@@ -1,0 +1,38 @@
+<%#= render :partial => 'list_with_header' -%>
+      <% columns = list_columns %>
+<table>
+  <thead>
+    <tr>
+		<% columns.each do |c| %>
+		<th><%= c.name %></th>
+		<% end %>
+    </tr>
+  </thead>
+  <tbody >
+    <% if !@page.empty? -%>
+		<% @page.items.each do |o| %>
+		<tr>
+		<% columns.each do |c| %>
+		<td>
+			<% val = o.send c.name %>
+			<% if !c.association %>
+				<%= val %>
+			<% else %>
+				<% if !c.plural_association? %>
+					<%= val.to_label if val != nil %>
+				<% else %>
+					<% val.each do |v| %>
+						<%= v.to_label if v != nil %>; 
+					<% end %>
+				<% end %>
+			
+			<% end %>
+		</td>
+		<% end %>
+		</tr>
+		<% end %>
+    <% end -%>
+  </tbody>
+  <tfoot>  
+  </tfoot>
+</table>
