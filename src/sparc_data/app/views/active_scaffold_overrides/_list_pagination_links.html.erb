@@ -1,0 +1,32 @@
+<% unless current_page.nil? -%>
+<% url_options = params_for(:action => :index) -%>
+ <% options = {'data-page-history' => controller_id, :remote => true, :method => :get} -%>
+
+ <%= loading_indicator_tag :action => :pagination %>
+ <%= link_to as_(:previous), url_options.merge(:page => current_page.number - 1), options.merge(:class => "as_paginate previous") if current_page.prev? %>
+ <%= pagination_ajax_links current_page, url_options, options, active_scaffold_config.list.page_links_inner_window, active_scaffold_config.list.page_links_outer_window %>
+ <%= link_to as_(:next), url_options.merge(:page => current_page.number + 1), options.merge(:class => "as_paginate next") if current_page.next? %>
+	|
+	Jump to Page 
+	<%#= form_tag(url_for(:action => 'index'), :method => :get, :style => 'display:inline-block') do %>
+	<%= form_tag(url_options, options.merge(:style => 'display:inline-block')) do %>
+	<% if params[:year] != nil %>
+  	<input type="hidden" name="year" value="<%= "#{params[:year]}"%>"/>
+	<% end %>
+	<% if params[:room_number] != nil %>
+  	<input type="hidden" name="room_number" value="<%= "#{params[:room_number]}"%>"/>
+	<% end %>
+	<input size="4" name="page"/>
+	<% end %>	 
+	Display
+	<%#= form_tag(url_for(:action => 'set_per_page'), :style => 'display:inline-block') do %>
+	<%= form_tag(url_options, options.merge(:style => 'display:inline-block')) do %>
+	<input size="4" name="limit" value="<%= active_scaffold_config.list.user.per_page %>"/>
+	<% if params[:year] != nil %>
+  	<input type="hidden" name="year" value="<%= "#{params[:year]}"%>"/>
+	<% end %>
+	<% if params[:room_number] != nil %>
+  	<input type="hidden" name="room_number" value="<%= "#{params[:room_number]}"%>"/>
+	<% end %>
+	<% end %>
+<% end -%>

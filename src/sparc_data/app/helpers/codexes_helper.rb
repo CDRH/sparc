@@ -1,0 +1,2 @@
+module CodexesHelper
+end
