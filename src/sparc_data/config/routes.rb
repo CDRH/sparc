@@ -3,72 +3,27 @@ Rails.application.routes.draw do
   resources :features do
     as_routes
     record_select_routes
-    collection do
-      post 'find_existing'
-      get 'remove_related'
-      get 'cancel_inline'
-      post 'update_inline'
-      get 'edit_inline'
-      get 'add_inline'
-      get 'search_inline'
-      post 'search_ids'
-      get 'search_form'
-      post 'search_post'
-    end
+    add_as_extension
   end
   resources :codexes do
     as_routes
     record_select_routes
-    collection do
-      post 'find_existing'
-      get 'remove_related'
-      get 'cancel_inline'
-      post 'update_inline'
-      get 'edit_inline'
-      get 'add_inline'
-      get 'search_inline'
-      post 'search_ids'
-      get 'search_form'
-      post 'search_post'
-    end
+    add_as_extension
   end
     
   resources :rooms do
     as_routes
     record_select_routes
-    # activescaffold_extensions
-    collection do
-      post 'find_existing'
-      get 'remove_related'
-      get 'cancel_inline'
-      post 'update_inline'
-      get 'edit_inline'
-      get 'add_inline'
-      get 'search_inline'
-      post 'search_ids'
-      get 'search_form'
-      post 'search_post'
-    end
+    add_as_extension
   end
 
   resources :room_types do
     as_routes
     record_select_routes
-    collection do
-      # post 'find_existing'
-      get 'remove_related'
-      get 'cancel_inline'
-      post 'update_inline'
-      get 'edit_inline'
-      get 'add_inline'
-      get 'search_inline'
-      post 'search_ids'
-      get 'search_form'
-      post 'search_post'
-    end
+    add_as_extension
   end
 
-    
+  # activescaffold_extensions(:rooms)
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
