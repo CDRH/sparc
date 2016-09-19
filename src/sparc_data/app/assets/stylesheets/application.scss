@@ -73,7 +73,7 @@ table.add-existing td {
   background-repeat: no-repeat;
 }
 .guest-search {
-	background-image: url(/assets/active_scaffold/magnifier.png);
+	background-image: image-url('magnifier.png');
     margin: 0;
     padding: 5px 5px 5px 25px;
     background-position: 5px 50%;
@@ -150,4 +150,7 @@ li {
 	width:700px;
 	height: 600px;
 //	display: none;
+}
+.active-scaffold a.inline-adapter-close {
+  background-image: image-url('close.png') !important;
 }
