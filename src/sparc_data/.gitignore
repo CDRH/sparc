@@ -18,6 +18,3 @@
 
 *.svn
 
-# config files
-database.yml
-secrets.yml
