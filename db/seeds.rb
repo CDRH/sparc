@@ -8,7 +8,7 @@
 
 
 if Unit.all.size < 1
-  s = Roo::Excelx.new('xls/Unit Summary_CCHedits.xlsx')
+  s = Roo::Excelx.new('xls/Unit_Summary_CCHedits.xlsx')
   s.sheet('room typology').each do |row|
     if row[0] != 'Type No.'
       room_type = RoomType.where(id: row[0].to_i)
@@ -174,7 +174,7 @@ if Feature.all.size < 1
 end
 
 if BoneTool.all.size < 1
-  s = Roo::Excelx.new('xls/Bone tool DB.xlsx')
+  s = Roo::Excelx.new('xls/Bone_tool_DB.xlsx')
 
   puts 'Loading Bonetools'
   
