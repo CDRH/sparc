@@ -1,0 +1,20 @@
+development:
+  adapter: postgresql
+  database: sparc_data_dev
+  host: localhost
+  username: rwb3y
+  password: 
+
+test:
+  adapter: postgresql
+  database: rails_test
+  host: localhost
+  username: rwb3y
+  password:
+
+production:
+  adapter: postgresql
+  database: sparc_data_dev
+  host: localhost
+  username: rwb3y
+  password: 

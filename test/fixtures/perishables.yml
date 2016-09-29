@@ -1,0 +1,49 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fs_number: MyString
+  salmon_museum_number: MyString
+  room: MyString
+  strat: MyString
+  grid: MyString
+  quad: MyString
+  depth: MyString
+  asso_feature: MyString
+  perishable_period_id: 1
+  sa_no: MyString
+  artifact_type: MyString
+  perishable_count: 1
+  artifact_structure: MyString
+  comments: MyText
+  other_comments: MyText
+  storage_location: MyString
+  object_structure: MyString
+  exhibit_location: MyString
+  record_key_no: MyString
+  museum_lab_no: MyString
+  field_date: MyString
+  original_analysis: MyText
+
+two:
+  fs_number: MyString
+  salmon_museum_number: MyString
+  room: MyString
+  strat: MyString
+  grid: MyString
+  quad: MyString
+  depth: MyString
+  asso_feature: MyString
+  perishable_period_id: 1
+  sa_no: MyString
+  artifact_type: MyString
+  perishable_count: 1
+  artifact_structure: MyString
+  comments: MyText
+  other_comments: MyText
+  storage_location: MyString
+  object_structure: MyString
+  exhibit_location: MyString
+  record_key_no: MyString
+  museum_lab_no: MyString
+  field_date: MyString
+  original_analysis: MyText

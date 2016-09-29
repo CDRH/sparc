@@ -1,0 +1,64 @@
+<script>
+$('#myModal').on('hidden.bs.modal', function() {
+	console.log('modal close');
+})
+function edit_data(id,column) {
+	console.log(id+"="+column);
+	$.ajax({
+		type: 'GET',
+		url: '<%= url_for(:action => 'edit_inline') %>?id='+id+'&column='+column+'&parent=<%= parent_record.class.to_s %>&parent_id=<%= parent_record.id %>',
+		success: function(data) {
+			//alert(data);
+			console.log($('#<%= "association-record_id_#{parent_record.id}"%>_'+column+'_'+id));
+			$('#<%= "association-record_id_#{parent_record.id}"%>_'+column+'_'+id).html(data);
+			// $('#myModal .modal-body').html(data);
+			// $('#myModal').modal('show');
+			// console.log($('#myModal-<%= "association-record_id_#{parent_record.id}"%>_'+column+'_'+id).modal());
+		}
+	})
+	return false;
+}
+</script>
+<div id="add-<%= column.name %>" class="add-area test">
+<% associated.each do |a| %>
+	<div id="<%= "association-record_id_#{parent_record.id}_#{column.name}_#{a.id}"%>">
+  <%= a.to_label if a != nil %> 
+  <% if !column.plural_association? %>
+		<%= link_to('Remove', url_for(:action => 'remove_related', :id => parent_record.id, :column => column.name), :remote => true, :data => {:confirm => 'Are you Sure?'}, :class => 'btn btn-default btn-xs')%> <%= link_to('Edit', '#', :onclick => "edit_data(#{a.id}, '#{column.name}');return false;", :class => 'btn btn-default btn-xs' ) %>
+		<div id="myModal-<%= "association-record_id_#{parent_record.id}_#{column.name}_#{a.id}"%>"  class="modal fade" role="dialog">
+			<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>			</div>
+		</div>
+	<% else %>
+		<input type="hidden" name="record[<%= column.name %>][<%= a.id %>][<%= a.class.primary_key %>]" value="<%= a.id %>">
+		<%= link_to('Remove', '#', :class => 'btn btn-default btn-xs', :onclick => "c=confirm('Are you sure?');if (c==true){$(this).parent().remove();}return false;")%> <%= link_to('Edit', '#', :onclick => "edit_data(#{a.id}, '#{column.name}');return false;", :class => 'btn btn-default btn-xs'  ) %> 
+		<div id="myModal-<%= "association-record_id_#{parent_record.id}_#{column.name}_#{a.id}"%>"  class="modal fade" role="dialog">
+			<div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Modal Header</h4>
+	      </div>
+	      <div class="modal-body" id="modal-body-<%= "association-record_id_#{parent_record.id}_#{column.name}_#{a.id}" %>">
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>	</div>
+		</div>
+
+	<% end %> 
+  </div>
+<% end %>
+</div>

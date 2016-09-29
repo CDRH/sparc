@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  room: MyString
+  strat_alpha: MyString
+  strat_one: 1.5
+  strat_two: 1.5
+  context: MyString
+  period: MyString
+  room_id: 
+
+two:
+  room: MyString
+  strat_alpha: MyString
+  strat_one: 1.5
+  strat_two: 1.5
+  context: MyString
+  period: MyString
+  room_id: 

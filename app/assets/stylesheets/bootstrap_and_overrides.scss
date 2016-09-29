@@ -1,0 +1,39 @@
+/*@import "bootstrap";*/
+body { padding: 15px; }
+//@import "bootstrap-responsive";
+
+label,
+input,
+button,
+select,
+textarea {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 16px;
+}
+
+.active-scaffold a.as_cancel, .submit {
+//	@extend .btn;
+	font-weight: bold;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  letter-spacing: 0;
+  margin: 0;
+  margin-top: 5px;
+	color: black;
+}
+
+.active-scaffold .draggable-list {
+  background-color: #ffff88;
+	margin: 5px;
+}
+
+.sub-form-record .actions a.destroy {
+	background: white !important;
+	display: inline !important;
+	padding: 1px 5px !important;
+	color: #06c !important;
+}
+.association-record .actions {
+	vertical-align: top !important;
+}

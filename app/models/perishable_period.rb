@@ -1,0 +1,2 @@
+class PerishablePeriod < ApplicationRecord
+end

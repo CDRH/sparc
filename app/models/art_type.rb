@@ -1,0 +1,2 @@
+class ArtType < ApplicationRecord
+end

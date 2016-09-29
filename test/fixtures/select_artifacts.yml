@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  room: MyString
+  strat: MyString
+  floor_association: MyString
+  sa_form: MyString
+  associated_feature_artifacts: MyString
+  grid: MyString
+  depth: MyString
+  select_artifact_occupation_id: 1
+  select_artifact_type: MyString
+  artifact_count: MyString
+  location_in_room: MyString
+  comments: MyText
+
+two:
+  room: MyString
+  strat: MyString
+  floor_association: MyString
+  sa_form: MyString
+  associated_feature_artifacts: MyString
+  grid: MyString
+  depth: MyString
+  select_artifact_occupation_id: 1
+  select_artifact_type: MyString
+  artifact_count: MyString
+  location_in_room: MyString
+  comments: MyText

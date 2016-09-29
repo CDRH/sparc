@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  room_id: 1
+  strat: MyString
+  salmon_museum_id_no: MyString
+  record_field_key_no: MyString
+  grid: MyString
+  quad: MyString
+  depth: MyString
+  feature_no: MyString
+  storage_bin: MyString
+  museum_date: MyString
+  field_date: MyString
+  affiliation: MyString
+  item: MyString
+
+two:
+  room_id: 1
+  strat: MyString
+  salmon_museum_id_no: MyString
+  record_field_key_no: MyString
+  grid: MyString
+  quad: MyString
+  depth: MyString
+  feature_no: MyString
+  storage_bin: MyString
+  museum_date: MyString
+  field_date: MyString
+  affiliation: MyString
+  item: MyString

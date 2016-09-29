@@ -1,0 +1,2 @@
+class OrnamentPeriod < ApplicationRecord
+end

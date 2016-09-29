@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  room_id: 1
+  strat: MyString
+  field_specimen_no: MyString
+  depth: MyString
+  occupation: MyString
+  grid: MyString
+  tool_type_code: 1
+  tool_type: MyString
+  species_code: 1
+  comments: MyText
+
+two:
+  room_id: 1
+  strat: MyString
+  field_specimen_no: MyString
+  depth: MyString
+  occupation: MyString
+  grid: MyString
+  tool_type_code: 1
+  tool_type: MyString
+  species_code: 1
+  comments: MyText

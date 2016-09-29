@@ -1,0 +1,90 @@
+<script>
+function add_data(column) {
+	$.ajax({
+		type: 'GET',
+		url: '<%= url_for(:action => 'add_inline') %>?column='+column+'&parent=<%= parent_record.class.to_s %>&parent_id=<%= parent_record.id %>',
+		success: function(data) {
+			//alert(data);
+			console.log($('#<%= "association-record_id_#{parent_record.id}"%>_'+column+'_'));
+			$('#add-new-'+column).html(data);
+			// $('#myModal .modal-body').html(data);
+			// $('#myModal').modal('show');
+			// console.log($('#myModal-<%= "association-record_id_#{parent_record.id}"%>_'+column+'_'+id).modal());
+		}
+	})
+	return false;
+}
+</script>
+<%
+begin
+  remote_controller = active_scaffold_controller_for(column.association.klass)
+rescue ActiveScaffold::ControllerNotFound
+  remote_controller = nil
+end
+@record = parent_record
+show_add_existing = column_show_add_existing(column, parent_record)
+show_add_new = column_show_add_new(column, associated, parent_record)
+return unless show_add_new or show_add_existing
+temporary_id = generated_id(parent_record) if parent_record.new_record?
+controller_path = active_scaffold_controller_for(parent_record.class).controller_path
+edit_associated_url = params_for(:controller => controller_path, :action => 'edit_associated', :child_association => column.name, :associated_id => '--ID--', :scope => scope, :id => parent_record.to_param, :generated_id => temporary_id, :parent_controller => params[:parent_controller] || controller.controller_path) if show_add_existing
+add_new_url = params_for(:controller => controller_path, :action => 'edit_associated', :child_association => column.name, :scope => scope, :id => parent_record.to_param, :generated_id => temporary_id, :parent_controller => params[:parent_controller] || controller.controller_path) if show_add_new
+-%>
+<div class="footer-wrapper-old edit-related-data">
+  <div class="footer-old override-old">
+    <% if show_add_new -%>
+    <% if column.plural_association?
+         add_label = as_(:create_another, :model => column.association.klass.model_name.human)
+         add_class = 'as_create_another'
+       else
+         add_label = as_(:replace_with_new)
+         add_class = 'as_replace_with_new'
+       end
+       create_another_id = "#{sub_form_id(:association => column.name, :id => parent_record.id || temporary_id || 99999999999)}-create-another" %>
+    <%#= link_to add_label, add_new_url, :id => create_another_id, :remote => true, :class => "as-js-button #{add_class}", :style=> "display: none;" %>
+    <% end -%>
+	
+    <% if !column.plural_association? %>
+		<%#= link_to('Remove', url_for(:action => 'remove_related', :id => parent_record.id, :column => column.name), :remote => true, :data => {:confirm => 'Are you Sure?'})%>
+		<%#= link_to('Remove', remove_related_items_path, :id => parent_record.id, :column => column.name, :remote => true)%>
+	<% end %>
+	
+    <% if show_add_new and show_add_existing %>
+	<!-- <br> -->
+	<% end %>
+
+   <% k = column.association.klass.model_name %>
+	<div id="add-new-<%= column.name %>"></div>
+	<%= link_to('New', '#', :onclick => "add_data('#{column.name}');return false;", :class => 'btn btn-default btn-xs') if parent_record.id != nil %> 
+
+    <% if show_add_existing -%>
+      <% if false and remote_controller and remote_controller.respond_to? :uses_record_select? and remote_controller.uses_record_select? -%>
+        <%#= link_to_record_select as_(:add_existing), remote_controller.controller_path, record_select_params_for_add_existing(column.association, edit_associated_url, parent_record) -%>
+      <% else -%>
+        <% #select_options = options_from_collection_for_select(sorted_association_options_find(column.association, nil, parent_record), :to_param, :to_label)
+           add_existing_id = "#{sub_form_id(:association => column.name, :id => parent_record.id || temporary_id || 99999999999)}-add-existing"
+           add_existing_label = column.plural_association? ? :add_existing : :replace_existing %>
+		   <%# debugger %>
+		   <% if column.new_by_search %>
+		   <a href='#' id="edit-search-<%= k %>-show" onclick="$('#edit-search-<%= k %>').show();$('#<%= add_existing_id %>').show();$(this).hide();return false" class="btn btn-default btn-xs">Search</a><br>
+		   <% end %>
+		   <div id="edit-search-<%= k %>" style="display:none">
+			   <%# if k == 'Person' %>
+		   		<%#= render :partial => '/people/search_form.html.erb' %>
+			   <%# else %>
+		   		<%= render :partial => 'search_form.html.erb', :locals => {:klass => k.to_s, :parent_klass=> @record.class.to_s} %>
+			
+			<%# end %>
+			<br>
+					   <a href='#' id="edit-search-<%= k %>-hide" onclick="$('#edit-search-<%= k %>').hide();$('#edit-search-<%= k %>-show').show();$('#<%= add_existing_id %>').hide();return false" class="btn btn-default btn-xs">Close Search</a>
+	        <%#= link_to as_(add_existing_label), edit_associated_url, :id => add_existing_id, :remote => true, :class=> "as-js-button as_#{add_existing_label}", :style => "display: none;" %>
+			
+			</div>
+        <%#= select_tag 'associated_id', '<option value="">'.html_safe + as_(:_select_) + '</option>'.html_safe + select_options %>
+		<input type="hidden" id="associated_id_selected_<%= k %>" value="">
+        <%= link_to as_(add_existing_label), edit_associated_url, :id => add_existing_id, :remote => true, :class=> "as-js-button-old as_#{add_existing_label} btn btn-default btn-xs", :style => "display: none;" %><br>
+      <% end -%>
+    <% end -%>
+	
+  </div>
+</div>

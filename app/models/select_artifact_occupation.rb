@@ -1,0 +1,2 @@
+class SelectArtifactOccupation < ApplicationRecord
+end

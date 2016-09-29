@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  museum_specimen_no: MyString
+  analysis_lab_no: MyString
+  room: MyString
+  strat: MyString
+  grid: MyString
+  quad: MyString
+  depth: MyString
+  field_date: MyString
+  period_id: 1
+  feature_id: 1
+  analyst: MyString
+  photographer: MyString
+  count: 1
+  item: MyString
+
+two:
+  museum_specimen_no: MyString
+  analysis_lab_no: MyString
+  room: MyString
+  strat: MyString
+  grid: MyString
+  quad: MyString
+  depth: MyString
+  field_date: MyString
+  period_id: 1
+  feature_id: 1
+  analyst: MyString
+  photographer: MyString
+  count: 1
+  item: MyString
