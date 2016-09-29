@@ -8,7 +8,7 @@
 
 
 if Unit.all.size < 1
-  s = Roo::Excelx.new('../../sparc/Unit Summary_CCHedits.xlsx')
+  s = Roo::Excelx.new('xls/Unit Summary_CCHedits.xlsx')
   s.sheet('room typology').each do |row|
     if row[0] != 'Type No.'
       room_type = RoomType.where(id: row[0].to_i)
@@ -72,7 +72,7 @@ if Unit.all.size < 1
 end
 
 if Stratum.all.size < 1
-  s = Roo::Excel.new('../../sparc/Strata.xls')
+  s = Roo::Excel.new('xls/Strata.xls')
 
   s.sheet('strat descp').each do |row|
     if row[0] != 'CODE'
@@ -114,7 +114,7 @@ if Stratum.all.size < 1
 end
 
 if Feature.all.size < 1
-  s = Roo::Excel.new('../../sparc/Features_CCHedits.xls')
+  s = Roo::Excel.new('xls/Features_CCHedits.xls')
 
 
   s.sheet('Data').each do |row|
@@ -174,7 +174,7 @@ if Feature.all.size < 1
 end
 
 if BoneTool.all.size < 1
-  s = Roo::Excelx.new('../../sparc/Bone tool DB.xlsx')
+  s = Roo::Excelx.new('xls/Bone tool DB.xlsx')
 
   puts 'Loading Bonetools'
   
@@ -229,7 +229,7 @@ end
 
 if Eggshell.all.size < 1
   puts 'Loading Eggshells...'
-  s = Roo::Excel.new('../../sparc/Eggshell_CCHedits.xls')
+  s = Roo::Excel.new('xls/Eggshell_CCHedits.xls')
 
 
   s.sheet('eggshell').each do |row|
