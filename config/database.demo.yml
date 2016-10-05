@@ -1,20 +1,18 @@
-development:
+default: &default
   adapter: postgresql
-  database: sparc_data_dev
-  host: localhost
+  encoding: utf8
   username: rwb3y
+  host: localhost
   password: 
+
+development:
+  <<: *default
+  database: sparc_dev
 
 test:
-  adapter: postgresql
-  database: rails_test
-  host: localhost
-  username: rwb3y
-  password:
+  <<: *default
+  database: sparc_test
 
 production:
-  adapter: postgresql
-  database: sparc_data_dev
-  host: localhost
-  username: rwb3y
-  password: 
+  <<: *default
+  database: sparc
