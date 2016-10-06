@@ -54,10 +54,14 @@ if Unit.all.size < 1
     if row[0] != 'Type No.'
       room_type = RoomType.where(id: row[0].to_i)
       if room_type.size == 0
-        room_type = RoomType.create(:id => row[0].to_i, :description => row[1], :period => row[2], :location => row[3])
+        room_type = RoomType.create(
+          :id => row[0].to_i,
+          :description => row[1],
+          :location => row[3],
+          :period => row[2]
+        )
       end
     end
-
   end
 
   s.sheet('data').each do |row|
@@ -228,19 +232,14 @@ if BoneTool.all.size < 1
       a = b.strat.to_s.gsub(';',',').split(',').map{|bstrat| bstrat.strip}
       a.each do |strats|
         s = Stratum.where(strat_all: strats, unit_id: room.id).first
-        if s == nil
-          s = Stratum.create(strat_all: strats, unit_id: room ? room.id : nil, comments: 'imported none')
-          puts "create Stratum #{row[0]} (#{room.unit_no}) #{strats}"
+        if s.nil?
+          puts "creating Stratum #{row[0]} (#{room.unit_no}) #{strats}"
+          s = Stratum.create(
+            strat_all: strats,
+            unit_id: room ? room.id : nil,
+            comments: 'imported none'
+          )
         end
-        # f = s.features.where(feature_no: row[2]).first
-        # if !f
-        #   f = Feature.create(feature_no: row[2])
-        #   f.strata << s
-        # else
-        #   if !f.strata.include?(s)
-        #     f.strata << s
-        #   end
-        # end
         b.strata << s
       end
     end
@@ -306,9 +305,7 @@ if Eggshell.all.size < 1
             f = Feature.create(feature_no: fn)
             f.strata << s
           else
-            if !f.strata.include?(s)
-              f.strata << s
-            end
+            f.strata << s if !f.strata.include?(s)
           end
           e.features << f
         end
