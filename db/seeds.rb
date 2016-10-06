@@ -1,10 +1,9 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+
+################
+# Spreadsheets #
+################
 
 files = {
   bonetools: 'xls/Bone_tool_DB.xlsx',
@@ -14,11 +13,40 @@ files = {
   units: 'xls/Unit_Summary_CCHedits.xlsx',
 }
 
+###########
+# Helpers #
+###########
+
 def create_if_not_exists model, field, column
   record = model.where(field => column).first
   record = model.create(field => column) if !record
   return record
 end
+
+def select_or_create_unit unit, spreadsheet
+  room = nil
+  if unit != 'no data' and !unit.include?(' ')
+    if Unit.where(:unit_no => unit).size < 1
+      room = Unit.create(:unit_no => unit)
+      puts "creating Unit #{unit} from #{spreadsheet}"
+    else
+      room = Unit.where(:unit_no => unit).first
+    end
+  else
+    if Unit.where(:unit_no => 'Other').size < 1
+      room = Unit.create(:unit_no => 'Other')
+      puts "creating Unit Other for #{unit}"
+    else
+      room = Unit.where(:unit_no => 'Other').first
+      puts "using Unit Other for #{unit}"
+    end
+  end
+  return room
+end
+
+#########
+# Units #
+#########
 
 if Unit.all.size < 1
   s = Roo::Excelx.new(files[:units])
@@ -67,6 +95,10 @@ if Unit.all.size < 1
   end
 end
 
+##########
+# Strata #
+##########
+
 if Stratum.all.size < 1
   s = Roo::Excel.new(files[:strata])
 
@@ -101,13 +133,14 @@ if Stratum.all.size < 1
       if !so
         so = StratOccupation.create(occupation: row[5])
       end
-     
       stratum.update_columns(strat_all: row[1], strat_alpha: row[2], strat_type_id: st != nil ? st.id : nil, stratum_one: row[3], stratum_two: row[4], strat_occupation_id: so.id, comments: row[6])
     end
-
   end
-
 end
+
+############
+# Features #
+############
 
 if Feature.all.size < 1
   s = Roo::Excel.new(files[:features])
@@ -150,59 +183,54 @@ if Feature.all.size < 1
     a = f.strat.to_s.gsub(';',',').split(',').map{|o| o.strip}
     # a.uniq!
     a.each do |o|
-      c = nil
-        r = Unit.where(unit_no:f.unit_no).first
-        if r == nil
-          r = Unit.create(unit_no:f.unit_no, comments: 'imported from feature')
-          puts "create Unit #{f.unit_no} from feature #{f.id}"
-        end
-        s = Stratum.where(strat_all: o, unit_id: r.id).first
-        if s == nil
-          s = Stratum.create(strat_all: o, unit_id: r.id, comments: 'imported none')
-          puts "create Strata #{f.unit_no} #{o}"
-        end
-        Feature.where(id: f.id).first.strata << s
+      r = Unit.where(unit_no:f.unit_no).first
+      if r.nil?
+        r = Unit.create(unit_no:f.unit_no, comments: 'imported from feature')
+        puts "create Unit #{f.unit_no} from feature #{f.id}"
+      end
+      s = Stratum.where(strat_all: o, unit_id: r.id).first
+      if s.nil?
+        s = Stratum.create(strat_all: o, unit_id: r.id, comments: 'imported none')
+        puts "create Strata #{f.unit_no} #{o}"
+      end
+      Feature.where(id: f.id).first.strata << s
     end
   end
 end
 
+#############
+# BoneTools #
+#############
+
 if BoneTool.all.size < 1
   s = Roo::Excelx.new(files[:bonetools])
-
   puts 'Loading Bonetools'
   
   s.sheet('data').each do |row|
     room = nil
     if row[0] != 'Room'
-      if row[0] != 'no data' and !row[0].include?(' ')
-        if Unit.where(:unit_no => row[0]).size < 1
-          room = Unit.create(:unit_no => row[0])
-          puts "creating Unit #{row[0]}"
-        else
-          room = Unit.where(:unit_no => row[0]).first
-        end
-      else
-        if Unit.where(:unit_no => 'Other').size < 1
-          room = Unit.create(:unit_no => 'Other')
-          puts "creating Unit Other for #{row[0]}"
-        else
-          room = Unit.where(:unit_no => 'Other').first
-          puts "using Unit Other for #{row[0]}"
-        end
-       
-      end
-      o = BoneToolOccupation.where(occupation: row[4]).first
-      if !o
-        o = BoneToolOccupation.create(occupation: row[4])
-      end
-      b = BoneTool.create(room: row[0], strat: row[1], field_specimen_no: row[2], depth: row[3], bone_tool_occupation_id: o.id, grid: row[5], tool_type_code: row[6], tool_type: row[7] , species_code: row[8], comments: row[9])
+      room = select_or_create_unit(row[0], "bonetools")
+
+      o = create_if_not_exists(BoneToolOccupation, :occupation, row[4])
+      b = BoneTool.create(
+        bone_tool_occupation: o,
+        comments: row[9],
+        depth: row[3],
+        field_specimen_no: row[2],
+        grid: row[5],
+        room: row[0],
+        species_code: row[8],
+        strat: row[1],
+        tool_type: row[7],
+        tool_type_code: row[6]
+      )
      
-      a = b.strat.to_s.gsub(';',',').split(',').map{|o| o.strip}
-      a.each do |o|
-        s = Stratum.where(strat_all: o, unit_id: room.id).first
+      a = b.strat.to_s.gsub(';',',').split(',').map{|bstrat| bstrat.strip}
+      a.each do |strats|
+        s = Stratum.where(strat_all: strats, unit_id: room.id).first
         if s == nil
-          s = Stratum.create(strat_all: o, unit_id: room ? room.id : nil, comments: 'imported none')
-          puts "create Stratum #{row[0]} (#{room.unit_no}) #{o}"
+          s = Stratum.create(strat_all: strats, unit_id: room ? room.id : nil, comments: 'imported none')
+          puts "create Stratum #{row[0]} (#{room.unit_no}) #{strats}"
         end
         # f = s.features.where(feature_no: row[2]).first
         # if !f
@@ -220,60 +248,56 @@ if BoneTool.all.size < 1
 
 end
 
+#############
+# Eggshells #
+#############
+
 if Eggshell.all.size < 1
   puts 'Loading Eggshells...'
   s = Roo::Excel.new(files[:eggshells])
 
-
   s.sheet('eggshell').each do |row|
     room = nil
     if row[0] != 'Room'
-      if row[0] != 'no data' and !row[0].include?(' ')
-        if Unit.where(:unit_no => row[0]).size < 1
-          room = Unit.create(:unit_no => row[0])
-          puts "creating Unit #{row[0]}"
-        else
-          room = Unit.where(:unit_no => row[0]).first
-        end
-      else
-        if Unit.where(:unit_no => 'Other').size < 1
-          room = Unit.create(:unit_no => 'Other')
-          puts "creating Unit Other for #{row[0]}"
-        else
-          room = Unit.where(:unit_no => 'Other').first
-          puts "using Unit Other for #{row[0]}"
-        end
-       
-      end
+      room = select_or_create_unit(row[0], "eggshells")
+
       ea = nil
       if row[11]
-        ea = EggshellAffiliation.where(affiliation: row[11]).first
-        if !ea
-          ea = EggshellAffiliation.create(affiliation: row[11])
-        end
+        ea = create_if_not_exists(EggshellAffiliation, :affiliation, row[11])
       end
       ei = nil
       if row[12]
-        ei = EggshellItem.where(item: row[12]).first
-        if !ei
-          ei = EggshellItem.create(item: row[12])
-        end
+        ei = create_if_not_exists(EggshellItem, :item, row[12]) if row[12]
       end
-      e = Eggshell.create(room: row[0], strat: row[1], salmon_museum_id_no: row[2], record_field_key_no: row[3], grid: row[4], quad: row[5], depth: row[6], feature_no: row[7] , storage_bin: row[8], museum_date: row[9], field_date: row[10], eggshell_affiliation_id: ea != nil ? ea.id : nil, eggshell_item_id: ei != nil ? ei.id : nil)
+      e = Eggshell.create(
+        depth: row[6],
+        eggshell_affiliation: ea.nil? ? nil : ea,
+        eggshell_item: ei.nil? ? nil : ei,
+        feature_no: row[7],
+        field_date: row[10],
+        grid: row[4],
+        museum_date: row[9],
+        quad: row[5],
+        record_field_key_no: row[3],
+        room: row[0],
+        salmon_museum_id_no: row[2],
+        storage_bin: row[8],
+        strat: row[1],
+      )
      
       a = e.strat.to_s.gsub(';',',').split(',').map{|o| o.strip}
       a.each do |o|
         s = Stratum.where(strat_all: o, unit_id: room.id).first
-        if s == nil
+        if s.nil?
           s = Stratum.create(strat_all: o, unit_id: room ? room.id : nil, comments: 'imported none')
           puts "create Stratum #{row[0]} (#{room.unit_no}) #{o}"
         end
         i = row[7].rindex(/[A-Z]/)
         if row[7]
+          fn = nil
           if row[7] == 'none'
             fn = 'none'
           else
-            unit = row[7][0,i+1]
             fn = row[7][i+1,row[7].size-1].to_f
           end
           puts "find feature #{fn}"
@@ -291,6 +315,5 @@ if Eggshell.all.size < 1
       end
     end
   end
-
 
 end
