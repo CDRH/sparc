@@ -14,6 +14,12 @@ files = {
   units: 'xls/Unit_Summary_CCHedits.xlsx',
 }
 
+def create_if_not_exists model, field, column
+  record = model.where(field => column).first
+  record = model.create(field => column) if !record
+  return record
+end
+
 if Unit.all.size < 1
   s = Roo::Excelx.new(files[:units])
   s.sheet('room typology').each do |row|
@@ -29,50 +35,33 @@ if Unit.all.size < 1
   s.sheet('data').each do |row|
     if row[0] != 'Unit No.'
       units = Unit.where(:unit_no => row[0])
+      # TODO does this mean that there may be multiple units with the same "unit_no" ?
+      # but we are only going to add to the first instance?
+      # if there should only be one, we could use
+      # `Unit.find_or_create_by(unit_no: row[0])`
       if units.size < 1
         puts "No Unit for #{row[0]}"
         unit = Unit.create(:unit_no => row[0])
       else
         unit = Unit.where(:unit_no => row[0]).first
       end
-      es = ExcavationStatus.where(excavation_status: row[1]).first
-      if !es
-        es = ExcavationStatus.create(excavation_status: row[1])
-      end
-      uo = UnitOccupation.where(occupation: row[2]).first
-      if !uo
-        uo = UnitOccupation.create(occupation: row[2])
-      end
-      uc = UnitClass.where(unit_class: row[3]).first
-      if !uc
-        uc = UnitClass.create(unit_class: row[3])
-      end
-      s = Story.where(story: row[4]).first
-      if !s
-        s = Story.create(story: row[4])
-      end
-      ir = IntactRoof.where(intact_roof: row[5]).first
-      if !ir
-        ir = IntactRoof.create(intact_roof: row[5])
-      end
-      ss = SalmonSector.where(salmon_sector: row[9]).first
-      if !ss
-        ss = SalmonSector.create(salmon_sector: row[9])
-      end
-      td = TypeDescription.where(type_description: row[7]).first
-      if !td
-        td = TypeDescription.create(type_description: row[7])
-      end
-      ifn = InferredFunction.where(inferred_function: row[8]).first
-      if !ifn
-        ifn = InferredFunction.create(inferred_function: row[8])
-      end
-      is = IrregularShape.where(irregular_shape: row[1]).first
-      if !is
-        is = IrregularShape.create(irregular_shape: row[1])
-      end
-    
-      unit.update_columns(excavation_status_id: es.id, unit_occupation_id: uo.id, unit_class_id: uc.id, story_id: s.id, intact_roof_id: ir.id, room_type_id: row[6] != 'n/a' ? row[6].to_i : nil, type_description_id: td.id , inferred_function_id: ifn.id, salmon_sector_id: ss.id, other_description: row[10], irregular_shape_id: is.id, length: row[12], width: row[13], floor_area: row[14], comments: row[15])
+      u = {}
+      u[:excavation_status] = create_if_not_exists(ExcavationStatus, :excavation_status, row[1])
+      u[:unit_occupation] = create_if_not_exists(UnitOccupation, :occupation, row[2])
+      u[:unit_class] = create_if_not_exists(UnitClass, :unit_class, row[3])
+      u[:story] = create_if_not_exists(Story, :story, row[4])
+      u[:intact_roof] = create_if_not_exists(IntactRoof, :intact_roof, row[5])
+      u[:salmon_sector] = create_if_not_exists(SalmonSector, :salmon_sector, row[9])
+      u[:type_description] = create_if_not_exists(TypeDescription, :type_description, row[7])
+      u[:inferred_function] = create_if_not_exists(InferredFunction, :inferred_function, row[8])
+      u[:irregular_shape] = create_if_not_exists(IrregularShape, :irregular_shape, row[1])
+      u[:room_type_id] = row[6] != 'n/a' ? row[6].to_i : nil
+      u[:other_description] = row[10]
+      u[:length] = row[12]
+      u[:width] = row[13]
+      u[:floor_area] = row[14]
+      u[:comments] = row[15]
+      unit.update(u)
     end
 
   end
@@ -88,21 +77,21 @@ if Stratum.all.size < 1
         strat_type = StratType.create(code: row[0], strat_type: row[1])
       end
     end
-
   end
 
   s.sheet('data').each do |row|
     if row[0] != 'ROOM'
+      # TODO same note here as above, can there be more than one with unit_no?
       units = Unit.where(:unit_no => row[0])
       if units.size < 1
-        puts "No Unit for #{row[0]}"
+        puts "Creating Unit for #{row[0]}"
         unit = Unit.create(:unit_no => row[0])
       else
         unit = Unit.where(:unit_no => row[0]).first
       end
       strata = Stratum.where(:unit_id => unit.id, strat_all: row[1])
       if strata.size < 1
-        puts "No Stratum for #{row[0]} #{row[1]}"
+        puts "Creating Stratum for #{row[0]} #{row[1]}"
         stratum = Stratum.create(:unit_id => unit.id, strat_all: row[1])
       else
         stratum = Stratum.where(:unit_id => unit.id, strat_all: row[1]).first
@@ -123,44 +112,41 @@ end
 if Feature.all.size < 1
   s = Roo::Excel.new(files[:features])
 
-
   s.sheet('Data').each do |row|
     if row[0] != 'Room'
-
-      fo = FeatureOccupation.where(occupation: row[8]).first
-      if !fo
-        fo = FeatureOccupation.create(occupation: row[8])
-      end
-      ft = FeatureType.where(feature_type: row[9]).first
-      if !ft
-        ft = FeatureType.create(feature_type: row[9])
-      end
-      fg = FeatureGroup.where(feature_group: row[11]).first
-      if !fg
-        fg = FeatureGroup.create(feature_group: row[11])
-      end
-      rf = ResidentualFeature.where(residentual_feature: row[12]).first
-      if !rf
-        rf = ResidentualFeature.create(residentual_feature: row[12])
-      end
-      td = TShapedDoor.where(t_shaped_door: row[14]).first
-      if !td
-        td = TShapedDoor.create(t_shaped_door: row[14])
-      end
-      dm = DoorBetweenMultipleRoom.where(door_between_multiple_rooms: row[15]).first
-      if !dm
-        dm = DoorBetweenMultipleRoom.create(door_between_multiple_rooms: row[15])
-      end
-      ds = DoorwaySealed.where(doorway_sealed: row[16]).first
-      if !ds
-        ds = DoorwaySealed.create(doorway_sealed: row[16])
-      end
-      Feature.create(unit_no: row[0], feature_no: row[1], strat: row[2], floor_association: row[3], other_associated_features: row[5], grid: row[6], depth_m_b_d: row[7], feature_occupation_id: fo != nil ? fo.id : nil, feature_type_id: ft ? ft.id : nil, feature_count: row[10], feature_group_id: fg ? fg.id : nil, residentual_feature_id: rf ? rf.id : nil, location_in_room: row[13], t_shaped_door_id: td ? td.id : nil, door_between_multiple_room_id: dm ? dm.id : nil, doorway_sealed_id: ds ? ds.id : nil, length: row[17], width: row[18], depth_height: row[19], comments: row[20], feature_form: row[4])
+      fo = create_if_not_exists(FeatureOccupation, :occupation, row[8])
+      ft = create_if_not_exists(FeatureType, :feature_type, row[9])
+      fg = create_if_not_exists(FeatureGroup, :feature_group, row[11])
+      rf = create_if_not_exists(ResidentualFeature, :residentual_feature, row[12])
+      td = create_if_not_exists(TShapedDoor, :t_shaped_door, row[14])
+      dm = create_if_not_exists(DoorBetweenMultipleRoom, :door_between_multiple_rooms, row[15])
+      ds = create_if_not_exists(DoorwaySealed, :doorway_sealed, row[16])
+      Feature.create(
+        unit_no: row[0],
+        feature_no: row[1],
+        strat: row[2],
+        floor_association: row[3],
+        other_associated_features: row[5],
+        grid: row[6], depth_m_b_d: row[7],
+        feature_occupation: fo != nil ? fo : nil,
+        feature_type: ft ? ft : nil,
+        feature_count: row[10],
+        feature_group: fg ? fg : nil,
+        residentual_feature: rf ? rf : nil,
+        location_in_room: row[13],
+        t_shaped_door: td ? td : nil,
+        door_between_multiple_room: dm ? dm : nil,
+        doorway_sealed: ds ? ds : nil,
+        length: row[17],
+        width: row[18],
+        depth_height: row[19],
+        comments: row[20],
+        feature_form: row[4]
+      )
     end
-  
   end
+
   Feature.all.each do |f|
-  
     a = f.strat.to_s.gsub(';',',').split(',').map{|o| o.strip}
     # a.uniq!
     a.each do |o|
@@ -168,7 +154,7 @@ if Feature.all.size < 1
         r = Unit.where(unit_no:f.unit_no).first
         if r == nil
           r = Unit.create(unit_no:f.unit_no, comments: 'imported from feature')
-          puts "create Unit #{f.unit_no}"
+          puts "create Unit #{f.unit_no} from feature #{f.id}"
         end
         s = Stratum.where(strat_all: o, unit_id: r.id).first
         if s == nil
