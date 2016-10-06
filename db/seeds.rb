@@ -9,6 +9,7 @@ files = {
   bonetools: 'xls/Bone_tool_DB.xlsx',
   eggshells: 'xls/Eggshell_CCHedits.xls',
   features: 'xls/Features_CCHedits.xls',
+  soils: 'xls/Soil_Master.xlsx',
   strata: 'xls/Strata.xls',
   units: 'xls/Unit_Summary_CCHedits.xlsx',
 }
@@ -213,7 +214,7 @@ if BoneTool.all.size < 1
   s.sheet('data').each do |row|
     room = nil
     if row[0] != 'Room'
-      room = select_or_create_unit(row[0], "bonetools")
+      room = select_or_create_unit(row[0], 'bonetools')
 
       o = create_if_not_exists(BoneToolOccupation, :occupation, row[4])
       b = BoneTool.create(
@@ -229,7 +230,7 @@ if BoneTool.all.size < 1
         tool_type_code: row[6]
       )
      
-      a = b.strat.to_s.gsub(';',',').split(',').map{|bstrat| bstrat.strip}
+      a = b.strat.to_s.gsub(';', ',').split(',').map{|bstrat| bstrat.strip}
       a.each do |strats|
         s = Stratum.where(strat_all: strats, unit_id: room.id).first
         if s.nil?
@@ -258,7 +259,7 @@ if Eggshell.all.size < 1
   s.sheet('eggshell').each do |row|
     room = nil
     if row[0] != 'Room'
-      room = select_or_create_unit(row[0], "eggshells")
+      room = select_or_create_unit(row[0], 'eggshells')
 
       ea = nil
       if row[11]
@@ -312,5 +313,70 @@ if Eggshell.all.size < 1
       end
     end
   end
+end
 
+#########
+# Soils #
+#########
+
+if Soil.all.size < 1
+  puts 'Loading Soils...'
+  s = Roo::Excelx.new(files[:soils])
+
+  s.sheet('Sheet1').each do |entry|
+    # empty and "no data" fields into "none" to standardize
+    row = entry.map{ |field| (field == "no data" || field.nil?) ? "none" : field }
+
+    if row[0] != 'SITE'
+      soil = {}
+      soil[:site] = row[0]
+      soil[:feature_key] = row[3]
+      soil[:fs] = row[4]
+      soil[:box] = row[5]
+      soil[:period] = row[6]
+      soil[:soil_count] = row[7]
+      soil[:gridew] = row[8]
+      soil[:gridns] = row[9]
+      soil[:quad] = row[10]
+      soil[:exactprov] = row[11]
+      soil[:depthbeg] = row[12]
+      soil[:depthend] = row[13]
+      soil[:otherstrat] = row[14]
+      soil[:date] = row[15]
+      soil[:excavator] = row[16]
+      soil[:sample_no] = row[18]
+      soil[:comments] = row[19]
+      soil[:data_entry] = row[20]
+      soil[:location] = row[21]
+
+      soil[:art_type] = create_if_not_exists(ArtType, :art_type, row[17])
+
+      # TODO there is not actually an association between soils and units, this is just a string
+      # though it will make a NEW unit if one didn't previously exist
+      # could assign strata to new unit
+      unit = select_or_create_unit(row[1], 'soils')
+      soil[:room] = unit.unit_no
+
+      soil_row = Soil.create(soil)
+
+      # associate strata with soil
+      soil_strata = row[2].split(',').map{ |stratum| stratum.strip }
+      soil_strata.each do |soil_str|
+        # TODO seems to be creating lots of strata, maybe should be trimming field somehow?
+        stratum = Stratum.where(strat_all: soil_str).first
+        if stratum.nil?
+          puts "creating stratum #{soil_str} for soil"
+          stratum = Stratum.create(
+            strat_all: soil_str,
+            unit: unit,
+            comments: 'imported from soil spreadsheet'
+          )
+        end
+        soil_row.strata << stratum
+      end
+
+      # features
+      # TODO I am not sure how to match the "FEATURE" column of the spreadsheet against the features table here
+    end
+  end
 end
