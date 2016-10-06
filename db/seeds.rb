@@ -6,9 +6,16 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+files = {
+  bonetools: 'xls/Bone_tool_DB.xlsx',
+  eggshells: 'xls/Eggshell_CCHedits.xls',
+  features: 'xls/Features_CCHedits.xls',
+  strata: 'xls/Strata.xls',
+  units: 'xls/Unit_Summary_CCHedits.xlsx',
+}
 
 if Unit.all.size < 1
-  s = Roo::Excelx.new('xls/Unit_Summary_CCHedits.xlsx')
+  s = Roo::Excelx.new(files[:units])
   s.sheet('room typology').each do |row|
     if row[0] != 'Type No.'
       room_type = RoomType.where(id: row[0].to_i)
@@ -72,7 +79,7 @@ if Unit.all.size < 1
 end
 
 if Stratum.all.size < 1
-  s = Roo::Excel.new('xls/Strata.xls')
+  s = Roo::Excel.new(files[:strata])
 
   s.sheet('strat descp').each do |row|
     if row[0] != 'CODE'
@@ -114,7 +121,7 @@ if Stratum.all.size < 1
 end
 
 if Feature.all.size < 1
-  s = Roo::Excel.new('xls/Features_CCHedits.xls')
+  s = Roo::Excel.new(files[:features])
 
 
   s.sheet('Data').each do |row|
@@ -174,7 +181,7 @@ if Feature.all.size < 1
 end
 
 if BoneTool.all.size < 1
-  s = Roo::Excelx.new('xls/Bone_tool_DB.xlsx')
+  s = Roo::Excelx.new(files[:bonetools])
 
   puts 'Loading Bonetools'
   
@@ -229,7 +236,7 @@ end
 
 if Eggshell.all.size < 1
   puts 'Loading Eggshells...'
-  s = Roo::Excel.new('xls/Eggshell_CCHedits.xls')
+  s = Roo::Excel.new(files[:eggshells])
 
 
   s.sheet('eggshell').each do |row|
