@@ -46,21 +46,21 @@ if Unit.all.size < 1
         unit = Unit.where(:unit_no => row[0]).first
       end
       u = {}
-      u[:excavation_status] = create_if_not_exists(ExcavationStatus, :excavation_status, row[1])
-      u[:unit_occupation] = create_if_not_exists(UnitOccupation, :occupation, row[2])
-      u[:unit_class] = create_if_not_exists(UnitClass, :unit_class, row[3])
-      u[:story] = create_if_not_exists(Story, :story, row[4])
-      u[:intact_roof] = create_if_not_exists(IntactRoof, :intact_roof, row[5])
-      u[:salmon_sector] = create_if_not_exists(SalmonSector, :salmon_sector, row[9])
-      u[:type_description] = create_if_not_exists(TypeDescription, :type_description, row[7])
-      u[:inferred_function] = create_if_not_exists(InferredFunction, :inferred_function, row[8])
-      u[:irregular_shape] = create_if_not_exists(IrregularShape, :irregular_shape, row[1])
-      u[:room_type_id] = row[6] != 'n/a' ? row[6].to_i : nil
-      u[:other_description] = row[10]
-      u[:length] = row[12]
-      u[:width] = row[13]
-      u[:floor_area] = row[14]
       u[:comments] = row[15]
+      u[:excavation_status] = create_if_not_exists(ExcavationStatus, :excavation_status, row[1])
+      u[:floor_area] = row[14]
+      u[:inferred_function] = create_if_not_exists(InferredFunction, :inferred_function, row[8])
+      u[:intact_roof] = create_if_not_exists(IntactRoof, :intact_roof, row[5])
+      u[:irregular_shape] = create_if_not_exists(IrregularShape, :irregular_shape, row[1])
+      u[:length] = row[12]
+      u[:other_description] = row[10]
+      u[:room_type_id] = row[6] != 'n/a' ? row[6].to_i : nil
+      u[:salmon_sector] = create_if_not_exists(SalmonSector, :salmon_sector, row[9])
+      u[:story] = create_if_not_exists(Story, :story, row[4])
+      u[:type_description] = create_if_not_exists(TypeDescription, :type_description, row[7])
+      u[:unit_class] = create_if_not_exists(UnitClass, :unit_class, row[3])
+      u[:unit_occupation] = create_if_not_exists(UnitOccupation, :occupation, row[2])
+      u[:width] = row[13]
       unit.update(u)
     end
 
@@ -122,26 +122,26 @@ if Feature.all.size < 1
       dm = create_if_not_exists(DoorBetweenMultipleRoom, :door_between_multiple_rooms, row[15])
       ds = create_if_not_exists(DoorwaySealed, :doorway_sealed, row[16])
       Feature.create(
-        unit_no: row[0],
-        feature_no: row[1],
-        strat: row[2],
-        floor_association: row[3],
-        other_associated_features: row[5],
-        grid: row[6], depth_m_b_d: row[7],
-        feature_occupation: fo != nil ? fo : nil,
-        feature_type: ft ? ft : nil,
-        feature_count: row[10],
-        feature_group: fg ? fg : nil,
-        residentual_feature: rf ? rf : nil,
-        location_in_room: row[13],
-        t_shaped_door: td ? td : nil,
+        comments: row[20],
+        depth_height: row[19],
         door_between_multiple_room: dm ? dm : nil,
         doorway_sealed: ds ? ds : nil,
+        grid: row[6], depth_m_b_d: row[7],
+        feature_count: row[10],
+        feature_form: row[4],
+        feature_group: fg ? fg : nil,
+        feature_no: row[1],
+        feature_occupation: fo != nil ? fo : nil,
+        feature_type: ft ? ft : nil,
+        floor_association: row[3],
         length: row[17],
-        width: row[18],
-        depth_height: row[19],
-        comments: row[20],
-        feature_form: row[4]
+        location_in_room: row[13],
+        other_associated_features: row[5],
+        residentual_feature: rf ? rf : nil,
+        strat: row[2],
+        t_shaped_door: td ? td : nil,
+        unit_no: row[0],
+        width: row[18]
       )
     end
   end
