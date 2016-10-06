@@ -3,61 +3,61 @@ Rails.application.routes.draw do
   resources :features do
     as_routes
     record_select_routes
-    add_as_extension
+    add_as_extension :features
   end
 
   resources :room_types do
     as_routes
     record_select_routes
-    add_as_extension
+    add_as_extension :room_types
   end
 
   resources :bone_tools do
     as_routes
     record_select_routes
-    add_as_extension
+    add_as_extension :bone_tools
   end
 
   resources :eggshells do
     as_routes
     record_select_routes
-    add_as_extension
+    add_as_extension :eggshells
   end
 
   resources :units do
     as_routes
     record_select_routes
-    add_as_extension
+    add_as_extension :units
   end
 
   resources :strata do
     as_routes
     record_select_routes
-    add_as_extension
+    add_as_extension :strata
   end
 
   resources :ornaments do
     as_routes
     record_select_routes
-    add_as_extension
+    add_as_extension :ornaments
   end
 
   resources :soils do
     as_routes
     record_select_routes
-    add_as_extension
+    add_as_extension :soils
   end
 
   resources :perishables do
     as_routes
     record_select_routes
-    add_as_extension
+    add_as_extension :perishables
   end
 
   resources :select_artifacts do
     as_routes
     record_select_routes
-    add_as_extension
+    add_as_extension :select_artifacts
   end
 
   # activescaffold_extensions(:rooms)
