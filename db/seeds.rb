@@ -9,6 +9,7 @@ files = {
   bonetools: 'xls/Bone_tool_DB.xlsx',
   eggshells: 'xls/Eggshell_CCHedits.xls',
   features: 'xls/Features_CCHedits.xls',
+  ornaments: 'xls/Ornament_DB_CCHedits.xlsx',
   perishables: 'xls/Perishables_CCHedits.xls',
   soils: 'xls/Soil_Master.xlsx',
   strata: 'xls/Strata.xls',
@@ -40,6 +41,8 @@ def get_feature_number longnum, source
   feature = nil
   if longnum == "no data"
     feature = "no data"
+  elsif longnum == "none"
+    feature = "none"
   else
     begin
       # cut off the unit part of the id:
@@ -486,6 +489,54 @@ if Perishable.all.size < 1
       # TODO strata and features after hearing back about unit info
       # strata is row[3]
       # features is row[7]
+    end
+  end
+end
+
+#############
+# Ornaments #
+#############
+
+if Ornament.all.size < 1
+  puts 'Loading Ornaments...'
+  s = Roo::Excelx.new(files[:ornaments])
+
+  s.sheet('data').each do |entry|
+    # empty fields should say "none" to standardize
+    row = convert_empty_to_none(entry)
+
+    if row[0] != 'Museum Specimen No.'
+      orna = {}
+      orna[:museum_specimen_no] = row[0]
+      orna[:analysis_lab_no] = row[1]
+      orna[:room] = row[2]
+      orna[:grid] = row[4]
+      orna[:quad] = row[5]
+      orna[:depth] = row[6]
+      orna[:field_date] = row[7]
+      orna[:analyst] = row[10]
+      orna[:analyzed] = row[11]
+      orna[:photographer] = row[12]
+      orna[:count] = row[13]
+      orna[:item] = row[14]
+
+      stratum = create_if_not_exists(Stratum, :strat_all, row[3])
+      orna[:strat] = stratum.id
+
+      feature_no = get_feature_number(row[9], "ornaments")
+      feature = Feature.where(feature_no: feature, unit_no: orna[:room]).first
+      if feature.nil?
+        feature = Feature.create(
+          unit_no: orna[:room],
+          feature_no: feature_no
+        )
+        feature.strata << stratum
+      end
+      orna[:feature] = feature
+      orna[:ornament_period_id] = create_if_not_exists(OrnamentPeriod, :period, row[8]).id
+
+      orna_row = Ornament.create(orna)
+
     end
   end
 end
