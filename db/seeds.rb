@@ -14,6 +14,11 @@ files = {
   units: 'xls/Unit_Summary_CCHedits.xlsx',
 }
 
+# will contain an array of hashes
+# with items that need to be hand checked
+# (for example, a unit number in the soils spreadsheet that is brand new)
+@handcheck = []
+
 ###########
 # Helpers #
 ###########
@@ -24,12 +29,30 @@ def create_if_not_exists model, field, column
   return record
 end
 
+def get_feature_number longnum, source
+  feature = nil
+  if longnum == "no data"
+    feature = "no data"
+  else
+    begin
+      # cut off the unit part of the id:
+      # "014P002" or "014P-002" and turn to float "2.0"
+      feature = longnum.split(/[A-Z\-]/).last.to_f
+    rescue
+      puts "Unable to parse feature #{longnum} from #{source}"
+      @handcheck << { type: "feature", num: longnum, source: source }
+    end
+  end
+  return feature
+end
+
 def select_or_create_unit unit, spreadsheet
   room = nil
   if unit != 'no data' and !unit.include?(' ')
     if Unit.where(:unit_no => unit).size < 1
       room = Unit.create(:unit_no => unit)
       puts "creating Unit #{unit} from #{spreadsheet}"
+      @handcheck << { type: "unit", num: "#{unit}", source: "#{spreadsheet}" }
     else
       room = Unit.where(:unit_no => unit).first
     end
@@ -73,7 +96,7 @@ if Unit.all.size < 1
       # if there should only be one, we could use
       # `Unit.find_or_create_by(unit_no: row[0])`
       if units.size < 1
-        puts "No Unit for #{row[0]}"
+        puts "Creating unit for #{row[0]}"
         unit = Unit.create(:unit_no => row[0])
       else
         unit = Unit.where(:unit_no => row[0]).first
@@ -121,7 +144,8 @@ if Stratum.all.size < 1
       # TODO same note here as above, can there be more than one with unit_no?
       units = Unit.where(:unit_no => row[0])
       if units.size < 1
-        puts "Creating Unit for #{row[0]}"
+        puts "Creating Unit for stratum #{row[0]}"
+        @handcheck << { type: "unit", num: row[0], source: "strata #{row[1]}" }
         unit = Unit.create(:unit_no => row[0])
       else
         unit = Unit.where(:unit_no => row[0]).first
@@ -192,11 +216,13 @@ if Feature.all.size < 1
       if r.nil?
         r = Unit.create(unit_no:f.unit_no, comments: 'imported from feature')
         puts "create Unit #{f.unit_no} from feature #{f.id}"
+        @handcheck << { type: "unit", num: "#{f.unit_no}", source: "feature #{f.id}" }
       end
       s = Stratum.where(strat_all: o, unit_id: r.id).first
       if s.nil?
         s = Stratum.create(strat_all: o, unit_id: r.id, comments: 'imported none')
-        puts "create Strata #{f.unit_no} #{o}"
+        puts "create stratum #{f.unit_no} #{o}"
+        @handcheck << { type: "stratum", num: "#{f.unit_no} #{o}", source: "feature #{f.id}" }
       end
       Feature.where(id: f.id).first.strata << s
     end
@@ -235,6 +261,7 @@ if BoneTool.all.size < 1
         s = Stratum.where(strat_all: strats, unit_id: room.id).first
         if s.nil?
           puts "creating Stratum #{row[0]} (#{room.unit_no}) #{strats}"
+          @handcheck << { type: "stratum", num: "#{row[0]} #{room.unit_no}", source: "bonetool #{b.id}" }
           s = Stratum.create(
             strat_all: strats,
             unit_id: room ? room.id : nil,
@@ -289,21 +316,26 @@ if Eggshell.all.size < 1
       a.each do |o|
         s = Stratum.where(strat_all: o, unit_id: room.id).first
         if s.nil?
-          s = Stratum.create(strat_all: o, unit_id: room ? room.id : nil, comments: 'imported none')
+          s_unit_id = room ? room.id : nil
+          s = Stratum.create(strat_all: o, unit_id: s_unit_id, comments: 'imported none')
           puts "create Stratum #{row[0]} (#{room.unit_no}) #{o}"
+          @handcheck << { type: "stratum", num: "#{row[0]} #{room.unit_no}", source: "eggshell" }
         end
-        i = row[7].rindex(/[A-Z]/)
         if row[7]
           fn = nil
           if row[7] == 'none'
             fn = 'none'
           else
-            fn = row[7][i+1,row[7].size-1].to_f
+            fn = get_feature_number(row[7], "eggshell")
           end
-          puts "find feature #{fn}"
+          # TODO feature unique by unit + feature_no
+          # but in this case, it's checking by the stratum
+          # which presumably should work but it seems like it's making loads of new features '
+          # so we should check on this
           f = s.features.where(feature_no: fn).first
           if !f
             f = Feature.create(feature_no: fn)
+            @handcheck << { type: "feature", num: "#{fn} (room #{s.unit.id})", source: "eggshell #{row[2]}" }
             f.strata << s
           else
             f.strata << s if !f.strata.include?(s)
@@ -319,37 +351,38 @@ end
 # Soils #
 #########
 
+
 if Soil.all.size < 1
   puts 'Loading Soils...'
   s = Roo::Excelx.new(files[:soils])
 
   s.sheet('Sheet1').each do |entry|
-    # empty and "no data" fields into "none" to standardize
-    row = entry.map{ |field| (field == "no data" || field.nil?) ? "none" : field }
+    # empty fields should say "none" to standardize
+    row = entry.map{ |field| (field.nil? || field == "") ? "none" : field }
 
     if row[0] != 'SITE'
       soil = {}
-      soil[:site] = row[0]
-      soil[:feature_key] = row[3]
-      soil[:fs] = row[4]
       soil[:box] = row[5]
-      soil[:period] = row[6]
-      soil[:soil_count] = row[7]
-      soil[:gridew] = row[8]
-      soil[:gridns] = row[9]
-      soil[:quad] = row[10]
-      soil[:exactprov] = row[11]
-      soil[:depthbeg] = row[12]
-      soil[:depthend] = row[13]
-      soil[:otherstrat] = row[14]
-      soil[:date] = row[15]
-      soil[:excavator] = row[16]
-      soil[:sample_no] = row[18]
       soil[:comments] = row[19]
       soil[:data_entry] = row[20]
+      soil[:date] = row[15]
+      soil[:depthbeg] = row[12]
+      soil[:depthend] = row[13]
+      soil[:exactprov] = row[11]
+      soil[:excavator] = row[16]
+      soil[:feature_key] = row[3]
+      soil[:fs] = row[4]
+      soil[:gridew] = row[8]
+      soil[:gridns] = row[9]
       soil[:location] = row[21]
+      soil[:otherstrat] = row[14]
+      soil[:period] = row[6]
+      soil[:quad] = row[10]
+      soil[:sample_no] = row[18]
+      soil[:site] = row[0]
+      soil[:soil_count] = row[7]
 
-      soil[:art_type] = create_if_not_exists(ArtType, :art_type, row[17])
+      soil[:art_type_id] = create_if_not_exists(ArtType, :art_type, row[17]).id
 
       # TODO there is not actually an association between soils and units, this is just a string
       # though it will make a NEW unit if one didn't previously exist
@@ -360,12 +393,15 @@ if Soil.all.size < 1
       soil_row = Soil.create(soil)
 
       # associate strata with soil
+      # note: only one stratum per soil row
+      #   and only one feature per soil row
+      #   iterating through to adjust for future developments
       soil_strata = row[2].split(',').map{ |stratum| stratum.strip }
       soil_strata.each do |soil_str|
-        # TODO seems to be creating lots of strata, maybe should be trimming field somehow?
         stratum = Stratum.where(strat_all: soil_str).first
         if stratum.nil?
           puts "creating stratum #{soil_str} for soil"
+          @handcheck << { type: "stratum", num: soil_str, source: "soils" }
           stratum = Stratum.create(
             strat_all: soil_str,
             unit: unit,
@@ -373,10 +409,33 @@ if Soil.all.size < 1
           )
         end
         soil_row.strata << stratum
-      end
 
-      # features
-      # TODO I am not sure how to match the "FEATURE" column of the spreadsheet against the features table here
+        # features
+        soil_features = row[3].split(',').map{ |f| f.strip }
+        soil_features.each do |soil_feat|
+          feat_num = get_feature_number(soil_feat, "soils")
+          feature = Feature.where(feature_no: feat_num).first
+          if feature.nil?
+            puts "creating feature #{feat_num} for soil (room #{unit.unit_no})"
+            @handcheck << { type: "feature", num: "#{soil_feat}", source: "soils" }
+            feature = Feature.create(
+              feature_no: feat_num,
+              unit_no: unit.unit_no,
+              comments: "imported from soil spreadsheet"
+            )
+          end
+          soil_row.features << feature
+          stratum.features << feature
+        end
+      end
     end
+  end
+end
+
+
+File.open("please_check_for_accuracy.txt", "w") do |file|
+  file.write("Please review the following and verify that units, strata, etc, were added correctly\n")
+  @handcheck.each do |added|
+    file.write("\n#{added[:type]} number #{added[:num]} was added from the #{added[:source]} spreadsheet")
   end
 end
