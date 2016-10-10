@@ -13,6 +13,7 @@ class Feature < ActiveRecord::Base
 
   has_and_belongs_to_many :soils
   has_and_belongs_to_many :perishables
+  has_and_belongs_to_many :ornaments
 
   def to_label
     "#{strata.map{|s| s.to_label}.join(', ')} : #{feature_no}"
