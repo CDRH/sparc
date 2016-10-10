@@ -11,6 +11,8 @@ class Feature < ActiveRecord::Base
   has_and_belongs_to_many :strata
   has_many :units, :through => :strata
 
+  has_and_belongs_to_many :soils
+
   def to_label
     "#{strata.map{|s| s.to_label}.join(', ')} : #{feature_no}"
   end
