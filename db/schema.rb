@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160928162428) do
   end
 
   create_table "bone_tools", force: :cascade do |t|
+    t.string   "room"
     t.string   "strat"
     t.string   "field_specimen_no"
     t.string   "depth"
@@ -37,9 +38,8 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.string   "tool_type"
     t.integer  "species_code"
     t.text     "comments"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "room",                    limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "bone_tools_features", id: false, force: :cascade do |t|
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20160928162428) do
 
   create_table "eggshells", force: :cascade do |t|
     t.integer  "stratum_id"
+    t.string   "room"
     t.string   "strat"
     t.string   "salmon_museum_id_no"
     t.string   "record_field_key_no"
@@ -94,9 +95,8 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.string   "field_date"
     t.integer  "eggshell_affiliation_id"
     t.integer  "eggshell_item_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "room",                    limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "eggshells_features", id: false, force: :cascade do |t|
@@ -228,12 +228,12 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.integer  "ornament_period_id"
     t.integer  "feature_id"
     t.string   "analyst"
+    t.string   "analyzed"
     t.string   "photographer"
     t.integer  "count"
     t.string   "item"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "analyzed",           limit: 255
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "ornaments_strata", id: false, force: :cascade do |t|
@@ -304,6 +304,7 @@ ActiveRecord::Schema.define(version: 20160928162428) do
 
   create_table "select_artifacts", force: :cascade do |t|
     t.string   "room"
+    t.string   "artifact_no"
     t.string   "strat"
     t.string   "floor_association"
     t.string   "sa_form"

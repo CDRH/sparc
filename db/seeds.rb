@@ -11,6 +11,7 @@ files = {
   features: 'xls/Features_CCHedits.xls',
   ornaments: 'xls/Ornament_DB_CCHedits.xlsx',
   perishables: 'xls/Perishables_CCHedits.xls',
+  select_artifacts: 'xls/Select_Artifacts.xls',
   soils: 'xls/Soil_Master.xlsx',
   strata: 'xls/Strata.xls',
   units: 'xls/Unit_Summary_CCHedits.xlsx',
@@ -535,8 +536,60 @@ if Ornament.all.size < 1
       orna[:feature] = feature
       orna[:ornament_period_id] = create_if_not_exists(OrnamentPeriod, :period, row[8]).id
 
-      orna_row = Ornament.create(orna)
+      # should already have the stratum and feature related, so we're done!
+      Ornament.create(orna)
+    end
+  end
+end
 
+
+####################
+# Select Artifacts #
+####################
+
+if SelectArtifact.all.size < 1
+  puts 'Loading Select Artifacts...'
+  s = Roo::Excel.new(files[:select_artifacts])
+
+  s.sheet('main data').each do |entry|
+    # empty fields should say "none" to standardize
+    row = convert_empty_to_none(entry)
+
+    if row[0] != 'Room'
+      sa = {}
+      sa[:artifact_no] = row[1]
+      # sa[:strat] = row[2]
+      sa[:floor_association] = row[3]
+      sa[:sa_form] = row[4]
+      # TODO verify that the below is not "features"
+      sa[:associated_feature_artifacts] = row[5]
+      sa[:grid] = row[6]
+      sa[:depth] = row[7]
+      sa[:select_artifact_occupation_id] = create_if_not_exists(SelectArtifactOccupation, :occupation, row[8]).id
+      sa[:select_artifact_type] = row[9]
+      sa[:artifact_count] = row[10]
+      sa[:location_in_room] = row[11]
+      sa[:comments] = row[12]
+
+      unit = select_or_create_unit(row[0], "select artifacts")
+      sa[:room] = unit.id
+
+      select_artifact = SelectArtifact.create(sa)
+
+      sa_strata = row[2].split(',').map{ |stratum| stratum.strip }
+      sa_strata.each do |sa_str|
+        stratum = Stratum.where(strat_all: sa_str).first
+        if stratum.nil?
+          puts "creating stratum #{sa_str} for select artifacts"
+          @handcheck << { type: "stratum", num: sa_str, source: "select artifacts" }
+          stratum = Stratum.create(
+            strat_all: sa_str,
+            unit: unit,
+            comments: 'imported from soil spreadsheet'
+          )
+        end
+        select_artifact.strata << stratum
+      end
     end
   end
 end
