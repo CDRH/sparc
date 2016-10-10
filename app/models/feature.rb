@@ -12,6 +12,7 @@ class Feature < ActiveRecord::Base
   has_many :units, :through => :strata
 
   has_and_belongs_to_many :soils
+  has_and_belongs_to_many :perishables
 
   def to_label
     "#{strata.map{|s| s.to_label}.join(', ')} : #{feature_no}"
