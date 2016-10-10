@@ -9,6 +9,7 @@ files = {
   bonetools: 'xls/Bone_tool_DB.xlsx',
   eggshells: 'xls/Eggshell_CCHedits.xls',
   features: 'xls/Features_CCHedits.xls',
+  perishables: 'xls/Perishables_CCHedits.xls',
   soils: 'xls/Soil_Master.xlsx',
   strata: 'xls/Strata.xls',
   units: 'xls/Unit_Summary_CCHedits.xlsx',
@@ -27,6 +28,12 @@ def create_if_not_exists model, field, column
   record = model.where(field => column).first
   record = model.create(field => column) if !record
   return record
+end
+
+def convert_empty_to_none entry
+  return entry.map do |field|
+    (field.nil? || field == "") ? "none" : field
+  end
 end
 
 def get_feature_number longnum, source
@@ -351,7 +358,6 @@ end
 # Soils #
 #########
 
-
 if Soil.all.size < 1
   puts 'Loading Soils...'
   s = Roo::Excelx.new(files[:soils])
@@ -428,6 +434,58 @@ if Soil.all.size < 1
           stratum.features << feature
         end
       end
+    end
+  end
+end
+
+###############
+# Perishables #
+###############
+
+# NOTE:  Perishables may belong to more than one unit
+
+if Perishable.all.size < 1
+  puts 'Loading Perishables...'
+  s = Roo::Excel.new(files[:perishables])
+
+  s.sheet('all').each do |entry|
+    # empty fields should say "none" to standardize
+    row = convert_empty_to_none(entry)
+
+    if row[0] != 'FS Number'
+      perish = {}
+      perish[:fs_number] = row[0]
+      perish[:salmon_museum_number] = row[1]
+      # Note: room is being saved as the string from the spreadsheet
+      perish[:room] = row[2]
+      perish[:grid] = row[4]
+      perish[:quad] = row[5]
+      perish[:depth] = row[6]
+      perish[:sa_no] = row[9]
+      perish[:artifact_type] = row[10]
+      perish[:perishable_count] = row[11]
+      perish[:artifact_structure] = row[12]
+      perish[:comments] = row[13]
+      perish[:other_comments] = row[14]
+      perish[:storage_location] = row[15]
+      # TODO not sure what column to use for this
+      # perish[:object_structure] = row[16]
+      perish[:exhibit_location] = row[16]
+      perish[:record_key_no] = row[17]
+      perish[:museum_lab_no] = row[18]
+      perish[:field_date] = row[19]
+      perish[:original_analysis] = row[20]
+
+      # period
+      perish[:perishable_period_id] = create_if_not_exists(PerishablePeriod, :period, row[8]).id
+
+      perish_row = Perishable.create(perish)
+
+      # TODO perishables have more than one unit, what to do in that case?
+      # unit = select_or_create_unit(row[2], 'perishables')
+      # TODO strata and features after hearing back about unit info
+      # strata is row[3]
+      # features is row[7]
     end
   end
 end
