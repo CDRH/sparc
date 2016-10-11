@@ -4,7 +4,7 @@ class Soil < ApplicationRecord
   has_and_belongs_to_many :strata
   
   def to_label
-    "#{museum_specimen_no}"
+    "#{comments}"
   end
   def authorized_for_update?
     puts "---------#{current_user}"
