@@ -343,7 +343,7 @@ if Eggshell.all.size < 1
           # it was checking by the stratum
           # which presumably should work but it seems like it's making loads of new features '
           # so I have altered it for the time being
-          f = Feature.where(feature_no: fn, unit_no: room.unit_no).first
+          f = s.features.where(feature_no: fn, unit_no: room.unit_no).first
           if !f
             f = Feature.create(feature_no: fn, unit_no: room.unit_no)
             @handcheck << { type: "feature", num: "#{room.unit_no}:#{fn}", source: "eggshell #{row[2]}" }
@@ -424,7 +424,7 @@ if Soil.all.size < 1
         soil_features = row[3].split(',').map{ |f| f.strip }
         soil_features.each do |soil_feat|
           feat_num = get_feature_number(soil_feat, "soils")
-          feature = Feature.where(feature_no: feat_num, unit_no: unit.unit_no).first
+          feature = stratum.features.where(feature_no: feat_num, unit_no: unit.unit_no).first
           if feature.nil?
             puts "creating feature #{feat_num} for soil (room #{unit.unit_no})"
             @handcheck << { type: "feature", num: "#{unit.unit_no}:#{soil_feat}", source: "soils" }
