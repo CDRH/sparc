@@ -572,7 +572,7 @@ if SelectArtifact.all.size < 1
       sa[:comments] = row[12]
 
       unit = select_or_create_unit(row[0], "select artifacts")
-      sa[:room] = unit.id
+      sa[:room] = unit.unit_no
 
       select_artifact = SelectArtifact.create(sa)
 
