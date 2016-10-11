@@ -233,7 +233,7 @@ if Feature.all.size < 1
       if s.nil?
         s = Stratum.create(strat_all: o, unit_id: r.id, comments: 'imported none')
         puts "create stratum #{f.unit_no} #{o}"
-        @handcheck << { type: "stratum", num: "#{f.unit_no} #{o}", source: "feature #{f.id}" }
+        @handcheck << { type: "stratum", num: "#{f.unit_no}:#{o}", source: "feature #{f.id}" }
       end
       Feature.where(id: f.id).first.strata << s
     end
@@ -272,7 +272,7 @@ if BoneTool.all.size < 1
         s = Stratum.where(strat_all: strats, unit_id: room.id).first
         if s.nil?
           puts "creating Stratum #{row[0]} (#{room.unit_no}) #{strats}"
-          @handcheck << { type: "stratum", num: "#{row[0]} #{room.unit_no}", source: "bonetool #{b.id}" }
+          @handcheck << { type: "stratum", num: "#{room.unit_no}:#{row[0]}", source: "bonetool #{b.id}" }
           s = Stratum.create(
             strat_all: strats,
             unit_id: room ? room.id : nil,
@@ -326,11 +326,11 @@ if Eggshell.all.size < 1
       a = e.strat.to_s.gsub(';',',').split(',').map{|o| o.strip}
       a.each do |o|
         s = Stratum.where(strat_all: o, unit_id: room.id).first
+        unit_id = room ? room.id : nil
         if s.nil?
-          s_unit_id = room ? room.id : nil
-          s = Stratum.create(strat_all: o, unit_id: s_unit_id, comments: 'imported none')
+          s = Stratum.create(strat_all: o, unit_id: unit_id, comments: 'imported none')
           puts "create Stratum #{row[0]} (#{room.unit_no}) #{o}"
-          @handcheck << { type: "stratum", num: "#{row[0]} #{room.unit_no}", source: "eggshell" }
+          @handcheck << { type: "stratum", num: "#{room.unit_no}:#{row[0]}", source: "eggshell" }
         end
         if row[7]
           fn = nil
@@ -340,13 +340,13 @@ if Eggshell.all.size < 1
             fn = get_feature_number(row[7], "eggshell")
           end
           # TODO feature unique by unit + feature_no
-          # but in this case, it's checking by the stratum
+          # it was checking by the stratum
           # which presumably should work but it seems like it's making loads of new features '
-          # so we should check on this
-          f = s.features.where(feature_no: fn).first
+          # so I have altered it for the time being
+          f = Feature.where(feature_no: fn, unit_no: room.unit_no).first
           if !f
-            f = Feature.create(feature_no: fn)
-            @handcheck << { type: "feature", num: "#{fn} (room #{s.unit.id})", source: "eggshell #{row[2]}" }
+            f = Feature.create(feature_no: fn, unit_no: room.unit_no)
+            @handcheck << { type: "feature", num: "#{room.unit_no}:#{fn}", source: "eggshell #{row[2]}" }
             f.strata << s
           else
             f.strata << s if !f.strata.include?(s)
@@ -408,10 +408,10 @@ if Soil.all.size < 1
       #   iterating through to adjust for future developments
       soil_strata = row[2].split(',').map{ |stratum| stratum.strip }
       soil_strata.each do |soil_str|
-        stratum = Stratum.where(strat_all: soil_str).first
+        stratum = Stratum.where(strat_all: soil_str, unit_id: unit.id).first
         if stratum.nil?
           puts "creating stratum #{soil_str} for soil"
-          @handcheck << { type: "stratum", num: soil_str, source: "soils" }
+          @handcheck << { type: "stratum", num: "#{unit.unit_no}:#{soil_str}", source: "soils" }
           stratum = Stratum.create(
             strat_all: soil_str,
             unit: unit,
@@ -424,10 +424,10 @@ if Soil.all.size < 1
         soil_features = row[3].split(',').map{ |f| f.strip }
         soil_features.each do |soil_feat|
           feat_num = get_feature_number(soil_feat, "soils")
-          feature = Feature.where(feature_no: feat_num).first
+          feature = Feature.where(feature_no: feat_num, unit_no: unit.unit_no).first
           if feature.nil?
             puts "creating feature #{feat_num} for soil (room #{unit.unit_no})"
-            @handcheck << { type: "feature", num: "#{soil_feat}", source: "soils" }
+            @handcheck << { type: "feature", num: "#{unit.unit_no}:#{soil_feat}", source: "soils" }
             feature = Feature.create(
               feature_no: feat_num,
               unit_no: unit.unit_no,
@@ -576,16 +576,16 @@ if SelectArtifact.all.size < 1
 
       select_artifact = SelectArtifact.create(sa)
 
-      sa_strata = row[2].split(',').map{ |stratum| stratum.strip }
+      sa_strata = row[2].split(/[,;]/).map{ |stratum| stratum.strip }
       sa_strata.each do |sa_str|
-        stratum = Stratum.where(strat_all: sa_str).first
+        stratum = Stratum.where(strat_all: sa_str, unit_id: unit.id).first
         if stratum.nil?
           puts "creating stratum #{sa_str} for select artifacts"
-          @handcheck << { type: "stratum", num: sa_str, source: "select artifacts" }
+          @handcheck << { type: "stratum", num: "#{unit.id}:#{sa_str}", source: "select artifacts" }
           stratum = Stratum.create(
             strat_all: sa_str,
             unit: unit,
-            comments: 'imported from soil spreadsheet'
+            comments: 'imported from select artifacts spreadsheet'
           )
         end
         select_artifact.strata << stratum
