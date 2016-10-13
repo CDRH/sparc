@@ -282,7 +282,7 @@ if Feature.all.size < 1
         puts "create stratum #{f.unit_no} #{o}"
         @handcheck << { type: "stratum", num: "#{f.unit_no}:#{o}", source: "feature #{f.id}" }
       end
-      f.strata << s
+      f.strata << s unless f.strata.include?(s)
     end
   end
 end
@@ -326,7 +326,7 @@ if BoneTool.all.size < 1
             comments: 'imported none'
           )
         end
-        b.strata << s
+        b.strata << s unless b.strata.include?(s)
       end
     end
   end
@@ -384,8 +384,7 @@ if Soil.all.size < 1
   s = Roo::Excelx.new(files[:soils])
 
   s.sheet('Sheet1').each do |entry|
-    # empty fields should say "none" to standardize
-    row = entry.map{ |field| (field.nil? || field == "") ? "none" : field }
+    row = convert_empty_to_none(entry)
 
     if row[0] != 'SITE'
       soil = {}
@@ -412,9 +411,6 @@ if Soil.all.size < 1
 
       soil[:art_type_id] = create_if_not_exists(ArtType, :art_type, row[17]).id
 
-      # TODO there is not actually an association between soils and units, this is just a string
-      # though it will make a NEW unit if one didn't previously exist
-      # could assign strata to new unit
       unit = select_or_create_unit(row[1], 'soils')
       soil[:room] = unit.unit_no
 
@@ -442,7 +438,6 @@ if Perishable.all.size < 1
       perish = {}
       perish[:fs_number] = row[0]
       perish[:salmon_museum_number] = row[1]
-      # Note: room is being saved as the string from the spreadsheet
       perish[:room] = row[2]
       perish[:grid] = row[4]
       perish[:quad] = row[5]
@@ -485,7 +480,6 @@ if Ornament.all.size < 1
   s = Roo::Excelx.new(files[:ornaments])
 
   s.sheet('data').each do |entry|
-    # empty fields should say "none" to standardize
     row = convert_empty_to_none(entry)
 
     if row[0] != 'Museum Specimen No.'
@@ -504,7 +498,8 @@ if Ornament.all.size < 1
       orna[:item] = row[14]
 
       stratum = create_if_not_exists(Stratum, :strat_all, row[3])
-      orna[:strat] = stratum.id
+      # do not link the stratum object directly to ornament, just string
+      orna[:strat] = row[3]
 
       feature_no = get_feature_number(row[9], "ornaments")
       feature = Feature.where(feature_no: feature, unit_no: orna[:room]).first
@@ -513,7 +508,7 @@ if Ornament.all.size < 1
           unit_no: orna[:room],
           feature_no: feature_no
         )
-        feature.strata << stratum
+        feature.strata << stratum unless feature.strata.include?(stratum)
       end
       orna[:feature] = feature
       orna[:ornament_period_id] = create_if_not_exists(OrnamentPeriod, :period, row[8]).id
@@ -534,16 +529,20 @@ if SelectArtifact.all.size < 1
   s = Roo::Excel.new(files[:select_artifacts])
 
   s.sheet('main data').each do |entry|
-    # empty fields should say "none" to standardize
     row = convert_empty_to_none(entry)
 
     if row[0] != 'Room'
       sa = {}
       sa[:artifact_no] = row[1]
-      # sa[:strat] = row[2]
+      # Note: Select Artifacts have an actual relationship with strata
+      # but I'm copying the string from the spreadsheet since there
+      # is a specific database field that seems to be for it
+      sa[:strat] = row[2]
       sa[:floor_association] = row[3]
       sa[:sa_form] = row[4]
-      # TODO verify that the below is not "features"
+      # Note: The below could be parsed into specific features
+      # at which point the select_artifacts_strata table should
+      # be removed and a join set up with features instead
       sa[:associated_feature_artifacts] = row[5]
       sa[:grid] = row[6]
       sa[:depth] = row[7]
@@ -570,7 +569,7 @@ if SelectArtifact.all.size < 1
             comments: 'imported from select artifacts spreadsheet'
           )
         end
-        select_artifact.strata << stratum
+        select_artifact.strata << stratum unless select_artifact.strata.include?(stratum)
       end
     end
   end
