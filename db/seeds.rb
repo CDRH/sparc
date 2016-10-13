@@ -38,8 +38,7 @@ def associate_strata_features unit, aStrata, aFeatures, related_item, source
     stratum = Stratum.where(strat_all: strat_no, unit_id: unit.id).first
     # create if stratum does not yet exist for a specific unit
     if stratum.nil?
-      puts "creating Stratum #{unit.unit_no}:#{strat_no} for #{source}"
-      @handcheck << { type: "stratum", num: "#{unit.unit_no}:#{strat_no}", source: source }
+      report "stratum", "#{unit.unit_no}:#{strat_no}", source
       stratum = Stratum.create(
         strat_all: strat_no,
         unit_id: unit.id,
@@ -59,8 +58,7 @@ def associate_strata_features unit, aStrata, aFeatures, related_item, source
           unit_no: unit.unit_no,
           comments: "imported from #{source}"
         )
-        @handcheck << { type: "feature", num: "#{unit.unit_no}:#{strat_no}:#{feat_no}", source: source}
-        puts "creating feature #{unit.unit_no}:#{strat_no}:#{feat_no} for #{source}"
+        report "feature", "#{unit.unit_no}:#{strat_no}:#{feat_no}", source
       end
       # associate the feature with the strata
       # associate the feature with the specific record (ornament, perishable, etc)
@@ -97,11 +95,20 @@ def get_feature_number feat_str, source
       # "014P002" or "014P-002" and turn to float "2.0"
       feature = feat_str.split(/[A-Z\-]/).last.to_f
     rescue
+      report "feature", feat_str, source
       puts "Unable to parse feature #{feat_str} from #{source}"
-      @handcheck << { type: "feature", num: feat_str, source: source }
     end
   end
   return feature
+end
+
+def report type, num, source
+  # filter out all of the stratum and features that are "none"
+  # but keep those that might be attached TO a "none" stratum, unit, etc
+  puts "creating #{type} #{num} for #{source}"
+  if !num.end_with?("none") && !num.end_with?("no data")
+    @handcheck << { type: type, num: num, source: source }
+  end
 end
 
 def select_or_create_unit unit, spreadsheet
@@ -109,8 +116,7 @@ def select_or_create_unit unit, spreadsheet
   if unit != 'no data' and !unit.include?(' ')
     if Unit.where(:unit_no => unit).size < 1
       room = Unit.create(:unit_no => unit)
-      puts "creating Unit #{unit} from #{spreadsheet}"
-      @handcheck << { type: "unit", num: "#{unit}", source: "#{spreadsheet}" }
+      report "unit", unit, spreadsheet
     else
       room = Unit.where(:unit_no => unit).first
     end
@@ -202,8 +208,7 @@ if Stratum.all.size < 1
       # TODO same note here as above, can there be more than one with unit_no?
       units = Unit.where(:unit_no => row[0])
       if units.size < 1
-        puts "Creating Unit for stratum #{row[0]}"
-        @handcheck << { type: "unit", num: row[0], source: "stratum #{row[1]}" }
+        report "unit", row[0], "stratum #{row[1]}"
         unit = Unit.create(:unit_no => row[0])
       else
         unit = Unit.where(:unit_no => row[0]).first
@@ -273,14 +278,12 @@ if Feature.all.size < 1
       r = Unit.where(unit_no:f.unit_no).first
       if r.nil?
         r = Unit.create(unit_no:f.unit_no, comments: 'imported from feature')
-        puts "create Unit #{f.unit_no} from feature #{f.id}"
-        @handcheck << { type: "unit", num: "#{f.unit_no}", source: "feature #{f.id}" }
+        report "unit", f.unit_no, "feature #{f.feature_no}"
       end
       s = Stratum.where(strat_all: o, unit_id: r.id).first
       if s.nil?
         s = Stratum.create(strat_all: o, unit_id: r.id, comments: 'imported none')
-        puts "create stratum #{f.unit_no} #{o}"
-        @handcheck << { type: "stratum", num: "#{f.unit_no}:#{o}", source: "feature #{f.id}" }
+        report "stratum", "#{f.unit_no}:#{o}", "feature #{f.feature_no}"
       end
       f.strata << s unless f.strata.include?(s)
     end
@@ -318,8 +321,7 @@ if BoneTool.all.size < 1
       a.each do |strats|
         s = Stratum.where(strat_all: strats, unit_id: room.id).first
         if s.nil?
-          puts "creating Stratum #{strats} (#{room.unit_no}) #{strats}"
-          @handcheck << { type: "stratum", num: "#{room.unit_no}:#{row[0]}", source: "bonetool #{b.id}" }
+          report "stratum", "#{room.unit_no}:#{row[0]}", "bonetool #{b.id}"
           s = Stratum.create(
             strat_all: strats,
             unit_id: room ? room.id : nil,
@@ -566,8 +568,7 @@ if SelectArtifact.all.size < 1
       sa_strata.each do |sa_str|
         stratum = Stratum.where(strat_all: sa_str, unit_id: unit.id).first
         if stratum.nil?
-          puts "creating stratum #{sa_str} for select artifacts"
-          @handcheck << { type: "stratum", num: "#{unit.id}:#{sa_str}", source: "select artifacts" }
+          report "stratum", "#{unit.id}:#{sa_str}", "select artifact #{select_artifact.id}"
           stratum = Stratum.create(
             strat_all: sa_str,
             unit: unit,
