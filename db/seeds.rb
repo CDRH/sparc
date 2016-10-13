@@ -26,6 +26,51 @@ files = {
 # Helpers #
 ###########
 
+# given a specific unit with a list of strata and features, find or create
+# all the items and create appropriate relationships
+# returns the features
+#   unit has many strata which have many features
+#   feature is uniquely identified by unit, stratum, and feature_no
+def associate_strata_features unit, aStrata, aFeatures, related_item, source
+  # pull out all of the strata from a single column
+  strata = aStrata.split(/[;,]/).map { |s| s.strip }
+  strata.each do |strat_no|
+    stratum = Stratum.where(strat_all: strat_no, unit_id: unit.id).first
+    # create if stratum does not yet exist for a specific unit
+    if stratum.nil?
+      puts "creating Stratum #{unit.unit_no}:#{strat_no} for #{source}"
+      @handcheck << { type: "stratum", num: "#{unit.unit_no}:#{strat_no}", source: source }
+      stratum = Stratum.create(
+        strat_all: strat_no,
+        unit_id: unit.id,
+        comments: "imported from #{source}"
+      )
+    end
+    # pull out all of the features from a single column
+    features = aFeatures.split(/[;,]/).map { |f| f.strip }
+    features.each do |feat_no|
+      # at this point the given stratum should be associated with a specific unit, so
+      # only verifying that the feature_no is not in the stratum
+      feature = stratum.features.where(feature_no: feat_no).first
+      if !feature
+        feature = Feature.create(
+          feature_no: feat_no,
+          unit_no: unit.unit_no,
+          comments: "imported from #{source}"
+        )
+        @handcheck << { type: "feature", num: "#{unit.unit_no}:#{strat_no}:#{feat_no}", source: source}
+        puts "creating feature #{unit.unit_no}:#{strat_no}:#{feat_no} for #{source}"
+      end
+      # associate the feature with the strata
+      # associate the feature with the specific record (ornament, perishable, etc)
+      stratum.features << feature unless stratum.features.include?(feature)
+      if related_item
+        related_item.features << feature unless related_item.features.include?(feature)
+      end
+    end
+  end
+end
+
 def create_if_not_exists model, field, column
   record = model.where(field => column).first
   record = model.create(field => column) if !record
@@ -40,10 +85,8 @@ end
 
 def get_feature_number longnum, source
   feature = nil
-  if longnum == "no data"
-    feature = "no data"
-  elsif longnum == "none"
-    feature = "none"
+  if longnum == "no data" || longnum == "none"
+    feature = longnum
   else
     begin
       # cut off the unit part of the id:
@@ -156,7 +199,7 @@ if Stratum.all.size < 1
       units = Unit.where(:unit_no => row[0])
       if units.size < 1
         puts "Creating Unit for stratum #{row[0]}"
-        @handcheck << { type: "unit", num: row[0], source: "strata #{row[1]}" }
+        @handcheck << { type: "unit", num: row[0], source: "stratum #{row[1]}" }
         unit = Unit.create(:unit_no => row[0])
       else
         unit = Unit.where(:unit_no => row[0]).first
@@ -235,7 +278,7 @@ if Feature.all.size < 1
         puts "create stratum #{f.unit_no} #{o}"
         @handcheck << { type: "stratum", num: "#{f.unit_no}:#{o}", source: "feature #{f.id}" }
       end
-      Feature.where(id: f.id).first.strata << s
+      f.strata << s
     end
   end
 end
@@ -271,7 +314,7 @@ if BoneTool.all.size < 1
       a.each do |strats|
         s = Stratum.where(strat_all: strats, unit_id: room.id).first
         if s.nil?
-          puts "creating Stratum #{row[0]} (#{room.unit_no}) #{strats}"
+          puts "creating Stratum #{strats} (#{room.unit_no}) #{strats}"
           @handcheck << { type: "stratum", num: "#{room.unit_no}:#{row[0]}", source: "bonetool #{b.id}" }
           s = Stratum.create(
             strat_all: strats,
@@ -323,37 +366,7 @@ if Eggshell.all.size < 1
         strat: row[1],
       )
      
-      a = e.strat.to_s.gsub(';',',').split(',').map{|o| o.strip}
-      a.each do |o|
-        s = Stratum.where(strat_all: o, unit_id: room.id).first
-        unit_id = room ? room.id : nil
-        if s.nil?
-          s = Stratum.create(strat_all: o, unit_id: unit_id, comments: 'imported none')
-          puts "create Stratum #{row[0]} (#{room.unit_no}) #{o}"
-          @handcheck << { type: "stratum", num: "#{room.unit_no}:#{row[0]}", source: "eggshell" }
-        end
-        if row[7]
-          fn = nil
-          if row[7] == 'none'
-            fn = 'none'
-          else
-            fn = get_feature_number(row[7], "eggshell")
-          end
-          # TODO feature unique by unit + feature_no
-          # it was checking by the stratum
-          # which presumably should work but it seems like it's making loads of new features '
-          # so I have altered it for the time being
-          f = s.features.where(feature_no: fn, unit_no: room.unit_no).first
-          if !f
-            f = Feature.create(feature_no: fn, unit_no: room.unit_no)
-            @handcheck << { type: "feature", num: "#{room.unit_no}:#{fn}", source: "eggshell #{row[2]}" }
-            f.strata << s
-          else
-            f.strata << s if !f.strata.include?(s)
-          end
-          e.features << f
-        end
-      end
+      associate_strata_features(room, row[1], row[7], e, "eggshell")
     end
   end
 end
@@ -391,6 +404,7 @@ if Soil.all.size < 1
       soil[:sample_no] = row[18]
       soil[:site] = row[0]
       soil[:soil_count] = row[7]
+      soil[:strat] = row[2]
 
       soil[:art_type_id] = create_if_not_exists(ArtType, :art_type, row[17]).id
 
@@ -401,43 +415,7 @@ if Soil.all.size < 1
       soil[:room] = unit.unit_no
 
       soil_row = Soil.create(soil)
-
-      # associate strata with soil
-      # note: only one stratum per soil row
-      #   and only one feature per soil row
-      #   iterating through to adjust for future developments
-      soil_strata = row[2].split(',').map{ |stratum| stratum.strip }
-      soil_strata.each do |soil_str|
-        stratum = Stratum.where(strat_all: soil_str, unit_id: unit.id).first
-        if stratum.nil?
-          puts "creating stratum #{soil_str} for soil"
-          @handcheck << { type: "stratum", num: "#{unit.unit_no}:#{soil_str}", source: "soils" }
-          stratum = Stratum.create(
-            strat_all: soil_str,
-            unit: unit,
-            comments: 'imported from soil spreadsheet'
-          )
-        end
-        soil_row.strata << stratum
-
-        # features
-        soil_features = row[3].split(',').map{ |f| f.strip }
-        soil_features.each do |soil_feat|
-          feat_num = get_feature_number(soil_feat, "soils")
-          feature = stratum.features.where(feature_no: feat_num, unit_no: unit.unit_no).first
-          if feature.nil?
-            puts "creating feature #{feat_num} for soil (room #{unit.unit_no})"
-            @handcheck << { type: "feature", num: "#{unit.unit_no}:#{soil_feat}", source: "soils" }
-            feature = Feature.create(
-              feature_no: feat_num,
-              unit_no: unit.unit_no,
-              comments: "imported from soil spreadsheet"
-            )
-          end
-          soil_row.features << feature
-          stratum.features << feature
-        end
-      end
+      associate_strata_features(unit, row[2], row[3], soil_row, "soil")
     end
   end
 end
