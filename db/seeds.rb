@@ -497,8 +497,13 @@ if Ornament.all.size < 1
       orna[:count] = row[13]
       orna[:item] = row[14]
 
-      stratum = create_if_not_exists(Stratum, :strat_all, row[3])
-      # do not link the stratum object directly to ornament, just string
+      unit = select_or_create_unit(row[2], "ornaments")
+
+      stratum = Stratum.where(strat_all: row[3], unit_id: unit.id).first
+      if !stratum
+        stratum = Stratum.create(strat_all: row[3], unit_id: unit.id)
+      end
+      # does not link the stratum object directly to ornament, just string
       orna[:strat] = row[3]
 
       feature_no = get_feature_number(row[9], "ornaments")
