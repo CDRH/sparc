@@ -1,4 +1,8 @@
 class Story < ActiveRecord::Base
+  has_many :units
+
+  validates_uniqueness_of :story
+
   def to_label
     "#{story}"
   end

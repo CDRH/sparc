@@ -1,4 +1,8 @@
 class TypeDescription < ActiveRecord::Base
+  has_many :units
+
+  validates_uniqueness_of :type_description
+
   def to_label
     "#{type_description}"
   end

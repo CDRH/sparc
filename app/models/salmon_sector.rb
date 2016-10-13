@@ -1,4 +1,8 @@
 class SalmonSector < ActiveRecord::Base
+  has_many :units
+
+  validates_uniqueness_of :salmon_sector
+
   def to_label
     "#{salmon_sector}"
   end

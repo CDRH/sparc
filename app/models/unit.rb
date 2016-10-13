@@ -11,6 +11,8 @@ class Unit < ActiveRecord::Base
   belongs_to :unit_occupation
   has_many :strata
   
+  validates_uniqueness_of :unit_no
+
   def to_label
     "#{unit_no}"
   end

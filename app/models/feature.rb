@@ -1,5 +1,4 @@
 class Feature < ActiveRecord::Base
-  belongs_to :excavtion_status
   belongs_to :feature_group
   belongs_to :feature_occupation
   belongs_to :feature_type
@@ -11,9 +10,10 @@ class Feature < ActiveRecord::Base
   has_and_belongs_to_many :strata
   has_many :units, :through => :strata
 
-  has_and_belongs_to_many :soils
-  has_and_belongs_to_many :perishables
+  has_and_belongs_to_many :eggshells
   has_and_belongs_to_many :ornaments
+  has_and_belongs_to_many :perishables
+  has_and_belongs_to_many :soils
 
   def to_label
     "#{strata.map{|s| s.to_label}.join(', ')} : #{feature_no}"
