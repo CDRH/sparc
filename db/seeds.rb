@@ -451,7 +451,6 @@ if Perishable.all.size < 1
       perish[:other_comments] = row[14]
       perish[:storage_location] = row[15]
       # TODO not sure what column to use for this
-      # perish[:object_structure] = row[16]
       perish[:exhibit_location] = row[16]
       perish[:record_key_no] = row[17]
       perish[:museum_lab_no] = row[18]

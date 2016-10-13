@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013144517) do
+ActiveRecord::Schema.define(version: 20161013151738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -238,7 +238,6 @@ ActiveRecord::Schema.define(version: 20161013144517) do
     t.text     "comments"
     t.text     "other_comments"
     t.string   "storage_location"
-    t.string   "object_structure"
     t.string   "exhibit_location"
     t.string   "record_key_no"
     t.string   "museum_lab_no"
