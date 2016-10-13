@@ -1,7 +1,6 @@
 class Soil < ApplicationRecord
   belongs_to :art_type
   has_and_belongs_to_many :features
-  has_and_belongs_to_many :strata
   
   def to_label
     "#{comments}"

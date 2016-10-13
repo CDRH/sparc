@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928162428) do
+ActiveRecord::Schema.define(version: 20161013144517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,13 +40,6 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.text     "comments"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-  end
-
-  create_table "bone_tools_features", id: false, force: :cascade do |t|
-    t.integer "bone_tool_id"
-    t.integer "feature_id"
-    t.index ["bone_tool_id"], name: "index_bone_tools_features_on_bone_tool_id", using: :btree
-    t.index ["feature_id"], name: "index_bone_tools_features_on_feature_id", using: :btree
   end
 
   create_table "bone_tools_strata", id: false, force: :cascade do |t|
@@ -104,13 +97,6 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.integer "feature_id"
     t.index ["eggshell_id"], name: "index_eggshells_features_on_eggshell_id", using: :btree
     t.index ["feature_id"], name: "index_eggshells_features_on_feature_id", using: :btree
-  end
-
-  create_table "eggshells_strata", id: false, force: :cascade do |t|
-    t.integer "eggshell_id"
-    t.integer "stratum_id"
-    t.index ["eggshell_id"], name: "index_eggshells_strata_on_eggshell_id", using: :btree
-    t.index ["stratum_id"], name: "index_eggshells_strata_on_stratum_id", using: :btree
   end
 
   create_table "excavation_statuses", force: :cascade do |t|
@@ -171,13 +157,6 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.index ["perishable_id"], name: "index_features_perishables_on_perishable_id", using: :btree
   end
 
-  create_table "features_select_artifacts", id: false, force: :cascade do |t|
-    t.integer "select_artifact_id"
-    t.integer "feature_id"
-    t.index ["feature_id"], name: "index_features_select_artifacts_on_feature_id", using: :btree
-    t.index ["select_artifact_id"], name: "index_features_select_artifacts_on_select_artifact_id", using: :btree
-  end
-
   create_table "features_soils", id: false, force: :cascade do |t|
     t.integer "soil_id"
     t.integer "feature_id"
@@ -234,13 +213,6 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.string   "item"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-  end
-
-  create_table "ornaments_strata", id: false, force: :cascade do |t|
-    t.integer "ornament_id"
-    t.integer "stratum_id"
-    t.index ["ornament_id"], name: "index_ornaments_strata_on_ornament_id", using: :btree
-    t.index ["stratum_id"], name: "index_ornaments_strata_on_stratum_id", using: :btree
   end
 
   create_table "perishable_periods", force: :cascade do |t|
@@ -354,13 +326,6 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "soils_strata", id: false, force: :cascade do |t|
-    t.integer "soil_id"
-    t.integer "stratum_id"
-    t.index ["soil_id"], name: "index_soils_strata_on_soil_id", using: :btree
-    t.index ["stratum_id"], name: "index_soils_strata_on_stratum_id", using: :btree
-  end
-
   create_table "stories", force: :cascade do |t|
     t.string   "story"
     t.datetime "created_at", null: false
@@ -458,16 +423,12 @@ ActiveRecord::Schema.define(version: 20160928162428) do
   end
 
   add_foreign_key "bone_tools", "bone_tool_occupations"
-  add_foreign_key "bone_tools_features", "bone_tools"
-  add_foreign_key "bone_tools_features", "features"
   add_foreign_key "bone_tools_strata", "bone_tools"
   add_foreign_key "bone_tools_strata", "strata"
   add_foreign_key "eggshells", "eggshell_affiliations"
   add_foreign_key "eggshells", "eggshell_items"
   add_foreign_key "eggshells_features", "eggshells"
   add_foreign_key "eggshells_features", "features"
-  add_foreign_key "eggshells_strata", "eggshells"
-  add_foreign_key "eggshells_strata", "strata"
   add_foreign_key "features", "door_between_multiple_rooms"
   add_foreign_key "features", "doorway_sealeds"
   add_foreign_key "features", "feature_groups"
@@ -477,23 +438,17 @@ ActiveRecord::Schema.define(version: 20160928162428) do
   add_foreign_key "features", "t_shaped_doors"
   add_foreign_key "features_perishables", "features"
   add_foreign_key "features_perishables", "perishables"
-  add_foreign_key "features_select_artifacts", "features"
-  add_foreign_key "features_select_artifacts", "select_artifacts"
   add_foreign_key "features_soils", "features"
   add_foreign_key "features_soils", "soils"
   add_foreign_key "features_strata", "features"
   add_foreign_key "features_strata", "strata"
   add_foreign_key "ornaments", "features"
   add_foreign_key "ornaments", "ornament_periods"
-  add_foreign_key "ornaments_strata", "ornaments"
-  add_foreign_key "ornaments_strata", "strata"
   add_foreign_key "perishables", "perishable_periods"
   add_foreign_key "select_artifacts", "select_artifact_occupations"
   add_foreign_key "select_artifacts_strata", "select_artifacts"
   add_foreign_key "select_artifacts_strata", "strata"
   add_foreign_key "soils", "art_types"
-  add_foreign_key "soils_strata", "soils"
-  add_foreign_key "soils_strata", "strata"
   add_foreign_key "strata", "strat_occupations"
   add_foreign_key "strata", "strat_types"
   add_foreign_key "strata", "units"
