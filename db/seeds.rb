@@ -48,7 +48,8 @@ def associate_strata_features unit, aStrata, aFeatures, related_item, source
     end
     # pull out all of the features from a single column
     features = aFeatures.split(/[;,]/).map { |f| f.strip }
-    features.each do |feat_no|
+    features.each do |feat|
+      feat_no = get_feature_number(feat, source)
       # at this point the given stratum should be associated with a specific unit, so
       # only verifying that the feature_no is not in the stratum
       feature = stratum.features.where(feature_no: feat_no).first
@@ -72,6 +73,7 @@ def associate_strata_features unit, aStrata, aFeatures, related_item, source
 end
 
 def create_if_not_exists model, field, column
+  column = column.nil? ? "no data" : column.strip
   record = model.where(field => column).first
   record = model.create(field => column) if !record
   return record
@@ -83,18 +85,20 @@ def convert_empty_to_none entry
   end
 end
 
-def get_feature_number longnum, source
+def get_feature_number feat_str, source
   feature = nil
-  if longnum == "no data" || longnum == "none"
-    feature = longnum
+  if feat_str == "no data" || feat_str == "none"
+    feature = feat_str
+  elsif feat_str == "NO INFO" || feat_str == "no info"
+    feature = "no data"
   else
     begin
       # cut off the unit part of the id:
       # "014P002" or "014P-002" and turn to float "2.0"
-      feature = longnum.split(/[A-Z\-]/).last.to_f
+      feature = feat_str.split(/[A-Z\-]/).last.to_f
     rescue
-      puts "Unable to parse feature #{longnum} from #{source}"
-      @handcheck << { type: "feature", num: longnum, source: source }
+      puts "Unable to parse feature #{feat_str} from #{source}"
+      @handcheck << { type: "feature", num: feat_str, source: source }
     end
   end
   return feature
@@ -443,6 +447,7 @@ if Perishable.all.size < 1
       perish[:grid] = row[4]
       perish[:quad] = row[5]
       perish[:depth] = row[6]
+      perish[:strat] = row[3]
       perish[:sa_no] = row[9]
       perish[:artifact_type] = row[10]
       perish[:perishable_count] = row[11]
@@ -462,11 +467,11 @@ if Perishable.all.size < 1
 
       perish_row = Perishable.create(perish)
 
-      # TODO perishables have more than one unit, what to do in that case?
-      # unit = select_or_create_unit(row[2], 'perishables')
-      # TODO strata and features after hearing back about unit info
-      # strata is row[3]
-      # features is row[7]
+      units = row[2].split(/[,;]/).map { |u| u.strip }
+      units.each do |unit_str|
+        unit = select_or_create_unit(unit_str, "perishables")
+        associate_strata_features(unit, row[3], row[7], perish_row, "perishables")
+      end
     end
   end
 end
