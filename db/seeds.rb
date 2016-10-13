@@ -242,7 +242,7 @@ if Feature.all.size < 1
       fo = create_if_not_exists(FeatureOccupation, :occupation, row[8])
       ft = create_if_not_exists(FeatureType, :feature_type, row[9])
       fg = create_if_not_exists(FeatureGroup, :feature_group, row[11])
-      rf = create_if_not_exists(ResidentualFeature, :residentual_feature, row[12])
+      rf = create_if_not_exists(ResidentialFeature, :residential_feature, row[12])
       td = create_if_not_exists(TShapedDoor, :t_shaped_door, row[14])
       dm = create_if_not_exists(DoorBetweenMultipleRoom, :door_between_multiple_rooms, row[15])
       ds = create_if_not_exists(DoorwaySealed, :doorway_sealed, row[16])
@@ -262,7 +262,7 @@ if Feature.all.size < 1
         length: row[17],
         location_in_room: row[13],
         other_associated_features: row[5],
-        residentual_feature: rf ? rf : nil,
+        residential_feature: rf ? rf : nil,
         strat: row[2],
         t_shaped_door: td ? td : nil,
         unit_no: row[0],

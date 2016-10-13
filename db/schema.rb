@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013173454) do
+ActiveRecord::Schema.define(version: 20161013185830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 20161013173454) do
     t.integer  "feature_occupation_id"
     t.integer  "feature_type_id"
     t.integer  "feature_count"
-    t.integer  "residentual_feature_id"
+    t.integer  "residential_feature_id"
     t.string   "real_feature"
     t.string   "location_in_room"
     t.integer  "feature_group_id"
@@ -261,10 +261,11 @@ ActiveRecord::Schema.define(version: 20161013173454) do
     t.datetime "updated_at",           null: false
   end
 
-  create_table "residentual_features", force: :cascade do |t|
-    t.string   "residentual_feature"
+  create_table "residential_features", force: :cascade do |t|
+    t.string   "residential_feature", null: false
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.index ["residential_feature"], name: "index_residential_features_on_residential_feature", unique: true, using: :btree
   end
 
   create_table "room_types", force: :cascade do |t|
@@ -457,7 +458,7 @@ ActiveRecord::Schema.define(version: 20161013173454) do
   add_foreign_key "features", "feature_groups"
   add_foreign_key "features", "feature_occupations"
   add_foreign_key "features", "feature_types"
-  add_foreign_key "features", "residentual_features"
+  add_foreign_key "features", "residential_features"
   add_foreign_key "features", "t_shaped_doors"
   add_foreign_key "features_perishables", "features"
   add_foreign_key "features_perishables", "perishables"

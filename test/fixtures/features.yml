@@ -13,7 +13,7 @@ one:
   feature_type: MyString
   feature_count: 
   feature_group: MyString
-  residentual_feature: MyString
+  residential_feature: MyString
   real_feature: MyString
   location_in_room: MyString
   comments: MyText
@@ -31,7 +31,7 @@ two:
   feature_type: MyString
   feature_count: 
   feature_group: MyString
-  residentual_feature: MyString
+  residential_feature: MyString
   real_feature: MyString
   location_in_room: MyString
   comments: MyText
