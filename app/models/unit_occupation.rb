@@ -1,4 +1,8 @@
 class UnitOccupation < ActiveRecord::Base
+  has_many :units
+
+  validates_uniqueness_of :occupation
+
   def to_label
     "#{occupation}"
   end

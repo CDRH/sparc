@@ -1,4 +1,8 @@
 class ExcavationStatus < ActiveRecord::Base
+  has_many :units
+
+  validates_uniqueness_of :excavation_status
+
   def to_label
     "#{excavation_status}"
   end
