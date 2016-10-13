@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ResidentualFeatureTest < ActiveSupport::TestCase
+class ResidentialFeatureTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
