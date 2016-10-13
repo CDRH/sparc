@@ -438,26 +438,26 @@ if Perishable.all.size < 1
 
     if row[0] != 'FS Number'
       perish = {}
-      perish[:fs_number] = row[0]
-      perish[:salmon_museum_number] = row[1]
-      perish[:room] = row[2]
-      perish[:grid] = row[4]
-      perish[:quad] = row[5]
-      perish[:depth] = row[6]
-      perish[:strat] = row[3]
-      perish[:sa_no] = row[9]
-      perish[:artifact_type] = row[10]
-      perish[:perishable_count] = row[11]
       perish[:artifact_structure] = row[12]
+      perish[:artifact_type] = row[10]
       perish[:comments] = row[13]
-      perish[:other_comments] = row[14]
-      perish[:storage_location] = row[15]
       # TODO not sure what column to use for this
+      perish[:depth] = row[6]
       perish[:exhibit_location] = row[16]
-      perish[:record_key_no] = row[17]
-      perish[:museum_lab_no] = row[18]
       perish[:field_date] = row[19]
+      perish[:fs_number] = row[0]
+      perish[:grid] = row[4]
+      perish[:museum_lab_no] = row[18]
       perish[:original_analysis] = row[20]
+      perish[:other_comments] = row[14]
+      perish[:perishable_count] = row[11]
+      perish[:quad] = row[5]
+      perish[:record_key_no] = row[17]
+      perish[:room] = row[2]
+      perish[:sa_no] = row[9]
+      perish[:salmon_museum_number] = row[1]
+      perish[:storage_location] = row[15]
+      perish[:strat] = row[3]
 
       # period
       perish[:perishable_period_id] = create_if_not_exists(PerishablePeriod, :period, row[8]).id
@@ -486,18 +486,18 @@ if Ornament.all.size < 1
 
     if row[0] != 'Museum Specimen No.'
       orna = {}
-      orna[:museum_specimen_no] = row[0]
       orna[:analysis_lab_no] = row[1]
-      orna[:room] = row[2]
-      orna[:grid] = row[4]
-      orna[:quad] = row[5]
-      orna[:depth] = row[6]
-      orna[:field_date] = row[7]
       orna[:analyst] = row[10]
       orna[:analyzed] = row[11]
-      orna[:photographer] = row[12]
       orna[:count] = row[13]
+      orna[:depth] = row[6]
+      orna[:field_date] = row[7]
+      orna[:grid] = row[4]
       orna[:item] = row[14]
+      orna[:museum_specimen_no] = row[0]
+      orna[:photographer] = row[12]
+      orna[:quad] = row[5]
+      orna[:room] = row[2]
 
       unit = select_or_create_unit(row[2], "ornaments")
 
@@ -540,24 +540,24 @@ if SelectArtifact.all.size < 1
 
     if row[0] != 'Room'
       sa = {}
+      sa[:artifact_count] = row[10]
       sa[:artifact_no] = row[1]
-      # Note: Select Artifacts have an actual relationship with strata
-      # but I'm copying the string from the spreadsheet since there
-      # is a specific database field that seems to be for it
-      sa[:strat] = row[2]
-      sa[:floor_association] = row[3]
-      sa[:sa_form] = row[4]
       # Note: The below could be parsed into specific features
       # at which point the select_artifacts_strata table should
       # be removed and a join set up with features instead
       sa[:associated_feature_artifacts] = row[5]
-      sa[:grid] = row[6]
+      sa[:comments] = row[12]
       sa[:depth] = row[7]
+      sa[:floor_association] = row[3]
+      sa[:grid] = row[6]
+      sa[:location_in_room] = row[11]
       sa[:select_artifact_occupation_id] = create_if_not_exists(SelectArtifactOccupation, :occupation, row[8]).id
       sa[:select_artifact_type] = row[9]
-      sa[:artifact_count] = row[10]
-      sa[:location_in_room] = row[11]
-      sa[:comments] = row[12]
+      sa[:sa_form] = row[4]
+      # Note: Select Artifacts have an actual relationship with strata
+      # but I'm copying the string from the spreadsheet since there
+      # is a specific database field that seems to be for it
+      sa[:strat] = row[2]
 
       unit = select_or_create_unit(row[0], "select artifacts")
       sa[:room] = unit.unit_no
