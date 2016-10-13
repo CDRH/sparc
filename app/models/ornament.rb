@@ -2,7 +2,6 @@ class Ornament < ApplicationRecord
   belongs_to :ornament_period
   belongs_to :eggshell_affiliation
   belongs_to :feature
-  belongs_to :stratum
   
   def to_label
     "#{museum_specimen_no}"
