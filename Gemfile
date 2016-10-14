@@ -46,7 +46,7 @@ group :development do
 end
 
 gem 'pg'
-gem 'active_scaffold', :git => 'git://github.com/activescaffold/active_scaffold.git'
+gem 'active_scaffold', :git => 'git://github.com/activescaffold/active_scaffold.git', :ref => 'fdd479d7f3e469a8ca11427bd574707745654f56'
 gem 'recordselect', :git => 'git://github.com/scambra/recordselect.git'
 
 gem 'devise'

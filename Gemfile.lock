@@ -1,8 +1,9 @@
 GIT
   remote: git://github.com/activescaffold/active_scaffold.git
-  revision: fd9d5890933237f9ab050ffadd01650d5aa9eb2e
+  revision: fdd479d7f3e469a8ca11427bd574707745654f56
+  ref: fdd479d7f3e469a8ca11427bd574707745654f56
   specs:
-    active_scaffold (3.4.39)
+    active_scaffold (3.4.41.1)
       ice_nine (~> 0.11)
       rails (>= 4.0.5)
 
@@ -235,4 +236,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.13.1
+   1.13.2
