@@ -1,9 +1,16 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  code: MyString
+# incomplete list
+1:
+  code: A
+  strat_type: A
+2:
+  code: B
   strat_type: MyString
-
-two:
-  code: MyString
+3:
+  code: C
+  strat_type: MyString
+4:
+  code: D
+  strat_type: MyString
+5:
+  code: E
   strat_type: MyString

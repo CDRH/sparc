@@ -75,3 +75,18 @@ rails s
 ```
 
 You can view the site at `localhost:3000`
+
+### Run Tests
+
+```
+rake test
+```
+
+Because of the way that foreign keys are set up currently, in order to run the tests you will have to grant the postgres role you're using superuser privileges on the rails test database.  If you just want to grant sweeping privileges, you can do this:
+
+```
+psql
+ALTER ROLE sparc WITH SUPERUSER;
+```
+
+I do not recommend doing the above in a production environment.  In the near future we should figure out how we would like cascading deletes, etc, to work for these PKs.

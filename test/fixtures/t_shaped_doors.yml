@@ -1,7 +1,8 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  t_shape_doorstring: MyString
-
-two:
-  t_shape_doorstring: MyString
+1:
+  t_shaped_door: n/a
+2:
+  t_shaped_door: no
+3:
+  t_shaped_door: no data
+4:
+  t_shaped_door: yes

@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  room_id: 1
+  room: 1
   strat: MyString
   salmon_museum_id_no: MyString
   record_field_key_no: MyString
@@ -12,11 +12,11 @@ one:
   storage_bin: MyString
   museum_date: MyString
   field_date: MyString
-  affiliation: MyString
-  item: MyString
+  eggshell_affiliation_id: 1
+  eggshell_item_id: 1
 
 two:
-  room_id: 1
+  room: 1
   strat: MyString
   salmon_museum_id_no: MyString
   record_field_key_no: MyString
@@ -27,5 +27,5 @@ two:
   storage_bin: MyString
   museum_date: MyString
   field_date: MyString
-  affiliation: MyString
-  item: MyString
+  eggshell_affiliation_id: 2
+  eggshell_item_id: 2
