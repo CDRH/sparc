@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   unit_no: MyString
   feature_no: MyString
   strat: MyString
@@ -19,6 +20,7 @@ one:
   comments: MyText
 
 two:
+  id: 2
   unit_no: MyString
   feature_no: MyString
   strat: MyString

@@ -1,12 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 1:
+  id: 1
   art_type: Adobe
 2:
+  id: 2
   art_type: Mortar
 3:
+  id: 3
   art_type: Soil
 4:
+  id: 4
   art_type: Soil/Pollen
 5:
+  id: 5
   art_type: Soils
