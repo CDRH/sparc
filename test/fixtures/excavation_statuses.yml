@@ -1,7 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  excavation_status: MyString
-
-two:
-  excavation_status: MyString
+1:
+  excavation_status: completely excavated
+2:
+  excavation_status: excavated
+3:
+  excavation_status: identified
+4:
+  excavation_status: not used
+5:
+  excavation_status: outlined
+6:
+  excavation_status: partially excavated

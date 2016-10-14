@@ -1,7 +1,16 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  unit_class: MyString
-
-two:
-  unit_class: MyString
+1:
+  unit_class: Antechamber
+2:
+  unit_class: backwall
+3:
+  unit_class: Kiva
+4:
+  unit_class: n/a
+5:
+  unit_class: plaza
+6:
+  unit_class: Room
+7:
+  unit_class: test trench
+8:
+  unit_class: test unit

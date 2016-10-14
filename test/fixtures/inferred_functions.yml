@@ -1,7 +1,15 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  inferred_function: MyString
-
-two:
-  inferred_function: MyString
+# there are many more besides these
+1:
+  inferred_function: antechamber
+2:
+  inferred_function: corn mealing
+3:
+  inferred_function: corn storage
+4:
+  inferred_function: corn storage; ritual artifact storage
+5:
+  inferred_function: fill
+6:
+  inferred_function: habitation
+7:
+  inferred_function: kiva

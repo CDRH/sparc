@@ -15,11 +15,11 @@ one:
   exactprov: MyString
   depthbeg: MyString
   depthend: MyString
-  oetherstrat: MyString
+  otherstrat: MyString
   date: MyString
   excavator: MyString
   art_type_id: 1
-  samle_no: MyString
+  sample_no: MyString
   comments: MyText
   data_entry: MyText
   location: MyString
@@ -39,11 +39,11 @@ two:
   exactprov: MyString
   depthbeg: MyString
   depthend: MyString
-  oetherstrat: MyString
+  otherstrat: MyString
   date: MyString
   excavator: MyString
   art_type_id: 1
-  samle_no: MyString
+  sample_no: MyString
   comments: MyText
   data_entry: MyText
   location: MyString

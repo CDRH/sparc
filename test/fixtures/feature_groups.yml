@@ -1,7 +1,26 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  feature_group: MyString
-
-two:
-  feature_group: MyString
+1:
+  feature_group: access
+2:
+  feature_group: architecture
+3:
+  feature_group: artifact
+4:
+  feature_group: burial
+5:
+  feature_group: construction
+6:
+  feature_group: n/a
+7:
+  feature_group: no data
+8:
+  feature_group: non-cultural
+9:
+  feature_group: residential
+10:
+  feature_group: ritual
+11:
+  feature_group: storage
+12:
+  feature_group: unknown

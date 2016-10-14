@@ -1,7 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  period: MyString
-
-two:
-  period: MyString
+1:
+  period: Chacoan
+2:
+  period: Mixed Chacoan and San Juan
+3:
+  period: no data
+4:
+  period: Post-San Juan
+5:
+  period: San Juan
+6:
+  period: Unknown

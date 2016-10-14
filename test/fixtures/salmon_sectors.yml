@@ -1,7 +1,15 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  salmon_sector: MyString
-
-two:
-  salmon_sector: MyString
+# Incomplete list of salmon sectors
+1:
+  salmon_sector: behind back wall
+2:
+  salmon_sector: center of pueblo
+3:
+  salmon_sector: central
+4:
+  salmon_sector: east
+5:
+  salmon_sector: east of great kiva
+6:
+  salmon_sector: in plaza
+7:
+  salmon_sector: n/a

@@ -1,7 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  art_type: MyString
-
-two:
-  art_type: MyString
+1:
+  art_type: Adobe
+2:
+  art_type: Mortar
+3:
+  art_type: Soil
+4:
+  art_type: Soil/Pollen
+5:
+  art_type: Soils

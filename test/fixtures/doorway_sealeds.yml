@@ -1,7 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  doorway_sealed: MyString
-
-two:
-  doorway_sealed: MyString
+1:
+  doorway_sealed: ??
+2:
+  doorway_sealed: n/a
+3:
+  doorway_sealed: no
+4:
+  doorway_sealed: no data
+5:
+  doorway_sealed: partial
+6:
+  doorway_sealed: unknown
+7:
+  doorway_sealed: yes
