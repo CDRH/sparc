@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   site: MyString
   room: MyString
   strat: MyString
@@ -25,6 +26,7 @@ one:
   location: MyString
 
 two:
+  id: 2
   site: MyString
   room: MyString
   strat: MyString
