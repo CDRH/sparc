@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/activescaffold/active_scaffold.git
+  remote: https://github.com/activescaffold/active_scaffold.git
   revision: fdd479d7f3e469a8ca11427bd574707745654f56
   ref: fdd479d7f3e469a8ca11427bd574707745654f56
   specs:
@@ -8,7 +8,7 @@ GIT
       rails (>= 4.0.5)
 
 GIT
-  remote: git://github.com/scambra/recordselect.git
+  remote: https://github.com/scambra/recordselect.git
   revision: acf663068169c5163fd81aad881639a2196f65af
   specs:
     recordselect (3.6.0)
