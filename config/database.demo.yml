@@ -1,8 +1,8 @@
 default: &default
   adapter: postgresql
   encoding: utf8
-  username: rwb3y
   host: localhost
+  username:
   password: 
 
 development:
@@ -16,3 +16,5 @@ test:
 production:
   <<: *default
   database: sparc
+  username:
+  password:
