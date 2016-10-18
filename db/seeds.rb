@@ -140,13 +140,14 @@ if Unit.all.size < 1
   s = Roo::Excelx.new(files[:units])
   s.sheet('room typology').each do |row|
     if row[0] != 'Type No.'
-      room_type = RoomType.where(id: row[0].to_i)
+      id = row[0].to_i
+      room_type = RoomType.where(id: id)
       if room_type.size == 0
         room_type = RoomType.create(
-          :id => row[0].to_i,
-          :description => row[1],
-          :location => row[3],
-          :period => row[2]
+          id: id,
+          description: row[1],
+          location: row[3],
+          period: row[2]
         )
       end
     end
@@ -441,8 +442,8 @@ if Perishable.all.size < 1
       perish[:artifact_structure] = row[12]
       perish[:artifact_type] = row[10]
       perish[:comments] = row[13]
-      # TODO not sure what column to use for this
       perish[:depth] = row[6]
+      # TODO not sure what column to use for this
       perish[:exhibit_location] = row[16]
       perish[:field_date] = row[19]
       perish[:fs_number] = row[0]
