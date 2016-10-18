@@ -1,9 +1,11 @@
 class Soil < ApplicationRecord
   belongs_to :art_type
   has_and_belongs_to_many :features
+  has_many :strata, :through => :features
+  has_many :units, :through => :strata
   
   def to_label
-    "#{museum_specimen_no}"
+    "#{comments}"
   end
   def authorized_for_update?
     puts "---------#{current_user}"

@@ -1,7 +1,7 @@
 class BoneTool < ActiveRecord::Base
+  belongs_to :bone_tool_occupation
   has_and_belongs_to_many :strata
   has_many :units, :through => :strata
-  belongs_to :bone_tool_occupation
   
   def to_label
     "#{field_specimen_no}"

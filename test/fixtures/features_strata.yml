@@ -1,0 +1,7 @@
+one:
+  stratum_id: 1
+  feature_id: 1
+
+two:
+  stratum_id: 2
+  feature_id: 1

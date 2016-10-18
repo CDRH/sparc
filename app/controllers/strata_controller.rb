@@ -3,7 +3,7 @@ class StrataController < ApplicationController
   active_scaffold :stratum do |conf|
     # conf.columns[:room].label = 'Unit'
     # conf.columns[:room_no].label = 'Unit no.'
-    conf.columns = [:unit, :strat_all, :strat_alpha, :strat_type, :stratum_one, :stratum_two, :strat_occupation, :comments] #, :features, :bone_tools, :eggshells]
+    conf.columns = [:unit, :strat_all, :strat_alpha, :strat_type, :stratum_one, :stratum_two, :strat_occupation, :features, :comments] #, :features, :bone_tools, :eggshells]
     conf.columns[:unit].actions_for_association_links = [:show]
     conf.columns[:strat_type].form_ui = :select
     conf.columns[:strat_occupation].form_ui = :select

@@ -1,7 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  intact_roof: MyString
-
-two:
-  intact_roof: MyString
+1:
+  intact_roof: n/a
+2:
+  intact_roof: no
+3:
+  intact_roof: yes

@@ -1,6 +1,8 @@
 class Perishable < ApplicationRecord
   belongs_to :perishable_period
   has_and_belongs_to_many :features
+  has_many :strata, :through => :features
+  has_many :units, :through => :strata
   
   def to_label
     "#{fs_number}"

@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   site: MyString
   room: MyString
   strat: MyString
@@ -15,16 +16,17 @@ one:
   exactprov: MyString
   depthbeg: MyString
   depthend: MyString
-  oetherstrat: MyString
+  otherstrat: MyString
   date: MyString
   excavator: MyString
   art_type_id: 1
-  samle_no: MyString
+  sample_no: MyString
   comments: MyText
   data_entry: MyText
   location: MyString
 
 two:
+  id: 2
   site: MyString
   room: MyString
   strat: MyString
@@ -39,11 +41,11 @@ two:
   exactprov: MyString
   depthbeg: MyString
   depthend: MyString
-  oetherstrat: MyString
+  otherstrat: MyString
   date: MyString
   excavator: MyString
   art_type_id: 1
-  samle_no: MyString
+  sample_no: MyString
   comments: MyText
   data_entry: MyText
   location: MyString

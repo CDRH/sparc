@@ -1,7 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  item: MyString
-
-two:
-  item: MyString
+1:
+  item: eggshell
+2:
+  item: eggshell, corn cobs
+3:
+  item: zoological

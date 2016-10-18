@@ -2,6 +2,8 @@ class Eggshell < ActiveRecord::Base
   belongs_to :eggshell_item
   belongs_to :eggshell_affiliation
   has_and_belongs_to_many :features
+  has_many :strata, :through => :features
+  has_many :units, :through => :strata
   
   def to_label
     "#{salmon_museum_id_no}"

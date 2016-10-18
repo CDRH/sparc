@@ -1,11 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  unit_no: MyString
+  id: 1
+  unit_no: 101A
   excavation_status_id: 1
   unit_occupation: 1
   unit_class_id: 1
-  stories_id: 1
+  story_id: 1
   intact_roof_id: 1
   salmon_type_code: MyString
   type_description_id: 1
@@ -19,18 +20,19 @@ one:
   comments: MyText
 
 two:
-  unit_no: MyString
-  excavation_status_id: 1
-  unit_occupation: 1
-  unit_class_id: 1
-  stories_id: 1
-  intact_roof_id: 1
+  id: 2
+  unit_no: 101W
+  excavation_status_id: 2
+  unit_occupation: 2
+  unit_class_id: 2
+  story_id: 2
+  intact_roof_id: 2
   salmon_type_code: MyString
-  type_description_id: 1
-  inferred_function_id: 1
-  salmon_sector_id: 1
+  type_description_id: 2
+  inferred_function_id: 2
+  salmon_sector_id: 2
   other_description: MyText
-  irregular_shape_id: 1
+  irregular_shape_id: 2
   length: MyString
   width: MyString
   floor_area: MyString

@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0.0.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -45,9 +45,11 @@ group :development do
   gem 'spring'
 end
 
+# postgres database for active record
 gem 'pg'
-gem 'active_scaffold', :git => 'git://github.com/activescaffold/active_scaffold.git'
-gem 'recordselect', :git => 'git://github.com/scambra/recordselect.git'
+# active scaffold sets up the table views
+gem 'active_scaffold', :git => 'https://github.com/activescaffold/active_scaffold.git', :ref => 'fdd479d7f3e469a8ca11427bd574707745654f56'
+gem 'recordselect', :git => 'https://github.com/scambra/recordselect.git'
 
 gem 'devise'
 gem 'bootstrap-sass'

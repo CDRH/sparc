@@ -10,24 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928162428) do
+ActiveRecord::Schema.define(version: 20161013185830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "art_types", force: :cascade do |t|
-    t.string   "art_type"
+    t.string   "art_type",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["art_type"], name: "index_art_types_on_art_type", unique: true, using: :btree
   end
 
   create_table "bone_tool_occupations", force: :cascade do |t|
-    t.string   "occupation"
+    t.string   "occupation", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["occupation"], name: "index_bone_tool_occupations_on_occupation", unique: true, using: :btree
   end
 
   create_table "bone_tools", force: :cascade do |t|
+    t.string   "room"
     t.string   "strat"
     t.string   "field_specimen_no"
     t.string   "depth"
@@ -37,16 +40,8 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.string   "tool_type"
     t.integer  "species_code"
     t.text     "comments"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "room",                    limit: 255
-  end
-
-  create_table "bone_tools_features", id: false, force: :cascade do |t|
-    t.integer "bone_tool_id"
-    t.integer "feature_id"
-    t.index ["bone_tool_id"], name: "index_bone_tools_features_on_bone_tool_id", using: :btree
-    t.index ["feature_id"], name: "index_bone_tools_features_on_feature_id", using: :btree
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "bone_tools_strata", id: false, force: :cascade do |t|
@@ -57,31 +52,36 @@ ActiveRecord::Schema.define(version: 20160928162428) do
   end
 
   create_table "door_between_multiple_rooms", force: :cascade do |t|
-    t.string   "door_between_multiple_rooms"
+    t.string   "door_between_multiple_rooms", null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.index ["door_between_multiple_rooms"], name: "door_between_rooms", unique: true, using: :btree
   end
 
   create_table "doorway_sealeds", force: :cascade do |t|
-    t.string   "doorway_sealed"
+    t.string   "doorway_sealed", null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["doorway_sealed"], name: "index_doorway_sealeds_on_doorway_sealed", unique: true, using: :btree
   end
 
   create_table "eggshell_affiliations", force: :cascade do |t|
-    t.string   "affiliation"
+    t.string   "affiliation", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["affiliation"], name: "index_eggshell_affiliations_on_affiliation", unique: true, using: :btree
   end
 
   create_table "eggshell_items", force: :cascade do |t|
-    t.string   "item"
+    t.string   "item",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["item"], name: "index_eggshell_items_on_item", unique: true, using: :btree
   end
 
   create_table "eggshells", force: :cascade do |t|
     t.integer  "stratum_id"
+    t.string   "room"
     t.string   "strat"
     t.string   "salmon_museum_id_no"
     t.string   "record_field_key_no"
@@ -94,9 +94,8 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.string   "field_date"
     t.integer  "eggshell_affiliation_id"
     t.integer  "eggshell_item_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "room",                    limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "eggshells_features", id: false, force: :cascade do |t|
@@ -106,13 +105,6 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.index ["feature_id"], name: "index_eggshells_features_on_feature_id", using: :btree
   end
 
-  create_table "eggshells_strata", id: false, force: :cascade do |t|
-    t.integer "eggshell_id"
-    t.integer "stratum_id"
-    t.index ["eggshell_id"], name: "index_eggshells_strata_on_eggshell_id", using: :btree
-    t.index ["stratum_id"], name: "index_eggshells_strata_on_stratum_id", using: :btree
-  end
-
   create_table "excavation_statuses", force: :cascade do |t|
     t.string   "excavation_status"
     t.datetime "created_at",        null: false
@@ -120,21 +112,24 @@ ActiveRecord::Schema.define(version: 20160928162428) do
   end
 
   create_table "feature_groups", force: :cascade do |t|
-    t.string   "feature_group"
+    t.string   "feature_group", null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["feature_group"], name: "index_feature_groups_on_feature_group", unique: true, using: :btree
   end
 
   create_table "feature_occupations", force: :cascade do |t|
-    t.string   "occupation"
+    t.string   "occupation", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["occupation"], name: "index_feature_occupations_on_occupation", unique: true, using: :btree
   end
 
   create_table "feature_types", force: :cascade do |t|
-    t.string   "feature_type"
+    t.string   "feature_type", null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["feature_type"], name: "index_feature_types_on_feature_type", unique: true, using: :btree
   end
 
   create_table "features", force: :cascade do |t|
@@ -149,7 +144,7 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.integer  "feature_occupation_id"
     t.integer  "feature_type_id"
     t.integer  "feature_count"
-    t.integer  "residentual_feature_id"
+    t.integer  "residential_feature_id"
     t.string   "real_feature"
     t.string   "location_in_room"
     t.integer  "feature_group_id"
@@ -171,13 +166,6 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.index ["perishable_id"], name: "index_features_perishables_on_perishable_id", using: :btree
   end
 
-  create_table "features_select_artifacts", id: false, force: :cascade do |t|
-    t.integer "select_artifact_id"
-    t.integer "feature_id"
-    t.index ["feature_id"], name: "index_features_select_artifacts_on_feature_id", using: :btree
-    t.index ["select_artifact_id"], name: "index_features_select_artifacts_on_select_artifact_id", using: :btree
-  end
-
   create_table "features_soils", id: false, force: :cascade do |t|
     t.integer "soil_id"
     t.integer "feature_id"
@@ -193,27 +181,31 @@ ActiveRecord::Schema.define(version: 20160928162428) do
   end
 
   create_table "inferred_functions", force: :cascade do |t|
-    t.string   "inferred_function"
+    t.string   "inferred_function", null: false
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.index ["inferred_function"], name: "index_inferred_functions_on_inferred_function", unique: true, using: :btree
   end
 
   create_table "intact_roofs", force: :cascade do |t|
-    t.string   "intact_roof"
+    t.string   "intact_roof", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["intact_roof"], name: "index_intact_roofs_on_intact_roof", unique: true, using: :btree
   end
 
   create_table "irregular_shapes", force: :cascade do |t|
-    t.string   "irregular_shape"
+    t.string   "irregular_shape", null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["irregular_shape"], name: "index_irregular_shapes_on_irregular_shape", unique: true, using: :btree
   end
 
   create_table "ornament_periods", force: :cascade do |t|
-    t.string   "period"
+    t.string   "period",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["period"], name: "index_ornament_periods_on_period", unique: true, using: :btree
   end
 
   create_table "ornaments", force: :cascade do |t|
@@ -228,25 +220,19 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.integer  "ornament_period_id"
     t.integer  "feature_id"
     t.string   "analyst"
+    t.string   "analyzed"
     t.string   "photographer"
     t.integer  "count"
     t.string   "item"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "analyzed",           limit: 255
-  end
-
-  create_table "ornaments_strata", id: false, force: :cascade do |t|
-    t.integer "ornament_id"
-    t.integer "stratum_id"
-    t.index ["ornament_id"], name: "index_ornaments_strata_on_ornament_id", using: :btree
-    t.index ["stratum_id"], name: "index_ornaments_strata_on_stratum_id", using: :btree
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "perishable_periods", force: :cascade do |t|
-    t.string   "period"
+    t.string   "period",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["period"], name: "index_perishable_periods_on_period", unique: true, using: :btree
   end
 
   create_table "perishables", force: :cascade do |t|
@@ -266,7 +252,6 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.text     "comments"
     t.text     "other_comments"
     t.string   "storage_location"
-    t.string   "object_structure"
     t.string   "exhibit_location"
     t.string   "record_key_no"
     t.string   "museum_lab_no"
@@ -276,10 +261,11 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.datetime "updated_at",           null: false
   end
 
-  create_table "residentual_features", force: :cascade do |t|
-    t.string   "residentual_feature"
+  create_table "residential_features", force: :cascade do |t|
+    t.string   "residential_feature", null: false
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.index ["residential_feature"], name: "index_residential_features_on_residential_feature", unique: true, using: :btree
   end
 
   create_table "room_types", force: :cascade do |t|
@@ -291,19 +277,22 @@ ActiveRecord::Schema.define(version: 20160928162428) do
   end
 
   create_table "salmon_sectors", force: :cascade do |t|
-    t.string   "salmon_sector"
+    t.string   "salmon_sector", null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["salmon_sector"], name: "index_salmon_sectors_on_salmon_sector", unique: true, using: :btree
   end
 
   create_table "select_artifact_occupations", force: :cascade do |t|
-    t.string   "occupation"
+    t.string   "occupation", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["occupation"], name: "index_select_artifact_occupations_on_occupation", unique: true, using: :btree
   end
 
   create_table "select_artifacts", force: :cascade do |t|
     t.string   "room"
+    t.string   "artifact_no"
     t.string   "strat"
     t.string   "floor_association"
     t.string   "sa_form"
@@ -353,30 +342,26 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "soils_strata", id: false, force: :cascade do |t|
-    t.integer "soil_id"
-    t.integer "stratum_id"
-    t.index ["soil_id"], name: "index_soils_strata_on_soil_id", using: :btree
-    t.index ["stratum_id"], name: "index_soils_strata_on_stratum_id", using: :btree
-  end
-
   create_table "stories", force: :cascade do |t|
-    t.string   "story"
+    t.string   "story",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["story"], name: "index_stories_on_story", unique: true, using: :btree
   end
 
   create_table "strat_occupations", force: :cascade do |t|
-    t.string   "occupation"
+    t.string   "occupation", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["occupation"], name: "index_strat_occupations_on_occupation", unique: true, using: :btree
   end
 
   create_table "strat_types", force: :cascade do |t|
-    t.string   "code"
+    t.string   "code",       null: false
     t.string   "strat_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_strat_types_on_code", unique: true, using: :btree
   end
 
   create_table "strata", force: :cascade do |t|
@@ -394,31 +379,35 @@ ActiveRecord::Schema.define(version: 20160928162428) do
   end
 
   create_table "t_shaped_doors", force: :cascade do |t|
-    t.string   "t_shaped_door"
+    t.string   "t_shaped_door", null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["t_shaped_door"], name: "index_t_shaped_doors_on_t_shaped_door", unique: true, using: :btree
   end
 
   create_table "type_descriptions", force: :cascade do |t|
-    t.string   "type_description"
+    t.string   "type_description", null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["type_description"], name: "index_type_descriptions_on_type_description", unique: true, using: :btree
   end
 
   create_table "unit_classes", force: :cascade do |t|
-    t.string   "unit_class"
+    t.string   "unit_class", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["unit_class"], name: "index_unit_classes_on_unit_class", unique: true, using: :btree
   end
 
   create_table "unit_occupations", force: :cascade do |t|
-    t.string   "occupation"
+    t.string   "occupation", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["occupation"], name: "index_unit_occupations_on_occupation", unique: true, using: :btree
   end
 
   create_table "units", force: :cascade do |t|
-    t.string   "unit_no"
+    t.string   "unit_no",              null: false
     t.integer  "excavation_status_id"
     t.integer  "unit_occupation_id"
     t.integer  "unit_class_id"
@@ -437,6 +426,7 @@ ActiveRecord::Schema.define(version: 20160928162428) do
     t.text     "comments"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.index ["unit_no"], name: "index_units_on_unit_no", unique: true, using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -457,42 +447,32 @@ ActiveRecord::Schema.define(version: 20160928162428) do
   end
 
   add_foreign_key "bone_tools", "bone_tool_occupations"
-  add_foreign_key "bone_tools_features", "bone_tools"
-  add_foreign_key "bone_tools_features", "features"
   add_foreign_key "bone_tools_strata", "bone_tools"
   add_foreign_key "bone_tools_strata", "strata"
   add_foreign_key "eggshells", "eggshell_affiliations"
   add_foreign_key "eggshells", "eggshell_items"
   add_foreign_key "eggshells_features", "eggshells"
   add_foreign_key "eggshells_features", "features"
-  add_foreign_key "eggshells_strata", "eggshells"
-  add_foreign_key "eggshells_strata", "strata"
   add_foreign_key "features", "door_between_multiple_rooms"
   add_foreign_key "features", "doorway_sealeds"
   add_foreign_key "features", "feature_groups"
   add_foreign_key "features", "feature_occupations"
   add_foreign_key "features", "feature_types"
-  add_foreign_key "features", "residentual_features"
+  add_foreign_key "features", "residential_features"
   add_foreign_key "features", "t_shaped_doors"
   add_foreign_key "features_perishables", "features"
   add_foreign_key "features_perishables", "perishables"
-  add_foreign_key "features_select_artifacts", "features"
-  add_foreign_key "features_select_artifacts", "select_artifacts"
   add_foreign_key "features_soils", "features"
   add_foreign_key "features_soils", "soils"
   add_foreign_key "features_strata", "features"
   add_foreign_key "features_strata", "strata"
   add_foreign_key "ornaments", "features"
   add_foreign_key "ornaments", "ornament_periods"
-  add_foreign_key "ornaments_strata", "ornaments"
-  add_foreign_key "ornaments_strata", "strata"
   add_foreign_key "perishables", "perishable_periods"
   add_foreign_key "select_artifacts", "select_artifact_occupations"
   add_foreign_key "select_artifacts_strata", "select_artifacts"
   add_foreign_key "select_artifacts_strata", "strata"
   add_foreign_key "soils", "art_types"
-  add_foreign_key "soils_strata", "soils"
-  add_foreign_key "soils_strata", "strata"
   add_foreign_key "strata", "strat_occupations"
   add_foreign_key "strata", "strat_types"
   add_foreign_key "strata", "units"

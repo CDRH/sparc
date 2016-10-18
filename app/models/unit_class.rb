@@ -1,4 +1,8 @@
 class UnitClass < ActiveRecord::Base
+  has_many :units
+
+  validates_uniqueness_of :unit_class
+
   def to_label
     "#{unit_class}"
   end

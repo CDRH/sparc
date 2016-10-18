@@ -1,4 +1,8 @@
 class IrregularShape < ActiveRecord::Base
+  has_many :units
+
+  validates_uniqueness_of :irregular_shape
+
   def to_label
     "#{irregular_shape}"
   end

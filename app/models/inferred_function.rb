@@ -1,4 +1,8 @@
 class InferredFunction < ActiveRecord::Base
+  has_many :units
+
+  validates_uniqueness_of :inferred_function
+
   def to_label
     "#{inferred_function}"
   end

@@ -1,6 +1,7 @@
 class SelectArtifact < ApplicationRecord
   belongs_to :select_artifact_occupation
   has_and_belongs_to_many :strata
+  has_many :units, :through => :strata
   
   def to_label
     "#{artifact_no}"
