@@ -1,7 +1,11 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  feature_type: MyString
-
-two:
-  feature_type: MyString
+# there are lots more, this is a selection
+1:
+  feature_type: adobe plug
+2:
+  feature_type: adobe ring
+3:
+  feature_type: adobe-filled pit
+4:
+  feature_type: adobe-lined pit
+5:
+  feature_type: adobe, lithic concentration

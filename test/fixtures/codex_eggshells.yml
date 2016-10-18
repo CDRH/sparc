@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  codex_id: 1
-  eggshell_id: 1
-
-two:
-  codex_id: 1
-  eggshell_id: 1

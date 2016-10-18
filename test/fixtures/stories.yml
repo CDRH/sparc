@@ -1,7 +1,14 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  story: MyString
-
-two:
-  story: MyString
+1:
+  story: n/a
+2:
+  story: no data
+3:
+  story: one
+4:
+  story: two
+5:
+  story: two?
+6:
+  story: three
+7:
+  story: three?

@@ -1,7 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  irregular_shape: MyString
-
-two:
-  irregular_shape: MyString
+1:
+  irregular_shape: n/a
+2:
+  irregular_shape: No
+3:
+  irregular_shape: no data
+4:
+  irregular_shape: Yes

@@ -1,15 +1,19 @@
 class Feature < ActiveRecord::Base
-  belongs_to :excavtion_status
   belongs_to :feature_group
   belongs_to :feature_occupation
   belongs_to :feature_type
   belongs_to :doorway_sealed
   belongs_to :door_between_multiple_room
-  belongs_to :residentual_feature
+  belongs_to :residential_feature
   belongs_to :t_shaped_door
 
   has_and_belongs_to_many :strata
   has_many :units, :through => :strata
+
+  has_and_belongs_to_many :eggshells
+  has_and_belongs_to_many :ornaments
+  has_and_belongs_to_many :perishables
+  has_and_belongs_to_many :soils
 
   def to_label
     "#{strata.map{|s| s.to_label}.join(', ')} : #{feature_no}"

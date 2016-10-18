@@ -1,4 +1,8 @@
 class IntactRoof < ActiveRecord::Base
+  has_many :units
+
+  validates_uniqueness_of :intact_roof
+
   def to_label
     "#{intact_roof}"
   end

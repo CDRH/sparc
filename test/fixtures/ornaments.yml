@@ -9,7 +9,7 @@ one:
   quad: MyString
   depth: MyString
   field_date: MyString
-  period_id: 1
+  ornament_period_id: 1
   feature_id: 1
   analyst: MyString
   photographer: MyString
@@ -25,7 +25,7 @@ two:
   quad: MyString
   depth: MyString
   field_date: MyString
-  period_id: 1
+  ornament_period_id: 1
   feature_id: 1
   analyst: MyString
   photographer: MyString

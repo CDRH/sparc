@@ -1,4 +1,4 @@
-def add_as_extension
+def add_as_extension item
   collection do
     post 'find_existing'
     get 'remove_related'
@@ -10,7 +10,7 @@ def add_as_extension
     post 'search_ids'
     get 'search_form'
     post 'search_post'
-    puts 'get collection'
+    puts "adding routes for collection #{item}"
   end
   
 end
