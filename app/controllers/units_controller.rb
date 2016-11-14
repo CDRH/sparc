@@ -3,6 +3,7 @@ class UnitsController < ApplicationController
   active_scaffold :unit do |conf|
     conf.label = 'Units'
     conf.columns = [:unit_no, :excavation_status, :unit_occupation, :unit_class, :story, :intact_roof, :room_type, :type_description, :inferred_function, :salmon_sector, :other_description, :irregular_shape, :length, :width, :floor_area, :comments, :strata]
+    conf.update.columns = [:unit_no, :excavation_status, :unit_occupation, :unit_class, :story, :intact_roof, :room_type, :type_description, :inferred_function, :salmon_sector, :other_description, :irregular_shape, :length, :width, :floor_area, :comments]
     # conf.columns[:codexes].label = 'Strata'
     conf.columns[:excavation_status].form_ui = :select
     conf.columns[:unit_occupation].form_ui = :select

@@ -1,0 +1,453 @@
+Please review the following and verify that units, strata, etc, were added correctly
+
+unit number 029W was added from the stratum A-1-1 spreadsheet
+unit number 112P was added from the stratum A-1-1 spreadsheet
+unit number 113P was added from the stratum A-1-1 spreadsheet
+unit number 212P was added from the stratum A-1-1 spreadsheet
+unit number 213P was added from the stratum B-1-2 spreadsheet
+unit number 313P was added from the stratum A-1-1 spreadsheet
+unit number 413P was added from the stratum A-1-2 spreadsheet
+unit number 513P was added from the stratum B-1-2 spreadsheet
+stratum number 006A:L-5-8 was added from the feature 100.0 spreadsheet
+stratum number 018P:Q-1-07 was added from the feature 4.0 spreadsheet
+stratum number 021P:Q-.7-8.1 was added from the feature 18.0 spreadsheet
+stratum number 031W:B-1-2 was added from the feature 1.0 spreadsheet
+stratum number 033C:L-1-5.5 was added from the feature 3.2 spreadsheet
+stratum number 033W:L-1-5.5 was added from the feature 6.0 spreadsheet
+stratum number 036W:B-2-3 was added from the feature 1.0 spreadsheet
+stratum number 036W:not used was added from the feature 4.0 spreadsheet
+stratum number 036W:N-1-13/F-1-15 was added from the feature 100.0 spreadsheet
+stratum number 062A:I-1-06 was added from the feature 12.0 spreadsheet
+stratum number 062W:I-1-4.2 was added from the feature 3.0 spreadsheet
+stratum number 067W:W-1-00 was added from the feature 1.0 spreadsheet
+stratum number 089W:H-1-12 was added from the feature 1.0 spreadsheet
+stratum number 092W:B-4-5 was added from the feature 5.0 spreadsheet
+stratum number 093W:L-0.5.-8.5 was added from the feature 12.0 spreadsheet
+stratum number 097B:N-1-3 was added from the feature 2.2 spreadsheet
+stratum number 097B:H-1-5 was added from the feature 7.0 spreadsheet
+stratum number 099W:H-1-9 was added from the feature 26.0 spreadsheet
+stratum number 100W:not used was added from the feature 1002.0 spreadsheet
+stratum number 102A:H-1-14 was added from the feature 4009.0 spreadsheet
+stratum number 119W:L-3-15 was added from the feature 24.0 spreadsheet
+stratum number 119W:I-11.6-39.6 was added from the feature 116.0 spreadsheet
+stratum number 121A:L-6-11 was added from the feature 23.0 spreadsheet
+stratum number 121E:D-2-4 was added from the feature 46.0 spreadsheet
+unit number 122A/W was added from the feature 1.0 spreadsheet
+stratum number 122A/W:C-0-0 was added from the feature 1.0 spreadsheet
+stratum number 122A/W:D-0-0 was added from the feature 7.0 spreadsheet
+stratum number 122A/W:I-0-0 was added from the feature 8.0 spreadsheet
+stratum number 122A/W:K-0-0 was added from the feature 10.0 spreadsheet
+stratum number 123B:nono was added from the feature 20.0 spreadsheet
+stratum number 124W:L-3-13 was added from the feature 13.0 spreadsheet
+stratum number 124W:Q-1-6 was added from the feature 27.0 spreadsheet
+stratum number 124W:H-1-9 was added from the feature 100.0 spreadsheet
+stratum number 127W:D-3-11 was added from the feature 97.0 spreadsheet
+stratum number 128A:I-2-6 was added from the feature 3.1 spreadsheet
+stratum number 128A:L-6-11? was added from the feature 8.0 spreadsheet
+stratum number 129W:C-70-78 was added from the feature 77.0 spreadsheet
+unit number 138W/Z was added from the feature 1.0 spreadsheet
+stratum number 138W/Z:L-1-2.5 was added from the feature 1.0 spreadsheet
+stratum number 138W/Z:L-2-9 was added from the feature 2.0 spreadsheet
+stratum number 062W:062W was added from the bonetool 4 spreadsheet
+stratum number 060A:060A was added from the bonetool 31 spreadsheet
+stratum number 008BW:008BW was added from the bonetool 39 spreadsheet
+stratum number 005W:005W was added from the bonetool 105 spreadsheet
+stratum number 093W:093W was added from the bonetool 118 spreadsheet
+unit number 085A/B/W was added from the bonetools spreadsheet
+stratum number 085A/B/W:085A/B/W was added from the bonetool 121 spreadsheet
+stratum number 040W:040W was added from the bonetool 201 spreadsheet
+stratum number 064W:064W was added from the bonetool 203 spreadsheet
+stratum number 091A:091A was added from the bonetool 206 spreadsheet
+stratum number 094A:094A was added from the bonetool 209 spreadsheet
+stratum number 094B:094B was added from the bonetool 210 spreadsheet
+stratum number 094W:094W was added from the bonetool 211 spreadsheet
+stratum number Other:123A or 123B was added from the bonetool 219 spreadsheet
+stratum number 036W:C-15-19 was added from the eggshell spreadsheet
+stratum number 036W:P-0-0 was added from the eggshell spreadsheet
+stratum number 037W:P-0-0 was added from the eggshell spreadsheet
+feature number 043W:G-1.1-10.1:42.0 was added from the eggshell spreadsheet
+stratum number 059W:P-0-1.5 was added from the eggshell spreadsheet
+stratum number 062W:C-2.5-7.2 was added from the eggshell spreadsheet
+feature number 062W:C-2.5-7.5:2.0 was added from the eggshell spreadsheet
+feature number 062W:C-2-7:2.0 was added from the eggshell spreadsheet
+feature number 062W:C-2-7.1:63.0 was added from the eggshell spreadsheet
+feature number 062W:L-2-7.1:63.0 was added from the eggshell spreadsheet
+stratum number 062W:multiple strata was added from the eggshell spreadsheet
+feature number 062W:no data:64.0 was added from the eggshell spreadsheet
+stratum number 062W:P-1-4.5 was added from the eggshell spreadsheet
+feature number 064W:L-4-12:118.0 was added from the eggshell spreadsheet
+stratum number 091W:I-.8-29.8 was added from the eggshell spreadsheet
+feature number 092A:B-4-5:4.0 was added from the eggshell spreadsheet
+stratum number 093W:G-1-16 was added from the eggshell spreadsheet
+stratum number 097W:M-1-5 was added from the eggshell spreadsheet
+stratum number 102D:D-1-31 was added from the eggshell spreadsheet
+stratum number 102D:T-1-31 was added from the eggshell spreadsheet
+stratum number 121E:P-0-0 was added from the eggshell spreadsheet
+stratum number 129W:C-28-35 was added from the eggshell spreadsheet
+stratum number 129W:C-29.5-36.5 was added from the eggshell spreadsheet
+stratum number 129W:MN-1.8-86.8 was added from the eggshell spreadsheet
+stratum number 129W:G-0.1-92.1 was added from the eggshell spreadsheet
+feature number 129W:P-0-0:101.0 was added from the eggshell spreadsheet
+feature number 130W:F-1-3:4.0 was added from the eggshell spreadsheet
+stratum number 006W:N-1-5.1 was added from the soil spreadsheet
+stratum number 006W:C-2-5 was added from the soil spreadsheet
+stratum number 006W:B-2-3 was added from the soil spreadsheet
+stratum number 018P:R-1-11 was added from the soil spreadsheet
+stratum number 020P:J-1-11 was added from the soil spreadsheet
+stratum number 020P:Q-2-4 was added from the soil spreadsheet
+stratum number 020P:L-12-4 was added from the soil spreadsheet
+stratum number 020P:B-3-4 was added from the soil spreadsheet
+stratum number 020P:L-5-4 was added from the soil spreadsheet
+stratum number 020P:L-1-4 was added from the soil spreadsheet
+stratum number 020P:L-1-3 was added from the soil spreadsheet
+stratum number 020P:L-1-5 was added from the soil spreadsheet
+stratum number 020P:B-4-3 was added from the soil spreadsheet
+stratum number 020P:L-4-3 was added from the soil spreadsheet
+stratum number 021P:Q-6-8 was added from the soil spreadsheet
+stratum number 021P:L-0-5 was added from the soil spreadsheet
+stratum number 021P:J-1-14 was added from the soil spreadsheet
+stratum number 030W:B-1-2 was added from the soil spreadsheet
+stratum number 033W:S-1-14 was added from the soil spreadsheet
+stratum number 033W:L-2-17 was added from the soil spreadsheet
+stratum number 033W:B-1-2 was added from the soil spreadsheet
+feature number 033W:W-1-18:3012.0 was added from the soil spreadsheet
+feature number 033W:W-1-18:3013.0 was added from the soil spreadsheet
+feature number 033W:W-1-18:3014.0 was added from the soil spreadsheet
+feature number 033W:no data:3015.0 was added from the soil spreadsheet
+feature number 033W:no data:3017.0 was added from the soil spreadsheet
+feature number 033W:no data:3016.0 was added from the soil spreadsheet
+feature number 037A:no data:68.0 was added from the soil spreadsheet
+stratum number 037W:O-2-17 was added from the soil spreadsheet
+stratum number 037W:J-1-1 was added from the soil spreadsheet
+stratum number 037W:L-2-13 was added from the soil spreadsheet
+feature number 037W:L-2-13:79.0 was added from the soil spreadsheet
+stratum number 037W:K-1-18 was added from the soil spreadsheet
+stratum number 037W:G-2-12.1 was added from the soil spreadsheet
+stratum number 037W:L-3-13 was added from the soil spreadsheet
+stratum number 037W:U-1-10 was added from the soil spreadsheet
+stratum number 067W:NC-2-5 was added from the soil spreadsheet
+stratum number 067W:NB-2-5 was added from the soil spreadsheet
+stratum number 081W:E-2-13 was added from the soil spreadsheet
+stratum number 081W:F-2-12 was added from the soil spreadsheet
+stratum number 082W:L-4-15 was added from the soil spreadsheet
+stratum number 083W:L-1-7 was added from the soil spreadsheet
+stratum number 083W:H-1-8 was added from the soil spreadsheet
+stratum number 084W:C-2-6 was added from the soil spreadsheet
+stratum number 084W:C-3-7 was added from the soil spreadsheet
+stratum number 090W:C-2-9 was added from the soil spreadsheet
+stratum number 090W:H-1-11 was added from the soil spreadsheet
+stratum number 090W:F-1-9 was added from the soil spreadsheet
+stratum number 090W:H-1-10 was added from the soil spreadsheet
+stratum number 090W:C-1-11 was added from the soil spreadsheet
+stratum number 090W:L-6-20 was added from the soil spreadsheet
+stratum number 091B:L-1-77 was added from the soil spreadsheet
+stratum number 091D:D-1-2 was added from the soil spreadsheet
+stratum number 091W:C-2-19 was added from the soil spreadsheet
+stratum number 091W:H-2-11 was added from the soil spreadsheet
+stratum number 093W:L-23-39 was added from the soil spreadsheet
+stratum number 093W:L-21-39 was added from the soil spreadsheet
+stratum number 093W:L-9-43 was added from the soil spreadsheet
+stratum number 093W:L-15-36 was added from the soil spreadsheet
+stratum number 093W:L-17-39 was added from the soil spreadsheet
+stratum number 093W:L-12-47 was added from the soil spreadsheet
+stratum number 093W:L-13-36 was added from the soil spreadsheet
+stratum number 093W:L-20-41 was added from the soil spreadsheet
+stratum number 093W:L-18-36 was added from the soil spreadsheet
+stratum number 094A:L-1-3 was added from the soil spreadsheet
+stratum number 094W:L-1-4 was added from the soil spreadsheet
+stratum number 097W:D-1-11 was added from the soil spreadsheet
+stratum number 098W:F-1-3 was added from the soil spreadsheet
+stratum number 099W:H-1-03 was added from the soil spreadsheet
+stratum number 099W:H-1-08 was added from the soil spreadsheet
+stratum number 100W:I-1-19 was added from the soil spreadsheet
+feature number 100W:L-11-31:5014.0 was added from the soil spreadsheet
+stratum number 100W:I-2-22 was added from the soil spreadsheet
+stratum number 100W:L-16-40 was added from the soil spreadsheet
+feature number 100W:L-16-40:5019.0 was added from the soil spreadsheet
+feature number 100W:L-19-43:5021.0 was added from the soil spreadsheet
+stratum number 100W:H-2-22 was added from the soil spreadsheet
+stratum number 100W:L-14-24 was added from the soil spreadsheet
+feature number 100W:L-14-24:5017.0 was added from the soil spreadsheet
+feature number 100W:L-6-26:5005.0 was added from the soil spreadsheet
+stratum number 100W:T-1-34 was added from the soil spreadsheet
+feature number 101W:G-1-8:101.0 was added from the soil spreadsheet
+stratum number 101W:H-1-8 was added from the soil spreadsheet
+feature number 101W:L-4-15:101.0 was added from the soil spreadsheet
+stratum number 102A:C-2-24 was added from the soil spreadsheet
+stratum number 102A:L-11-21 was added from the soil spreadsheet
+stratum number 102A:D-2-23 was added from the soil spreadsheet
+stratum number 102A:C-4-15 was added from the soil spreadsheet
+stratum number 102A:D-1-23 was added from the soil spreadsheet
+stratum number 102A:L-5-9 was added from the soil spreadsheet
+stratum number 102A:C-2-9 was added from the soil spreadsheet
+unit number 112W was added from the soils spreadsheet
+stratum number 112W:M-2-6 was added from the soil spreadsheet
+feature number 118W:H-3-19:71.0 was added from the soil spreadsheet
+stratum number 118W:O-1-16 was added from the soil spreadsheet
+stratum number 118W:FG-3-17 was added from the soil spreadsheet
+stratum number 118W:H-3-9 was added from the soil spreadsheet
+stratum number 118W:H-3-49 was added from the soil spreadsheet
+stratum number 118W:O-1-16.5 was added from the soil spreadsheet
+feature number 119W:F-3-20:14.0 was added from the soil spreadsheet
+stratum number 119W:D-3-14 was added from the soil spreadsheet
+stratum number 119W:L-5-19 was added from the soil spreadsheet
+stratum number 121C:D-1-3 was added from the soil spreadsheet
+stratum number 121W:D-3-25 was added from the soil spreadsheet
+stratum number 121W:D-4-25 was added from the soil spreadsheet
+stratum number 121W:D-2-24 was added from the soil spreadsheet
+stratum number 122W:F-1-2 was added from the soil spreadsheet
+stratum number 123A:C-1-7 was added from the soil spreadsheet
+stratum number 123A:G-1-9 was added from the soil spreadsheet
+stratum number 123A:C-2-8 was added from the soil spreadsheet
+stratum number 123A:I-2-10 was added from the soil spreadsheet
+stratum number 123B:I-2-8 was added from the soil spreadsheet
+stratum number 123B:I-1-6 was added from the soil spreadsheet
+stratum number 123B:L-1-12 was added from the soil spreadsheet
+stratum number 123B:I-3-11 was added from the soil spreadsheet
+stratum number 123B:B-3-5 was added from the soil spreadsheet
+feature number 124A:E-1-3:17.0 was added from the soil spreadsheet
+stratum number 124A:C-1-6 was added from the soil spreadsheet
+feature number 124A:C-1-6:16.0 was added from the soil spreadsheet
+stratum number 124W:H-1-6 was added from the soil spreadsheet
+stratum number 124W:C-2-8 was added from the soil spreadsheet
+feature number 124W:H-2-9:13.0 was added from the soil spreadsheet
+stratum number 124W:B-1-2 was added from the soil spreadsheet
+stratum number 124W:L-1-8 was added from the soil spreadsheet
+feature number 124W:L-1-8:12.0 was added from the soil spreadsheet
+feature number 124W:H-2-9:69.0 was added from the soil spreadsheet
+stratum number 124W:E-1-3 was added from the soil spreadsheet
+feature number 124W:H-2-9:68.0 was added from the soil spreadsheet
+stratum number 124W:G-1-5 was added from the soil spreadsheet
+feature number 124W:G-1-5:11.0 was added from the soil spreadsheet
+stratum number 124W:L-4-7 was added from the soil spreadsheet
+feature number 124W:L-4-7:15.0 was added from the soil spreadsheet
+stratum number 124W:L-5-7 was added from the soil spreadsheet
+stratum number 124W:F-1-4 was added from the soil spreadsheet
+stratum number 124W:L-7-7 was added from the soil spreadsheet
+stratum number 124W:L-2-2 was added from the soil spreadsheet
+feature number 124W:L-2-2:14.0 was added from the soil spreadsheet
+stratum number 124W:J-1-8 was added from the soil spreadsheet
+stratum number 124W:J-1-11 was added from the soil spreadsheet
+stratum number 127W:I-3-38 was added from the soil spreadsheet
+stratum number 127W:I-35-38 was added from the soil spreadsheet
+stratum number 127W:J-1-15 was added from the soil spreadsheet
+stratum number 127W:O-1-15 was added from the soil spreadsheet
+stratum number 127W:W-1-36 was added from the soil spreadsheet
+stratum number 129W:I-83-91 was added from the soil spreadsheet
+stratum number 129W:I-72-92 was added from the soil spreadsheet
+stratum number 129W:G-2-92 was added from the soil spreadsheet
+stratum number 129W:G-1-92 was added from the soil spreadsheet
+stratum number 129W:F-1-08 was added from the soil spreadsheet
+stratum number 129W:F-1-83 was added from the soil spreadsheet
+stratum number 130W:C-5-16 was added from the soil spreadsheet
+stratum number 130W:G-5-8 was added from the soil spreadsheet
+stratum number 130W:L-80-22 was added from the soil spreadsheet
+stratum number 130W:C-2-11 was added from the soil spreadsheet
+stratum number 130W:H-2-5 was added from the soil spreadsheet
+stratum number 130W:F-1-03 was added from the soil spreadsheet
+stratum number 138W:L-2-9 was added from the soil spreadsheet
+feature number 138W:L-2-9:2.0 was added from the soil spreadsheet
+stratum number 143W:L-4-4 was added from the soil spreadsheet
+unit number P/5 was added from the soils spreadsheet
+unit number P/PL5- was added from the soils spreadsheet
+unit number PL/5 was added from the soils spreadsheet
+unit number PL4-1 was added from the soils spreadsheet
+unit number PL4-2 was added from the soils spreadsheet
+unit number PL4-3 was added from the soils spreadsheet
+unit number PL4-4 was added from the soils spreadsheet
+unit number PL4-5 was added from the soils spreadsheet
+unit number PL4-6 was added from the soils spreadsheet
+unit number PL5 was added from the soils spreadsheet
+unit number PL5-3 was added from the soils spreadsheet
+stratum number 004A:B-4-08 was added from the perishables spreadsheet
+feature number 004A:B-4-08:2.0 was added from the perishables spreadsheet
+stratum number 030W:F-1-02 was added from the perishables spreadsheet
+stratum number 030W:G-1-03 was added from the perishables spreadsheet
+stratum number 030W:G-2-08 was added from the perishables spreadsheet
+stratum number 030W:M-1-06 was added from the perishables spreadsheet
+stratum number 031A:G-1-04 was added from the perishables spreadsheet
+stratum number 031A:MIXED was added from the perishables spreadsheet
+stratum number 031W:F-1-06 was added from the perishables spreadsheet
+stratum number 031W:L-1-07 was added from the perishables spreadsheet
+feature number 031W:no data:17.0 was added from the perishables spreadsheet
+stratum number 033B:F-1-03 was added from the perishables spreadsheet
+feature number 033B:F-1-03:1.0 was added from the perishables spreadsheet
+feature number 033B:F-1-03:2.0 was added from the perishables spreadsheet
+stratum number 033B:L-1-03 was added from the perishables spreadsheet
+feature number 033B:L-1-03:1.0 was added from the perishables spreadsheet
+feature number 033B:L-1-03:3.0 was added from the perishables spreadsheet
+feature number 033B:L-1-03:2.0 was added from the perishables spreadsheet
+stratum number 033C:C-1-07 was added from the perishables spreadsheet
+stratum number 033W:F-2-09 was added from the perishables spreadsheet
+stratum number 036W:B-1-02 was added from the perishables spreadsheet
+stratum number 036W:C-25-04.5 was added from the perishables spreadsheet
+feature number 036W:C-25-04.5:29.0 was added from the perishables spreadsheet
+stratum number 036W:C-3-05 was added from the perishables spreadsheet
+stratum number 036W:L-1-05.5 was added from the perishables spreadsheet
+feature number 036W:L-1-05.5:3.0 was added from the perishables spreadsheet
+feature number 036W:C-6.2-8.2:31.0 was added from the perishables spreadsheet
+stratum number 037W:C-2-08 was added from the perishables spreadsheet
+stratum number 037W:C-3-09 was added from the perishables spreadsheet
+stratum number 037W:F-2-05 was added from the perishables spreadsheet
+stratum number 037W:F-2-05 & C-2-08 was added from the perishables spreadsheet
+stratum number 043W:B-4-09 was added from the perishables spreadsheet
+stratum number 043W:F-1.5-0.6 was added from the perishables spreadsheet
+feature number 043W:F-1.5-0.6:57.0 was added from the perishables spreadsheet
+stratum number 043W:F-1.5-06 was added from the perishables spreadsheet
+feature number 043W:F-1.5-06:19.0 was added from the perishables spreadsheet
+feature number 043W:F-1.5-06:57.0 was added from the perishables spreadsheet
+stratum number 043W:F-15-06 was added from the perishables spreadsheet
+stratum number 043W:F-2-07 was added from the perishables spreadsheet
+feature number 043W:F-2-07:57.0 was added from the perishables spreadsheet
+stratum number 043W:L-4-06.7 was added from the perishables spreadsheet
+feature number 043W:L-4-06.7:57.0 was added from the perishables spreadsheet
+stratum number 043W:F-3-08 was added from the perishables spreadsheet
+feature number 043W:F-3-08:57.0 was added from the perishables spreadsheet
+stratum number 043W:I-4-06.7 was added from the perishables spreadsheet
+feature number 043W:I-4-06.7:57.0 was added from the perishables spreadsheet
+stratum number 043W:L-1-06.5 was added from the perishables spreadsheet
+feature number 043W:L-1-06.5:5.0 was added from the perishables spreadsheet
+stratum number 043W:L-2-07.5 was added from the perishables spreadsheet
+feature number 043W:L-2-07.5:3.0 was added from the perishables spreadsheet
+stratum number 043W:L-406.7 was added from the perishables spreadsheet
+feature number 043W:L-406.7:57.0 was added from the perishables spreadsheet
+stratum number 043W:R-4-09 was added from the perishables spreadsheet
+stratum number 043W:S-2-06.6 was added from the perishables spreadsheet
+feature number 043W:S-2-06.6:19.0 was added from the perishables spreadsheet
+stratum number 043W:X-3-10 (?) was added from the perishables spreadsheet
+feature number 043W:X-3-10 (?):42.0 was added from the perishables spreadsheet
+feature number 043W:none:57.0 was added from the perishables spreadsheet
+stratum number 059W:C-1-04 was added from the perishables spreadsheet
+stratum number 059W:C-2-05 was added from the perishables spreadsheet
+stratum number 059W:C-3-06 was added from the perishables spreadsheet
+stratum number 059W:E-1-03 was added from the perishables spreadsheet
+stratum number 059W:P-1-01.5 was added from the perishables spreadsheet
+stratum number 059W:F-1-03 was added from the perishables spreadsheet
+stratum number 059W:S-1.4-05.4 was added from the perishables spreadsheet
+stratum number 059W:S-14-05.4 was added from the perishables spreadsheet
+stratum number 060B:E was added from the perishables spreadsheet
+stratum number 061A:D-1-02 was added from the perishables spreadsheet
+stratum number 061A:D-2-03 was added from the perishables spreadsheet
+stratum number 062A:C-2-07 was added from the perishables spreadsheet
+stratum number 062A:F-1-04 was added from the perishables spreadsheet
+stratum number 062A:H-2-05.5 was added from the perishables spreadsheet
+stratum number 062A:H-2-O5.5 was added from the perishables spreadsheet
+stratum number 062A:X-1-10 was added from the perishables spreadsheet
+stratum number 062W:C-2-07 was added from the perishables spreadsheet
+stratum number 062B:C-2-06.9 was added from the perishables spreadsheet
+stratum number 062W:C-2-06.9 was added from the perishables spreadsheet
+stratum number 062W:C-2.5-07.5 was added from the perishables spreadsheet
+stratum number 062W:L-2.0-7.1 was added from the perishables spreadsheet
+feature number 062W:C-2-07:2.0 was added from the perishables spreadsheet
+stratum number 062W:L-2-07.1 was added from the perishables spreadsheet
+feature number 062W:L-2-07.1:2.0 was added from the perishables spreadsheet
+stratum number 062W:L-2- 07.1 was added from the perishables spreadsheet
+stratum number 062W:C-25-07.5 was added from the perishables spreadsheet
+stratum number 062W:C-27.5 - 27.5 was added from the perishables spreadsheet
+stratum number 062W:C-3-08 was added from the perishables spreadsheet
+stratum number 062W:C-4-09 was added from the perishables spreadsheet
+stratum number 062W:get from F# was added from the perishables spreadsheet
+feature number 062W:get from F#:63.0 was added from the perishables spreadsheet
+stratum number 062W:L-1-7.1 was added from the perishables spreadsheet
+stratum number 062W:L-2.0-07 was added from the perishables spreadsheet
+feature number 062W:L-2.0-07:2.0 was added from the perishables spreadsheet
+stratum number 062W:L-2.0-07.1 was added from the perishables spreadsheet
+stratum number 062W:L-2.07.1 was added from the perishables spreadsheet
+feature number 062W:L-2.07.1:63.0 was added from the perishables spreadsheet
+feature number 062W:C-2.5-07.5:63.0 was added from the perishables spreadsheet
+stratum number 062W:L-2-07 was added from the perishables spreadsheet
+feature number 062W:L-2-07:63.0 was added from the perishables spreadsheet
+feature number 062W:L-2-07.1:63.0 was added from the perishables spreadsheet
+feature number 062W:L-2-07.1:62.0 was added from the perishables spreadsheet
+stratum number 062W:L-2-07-1 was added from the perishables spreadsheet
+stratum number 062W:P-0-00 was added from the perishables spreadsheet
+feature number 062W:none:2.0 was added from the perishables spreadsheet
+feature number 062W:none:122.0 was added from the perishables spreadsheet
+unit number 062W? was added from the perishables spreadsheet
+stratum number 062W?:C-2-05 was added from the perishables spreadsheet
+feature number 062W?:C-2-05:0.0 was added from the perishables spreadsheet
+stratum number 062W?:C-2-07 was added from the perishables spreadsheet
+feature number 062W?:C-2-07:0.0 was added from the perishables spreadsheet
+stratum number 062W?:L-2-07.1 was added from the perishables spreadsheet
+feature number 062W?:L-2-07.1:0.0 was added from the perishables spreadsheet
+feature number 062W?:none:2.0 was added from the perishables spreadsheet
+feature number 062W?:none:0.0 was added from the perishables spreadsheet
+stratum number 064W:BENCH WALL was added from the perishables spreadsheet
+stratum number 064W:F-1-06 was added from the perishables spreadsheet
+feature number 064W:F-1-06:118.0 was added from the perishables spreadsheet
+stratum number 064W:H-1-08 was added from the perishables spreadsheet
+feature number 064W:H-1-08:4.0 was added from the perishables spreadsheet
+feature number 064W:H-1-08:118.0 was added from the perishables spreadsheet
+stratum number 067W:FC-2.5-05.5 was added from the perishables spreadsheet
+stratum number 067W:B-3-09 was added from the perishables spreadsheet
+stratum number 084W:C-1-05 was added from the perishables spreadsheet
+stratum number 084W:N-2-04 was added from the perishables spreadsheet
+stratum number 084W:W-2-04 was added from the perishables spreadsheet
+stratum number 088W:H-1-06 was added from the perishables spreadsheet
+stratum number 090W:C-2-07 was added from the perishables spreadsheet
+stratum number 093W:C-4-06 was added from the perishables spreadsheet
+stratum number 097A:H-1-04 was added from the perishables spreadsheet
+feature number 097A:H-1-04:1001.0 was added from the perishables spreadsheet
+feature number 097A:none:1001.0 was added from the perishables spreadsheet
+stratum number 097B:X-1-06 was added from the perishables spreadsheet
+feature number 097B:X-1-06:2.0 was added from the perishables spreadsheet
+stratum number 097W:D-1.5-11.5 was added from the perishables spreadsheet
+feature number 097W:D-2-13:2007.0 was added from the perishables spreadsheet
+stratum number 097W:L-3-08 was added from the perishables spreadsheet
+feature number 097W:L-3-08:2007.0 was added from the perishables spreadsheet
+stratum number 097W:N-1-03 was added from the perishables spreadsheet
+feature number 097W:N-1-03:1007.0 was added from the perishables spreadsheet
+feature number 097W:N-1-03:1006.0 was added from the perishables spreadsheet
+stratum number 098W:B-1-05 was added from the perishables spreadsheet
+stratum number 098W:H-1-08 was added from the perishables spreadsheet
+stratum number 100W:N-1-03 was added from the perishables spreadsheet
+feature number 100W:N-1-03:14.0 was added from the perishables spreadsheet
+stratum number 100W:C-1-04.2 was added from the perishables spreadsheet
+feature number 100W:none:302.0 was added from the perishables spreadsheet
+feature number 100W:none:0.0 was added from the perishables spreadsheet
+stratum number 101W:C-1-06 was added from the perishables spreadsheet
+stratum number 101W:C-2-07 was added from the perishables spreadsheet
+stratum number 101W:G-1-08 was added from the perishables spreadsheet
+stratum number 101W:L-1-06 was added from the perishables spreadsheet
+unit number 102W was added from the perishables spreadsheet
+stratum number 102W:L-1-03.5 was added from the perishables spreadsheet
+feature number 102W:L-1-03.5:1.0 was added from the perishables spreadsheet
+stratum number 118W:F-2-05.1 was added from the perishables spreadsheet
+feature number 118W:F-2-05.1:12.0 was added from the perishables spreadsheet
+stratum number 121W:L-16-13 was added from the perishables spreadsheet
+feature number 121W:L-16-13:33.0 was added from the perishables spreadsheet
+stratum number 122A:L was added from the perishables spreadsheet
+feature number 122W:D-0-0:1.0 was added from the perishables spreadsheet
+stratum number 123B:C-1-03 was added from the perishables spreadsheet
+feature number 123B:C-1-03:5.0 was added from the perishables spreadsheet
+stratum number 127B:D-2-05 was added from the perishables spreadsheet
+feature number 127B:D-2-05:1.0 was added from the perishables spreadsheet
+stratum number 127W:F-1-04 was added from the perishables spreadsheet
+stratum number 127W:L-1-08 was added from the perishables spreadsheet
+feature number 127W:L-1-08:55.0 was added from the perishables spreadsheet
+stratum number 127W:L-2-1.5 was added from the perishables spreadsheet
+feature number 127W:L-2-1.5:99.0 was added from the perishables spreadsheet
+stratum number 127W:L-23.44 was added from the perishables spreadsheet
+feature number 127W:L-23.44:147.0 was added from the perishables spreadsheet
+feature number 127W:none:107.0 was added from the perishables spreadsheet
+feature number 127W:none:115.0 was added from the perishables spreadsheet
+feature number 127W:none:126.0 was added from the perishables spreadsheet
+feature number 129W:F-1-08:7.0 was added from the perishables spreadsheet
+stratum number 129W:F-1-08.1 was added from the perishables spreadsheet
+stratum number 129W:F-1-08.3 was added from the perishables spreadsheet
+stratum number 129W:M-1-06 was added from the perishables spreadsheet
+stratum number 130W:H-1-05 was added from the perishables spreadsheet
+feature number 130W:H-1-05:30.0 was added from the perishables spreadsheet
+unit number unknown was added from the ornaments spreadsheet
+unit number 123W-A-B was added from the ornaments spreadsheet
+unit number Unknown was added from the ornaments spreadsheet
+unit number TT1 was added from the ornaments spreadsheet
+unit number Surface was added from the ornaments spreadsheet
+stratum number 77:F-2-5 was added from the select artifact 144 spreadsheet
+stratum number 77:L-2-9 was added from the select artifact 165 spreadsheet
+stratum number 51:G-1-6 was added from the select artifact 219 spreadsheet
+stratum number 34:L-1-08 was added from the select artifact 540 spreadsheet
+stratum number 174:K-1-11.5 was added from the select artifact 587 spreadsheet
+stratum number 167:H-1-6 was added from the select artifact 607 spreadsheet
+stratum number 160:W-1-91 was added from the select artifact 709 spreadsheet
+stratum number 160:H-4.5-22.5 was added from the select artifact 794 spreadsheet
