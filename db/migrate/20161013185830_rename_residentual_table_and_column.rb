@@ -5,7 +5,7 @@ class RenameResidentualTableAndColumn < ActiveRecord::Migration[5.0]
     rename_table :residentual_features, :residential_features
     rename_column :residential_features, :residentual_feature, :residential_feature
 
-    add_index :residential_features, :residential_feature, :unique => true
+    # add_index :residential_features, :residential_feature, :unique => true
     change_column :residential_features, :residential_feature, :string, :null => false
   end
 end
