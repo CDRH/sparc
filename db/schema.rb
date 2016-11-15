@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013185830) do
+ActiveRecord::Schema.define(version: 20161114192958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,9 +106,10 @@ ActiveRecord::Schema.define(version: 20161013185830) do
   end
 
   create_table "excavation_statuses", force: :cascade do |t|
-    t.string   "excavation_status"
+    t.string   "excavation_status", null: false
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.index ["excavation_status"], name: "index_excavation_statuses_on_excavation_status", unique: true, using: :btree
   end
 
   create_table "feature_groups", force: :cascade do |t|
@@ -159,6 +160,13 @@ ActiveRecord::Schema.define(version: 20161013185830) do
     t.datetime "updated_at",                    null: false
   end
 
+  create_table "features_lithic_inventories", id: false, force: :cascade do |t|
+    t.integer "lithic_inventory_id"
+    t.integer "feature_id"
+    t.index ["feature_id"], name: "index_features_lithic_inventories_on_feature_id", using: :btree
+    t.index ["lithic_inventory_id"], name: "index_features_lithic_inventories_on_lithic_inventory_id", using: :btree
+  end
+
   create_table "features_perishables", id: false, force: :cascade do |t|
     t.integer "perishable_id"
     t.integer "feature_id"
@@ -199,6 +207,34 @@ ActiveRecord::Schema.define(version: 20161013185830) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["irregular_shape"], name: "index_irregular_shapes_on_irregular_shape", unique: true, using: :btree
+  end
+
+  create_table "lithic_inventories", force: :cascade do |t|
+    t.string   "site"
+    t.string   "box"
+    t.string   "fs"
+    t.integer  "lithic_inventory_count"
+    t.string   "gridew"
+    t.string   "gridns"
+    t.string   "quad"
+    t.string   "exactprov"
+    t.string   "depthbeg"
+    t.string   "stratalpha"
+    t.integer  "strat_one"
+    t.integer  "strat_two"
+    t.string   "othstrats"
+    t.string   "field_date"
+    t.string   "excavator"
+    t.string   "arttype"
+    t.string   "sano"
+    t.string   "recordkey"
+    t.integer  "feature_id"
+    t.text     "comments"
+    t.string   "entby"
+    t.string   "location"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "depthend",               limit: 255
   end
 
   create_table "ornament_periods", force: :cascade do |t|
@@ -460,12 +496,15 @@ ActiveRecord::Schema.define(version: 20161013185830) do
   add_foreign_key "features", "feature_types"
   add_foreign_key "features", "residential_features"
   add_foreign_key "features", "t_shaped_doors"
+  add_foreign_key "features_lithic_inventories", "features"
+  add_foreign_key "features_lithic_inventories", "lithic_inventories"
   add_foreign_key "features_perishables", "features"
   add_foreign_key "features_perishables", "perishables"
   add_foreign_key "features_soils", "features"
   add_foreign_key "features_soils", "soils"
   add_foreign_key "features_strata", "features"
   add_foreign_key "features_strata", "strata"
+  add_foreign_key "lithic_inventories", "features"
   add_foreign_key "ornaments", "features"
   add_foreign_key "ornaments", "ornament_periods"
   add_foreign_key "perishables", "perishable_periods"

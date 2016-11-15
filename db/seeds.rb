@@ -15,6 +15,7 @@ files = {
   soils: 'xls/Soil_Master.xlsx',
   strata: 'xls/Strata.xls',
   units: 'xls/Unit_Summary_CCHedits.xlsx',
+  lithic_inventory: 'xls/LithicInventory2016.xlsx'
 }
 
 # will contain an array of hashes
@@ -578,6 +579,51 @@ if SelectArtifact.all.size < 1
         end
         select_artifact.strata << stratum unless select_artifact.strata.include?(stratum)
       end
+    end
+  end
+end
+
+######################
+# Lithic Inventories #
+######################
+
+if LithicInventory.all.size < 1
+  puts 'Loading Lithic Inventory ...'
+  s = Roo::Excelx.new(files[:lithic_inventory])
+
+  s.sheet('Sheet1').each do |entry|
+    row = convert_empty_to_none(entry)
+
+    if row[0] != 'SITE'
+      lithic = {}
+      lithic[:site] = row[0]
+      lithic[:box] = row[1]
+      lithic[:fs] = row[2]
+      lithic[:lithic_inventory_count] = row[3]
+      lithic[:gridew] = row[6]
+      lithic[:gridns] = row[7]
+      lithic[:quad] = row[8]
+      lithic[:exactprov] = row[9]
+      lithic[:depthbeg] = row[10]
+      lithic[:depthend] = row[11]
+      lithic[:stratalpha] = row[12]
+      lithic[:strat_one] = row[13]
+      lithic[:strat_two] = row[14]
+      lithic[:othstrats] = row[15]
+      lithic[:field_date] = row[16]
+      lithic[:excavator] = row[17]
+      lithic[:art_type] = row[18]
+      lithic[:sano] = row[19]
+      lithic[:recordkey] = row[20]
+      lithic[:comments] = row[22]
+      lithic[:entby] = row[23]
+      lithic[:location] = row[24]
+
+      unit = select_or_create_unit(row[4], 'lithic_inventories')
+      # lithic[:room] = unit.unit_no
+
+      lithic_row = LithicInventory.create(lithic)
+      associate_strata_features(unit, row[5], row[21], lithic_row, "lithic_inventory")
     end
   end
 end
