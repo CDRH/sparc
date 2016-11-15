@@ -173,7 +173,7 @@ if Unit.all.size < 1
       u[:floor_area] = row[14]
       u[:inferred_function] = create_if_not_exists(InferredFunction, :inferred_function, row[8])
       u[:intact_roof] = create_if_not_exists(IntactRoof, :intact_roof, row[5])
-      u[:irregular_shape] = create_if_not_exists(IrregularShape, :irregular_shape, row[1])
+      u[:irregular_shape] = create_if_not_exists(IrregularShape, :irregular_shape, row[11])
       u[:length] = row[12]
       u[:other_description] = row[10]
       u[:room_type_id] = row[6] != 'n/a' ? row[6].to_i : nil
