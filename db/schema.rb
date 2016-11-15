@@ -219,22 +219,22 @@ ActiveRecord::Schema.define(version: 20161114192958) do
     t.string   "quad"
     t.string   "exactprov"
     t.string   "depthbeg"
+    t.string   "depthend"
     t.string   "stratalpha"
     t.integer  "strat_one"
     t.integer  "strat_two"
     t.string   "othstrats"
     t.string   "field_date"
     t.string   "excavator"
-    t.string   "arttype"
+    t.string   "art_type"
     t.string   "sano"
     t.string   "recordkey"
     t.integer  "feature_id"
     t.text     "comments"
     t.string   "entby"
     t.string   "location"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.string   "depthend",               limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "ornament_periods", force: :cascade do |t|
