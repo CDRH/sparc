@@ -1,9 +1,8 @@
 GIT
   remote: https://github.com/activescaffold/active_scaffold.git
-  revision: fdd479d7f3e469a8ca11427bd574707745654f56
-  ref: fdd479d7f3e469a8ca11427bd574707745654f56
+  revision: a0180641923dcf6fb759d22ebc02225c21f4f449
   specs:
-    active_scaffold (3.4.41.1)
+    active_scaffold (3.4.99)
       ice_nine (~> 0.11)
       rails (>= 4.0.5)
 

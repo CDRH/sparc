@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   tables = [
+    :lithic_inventories,
     :bone_tools,
     :eggshells,
     :features,
