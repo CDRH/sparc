@@ -10,6 +10,6 @@ class StrataController < ApplicationController
     conf.actions.swap :search, :field_search
   end
 
-  record_select :per_page => 10, :search_on => [:strat_all]
+  record_select :per_page => 10, :search_on => [:strat_all], :order_by => 'strat_all asc, strat_alpha asc'
 
 end

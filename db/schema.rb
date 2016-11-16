@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114192958) do
+ActiveRecord::Schema.define(version: 20161116132226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,41 @@ ActiveRecord::Schema.define(version: 20161114192958) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["art_type"], name: "index_art_types_on_art_type", unique: true, using: :btree
+  end
+
+  create_table "bone_inventories", force: :cascade do |t|
+    t.string   "site"
+    t.string   "box"
+    t.string   "fs"
+    t.integer  "bone_inventory_count"
+    t.string   "gridew"
+    t.string   "gridns"
+    t.string   "quad"
+    t.string   "exactprov"
+    t.string   "depthbeg"
+    t.string   "depthend"
+    t.string   "stratalpha"
+    t.integer  "strat_one"
+    t.integer  "strat_two"
+    t.string   "othstrats"
+    t.string   "field_date"
+    t.string   "excavator"
+    t.string   "art_type"
+    t.string   "sano"
+    t.string   "recordkey"
+    t.integer  "feature_id"
+    t.text     "comments"
+    t.string   "entby"
+    t.string   "location"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "bone_inventories_features", id: false, force: :cascade do |t|
+    t.integer "feature_id"
+    t.integer "bone_inventory_id"
+    t.index ["bone_inventory_id"], name: "index_bone_inventories_features_on_bone_inventory_id", using: :btree
+    t.index ["feature_id"], name: "index_bone_inventories_features_on_feature_id", using: :btree
   end
 
   create_table "bone_tool_occupations", force: :cascade do |t|
@@ -49,6 +84,41 @@ ActiveRecord::Schema.define(version: 20161114192958) do
     t.integer "stratum_id"
     t.index ["bone_tool_id"], name: "index_bone_tools_strata_on_bone_tool_id", using: :btree
     t.index ["stratum_id"], name: "index_bone_tools_strata_on_stratum_id", using: :btree
+  end
+
+  create_table "ceramic_inventories", force: :cascade do |t|
+    t.string   "site"
+    t.string   "box"
+    t.string   "fs"
+    t.integer  "ceramic_inventory_count"
+    t.string   "gridew"
+    t.string   "gridns"
+    t.string   "quad"
+    t.string   "exactprov"
+    t.string   "depthbeg"
+    t.string   "depthend"
+    t.string   "stratalpha"
+    t.integer  "strat_one"
+    t.integer  "strat_two"
+    t.string   "othstrats"
+    t.string   "field_date"
+    t.string   "excavator"
+    t.string   "art_type"
+    t.string   "sano"
+    t.string   "recordkey"
+    t.integer  "feature_id"
+    t.text     "comments"
+    t.string   "entby"
+    t.string   "location"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "ceramic_inventories_features", id: false, force: :cascade do |t|
+    t.integer "feature_id"
+    t.integer "ceramic_inventory_id"
+    t.index ["ceramic_inventory_id"], name: "index_ceramic_inventories_features_on_ceramic_inventory_id", using: :btree
+    t.index ["feature_id"], name: "index_ceramic_inventories_features_on_feature_id", using: :btree
   end
 
   create_table "door_between_multiple_rooms", force: :cascade do |t|
@@ -482,9 +552,15 @@ ActiveRecord::Schema.define(version: 20161114192958) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "bone_inventories", "features"
+  add_foreign_key "bone_inventories_features", "bone_inventories"
+  add_foreign_key "bone_inventories_features", "features"
   add_foreign_key "bone_tools", "bone_tool_occupations"
   add_foreign_key "bone_tools_strata", "bone_tools"
   add_foreign_key "bone_tools_strata", "strata"
+  add_foreign_key "ceramic_inventories", "features"
+  add_foreign_key "ceramic_inventories_features", "ceramic_inventories"
+  add_foreign_key "ceramic_inventories_features", "features"
   add_foreign_key "eggshells", "eggshell_affiliations"
   add_foreign_key "eggshells", "eggshell_items"
   add_foreign_key "eggshells_features", "eggshells"

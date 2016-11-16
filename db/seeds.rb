@@ -15,7 +15,9 @@ files = {
   soils: 'xls/Soil_Master.xlsx',
   strata: 'xls/Strata.xls',
   units: 'xls/Unit_Summary_CCHedits.xlsx',
-  lithic_inventory: 'xls/LithicInventory2016.xlsx'
+  lithic_inventory: 'xls/LithicInventory2016.xlsx',
+  bone_inventory: 'xls/BoneInventory2016-CCH.xlsx',
+  ceramic_inventory: 'xls/CeramicInventory2016.xlsx',
 }
 
 # will contain an array of hashes
@@ -624,6 +626,96 @@ if LithicInventory.all.size < 1
 
       lithic_row = LithicInventory.create(lithic)
       associate_strata_features(unit, row[5], row[21], lithic_row, "lithic_inventory")
+    end
+  end
+end
+
+####################
+# Bone Inventories #
+####################
+
+if BoneInventory.all.size < 1
+  puts 'Loading Bone Inventory ...'
+  s = Roo::Excelx.new(files[:bone_inventory])
+
+  s.sheet('Sheet1').each do |entry|
+    row = convert_empty_to_none(entry)
+
+    if row[0] != 'SITE'
+      bone_inventory = {}
+      bone_inventory[:site] = row[0]
+      bone_inventory[:box] = row[1]
+      bone_inventory[:fs] = row[2]
+      bone_inventory[:bone_inventory_count] = row[3]
+      bone_inventory[:gridew] = row[6]
+      bone_inventory[:gridns] = row[7]
+      bone_inventory[:quad] = row[8]
+      bone_inventory[:exactprov] = row[9]
+      bone_inventory[:depthbeg] = row[10]
+      bone_inventory[:depthend] = row[11]
+      bone_inventory[:stratalpha] = row[12]
+      bone_inventory[:strat_one] = row[13]
+      bone_inventory[:strat_two] = row[14]
+      bone_inventory[:othstrats] = row[15]
+      bone_inventory[:field_date] = row[16]
+      bone_inventory[:excavator] = row[17]
+      bone_inventory[:art_type] = row[18]
+      bone_inventory[:sano] = row[19]
+      bone_inventory[:recordkey] = row[20]
+      bone_inventory[:comments] = row[22]
+      bone_inventory[:entby] = row[23]
+      bone_inventory[:location] = row[24]
+
+      unit = select_or_create_unit(row[4], 'bone_inventories')
+      # bone_inventory[:room] = unit.unit_no
+
+      bone_inventory_row = BoneInventory.create(bone_inventory)
+      associate_strata_features(unit, row[5], row[21], bone_inventory_row, "bone_inventory")
+    end
+  end
+end
+
+#######################
+# Ceramic Inventories #
+#######################
+
+if CeramicInventory.all.size < 1
+  puts 'Loading Ceramic Inventory ...'
+  s = Roo::Excelx.new(files[:ceramic_inventory])
+
+  s.sheet('Sheet1').each do |entry|
+    row = convert_empty_to_none(entry)
+
+    if row[0] != 'SITE'
+      ceramic_inventory = {}
+      ceramic_inventory[:site] = row[0]
+      ceramic_inventory[:box] = row[1]
+      ceramic_inventory[:fs] = row[2]
+      ceramic_inventory[:ceramic_inventory_count] = row[3]
+      ceramic_inventory[:gridew] = row[6]
+      ceramic_inventory[:gridns] = row[7]
+      ceramic_inventory[:quad] = row[8]
+      ceramic_inventory[:exactprov] = row[9]
+      ceramic_inventory[:depthbeg] = row[10]
+      ceramic_inventory[:depthend] = row[11]
+      ceramic_inventory[:stratalpha] = row[12]
+      ceramic_inventory[:strat_one] = row[13]
+      ceramic_inventory[:strat_two] = row[14]
+      ceramic_inventory[:othstrats] = row[15]
+      ceramic_inventory[:field_date] = row[16]
+      ceramic_inventory[:excavator] = row[17]
+      ceramic_inventory[:art_type] = row[18]
+      ceramic_inventory[:sano] = row[19]
+      ceramic_inventory[:recordkey] = row[20]
+      ceramic_inventory[:comments] = row[22]
+      ceramic_inventory[:entby] = row[23]
+      ceramic_inventory[:location] = row[24]
+
+      unit = select_or_create_unit(row[4], 'ceramic_inventories')
+      # ceramic_inventory[:room] = unit.unit_no
+
+      ceramic_inventory_row = CeramicInventory.create(ceramic_inventory)
+      associate_strata_features(unit, row[5], row[21], ceramic_inventory_row, "ceramic_inventory")
     end
   end
 end
