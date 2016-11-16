@@ -1,4 +1,4 @@
-class BoneInventoriesController < ApplicationController
+class Query::BoneInventoriesController < ApplicationController
 
   active_scaffold :bone_inventory do |conf|
     conf.columns = [:site, :units, :strata, :features, :fs, :box, :bone_inventory_count, :gridew, :gridns, :quad, :exactprov, :depthbeg, :depthend, :stratalpha, :strat_one, :strat_two, :othstrats, :field_date, :excavator, :art_type, :sano, :recordkey, :comments, :entby, :location]

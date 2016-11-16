@@ -1,4 +1,4 @@
-class UnitsController < ApplicationController
+class Query::UnitsController < ApplicationController
 
   active_scaffold :unit do |conf|
     conf.label = 'Units'
