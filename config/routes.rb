@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   tables = [
     :lithic_inventories,
+    :bone_inventories,
+    :ceramic_inventories,
     :bone_tools,
     :eggshells,
     :features,

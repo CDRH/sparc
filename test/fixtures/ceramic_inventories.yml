@@ -1,0 +1,51 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  site: MyString
+  box: MyString
+  fs: MyString
+  ceramic_inventory_count: 1
+  gridew: MyString
+  gridns: MyString
+  quad: MyString
+  exactprov: MyString
+  depthbeg: MyString
+  depthend: MyString
+  stratalpha: MyString
+  strat_one: 1
+  strat_two: 1
+  othstrats: MyString
+  field_date: MyString
+  excavator: MyString
+  art_type: MyString
+  sano: MyString
+  recordkey: MyString
+  feature_id: 1
+  comments: MyText
+  entby: MyString
+  location: MyString
+
+two:
+  site: MyString
+  box: MyString
+  fs: MyString
+  ceramic_inventory_count: 1
+  gridew: MyString
+  gridns: MyString
+  quad: MyString
+  exactprov: MyString
+  depthbeg: MyString
+  depthend: MyString
+  stratalpha: MyString
+  strat_one: 1
+  strat_two: 1
+  othstrats: MyString
+  field_date: MyString
+  excavator: MyString
+  art_type: MyString
+  sano: MyString
+  recordkey: MyString
+  feature_id: 1
+  comments: MyText
+  entby: MyString
+  location: MyString
