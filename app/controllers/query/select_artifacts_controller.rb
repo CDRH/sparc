@@ -1,4 +1,4 @@
-class SelectArtifactsController < ApplicationController
+class Query::SelectArtifactsController < ApplicationController
 
   active_scaffold :select_artifact do |conf|
     conf.columns = [:units, :strata, :artifact_no, :floor_association, :sa_form, :associated_feature_artifacts, :grid, :depth, :select_artifact_occupation, :select_artifact_type, :artifact_count, :location_in_room, :comments]

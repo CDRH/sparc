@@ -1,4 +1,4 @@
-class StrataController < ApplicationController
+class Query::StrataController < ApplicationController
 
   active_scaffold :stratum do |conf|
     # conf.columns[:room].label = 'Unit'

@@ -1,4 +1,4 @@
-class LithicInventoriesController < ApplicationController
+class Query::LithicInventoriesController < ApplicationController
 
   active_scaffold :lithic_inventory do |conf|
     conf.columns = [:site, :units, :strata, :features, :fs, :box, :lithic_inventory_count, :gridew, :gridns, :quad, :exactprov, :depthbeg, :depthend, :stratalpha, :strat_one, :strat_two, :othstrats, :field_date, :excavator, :art_type, :sano, :recordkey, :comments, :entby, :location]
