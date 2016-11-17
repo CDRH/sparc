@@ -2,6 +2,7 @@ class SearchController < ApplicationController
 
   def unit
     @unit = Unit.where(:unit_no => params["id"]).first
+    @zone = @unit.unit_no.sub(/^0*/, "").sub(/[A-Z\/]*$/, "") if @unit
   end
 
   def zone
