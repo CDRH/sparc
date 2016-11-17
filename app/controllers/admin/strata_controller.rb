@@ -5,6 +5,8 @@ class Admin::StrataController < ApplicationController
     # conf.columns[:room_no].label = 'Unit no.'
     conf.columns = [:unit, :strat_all, :strat_alpha, :strat_type, :stratum_one, :stratum_two, :strat_occupation, :features, :comments] #, :features, :bone_tools, :eggshells]
     conf.columns[:unit].actions_for_association_links = [:show]
+    conf.columns[:unit].form_ui = :record_select
+    conf.columns[:features].form_ui = :record_select
     conf.columns[:strat_type].form_ui = :select
     conf.columns[:strat_occupation].form_ui = :select
     conf.actions.swap :search, :field_search

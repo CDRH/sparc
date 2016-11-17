@@ -13,6 +13,8 @@ class Admin::FeaturesController < ApplicationController
     conf.columns[:length].label  = 'Length'
     conf.columns[:width].label  = 'Width'
     conf.columns[:depth_height].label  = 'Depth/Height'
+    conf.columns[:units].form_ui = :record_select
+    conf.columns[:strata].form_ui = :record_select
     conf.actions.swap :search, :field_search
   end
 

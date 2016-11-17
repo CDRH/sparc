@@ -5,6 +5,8 @@ class Admin::BoneToolsController < ApplicationController
     conf.columns[:bone_tool_occupation].form_ui = :select
     # conf.columns[:strata].form_ui = :record_select
     # conf.columns[:features].options = {:draggable_lists => true}
+    conf.columns[:units].form_ui = :record_select
+    conf.columns[:strata].form_ui = :record_select
     conf.actions.swap :search, :field_search
   end
 

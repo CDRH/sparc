@@ -48,7 +48,7 @@ end
 # postgres database for active record
 gem 'pg'
 # active scaffold sets up the table views
-gem 'active_scaffold', :git => 'https://github.com/activescaffold/active_scaffold.git' #, :ref => 'fdd479d7f3e469a8ca11427bd574707745654f56'
+gem 'active_scaffold', :git => 'https://github.com/activescaffold/active_scaffold.git'#, :ref => 'fdd479d7f3e469a8ca11427bd574707745654f56'
 gem 'recordselect', :git => 'https://github.com/scambra/recordselect.git'
 
 gem 'devise'
