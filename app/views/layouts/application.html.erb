@@ -11,7 +11,7 @@
   var edit_html_location = null;
   var selected_id = null;
   var plural_search = false;
-  <% if (params[:controller] != "static") && (!params[:controller].to_s.include? 'devise') %>
+  <% if (params[:controller].include? 'query') && (!params[:controller].to_s.include? 'devise') %>
     function load_internal_search(loc, column, id, label, plural) {
       edit_html_location = loc;
       selected_id = id;
@@ -108,7 +108,9 @@
 
   <%= render 'layouts/messages' %>
 
-  <%= yield %>
+  <div class="container">
+    <%= yield %>
+  </div>
 
   <!-- modal -->
   <div id="myModal"  class="modal fade" role="dialog">
