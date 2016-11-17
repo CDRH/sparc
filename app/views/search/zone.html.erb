@@ -1,3 +1,6 @@
-Zone and <%= params["id"] %>
+<h1>Zone <%= params["id"] %></h1>
 
-<%= link_to "Test", search_zone_path("84") %>
+<% @units.each do |unit| %>
+  <h2><%= link_to unit.unit_no, unit_path(unit.unit_no) %></h2>
+  <%= render partial: "unit", locals: { unit: unit } %>
+<% end %>

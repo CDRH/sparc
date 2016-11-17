@@ -1,0 +1,29 @@
+<ul>
+  <li>Excavation Status: <%= unit.excavation_status.excavation_status %></li>
+  <li>Occupation: <%= unit.unit_occupation.occupation %></li>
+  <li>Class: <%= unit.unit_class.unit_class %></li>
+  <li>Stories: <%= unit.story.story %></li>
+  <li>Intact Roof: <%= unit.intact_roof.intact_roof %></li>
+  <!-- <li>Type: <%# unit.salmon_type_code %></li> -->
+  <li>Type Description: <%= unit.type_description.type_description %></li>
+  <li>Inferred Function: <%= unit.inferred_function.inferred_function %></li>
+  <li>Sector: <%= unit.salmon_sector.salmon_sector %></li>
+  <li>Other Description: <%= unit.other_description %></li>
+  <li>Irregular Shape: <%= unit.irregular_shape.irregular_shape %></li>
+
+  <% type = unit.room_type %>
+  <% if type %>
+    <li>Room Type: <%= type.description %></li>
+    <ul>
+      <li>Room Type Period: <%= type.period %></li>
+      <li>Room Type Location: <%= type.location %></li>
+    </ul>
+  <% else %>
+    <li>Room Type:  None Found in DB!</li>
+  <% end %>
+
+  <li>Length: <%= unit.length %></li>
+  <li>Width: <%= unit.width %></li>
+  <li>Floor Area: <%= unit.floor_area %></li>
+  <li>Comments: <%= unit.comments %></li>
+</ul>
