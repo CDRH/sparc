@@ -1,3 +1,5 @@
 <h1><%= @unit.unit_no %></h1>
 
 <%= render partial: "unit", locals: { unit: @unit } %>
+
+<%= link_to "See Related Units", search_zone_path(@zone) %>
