@@ -1,4 +1,4 @@
-class FeaturesController < ApplicationController
+class Admin::FeaturesController < ApplicationController
 
   active_scaffold :feature do |conf|
     

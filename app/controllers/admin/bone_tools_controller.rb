@@ -1,4 +1,4 @@
-class BoneToolsController < ApplicationController
+class Admin::BoneToolsController < ApplicationController
 
   active_scaffold :bone_tool do |conf|
     conf.columns = [:units, :strata, :field_specimen_no, :depth, :bone_tool_occupation, :grid, :tool_type_code, :tool_type, :species_code, :comments]

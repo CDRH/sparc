@@ -19,15 +19,18 @@ Rails.application.routes.draw do
   ]
 
   tables.each do |table|
-    resources table do
-      as_routes
-      record_select_routes
-      add_as_extension table
+    namespace :admin do
+      resources table do
+        # as_routes is deprecated but for some reason its replacement isn't working for me
+        as_routes
+        record_select_routes
+        add_as_extension table
+      end
     end
   end
 
   # activescaffold_extensions(:rooms)
 
-  root 'units#index'
+  get '/', to: 'static#index', as: :home
 
 end

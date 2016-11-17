@@ -1,4 +1,4 @@
-class EggshellsController < ApplicationController
+class Admin::EggshellsController < ApplicationController
 
   active_scaffold :eggshell do |conf|
     conf.columns = [:units, :strata, :features, :salmon_museum_id_no, :record_field_key_no, :grid, :depth, :feature_no, :storage_bin, :museum_date, :field_date, :eggshell_affiliation, :eggshell_item]
