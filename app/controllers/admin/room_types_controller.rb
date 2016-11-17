@@ -1,4 +1,4 @@
-class Query::RoomTypesController < ApplicationController
+class Admin::RoomTypesController < ApplicationController
 
   active_scaffold :room_type do |conf|
     conf.columns = [:description, :period, :location]

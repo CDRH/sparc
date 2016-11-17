@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   ]
 
   tables.each do |table|
-    namespace :query do
+    namespace :admin do
       resources table do
         # as_routes is deprecated but for some reason its replacement isn't working for me
         as_routes
