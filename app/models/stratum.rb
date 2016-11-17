@@ -8,7 +8,7 @@ class Stratum < ActiveRecord::Base
   has_and_belongs_to_many :select_artifacts
   
   def to_label
-    "#{strat_all} #{strat_alpha}"
+    "#{unit.to_label if unit} : #{strat_all} #{strat_alpha}"
   end
   def authorized_for_update?
     puts "---------#{current_user}"
