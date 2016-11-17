@@ -89,6 +89,12 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="http://www.chacoarchive.org/cra/">
+            Chaco Canyon Archive
+            <span class="glyphicon glyphicon-share"></span>
+          </a>
+        </li>
         <% if user_signed_in? %>
           <li>
             <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
