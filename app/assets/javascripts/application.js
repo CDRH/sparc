@@ -15,4 +15,5 @@
 //= require active_scaffold
 //= require bootstrap-sprockets
 //= require turbolinks
-//= require_tree .
+
+// require_tree .

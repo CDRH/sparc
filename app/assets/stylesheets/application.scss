@@ -12,6 +12,11 @@
  *
  *= require jquery-ui
  *= require active_scaffold
- *= require_tree .
- *= require_self
+ *= require bootstrap_and_overrides
+ *= require scaffolds
+ *= require tables
+
+ * require maps
+ * require_tree .
+ * require_self
  */
