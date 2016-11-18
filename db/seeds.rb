@@ -6,18 +6,19 @@
 ################
 
 files = {
+  bone_inventory: 'xls/BoneInventory2016-CCH.xlsx',
   bonetools: 'xls/Bone_tool_DB.xlsx',
+  ceramic_inventory: 'xls/CeramicInventory2016.xlsx',
   eggshells: 'xls/Eggshell_CCHedits.xls',
   features: 'xls/Features_CCHedits.xls',
+  lithic_inventory: 'xls/LithicInventory2016.xlsx',
   ornaments: 'xls/Ornament_DB_CCHedits.xlsx',
-  perishables: 'xls/Perishables_CCHedits.xls',
+  perishables: 'xls/Perishables-CCHedits-Nov13-2016.xls',
+  photos: 'xls/Images.xlsx',
   select_artifacts: 'xls/Select_Artifacts.xls',
   soils: 'xls/Soil_Master.xlsx',
   strata: 'xls/Strata.xls',
   units: 'xls/Unit_Summary_CCHedits.xlsx',
-  lithic_inventory: 'xls/LithicInventory2016.xlsx',
-  bone_inventory: 'xls/BoneInventory2016-CCH.xlsx',
-  ceramic_inventory: 'xls/CeramicInventory2016.xlsx',
 }
 
 # will contain an array of hashes
