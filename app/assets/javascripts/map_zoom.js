@@ -11,5 +11,4 @@ var map_setup = function() {
 
 // ready / load recommendations from http://stackoverflow.com/a/35246512/4154134
 $(document).ready(map_setup);
-$(document).on('page:load', map_setup)
 $(document).on('turbolinks:load', map_setup)
