@@ -33,3 +33,49 @@ a:hover text {
   min-width:inherit;
   width:inherit;
 }
+
+/* svg element styles */
+
+line, path, polygon, polyline {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+  stroke-width: 0.6378;
+}
+
+.main_line {
+  stroke: #0000FF;
+}
+
+.alt_line {
+  stroke: #C0C0C0;
+}
+
+.hl_line {
+  stroke: #00FF00;
+}
+
+/* early specific */
+
+.early path {
+  stroke-dasharray: 0.2012, 0.1006;
+}
+
+.early g#freeze_for_2nd_occ,
+.early g#not-used,
+.early g#sec-occupation {
+  display: none;
+}
+
+.early g#freeze_for_2nd_occ > g,
+.early g#not-used > g,
+.early g#sec-occupation > g {
+  display: inline;
+}
+
+/* late specific */
+
+.late path {
+  stroke-dasharray: 1.3778, 0.6889;
+}
