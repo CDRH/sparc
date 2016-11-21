@@ -12,11 +12,23 @@
  *
  *= require jquery-ui
  *= require active_scaffold
- *= require bootstrap_and_overrides
  *= require scaffolds
- *= require tables
-
- * require maps
- * require_tree .
- * require_self
+ *= require active_scaffold_customization
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  padding: 15px;
+}
+
+label,
+input,
+button,
+select,
+textarea {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 16px;
+}
