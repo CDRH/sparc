@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require active_scaffold
 //= require bootstrap-sprockets
 //= require turbolinks
 
