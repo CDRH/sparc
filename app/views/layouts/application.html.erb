@@ -7,47 +7,6 @@
   <%= csrf_meta_tags %>
 </head>
 
-<script>
-  var edit_html_location = null;
-  var selected_id = null;
-  var plural_search = false;
-  <% if (params[:controller].include? 'query') && (!params[:controller].to_s.include? 'devise') %>
-    function load_internal_search(loc, column, id, label, plural) {
-      edit_html_location = loc;
-      selected_id = id;
-      plural_search = plural;
-      $.ajax({
-        type: 'GET',
-        url: '<%= url_for(:action => 'search_inline') if params[:controller] != 'interaction' and !params[:controller].to_s.include?('devise') %>?klass='+column+'&plural='+plural,
-        success: function(data) {
-          $('#myModal .modal-body').html(data);
-          $('#modal-title').html(label);
-          var top = window.pageYOffset || document.documentElement.scrollTop;
-          $('#myModal').modal('show');
-        }
-      })
-      return false;
-    }
-  <% end %>
-
-  $(function() {
-    $('#myModal .modal-footer button').on('click', function (e) {
-        var $target = $(e.target); // Clicked button element
-          // console.log($target[0].textContent); // Logged if the clicked button actually closed the modal
-      if($target[0].textContent == 'OK') {
-        $('#myModal input:checked').each(function(k,v) {
-          if(!plural_search) {
-            $('#'+edit_html_location).html('<input type="hidden" name="'+selected_id+'" value="'+$(v).val()+'">'+$(v)[0].nextSibling.data);
-          } else {
-            $('#'+edit_html_location).append('<input type="checkbox" checked class="related-checkbox" name="'+selected_id+'" value="'+$(v).val()+'">'+$(v)[0].nextSibling.data+'<br>');
-          }
-          // console.log($(v)[0].nextSibling.data);
-        })
-      }
-    });
-  });
-</script>
-
 <body>
   <nav role="navigation" class="navbar navbar-default">
     <div class="navbar-header">
@@ -57,8 +16,6 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <!-- <a href="/interaction" class="navbar-brand">Chaco</a> -->
-      <%#= link_to('Chaco', {controller: 'interaction', action: 'index'}, class: "navbar-brand")%>
     </div>
     <!-- Collection of nav links and other content for toggling -->
     <div id="navbarCollapse" class="collapse navbar-collapse">
@@ -112,22 +69,6 @@
     <%= yield %>
   </div>
 
-  <!-- modal -->
-  <div id="myModal"  class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" id="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body" id="modal-body"></div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default ok-button" data-dismiss="modal">OK</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </body>
 
 </html>
