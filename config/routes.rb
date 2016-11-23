@@ -5,11 +5,8 @@ Rails.application.routes.draw do
   get '/', to: 'static#index', as: :home
   # explore
   get '/explore', to: 'explore#index', as: :explore
-  get '/explore/early-links', to: 'explore#early-links', as: :explore_e_links
-  get '/explore/early-links-numbered', to: 'explore#early-links-numbered', as: :explore_e_links_num
   get '/explore/early-zoom', to: 'explore#early-zoom', as: :explore_e_zoom
   get '/explore/early-zoom-links', to: 'explore#early-zoom-links', as: :explore_e_zoom_links
-  get '/explore/early', to: 'explore#early', as: :explore_e
   get '/explore/late', to: 'explore#late', as: :explore_l
   get '/explore/late-zoom', to: 'explore#late-zoom', as: :explore_l_zoom
   # search and browse
