@@ -2,6 +2,23 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  get '/', to: 'static#index', as: :home
+  # explore
+  get '/explore', to: 'explore#index', as: :explore
+  get '/explore/early-zoom', to: 'explore#early-zoom', as: :explore_e_zoom
+  get '/explore/early-zoom-links', to: 'explore#early-zoom-links', as: :explore_e_zoom_links
+  get '/explore/late', to: 'explore#late', as: :explore_l
+  get '/explore/late-zoom', to: 'explore#late-zoom', as: :explore_l_zoom
+  # search and browse
+  get '/search', to: 'static#search', as: :search
+  get '/search/unit/:id', to: 'search#unit', as: :unit
+  get '/search/zone/:id', to: 'search#zone', as: :search_zone
+
+  get '/query', to: 'static#query', as: :query
+  get '/gallery', to: 'static#gallery', as: :gallery
+  get '/about', to: 'static#about', as: :about
+
+
   tables = [
     :bone_inventories,
     :bone_tools,
@@ -33,5 +50,4 @@ Rails.application.routes.draw do
 
   # activescaffold_extensions(:rooms)
 
-  get '/', to: 'static#index', as: :home
 end

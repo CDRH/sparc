@@ -1,0 +1,48 @@
+<% if unit %>
+  <div class="row">
+    <div class="col-md-6">
+      <ul>
+        <li><%= link_to "More info", admin_unit_path(unit.id) %>
+        <% unit.strata.each do |stratum| %>
+          <li>Strata: <%= link_to stratum.strat_all, admin_stratum_path(stratum.id) %></li>
+          <ul>
+            <% stratum.features.each do |feature| %>
+              <li>Feature: <%= link_to feature.feature_no, admin_feature_path(feature.id) %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <ul>
+        <li>Excavation Status: <%= unit.excavation_status.excavation_status if unit.excavation_status %></li>
+        <li>Occupation: <%= unit.unit_occupation.occupation if unit.unit_occupation %></li>
+        <li>Class: <%= unit.unit_class.unit_class if unit.unit_class %></li>
+        <li>Stories: <%= unit.story.story if unit.story %></li>
+        <li>Intact Roof: <%= unit.intact_roof.intact_roof if unit.intact_roof %></li>
+        <!-- <li>Type: <%# unit.salmon_type_code %></li> -->
+        <li>Type Description: <%= unit.type_description.type_description if unit.type_description %></li>
+        <li>Inferred Function: <%= unit.inferred_function.inferred_function if unit.inferred_function %></li>
+        <li>Sector: <%= unit.salmon_sector.salmon_sector if unit.salmon_sector %></li>
+        <li>Other Description: <%= unit.other_description if unit.other_description %></li>
+        <li>Irregular Shape: <%= unit.irregular_shape.irregular_shape if unit.irregular_shape %></li>
+
+        <% type = unit.room_type %>
+        <% if type %>
+          <li>Room Type: <%= type.description %></li>
+          <ul>
+            <li>Room Type Period: <%= type.period %></li>
+            <li>Room Type Location: <%= type.location %></li>
+          </ul>
+        <% else %>
+          <li>Room Type:  None Found in DB!</li>
+        <% end %>
+
+        <li>Length: <%= unit.length %></li>
+        <li>Width: <%= unit.width %></li>
+        <li>Floor Area: <%= unit.floor_area %></li>
+        <li>Comments: <%= unit.comments %></li>
+      </ul>
+    </div>
+  </div>
+<% end %>
