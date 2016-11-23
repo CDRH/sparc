@@ -127,7 +127,7 @@ def select_or_create_unit unit, spreadsheet
   unit = unit.to_s.strip
   if unit != 'no data' and !unit.include?(' ')
     if Unit.where(:unit_no => unit).size < 1
-      room = Unit.create(:unit_no => unit)
+      room = Unit.create(:unit_no => unit, :comments => "Created from #{spreadsheet}")
       report "unit", unit, spreadsheet
     else
       room = Unit.where(:unit_no => unit).first
@@ -138,7 +138,7 @@ def select_or_create_unit unit, spreadsheet
       puts "creating Unit Other for #{unit}"
     else
       room = Unit.where(:unit_no => 'Other').first
-      puts "using Unit Other for #{unit}"
+      puts "using Unit Other for #{unit} from #{spreadsheet}"
     end
   end
   return room
