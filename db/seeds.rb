@@ -295,7 +295,7 @@ if Feature.all.size < 1
       end
       s = Stratum.where(strat_all: o, unit_id: r.id).first
       if s.nil?
-        s = Stratum.create(strat_all: o, unit_id: r.id, comments: 'imported none')
+        s = Stratum.create(strat_all: o, unit_id: r.id, comments: 'imported stratum none from features')
         report "stratum", "#{f.unit_no}:#{o}", "feature #{f.feature_no}"
       end
       f.strata << s unless f.strata.include?(s)
@@ -780,9 +780,13 @@ if Image.all.size < 1
         end
       end
 
-      unit = select_or_create_unit(row[1], "images")
-      associate_strata_features(unit, row[2], row[16], image, "images")
-
+      # TODO remove this once the spreadsheet is revised with correct unit assignments
+      if row[1].to_s.include?("-")
+        report "unit", row[1], "images (actually NOT added because of the hyphen)"
+      else
+        unit = select_or_create_unit(row[1], "images")
+        associate_strata_features(unit, row[2], row[16], image, "images")
+      end
     end
   end
 end
