@@ -9,3 +9,20 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
+
+
+# active scaffold
+# Note: active_scaffold.css is coming from the active_scaffold gem
+Rails.application.config.assets.precompile += %w(
+  active_scaffold.css
+  active_scaffold.js
+  active_scaffold_customization.css
+  scaffolds.scss
+)
+
+# maps
+Rails.application.config.assets.precompile += %w(
+  svg-pan-zoom.js
+  map_zoom.js
+  maps.css
+)
