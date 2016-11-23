@@ -1,6 +1,6 @@
 class Image < ActiveRecord::Base
-  belongs_to :feature
-  has_many :strata, :through => :feature
+  has_and_belongs_to_many :features
+  has_many :strata, :through => :features
   has_many :units, :through => :strata
 
   has_and_belongs_to_many :image_subjects

@@ -781,21 +781,7 @@ if Image.all.size < 1
       end
 
       unit = select_or_create_unit(row[1], "images")
-      stratum = select_or_create_stratum(unit, row[2], "images")
-      f_num = row[16].gsub(/\d{3}[A-Z]-/, "")
-      feature = stratum.features.where(feature_no: f_num).first
-      if !feature
-        feature = Feature.create(
-          feature_no: f_num,
-          unit_no: unit.unit_no,
-          comments: "imported from images"
-        )
-        stratum.features << feature
-        report "feature", "#{unit.unit_no}:#{stratum.strat_all}:#{f_num}", "images"
-      end
-
-      image.feature = feature
-      image.save
+      associate_strata_features(unit, row[2], row[16], image, "images")
 
     end
   end

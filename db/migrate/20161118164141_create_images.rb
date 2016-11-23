@@ -20,7 +20,6 @@ class CreateImages < ActiveRecord::Migration[5.0]
       # Note: string instead of date format to fit pattern of other tables
       t.string :date
       t.string :creator
-      t.belongs_to :feature, index: true
       t.string :signi_art_no
       t.string :other_no
       t.string :human_remains
@@ -41,6 +40,11 @@ class CreateImages < ActiveRecord::Migration[5.0]
       t.references :images, index: true, foreign_key: true
       t.references :image_subjects, index: true, foreign_key: true
       t.timestamps
+    end
+
+    create_join_table :images, :features do |t|
+      t.references :feature, index: true, foreign_key: true
+      t.references :image, index: true, foreign_key: true
     end
   end
 end

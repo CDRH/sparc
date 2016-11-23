@@ -11,7 +11,7 @@ class Feature < ActiveRecord::Base
   has_many :units, :through => :strata
 
   has_and_belongs_to_many :eggshells
-  has_many :images
+  has_and_belongs_to_many :images
   has_and_belongs_to_many :ornaments
   has_and_belongs_to_many :perishables
   has_and_belongs_to_many :soils

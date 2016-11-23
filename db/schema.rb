@@ -230,6 +230,13 @@ ActiveRecord::Schema.define(version: 20161118164141) do
     t.datetime "updated_at",                    null: false
   end
 
+  create_table "features_images", id: false, force: :cascade do |t|
+    t.integer "image_id"
+    t.integer "feature_id"
+    t.index ["feature_id"], name: "index_features_images_on_feature_id", using: :btree
+    t.index ["image_id"], name: "index_features_images_on_image_id", using: :btree
+  end
+
   create_table "features_lithic_inventories", id: false, force: :cascade do |t|
     t.integer "lithic_inventory_id"
     t.integer "feature_id"
@@ -291,7 +298,6 @@ ActiveRecord::Schema.define(version: 20161118164141) do
     t.string   "dep_end"
     t.string   "date"
     t.string   "creator"
-    t.integer  "feature_id"
     t.string   "signi_art_no"
     t.string   "other_no"
     t.string   "human_remains"
@@ -302,7 +308,6 @@ ActiveRecord::Schema.define(version: 20161118164141) do
     t.string   "notes"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["feature_id"], name: "index_images_on_feature_id", using: :btree
   end
 
   create_table "inferred_functions", force: :cascade do |t|
@@ -619,6 +624,8 @@ ActiveRecord::Schema.define(version: 20161118164141) do
   add_foreign_key "features", "feature_types"
   add_foreign_key "features", "residential_features"
   add_foreign_key "features", "t_shaped_doors"
+  add_foreign_key "features_images", "features"
+  add_foreign_key "features_images", "images"
   add_foreign_key "features_lithic_inventories", "features"
   add_foreign_key "features_lithic_inventories", "lithic_inventories"
   add_foreign_key "features_perishables", "features"
