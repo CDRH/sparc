@@ -286,6 +286,7 @@ ActiveRecord::Schema.define(version: 20161118164141) do
     t.string   "site"
     t.string   "room"
     t.string   "strat"
+    t.string   "asso_features"
     t.string   "image_no"
     t.string   "format"
     t.string   "image_type"

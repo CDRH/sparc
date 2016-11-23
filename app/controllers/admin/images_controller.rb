@@ -11,6 +11,7 @@ class Admin::ImagesController < ApplicationController
       :comments,
       :notes,
       # organized alphabetically here on out
+      :asso_features,
       :assocnoeg,
       :box,
       :data_entry,

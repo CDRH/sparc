@@ -762,6 +762,7 @@ if Image.all.size < 1
       record[:dep_end] = row[12]
       record[:date] = row[14]
       record[:creator] = row[15]
+      record[:asso_features] = row[16]
       record[:signi_art_no] = row[17]
       record[:other_no] = row[18]
       record[:human_remains] = row[19]

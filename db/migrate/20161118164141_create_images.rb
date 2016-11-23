@@ -5,6 +5,7 @@ class CreateImages < ActiveRecord::Migration[5.0]
       # Note: room and strat merely strings
       t.string :room
       t.string :strat
+      t.string :asso_features
       # Note: using image_no instead of id
       # to fit the pattern of the other tables
       t.string :image_no
