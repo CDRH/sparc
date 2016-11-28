@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     :soils,
     :strata,
     :units,
+    :zones
   ]
 
   tables.each do |table|
