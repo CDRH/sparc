@@ -9,9 +9,11 @@ class Unit < ActiveRecord::Base
   belongs_to :type_description
   belongs_to :unit_class
   belongs_to :unit_occupation
+  belongs_to :zone
+
   has_many :strata
   has_many :features, :through => :strata
-  
+
   validates_uniqueness_of :unit_no
 
   def to_label
