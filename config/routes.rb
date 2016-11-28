@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   get '/explore/late-zoom', to: 'explore#late-zoom', as: :explore_l_zoom
   # search and browse
   get '/search', to: 'static#search', as: :search
-  get '/search/unit/:id', to: 'search#unit', as: :unit
-  get '/search/zone/:id', to: 'search#zone', as: :search_zone
+  get '/search/unit/:number', to: 'search#unit', as: :unit
+  get '/search/zone/:number', to: 'search#zone', as: :search_zone
 
   get '/query', to: 'static#query', as: :query
   get '/gallery', to: 'static#gallery', as: :gallery
