@@ -180,6 +180,7 @@ stratum number 102A:C-4-15 was added from the soil spreadsheet
 stratum number 102A:D-1-23 was added from the soil spreadsheet
 stratum number 102A:L-5-9 was added from the soil spreadsheet
 stratum number 102A:C-2-9 was added from the soil spreadsheet
+zone number 112 was added from the soils spreadsheet
 unit number 112W was added from the soils spreadsheet
 stratum number 112W:M-2-6 was added from the soil spreadsheet
 feature number 118W:H-3-19:71.0 was added from the soil spreadsheet
@@ -248,16 +249,27 @@ stratum number 130W:F-1-03 was added from the soil spreadsheet
 stratum number 138W:L-2-9 was added from the soil spreadsheet
 feature number 138W:L-2-9:2.0 was added from the soil spreadsheet
 stratum number 143W:L-4-4 was added from the soil spreadsheet
+zone number P/5 was added from the soils spreadsheet
 unit number P/5 was added from the soils spreadsheet
+zone number P/PL5- was added from the soils spreadsheet
 unit number P/PL5- was added from the soils spreadsheet
+zone number PL/5 was added from the soils spreadsheet
 unit number PL/5 was added from the soils spreadsheet
+zone number PL4-1 was added from the soils spreadsheet
 unit number PL4-1 was added from the soils spreadsheet
+zone number PL4-2 was added from the soils spreadsheet
 unit number PL4-2 was added from the soils spreadsheet
+zone number PL4-3 was added from the soils spreadsheet
 unit number PL4-3 was added from the soils spreadsheet
+zone number PL4-4 was added from the soils spreadsheet
 unit number PL4-4 was added from the soils spreadsheet
+zone number PL4-5 was added from the soils spreadsheet
 unit number PL4-5 was added from the soils spreadsheet
+zone number PL4-6 was added from the soils spreadsheet
 unit number PL4-6 was added from the soils spreadsheet
+zone number PL5 was added from the soils spreadsheet
 unit number PL5 was added from the soils spreadsheet
+zone number PL5-3 was added from the soils spreadsheet
 unit number PL5-3 was added from the soils spreadsheet
 stratum number 004A:B-4-08 was added from the perishables spreadsheet
 feature number 004A:B-4-08:2.0 was added from the perishables spreadsheet
@@ -363,6 +375,7 @@ stratum number 062W:L-2-07-1 was added from the perishables spreadsheet
 stratum number 062W:P-0-00 was added from the perishables spreadsheet
 feature number 062W:none:2.0 was added from the perishables spreadsheet
 feature number 062W:none:122.0 was added from the perishables spreadsheet
+zone number 62W? was added from the perishables spreadsheet
 unit number 062W? was added from the perishables spreadsheet
 stratum number 062W?:C-2-05 was added from the perishables spreadsheet
 feature number 062W?:C-2-05:0.0 was added from the perishables spreadsheet
@@ -438,10 +451,15 @@ stratum number 129W:F-1-08.3 was added from the perishables spreadsheet
 stratum number 129W:M-1-06 was added from the perishables spreadsheet
 stratum number 130W:H-1-05 was added from the perishables spreadsheet
 feature number 130W:H-1-05:30.0 was added from the perishables spreadsheet
+zone number unknown was added from the ornaments spreadsheet
 unit number unknown was added from the ornaments spreadsheet
+zone number 123W-A- was added from the ornaments spreadsheet
 unit number 123W-A-B was added from the ornaments spreadsheet
+zone number Unknown was added from the ornaments spreadsheet
 unit number Unknown was added from the ornaments spreadsheet
+zone number TT1 was added from the ornaments spreadsheet
 unit number TT1 was added from the ornaments spreadsheet
+zone number Surface was added from the ornaments spreadsheet
 unit number Surface was added from the ornaments spreadsheet
 stratum number 77:F-2-5 was added from the select artifact 144 spreadsheet
 stratum number 77:L-2-9 was added from the select artifact 165 spreadsheet
@@ -787,8 +805,10 @@ stratum number 102C:D-1-31 was added from the bone_inventory spreadsheet
 stratum number 102D:P-0-0 was added from the bone_inventory spreadsheet
 stratum number 105W:B-1-2 was added from the bone_inventory spreadsheet
 stratum number 109W:B-1-2 was added from the bone_inventory spreadsheet
+zone number 110 was added from the bone_inventories spreadsheet
 unit number 110W was added from the bone_inventories spreadsheet
 stratum number 110W:B-1-2 was added from the bone_inventory spreadsheet
+zone number 111 was added from the bone_inventories spreadsheet
 unit number 111W was added from the bone_inventories spreadsheet
 stratum number 111W:B-1-2 was added from the bone_inventory spreadsheet
 stratum number 118W:B-4-9 was added from the bone_inventory spreadsheet
@@ -871,6 +891,7 @@ stratum number 123A:H-1-4 was added from the ceramic_inventory spreadsheet
 stratum number 119W:B-8-22 was added from the ceramic_inventory spreadsheet
 stratum number 030W:P-0-0 was added from the ceramic_inventory spreadsheet
 feature number 004W:G-2-7:1.0 was added from the ceramic_inventory spreadsheet
+zone number T01 was added from the ceramic_inventories spreadsheet
 unit number T01EW was added from the ceramic_inventories spreadsheet
 stratum number T01EW:P-0-0 was added from the ceramic_inventory spreadsheet
 feature number 091A:C-3-17:3.0 was added from the ceramic_inventory spreadsheet
@@ -1029,6 +1050,7 @@ stratum number 129W:C-27.5-35.5 was added from the ceramic_inventory spreadsheet
 stratum number 129W:C-27.5-35.7 was added from the ceramic_inventory spreadsheet
 stratum number 162W:A-1-1 was added from the ceramic_inventory spreadsheet
 stratum number 123W:C-1-5 was added from the ceramic_inventory spreadsheet
+zone number 114 was added from the ceramic_inventories spreadsheet
 unit number 114W was added from the ceramic_inventories spreadsheet
 stratum number 114W:A-1-1 was added from the ceramic_inventory spreadsheet
 stratum number 129W:C-4.6-12.6 was added from the ceramic_inventory spreadsheet

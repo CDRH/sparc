@@ -120,21 +120,25 @@ def select_or_create_stratum unit, strat_no, source
   return stratum
 end
 
-def select_or_create_unit unit, spreadsheet
+def select_or_create_unit unit, spreadsheet, log=true
   room = nil
   # some units have trailing spaces or are in the spreadsheet
   # as an integer field, which the roo gem preserves
   unit = unit.to_s.strip
   if unit != 'no data' and !unit.include?(' ')
     if Unit.where(:unit_no => unit).size < 1
-      room = Unit.create(:unit_no => unit, :comments => "Created from #{spreadsheet}")
-      report "unit", unit, spreadsheet
+      # extract the zone from the unit
+      # and create zone if necessary
+      zone = select_or_create_zone_from_unit unit, spreadsheet, log
+      room = Unit.create(:unit_no => unit, :zone => zone, :comments => "Created from #{spreadsheet}")
+      report "unit", unit, spreadsheet if log
     else
       room = Unit.where(:unit_no => unit).first
     end
   else
-    if Unit.where(:unit_no => 'Other').size < 1
-      room = Unit.create(:unit_no => 'Other')
+    if Unit.where(:unit_no => "Other").size < 1
+      zone = Zone.create(:number => "Other")
+      room = Unit.create(:unit_no => "Other", :zone => zone)
       puts "creating Unit Other for #{unit}"
     else
       room = Unit.where(:unit_no => 'Other').first
@@ -142,6 +146,17 @@ def select_or_create_unit unit, spreadsheet
     end
   end
   return room
+end
+
+def select_or_create_zone_from_unit unit_str, spreadsheet, log=true
+  num = unit_str.sub(/^0*/, "").sub(/[A-Z\/]*$/, "")
+  if Zone.where(:number => num).size < 1
+    puts "creating zone #{num} from #{spreadsheet}"
+    report "zone", num, spreadsheet if log
+    return Zone.create(:number => num)
+  else
+    return Zone.where(:number => num).first
+  end
 end
 
 #########
@@ -167,17 +182,7 @@ if Unit.all.size < 1
 
   s.sheet('data').each do |row|
     if row[0] != 'Unit No.'
-      units = Unit.where(:unit_no => row[0])
-      # TODO does this mean that there may be multiple units with the same "unit_no" ?
-      # but we are only going to add to the first instance?
-      # if there should only be one, we could use
-      # `Unit.find_or_create_by(unit_no: row[0])`
-      if units.size < 1
-        puts "Creating unit for #{row[0]}"
-        unit = Unit.create(:unit_no => row[0])
-      else
-        unit = Unit.where(:unit_no => row[0]).first
-      end
+      unit = select_or_create_unit row[0], "units", false
       u = {}
       u[:comments] = row[15]
       u[:excavation_status] = create_if_not_exists(ExcavationStatus, :excavation_status, row[1])
