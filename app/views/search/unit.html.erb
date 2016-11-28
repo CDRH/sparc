@@ -2,4 +2,4 @@
 
 <%= render partial: "unit", locals: { unit: @unit } %>
 
-<%= link_to "See Related Units", search_zone_path(@zone) %>
+<%= link_to "See Related Units", search_zone_path(@unit.zone) %>
