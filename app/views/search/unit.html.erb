@@ -1,5 +1,193 @@
 <h1><%= @unit.unit_no %></h1>
 
-<%= render partial: "unit", locals: { unit: @unit } %>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active">
+    <a href="#overview" aria-controls="overview"
+        role="tab" data-toggle="tab">Overview</a>
+  </li>
+  <li role="presentation">
+    <a href="#description" aria-controls="description"
+        role="tab" data-toggle="tab">Description</a>
+  </li>
+  <li role="presentation">
+    <a href="#images" aria-controls="images"
+        role="tab" data-toggle="tab">Image Gallery</a>
+  </li>
+  <li role="presentation">
+    <a href="#items" aria-controls="items"
+        role="tab" data-toggle="tab">Associated Strata and Items</a>
+  </li>
+</ul>
 
-<%= link_to "See Related Units", search_zone_path(@unit.zone) %>
+<!-- Tab panes -->
+<div class="tab-content">
+
+  <!-- overview -->
+  <div role="tabpanel" class="tab-pane active" id="overview">
+    <div class="row">
+      <div class="col-md-6">
+        <ul>
+          <li><strong>Class:</strong> <%= @unit.unit_class.unit_class if @unit.unit_class %></li>
+          <li><strong>Excavation Status:</strong> <%= @unit.excavation_status.excavation_status if @unit.excavation_status %></li>
+          <li><strong>Occupation:</strong> <%= @unit.unit_occupation.occupation if @unit.unit_occupation %></li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <ul>
+        <li><%= pluralize @unit.strata.size, "stratum" %></li>
+        <li><%= pluralize @unit.features.size, "feature" %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- description -->
+  <div role="tabpanel" class="tab-pane" id="description">
+    <div class="row">
+      <div class="col-md-6">
+        <ul>
+          <li>Excavation Status: <%= @unit.excavation_status.excavation_status if @unit.excavation_status %></li>
+          <li>Occupation: <%= @unit.unit_occupation.occupation if @unit.unit_occupation %></li>
+          <li>Class: <%= @unit.unit_class.unit_class if @unit.unit_class %></li>
+          <li>Stories: <%= @unit.story.story if @unit.story %></li>
+          <li>Intact Roof: <%= @unit.intact_roof.intact_roof if @unit.intact_roof %></li>
+          <li>Type: <%= @unit.salmon_type_code %></li>
+          <li>Type Description: <%= @unit.type_description.type_description if @unit.type_description %></li>
+          <li>Inferred Function: <%= @unit.inferred_function.inferred_function if @unit.inferred_function %></li>
+          <li>Sector: <%= @unit.salmon_sector.salmon_sector if @unit.salmon_sector %></li>
+          <li>Other Description: <%= @unit.other_description if @unit.other_description %></li>
+          <li>Irregular Shape: <%= @unit.irregular_shape.irregular_shape if @unit.irregular_shape %></li>
+        </ul>
+      </div>
+      <!-- ROOM TYPE -->
+      <div class="col-md-6">
+        <a href="#unit_room_type" data-toggle="collapse" aria-expanded="false" aria-controls="unit_room_type">Room Type Info</a>
+        <div class="collapse" id="unit_room_type">
+          <div class="well">
+            <% type = @unit.room_type %>
+            <% if type %>
+              Room Type: <%= type.description %>
+              <ul>
+                <li>Room Type Period: <%= type.period %></li>
+                <li>Room Type Location: <%= type.location %></li>
+              </ul>
+            <% else %>
+              Room Type:  None Found in DB!
+            <% end %>
+          </div>
+        </div>
+        <ul>
+          <li>Length: <%= @unit.length %></li>
+          <li>Width: <%= @unit.width %></li>
+          <li>Floor Area: <%= @unit.floor_area %></li>
+          <li>Comments: <%= @unit.comments %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- images -->
+  <div role="tabpanel" class="tab-pane" id="images">
+    <div class="row">
+      <p>Images will go here</p>
+    </div>
+  </div>
+
+  <!-- strata and features -->
+  <div role="tabpanel" class="tab-pane" id="items">
+    <% @unit.strata.each_with_index do |stratum, i| %>
+      <h4>Strata: <%= link_to stratum.strat_all, admin_stratum_path(stratum.id) %></h4>
+      <ul>
+        <!-- STRATUM DESC -->
+        <li>Type: <%= stratum.strat_type.strat_type if stratum.strat_type %></li>
+        <li>Occupation: <%= stratum.strat_occupation.occupation if stratum.strat_occupation %></li>
+        <% if stratum.bone_tools.size > 0 %>
+          <li>
+            <!-- BONE TOOLS -->
+            <% stratum.bone_tools.each_with_index do |item, j| %>
+              <a href="#bonetools_<%= i %>_<%= j %>" data-toggle="collapse" aria-expanded="false" aria-controls="bonetools_<%= i %>_<%= j %>">Bone Tool More Info <%= item.field_specimen_no %></a>
+              <div class="collapse" id="bonetools_<%= i %>_<%= j %>">
+                <div class="well">
+                  <%# link_to "More info for #{item.field_specimen_no}", admin_bone_tool_path(item.id) %>
+                  <ul>
+                    <li>Specimen No: <%= item.field_specimen_no %></li>
+                    <li>Depth: <%= item.depth %></li>
+                    <li>Grid: <%= item.grid %></li>
+                    <li>Occupation: <%= item.bone_tool_occupation.occupation if item.bone_tool_occupation %></li>
+                    <li>Tool Type: <%= item.tool_type_code %></li>
+                    <li>Tool Type: <%= item.tool_type %></li>
+                    <li>Species Code: <%= item.species_code %></li>
+                  </ul>
+                </div>
+              </div>
+            <% end %>
+          </li>
+        <% else %>
+          <li>No Bone Tools</li>
+        <% end %>
+        <!-- SELECT ARTIFACTS -->
+        <% if stratum.select_artifacts.size > 0 %>
+          <li>Stuff about <%= pluralize(stratum.select_artifacts.size, "Select Artifact") %> might go here</li>
+        <% else %>
+          <li>No Select Artifacts</li>
+        <% end %>
+      </ul>
+      <!-- FEATURES -->
+      <h5>Features</h5>
+      <ul>
+        <% stratum.features.each_with_index do |feature, j| %>
+          <li>
+            <a href="#feature_<%= i %>_<%= j %>" data-toggle="collapse" aria-expanded="false" aria-controls="feature_<%= i %>_<%= j %>">Feature More Info <%= feature.feature_no %></a>
+            <div class="collapse" id="feature_<%= i %>_<%= j %>">
+              <div class="well">
+                <%= link_to feature.feature_no, admin_feature_path(feature.id) %>
+                <!-- FEATURE DESC -->
+                <ul>
+                  <li>Door Between Rooms: <%= feature.door_between_multiple_room.door_between_multiple_rooms if feature.door_between_multiple_room %></li>
+                  <li>Doorway Sealed: <%= feature.doorway_sealed.doorway_sealed if feature.doorway_sealed %>
+                  <li>Group: <%= feature.feature_group.feature_group if feature.feature_group %></li>
+                  <li>Occupation: <%= feature.feature_occupation.occupation if feature.feature_occupation %></li>
+                  <li>Residential Feature: <%= feature.residential_feature.residential_feature if feature.residential_feature %></li>
+                  <li>T-Shaped Door: <%= feature.t_shaped_door.t_shaped_door if feature.t_shaped_door %></li>
+                  <li>Type: <%= feature.feature_type.feature_type if feature.feature_type %></li>
+
+                  <!-- EGGSHELLS -->
+                  <% if feature.eggshells.size > 0 %>
+                    <li>Stuff about <%= pluralize(feature.eggshells.size, "Eggshell") %> might go here</li>
+                  <% else %>
+                    <li>No Eggshells</li>
+                  <% end %>
+
+                  <!-- ORNAMENTS -->
+                  <!-- TODO the relationship between ornament and features is defined multiple ways in the DB, verify which is correct -->
+                  <% if false %>
+                    <li>Stuff about ornaments <%# pluralize(feature.ornaments.size, "Ornament") %> might go here</li>
+                  <% else %>
+                    <li>No Ornaments right now because DB schema / models hooked up incorrectly</li>
+                  <% end %>
+
+                  <!-- PERISHABLES -->
+                  <% if feature.perishables.size > 0 %>
+                    <li>Stuff about <%= pluralize(feature.perishables.size, "Perishable") %> might go here</li>
+                  <% else %>
+                    <li>No Perishables</li>
+                  <% end %>
+
+                  <!-- SOILS -->
+                  <% if feature.soils.size > 0 %>
+                    <li>Stuff about <%= pluralize(feature.soils.size, "Soil") %> might go here</li>
+                  <% else %>
+                    <li>No Soils</li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+</div> <!-- /tab-content -->
