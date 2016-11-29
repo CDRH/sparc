@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116132226) do
+ActiveRecord::Schema.define(version: 20161118164141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -230,6 +230,13 @@ ActiveRecord::Schema.define(version: 20161116132226) do
     t.datetime "updated_at",                    null: false
   end
 
+  create_table "features_images", id: false, force: :cascade do |t|
+    t.integer "image_id"
+    t.integer "feature_id"
+    t.index ["feature_id"], name: "index_features_images_on_feature_id", using: :btree
+    t.index ["image_id"], name: "index_features_images_on_image_id", using: :btree
+  end
+
   create_table "features_lithic_inventories", id: false, force: :cascade do |t|
     t.integer "lithic_inventory_id"
     t.integer "feature_id"
@@ -256,6 +263,52 @@ ActiveRecord::Schema.define(version: 20161116132226) do
     t.integer "stratum_id"
     t.index ["feature_id"], name: "index_features_strata_on_feature_id", using: :btree
     t.index ["stratum_id"], name: "index_features_strata_on_stratum_id", using: :btree
+  end
+
+  create_table "image_subjects", force: :cascade do |t|
+    t.string   "subject"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "image_subjects_images", id: false, force: :cascade do |t|
+    t.integer  "image_id",          null: false
+    t.integer  "image_subject_id",  null: false
+    t.integer  "images_id"
+    t.integer  "image_subjects_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["image_subjects_id"], name: "index_image_subjects_images_on_image_subjects_id", using: :btree
+    t.index ["images_id"], name: "index_image_subjects_images_on_images_id", using: :btree
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string   "site"
+    t.string   "room"
+    t.string   "strat"
+    t.string   "asso_features"
+    t.string   "image_no"
+    t.string   "format"
+    t.string   "image_type"
+    t.string   "assocnoeg"
+    t.string   "box"
+    t.string   "gride"
+    t.string   "gridn"
+    t.string   "orientation"
+    t.string   "dep_beg"
+    t.string   "dep_end"
+    t.string   "date"
+    t.string   "creator"
+    t.string   "signi_art_no"
+    t.string   "other_no"
+    t.string   "human_remains"
+    t.string   "comments"
+    t.string   "storage_location"
+    t.string   "data_entry"
+    t.string   "image_quality"
+    t.string   "notes"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "inferred_functions", force: :cascade do |t|
@@ -572,6 +625,8 @@ ActiveRecord::Schema.define(version: 20161116132226) do
   add_foreign_key "features", "feature_types"
   add_foreign_key "features", "residential_features"
   add_foreign_key "features", "t_shaped_doors"
+  add_foreign_key "features_images", "features"
+  add_foreign_key "features_images", "images"
   add_foreign_key "features_lithic_inventories", "features"
   add_foreign_key "features_lithic_inventories", "lithic_inventories"
   add_foreign_key "features_perishables", "features"
@@ -580,6 +635,8 @@ ActiveRecord::Schema.define(version: 20161116132226) do
   add_foreign_key "features_soils", "soils"
   add_foreign_key "features_strata", "features"
   add_foreign_key "features_strata", "strata"
+  add_foreign_key "image_subjects_images", "image_subjects", column: "image_subjects_id"
+  add_foreign_key "image_subjects_images", "images", column: "images_id"
   add_foreign_key "lithic_inventories", "features"
   add_foreign_key "ornaments", "features"
   add_foreign_key "ornaments", "ornament_periods"

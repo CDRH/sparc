@@ -20,12 +20,13 @@ Rails.application.routes.draw do
 
 
   tables = [
-    :lithic_inventories,
     :bone_inventories,
-    :ceramic_inventories,
     :bone_tools,
+    :ceramic_inventories,
     :eggshells,
     :features,
+    :images,
+    :lithic_inventories,
     :ornaments,
     :perishables,
     :room_types,
@@ -37,6 +38,7 @@ Rails.application.routes.draw do
 
   tables.each do |table|
     namespace :admin do
+      get '/', to: 'units#index'
       resources table do
         # as_routes is deprecated but for some reason its replacement isn't working for me
         as_routes

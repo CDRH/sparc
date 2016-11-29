@@ -6,18 +6,19 @@
 ################
 
 files = {
+  bone_inventory: 'xls/BoneInventory2016-CCH.xlsx',
   bonetools: 'xls/Bone_tool_DB.xlsx',
+  ceramic_inventory: 'xls/CeramicInventory2016.xlsx',
   eggshells: 'xls/Eggshell_CCHedits.xls',
   features: 'xls/Features_CCHedits.xls',
+  images: 'xls/Images.xlsx',
+  lithic_inventory: 'xls/LithicInventory2016.xlsx',
   ornaments: 'xls/Ornament_DB_CCHedits.xlsx',
-  perishables: 'xls/Perishables_CCHedits.xls',
+  perishables: 'xls/Perishables-CCHedits-Nov13-2016.xls',
   select_artifacts: 'xls/Select_Artifacts.xls',
   soils: 'xls/Soil_Master.xlsx',
   strata: 'xls/Strata.xls',
   units: 'xls/Unit_Summary_CCHedits.xlsx',
-  lithic_inventory: 'xls/LithicInventory2016.xlsx',
-  bone_inventory: 'xls/BoneInventory2016-CCH.xlsx',
-  ceramic_inventory: 'xls/CeramicInventory2016.xlsx',
 }
 
 # will contain an array of hashes
@@ -38,16 +39,7 @@ def associate_strata_features unit, aStrata, aFeatures, related_item, source
   # pull out all of the strata from a single column
   strata = aStrata.split(/[;,]/).map { |s| s.strip }
   strata.each do |strat_no|
-    stratum = Stratum.where(strat_all: strat_no, unit_id: unit.id).first
-    # create if stratum does not yet exist for a specific unit
-    if stratum.nil?
-      report "stratum", "#{unit.unit_no}:#{strat_no}", source
-      stratum = Stratum.create(
-        strat_all: strat_no,
-        unit_id: unit.id,
-        comments: "imported from #{source}"
-      )
-    end
+    stratum = select_or_create_stratum(unit, strat_no, source)
     # pull out all of the features from a single column
     features = aFeatures.split(/[;,]/).map { |f| f.strip }
     features.each do |feat|
@@ -114,11 +106,28 @@ def report type, num, source
   end
 end
 
+def select_or_create_stratum unit, strat_no, source
+  stratum = Stratum.where(strat_all: strat_no, unit_id: unit.id).first
+  # create if stratum does not yet exist for a specific unit
+  if stratum.nil?
+    report "stratum", "#{unit.unit_no}:#{strat_no}", source
+    stratum = Stratum.create(
+      strat_all: strat_no,
+      unit_id: unit.id,
+      comments: "imported from #{source}"
+    )
+  end
+  return stratum
+end
+
 def select_or_create_unit unit, spreadsheet
   room = nil
+  # some units have trailing spaces or are in the spreadsheet
+  # as an integer field, which the roo gem preserves
+  unit = unit.to_s.strip
   if unit != 'no data' and !unit.include?(' ')
     if Unit.where(:unit_no => unit).size < 1
-      room = Unit.create(:unit_no => unit)
+      room = Unit.create(:unit_no => unit, :comments => "Created from #{spreadsheet}")
       report "unit", unit, spreadsheet
     else
       room = Unit.where(:unit_no => unit).first
@@ -129,7 +138,7 @@ def select_or_create_unit unit, spreadsheet
       puts "creating Unit Other for #{unit}"
     else
       room = Unit.where(:unit_no => 'Other').first
-      puts "using Unit Other for #{unit}"
+      puts "using Unit Other for #{unit} from #{spreadsheet}"
     end
   end
   return room
@@ -286,7 +295,7 @@ if Feature.all.size < 1
       end
       s = Stratum.where(strat_all: o, unit_id: r.id).first
       if s.nil?
-        s = Stratum.create(strat_all: o, unit_id: r.id, comments: 'imported none')
+        s = Stratum.create(strat_all: o, unit_id: r.id, comments: 'imported stratum none from features')
         report "stratum", "#{f.unit_no}:#{o}", "feature #{f.feature_no}"
       end
       f.strata << s unless f.strata.include?(s)
@@ -716,6 +725,69 @@ if CeramicInventory.all.size < 1
 
       ceramic_inventory_row = CeramicInventory.create(ceramic_inventory)
       associate_strata_features(unit, row[5], row[21], ceramic_inventory_row, "ceramic_inventory")
+    end
+  end
+end
+
+##########
+# Images #
+##########
+
+if Image.all.size < 1
+  puts 'Loading Images...'
+  s = Roo::Excelx.new(files[:images])
+
+  # NOTE:  I suspect that some of the single units are actually
+  # ranges, so this whole thing will need to be redone so that
+  # a given feature is attached to multiple strata attached to
+  # multiple units (great sadness)
+
+  s.sheet('data').each do |entry|
+    row = convert_empty_to_none(entry)
+
+    if row[0] != 'Site'
+      record = {}
+      record[:assocnoeg] = row[6]
+      record[:asso_features] = row[16]
+      record[:box] = row[7]
+      record[:comments] = row[24]
+      record[:creator] = row[15]
+      record[:data_entry] = row[26]
+      record[:date] = row[14]
+      record[:dep_beg] = row[11]
+      record[:dep_end] = row[12]
+      record[:format] = row[4]
+      record[:gride] = row[8]
+      record[:gridn] = row[9]
+      record[:human_remains] = row[19]
+      record[:image_no] = row[3]
+      record[:image_quality] = row[27]
+      record[:image_type] = row[5]
+      record[:notes] = row[28]
+      record[:orientation] = row[10]
+      record[:other_no] = row[18]
+      record[:room] = row[1]
+      record[:signi_art_no] = row[17]
+      record[:site] = row[0]
+      record[:storage_location] = row[25]
+      record[:strat] = row[2]
+
+      image = Image.create(record)
+
+      [row[21], row[22], row[23]].each do |subj|
+        if subj != "none"
+          subject = create_if_not_exists(ImageSubject, "subject", subj)
+          image.image_subjects << subject
+        end
+      end
+
+      # TODO remove this once the spreadsheet is revised with correct unit assignments
+      if row[1].to_s.include?("-")
+        report "unit", row[1], "images (actually NOT added because of the hyphen)"
+      else
+        unit = select_or_create_unit(row[1], "images")
+        associate_strata_features(unit, row[2], row[16], image, "images")
+      end
     end
   end
 end
