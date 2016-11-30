@@ -1,0 +1,26 @@
+<%= stylesheet_link_tag "images", media: "all", "data-turbolinks-track" => true %>
+
+<h1>Image Gallery</h1>
+
+<%= will_paginate @images %>
+
+<% @images.each_slice(4) do |img_set| %>
+  <div class="row">
+    <% img_set.each do |img| %>
+      <% remains = human_remains?(img.human_remains) %>
+      <div class="col-md-3 <%= 'human_remains' if remains %>">
+        <%= link_to image_path(img.image_no) do %>
+          <%= image_tag("placeholder_small") %>
+        <% end %>
+        <ul>
+          <li>Unit: <%= img.unit_list.join("; ") %></li>
+          <li>Number: <%= img.image_no %></li>
+          <li>Format: <%= img.format %></li>
+          <li>Comments: <%= img.comments %></li>
+          <li>Subjects: <%= img.subject_list.join("; ") %></li>
+          <li>Human Remains: <%= img.human_remains %></li>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+<% end %>
