@@ -8,6 +8,18 @@ class Image < ActiveRecord::Base
   def to_label
     image_no
   end
+
+  def subject_list
+    image_subjects.map {|s| s.subject }
+  end
+
+  def unit_list
+    units.map {|u| u.unit_no }
+  end
+
+
+  # active scaffold / devise
+
   def authorized_for_update?
     puts "---------#{current_user}"
     current_user != nil ? true : false
