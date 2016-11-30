@@ -1,6 +1,40 @@
-<h1>Zone <%= params["id"] %></h1>
+<h1>Zone <%= params["number"] %></h1>
 
-<% @units.each do |unit| %>
-  <h2><%= link_to unit.unit_no, unit_path(unit.unit_no) %></h2>
-  <%= render partial: "unit", locals: { unit: unit } %>
-<% end %>
+<p>View of the map(s) will go here with a highlighted zone</p>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <% @units.each_with_index do |unit, i| %>
+    <% active = i == 0 %>
+    <li role="presentation" <%= "class=active" if active %> >
+      <a href=<%= "#unit_#{i}" %> aria-controls=<%= "unit_#{i}" %> role="tab" data-toggle="tab"><%= unit.unit_no %></a>
+    </li>
+  <% end %>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <% @units.each_with_index do |unit, i| %>
+    <% active = i == 0 %>
+    <div role="tabpanel" class="tab-pane <%= "active" if active %>" id=<%= "unit_#{i}" %> >
+      <h2><%= link_to unit.unit_no, unit_path(unit.unit_no) %></h2>
+      <p>Probably an image gallery will go here?</p>
+      <p><%= link_to "More info", unit_path(unit.unit_no) %></p>
+      <div class="row">
+        <div class="col-md-6">
+          <ul>
+            <li><strong>Class:</strong> <%= unit.unit_class.unit_class if unit.unit_class %></li>
+            <li><strong>Excavation Status:</strong> <%= unit.excavation_status.excavation_status if unit.excavation_status %></li>
+            <li><strong>Occupation:</strong> <%= unit.unit_occupation.occupation if unit.unit_occupation %></li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul>
+          <li><%= pluralize unit.strata.size, "stratum" %></li>
+          <li><%= pluralize unit.features.size, "feature" %></li>
+          </ul>
+        </div>
+      </div>
+    </div> <!-- /tabpanel -->
+  <% end %>
+</div> <!-- /tab-content -->
