@@ -1,0 +1,47 @@
+<%= stylesheet_link_tag "images", media: "all", "data-turbolinks-track" => true %>
+
+<h1>Image Gallery</h1>
+
+<%= form_tag gallery_path, :method => "get",
+    id: "image-search-form", class: "form-inline", role: "form" do %>
+    <%= hidden_field_tag :sort, params[:sort] %>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= label_tag "image_no" %>
+          <%= text_field_tag "image_no", params["image_no"], placeholder: "00946", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= label_tag "comments" %>
+          <%= text_field_tag "comments", params["comments"], placeholder: "wall section", class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <%= link_to "Clear Search", gallery_path, :class => "btn btn-warning" %>
+        <%= submit_tag("Search", :class => "btn btn-primary") %>
+      </div>
+    </div>
+<% end %>
+
+<%= will_paginate @images %>
+
+<% @images.each_slice(4) do |img_set| %>
+  <div class="row">
+    <% img_set.each do |img| %>
+      <% remains = human_remains?(img.human_remains) %>
+      <div class="col-md-3 <%= 'human_remains' if remains %>">
+        <%= link_to image_path(img.image_no) do %>
+          <%= image_tag("placeholder_small") %>
+        <% end %>
+        <ul>
+          <li>Unit: <%= img.unit_list.join("; ") %></li>
+          <li>Number: <%= img.image_no %></li>
+          <li>Format: <%= img.format %></li>
+          <li>Comments: <%= img.comments %></li>
+          <li>Subjects: <%= img.subject_list.join("; ") %></li>
+          <li>Human Remains: <%= img.human_remains %></li>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+<% end %>
