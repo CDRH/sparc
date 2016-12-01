@@ -2,42 +2,51 @@
 
 <h1>Image <%= @image.image_no %></h1>
 
-<%= image_tag("placeholder_large") %>
+<div class="row">
 
-<h2>Image Information</h2>
-<ul>
-  <li>Units:
-    <% @image.unit_list.each do |u| %>
-      <%= link_to u, unit_path(u) %>
-    <% end %>
-  </li>
-  <li>Number: <%= @image.image_no %></li>
-  <li>Format: <%= @image.format %></li>
-  <li>Comments: <%= @image.comments %></li>
-  <li>Subjects: <%= @image.subject_list.join("; ") %></li>
-  <li <%= "class=human_remains" if !@image.displayable? %>>
-    Human Remains: <%= @image.human_remain %>
-  </li>
-  <!-- TODO Features or Strata here? -->
-  <li>Features: <%= @image.features.size %></li>
-</ul>
+  <div class="col-md-4">
+    <%= image_tag("placeholder_large") %>
+  </div>
 
-<h2>More Information</h2>
-<ul>
-  <li>Site: <%= @image.site %></li>
-  <li>Type: <%= @image.image_type %></li>
-  <li>Assocnoeg: <%= @image.assocnoeg %></li>
-  <li>Box: <%= @image.box %></li>
-  <li>Grid EW: <%= @image.gride %></li>
-  <li>Grid NS: <%= @image.gridn %></li>
-  <li>Orientation: <%= @image.orientation %></li>
-  <li>Depth Beg: <%= @image.dep_beg %></li>
-  <li>Depth End: <%= @image.dep_end %></li>
-  <li>Date: <%= @image.date %></li>
-  <li>Creator: <%= @image.creator %></li>
-  <li>Signi Art No: <%= @image.signi_art_no %></li>
-  <li>Storage Location: <%= @image.storage_location %></li>
-  <li>Data Entry: <%= @image.data_entry %></li>
-  <li>Quality: <%= @image.quality %></li>
-  <li>Notes: <%= @image.notes %></li>
-</ul>
+  <div class="col-md-4">
+    <h2>Image Information</h2>
+    <ul>
+      <li>Units:
+        <% @image.unit_list.each do |u| %>
+          <%= link_to u, unit_path(u) %>
+        <% end %>
+      </li>
+      <li>Number: <%= @image.image_no %></li>
+      <li>Format: <%= @image.format %></li>
+      <li>Comments: <%= @image.comments %></li>
+      <li>Subjects: <%= @image.subject_list.join("; ") %></li>
+      <li <%= "class=human_remains" if !@image.displayable? %>>
+        Human Remains: <%= @image.human_remain %>
+      </li>
+      <!-- TODO Features or Strata here? -->
+      <li>Features: <%= @image.features.size %></li>
+    </ul>
+  </div>
+
+  <div class="col-md-4">
+    <h2>More Information</h2>
+    <ul>
+      <li>Site: <%= @image.site %></li>
+      <li>Type: <%= @image.image_type %></li>
+      <li>Assocnoeg: <%= @image.assocnoeg %></li>
+      <li>Box: <%= @image.box %></li>
+      <li>Grid EW: <%= @image.gride %></li>
+      <li>Grid NS: <%= @image.gridn %></li>
+      <li>Orientation: <%= @image.orientation %></li>
+      <li>Depth Beg: <%= @image.dep_beg %></li>
+      <li>Depth End: <%= @image.dep_end %></li>
+      <li>Date: <%= @image.date %></li>
+      <li>Creator: <%= @image.creator %></li>
+      <li>Signi Art No: <%= @image.signi_art_no %></li>
+      <li>Storage Location: <%= @image.storage_location %></li>
+      <li>Data Entry: <%= @image.data_entry %></li>
+      <li>Quality: <%= @image.quality %></li>
+      <li>Notes: <%= @image.notes %></li>
+    </ul>
+  </div>
+</div>
