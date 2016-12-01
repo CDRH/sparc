@@ -169,46 +169,73 @@ end
 #########
 # Units #
 #########
+def seed_units files
+  puts "Loading Room Types and Units..."
 
-if Unit.all.size < 1
   s = Roo::Excelx.new(files[:units])
-  s.sheet('room typology').each do |row|
-    if row[0] != 'Type No.'
-      id = row[0].to_i
-      room_type = RoomType.where(id: id)
-      if room_type.size == 0
-        room_type = RoomType.create(
-          id: id,
-          description: row[1],
-          location: row[3],
-          period: row[2]
-        )
-      end
-    end
+
+  room_type_columns = {
+    # Ordered as seen in spreadsheet
+    # Comment columns not used or saved in database
+    id: "Type No.",
+    description: "Description",
+    period: "Period",
+    location: "Location",
+  }
+
+  s.sheet('room typology').each(room_type_columns) do |row|
+    # Skip header row
+    next if row[:id] == "Type No."
+
+    room_type = convert_empty_hash_values_to_none(row)
+
+    room_type[:id] = room_type[:id].to_i
+    next if RoomType.where(id: room_type[:id]).size > 0
+
+    RoomType.create(room_type)
   end
 
-  s.sheet('data').each do |row|
-    if row[0] != 'Unit No.'
-      unit = select_or_create_unit row[0], "units", false
-      u = {}
-      u[:comments] = row[15]
-      u[:excavation_status] = create_if_not_exists(ExcavationStatus, :excavation_status, row[1])
-      u[:floor_area] = row[14]
-      u[:inferred_function] = create_if_not_exists(InferredFunction, :inferred_function, row[8])
-      u[:intact_roof] = create_if_not_exists(IntactRoof, :intact_roof, row[5])
-      u[:irregular_shape] = create_if_not_exists(IrregularShape, :irregular_shape, row[11])
-      u[:length] = row[12]
-      u[:other_description] = row[10]
-      u[:room_type_id] = row[6] != 'n/a' ? row[6].to_i : nil
-      u[:salmon_sector] = create_if_not_exists(SalmonSector, :salmon_sector, row[9])
-      u[:story] = create_if_not_exists(Story, :story, row[4])
-      u[:type_description] = create_if_not_exists(TypeDescription, :type_description, row[7])
-      u[:unit_class] = create_if_not_exists(UnitClass, :unit_class, row[3])
-      u[:unit_occupation] = create_if_not_exists(UnitOccupation, :occupation, row[2])
-      u[:width] = row[13]
-      unit.update(u)
-    end
 
+  unit_columns = {
+    # Ordered as seen in spreadsheet
+    # Comment columns not used or saved in database
+    unit_no: "Unit No.",
+    excavation_status: "Excavation Status",
+    unit_occupation: "Occupation",
+    unit_class: "Class",
+    story: "Stories",
+    intact_roof: "Intact Roof",
+    salmon_type_code: "Salmon Type Code",
+    type_description: "Type Description",
+    inferred_function: "Inferred Function",
+    salmon_sector: "Salmon Sector",
+    other_description: "Other Descrp",
+    irregular_shape: "Irregular Shape",
+    length: "Length",
+    width: "Width",
+    floor_area: "Floor Area",
+    comments: "Comments",
+  }
+
+  s.sheet('data').each(unit_columns) do |row|
+    # Skip header row
+    next if row[:unit_no] == "Unit No."
+
+    unit = convert_empty_hash_values_to_none(row)
+
+    unit[:excavation_status] = create_if_not_exists(ExcavationStatus, :excavation_status, unit[:excavation_status])
+    unit[:inferred_function] = create_if_not_exists(InferredFunction, :inferred_function, unit[:inferred_function])
+    unit[:intact_roof] = create_if_not_exists(IntactRoof, :intact_roof, unit[:intact_roof])
+    unit[:irregular_shape] = create_if_not_exists(IrregularShape, :irregular_shape, unit[:irregular_shape])
+    unit[:room_type_id] = unit[:salmon_type_code] != "n/a" ? unit[:salmon_type_code].to_i : nil
+    unit[:salmon_sector] = create_if_not_exists(SalmonSector, :salmon_sector, unit[:salmon_sector])
+    unit[:story] = create_if_not_exists(Story, :story, unit[:story])
+    unit[:type_description] = create_if_not_exists(TypeDescription, :type_description, unit[:type_description])
+    unit[:unit_class] = create_if_not_exists(UnitClass, :unit_class, unit[:unit_class])
+    unit[:unit_occupation] = create_if_not_exists(UnitOccupation, :occupation, unit[:unit_occupation])
+
+    u = select_or_create_unit unit[:unit_no], "units", false
+    u.update(unit)
   end
 end
 
@@ -407,6 +434,7 @@ end
 #########
 def seed_soils files
   puts 'Loading Soils...'
+
   s = Roo::Excelx.new(files[:soils])
 
   columns = {
@@ -827,6 +855,7 @@ end
 ###################
 # Seeding Control #
 ###################
+seed_units(files) if Unit.all.size < 1
 seed_soils(files) if Soil.all.size < 1
 
 File.open("reports/please_check_for_accuracy.txt", "w") do |file|
