@@ -752,24 +752,17 @@ if Image.all.size < 1
 
     if row[0] != 'Site'
       record = {}
-      record[:assocnoeg] = row[6]
       record[:asso_features] = row[16]
-      record[:box] = row[7]
       record[:comments] = row[24]
-      record[:creator] = row[15]
       record[:data_entry] = row[26]
       record[:date] = row[14]
       record[:dep_beg] = row[11]
       record[:dep_end] = row[12]
-      record[:format] = row[4]
       record[:gride] = row[8]
       record[:gridn] = row[9]
-      record[:human_remains] = row[19]
       record[:image_no] = row[3]
-      record[:image_quality] = row[27]
       record[:image_type] = row[5]
       record[:notes] = row[28]
-      record[:orientation] = row[10]
       record[:other_no] = row[18]
       record[:room] = row[1]
       record[:signi_art_no] = row[17]
@@ -778,6 +771,35 @@ if Image.all.size < 1
       record[:strat] = row[2]
 
       image = Image.create(record)
+
+      # create / select and assign related image tables
+      belongs_to = {
+        ImageAssocnoeg => row[6],
+        ImageBox => row[7],
+        ImageCreator => row[15],
+        ImageFormat => row[4],
+        ImageOrientation => row[10],
+        ImageQuality => row[27]
+      }
+      belongs_to.each do |table, data|
+        record = create_if_not_exists(table, "name", data)
+        relation = table.to_s.underscore
+        # equivalent to `image.image_box = 'P1281'`
+        image.send("#{relation}=", record)
+      end
+
+      # create / select human remains and assign to image
+      hr_data = row[19].nil? ? "no data" : row[19].strip
+      hr_record = ImageHumanRemain.find_by(:name => hr_data)
+      if !hr_record
+        # default to marking images as not displayable unless
+        # "N" marked as NOT human remains
+        displayable = hr_data == "N" ? true : false
+        hr_record = ImageHumanRemain.create(:name => hr_data, :displayable => displayable)
+      end
+      image.image_human_remain = hr_record
+
+      image.save
 
       [row[21], row[22], row[23]].each do |subj|
         if subj != "none"

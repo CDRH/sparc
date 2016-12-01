@@ -4,6 +4,13 @@ class Image < ActiveRecord::Base
   has_many :units, :through => :strata
 
   has_and_belongs_to_many :image_subjects
+  belongs_to :image_assocnoeg
+  belongs_to :image_box
+  belongs_to :image_creator
+  belongs_to :image_format
+  belongs_to :image_human_remain
+  belongs_to :image_orientation
+  belongs_to :image_quality
 
   def to_label
     image_no
