@@ -10,9 +10,12 @@ class Feature < ActiveRecord::Base
   has_and_belongs_to_many :strata
   has_many :units, :through => :strata
 
+  has_many :ornaments
+  has_and_belongs_to_many :bone_inventories
+  has_and_belongs_to_many :ceramic_inventories
   has_and_belongs_to_many :eggshells
   has_and_belongs_to_many :images
-  has_and_belongs_to_many :ornaments
+  has_and_belongs_to_many :lithic_inventories
   has_and_belongs_to_many :perishables
   has_and_belongs_to_many :soils
 
