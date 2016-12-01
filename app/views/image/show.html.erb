@@ -15,8 +15,8 @@
   <li>Format: <%= @image.format %></li>
   <li>Comments: <%= @image.comments %></li>
   <li>Subjects: <%= @image.subject_list.join("; ") %></li>
-  <li <%= "class=human_remains" if human_remains?(@image.human_remains) %>>
-    Human Remains: <%= @image.human_remains %>
+  <li <%= "class=human_remains" if !@image.displayable? %>>
+    Human Remains: <%= @image.human_remain %>
   </li>
   <!-- TODO Features or Strata here? -->
   <li>Features: <%= @image.features.size %></li>
@@ -38,6 +38,6 @@
   <li>Signi Art No: <%= @image.signi_art_no %></li>
   <li>Storage Location: <%= @image.storage_location %></li>
   <li>Data Entry: <%= @image.data_entry %></li>
-  <li>Quality: <%= @image.image_quality %></li>
+  <li>Quality: <%= @image.quality %></li>
   <li>Notes: <%= @image.notes %></li>
 </ul>

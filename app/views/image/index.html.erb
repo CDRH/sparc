@@ -28,8 +28,7 @@
 <% @images.each_slice(4) do |img_set| %>
   <div class="row">
     <% img_set.each do |img| %>
-      <% remains = human_remains?(img.human_remains) %>
-      <div class="col-md-3 <%= 'human_remains' if remains %>">
+      <div class="col-md-3 <%= 'human_remains' if !img.displayable? %>">
         <%= link_to image_path(img.image_no) do %>
           <%= image_tag("placeholder_small") %>
         <% end %>
@@ -39,7 +38,7 @@
           <li>Format: <%= img.format %></li>
           <li>Comments: <%= img.comments %></li>
           <li>Subjects: <%= img.subject_list.join("; ") %></li>
-          <li>Human Remains: <%= img.human_remains %></li>
+          <li>Human Remains: <%= img.human_remain %></li>
         </ul>
       </div>
     <% end %>

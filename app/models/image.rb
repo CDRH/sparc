@@ -16,6 +16,38 @@ class Image < ActiveRecord::Base
     image_no
   end
 
+  def assocnoeg
+    image_assocnoeg.name
+  end
+
+  def box
+    image_box.name
+  end
+
+  def creator
+    image_creator.name
+  end
+
+  def displayable?
+    image_human_remain.displayable
+  end
+
+  def format
+    image_format.name
+  end
+
+  def human_remain
+    image_human_remain.name
+  end
+
+  def orientation
+    image_orientation.name
+  end
+
+  def quality
+    image_quality.name
+  end
+
   def subject_list
     image_subjects.map {|s| s.subject }
   end
