@@ -778,6 +778,7 @@ if Image.all.size < 1
         ImageBox => row[7],
         ImageCreator => row[15],
         ImageFormat => row[4],
+        ImageHumanRemain => row[19],
         ImageOrientation => row[10],
         ImageQuality => row[27]
       }
@@ -787,17 +788,6 @@ if Image.all.size < 1
         # equivalent to `image.image_box = 'P1281'`
         image.send("#{relation}=", record)
       end
-
-      # create / select human remains and assign to image
-      hr_data = row[19].nil? ? "no data" : row[19].strip
-      hr_record = ImageHumanRemain.find_by(:name => hr_data)
-      if !hr_record
-        # default to marking images as not displayable unless
-        # "N" marked as NOT human remains
-        displayable = hr_data == "N" ? true : false
-        hr_record = ImageHumanRemain.create(:name => hr_data, :displayable => displayable)
-      end
-      image.image_human_remain = hr_record
 
       image.save
 
