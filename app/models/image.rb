@@ -17,35 +17,35 @@ class Image < ActiveRecord::Base
   end
 
   def assocnoeg
-    image_assocnoeg.name
+    image_assocnoeg.name if image_assocnoeg
   end
 
   def box
-    image_box.name
+    image_box.name if image_box
   end
 
   def creator
-    image_creator.name
+    image_creator.name if image_creator
   end
 
   def displayable?
-    image_human_remain.displayable
+    image_human_remain.displayable if image_human_remain
   end
 
   def format
-    image_format.name
+    image_format.name if image_format
   end
 
   def human_remain
-    image_human_remain.name
+    image_human_remain.name if image_human_remain
   end
 
   def orientation
-    image_orientation.name
+    image_orientation.name if image_orientation
   end
 
   def quality
-    image_quality.name
+    image_quality.name if image_quality
   end
 
   def subject_list
