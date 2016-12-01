@@ -3,7 +3,8 @@ require 'test_helper'
 class ArtTypeTest < ActiveSupport::TestCase
 
   def setup
-    @item = ArtType.first
+    @item = ArtType.create(:art_type => "test")
+    @item.soils << Soil.first
   end
 
   test "associations" do

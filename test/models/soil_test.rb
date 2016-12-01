@@ -2,7 +2,8 @@ require 'test_helper'
 
 class SoilTest < ActiveSupport::TestCase
   def setup
-    @item = Soil.first
+    @item = Soil.create(:art_type => ArtType.first)
+    @item.features << Feature.first
   end
 
   test "associations" do
