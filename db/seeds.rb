@@ -78,6 +78,13 @@ def convert_empty_to_none entry
   end
 end
 
+# Rename this after all sheets have been refactored
+def convert_empty_hash_values_to_none entry_hash
+  return entry_hash.each do |key, value|
+    entry_hash[key] = "none" if value.blank?
+  end
+end
+
 def get_feature_number feat_str, source
   feature = nil
   if feat_str == "no data" || feat_str == "none"
@@ -398,45 +405,53 @@ end
 #########
 # Soils #
 #########
-
-if Soil.all.size < 1
+def seed_soils files
   puts 'Loading Soils...'
   s = Roo::Excelx.new(files[:soils])
 
-  s.sheet('Sheet1').each do |entry|
-    row = convert_empty_to_none(entry)
+  columns = {
+    # Ordered as seen in spreadsheet
+    # Comment columns not used or saved in database
+    site: "SITE",
+    room: "ROOM",
+    strat: "STRATUM",
+    feature_key: "FEATURE",
+    fs: "FS",
+    box: "BOX",
+    period: "PERIOD",
+    soil_count: "COUNT",
+    gridew: "GRIDEW",
+    gridns: "GRIDNS",
+    quad: "QUAD",
+    exactprov: "EXACTPROV",
+    depthbeg: "DEPTHBEG",
+    depthend: "DEPTHEND",
+    otherstrat: "OTHSTRATS",
+    date: "DATE",
+    excavator: "EXCAVATOR",
+    arttype: "ARTTYPE",
+    sample_no: "SAMPLE NO",
+    comments: "COMMENTS",
+    data_entry: "DATA ENTRY",
+    location: "LOCATION",
+  }
 
-    if row[0] != 'SITE'
-      soil = {}
-      soil[:box] = row[5]
-      soil[:comments] = row[19]
-      soil[:data_entry] = row[20]
-      soil[:date] = row[15]
-      soil[:depthbeg] = row[12]
-      soil[:depthend] = row[13]
-      soil[:exactprov] = row[11]
-      soil[:excavator] = row[16]
-      soil[:feature_key] = row[3]
-      soil[:fs] = row[4]
-      soil[:gridew] = row[8]
-      soil[:gridns] = row[9]
-      soil[:location] = row[21]
-      soil[:otherstrat] = row[14]
-      soil[:period] = row[6]
-      soil[:quad] = row[10]
-      soil[:sample_no] = row[18]
-      soil[:site] = row[0]
-      soil[:soil_count] = row[7]
-      soil[:strat] = row[2]
+  s.sheet('Sheet1').each(columns) do |row_hash|
+    soil = convert_empty_hash_values_to_none(row_hash)
 
-      soil[:art_type_id] = create_if_not_exists(ArtType, :art_type, row[17]).id
+    # Skip header row
+    next if soil[:site] == "SITE"
 
-      unit = select_or_create_unit(row[1], 'soils')
-      soil[:room] = unit.unit_no
+    soil[:art_type_id] = create_if_not_exists(ArtType, :art_type, soil[:arttype]).id
 
-      soil_row = Soil.create(soil)
-      associate_strata_features(unit, row[2], row[3], soil_row, "soil")
-    end
+    unit = select_or_create_unit(:room, 'soils')
+    soil[:room] = unit.unit_no
+
+    # Delete columns used but not saved in database
+    soil.delete :arttype
+
+    soil_record = Soil.create(soil)
+    associate_strata_features(unit, soil[:room], soil[:strat], soil_record, "soil")
   end
 end
 
@@ -809,6 +824,10 @@ if Image.all.size < 1
   end
 end
 
+###################
+# Seeding Control #
+###################
+seed_soils(files) if Soil.all.size < 1
 
 File.open("reports/please_check_for_accuracy.txt", "w") do |file|
   file.write("Please review the following and verify that units, strata, etc, were added correctly\n")
