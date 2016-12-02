@@ -13,6 +13,7 @@ class Unit < ActiveRecord::Base
 
   has_many :strata
   has_many :features, :through => :strata
+  has_many :images, :through => :features
 
   validates_uniqueness_of :unit_no
 

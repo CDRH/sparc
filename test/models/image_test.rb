@@ -21,6 +21,8 @@ class ImageTest < ActiveSupport::TestCase
     assert_not_empty @item.features
     assert_not_empty @item.strata
     assert_not_empty @item.units
+    assert_not_empty @item.unit_occupations
+    assert_not_empty @item.zones
     assert_not_empty @item.image_subjects
 
     assert_not_nil @item.image_assocnoeg
