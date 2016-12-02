@@ -17,6 +17,10 @@
         <%= label_tag "creator" %>
         <%= select_tag "creator", options_from_collection_for_select(ImageCreator.all, "id", "name", params["creator"]), :include_blank => true, class: "form-control" %>
       </div>
+      <div class="form-group">
+        <%= label_tag "occupation" %>
+        <%= select_tag "occupation", options_from_collection_for_select(@occupations, "id", "occupation", params["occupation"]), :include_blank => true, class: "form-control" %>
+      </div>
     </div>
 
     <!-- common options -->
@@ -27,7 +31,11 @@
       </div>
       <div class="form-group">
         <%= label_tag "unit" %>
-        <%= select_tag "unit", options_from_collection_for_select(Unit.all, "id", "unit_no", params["unit"]), :include_blank => true, class: "form-control" %>
+        <%= select_tag "unit", options_from_collection_for_select(@units, "id", "unit_no", params["unit"]), :include_blank => true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= label_tag "zone" %>
+        <%= select_tag "zone", options_from_collection_for_select(@zones, "id", "number", params["zone"]), :include_blank => true, class: "form-control" %>
       </div>
     </div>
 
@@ -109,6 +117,7 @@
         <% end %>
         <ul>
           <li>Unit: <%= img.unit_list.join("; ") %></li>
+          <li>Occupations: <%= img.occupation_list.join("; ") %></li>
           <li>Number: <%= img.image_no %></li>
           <li>Format: <%= img.format %></li>
           <li>Comments: <%= img.comments %></li>
