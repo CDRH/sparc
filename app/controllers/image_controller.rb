@@ -23,6 +23,8 @@ class ImageController < ApplicationController
     images = add_to_query(images, :units, params["unit"], :units, false)
     images = add_to_query(images, :zones, params["zone"], :zones, false)
 
+    @result_num = images.size
+
     @images = images.paginate(:page => params[:page], :per_page => 20)
     @occupations = UnitOccupation.distinct.joins(:images).order("occupation")
     @units = Unit.distinct.joins(:images).order("unit_no")
