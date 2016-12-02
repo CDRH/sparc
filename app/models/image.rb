@@ -62,6 +62,10 @@ class Image < ActiveRecord::Base
     units.map {|u| u.unit_no }
   end
 
+  def zone_list
+    zones.map {|z| z.number }
+  end
+
 
   # active scaffold / devise
 
