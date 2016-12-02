@@ -65,7 +65,7 @@
   </div> <!-- /row -->
 
   <div class="row">
-    <div class="collapse" id="collapseExample">
+    <div class="collapse" id="collapseMore">
       <div class="well">
         <div class="row">
           <div class="col-md-3">
@@ -97,8 +97,8 @@
 
   <div class="row">
     <a class="btn btn-info" role="button" data-toggle="collapse"
-      href="#collapseExample" aria-expanded="false"
-      aria-controls="collapseExample">
+      href="#collapseMore" aria-expanded="false"
+      aria-controls="collapseMore">
       More Query Options
     </a>
     <%= link_to "Clear Search", gallery_path, :class => "btn btn-warning" %>
@@ -106,6 +106,7 @@
   </div>
 <% end %>
 
+<p>Found <%= pluralize(@result_num, "image") %></p>
 <%= will_paginate @images %>
 
 <% @images.each_slice(4) do |img_set| %>
