@@ -65,7 +65,7 @@
             <% end %>
             <div class="form-group">
               <%= label_tag "room_type" %>
-              <%= select_tag("room_type", options_for_select(room_types, params["room_type"]), class: "form-control") %>
+              <%= select_tag("room_type", options_for_select(room_types, params["room_type"]), :include_blank => true, class: "form-control") %>
             </div>
             <%= render :partial => "dropdown",
               :locals => { :column => "type_description", :classname => TypeDescription, :alt_label => nil } %>
@@ -105,9 +105,9 @@
         <div class="col-md-2">
           <h2><%= unit.unit_no %></h2>
           <ul>
-            <li>Occupation: <%= unit.unit_occupation.occupation %>
-            <li>Type: <%= unit.type_description.type_description %>
-            <li>Inferred Function: <%= unit.inferred_function.inferred_function %></li>
+            <li>Occupation: <%= unit.unit_occupation.occupation if unit.unit_occupation %>
+            <li>Type: <%= unit.type_description.type_description if unit.type_description %>
+            <li>Inferred Function: <%= unit.inferred_function.inferred_function if unit.inferred_function %></li>
             <!-- <li>Number of Images: <%# unit.images.size %></li> -->
           </ul>
         </div>
