@@ -14,6 +14,20 @@ class Unit < ActiveRecord::Base
   has_many :strata
   has_many :features, :through => :strata
 
+  # strata objects
+  has_many :bone_tools, :through => :strata
+  has_many :select_artifacts, :through => :strata
+
+  # feature objects
+  has_many :bone_inventories, :through => :features
+  has_many :ceramic_inventories, :through => :features
+  has_many :eggshells, :through => :features
+  has_many :images, :through => :features
+  has_many :lithic_inventories, :through => :features
+  has_many :ornaments, :through => :features
+  has_many :perishables, :through => :features
+  has_many :soils, :through => :features
+
   validates_uniqueness_of :unit_no
 
   def to_label

@@ -11,6 +11,8 @@ class SearchController < ApplicationController
     units = units.where("unit_no LIKE ?", "%#{params['unit_no']}%") if !params["unit_no"].blank?
     units = units.where("other_description LIKE ?", "%#{params['other_description']}%") if !params["other_description"].blank?
     units = units.where("comments LIKE ?", "%#{params['comments']}%") if !params["comments"].blank?
+    units = units.joins(:strata).where("strata.strat_all LIKE ?", "%#{params['strata']}%") if !params["strata"].blank?
+
 
     units = add_to_query(units, :excavation_statuses, params["excavation_status"], :excavation_status)
     units = add_to_query(units, :inferred_functions, params["inferred_function"], :inferred_function, false)
