@@ -71,6 +71,14 @@
               :locals => { :column => "type_description", :classname => TypeDescription, :alt_label => nil } %>
           </div>
 
+          <!-- ? -->
+          <div class="col-md-3">
+            <div class="form-group">
+              <%= label_tag "strata" %>
+              <%= text_field_tag "strata", params["strata"], placeholder: "B-1-2", class: "form-control" %>
+            </div>
+          </div>
+
           <!-- comments -->
           <div class="col-md-3">
             <div class="form-group">
