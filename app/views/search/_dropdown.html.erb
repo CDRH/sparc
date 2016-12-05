@@ -1,0 +1,19 @@
+<div class="form-group">
+  <%# label %>
+  <% if alt_label %>
+    <%= label_tag column, alt_label %>
+  <% else %>
+    <%= label_tag column %>
+  <% end %>
+
+  <%# dropdown %>
+  <%= select_tag column,
+      options_from_collection_for_select(
+        classname.all,
+        "id",
+        column,
+        params[column]),
+      :include_blank => true,
+      class: "form-control"
+  %>
+</div>

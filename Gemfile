@@ -58,3 +58,5 @@ gem 'kaminari'
 gem 'activerecord-session_store'
 gem 'roo'
 gem 'roo-xls'
+
+gem 'will_paginate'
