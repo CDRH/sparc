@@ -96,9 +96,35 @@
   </div>
 
   <div class="row">
+    <div class="collapse" id="collapseItems">
+      <div class="well">
+        <h4>Return only units with the following items (query may take some time, please be patient):</h4>
+        <div class="form-group">
+          <ul id="unit_search_list">
+            <%= render :partial => "radio_button", :locals => { :item => "bone_tools", :label => "Bone Tools" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "bone_inventories", :label => "Bone Inventories" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "ceramic_inventories", :label => "Ceramic Inventories" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "eggshells", :label => "Eggshells" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "images", :label => "Images" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "lithic_inventories", :label => "Lithic Inventories" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "ornaments", :label => "Ornaments" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "perishables", :label => "Perishables" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "select_artifacts", :label => "Select Artifacts" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "soils", :label => "Soils" } %>
+          </ul>
+        </div>
+      </div> <!-- /well -->
+    </div> <!-- /collapse -->
+  </div> <!-- /row -->
+
+  <div class="row">
     <a class="btn btn-info" role="button" data-toggle="collapse"
       href="#collapseMore" aria-expanded="false" aria-controls="collapseMore">
       Expand More Search Options
+    </a>
+    <a class="btn btn-info" role="button" data-toggle="collapse"
+      href="#collapseItems" aria-expanded="false" aria-controls="collapseItems">
+      Limit by Relationship to Items
     </a>
     <%= link_to "Clear Search", search_path, :class => "btn btn-warning" %>
     <%= submit_tag "Search", :class => "btn btn-primary" %>
@@ -111,7 +137,7 @@
     <div class="row">
       <% unit_set.each do |unit| %>
         <div class="col-md-2">
-          <h2><%= unit.unit_no %></h2>
+          <h2><%= link_to unit.unit_no, unit_path(unit.unit_no) %></h2>
           <ul>
             <li>Occupation: <%= unit.unit_occupation.occupation if unit.unit_occupation %>
             <li>Type: <%= unit.type_description.type_description if unit.type_description %>
