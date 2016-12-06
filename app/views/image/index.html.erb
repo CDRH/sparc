@@ -114,8 +114,7 @@
     <% img_set.each do |img| %>
       <div class="col-md-3 <%= 'human_remains' if !img.displayable? %>">
         <%= link_to image_path(img.image_no) do %>
-          <%= image_tag("placeholder_small") %>
-          <%# image_tag("field/small/#{img.image_no}") %>
+          <%= image_tag("thumb/#{img.image_no}") %>
         <% end %>
         <ul>
           <li>Units: <%= img.unit_list.join("; ") %></li>
@@ -130,3 +129,6 @@
     <% end %>
   </div>
 <% end %>
+
+<%= will_paginate @images %>
+

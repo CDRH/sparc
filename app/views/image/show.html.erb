@@ -4,12 +4,11 @@
 
 <div class="row">
 
-  <div class="col-md-4">
-    <%= image_tag("placeholder_large") %>
-    <%# image_tag("field/large/#{@image.image_no}") %>
+  <div class="col-md-6">
+    <%= image_tag("large/#{@image.image_no}", class: "image_large") %>
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-3">
     <h2>Image Information</h2>
     <ul>
       <li>Units:
@@ -30,7 +29,7 @@
     </ul>
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-3">
     <h2>More Information</h2>
     <ul>
       <li>Site: <%= @image.site %></li>
