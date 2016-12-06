@@ -21,7 +21,7 @@ class ImageController < ApplicationController
     images = add_to_query(images, :image_subjects, params["subject"], :image_subjects, false)
     images = add_to_query(images, :unit_occupations, params["occupation"], :unit_occupations, true)
     images = add_to_query(images, :units, params["unit"], :units, false)
-    images = add_to_query(images, :zones, params["zone"], :zones, false)
+    images = add_to_query(images, :zones, params["zone"], :zones, true)
 
     @result_num = images.size
 
