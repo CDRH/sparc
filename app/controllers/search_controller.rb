@@ -13,7 +13,7 @@ class SearchController < ApplicationController
     units = units.where("comments LIKE ?", "%#{params['comments']}%") if !params["comments"].blank?
     units = units.joins(:strata).where("strata.strat_all LIKE ?", "%#{params['strata']}%") if !params["strata"].blank?
 
-
+    # basic joins
     units = add_to_query(units, :excavation_statuses, params["excavation_status"], :excavation_status)
     units = add_to_query(units, :inferred_functions, params["inferred_function"], :inferred_function, false)
     units = add_to_query(units, :intact_roofs, params["intact_roof"], :intact_roof)
@@ -25,6 +25,9 @@ class SearchController < ApplicationController
     units = add_to_query(units, :unit_classes, params["unit_class"], :unit_class)
     units = add_to_query(units, :unit_occupations, params["occupation"], :unit_occupation, false)
     units = add_to_query(units, :zones, params["zone"], :zone)
+
+    # left joins where not null
+    units = units.includes(params["items"]).where.not(params["items"] => { id: nil }) if !params["items"].blank?
 
     @result_num = units.size
     @units = units.paginate(:page => params[:page], :per_page => 20)

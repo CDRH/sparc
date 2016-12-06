@@ -29,3 +29,11 @@ textarea {
   font-weight: normal;
   line-height: 16px;
 }
+
+#unit_search_list {
+  list-style-type: none;
+
+  column-count: 4;
+  -moz-column-count: 4; /* Firefox */
+  -webkit-column-count: 4; /* Chrome, Safari, Opera */
+}
