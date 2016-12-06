@@ -17,7 +17,7 @@ namespace :images do
         missing << "large/#{image}"
       end
     end
-    puts "Found #{missing.length} missing images, please see images_missing.txt for information"
+    puts "Found #{missing.length} missing images, please see #{LOG_LOC}/images_missing.txt for information"
     File.open("#{LOG_LOC}/images_missing.txt", "w") do |file|
       file.write(missing.join("\n"))
     end
@@ -31,7 +31,7 @@ namespace :images do
       id = File.basename(image, ".*")
       extra << id if Image.find_by(image_no: id).nil?
     end
-    puts "Found #{extra.length} extra images, please see images_extra.txt for information."
+    puts "Found #{extra.length} extra images, please see #{LOG_LOC}/images_extra.txt for information."
     File.open("#{LOG_LOC}/images_extra.txt", "w") do |file|
       file.write(extra.uniq.join("\n"))
     end
@@ -39,3 +39,4 @@ namespace :images do
   end
 
 end
+
