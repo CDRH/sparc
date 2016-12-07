@@ -39,8 +39,8 @@ class ImageController < ApplicationController
   private
 
   # essentially creating: images.where(:where_rel => { :id => param }).joins(:relationship)
-  # but avoiding code duplication, also only will join if requested
-  # and otherwise assumes that the field has been joined or included previously
+  # assumes that the tables need to be joined, but can optionally omit join if this table
+  # has previously been loaded via includes
   def add_to_query query_obj, where_rel, param, relationship, joins=true
     if !param.blank?
       query_obj = query_obj.where(where_rel => { :id => param })
