@@ -96,11 +96,11 @@
   </div> <!-- /row -->
 
   <div class="row">
-    <a class="btn btn-info" role="button" data-toggle="collapse"
-      href="#collapseMore" aria-expanded="false"
-      aria-controls="collapseMore">
+    <button class="btn btn-info" type="button"
+      data-toggle="collapse" data-target="#collapseMore"
+      aria-expanded="false" aria-controls="collapseMore">
       More Query Options
-    </a>
+    </button>
     <%= render partial: "partials/clear_search", locals: { path: gallery_path } %>
     <%= submit_tag("Search", :class => "btn btn-primary") %>
   </div>
