@@ -101,7 +101,7 @@
       aria-controls="collapseMore">
       More Query Options
     </a>
-    <%= link_to "Clear Search", gallery_path, :class => "btn btn-warning" %>
+    <%= render partial: "partials/clear_search", locals: { path: gallery_path } %>
     <%= submit_tag("Search", :class => "btn btn-primary") %>
   </div>
 <% end %>
