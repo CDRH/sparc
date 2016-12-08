@@ -1,5 +1,5 @@
 IMG_LOC = "#{Rails.root}/app/assets/images/field"
-LOG_LOC = "#{Rails.root}"
+LOG_LOC = "#{Rails.root}/reports"
 
 namespace :images do
 
