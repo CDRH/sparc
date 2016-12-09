@@ -14,40 +14,40 @@
         <%= text_field_tag "image_no", params["image_no"], placeholder: "00946", class: "form-control" %>
       </div>
       <div class="form-group">
-        <%= label_tag "creator" %>
-        <%= select_tag "creator", options_from_collection_for_select(ImageCreator.all, "id", "name", params["creator"]), :include_blank => true, class: "form-control" %>
+        <%= render :partial => "partials/dropdown",
+          :locals => { :classname => ImageCreator, :column => "name", :label => "creator" } %>
       </div>
       <div class="form-group">
-        <%= label_tag "occupation" %>
-        <%= select_tag "occupation", options_from_collection_for_select(@occupations, "id", "occupation", params["occupation"]), :include_blank => true, class: "form-control" %>
+        <%= render :partial => "partials/dropdown",
+          :locals => { :classname => @occupations, :column => "occupation" } %>
       </div>
     </div>
 
     <!-- common options -->
     <div class="col-md-3">
       <div class="form-group">
-        <%= label_tag "format" %>
-        <%= select_tag "format", options_from_collection_for_select(ImageFormat.all, "id", "name", params["format"]), :include_blank => true, class: "form-control" %>
+        <%= render :partial => "partials/dropdown",
+          :locals => { :classname => ImageFormat, :column => "name", :label => "format" } %>
       </div>
       <div class="form-group">
-        <%= label_tag "unit" %>
-        <%= select_tag "unit", options_from_collection_for_select(@units, "id", "unit_no", params["unit"]), :include_blank => true, class: "form-control" %>
+        <%= render :partial => "partials/dropdown",
+          :locals => { :classname => @units, :column => "unit_no", :label => "unit" } %>
       </div>
       <div class="form-group">
-        <%= label_tag "zone" %>
-        <%= select_tag "zone", options_from_collection_for_select(@zones, "id", "number", params["zone"]), :include_blank => true, class: "form-control" %>
+        <%= render :partial => "partials/dropdown",
+          :locals => { :classname => @zones, :column => "number", :label => "zone" } %>
       </div>
     </div>
 
     <!-- qualitative -->
     <div class="col-md-3">
       <div class="form-group">
-        <%= label_tag "orientation" %>
-        <%= select_tag "orientation", options_from_collection_for_select(ImageOrientation.all, "id", "name", params["orientation"]), :include_blank => true, class: "form-control" %>
+        <%= render :partial => "partials/dropdown",
+          :locals => { :classname => ImageOrientation, :column => "name", :label => "orientation" } %>
       </div>
       <div class="form-group">
-        <%= label_tag "quality" %>
-        <%= select_tag "quality", options_from_collection_for_select(ImageQuality.all, "id", "name", params["quality"]), :include_blank => true, class: "form-control" %>
+        <%= render :partial => "partials/dropdown",
+          :locals => { :classname => ImageQuality, :column => "name", :label => "quality" } %>
       </div>
     </div>
 
@@ -58,8 +58,8 @@
         <%= text_field_tag "comments", params["comments"], placeholder: "wall section", class: "form-control" %>
       </div>
       <div class="form-group">
-        <%= label_tag "subject", "Subject: (Can have up to three subjects each)" %>
-        <%= select_tag "subject", options_from_collection_for_select(ImageSubject.all, "id", "subject", params["subject"]), :include_blank => true, class: "form-control" %>
+        <%= render :partial => "partials/dropdown",
+          :locals => { :classname => ImageSubject, :column => "subject" } %>
       </div>
     </div>
   </div> <!-- /row -->
@@ -69,26 +69,16 @@
       <div class="well">
         <div class="row">
           <div class="col-md-3">
-            <div class="form-group">
-              <%= label_tag "box" %>
-              <%= select_tag "box",
-                options_from_collection_for_select(ImageBox.all, "id", "name", params["box"]),
-                :include_blank => true, class: "form-control" %>
+            <%= render :partial => "partials/dropdown",
+              :locals => { :classname => ImageBox, :column => "name", :label => "box" } %>
             </div>
+          <div class="col-md-3">
+            <%= render :partial => "partials/dropdown",
+              :locals => { :classname => ImageHumanRemain, :column => "name", :label => "human_remain" } %>
           </div>
           <div class="col-md-3">
-            <div class="form-group">
-              <%= label_tag "remain", "Human Remains" %>
-              <%= select_tag "remain", options_from_collection_for_select(ImageHumanRemain.all, "id", "name", params["remain"]), :include_blank => true, class: "form-control" %>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <%= label_tag "assocnoeg", "Associated Negative" %>
-              <%= select_tag "assocnoeg",
-                options_from_collection_for_select(ImageAssocnoeg.all, "id", "name", params["assocnoeg"]),
-                :include_blank => true, class: "form-control" %>
-            </div>
+            <%= render :partial => "partials/dropdown",
+              :locals => { :classname => ImageAssocnoeg, :column => "name", :label => "associated_negative" } %>
           </div>
         </div> <!-- /row -->
       </div> <!-- /well -->
