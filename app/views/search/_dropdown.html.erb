@@ -1,7 +1,12 @@
+<%# expected local variables:
+  #  classname = class representing db table
+  #  column = database column to use
+  #  label = use if column_name is not for user display
+%>
+
 <div class="form-group">
-  <%# label %>
-  <% if alt_label %>
-    <%= label_tag column, alt_label %>
+  <% if !local_assigns[:label].nil? %>
+    <%= label_tag column, label %>
   <% else %>
     <%= label_tag column %>
   <% end %>
