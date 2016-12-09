@@ -84,6 +84,15 @@ rails s
 
 You can view the site at `localhost:3000`
 
+### Check Image Status
+
+Images should be stored in `app/assets/images/field` in the `large` and `thumb` directories. To check if all the images and there and if each image in the directories has metadata, run the following, respectively:
+
+```
+rake images:find_missing
+rake images:find_extra
+```
+
 ### Run Tests
 
 ```bash
