@@ -798,7 +798,7 @@ if Image.all.size < 1
 end
 
 
-File.open("please_check_for_accuracy.txt", "w") do |file|
+File.open("reports/please_check_for_accuracy.txt", "w") do |file|
   file.write("Please review the following and verify that units, strata, etc, were added correctly\n")
   @handcheck.each do |added|
     file.write("\n#{added[:type]} number #{added[:num]} was added from the #{added[:source]} spreadsheet")
