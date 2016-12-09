@@ -11,31 +11,31 @@
         <%= label_tag "unit_no", "Unit Number" %>
         <%= text_field_tag "unit_no", params["unit_no"], placeholder: "BW", class: "form-control" %>
       </div>
-      <%= render :partial => "dropdown",
+      <%= render :partial => "partials/dropdown",
         :locals => { :column => "excavation_status", :classname => ExcavationStatus } %>
     </div>
 
     <!-- description -->
     <div class="col-md-3">
-      <%= render :partial => "dropdown",
+      <%= render :partial => "partials/dropdown",
         :locals => { :column => "intact_roof", :classname => IntactRoof } %>
-      <%= render :partial => "dropdown",
+      <%= render :partial => "partials/dropdown",
         :locals => { :column => "irregular_shape", :classname => IrregularShape } %>
     </div>
 
     <!-- other description -->
     <div class="col-md-3">
-      <%= render :partial => "dropdown",
-        :locals => { :column => "story", :classname => Story, :label => "Stories" } %>
-      <%= render :partial => "dropdown",
+      <%= render :partial => "partials/dropdown",
+        :locals => { :column => "story", :classname => Story } %>
+      <%= render :partial => "partials/dropdown",
         :locals => { :column => "occupation", :classname => UnitOccupation } %>
     </div>
 
     <!-- function -->
     <div class="col-md-3">
-      <%= render :partial => "dropdown",
+      <%= render :partial => "partials/dropdown",
         :locals => { :column => "inferred_function", :classname => InferredFunction } %>
-      <%= render :partial => "dropdown",
+      <%= render :partial => "partials/dropdown",
         :locals => { :column => "unit_class", :classname => UnitClass } %>
     </div>
 
@@ -49,20 +49,9 @@
 
         <!-- location -->
           <div class="col-md-3">
-            <div class="form-group">
-              <%= label_tag "zone" %>
-              <%= select_tag "zone", 
-                options_from_collection_for_select(
-                  Zone.all,
-                  "id",
-                  "number",
-                  params["zone"]
-                ),
-                :include_blank => true,
-                :class => "form-control"
-              %>
-            </div>
-            <%= render :partial => "dropdown",
+            <%= render :partial => "partials/dropdown",
+              :locals => { :classname => Zone, :column => "number", :label => "zone" } %>
+            <%= render :partial => "partials/dropdown",
               :locals => { :column => "salmon_sector", :classname => SalmonSector } %>
           </div>
 
@@ -75,7 +64,7 @@
               <%= label_tag "room_type" %>
               <%= select_tag("room_type", options_for_select(room_types, params["room_type"]), :include_blank => true, class: "form-control") %>
             </div>
-            <%= render :partial => "dropdown",
+            <%= render :partial => "partials/dropdown",
               :locals => { :column => "type_description", :classname => TypeDescription } %>
           </div>
 
@@ -126,14 +115,16 @@
   </div> <!-- /row -->
 
   <div class="row">
-    <a class="btn btn-info" role="button" data-toggle="collapse"
-      href="#collapseMore" aria-expanded="false" aria-controls="collapseMore">
-      Expand More Search Options
-    </a>
-    <a class="btn btn-info" role="button" data-toggle="collapse"
-      href="#collapseItems" aria-expanded="false" aria-controls="collapseItems">
-      Limit by Relationship to Items
-    </a>
+    <button class="btn btn-info" type="button"
+      data-toggle="collapse" data-target="#collapseMore"
+      aria-expanded="false" aria-controls="collapseMore">
+      More Query Options
+    </button>
+    <button class="btn btn-info" type="button"
+      data-toggle="collapse" data-target="#collapseItems"
+      aria-expanded="false" aria-controls="collapseItems">
+      Limit by Items in Unit
+    </button>
     <%= render :partial => "partials/clear_search", :locals => { :path => search_path } %>
     <%= submit_tag "Search", :class => "btn btn-primary" %>
   </div> <!-- /row -->
@@ -150,7 +141,7 @@
             <li>Occupation: <%= unit.unit_occupation.occupation if unit.unit_occupation %>
             <li>Type: <%= unit.type_description.type_description if unit.type_description %>
             <li>Inferred Function: <%= unit.inferred_function.inferred_function if unit.inferred_function %></li>
-            <!-- <li>Number of Images: <%# unit.images.size %></li> -->
+            <li>Number of Images: <%= unit.images.size %></li>
           </ul>
         </div>
       <% end %>
