@@ -13,6 +13,7 @@ class Unit < ActiveRecord::Base
 
   has_many :strata
   has_many :features, :through => :strata
+  has_many :images, :through => :features
 
   # strata objects
   has_many :bone_tools, :through => :strata

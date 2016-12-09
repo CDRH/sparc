@@ -20,6 +20,11 @@ Rails.application.config.assets.precompile += %w(
   scaffolds.scss
 )
 
+# images
+Rails.application.config.assets.precompile += %w(
+  images.css
+)
+
 # maps
 Rails.application.config.assets.precompile += %w(
   svg-pan-zoom.js

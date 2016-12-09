@@ -1,0 +1,20 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  site: MyString
+  room: MyString
+  strat: MyString
+  asso_features: MyString
+  image_no: MyString
+  image_type: MyString
+  gride: MyString
+  gridn: MyString
+  dep_beg: MyString
+  dep_end: MyString
+  date: MyString
+  signi_art_no: MyString
+  other_no: MyString
+  comments: MyString
+  storage_location: MyString
+  data_entry: MyString
+  notes: MyString

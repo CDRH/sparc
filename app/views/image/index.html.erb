@@ -1,0 +1,134 @@
+<%= stylesheet_link_tag "images", media: "all", "data-turbolinks-track" => true %>
+
+<h1>Image Gallery</h1>
+
+<%= form_tag gallery_path, :method => "get",
+  id: "image-search-form", role: "form" do %>
+  <%= hidden_field_tag "sort", params["sort"] %>
+  <div class="row">
+
+    <!-- identity -->
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= label_tag "image_no" %>
+        <%= text_field_tag "image_no", params["image_no"], placeholder: "00946", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= label_tag "creator" %>
+        <%= select_tag "creator", options_from_collection_for_select(ImageCreator.all, "id", "name", params["creator"]), :include_blank => true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= label_tag "occupation" %>
+        <%= select_tag "occupation", options_from_collection_for_select(@occupations, "id", "occupation", params["occupation"]), :include_blank => true, class: "form-control" %>
+      </div>
+    </div>
+
+    <!-- common options -->
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= label_tag "format" %>
+        <%= select_tag "format", options_from_collection_for_select(ImageFormat.all, "id", "name", params["format"]), :include_blank => true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= label_tag "unit" %>
+        <%= select_tag "unit", options_from_collection_for_select(@units, "id", "unit_no", params["unit"]), :include_blank => true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= label_tag "zone" %>
+        <%= select_tag "zone", options_from_collection_for_select(@zones, "id", "number", params["zone"]), :include_blank => true, class: "form-control" %>
+      </div>
+    </div>
+
+    <!-- qualitative -->
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= label_tag "orientation" %>
+        <%= select_tag "orientation", options_from_collection_for_select(ImageOrientation.all, "id", "name", params["orientation"]), :include_blank => true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= label_tag "quality" %>
+        <%= select_tag "quality", options_from_collection_for_select(ImageQuality.all, "id", "name", params["quality"]), :include_blank => true, class: "form-control" %>
+      </div>
+    </div>
+
+    <!-- contents -->
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= label_tag "comments" %>
+        <%= text_field_tag "comments", params["comments"], placeholder: "wall section", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= label_tag "subject", "Subject: (Can have up to three subjects each)" %>
+        <%= select_tag "subject", options_from_collection_for_select(ImageSubject.all, "id", "subject", params["subject"]), :include_blank => true, class: "form-control" %>
+      </div>
+    </div>
+  </div> <!-- /row -->
+
+  <div class="row">
+    <div class="collapse" id="collapseMore">
+      <div class="well">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <%= label_tag "box" %>
+              <%= select_tag "box",
+                options_from_collection_for_select(ImageBox.all, "id", "name", params["box"]),
+                :include_blank => true, class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <%= label_tag "remain", "Human Remains" %>
+              <%= select_tag "remain", options_from_collection_for_select(ImageHumanRemain.all, "id", "name", params["remain"]), :include_blank => true, class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <%= label_tag "assocnoeg", "Associated Negative" %>
+              <%= select_tag "assocnoeg",
+                options_from_collection_for_select(ImageAssocnoeg.all, "id", "name", params["assocnoeg"]),
+                :include_blank => true, class: "form-control" %>
+            </div>
+          </div>
+        </div> <!-- /row -->
+      </div> <!-- /well -->
+    </div> <!-- /collapse -->
+  </div> <!-- /row -->
+
+  <div class="row">
+    <button class="btn btn-info" type="button"
+      data-toggle="collapse" data-target="#collapseMore"
+      aria-expanded="false" aria-controls="collapseMore">
+      More Query Options
+    </button>
+    <%= render partial: "partials/clear_search", locals: { path: gallery_path } %>
+    <%= submit_tag("Search", :class => "btn btn-primary") %>
+  </div>
+<% end %>
+
+<p>Found <%= pluralize(@result_num, "image") %></p>
+<%= will_paginate @images %>
+
+<% @images.each_slice(4) do |img_set| %>
+  <div class="row">
+    <% img_set.each do |img| %>
+      <div class="col-md-3 <%= 'human_remains' if !img.displayable? %>">
+        <%= link_to image_path img.image_no do %>
+          <%= image_tag "field/thumb/#{img.image_no}" %>
+        <% end %>
+        <ul>
+          <li>Units: <%= img.unit_list.join("; ") %></li>
+          <li>Occupations: <%= img.occupation_list.join("; ") %></li>
+          <li>Number: <%= img.image_no %></li>
+          <li>Format: <%= img.format %></li>
+          <li>Comments: <%= img.comments %></li>
+          <li>Subjects: <%= img.subject_list.join("; ") %></li>
+          <li>Human Remains: <%= img.human_remain %></li>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= will_paginate @images %>
+
