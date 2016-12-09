@@ -12,31 +12,31 @@
         <%= text_field_tag "unit_no", params["unit_no"], placeholder: "BW", class: "form-control" %>
       </div>
       <%= render :partial => "dropdown",
-        :locals => { :column => "excavation_status", :classname => ExcavationStatus, :alt_label => nil } %>
+        :locals => { :column => "excavation_status", :classname => ExcavationStatus } %>
     </div>
 
     <!-- description -->
     <div class="col-md-3">
       <%= render :partial => "dropdown",
-        :locals => { :column => "intact_roof", :classname => IntactRoof, :alt_label => nil } %>
+        :locals => { :column => "intact_roof", :classname => IntactRoof } %>
       <%= render :partial => "dropdown",
-        :locals => { :column => "irregular_shape", :classname => IrregularShape, :alt_label => nil } %>
+        :locals => { :column => "irregular_shape", :classname => IrregularShape } %>
     </div>
 
     <!-- other description -->
     <div class="col-md-3">
       <%= render :partial => "dropdown",
-        :locals => { :column => "story", :classname => Story, :alt_label => "Stories" } %>
+        :locals => { :column => "story", :classname => Story, :label => "Stories" } %>
       <%= render :partial => "dropdown",
-        :locals => { :column => "occupation", :classname => UnitOccupation, :alt_label => nil } %>
+        :locals => { :column => "occupation", :classname => UnitOccupation } %>
     </div>
 
     <!-- function -->
     <div class="col-md-3">
       <%= render :partial => "dropdown",
-        :locals => { :column => "inferred_function", :classname => InferredFunction, :alt_label => nil } %>
+        :locals => { :column => "inferred_function", :classname => InferredFunction } %>
       <%= render :partial => "dropdown",
-        :locals => { :column => "unit_class", :classname => UnitClass, :alt_label => nil } %>
+        :locals => { :column => "unit_class", :classname => UnitClass } %>
     </div>
 
   </div> <!-- /row -->
@@ -51,11 +51,19 @@
           <div class="col-md-3">
             <div class="form-group">
               <%= label_tag "zone" %>
-              <%= select_tag "zone", options_from_collection_for_select(
-                  Zone.all, "id", "number", params["zone"]), :include_blank => true, class: "form-control" %>
+              <%= select_tag "zone", 
+                options_from_collection_for_select(
+                  Zone.all,
+                  "id",
+                  "number",
+                  params["zone"]
+                ),
+                :include_blank => true,
+                :class => "form-control"
+              %>
             </div>
             <%= render :partial => "dropdown",
-              :locals => { :column => "salmon_sector", :classname => SalmonSector, :alt_label => nil } %>
+              :locals => { :column => "salmon_sector", :classname => SalmonSector } %>
           </div>
 
           <!-- unit type description -->
@@ -68,7 +76,7 @@
               <%= select_tag("room_type", options_for_select(room_types, params["room_type"]), :include_blank => true, class: "form-control") %>
             </div>
             <%= render :partial => "dropdown",
-              :locals => { :column => "type_description", :classname => TypeDescription, :alt_label => nil } %>
+              :locals => { :column => "type_description", :classname => TypeDescription } %>
           </div>
 
           <!-- ? -->
@@ -126,7 +134,7 @@
       href="#collapseItems" aria-expanded="false" aria-controls="collapseItems">
       Limit by Relationship to Items
     </a>
-    <%= link_to "Clear Search", search_path, :class => "btn btn-warning" %>
+    <%= render :partial => "partials/clear_search", :locals => { :path => search_path } %>
     <%= submit_tag "Search", :class => "btn btn-primary" %>
   </div> <!-- /row -->
 
