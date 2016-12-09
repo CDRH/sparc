@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class UnitOccupationTest < ActiveSupport::TestCase
+class ZoneTest < ActiveSupport::TestCase
   def setup
-    @item = UnitOccupation.create(:occupation => "test")
+    @item = Zone.create(:number => "test")
     feat = Feature.first
     feat.images << Image.first
     strat = Stratum.first
@@ -13,8 +13,8 @@ class UnitOccupationTest < ActiveSupport::TestCase
   end
 
   test "associations" do
-    # check generally that these respond with collections, not nil, etc
     assert_not_empty @item.units
     assert_not_empty @item.images
   end
+
 end

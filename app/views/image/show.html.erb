@@ -1,0 +1,54 @@
+<%= stylesheet_link_tag "images", media: "all", "data-turbolinks-track" => true %>
+
+<h1>Image <%= @image.image_no %></h1>
+
+<div class="row">
+
+  <div class="col-md-6">
+    <%= image_tag "field/large/#{@image.image_no}", class: "image_large" %>
+  </div>
+
+  <div class="col-md-3">
+    <h2>Image Information</h2>
+    <ul>
+      <li>Units:
+        <% @image.unit_list.each do |u| %>
+          <%= link_to u, unit_path(u) %>
+        <% end %>
+      </li>
+      <li>Occupations: <%= @image.occupation_list.join("; ") %></li>
+      <li>Number: <%= @image.image_no %></li>
+      <li>Format: <%= @image.format %></li>
+      <li>Comments: <%= @image.comments %></li>
+      <li>Subjects: <%= @image.subject_list.join("; ") %></li>
+      <li <%= "class=human_remains" if !@image.displayable? %>>
+        Human Remains: <%= @image.human_remain %>
+      </li>
+      <!-- TODO Features or Strata here? -->
+      <li>Features: <%= @image.features.size %></li>
+    </ul>
+  </div>
+
+  <div class="col-md-3">
+    <h2>More Information</h2>
+    <ul>
+      <li>Site: <%= @image.site %></li>
+      <li>Type: <%= @image.image_type %></li>
+      <li>Assocnoeg: <%= @image.assocnoeg %></li>
+      <li>Box: <%= @image.box %></li>
+      <li>Grid EW: <%= @image.gride %></li>
+      <li>Grid NS: <%= @image.gridn %></li>
+      <li>Orientation: <%= @image.orientation %></li>
+      <li>Depth Beg: <%= @image.dep_beg %></li>
+      <li>Depth End: <%= @image.dep_end %></li>
+      <li>Date: <%= @image.date %></li>
+      <li>Creator: <%= @image.creator %></li>
+      <li>Signi Art No: <%= @image.signi_art_no %></li>
+      <li>Storage Location: <%= @image.storage_location %></li>
+      <li>Data Entry: <%= @image.data_entry %></li>
+      <li>Quality: <%= @image.quality %></li>
+      <li>Notes: <%= @image.notes %></li>
+      <li>Zones: <%= @image.zone_list.join("; ") %></li>
+    </ul>
+  </div>
+</div>

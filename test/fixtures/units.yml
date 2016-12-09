@@ -18,6 +18,7 @@ one:
   width: MyString
   floor_area: MyString
   comments: MyText
+  zone_id: 1
 
 two:
   id: 2
@@ -37,3 +38,4 @@ two:
   width: MyString
   floor_area: MyString
   comments: MyText
+  zone_id: 1

@@ -1,5 +1,6 @@
 class Zone < ActiveRecord::Base
   has_many :units
+  has_many :images, :through => :units
   
   validates_uniqueness_of :number
 

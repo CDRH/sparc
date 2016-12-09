@@ -1,0 +1,5 @@
+<% if request.query_parameters.empty? %>
+  <%= button_tag "Clear Search", type: :reset, class: "btn btn-warning" %>
+<% else %>
+  <%= link_to "Clear Search", path, class: "btn btn-warning" %>
+<% end %>
