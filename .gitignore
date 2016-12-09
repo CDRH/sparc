@@ -25,3 +25,7 @@
 .ruby-version
 .ruby-gemset
 !config/rvm/*
+
+# ignore the large amount of images for the gallery
+**/images/field/*
+!**/images/field/.keep

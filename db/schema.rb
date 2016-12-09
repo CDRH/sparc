@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161128155146) do
+ActiveRecord::Schema.define(version: 20161130201151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -265,6 +265,49 @@ ActiveRecord::Schema.define(version: 20161128155146) do
     t.index ["stratum_id"], name: "index_features_strata_on_stratum_id", using: :btree
   end
 
+  create_table "image_assocnoegs", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "image_boxes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "image_creators", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "image_formats", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "image_human_remains", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "displayable"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "image_orientations", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "image_qualities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "image_subjects", force: :cascade do |t|
     t.string   "subject"
     t.datetime "created_at", null: false
@@ -288,27 +331,34 @@ ActiveRecord::Schema.define(version: 20161128155146) do
     t.string   "strat"
     t.string   "asso_features"
     t.string   "image_no"
-    t.string   "format"
     t.string   "image_type"
-    t.string   "assocnoeg"
-    t.string   "box"
     t.string   "gride"
     t.string   "gridn"
-    t.string   "orientation"
     t.string   "dep_beg"
     t.string   "dep_end"
     t.string   "date"
-    t.string   "creator"
     t.string   "signi_art_no"
     t.string   "other_no"
-    t.string   "human_remains"
     t.string   "comments"
     t.string   "storage_location"
     t.string   "data_entry"
-    t.string   "image_quality"
     t.string   "notes"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "image_assocnoeg_id"
+    t.integer  "image_box_id"
+    t.integer  "image_creator_id"
+    t.integer  "image_format_id"
+    t.integer  "image_human_remain_id"
+    t.integer  "image_orientation_id"
+    t.integer  "image_quality_id"
+    t.index ["image_assocnoeg_id"], name: "index_images_on_image_assocnoeg_id", using: :btree
+    t.index ["image_box_id"], name: "index_images_on_image_box_id", using: :btree
+    t.index ["image_creator_id"], name: "index_images_on_image_creator_id", using: :btree
+    t.index ["image_format_id"], name: "index_images_on_image_format_id", using: :btree
+    t.index ["image_human_remain_id"], name: "index_images_on_image_human_remain_id", using: :btree
+    t.index ["image_orientation_id"], name: "index_images_on_image_orientation_id", using: :btree
+    t.index ["image_quality_id"], name: "index_images_on_image_quality_id", using: :btree
   end
 
   create_table "inferred_functions", force: :cascade do |t|
@@ -644,6 +694,13 @@ ActiveRecord::Schema.define(version: 20161128155146) do
   add_foreign_key "features_strata", "strata"
   add_foreign_key "image_subjects_images", "image_subjects", column: "image_subjects_id"
   add_foreign_key "image_subjects_images", "images", column: "images_id"
+  add_foreign_key "images", "image_assocnoegs"
+  add_foreign_key "images", "image_boxes"
+  add_foreign_key "images", "image_creators"
+  add_foreign_key "images", "image_formats"
+  add_foreign_key "images", "image_human_remains"
+  add_foreign_key "images", "image_orientations"
+  add_foreign_key "images", "image_qualities"
   add_foreign_key "lithic_inventories", "features"
   add_foreign_key "ornaments", "features"
   add_foreign_key "ornaments", "ornament_periods"
