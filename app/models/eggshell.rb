@@ -5,9 +5,14 @@ class Eggshell < ActiveRecord::Base
   has_many :strata, :through => :features
   has_many :units, :through => :strata
   
-  def to_label
-    "#{salmon_museum_id_no}"
+  def self.sorted
+    order("salmon_museum_id_no")
   end
+
+  def to_label
+    salmon_museum_id_no
+  end
+
   def authorized_for_update?
     puts "---------#{current_user}"
     current_user != nil ? true : false

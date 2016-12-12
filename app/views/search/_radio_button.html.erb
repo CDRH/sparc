@@ -1,0 +1,5 @@
+<li>
+  <%= label_tag "items_#{item}", label %>
+  <% selected = !params["items"].blank? && !params["items"][item].blank? %>
+  <%= radio_button_tag "items", item, selected %>
+</li>

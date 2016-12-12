@@ -1,0 +1,151 @@
+<h1>Search All Units</h1>
+
+<%= form_tag search_path, :method => "get",
+  id: "unit-search-form", role: "form" do %>
+  <%= hidden_field_tag "sort", params["sort"] %>
+
+  <div class="row">
+    <!-- location -->
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= label_tag "unit_no", "Unit Number" %>
+        <%= text_field_tag "unit_no", params["unit_no"], placeholder: "BW", class: "form-control" %>
+      </div>
+      <%= render :partial => "partials/dropdown",
+        :locals => { :column => "excavation_status", :classname => ExcavationStatus.sorted } %>
+    </div>
+
+    <!-- description -->
+    <div class="col-md-3">
+      <%= render :partial => "partials/dropdown",
+        :locals => { :column => "intact_roof", :classname => IntactRoof.sorted } %>
+      <%= render :partial => "partials/dropdown",
+        :locals => { :column => "irregular_shape", :classname => IrregularShape.sorted } %>
+    </div>
+
+    <!-- other description -->
+    <div class="col-md-3">
+      <%= render :partial => "partials/dropdown",
+        :locals => { :column => "story", :classname => Story.sorted } %>
+      <%= render :partial => "partials/dropdown",
+        :locals => { :column => "occupation", :classname => UnitOccupation.sorted } %>
+    </div>
+
+    <!-- function -->
+    <div class="col-md-3">
+      <%= render :partial => "partials/dropdown",
+        :locals => { :column => "inferred_function", :classname => InferredFunction.sorted } %>
+      <%= render :partial => "partials/dropdown",
+        :locals => { :column => "unit_class", :classname => UnitClass.sorted } %>
+    </div>
+
+  </div> <!-- /row -->
+
+  <!-- COLLAPSED SEARCH OPTIONS -->
+  <div class="row">
+    <div class="collapse" id="collapseMore">
+      <div class="well">
+        <div class="row">
+
+        <!-- location -->
+          <div class="col-md-3">
+            <%= render :partial => "partials/dropdown",
+              :locals => { :classname => Zone.sorted, :column => "number", :label => "zone" } %>
+            <%= render :partial => "partials/dropdown",
+              :locals => { :column => "salmon_sector", :classname => SalmonSector.sorted } %>
+          </div>
+
+          <!-- unit type description -->
+          <div class="col-md-3">
+            <% room_types = RoomType.sorted.map do |type| %>
+              <% [ type.to_label, type.id ] %>
+            <% end %>
+            <div class="form-group">
+              <%= label_tag "room_type" %>
+              <%= select_tag("room_type", options_for_select(room_types, params["room_type"]), :include_blank => true, class: "form-control") %>
+            </div>
+            <%= render :partial => "partials/dropdown",
+              :locals => { :column => "type_description", :classname => TypeDescription.sorted } %>
+          </div>
+
+          <!-- ? -->
+          <div class="col-md-3">
+            <div class="form-group">
+              <%= label_tag "strata" %>
+              <%= text_field_tag "strata", params["strata"], placeholder: "B-1-2", class: "form-control" %>
+            </div>
+          </div>
+
+          <!-- comments -->
+          <div class="col-md-3">
+            <div class="form-group">
+              <%= label_tag "other_description", "Other Description (not much text to search?)" %>
+              <%= text_field_tag "other_description", params["other_description"], placeholder: "intersticial", class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= label_tag "comments", "Comments" %>
+              <%= text_field_tag "comments", params["comments"], placeholder: "intersticial", class: "form-control" %>
+            </div>
+          </div>
+        </div> <!-- /row -->
+
+    </div> <!-- /well -->
+  </div>
+
+  <div class="row">
+    <div class="collapse" id="collapseItems">
+      <div class="well">
+        <h4>Return only units with the following items (query may take some time, please be patient):</h4>
+        <div class="form-group">
+          <ul id="unit_search_list">
+            <%= render :partial => "radio_button", :locals => { :item => "bone_tools", :label => "Bone Tools" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "bone_inventories", :label => "Bone Inventories" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "ceramic_inventories", :label => "Ceramic Inventories" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "eggshells", :label => "Eggshells" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "images", :label => "Images" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "lithic_inventories", :label => "Lithic Inventories" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "ornaments", :label => "Ornaments" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "perishables", :label => "Perishables" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "select_artifacts", :label => "Select Artifacts" } %>
+            <%= render :partial => "radio_button", :locals => { :item => "soils", :label => "Soils" } %>
+          </ul>
+        </div>
+      </div> <!-- /well -->
+    </div> <!-- /collapse -->
+  </div> <!-- /row -->
+
+  <div class="row">
+    <button class="btn btn-info" type="button"
+      data-toggle="collapse" data-target="#collapseMore"
+      aria-expanded="false" aria-controls="collapseMore">
+      More Query Options
+    </button>
+    <button class="btn btn-info" type="button"
+      data-toggle="collapse" data-target="#collapseItems"
+      aria-expanded="false" aria-controls="collapseItems">
+      Limit by Items in Unit
+    </button>
+    <%= render :partial => "partials/clear_search", :locals => { :path => search_path } %>
+    <%= submit_tag "Search", :class => "btn btn-primary" %>
+  </div> <!-- /row -->
+
+  <p>Found <%= pluralize @result_num, "result" %></p>
+  <%= will_paginate @units %>
+
+  <% @units.each_slice(6) do |unit_set| %>
+    <div class="row">
+      <% unit_set.each do |unit| %>
+        <div class="col-md-2">
+          <h2><%= link_to unit.unit_no, unit_path(unit.unit_no) %></h2>
+          <ul>
+            <li>Occupation: <%= unit.unit_occupation.occupation if unit.unit_occupation %>
+            <li>Type: <%= unit.type_description.type_description if unit.type_description %>
+            <li>Inferred Function: <%= unit.inferred_function.inferred_function if unit.inferred_function %></li>
+            <li>Number of Images: <%= unit.images.size %></li>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+<% end %>

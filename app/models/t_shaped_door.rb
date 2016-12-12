@@ -3,7 +3,11 @@ class TShapedDoor < ActiveRecord::Base
 
   validates_uniqueness_of :t_shaped_door
 
+  def self.sorted
+    order("t_shaped_door")
+  end
+
   def to_label
-    "#{t_shaped_door}"
+    t_shaped_door
   end
 end

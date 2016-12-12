@@ -15,11 +15,30 @@ class Unit < ActiveRecord::Base
   has_many :features, :through => :strata
   has_many :images, :through => :features
 
+  # strata objects
+  has_many :bone_tools, :through => :strata
+  has_many :select_artifacts, :through => :strata
+
+  # feature objects
+  has_many :bone_inventories, :through => :features
+  has_many :ceramic_inventories, :through => :features
+  has_many :eggshells, :through => :features
+  has_many :images, :through => :features
+  has_many :lithic_inventories, :through => :features
+  has_many :ornaments, :through => :features
+  has_many :perishables, :through => :features
+  has_many :soils, :through => :features
+
   validates_uniqueness_of :unit_no
 
-  def to_label
-    "#{unit_no}"
+  def self.sorted
+    order("unit_no")
   end
+
+  def to_label
+    unit_no
+  end
+
   def authorized_for_update?
     puts "---------#{current_user}"
     current_user != nil ? true : false
