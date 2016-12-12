@@ -3,7 +3,11 @@ class FeatureGroup < ActiveRecord::Base
 
   validates_uniqueness_of :feature_group
 
+  def self.sorted
+    order("feature_group")
+  end
+
   def to_label
-    "#{feature_group}"
+    feature_group
   end
 end

@@ -27,19 +27,19 @@ class SearchController < ApplicationController
     units = add_to_query(units, :zones, params["zone"], :zone)
 
     # left joins where not null
-    units = units.includes(params["items"]).where.not(params["items"] => { id: nil }) if !params["items"].blank?
+    units = units.includes(params["items"]).where.not(params["items"] => { :id => nil }) if !params["items"].blank?
 
     @result_num = units.size
-    @units = units.paginate(:page => params[:page], :per_page => 20)
+    @units = units.sorted.paginate(:page => params[:page], :per_page => 20)
   end
 
   def unit
-    @unit = Unit.where(:unit_no => params["number"]).first
-    @images = Image.joins(:units).where(:units => { :unit_no => params["number"] }).limit(8)
+    @unit = Unit.sorted.where(:unit_no => params["number"]).first
+    @images = Image.sorted.joins(:units).where(:units => { :unit_no => params["number"] }).limit(8)
   end
 
   def zone
-    @units = Unit.joins(:zone).where("zones.number" => params["number"])
+    @units = Unit.sorted.joins(:zone).where("zones.number" => params["number"])
   end
 
 

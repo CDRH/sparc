@@ -4,8 +4,12 @@ class UnitOccupation < ActiveRecord::Base
 
   validates_uniqueness_of :occupation
 
+  def self.sorted
+    order("occupation")
+  end
+
   def to_label
-    "#{occupation}"
+    occupation
   end
   def authorized_for_update?
     puts "---------#{current_user}"

@@ -26,14 +26,15 @@ class ImageController < ApplicationController
     @result_num = images.size
 
     @images = images.paginate(:page => params[:page], :per_page => 20)
-    @occupations = UnitOccupation.distinct.joins(:images).order("occupation")
-    @units = Unit.distinct.joins(:images).order("unit_no")
-    @zones = Zone.distinct.joins(:images).order("number")
+    @occupations = UnitOccupation.sorted.distinct.joins(:images).order("occupation")
+    @units = Unit.sorted.distinct.joins(:images).order("unit_no")
+    @zones = Zone.sorted.distinct.joins(:images).order("number")
   end
 
   def show
     @image = Image.includes(:image_subjects, :units)
       .find_by(image_no: params[:number])
+      .sorted
   end
 
   private

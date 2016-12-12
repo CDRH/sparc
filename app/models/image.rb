@@ -14,6 +14,10 @@ class Image < ActiveRecord::Base
   belongs_to :image_orientation
   belongs_to :image_quality
 
+  def self.sorted
+    order("image_no")
+  end
+
   def to_label
     image_no
   end

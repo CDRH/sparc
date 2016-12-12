@@ -3,9 +3,14 @@ class IntactRoof < ActiveRecord::Base
 
   validates_uniqueness_of :intact_roof
 
-  def to_label
-    "#{intact_roof}"
+  def self.sorted
+    order("intact_roof")
   end
+
+  def to_label
+    intact_roof
+  end
+
   def authorized_for_update?
     puts "---------#{current_user}"
     current_user != nil ? true : false

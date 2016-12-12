@@ -11,7 +11,7 @@
   <%# dropdown %>
   <%= select_tag label,
       options_from_collection_for_select(
-        classname.all,
+        classname,
         "id",
         column,
         params[label]),

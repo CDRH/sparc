@@ -3,6 +3,10 @@ class OrnamentPeriod < ApplicationRecord
 
   validates_uniqueness_of :period
 
+  def self.sorted
+    order("period")
+  end
+
   def to_label
     period
   end
