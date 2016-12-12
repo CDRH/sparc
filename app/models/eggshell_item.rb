@@ -3,7 +3,11 @@ class EggshellItem < ApplicationRecord
 
   validates_uniqueness_of :item
 
+  def self.sorted
+    order("item")
+  end
+
   def to_label
-    "#{item}"
+    item
   end
 end

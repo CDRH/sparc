@@ -3,9 +3,14 @@ class SalmonSector < ActiveRecord::Base
 
   validates_uniqueness_of :salmon_sector
 
-  def to_label
-    "#{salmon_sector}"
+  def self.sorted
+    order("salmon_sector")
   end
+
+  def to_label
+    salmon_sector
+  end
+
   def authorized_for_update?
     puts "---------#{current_user}"
     current_user != nil ? true : false

@@ -31,9 +31,14 @@ class Unit < ActiveRecord::Base
 
   validates_uniqueness_of :unit_no
 
-  def to_label
-    "#{unit_no}"
+  def self.sorted
+    order("unit_no")
   end
+
+  def to_label
+    unit_no
+  end
+
   def authorized_for_update?
     puts "---------#{current_user}"
     current_user != nil ? true : false

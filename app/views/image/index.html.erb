@@ -15,7 +15,7 @@
       </div>
       <div class="form-group">
         <%= render :partial => "partials/dropdown",
-          :locals => { :classname => ImageCreator, :column => "name", :label => "creator" } %>
+          :locals => { :classname => ImageCreator.sorted, :column => "name", :label => "creator" } %>
       </div>
       <div class="form-group">
         <%= render :partial => "partials/dropdown",
@@ -27,7 +27,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <%= render :partial => "partials/dropdown",
-          :locals => { :classname => ImageFormat, :column => "name", :label => "format" } %>
+          :locals => { :classname => ImageFormat.sorted, :column => "name", :label => "format" } %>
       </div>
       <div class="form-group">
         <%= render :partial => "partials/dropdown",
@@ -43,11 +43,11 @@
     <div class="col-md-3">
       <div class="form-group">
         <%= render :partial => "partials/dropdown",
-          :locals => { :classname => ImageOrientation, :column => "name", :label => "orientation" } %>
+          :locals => { :classname => ImageOrientation.sorted, :column => "name", :label => "orientation" } %>
       </div>
       <div class="form-group">
         <%= render :partial => "partials/dropdown",
-          :locals => { :classname => ImageQuality, :column => "name", :label => "quality" } %>
+          :locals => { :classname => ImageQuality.sorted, :column => "name", :label => "quality" } %>
       </div>
     </div>
 
@@ -59,7 +59,7 @@
       </div>
       <div class="form-group">
         <%= render :partial => "partials/dropdown",
-          :locals => { :classname => ImageSubject, :column => "subject" } %>
+          :locals => { :classname => ImageSubject.sorted, :column => "subject" } %>
       </div>
     </div>
   </div> <!-- /row -->
@@ -70,15 +70,15 @@
         <div class="row">
           <div class="col-md-3">
             <%= render :partial => "partials/dropdown",
-              :locals => { :classname => ImageBox, :column => "name", :label => "box" } %>
+              :locals => { :classname => ImageBox.sorted, :column => "name", :label => "box" } %>
             </div>
           <div class="col-md-3">
             <%= render :partial => "partials/dropdown",
-              :locals => { :classname => ImageHumanRemain, :column => "name", :label => "human_remain" } %>
+              :locals => { :classname => ImageHumanRemain.sorted, :column => "name", :label => "human_remain" } %>
           </div>
           <div class="col-md-3">
             <%= render :partial => "partials/dropdown",
-              :locals => { :classname => ImageAssocnoeg, :column => "name", :label => "associated_negative" } %>
+              :locals => { :classname => ImageAssocnoeg.sorted, :column => "name", :label => "associated_negative" } %>
           </div>
         </div> <!-- /row -->
       </div> <!-- /well -->

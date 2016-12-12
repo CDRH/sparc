@@ -3,6 +3,10 @@ class ImageSubject < ActiveRecord::Base
 
   validates_uniqueness_of :subject
 
+  def self.sorted
+    order("subject")
+  end
+
   def to_label
     subject
   end

@@ -4,6 +4,10 @@ class Zone < ActiveRecord::Base
   
   validates_uniqueness_of :number
 
+  def self.sorted
+    order("number")
+  end
+
   def to_label
     number
   end
