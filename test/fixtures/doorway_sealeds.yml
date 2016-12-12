@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 1:
-  doorway_sealed: ??
-2:
   doorway_sealed: n/a
+2:
+  doorway_sealed: "??"
 3:
-  doorway_sealed: no
+  doorway_sealed: "no"
 4:
   doorway_sealed: no data
 5:
@@ -13,4 +13,4 @@
 6:
   doorway_sealed: unknown
 7:
-  doorway_sealed: yes
+  doorway_sealed: "yes"

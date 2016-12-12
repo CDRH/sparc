@@ -1,0 +1,21 @@
+<%# expected local variables:
+  #  classname = class representing db table
+  #  column = database column to use
+  #  label = user label and parameter (use if different than column)
+%>
+
+<div class="form-group">
+  <% label = local_assigns[:label].nil? ? column : label %>
+  <%= label_tag label %>
+
+  <%# dropdown %>
+  <%= select_tag label,
+      options_from_collection_for_select(
+        classname,
+        "id",
+        column,
+        params[label]),
+      :include_blank => true,
+      class: "form-control"
+  %>
+</div>

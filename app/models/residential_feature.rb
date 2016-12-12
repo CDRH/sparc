@@ -3,7 +3,11 @@ class ResidentialFeature < ActiveRecord::Base
 
   validates_uniqueness_of :residential_feature
 
+  def self.sorted
+    order("residential_feature")
+  end
+
   def to_label
-    "#{residential_feature}"
+    residential_feature
   end
 end

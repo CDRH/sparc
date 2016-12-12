@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get '/gallery', to: 'image#index', as: :gallery
   get '/gallery/:number', to: 'image#show', as: :image
   # search and browse
-  get '/search', to: 'static#search', as: :search
+  get '/search', to: 'search#index', as: :search
   get '/search/unit/:number', to: 'search#unit', as: :unit
   get '/search/zone/:number', to: 'search#zone', as: :search_zone
   # placeholders

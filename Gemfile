@@ -56,6 +56,10 @@ gem 'bootstrap-sass'
 
 gem 'kaminari'
 gem 'activerecord-session_store'
+
+# spreadsheet parsing tools
 gem 'roo'
 gem 'roo-xls'
+
+# pagination
 gem 'will_paginate'
