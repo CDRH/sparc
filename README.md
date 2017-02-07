@@ -17,7 +17,9 @@ git clone git@github.com:CDRH/sparc.git
 cd sparc
 ```
 
-Make sure that you have ruby version `2.3.1` installed and operating in this directory.  You may want to also make sure that you are installing gems into a distinct place from other ruby projects using the same version.
+Make sure that you have the latest Ruby 2.3.x version installed and operating in this directory.  You may want to also make sure that you are installing gems into a distinct place from other Ruby projects using the same version. RVM is recommended for this.
+
+The `pg` gem requires `postgresql-devel` be installed on the system before the gem will bundle.
 
 Once you have the correct ruby version, run the following. This may take a few minutes.
 
@@ -32,7 +34,7 @@ Now let's take a minute to set up your secrets file.
 cp config/secrets.demo.yml config/secrets.yml
 ```
 
-Now you can run `rake secret` as many times as you like to generate new secrets for your `config/secrets.yml` file.
+Now you can run `rails secret` as many times as you like to generate new secrets for your `config/secrets.yml` file.
 
 
 ### Database
@@ -41,18 +43,7 @@ This repo is using postgres, but you could switch it out for sqlite or mysql2 if
 
 If you do have postgres installed, you'll need to create a user that rails can use to manage three databases:  production, development, and test.
 
-`su postgres`:
-
-- `psql`:
-```sql
-CREATE ROLE sparc WITH CREATEDB LOGIN PASSWORD 'your_password_here';
-
-# Exit psql shell
-exit  # or Ctrl+D
-
-# Exit bash shell as postgres user
-exit  # Ctrl+D
-```
+`sudo -i -u postgres createuser -d -P sparc`
 
 Now you'll need to set up your database configuration.
 
@@ -101,9 +92,7 @@ rake test
 
 Because of the way that foreign keys are set up currently, in order to run the tests you will have to grant the postgres role you're using superuser privileges on the rails test database.  If you just want to grant sweeping privileges, you can do this:
 
-`su postgres`:
-
-- `psql`:
+`sudo -i -u postgres psql`:
 
 ```sql
 # Add privileges
@@ -114,9 +103,6 @@ ALTER ROLE sparc WITH NOSUPERUSER;
 
 # Exit psql shell
 exit  # or Ctrl+D
-
-# Exit bash shell as postgres user
-exit  # Ctrl+D
 ```
 
 I do not recommend doing the above in a production environment.  In the near future we should figure out how we would like cascading deletes, etc, to work for these PKs.
