@@ -34,7 +34,6 @@ class ImageController < ApplicationController
   def show
     @image = Image.includes(:image_subjects, :units)
       .find_by(image_no: params[:number])
-      .sorted
   end
 
   private
