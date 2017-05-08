@@ -27,7 +27,11 @@ class SearchController < ApplicationController
     units = add_to_query(units, :zones, params["zone"], :zone)
 
     # left joins where not null
-    units = units.includes(params["items"]).where.not(params["items"] => { :id => nil }) if !params["items"].blank?
+    if params["items"].present?
+      params["items"].each do |item|
+        units = units.includes(item).where.not(item => { :id => nil })
+      end
+    end
 
     @result_num = units.size
     @units = units.sorted.paginate(:page => params[:page], :per_page => 20)
