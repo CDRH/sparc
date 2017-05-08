@@ -32,7 +32,7 @@ class Unit < ActiveRecord::Base
   validates_uniqueness_of :unit_no
 
   def self.sorted
-    order("unit_no")
+    order("units.unit_no")
   end
 
   def to_label

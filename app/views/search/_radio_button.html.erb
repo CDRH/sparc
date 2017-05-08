@@ -1,5 +1,5 @@
 <li>
   <%= label_tag "items_#{item}", label %>
-  <% selected = !params["items"].blank? && !params["items"][item].blank? %>
-  <%= radio_button_tag "items", item, selected %>
+  <% selected = params["items"].present? && params["items"].include?(item) %>
+  <%= check_box_tag "items[]", item, selected %>
 </li>
