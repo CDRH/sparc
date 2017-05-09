@@ -242,43 +242,70 @@ end
 ##########
 # Strata #
 ##########
+def seed_strata files
+  puts "Loading Strata Types and Strata..."
 
-if Stratum.all.size < 1
   s = Roo::Excel.new(files[:strata])
 
-  s.sheet('strat descp').each do |row|
-    if row[0] != 'CODE'
-      strat_type = StratType.where(code: row[0])
-      if strat_type.size == 0
-        strat_type = StratType.create(code: row[0], strat_type: row[1])
-      end
-    end
+  strata_type_columns = {
+    # Ordered as seen in spreadsheet
+    # Comment columns not used or saved in database
+    code: "CODE",
+    strat_type: "STRATTYPE"
+  }
+
+  s.sheet('strat descp').each(strata_type_columns) do |row|
+    # Skip header row
+    next if row[:code] == "CODE"
+
+    strata_type = convert_empty_hash_values_to_none(row)
+
+    next if StratType.where(code: strata_type[:code]).size > 0
+
+    StratType.create(strata_type)
   end
 
-  s.sheet('data').each do |row|
-    if row[0] != 'ROOM'
-      # TODO same note here as above, can there be more than one with unit_no?
-      units = Unit.where(:unit_no => row[0])
-      if units.size < 1
-        report "unit", row[0], "stratum #{row[1]}"
-        unit = Unit.create(:unit_no => row[0])
-      else
-        unit = Unit.where(:unit_no => row[0]).first
-      end
-      strata = Stratum.where(:unit_id => unit.id, strat_all: row[1])
-      if strata.size < 1
-        puts "Creating Stratum for #{row[0]} #{row[1]}"
-        stratum = Stratum.create(:unit_id => unit.id, strat_all: row[1])
-      else
-        stratum = Stratum.where(:unit_id => unit.id, strat_all: row[1]).first
-      end
-      st = StratType.where(code: row[2]).first
-      so = StratOccupation.where(occupation: row[5]).first
-      if !so
-        so = StratOccupation.create(occupation: row[5])
-      end
-      stratum.update_columns(strat_all: row[1], strat_alpha: row[2], strat_type_id: st != nil ? st.id : nil, stratum_one: row[3], stratum_two: row[4], strat_occupation_id: so.id, comments: row[6])
+
+  strata_columns = {
+    # Ordered as seen in spreadsheet
+    # Comment columns not used or saved in database
+    room: "ROOM",
+    strat_all: "STRAT-ALL",
+    strat_alpha: "STRAT-ALPHA",
+    stratum_one: "STRATUM 1",
+    stratum_two: "STRATUM 2",
+    occupation: "OCCUPATION",
+    comments: "COMMENTS"
+  }
+
+  s.sheet('data').each(strata_columns) do |row|
+    # Skip header row
+    next if row[:room] == "ROOM"
+
+    stratum = convert_empty_hash_values_to_none(row)
+
+    # TODO same note here as above, can there be more than one with unit_no?
+    if Unit.where(:unit_no => stratum[:room]).size < 1
+      report "unit", stratum[:room], "stratum #{stratum[:strat_all]}"
+      unit = Unit.create(:unit_no => stratum[:room])
+    else
+      unit = Unit.where(:unit_no => stratum[:room]).first
     end
+
+    if Stratum.where(:unit_id => unit.id, strat_all: stratum[:strat_all]).size < 1
+      puts "Creating Stratum for #{stratum[:room]} #{stratum[:strat_all]}"
+      stratum = Stratum.create(:unit_id => unit.id, strat_all: stratum[:strat_all])
+    else
+      stratum = Stratum.where(:unit_id => unit.id, strat_all: stratum[:strat_all]).first
+    end
+
+    st = StratType.where(code: stratum[:strat_alpha]).first
+    so = StratOccupation.where(occupation: stratum[:occupation]).first
+    if !so
+      so = StratOccupation.create(occupation: stratum[:occupation])
+    end
+
+    stratum.update_columns(strat_all: stratum[:strat_all], strat_alpha: stratum[:strat_alpha], strat_type_id: st != nil ? st.id : nil, stratum_one: stratum[:stratum_one], stratum_two: stratum[:stratum_two], strat_occupation_id: so.id, comments: stratum[:comments])
   end
 end
 
@@ -856,6 +883,7 @@ end
 # Seeding Control #
 ###################
 seed_units(files) if Unit.all.size < 1
+seed_strata(files) if Stratum.all.size < 1
 seed_soils(files) if Soil.all.size < 1
 
 File.open("reports/please_check_for_accuracy.txt", "w") do |file|
