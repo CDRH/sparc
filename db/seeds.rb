@@ -312,8 +312,9 @@ end
 ############
 # Features #
 ############
+def seed_features files
+  puts "Loading Features..."
 
-if Feature.all.size < 1
   s = Roo::Excel.new(files[:features])
 
   s.sheet('Data').each do |row|
@@ -369,14 +370,14 @@ if Feature.all.size < 1
   end
 end
 
-#############
-# BoneTools #
-#############
+##############
+# Bone Tools #
+##############
+def seed_bone_tools files
+  puts "Loading Bone Tools..."
 
-if BoneTool.all.size < 1
   s = Roo::Excelx.new(files[:bonetools])
-  puts 'Loading Bonetools'
-  
+
   s.sheet('data').each do |row|
     room = nil
     if row[0] != 'Room'
@@ -417,9 +418,9 @@ end
 #############
 # Eggshells #
 #############
+def seed_eggshells files
+  puts "Loading Eggshells..."
 
-if Eggshell.all.size < 1
-  puts 'Loading Eggshells...'
   s = Roo::Excel.new(files[:eggshells])
 
   s.sheet('eggshell').each do |row|
@@ -460,7 +461,7 @@ end
 # Soils #
 #########
 def seed_soils files
-  puts 'Loading Soils...'
+  puts "Loading Soils..."
 
   s = Roo::Excelx.new(files[:soils])
 
@@ -513,11 +514,10 @@ end
 ###############
 # Perishables #
 ###############
-
 # NOTE:  Perishables may belong to more than one unit
+def seed_perishables files
+  puts "Loading Perishables..."
 
-if Perishable.all.size < 1
-  puts 'Loading Perishables...'
   s = Roo::Excel.new(files[:perishables])
 
   s.sheet('all').each do |entry|
@@ -564,9 +564,9 @@ end
 #############
 # Ornaments #
 #############
+def seed_ornaments files
+  puts "Loading Ornaments..."
 
-if Ornament.all.size < 1
-  puts 'Loading Ornaments...'
   s = Roo::Excelx.new(files[:ornaments])
 
   s.sheet('data').each do |entry|
@@ -618,9 +618,9 @@ end
 ####################
 # Select Artifacts #
 ####################
+def seed_select_artifacts files
+  puts "Loading Select Artifacts..."
 
-if SelectArtifact.all.size < 1
-  puts 'Loading Select Artifacts...'
   s = Roo::Excel.new(files[:select_artifacts])
 
   s.sheet('main data').each do |entry|
@@ -672,9 +672,9 @@ end
 ######################
 # Lithic Inventories #
 ######################
+def seed_lithic_inventories files
+  puts "Loading Lithic Inventory ..."
 
-if LithicInventory.all.size < 1
-  puts 'Loading Lithic Inventory ...'
   s = Roo::Excelx.new(files[:lithic_inventory])
 
   s.sheet('Sheet1').each do |entry|
@@ -714,12 +714,12 @@ if LithicInventory.all.size < 1
   end
 end
 
-####################
-# Bone Inventories #
-####################
+##################
+# Bone Inventory #
+##################
+def seed_bone_inventory files
+  puts "Loading Bone Inventory ..."
 
-if BoneInventory.all.size < 1
-  puts 'Loading Bone Inventory ...'
   s = Roo::Excelx.new(files[:bone_inventory])
 
   s.sheet('Sheet1').each do |entry|
@@ -759,12 +759,12 @@ if BoneInventory.all.size < 1
   end
 end
 
-#######################
-# Ceramic Inventories #
-#######################
+#####################
+# Ceramic Inventory #
+#####################
+def seed_ceramic_inventory files
+  puts "Loading Ceramic Inventory ..."
 
-if CeramicInventory.all.size < 1
-  puts 'Loading Ceramic Inventory ...'
   s = Roo::Excelx.new(files[:ceramic_inventory])
 
   s.sheet('Sheet1').each do |entry|
@@ -807,9 +807,9 @@ end
 ##########
 # Images #
 ##########
+def seed_images files
+  puts "Loading Images..."
 
-if Image.all.size < 1
-  puts 'Loading Images...'
   s = Roo::Excelx.new(files[:images])
 
   # NOTE:  I suspect that some of the single units are actually
@@ -882,10 +882,28 @@ end
 ###################
 # Seeding Control #
 ###################
+# Primary Tables
 seed_units(files) if Unit.all.size < 1
 seed_strata(files) if Stratum.all.size < 1
+seed_features(files) if Feature.all.size < 1
+
+# Inventory Tables
+seed_bone_inventory(files) if BoneInventory.all.size < 1
+seed_ceramic_inventory(files) if CeramicInventory.all.size < 1
+seed_lithic_inventories(files) if LithicInventory.all.size < 1
+
+# Analysis Tables
+seed_bone_tools(files) if BoneTool.all.size < 1
+seed_eggshells(files) if Eggshell.all.size < 1
+seed_ornaments(files) if Ornament.all.size < 1
+seed_perishables(files) if Perishable.all.size < 1
+seed_select_artifacts(files) if SelectArtifact.all.size < 1
 seed_soils(files) if Soil.all.size < 1
 
+# Images
+seed_images(files) if Image.all.size < 1
+
+# Logging
 File.open("reports/please_check_for_accuracy.txt", "w") do |file|
   file.write("Please review the following and verify that units, strata, etc, were added correctly\n")
   @handcheck.each do |added|
