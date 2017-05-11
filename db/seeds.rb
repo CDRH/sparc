@@ -293,6 +293,7 @@ def seed_strata files
 
     stratum = convert_empty_hash_values_to_none(row)
 
+    # Handle foreign key columns
     # TODO same note here as above, can there be more than one with unit_no?
     if Unit.where(:unit_no => stratum[:unit]).size < 1
       report "Unit", stratum[:unit], "Stratum #{stratum[:strat_all]}"
@@ -301,7 +302,6 @@ def seed_strata files
       stratum[:unit] = Unit.where(:unit_no => stratum[:unit]).first
     end
 
-    # Handle foreign key columns
     stratum[:strat_occupation] = create_if_not_exists(StratOccupation, :occupation, stratum[:strat_occupation])
     stratum[:strat_type] = StratType.where(code: stratum[:strat_alpha]).first
 
