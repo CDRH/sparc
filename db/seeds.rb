@@ -107,7 +107,7 @@ end
 def report type, num, source
   # filter out all of the stratum and features that are "none"
   # but keep those that might be attached TO a "none" stratum, unit, etc
-  puts "creating #{type} #{num} for #{source}"
+  puts "\nCreating #{type} #{num} for #{source}"
   if !num.end_with?("none") && !num.end_with?("no data")
     @handcheck << { type: type, num: num, source: source }
   end
@@ -137,8 +137,9 @@ def select_or_create_unit unit, spreadsheet, log=true
       # extract the zone from the unit
       # and create zone if necessary
       zone = select_or_create_zone_from_unit unit, spreadsheet, log
-      room = Unit.create(:unit_no => unit, :zone => zone, :comments => "Created from #{spreadsheet}")
-      report "unit", unit, spreadsheet if log
+      puts unit
+      room = Unit.create(:unit_no => unit, :zone => zone)
+      report "Unit", unit, spreadsheet if log
     else
       room = Unit.where(:unit_no => unit).first
     end
@@ -146,10 +147,10 @@ def select_or_create_unit unit, spreadsheet, log=true
     if Unit.where(:unit_no => "Other").size < 1
       zone = Zone.create(:number => "Other")
       room = Unit.create(:unit_no => "Other", :zone => zone)
-      puts "creating Unit Other for #{unit}"
+      puts "Creating \"Other\" for #{unit}"
     else
       room = Unit.where(:unit_no => 'Other').first
-      puts "using Unit Other for #{unit} from #{spreadsheet}"
+      puts "Using \"Other\" for #{unit}"
     end
   end
   return room
@@ -158,8 +159,8 @@ end
 def select_or_create_zone_from_unit unit_str, spreadsheet, log=true
   num = unit_str.sub(/^0*/, "").sub(/[A-Z\/]*$/, "")
   if Zone.where(:number => num).size < 1
-    puts "creating zone #{num} from #{spreadsheet}"
-    report "zone", num, spreadsheet if log
+    puts "\nZone #{num}:"
+    report "Zone", num, spreadsheet if log
     return Zone.create(:number => num)
   else
     return Zone.where(:number => num).first
@@ -170,17 +171,16 @@ end
 # Units #
 #########
 def seed_units files
-  puts "Loading Room Types and Units..."
-
   s = Roo::Excelx.new(files[:units])
 
+  puts "\n\n\nCreating Room Types\n"
+
   room_type_columns = {
-    # Ordered as seen in spreadsheet
-    # Comment columns not used or saved in database
+    # Order as seen in spreadsheet
     id: "Type No.",
     description: "Description",
     period: "Period",
-    location: "Location",
+    location: "Location"
   }
 
   s.sheet('room typology').each(room_type_columns) do |row|
@@ -192,13 +192,18 @@ def seed_units files
     room_type[:id] = room_type[:id].to_i
     next if RoomType.where(id: room_type[:id]).size > 0
 
+    puts "\n#{room_type[:id]}"
+    puts "  When  : #{room_type[:period]}"
+    puts "  Where : #{room_type[:location]}"
+    puts "  Descrp: #{room_type[:description]}"
     RoomType.create(room_type)
   end
 
 
+  puts "\n\n\nCreating Units\n"
+
   unit_columns = {
-    # Ordered as seen in spreadsheet
-    # Comment columns not used or saved in database
+    # Order as seen in spreadsheet
     unit_no: "Unit No.",
     excavation_status: "Excavation Status",
     unit_occupation: "Occupation",
@@ -214,7 +219,7 @@ def seed_units files
     length: "Length",
     width: "Width",
     floor_area: "Floor Area",
-    comments: "Comments",
+    comments: "Comments"
   }
 
   s.sheet('data').each(unit_columns) do |row|
@@ -223,18 +228,19 @@ def seed_units files
 
     unit = convert_empty_hash_values_to_none(row)
 
+    # Handle foreign key columns
     unit[:excavation_status] = create_if_not_exists(ExcavationStatus, :excavation_status, unit[:excavation_status])
-    unit[:inferred_function] = create_if_not_exists(InferredFunction, :inferred_function, unit[:inferred_function])
-    unit[:intact_roof] = create_if_not_exists(IntactRoof, :intact_roof, unit[:intact_roof])
-    unit[:irregular_shape] = create_if_not_exists(IrregularShape, :irregular_shape, unit[:irregular_shape])
-    unit[:room_type_id] = unit[:salmon_type_code] != "n/a" ? unit[:salmon_type_code].to_i : nil
-    unit[:salmon_sector] = create_if_not_exists(SalmonSector, :salmon_sector, unit[:salmon_sector])
-    unit[:story] = create_if_not_exists(Story, :story, unit[:story])
-    unit[:type_description] = create_if_not_exists(TypeDescription, :type_description, unit[:type_description])
-    unit[:unit_class] = create_if_not_exists(UnitClass, :unit_class, unit[:unit_class])
     unit[:unit_occupation] = create_if_not_exists(UnitOccupation, :occupation, unit[:unit_occupation])
+    unit[:unit_class] = create_if_not_exists(UnitClass, :unit_class, unit[:unit_class])
+    unit[:story] = create_if_not_exists(Story, :story, unit[:story])
+    unit[:intact_roof] = create_if_not_exists(IntactRoof, :intact_roof, unit[:intact_roof])
+    unit[:room_type_id] = unit[:salmon_type_code] != "n/a" ? unit[:salmon_type_code].to_i : nil
+    unit[:type_description] = create_if_not_exists(TypeDescription, :type_description, unit[:type_description])
+    unit[:inferred_function] = create_if_not_exists(InferredFunction, :inferred_function, unit[:inferred_function])
+    unit[:salmon_sector] = create_if_not_exists(SalmonSector, :salmon_sector, unit[:salmon_sector])
+    unit[:irregular_shape] = create_if_not_exists(IrregularShape, :irregular_shape, unit[:irregular_shape])
 
-    u = select_or_create_unit unit[:unit_no], "units", false
+    u = select_or_create_unit unit[:unit_no], "Units", false
     u.update(unit)
   end
 end
