@@ -243,13 +243,12 @@ end
 # Strata #
 ##########
 def seed_strata files
-  puts "Loading Strata Types and Strata..."
-
   s = Roo::Excel.new(files[:strata])
 
+  puts "\n\n\nCreating Strata Types\n"
+
   strata_type_columns = {
-    # Ordered as seen in spreadsheet
-    # Comment columns not used or saved in database
+    # Order as seen in spreadsheet
     code: "CODE",
     strat_type: "STRATTYPE"
   }
@@ -262,50 +261,50 @@ def seed_strata files
 
     next if StratType.where(code: strata_type[:code]).size > 0
 
+    # Output and save
+    puts "#{strata_type[:code]} => #{strata_type[:strat_type]}"
     StratType.create(strata_type)
   end
 
 
+  puts "\n\n\nCreating Strata\n"
+
   strata_columns = {
-    # Ordered as seen in spreadsheet
-    # Comment columns not used or saved in database
-    room: "ROOM",
+    # Order as seen in spreadsheet
+    unit: "ROOM",
     strat_all: "STRAT-ALL",
     strat_alpha: "STRAT-ALPHA",
     stratum_one: "STRATUM 1",
     stratum_two: "STRATUM 2",
-    occupation: "OCCUPATION",
+    strat_occupation: "OCCUPATION",
     comments: "COMMENTS"
   }
 
+  last_unit = ""
   s.sheet('data').each(strata_columns) do |row|
     # Skip header row
-    next if row[:room] == "ROOM"
+    next if row[:unit] == "ROOM"
 
     stratum = convert_empty_hash_values_to_none(row)
 
     # TODO same note here as above, can there be more than one with unit_no?
-    if Unit.where(:unit_no => stratum[:room]).size < 1
-      report "unit", stratum[:room], "stratum #{stratum[:strat_all]}"
-      unit = Unit.create(:unit_no => stratum[:room])
+    if Unit.where(:unit_no => stratum[:unit]).size < 1
+      report "Unit", stratum[:unit], "Stratum #{stratum[:strat_all]}"
+      stratum[:unit] = Unit.create(:unit_no => stratum[:unit])
     else
-      unit = Unit.where(:unit_no => stratum[:room]).first
+      stratum[:unit] = Unit.where(:unit_no => stratum[:unit]).first
     end
 
-    if Stratum.where(:unit_id => unit.id, strat_all: stratum[:strat_all]).size < 1
-      puts "Creating Stratum for #{stratum[:room]} #{stratum[:strat_all]}"
-      stratum = Stratum.create(:unit_id => unit.id, strat_all: stratum[:strat_all])
-    else
-      stratum = Stratum.where(:unit_id => unit.id, strat_all: stratum[:strat_all]).first
-    end
+    # Handle foreign key columns
+    stratum[:strat_occupation] = create_if_not_exists(StratOccupation, :occupation, stratum[:strat_occupation])
+    stratum[:strat_type] = StratType.where(code: stratum[:strat_alpha]).first
 
-    st = StratType.where(code: stratum[:strat_alpha]).first
-    so = StratOccupation.where(occupation: stratum[:occupation]).first
-    if !so
-      so = StratOccupation.create(occupation: stratum[:occupation])
-    end
+    # Output and save
+    puts "\nUnit #{stratum[:unit].unit_no}:" if stratum[:unit].unit_no != last_unit
+    last_unit = stratum[:unit].unit_no
 
-    stratum.update_columns(strat_all: stratum[:strat_all], strat_alpha: stratum[:strat_alpha], strat_type_id: st != nil ? st.id : nil, stratum_one: stratum[:stratum_one], stratum_two: stratum[:stratum_two], strat_occupation_id: so.id, comments: stratum[:comments])
+    puts stratum[:strat_all]
+    Stratum.create(stratum)
   end
 end
 
