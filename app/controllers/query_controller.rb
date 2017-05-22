@@ -1,4 +1,4 @@
-class SearchController < ApplicationController
+class QueryController < ApplicationController
 
   def index
     units = Unit.includes(
