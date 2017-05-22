@@ -44,7 +44,7 @@
                 <%= link_to "Query Data", query_path %>
               </li>
               <li <%= "class=active" if site_section == "documents" %>>
-                <%= link_to "TODO Documents", gallery_path %>
+                <%= link_to "Documents", documents_path %>
               </li>
               <li <%= "class=active" if site_section == "gallery" %>>
                 <%= link_to "Image Gallery", gallery_path %>
@@ -77,8 +77,9 @@
           </div> <!-- /navbar-collapse -->
         </div>
       </div>
-      <%# render "subnav" %>
-      TODO subnav goes here!
+
+      <%= render "subnavs/#{params["controller"]}" %>
+
     </header>
 
     <div class="container">
