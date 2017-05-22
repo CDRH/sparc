@@ -11,14 +11,15 @@ Rails.application.routes.draw do
   get '/explore/early-zoom-links', to: 'explore#early-zoom-links', as: :explore_e_zoom_links
   get '/explore/late', to: 'explore#late', as: :explore_l
   get '/explore/late-zoom', to: 'explore#late-zoom', as: :explore_l_zoom
+  get '/explore/units', to: 'explore#units', as: :units
+  get '/explore/unit/:number', to: 'explore#unit', as: :unit
+  get '/explore/zone/:number', to: 'explore#zone', as: :search_zone
   # images
   get '/gallery', to: 'image#index', as: :gallery
   get '/gallery/:number', to: 'image#show', as: :image
   # search and browse
   get '/query', to: 'query#index', as: :query
   get '/query/artifacts', to: 'query#artifacts', as: :artifacts
-  get '/query/unit/:number', to: 'query#unit', as: :unit
-  get '/query/zone/:number', to: 'query#zone', as: :search_zone
   # placeholders
   get '/about', to: 'static#about', as: :about
 

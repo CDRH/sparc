@@ -1,6 +1,6 @@
 <h1>Search All Units</h1>
 
-<%= form_tag query_path, :method => "get",
+<%= form_tag units_path, :method => "get",
   id: "unit-search-form", role: "form" do %>
   <%= hidden_field_tag "sort", params["sort"] %>
 
