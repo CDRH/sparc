@@ -1,0 +1,31 @@
+/**************************************/
+/* Bootstrap IMPORT */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+/* /Bootstrap IMPORT */
+/**************************************/
+
+/* Added styles */
+
+/* Styles for sparc subnavigation. Will probably want to refine this if we end up keeping it */
+
+.check_all {
+  margin-top: -2px;
+}
+
+.combined_selections .list-group {
+  margin-bottom:  0;;
+}
+
+.sparc_subnavbar.navbar {
+  margin-top: -20px;
+  height: 30px;
+  min-height:30px;
+  padding: 0;
+}
+
+.sparc_subnavbar .nav li a {
+  height:  29px;
+  padding-top:5px;
+  padding-bottom:15px
+}

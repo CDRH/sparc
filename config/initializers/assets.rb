@@ -22,6 +22,8 @@ Rails.application.config.assets.precompile += %w(
 
 # images
 Rails.application.config.assets.precompile += %w(
+  ekko-lightbox.min.css
+  ekko-lightbox.min.js
   images.css
 )
 

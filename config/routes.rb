@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   get '/', to: 'static#index', as: :home
+  # documents
+  get '/documents', to: 'documents#index', as: :documents
   # explore
   get '/explore', to: 'explore#index', as: :explore
   get '/explore/early-zoom', to: 'explore#early-zoom', as: :explore_e_zoom
@@ -13,11 +15,10 @@ Rails.application.routes.draw do
   get '/gallery', to: 'image#index', as: :gallery
   get '/gallery/:number', to: 'image#show', as: :image
   # search and browse
-  get '/search', to: 'search#index', as: :search
-  get '/search/unit/:number', to: 'search#unit', as: :unit
-  get '/search/zone/:number', to: 'search#zone', as: :search_zone
+  get '/query', to: 'query#index', as: :query
+  get '/query/unit/:number', to: 'query#unit', as: :unit
+  get '/query/zone/:number', to: 'query#zone', as: :search_zone
   # placeholders
-  get '/query', to: 'static#query', as: :query
   get '/about', to: 'static#about', as: :about
 
 
