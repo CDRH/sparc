@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get '/', to: 'static#index', as: :home
   # documents
-  get '/documents', to: 'documents#index', as: :documents
+  get '/documents', to: 'document#index', as: :documents
   # explore
   get '/explore', to: 'explore#index', as: :explore
   get '/explore/early-zoom', to: 'explore#early-zoom', as: :explore_e_zoom
@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/gallery/:number', to: 'image#show', as: :image
   # search and browse
   get '/query', to: 'query#index', as: :query
+  get '/query/artifacts', to: 'query#artifacts', as: :artifacts
   get '/query/unit/:number', to: 'query#unit', as: :unit
   get '/query/zone/:number', to: 'query#zone', as: :search_zone
   # placeholders
