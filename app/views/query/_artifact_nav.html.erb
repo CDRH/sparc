@@ -2,6 +2,9 @@
 
 <!-- bootstrap nav pills -->
 <ul class="nav nav-pills">
+  <li role="presentation" <%= "class=active" if sel == "bones"%>>
+    <%= link_to "Bones", bones_path %>
+  </li>
   <li role="presentation" <%= "class=active" if sel == "ceramics"%>>
     <%= link_to "Ceramics", ceramics_path %>
   </li>
