@@ -37,7 +37,8 @@
                 <div class="form-inline">
                   <%# TODO: unit_class will be renamed in the near future %>
                   <div class="checkbox">
-                    <label><input type="checkbox"/> <span><%= u.unit_class %></span></label>
+                    <%= check_box_tag "unittype[#{u.id}]", u.id, checked?(u.id, params["unittype"]), class: "select_all", name: "unittype[]" %>
+                    <%= label_tag "unittype[#{u.id}]", u.unit_class %>
                   </div>
                 </div>
               </li>
@@ -72,7 +73,8 @@
                 <div class="form-inline">
                   <%# TODO: unit_no will be renamed in the near future %>
                   <div class="checkbox">
-                    <label><input type="checkbox"/> <span><%= u.unit_no %></span></label>
+                    <%= check_box_tag "unitno[#{u.id}]", u.id, checked?(u.id, params["unitno"]), class: "select_all", name: "unitno[]" %>
+                    <%= label_tag "unitno[#{u.id}]", u.unit_no %>
                   </div>
                 </div>
               </li>
@@ -167,7 +169,8 @@
                 <div class="form-inline">
                   <div class="checkbox">
                     <%# TODO the column name for feature_group will change in the near future %>
-                    <label><input type="checkbox"/> <span><%= fg.feature_group %></span></label>
+                    <%= check_box_tag "featgrp[#{fg.id}]", fg.id, checked?(fg.id, params["featgrp"]), class: "select_all", name: "featgrp[]" %>
+                    <%= label_tag "featgrp[#{fg.id}]", fg.feature_group %>
                   </div>
                 </div>
               </li>
