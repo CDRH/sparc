@@ -1,0 +1,155 @@
+<h3>Artifact Search</h3>
+
+<%= render "artifact_nav" %>
+
+<br>
+
+<%= form_tag bones_path, method: :get do %>
+  <div class="row">
+    <!-- Ceramics tables and search options -->
+    <div class="col-md-8">
+
+      <!-- bone tool query navigation -->
+      <ul class="nav nav-tabs" id="artifacts_bones_tab">
+        <li class="active"><a href="#all" data-toggle="tab">All</a></li>
+        <li><a href="#tool" data-toggle="tab">Bone Tool</a></li>
+        <li><a href="#inventory" data-toggle="tab">Bone Inventory</a></li>
+      </ul>
+
+      <div class="tab-content">
+
+        <!-- all -->
+        <div class="tab-pane active" id="all">
+          <p>This is where a summary of stuff about bone tools would go and some search options</p>
+          <p>There are <%= pluralize @total_bi, "bone inventory" %> in this database</p>
+          <p>There are <%= pluralize @total_bt, "bone tool" %> in this database</p>
+        </div>
+
+        <!-- bone tools -->
+        <div class="tab-pane" id="tool">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag("bt_spno", "Specimen Number") %>
+                <%= text_field_tag "bt_spno", params["bt_spno"], placeholder: "8107", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag("bt_dep", "Depth") %>
+                <%= text_field_tag "bt_dep", params["bt_dep"], placeholder: "5.1", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag("cmmt", "Comments") %>
+                <%= text_field_tag "cmmt", params["cmmt"], placeholder: "complete pin", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag("bt_grid", "Grid") %>
+                <%= text_field_tag "bt_grid", params["bt_grid"], placeholder: "11W/10N", class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag "bt_type", "Type (this is an example of multiselect)" %>
+                <%= select_tag "bt_type", options_for_select(@bt_type, params["bt_type"]),
+                    class: "form-control", include_blank: true, multiple: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bt_tpcd", "Type Code" %>
+                <%= select_tag "bt_tpcd", options_for_select(@bt_tpcd, params["bt_tpcd"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bt_spcd", "Species Code" %>
+                <%= select_tag "bt_spcd", options_for_select(@bt_spcd, params["bt_spcd"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- inventory -->
+        <div class="tab-pane" id="inventory">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag("bi_site", "Site (I think there is only one...)") %>
+                <%= text_field_tag "bi_site", params["bi_site"], placeholder: "LA 8846", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag("bi_box", "Box (there are 102 boxes)") %>
+                <%= text_field_tag "bi_box", params["bi_box"], placeholder: "B068", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag("bi_fs", "FS#") %>
+                <%= text_field_tag "bi_fs", params["bi_fs"], placeholder: "10079", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag("bi_gdew", "Grid E/W") %>
+                <%= text_field_tag "bi_gdew", params["bi_gdew"], placeholder: "38W", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag("bi_gdns", "Grid N/S") %>
+                <%= text_field_tag "bi_gdns", params["bi_gdns"], placeholder: "21S", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag("bi_expr", "Exact Provenance") %>
+                <%= text_field_tag "bi_expr", params["bi_expr"], placeholder: "44.77E/03.64S", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag("bi_dpbg", "Beginning Depth") %>
+                <%= text_field_tag "bi_dpbg", params["bi_dpbg"], placeholder: "5.5", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag("bi_dpen", "Ending Depth") %>
+                <%= text_field_tag "bi_dpen", params["bi_dpen"], placeholder: "5.5", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag("bi_fldt", "Field Date") %>
+                <%= text_field_tag "bi_fldt", params["bi_fldt"], placeholder: "07/11/1973", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag("bi_excv", "Excavator") %>
+                <%= text_field_tag "bi_excv", params["bi_excv"], placeholder: "lolr", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag("bi_rcky", "Record Key") %>
+                <%= text_field_tag "bi_rcky", params["bi_rcky"], placeholder: "33756", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%# Note: this can be sent from the bone tools tab also %>
+                <%= label_tag("cmmt", "Comments") %>
+                <%= text_field_tag "cmmt", params["cmmt"], placeholder: "complete pin", class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag "bi_quad", "Quad" %>
+                <%= select_tag "bi_quad", options_for_select(@bi_quad, params["bi_quad"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bi_sano", "Quad" %>
+                <%= select_tag "bi_sano", options_for_select(@bi_sano, params["bi_sano"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bi_enby", "Data Entry" %>
+                <%= select_tag "bi_enby", options_for_select(@bi_enby, params["bi_enby"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bi_loca", "Location" %>
+                <%= select_tag "bi_loca", options_for_select(@bi_loca, params["bi_loca"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- /tab-content -->
+    </div> <!-- /col-md-8 -->
+
+    <%= render "artifact_global_opts" %>
+  </div>
+<% end %>

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   # search and browse
   get '/query', to: 'query#index', as: :query
   get '/query/artifacts', to: 'query#artifacts', as: :artifacts
+  get '/query/artifacts/bones', to: 'query#bones', as: :bones
   get '/query/artifacts/ceramics', to: 'query#ceramics', as: :ceramics
   get '/query/artifacts/lithics', to: 'query#lithics', as: :lithics
   get '/query/artifacts/faunal', to: 'query#faunal', as: :faunal
