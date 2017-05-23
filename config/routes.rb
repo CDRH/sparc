@@ -20,12 +20,12 @@ Rails.application.routes.draw do
   # search and browse
   get '/query', to: 'query#index', as: :query
   get '/query/artifacts', to: 'query#artifacts', as: :artifacts
-  get '/query/artifacts/ceramics', to: 'query#ceramics', as: :art_ceramics
-  get '/query/artifacts/lithics', to: 'query#lithics', as: :art_lithics
-  get '/query/artifacts/faunal', to: 'query#faunal', as: :art_faunal
-  get '/query/artifacts/perishables', to: 'query#perishables', as: :art_perishables
-  get '/query/artifacts/ornaments', to: 'query#ornaments', as: :art_ornaments
-  get '/query/artifacts/wood', to: 'query#wood', as: :art_wood
+  get '/query/artifacts/ceramics', to: 'query#ceramics', as: :ceramics
+  get '/query/artifacts/lithics', to: 'query#lithics', as: :lithics
+  get '/query/artifacts/faunal', to: 'query#faunal', as: :faunal
+  get '/query/artifacts/perishables', to: 'query#perishables', as: :perishables
+  get '/query/artifacts/ornaments', to: 'query#ornaments', as: :ornaments
+  get '/query/artifacts/wood', to: 'query#wood', as: :wood
   # placeholders
   get '/about', to: 'static#about', as: :about
 

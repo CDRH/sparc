@@ -19,7 +19,8 @@
     <![endif]-->
   </head>
 
-  <% site_section = "home" %>
+  <% section = @section || params["controller"] %>
+
   <body class=<%# page_classes %>>
     <header class="body_head">
       <div class="navbar navbar-inverse">
@@ -34,26 +35,26 @@
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li <%= "class=active" if site_section == "home" %>>
+              <li <%= "class=active" if section == "static" %>>
                 <%= link_to "SPARC Home", home_path %>
               </li>
-              <li <%= "class=active" if site_section == "explore" %>>
+              <li <%= "class=active" if section == "explore" %>>
                 <%= link_to "Explore Pueblo", explore_path %>
               </li>
-              <li <%= "class=active" if site_section == "query" %>>
+              <li <%= "class=active" if section == "query" %>>
                 <%= link_to "Query Data", query_path %>
               </li>
-              <li <%= "class=active" if site_section == "documents" %>>
+              <li <%= "class=active" if section == "document" %>>
                 <%= link_to "Documents", documents_path %>
               </li>
-              <li <%= "class=active" if site_section == "gallery" %>>
+              <li <%= "class=active" if section == "image" %>>
                 <%= link_to "Image Gallery", gallery_path %>
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li <%= "class=active" if site_section == "about" %>><%= link_to "About", about_path %></li>
+              <li <%= "class=active" if section == "about" %>><%= link_to "About", about_path %></li>
               <%# TODO the below will NOT be part of the final site %>
-              <li class="dropdown">
+              <li class="dropdown <%= "active" if section.include?("admin") %>">
                 <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">Admin DB View<b class="caret"></b></a>
                 <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4" data-turbolinks="false">
                   <li><%= link_to('Units', admin_units_path)%></li>
@@ -78,7 +79,10 @@
         </div>
       </div>
 
-      <%= render "subnavs/#{params["controller"]}" %>
+      <%# TODO can remove this check after active scaffold is removed %>
+      <% if lookup_context.exists?("subnavs/_#{params["controller"]}") %>
+        <%= render "subnavs/#{params["controller"]}" %>
+      <% end %>
 
     </header>
 
