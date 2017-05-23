@@ -1,8 +1,9 @@
 <div class="col-md-4">
 <!-- clear and submit -->
   <div class="pull-right">
-    <button class="btn btn-danger">Clear all search options</button>
-    <button class="btn btn-primary">Submit</button>
+    <%= link_to "Clear all search options", { controller: params["controller"], action: params["action"] }, class: "btn btn-danger" %>
+    <%# note: form begins on specific artifact views (see ceramics, lithics, etc) %>
+    <%= submit_tag "Submit", class: "btn btn-primary" %>
   </div>
   <br>
   <br>
