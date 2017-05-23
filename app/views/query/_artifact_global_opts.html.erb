@@ -11,13 +11,13 @@
 
   <div class="panel-group combined_selections" id="accordion" role="tablist" aria-multiselectable="true">
 
-    <!-- unit filters -->
+    <!-- unit type filters -->
     <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading-unit">
+      <div class="panel-heading" role="tab" id="heading-unittype">
         <h4 class="panel-title">
           <a role="button" data-toggle="collapse" data-parent="#accordion"
-             href="#collapse-unit" aria-expanded="true" aria-controls="collapse-unit">
-            Unit
+             href="#collapse-unittype" aria-expanded="true" aria-controls="collapse-unittype">
+            Unit Type
           </a>
           <div class="form-inline pull-right check_all">
             <div class="checkbox">
@@ -28,7 +28,7 @@
           </div>
         </h4>
       </div>
-      <div id="collapse-unit" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-unit">
+      <div id="collapse-unittype" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-unit">
         <div>
           <ul class="list-group checked-list-box">
             <% UnitClass.all.each do |u| %>
@@ -37,6 +37,41 @@
                   <%# TODO: unit_class will be renamed in the near future %>
                   <div class="checkbox">
                     <label><input type="checkbox"/> <span><%= u.unit_class %></span></label>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- unit num filters -->
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="heading-unitnum">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion"
+             href="#collapse-unitnum" aria-expanded="false" aria-controls="collapse-unitnum">
+            Unit Number
+          </a>
+          <div class="form-inline pull-right check_all">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" class="select_all"/> Select All
+              </label>
+            </div>
+          </div>
+        </h4>
+      </div>
+      <div id="collapse-unitnum" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-num">
+        <div>
+          <ul class="list-group checked-list-box">
+            <% Unit.all.each do |u| %>
+              <li class="list-group-item">
+                <div class="form-inline">
+                  <%# TODO: unit_no will be renamed in the near future %>
+                  <div class="checkbox">
+                    <label><input type="checkbox"/> <span><%= u.unit_no %></span></label>
                   </div>
                 </div>
               </li>
