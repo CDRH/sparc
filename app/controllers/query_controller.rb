@@ -17,6 +17,13 @@ class QueryController < ApplicationController
 
   def ceramics
     @subsection = "artifacts"
+
+    # filter / search population
+    @total_ci = CeramicInventory.count
+    @ci_enby = CeramicInventory.uniq.pluck(:entby).sort
+    @ci_loca = CeramicInventory.uniq.pluck(:location).sort
+    @ci_quad = CeramicInventory.uniq.pluck(:quad).sort
+    @ci_sano = CeramicInventory.uniq.pluck(:sano).sort
   end
 
   def lithics
