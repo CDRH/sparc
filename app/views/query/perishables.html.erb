@@ -1,0 +1,121 @@
+<h3>Artifact Search</h3>
+
+<%= render "artifact_nav" %>
+
+<br>
+
+<%= form_tag perishables_path, method: :get do %>
+  <div class="row">
+    <!-- Perishables table and search options -->
+    <div class="col-md-8">
+
+      <!-- perishables query navigation -->
+      <ul class="nav nav-tabs" id="artifacts_perishables_tab">
+        <li class="active"><a href="#all" data-toggle="tab">All</a></li>
+        <li><a href="#perishables" data-toggle="tab">Perishables</a></li>
+      </ul>
+
+      <div class="tab-content">
+
+        <!-- all -->
+        <div class="tab-pane active" id="all">
+          <p>This is where a summary of stuff about perishables would go and some search options</p>
+          <p>There are <%= pluralize @total_ps, "perishable" %> in this database</p>
+        </div>
+
+        <!-- perishables -->
+        <div class="tab-pane" id="perishables">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag "ps_fsno", "FS #" %>
+                <%= text_field_tag "ps_fsno", params["ps_fsno"], placeholder: "FS 80,004", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "ps_smin", "Salmon Museum ID #" %>
+                <%= text_field_tag "ps_smin", params["ps_smin"], placeholder: "FR80-000233-MSP", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "ps_grid", "Grid" %>
+                <%= text_field_tag "ps_grid", params["ps_grid"], placeholder: "20E/07N", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "ps_dep", "Depth" %>
+                <%= text_field_tag "ps_dep", params["ps_dep"], placeholder: "4.76-5.25", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "ps_sano", "Salmon #" %>
+                <%= text_field_tag "ps_sano", params["ps_sano"], placeholder: "FEA 004A007", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "cmmt", "Comments" %>
+                <%= text_field_tag "cmmt", params["cmmt"], placeholder: "lower mat", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "ps_cmmt", "Comments, Other" %>
+                <%= text_field_tag "ps_cmmt", params["ps_cmmt"], placeholder: "lower mat", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "rkno", "Record Key #" %>
+                <%= text_field_tag "rkno", params["rkno"], placeholder: "58945", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "mlno", "Museum Lab #" %>
+                <%= text_field_tag "mlno", params["mlno"], placeholder: "PER 176", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "fldt", "Field Date" %>
+                <%= text_field_tag "fldt", params["fldt"], placeholder: "8-8-73", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "ps_oran", "Original Analysis" %>
+                <%= text_field_tag "ps_oran", params["ps_oran"], placeholder: "Potter 7-8-79", class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag "ps_quad", "Quad" %>
+                <%= select_tag "ps_quad", options_for_select(@ps_quad, params["ps_quad"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "ps_perd", "Period" %>
+                <%= select_tag "ps_perd", options_for_select(@ps_perd, params["ps_perd"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "ps_type", "Artifact Type" %>
+                <%= select_tag "ps_type", options_for_select(@ps_type, params["ps_type"]),
+                    class: "form-control", include_blank: true, multiple: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "ps_arst", "Structure" %>
+                <%= select_tag "ps_arst", options_for_select(@ps_arst, params["ps_arst"]),
+                    class: "form-control", include_blank: true, multiple: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "ps_ct", "Count" %>
+                <%= select_tag "ps_ct", options_for_select(@ps_ct, params["ps_ct"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "ps_stlc", "Storage Location" %>
+                <%= select_tag "ps_stlc", options_for_select(@ps_stlc, params["ps_stlc"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "ps_exlc", "Exhibit Location" %>
+                <%= select_tag "ps_exlc", options_for_select(@ps_exlc, params["ps_exlc"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- /tab-content -->
+    </div> <!-- /col-md-8 -->
+
+    <%= render "artifact_global_opts" %>
+  </div>
+<% end %>
