@@ -1,10 +1,10 @@
 class BoneTool < ActiveRecord::Base
   belongs_to :bone_tool_occupation
   has_and_belongs_to_many :strata
-  has_many :units, :through => :strata
+  has_many :units, -> { distinct }, :through => :strata
   
   def self.sorted
-    order("fs_no")
+    order("bone_tools.fs_no")
   end
 
   def to_label
