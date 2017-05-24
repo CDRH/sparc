@@ -2,7 +2,7 @@ class QueryController < ApplicationController
 
   def bones
     @subsection = "artifacts"
-    #### FILTERS ####
+    #### SEARCH UI ####
     # tools
     @total_bt = BoneTool.count
     @bt_type = BoneTool.pluck(:tool_type).uniq.sort
@@ -19,7 +19,7 @@ class QueryController < ApplicationController
   def ceramics
     @subsection = "artifacts"
 
-    #### FILTERS ####
+    #### SEARCH UI ####
     # inventory
     @total_ci = CeramicInventory.count
     @ci_enby = CeramicInventory.pluck(:entby).uniq.sort
@@ -31,7 +31,7 @@ class QueryController < ApplicationController
   def eggshells
     @subsection = "artifacts"
 
-    #### FILTERS ####
+    #### SEARCH UI ####
     # eggshells
     @total_eg = Eggshell.count
     @eg_affl = EggshellAffiliation.pluck(:affiliation).uniq.sort
@@ -44,7 +44,7 @@ class QueryController < ApplicationController
   def lithics
     @subsection = "artifacts"
 
-    #### FILTERS ####
+    #### SEARCH UI ####
     # inventory
     @total_li = LithicInventory.count
     @li_artp = LithicInventory.pluck(:art_type).uniq.sort
@@ -57,11 +57,21 @@ class QueryController < ApplicationController
     @subsection = "artifacts"
   end
 
-  def perishables
+  def ornaments
     @subsection = "artifacts"
+
+    #### SEARCH UI ####
+    # ornaments
+    @total_om = Ornament.count
+    @om_anly = Ornament.pluck(:analyst).uniq.sort
+    @om_ct = Ornament.pluck(:count).uniq.sort
+    @om_item = Ornament.pluck(:item).uniq.sort
+    @om_perd = OrnamentPeriod.pluck(:period).uniq.sort
+    @om_phot = Ornament.pluck(:photographer).uniq.sort
+    @om_quad = Ornament.pluck(:quad).uniq.sort
   end
 
-  def ornaments
+  def perishables
     @subsection = "artifacts"
   end
 
