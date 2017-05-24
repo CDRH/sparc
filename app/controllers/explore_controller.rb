@@ -53,7 +53,7 @@ class ExploreController < ApplicationController
   # essentially creating: images.where(:where_rel => { :id => param }).joins(:relationship)
   # most of the time relationship is the same as where_rel but depends on model design
   def add_to_query query_obj, where_rel, param, relationship=where_rel, joins=true
-    if !param.blank?
+    if param.present?
       query_obj = query_obj.where(where_rel => { :id => param })
       query_obj = query_obj.joins(relationship) if joins
     end
