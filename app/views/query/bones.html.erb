@@ -30,16 +30,16 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <%= label_tag "bt_spno", "Specimen Number" %>
-                <%= text_field_tag "bt_spno", params["bt_spno"], placeholder: "8107", class: "form-control" %>
+                <%= label_tag "bt_fsno", "FS #" %>
+                <%= text_field_tag "bt_fsno", params["bt_fsno"], placeholder: "8107", class: "form-control" %>
               </div>
               <div class="form-group">
                 <%= label_tag "bt_dep", "Depth" %>
                 <%= text_field_tag "bt_dep", params["bt_dep"], placeholder: "5.1", class: "form-control" %>
               </div>
               <div class="form-group">
-                <%= label_tag "cmmt", "Comments" %>
-                <%= text_field_tag "cmmt", params["cmmt"], placeholder: "complete pin", class: "form-control" %>
+                <%= label_tag "bt_cmmt", "Comments" %>
+                <%= text_field_tag "bt_cmmt", params["bt_cmmt"], placeholder: "complete pin", class: "form-control" %>
               </div>
               <div class="form-group">
                 <%= label_tag "bt_grid", "Grid" %>
@@ -100,6 +100,31 @@
         </div>
 
       </div> <!-- /tab-content -->
+
+      <div class="search_results">
+        <p>Found <%= pluralize @res.count, "result" %>:</p>
+        <p><strong>NOTE: This is NOT what the search results will look like, but is a workspace while roughing in queries</strong></p>
+        <% @res.each do |res| %>
+          <div class="well">
+            <div class="row">
+              <div class="col-md-2">
+                <strong>FS#: <%= res.field_specimen_no %></strong>
+              </div>
+              <div class="col-md-4">
+                <p><strong>Unit:</strong> <%= res.units.map { |u| u.unit_no }.join("; ") %></p>
+                <p><strong>Occupation:</strong> <%= res.bone_tool_occupation.occupation %></p>
+                <p><strong>Grid:</strong> <%= res.grid %></p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Type:</strong> <%= res.tool_type %></p>
+                <p><strong>Type Code:</strong> <%= res.tool_type_code %></p>
+                <p><strong>Depth:</strong> <%= res.depth %></p>
+                <p><strong>Comments:</strong> <%= res.comments %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div> <!-- /col-md-8 -->
 
     <%= render "artifact_global_opts" %>

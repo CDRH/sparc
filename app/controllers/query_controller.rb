@@ -14,6 +14,21 @@ class QueryController < ApplicationController
     @bi_loca = BoneInventory.pluck(:location).uniq.sort
     @bi_quad = BoneInventory.pluck(:quad).uniq.sort
     @bi_sano = BoneInventory.pluck(:sano).uniq.sort
+
+    #### SEARCH RES ####
+    # tools
+    res = BoneTool.includes(:bone_tool_occupation, :units)
+    #   text searches
+    res = res.where("field_specimen_no LIKE ?", "%#{params['bt_fsno']}%") if params["bt_fsno"].present?
+    res = res.where("depth LIKE ?", "%#{params['bt_dep']}%") if params["bt_dep"].present?
+    res = res.where("comments LIKE ?", "%#{params['bt_cmmt']}%") if params["bt_cmmt"].present?
+    res = res.where("grid LIKE ?", "%#{params['bt_grid']}%") if params["bt_grid"].present?
+    #    match searches
+    res = res.where("tool_type IN (?)", params["bt_type"]) if params["bt_type"].present?
+    res = res.where("tool_type_code = ?", params["bt_tpcd"]) if params["bt_tpcd"].present?
+    res = res.where("species_code = ?", params["bt_spcd"]) if params["bt_spcd"].present?
+
+    @res = res.sorted.paginate(:page => params[:page], :per_page => 20)
   end
 
   def ceramics
