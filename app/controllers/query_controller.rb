@@ -86,7 +86,20 @@ class QueryController < ApplicationController
     @ps_type = Perishable.pluck(:artifact_type).uniq.sort
   end
 
-  def wood
+  def soils
+    @subsection = "artifacts"
+
+    #### SEARCH UI ####
+    # soils (inventory?)
+    @total_sl = Soil.count
+    @sl_artp = ArtType.pluck(:art_type).uniq.sort
+    @sl_enby = Soil.pluck(:data_entry).uniq.sort
+    @sl_loca = Soil.pluck(:location).uniq.sort
+    @sl_quad = Soil.pluck(:quad).uniq.sort
+
+  end
+
+  def woods
     @subsection = "artifacts"
   end
 
