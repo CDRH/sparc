@@ -11,20 +11,20 @@
 
       <!-- soils query navigation -->
       <ul class="nav nav-tabs" id="artifacts_soils_tab">
-        <li class="active"><a href="#all" data-toggle="tab">All</a></li>
-        <li><a href="#inventory" data-toggle="tab">Soils (Inventory?)</a></li>
+        <li><a href="#all" data-toggle="tab">All</a></li>
+        <li class="active"><a href="#inventory" data-toggle="tab">Soils (Inventory?)</a></li>
       </ul>
 
       <div class="tab-content">
 
         <!-- all -->
-        <div class="tab-pane active" id="all">
+        <div class="tab-pane" id="all">
           <p>This is where a summary of stuff about soils would go and some search options</p>
           <p>There are <%= pluralize @total_sl, "soils inventory" %> in this database</p>
         </div>
 
         <!-- inventory -->
-        <div class="tab-pane" id="inventory">
+        <div class="tab-pane active" id="inventory">
           <div class="row">
             <div class="col-md-6">
               <p>TODO: Soils does not have a record key number, but it DOES have a sample number, unlike the rest of the inventories, so the below field set will probably look slightly different</p>

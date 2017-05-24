@@ -11,22 +11,22 @@
 
       <!-- bone tool query navigation -->
       <ul class="nav nav-tabs" id="artifacts_bones_tab">
-        <li class="active"><a href="#all" data-toggle="tab">All</a></li>
-        <li><a href="#tool" data-toggle="tab">Bone Tool</a></li>
+        <li><a href="#all" data-toggle="tab">All</a></li>
+        <li class="active"><a href="#tool" data-toggle="tab">Bone Tool</a></li>
         <li><a href="#inventory" data-toggle="tab">Bone Inventory</a></li>
       </ul>
 
       <div class="tab-content">
 
         <!-- all -->
-        <div class="tab-pane active" id="all">
+        <div class="tab-pane" id="all">
           <p>This is where a summary of stuff about bone tools would go and some search options</p>
           <p>There are <%= pluralize @total_bi, "bone inventory" %> in this database</p>
           <p>There are <%= pluralize @total_bt, "bone tool" %> in this database</p>
         </div>
 
         <!-- bone tools -->
-        <div class="tab-pane" id="tool">
+        <div class="tab-pane active" id="tool">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
