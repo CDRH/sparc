@@ -2,12 +2,13 @@ class QueryController < ApplicationController
 
   def bones
     @subsection = "artifacts"
-    # filter / search population
+    #### FILTERS ####
+    # tools
     @total_bt = BoneTool.count
     @bt_type = BoneTool.pluck(:tool_type).uniq.sort
     @bt_tpcd = BoneTool.pluck(:tool_type_code).uniq.sort
     @bt_spcd = BoneTool.pluck(:species_code).uniq.sort
-
+    # inventory
     @total_bi = BoneInventory.count
     @bi_enby = BoneInventory.pluck(:entby).uniq.sort
     @bi_loca = BoneInventory.pluck(:location).uniq.sort
@@ -18,7 +19,8 @@ class QueryController < ApplicationController
   def ceramics
     @subsection = "artifacts"
 
-    # filter / search population
+    #### FILTERS ####
+    # inventory
     @total_ci = CeramicInventory.count
     @ci_enby = CeramicInventory.pluck(:entby).uniq.sort
     @ci_loca = CeramicInventory.pluck(:location).uniq.sort
@@ -29,16 +31,26 @@ class QueryController < ApplicationController
   def eggshells
     @subsection = "artifacts"
 
-    # filter / search population
+    #### FILTERS ####
+    # eggshells
     @total_eg = Eggshell.count
     @eg_affl = EggshellAffiliation.pluck(:affiliation).uniq.sort
-    @eg_quad = Eggshell.pluck(:quad).uniq.sort
+    @eg_item = EggshellItem.pluck(:item).uniq.sort
     @eg_msdt = Eggshell.pluck(:museum_date).uniq.sort
+    @eg_quad = Eggshell.pluck(:quad).uniq.sort
     @eg_sbin = Eggshell.pluck(:storage_bin).uniq.sort
   end
 
   def lithics
     @subsection = "artifacts"
+
+    #### FILTERS ####
+    # inventory
+    @total_li = LithicInventory.count
+    @li_artp = LithicInventory.pluck(:art_type).uniq.sort
+    @li_ct = LithicInventory.pluck(:lithic_inventory_count).uniq.sort
+    @li_enby = LithicInventory.pluck(:entby).uniq.sort
+    @li_loca = LithicInventory.pluck(:location).uniq.sort
   end
 
   def faunal
