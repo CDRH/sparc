@@ -73,6 +73,17 @@ class QueryController < ApplicationController
 
   def perishables
     @subsection = "artifacts"
+
+    #### SEARCH UI ####
+    # perishables
+    @total_ps = Perishable.count
+    @ps_arst = Perishable.pluck(:artifact_structure).uniq.sort
+    @ps_ct = Perishable.pluck(:perishable_count).uniq.sort
+    @ps_exlc = Perishable.pluck(:exhibit_location).uniq.sort
+    @ps_perd = PerishablePeriod.pluck(:period).uniq.sort
+    @ps_quad = Perishable.pluck(:quad).uniq.sort
+    @ps_stlc = Perishable.pluck(:storage_location).uniq.sort
+    @ps_type = Perishable.pluck(:artifact_type).uniq.sort
   end
 
   def wood
