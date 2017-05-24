@@ -43,7 +43,7 @@
               </div>
               <div class="form-group">
                 <%= label_tag "sl_artp", "Art Type" %>
-                <%= select_tag "sl_artp", options_for_select(@sl_artp, params["sl_artp"]),
+                <%= select_tag "sl_artp", options_from_collection_for_select(@sl_artp, "id", "art_type", params["sl_artp"]),
                     class: "form-control", include_blank: true %>
               </div>
               <div class="form-group">
