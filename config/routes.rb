@@ -27,7 +27,8 @@ Rails.application.routes.draw do
   get '/query/artifacts/faunal', to: 'query#faunal', as: :faunal
   get '/query/artifacts/ornaments', to: 'query#ornaments', as: :ornaments
   get '/query/artifacts/perishables', to: 'query#perishables', as: :perishables
-  get '/query/artifacts/wood', to: 'query#wood', as: :wood
+  get '/query/artifacts/soils', to: 'query#soils', as: :soils
+  get '/query/artifacts/woods', to: 'query#woods', as: :woods
   # placeholders
   get '/about', to: 'static#about', as: :about
 
