@@ -71,55 +71,7 @@
         <div class="tab-pane" id="inventory">
           <div class="row">
             <div class="col-md-6">
-              <div class="form-group">
-                <%= label_tag("bi_site", "Site (I think there is only one...)") %>
-                <%= text_field_tag "bi_site", params["bi_site"], placeholder: "LA 8846", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("bi_box", "Box (there are 102 boxes)") %>
-                <%= text_field_tag "bi_box", params["bi_box"], placeholder: "B068", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("bi_fs", "FS#") %>
-                <%= text_field_tag "bi_fs", params["bi_fs"], placeholder: "10079", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("bi_gdew", "Grid E/W") %>
-                <%= text_field_tag "bi_gdew", params["bi_gdew"], placeholder: "38W", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("bi_gdns", "Grid N/S") %>
-                <%= text_field_tag "bi_gdns", params["bi_gdns"], placeholder: "21S", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("bi_expr", "Exact Provenance") %>
-                <%= text_field_tag "bi_expr", params["bi_expr"], placeholder: "44.77E/03.64S", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("bi_dpbg", "Beginning Depth") %>
-                <%= text_field_tag "bi_dpbg", params["bi_dpbg"], placeholder: "5.5", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("bi_dpen", "Ending Depth") %>
-                <%= text_field_tag "bi_dpen", params["bi_dpen"], placeholder: "5.5", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("bi_fldt", "Field Date") %>
-                <%= text_field_tag "bi_fldt", params["bi_fldt"], placeholder: "07/11/1973", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("bi_excv", "Excavator") %>
-                <%= text_field_tag "bi_excv", params["bi_excv"], placeholder: "lolr", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("bi_rcky", "Record Key") %>
-                <%= text_field_tag "bi_rcky", params["bi_rcky"], placeholder: "33756", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%# Note: this can be sent from the bone tools tab also %>
-                <%= label_tag("cmmt", "Comments") %>
-                <%= text_field_tag "cmmt", params["cmmt"], placeholder: "complete pin", class: "form-control" %>
-              </div>
+              <%= render "inventory_common_fields" %>
             </div>
 
             <div class="col-md-6">

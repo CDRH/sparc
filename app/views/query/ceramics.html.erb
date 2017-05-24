@@ -27,55 +27,7 @@
         <div class="tab-pane" id="inventory">
           <div class="row">
             <div class="col-md-6">
-              <div class="form-group">
-                <%= label_tag("ci_site", "Site (I think there is only one...)") %>
-                <%= text_field_tag "ci_site", params["ci_site"], placeholder: "LA 8846", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("ci_box", "Box") %>
-                <%= text_field_tag "ci_box", params["ci_box"], placeholder: "C511", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("ci_fs", "FS#") %>
-                <%= text_field_tag "ci_fs", params["ci_fs"], placeholder: "33051", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("ci_gdew", "Grid E/W") %>
-                <%= text_field_tag "ci_gdew", params["ci_gdew"], placeholder: "38W", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("ci_gdns", "Grid N/S") %>
-                <%= text_field_tag "ci_gdns", params["ci_gdns"], placeholder: "21S", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("ci_expr", "Exact Provenance") %>
-                <%= text_field_tag "ci_expr", params["ci_expr"], placeholder: "44.77E/03.64S", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("ci_dpbg", "Beginning Depth") %>
-                <%= text_field_tag "ci_dpbg", params["ci_dpbg"], placeholder: "5.5", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("ci_dpen", "Ending Depth") %>
-                <%= text_field_tag "ci_dpen", params["ci_dpen"], placeholder: "5.5", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("ci_fldt", "Field Date") %>
-                <%= text_field_tag "ci_fldt", params["ci_fldt"], placeholder: "07/11/1973", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("ci_excv", "Excavator") %>
-                <%= text_field_tag "ci_excv", params["ci_excv"], placeholder: "lolr", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%= label_tag("ci_rcky", "Record Key") %>
-                <%= text_field_tag "ci_rcky", params["ci_rcky"], placeholder: "33756", class: "form-control" %>
-              </div>
-              <div class="form-group">
-                <%# Note: this can be sent from the bone tools tab also %>
-                <%= label_tag("cmmt", "Comments") %>
-                <%= text_field_tag "cmmt", params["cmmt"], placeholder: "floor surface", class: "form-control" %>
-              </div>
+              <%= render "inventory_common_fields" %>
             </div>
 
             <div class="col-md-6">
