@@ -17,17 +17,20 @@ class QueryController < ApplicationController
 
     #### SEARCH RES ####
     # tools
-    res = BoneTool.includes(:bone_tool_occupation, :units)
-    #   text searches
+    res = BoneTool.includes(
+      :bone_tool_occupation,
+    )
+    # text searches
     res = res.where("field_specimen_no LIKE ?", "%#{params['bt_fsno']}%") if params["bt_fsno"].present?
     res = res.where("depth LIKE ?", "%#{params['bt_dep']}%") if params["bt_dep"].present?
     res = res.where("comments LIKE ?", "%#{params['bt_cmmt']}%") if params["bt_cmmt"].present?
     res = res.where("grid LIKE ?", "%#{params['bt_grid']}%") if params["bt_grid"].present?
-    #    match searches
+    # match searches
     res = res.where("tool_type IN (?)", params["bt_type"]) if params["bt_type"].present?
     res = res.where("tool_type_code = ?", params["bt_tpcd"]) if params["bt_tpcd"].present?
     res = res.where("species_code = ?", params["bt_spcd"]) if params["bt_spcd"].present?
-
+    # join searches
+    res = global_search res
     @res = res.sorted.paginate(:page => params[:page], :per_page => 20)
   end
 
@@ -112,6 +115,15 @@ class QueryController < ApplicationController
 
   def woods
     @subsection = "artifacts"
+  end
+
+  private
+
+  def global_search res
+    res = res.joins(:units)
+    res = res.where(units: { id: params["unitno"] }) if params["unitno"].present?
+    res = res.where(units: { unit_class_id: params["unittype"] }) if params["unittype"].present?
+    return res
   end
 
 end
