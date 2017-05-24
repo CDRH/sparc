@@ -34,8 +34,8 @@ class QueryController < ApplicationController
     #### SEARCH UI ####
     # eggshells
     @total_eg = Eggshell.count
-    @eg_affl = EggshellAffiliation.pluck(:affiliation).uniq.sort
-    @eg_item = EggshellItem.pluck(:item).uniq.sort
+    @eg_affl = EggshellAffiliation.all
+    @eg_item = EggshellItem.all
     @eg_msdt = Eggshell.pluck(:museum_date).uniq.sort
     @eg_quad = Eggshell.pluck(:quad).uniq.sort
     @eg_sbin = Eggshell.pluck(:storage_bin).uniq.sort
@@ -62,7 +62,7 @@ class QueryController < ApplicationController
     @om_anly = Ornament.pluck(:analyst).uniq.sort
     @om_ct = Ornament.pluck(:count).uniq.sort
     @om_item = Ornament.pluck(:item).uniq.sort
-    @om_perd = OrnamentPeriod.pluck(:period).uniq.sort
+    @om_perd = OrnamentPeriod.all
     @om_phot = Ornament.pluck(:photographer).uniq.sort
     @om_quad = Ornament.pluck(:quad).uniq.sort
   end
@@ -76,7 +76,7 @@ class QueryController < ApplicationController
     @ps_arst = Perishable.pluck(:artifact_structure).uniq.sort
     @ps_ct = Perishable.pluck(:perishable_count).uniq.sort
     @ps_exlc = Perishable.pluck(:exhibit_location).uniq.sort
-    @ps_perd = PerishablePeriod.pluck(:period).uniq.sort
+    @ps_perd = PerishablePeriod.all
     @ps_quad = Perishable.pluck(:quad).uniq.sort
     @ps_stlc = Perishable.pluck(:storage_location).uniq.sort
     @ps_type = Perishable.pluck(:artifact_type).uniq.sort
@@ -88,7 +88,7 @@ class QueryController < ApplicationController
     #### SEARCH UI ####
     # soils (inventory?)
     @total_sl = Soil.count
-    @sl_artp = ArtType.pluck(:art_type).uniq.sort
+    @sl_artp = ArtType.all
     @sl_enby = Soil.pluck(:data_entry).uniq.sort
     @sl_loca = Soil.pluck(:location).uniq.sort
     @sl_quad = Soil.pluck(:quad).uniq.sort
