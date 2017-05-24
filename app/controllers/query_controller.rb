@@ -53,10 +53,6 @@ class QueryController < ApplicationController
     @li_loca = LithicInventory.pluck(:location).uniq.sort
   end
 
-  def faunal
-    @subsection = "artifacts"
-  end
-
   def ornaments
     @subsection = "artifacts"
 
