@@ -11,20 +11,20 @@
 
       <!-- eggshell query navigation -->
       <ul class="nav nav-tabs" id="artifacts_ceramics_tab">
-        <li class="active"><a href="#all" data-toggle="tab">All</a></li>
-        <li><a href="#eggs" data-toggle="tab">Eggshells</a></li>
+        <li><a href="#all" data-toggle="tab">All</a></li>
+        <li class="active"><a href="#eggs" data-toggle="tab">Eggshells</a></li>
       </ul>
 
       <div class="tab-content">
 
         <!-- all -->
-        <div class="tab-pane active" id="all">
+        <div class="tab-pane" id="all">
           <p>This is where a summary of stuff about eggshells would go and some search options</p>
           <p>There are <%= pluralize @total_eg, "eggshell" %> in this database</p>
         </div>
 
         <!-- eggs -->
-        <div class="tab-pane" id="eggs">
+        <div class="tab-pane active" id="eggs">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">

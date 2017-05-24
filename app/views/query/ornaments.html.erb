@@ -11,20 +11,20 @@
 
       <!-- ornament query navigation -->
       <ul class="nav nav-tabs" id="artifacts_ornaments_tab">
-        <li class="active"><a href="#all" data-toggle="tab">All</a></li>
-        <li><a href="#ornaments" data-toggle="tab">Ornaments</a></li>
+        <li><a href="#all" data-toggle="tab">All</a></li>
+        <li class="active"><a href="#ornaments" data-toggle="tab">Ornaments</a></li>
       </ul>
 
       <div class="tab-content">
 
         <!-- all -->
-        <div class="tab-pane active" id="all">
+        <div class="tab-pane" id="all">
           <p>This is where a summary of stuff about ornaments would go and some search options</p>
           <p>There are <%= pluralize @total_om, "ornament" %> in this database</p>
         </div>
 
         <!-- ornaments -->
-        <div class="tab-pane" id="ornaments">
+        <div class="tab-pane active" id="ornaments">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">

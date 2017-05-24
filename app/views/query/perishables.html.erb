@@ -11,20 +11,20 @@
 
       <!-- perishables query navigation -->
       <ul class="nav nav-tabs" id="artifacts_perishables_tab">
-        <li class="active"><a href="#all" data-toggle="tab">All</a></li>
-        <li><a href="#perishables" data-toggle="tab">Perishables</a></li>
+        <li><a href="#all" data-toggle="tab">All</a></li>
+        <li class="active"><a href="#perishables" data-toggle="tab">Perishables</a></li>
       </ul>
 
       <div class="tab-content">
 
         <!-- all -->
-        <div class="tab-pane active" id="all">
+        <div class="tab-pane" id="all">
           <p>This is where a summary of stuff about perishables would go and some search options</p>
           <p>There are <%= pluralize @total_ps, "perishable" %> in this database</p>
         </div>
 
         <!-- perishables -->
-        <div class="tab-pane" id="perishables">
+        <div class="tab-pane active" id="perishables">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">

@@ -11,9 +11,9 @@
 
       <!-- lithics query navigation -->
       <ul class="nav nav-tabs" id="myTab">
-        <li class="active"><a href="#all" data-toggle="tab">All</a></li>
+        <li><a href="#all" data-toggle="tab">All</a></li>
         <li><a href="#tool" data-toggle="tab">Lithic Tool</a></li>
-        <li><a href="#inventory" data-toggle="tab">Lithic Inventory</a></li>
+        <li class="active"><a href="#inventory" data-toggle="tab">Lithic Inventory</a></li>
         <li><a href="#debitage" data-toggle="tab">Lithic Debitage</a></li>
         <li><a href="#obsidian" data-toggle="tab">Obsidian</a></li>
       </ul>
@@ -21,7 +21,7 @@
       <div class="tab-content">
 
         <!-- all -->
-        <div class="tab-pane active" id="all">
+        <div class="tab-pane" id="all">
           <p>Information about lithics</p>
         </div>
 
@@ -31,7 +31,7 @@
         </div>
 
         <!-- inventory -->
-        <div class="tab-pane" id="inventory">
+        <div class="tab-pane active" id="inventory">
           <div class="row">
             <div class="col-md-6">
               <%= render "inventory_common_fields" %>
