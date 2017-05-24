@@ -24,7 +24,6 @@ Rails.application.routes.draw do
   get '/query/artifacts/ceramics', to: 'query#ceramics', as: :ceramics
   get '/query/artifacts/eggshells', to: 'query#eggshells', as: :eggshells
   get '/query/artifacts/lithics', to: 'query#lithics', as: :lithics
-  get '/query/artifacts/faunal', to: 'query#faunal', as: :faunal
   get '/query/artifacts/ornaments', to: 'query#ornaments', as: :ornaments
   get '/query/artifacts/perishables', to: 'query#perishables', as: :perishables
   get '/query/artifacts/soils', to: 'query#soils', as: :soils
