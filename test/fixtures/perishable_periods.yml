@@ -1,9 +1,9 @@
-# This is not a complete list of perishable periods
+# This is not a complete list of perishable names
 1:
-  period: Chacoan
+  name: Chacoan
 2:
-  period: historic
+  name: historic
 3:
-  period: intermediate?
+  name: intermediate?
 4:
-  period: intermediate/secondary
+  name: intermediate/secondary

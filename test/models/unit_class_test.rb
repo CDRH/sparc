@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UnitClassTest < ActiveSupport::TestCase
   def setup
-    @item = UnitClass.create(:unit_class => "test")
+    @item = UnitClass.create(:name => "test")
     @item.units << Unit.first
   end
 

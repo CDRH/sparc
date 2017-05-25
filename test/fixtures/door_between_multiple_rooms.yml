@@ -1,10 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 1:
-  door_between_multiple_rooms: n/a
+  name: n/a
 2:
-  door_between_multiple_rooms: no
+  name: no
 3:
-  door_between_multiple_rooms: no data
+  name: no data
 4:
-  door_between_multiple_rooms: yes
+  name: yes

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SelectArtifactOccupationTest < ActiveSupport::TestCase
   def setup
-    @item = SelectArtifactOccupation.create(:occupation => "test")
+    @item = SelectArtifactOccupation.create(:name => "test")
     @item.select_artifacts << SelectArtifact.first
   end
 

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class InferredFunctionTest < ActiveSupport::TestCase
   def setup
-    @item = InferredFunction.create(:inferred_function => "test")
+    @item = InferredFunction.create(:name => "test")
     @item.units << Unit.first
   end
 

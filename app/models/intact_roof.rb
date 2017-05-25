@@ -1,14 +1,14 @@
 class IntactRoof < ActiveRecord::Base
   has_many :units
 
-  validates_uniqueness_of :intact_roof
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("intact_roof")
+    order("name")
   end
 
   def to_label
-    intact_roof
+    name
   end
 
   def authorized_for_update?

@@ -1,13 +1,13 @@
 class EggshellItem < ApplicationRecord
   has_many :eggshells
 
-  validates_uniqueness_of :item
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("item")
+    order("name")
   end
 
   def to_label
-    item
+    name
   end
 end

@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 1:
-  period: Chacoan
+  name: Chacoan
 2:
-  period: Mixed Chacoan and San Juan
+  name: Mixed Chacoan and San Juan
 3:
-  period: no data
+  name: no data
 4:
-  period: Post-San Juan
+  name: Post-San Juan
 5:
-  period: San Juan
+  name: San Juan
 6:
-  period: Unknown
+  name: Unknown

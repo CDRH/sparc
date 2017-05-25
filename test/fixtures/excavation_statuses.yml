@@ -2,19 +2,19 @@
 
 1:
   id: 1
-  excavation_status: completely excavated
+  name: completely excavated
 2:
   id: 2
-  excavation_status: excavated
+  name: excavated
 3:
   id: 3
-  excavation_status: identified
+  name: identified
 4:
   id: 4
-  excavation_status: not used
+  name: not used
 5:
   id: 5
-  excavation_status: outlined
+  name: outlined
 6:
   id: 6
-  excavation_status: partially excavated
+  name: partially excavated

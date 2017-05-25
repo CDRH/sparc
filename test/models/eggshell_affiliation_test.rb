@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EggshellAffiliationTest < ActiveSupport::TestCase
   def setup
-    @item = EggshellAffiliation.create(:affiliation => "test")
+    @item = EggshellAffiliation.create(:name => "test")
     @item.eggshells << Eggshell.first
   end
 

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class FeatureOccupationTest < ActiveSupport::TestCase
     def setup
-    @item = FeatureOccupation.create(:occupation => "test")
+    @item = FeatureOccupation.create(:name => "test")
     @item.features << Feature.first
   end
 

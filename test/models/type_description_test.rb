@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TypeDescriptionTest < ActiveSupport::TestCase
   def setup
-    @item = TypeDescription.create(:type_description => "test")
+    @item = TypeDescription.create(:name => "test")
     @item.units << Unit.first
   end
 

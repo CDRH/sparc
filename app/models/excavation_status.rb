@@ -1,14 +1,14 @@
 class ExcavationStatus < ActiveRecord::Base
   has_many :units
 
-  validates_uniqueness_of :excavation_status
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("excavation_status")
+    order("name")
   end
 
   def to_label
-    excavation_status
+    name
   end
 
   def authorized_for_update?

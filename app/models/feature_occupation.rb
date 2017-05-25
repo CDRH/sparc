@@ -1,13 +1,13 @@
 class FeatureOccupation < ActiveRecord::Base
   has_many :features
 
-  validates_uniqueness_of :occupation
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("occupation")
+    order("name")
   end
 
   def to_label
-    occupation
+    name
   end
 end

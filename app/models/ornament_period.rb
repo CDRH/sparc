@@ -1,13 +1,13 @@
 class OrnamentPeriod < ApplicationRecord
   has_many :ornaments
 
-  validates_uniqueness_of :period
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("period")
+    order("name")
   end
 
   def to_label
-    period
+    name
   end
 end
