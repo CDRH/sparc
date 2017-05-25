@@ -85,6 +85,13 @@ def convert_empty_hash_values_to_none entry_hash
   end
 end
 
+def find_or_create_and_log(source, model, **attributes)
+  model.find_or_create_by(attributes) do |record|
+    record.comments = "Imported from #{source}"
+    report model, attributes.values.first, source
+  end
+end
+
 def get_feature_number feat_str, source
   feature = nil
   if feat_str == "no data" || feat_str == "none"
@@ -104,12 +111,12 @@ def get_feature_number feat_str, source
   return feature
 end
 
-def report type, num, source
+def report category, value, source
   # filter out all of the stratum and features that are "none"
   # but keep those that might be attached TO a "none" stratum, unit, etc
-  puts "\nCreating #{type} #{num} for #{source}"
-  if !num.end_with?("none") && !num.end_with?("no data")
-    @handcheck << { type: type, num: num, source: source }
+  puts "Creating #{category} #{value} for #{source}"
+  if !value.end_with?("none") && !value.end_with?("no data")
+    @handcheck << {category: category, value: value, source: source}
   end
 end
 
@@ -318,60 +325,68 @@ end
 # Features #
 ############
 def seed_features files
-  puts "Loading Features..."
-
   s = Roo::Excel.new(files[:features])
 
-  s.sheet('Data').each do |row|
-    if row[0] != 'Room'
-      fo = create_if_not_exists(FeatureOccupation, :occupation, row[8])
-      ft = create_if_not_exists(FeatureType, :feature_type, row[9])
-      fg = create_if_not_exists(FeatureGroup, :feature_group, row[11])
-      rf = create_if_not_exists(ResidentialFeature, :residential_feature, row[12])
-      td = create_if_not_exists(TShapedDoor, :t_shaped_door, row[14])
-      dm = create_if_not_exists(DoorBetweenMultipleRoom, :door_between_multiple_rooms, row[15])
-      ds = create_if_not_exists(DoorwaySealed, :doorway_sealed, row[16])
-      Feature.create(
-        comments: row[20],
-        depth_height: row[19],
-        door_between_multiple_room: dm ? dm : nil,
-        doorway_sealed: ds ? ds : nil,
-        grid: row[6], depth_m_b_d: row[7],
-        feature_count: row[10],
-        feature_form: row[4],
-        feature_group: fg ? fg : nil,
-        feature_no: row[1],
-        feature_occupation: fo != nil ? fo : nil,
-        feature_type: ft ? ft : nil,
-        floor_association: row[3],
-        length: row[17],
-        location_in_room: row[13],
-        other_associated_features: row[5],
-        residential_feature: rf ? rf : nil,
-        strat: row[2],
-        t_shaped_door: td ? td : nil,
-        unit_no: row[0],
-        width: row[18]
-      )
-    end
-  end
+  puts "\n\n\nCreating Features\n"
 
-  Feature.all.each do |f|
-    a = f.strat.to_s.gsub(';',',').split(',').map{|o| o.strip}
-    # a.uniq!
-    a.each do |o|
-      r = Unit.where(unit_no:f.unit_no).first
-      if r.nil?
-        r = Unit.create(unit_no:f.unit_no, comments: 'imported from feature')
-        report "unit", f.unit_no, "feature #{f.feature_no}"
-      end
-      s = Stratum.where(strat_all: o, unit_id: r.id).first
-      if s.nil?
-        s = Stratum.create(strat_all: o, unit_id: r.id, comments: 'imported stratum none from features')
-        report "stratum", "#{f.unit_no}:#{o}", "feature #{f.feature_no}"
-      end
-      f.strata << s unless f.strata.include?(s)
+  feature_columns = {
+    unit_no: "Room",
+    feature_no: "Feature No.",
+    strat: "Strat",
+    floor_association: "Floor Association",
+    feature_form: "Feature Form",
+    other_associated_features: "Other Associated Features",
+    grid: "Grid",
+    depth_m_b_d: "Depth (MBD)",
+    feature_occupation: "Occupation",
+    feature_type: "Feature Type",
+    feature_count: "Feature Count",
+    feature_group: "Feature Group",
+    residential_feature: "Residential Feature",
+    location_in_room: "Location in Room",
+    t_shaped_door: "T-Shaped Door",
+    door_between_multiple_room: "Door between Multiple Rooms",
+    doorway_sealed: "Doorway Sealed",
+    length: "Length",
+    width: "Width",
+    depth_height: "Depth/Height",
+    comments: "Comments"
+  }
+
+  last_unit = ""
+  s.sheet('Data').each(feature_columns) do |row|
+    # Skip header row
+    next if row[:unit_no] == "Room"
+
+    feature = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+    puts "\nUnit #{feature[:unit_no]}:" if feature[:unit_no] != last_unit
+    last_unit = feature[:unit_no]
+
+    # Handle foreign key columns
+
+    # Process each stratum in Strat column
+    feature[:strata] = []
+    strats = feature[:strat].split(/[;,]/).map{ |strat| strat.strip }
+    strats.uniq!
+    strats.each do |strat|
+      unit = find_or_create_and_log("Feature #{feature[:feature_no]}", Unit, unit_no: feature[:unit_no])
+
+      feature[:strata] << find_or_create_and_log("Feature #{feature[:feature_no]}", Stratum, strat_all: strat, unit_id: unit.id)
     end
+
+    feature[:feature_occupation] = create_if_not_exists(FeatureOccupation, :occupation, feature[:feature_occupation])
+    feature[:feature_type] = create_if_not_exists(FeatureType, :feature_type, feature[:feature_type])
+    feature[:feature_group] = create_if_not_exists(FeatureGroup, :feature_group, feature[:feature_group])
+    feature[:residential_feature] = create_if_not_exists(ResidentialFeature, :residential_feature, feature[:residential_feature])
+    feature[:t_shaped_door] = create_if_not_exists(TShapedDoor, :t_shaped_door, feature[:t_shaped_door])
+    feature[:door_between_multiple_room] = create_if_not_exists(DoorBetweenMultipleRoom, :door_between_multiple_rooms, feature[:door_between_multiple_room])
+    feature[:doorway_sealed] = create_if_not_exists(DoorwaySealed, :doorway_sealed, feature[:doorway_sealed])
+
+    # Output and save
+    puts feature[:feature_no]
+    Feature.create(feature)
   end
 end
 
@@ -912,6 +927,6 @@ seed_images(files) if Image.all.size < 1
 File.open("reports/please_check_for_accuracy.txt", "w") do |file|
   file.write("Please review the following and verify that units, strata, etc, were added correctly\n")
   @handcheck.each do |added|
-    file.write("\n#{added[:type]} number #{added[:num]} was added from the #{added[:source]} spreadsheet")
+    file.write("\n#{added[:category]} #{added[:value]} created from #{added[:source]}")
   end
 end
