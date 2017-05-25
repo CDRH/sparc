@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SalmonSectorTest < ActiveSupport::TestCase
   def setup
-    @item = SalmonSector.create(:salmon_sector => "test")
+    @item = SalmonSector.create(:name => "test")
     @item.units << Unit.first
   end
 

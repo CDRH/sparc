@@ -1,14 +1,14 @@
 class UnitClass < ActiveRecord::Base
   has_many :units
 
-  validates_uniqueness_of :unit_class
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("unit_class")
+    order("name")
   end
 
   def to_label
-    unit_class
+    name
   end
 
   def authorized_for_update?

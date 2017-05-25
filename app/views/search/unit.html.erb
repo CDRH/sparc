@@ -28,9 +28,9 @@
     <div class="row">
       <div class="col-md-6">
         <ul>
-          <li><strong>Class:</strong> <%= @unit.unit_class.unit_class if @unit.unit_class %></li>
-          <li><strong>Excavation Status:</strong> <%= @unit.excavation_status.excavation_status if @unit.excavation_status %></li>
-          <li><strong>Occupation:</strong> <%= @unit.unit_occupation.occupation if @unit.unit_occupation %></li>
+          <li><strong>Class:</strong> <%= @unit.unit_class.name if @unit.unit_class %></li>
+          <li><strong>Excavation Status:</strong> <%= @unit.excavation_status.name if @unit.excavation_status %></li>
+          <li><strong>Occupation:</strong> <%= @unit.unit_occupation.name if @unit.unit_occupation %></li>
         </ul>
       </div>
       <div class="col-md-6">
@@ -47,17 +47,17 @@
     <div class="row">
       <div class="col-md-6">
         <ul>
-          <li>Excavation Status: <%= @unit.excavation_status.excavation_status if @unit.excavation_status %></li>
-          <li>Occupation: <%= @unit.unit_occupation.occupation if @unit.unit_occupation %></li>
-          <li>Class: <%= @unit.unit_class.unit_class if @unit.unit_class %></li>
-          <li>Stories: <%= @unit.story.story if @unit.story %></li>
-          <li>Intact Roof: <%= @unit.intact_roof.intact_roof if @unit.intact_roof %></li>
+          <li>Excavation Status: <%= @unit.excavation_status.name if @unit.excavation_status %></li>
+          <li>Occupation: <%= @unit.unit_occupation.name if @unit.unit_occupation %></li>
+          <li>Class: <%= @unit.unit_class.name if @unit.unit_class %></li>
+          <li>Stories: <%= @unit.story.name if @unit.story %></li>
+          <li>Intact Roof: <%= @unit.intact_roof.name if @unit.intact_roof %></li>
           <li>Type: <%= @unit.salmon_type_code %></li>
-          <li>Type Description: <%= @unit.type_description.type_description if @unit.type_description %></li>
-          <li>Inferred Function: <%= @unit.inferred_function.inferred_function if @unit.inferred_function %></li>
-          <li>Sector: <%= @unit.salmon_sector.salmon_sector if @unit.salmon_sector %></li>
+          <li>Type Description: <%= @unit.type_description.name if @unit.type_description %></li>
+          <li>Inferred Function: <%= @unit.inferred_function.name if @unit.inferred_function %></li>
+          <li>Sector: <%= @unit.salmon_sector.name if @unit.salmon_sector %></li>
           <li>Other Description: <%= @unit.other_description if @unit.other_description %></li>
-          <li>Irregular Shape: <%= @unit.irregular_shape.irregular_shape if @unit.irregular_shape %></li>
+          <li>Irregular Shape: <%= @unit.irregular_shape.name if @unit.irregular_shape %></li>
         </ul>
       </div>
       <!-- ROOM TYPE -->
@@ -123,8 +123,8 @@
       <h4>Strata: <%= link_to stratum.strat_all, admin_stratum_path(stratum.id) %></h4>
       <ul>
         <!-- STRATUM DESC -->
-        <li>Type: <%= stratum.strat_type.strat_type if stratum.strat_type %></li>
-        <li>Occupation: <%= stratum.strat_occupation.occupation if stratum.strat_occupation %></li>
+        <li>Type: <%= stratum.strat_type.name if stratum.strat_type %></li>
+        <li>Occupation: <%= stratum.strat_occupation.name if stratum.strat_occupation %></li>
         <% if stratum.bone_tools.size > 0 %>
           <li>
             <!-- BONE TOOLS -->
@@ -137,7 +137,7 @@
                     <li>Specimen No: <%= item.field_specimen_no %></li>
                     <li>Depth: <%= item.depth %></li>
                     <li>Grid: <%= item.grid %></li>
-                    <li>Occupation: <%= item.bone_tool_occupation.occupation if item.bone_tool_occupation %></li>
+                    <li>Occupation: <%= item.bone_tool_occupation.name if item.bone_tool_occupation %></li>
                     <li>Tool Type: <%= item.tool_type_code %></li>
                     <li>Tool Type: <%= item.tool_type %></li>
                     <li>Species Code: <%= item.species_code %></li>
@@ -167,13 +167,13 @@
                 <%= link_to feature.feature_no, admin_feature_path(feature.id) %>
                 <!-- FEATURE DESC -->
                 <ul>
-                  <li>Door Between Rooms: <%= feature.door_between_multiple_room.door_between_multiple_rooms if feature.door_between_multiple_room %></li>
-                  <li>Doorway Sealed: <%= feature.doorway_sealed.doorway_sealed if feature.doorway_sealed %></li>
-                  <li>Group: <%= feature.feature_group.feature_group if feature.feature_group %></li>
-                  <li>Occupation: <%= feature.feature_occupation.occupation if feature.feature_occupation %></li>
-                  <li>Residential Feature: <%= feature.residential_feature.residential_feature if feature.residential_feature %></li>
-                  <li>T-Shaped Door: <%= feature.t_shaped_door.t_shaped_door if feature.t_shaped_door %></li>
-                  <li>Type: <%= feature.feature_type.feature_type if feature.feature_type %></li>
+                  <li>Door Between Rooms: <%= feature.door_between_multiple_room.name if feature.door_between_multiple_room %></li>
+                  <li>Doorway Sealed: <%= feature.doorway_sealed.name if feature.doorway_sealed %></li>
+                  <li>Group: <%= feature.feature_group.name if feature.feature_group %></li>
+                  <li>Occupation: <%= feature.feature_occupation.name if feature.feature_occupation %></li>
+                  <li>Residential Feature: <%= feature.residential_feature.name if feature.residential_feature %></li>
+                  <li>T-Shaped Door: <%= feature.t_shaped_door.name if feature.t_shaped_door %></li>
+                  <li>Type: <%= feature.feature_type.name if feature.feature_type %></li>
 
                   <!-- EGGSHELLS -->
                   <% if feature.eggshells.size > 0 %>

@@ -1,13 +1,13 @@
 class StratType < ActiveRecord::Base
   has_many :strata
 
-  validates_uniqueness_of :strat_type
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("strat_type")
+    order("name")
   end
 
   def to_label
-    strat_type
+    name
   end
 end

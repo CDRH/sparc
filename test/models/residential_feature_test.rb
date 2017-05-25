@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ResidentialFeatureTest < ActiveSupport::TestCase
   def setup
-    @item = ResidentialFeature.create(:residential_feature => "test")
+    @item = ResidentialFeature.create(:name => "test")
     @item.features << Feature.first
   end
 

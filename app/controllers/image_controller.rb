@@ -26,9 +26,9 @@ class ImageController < ApplicationController
     @result_num = images.size
 
     @images = images.paginate(:page => params[:page], :per_page => 20)
-    @occupations = UnitOccupation.sorted.distinct.joins(:images).order("occupation")
+    @occupations = UnitOccupation.sorted.distinct.joins(:images).order("name")
     @units = Unit.sorted.distinct.joins(:images).order("unit_no")
-    @zones = Zone.sorted.distinct.joins(:images).order("number")
+    @zones = Zone.sorted.distinct.joins(:images).order("name")
   end
 
   def show

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ZoneTest < ActiveSupport::TestCase
   def setup
-    @item = Zone.create(:number => "test")
+    @item = Zone.create(:name => "test")
     feat = Feature.first
     feat.images << Image.first
     strat = Stratum.first

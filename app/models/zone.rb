@@ -2,14 +2,14 @@ class Zone < ActiveRecord::Base
   has_many :units
   has_many :images, :through => :units
   
-  validates_uniqueness_of :number
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("number")
+    order("name")
   end
 
   def to_label
-    number
+    name
   end
 
   def authorized_for_update?

@@ -1,13 +1,13 @@
 class TShapedDoor < ActiveRecord::Base
   has_many :features
 
-  validates_uniqueness_of :t_shaped_door
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("t_shaped_door")
+    order("name")
   end
 
   def to_label
-    t_shaped_door
+    name
   end
 end

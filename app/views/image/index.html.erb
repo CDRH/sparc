@@ -19,7 +19,7 @@
       </div>
       <div class="form-group">
         <%= render :partial => "partials/dropdown",
-          :locals => { :classname => @occupations, :column => "occupation" } %>
+          :locals => { :classname => @occupations, :column => "name" } %>
       </div>
     </div>
 
@@ -35,7 +35,7 @@
       </div>
       <div class="form-group">
         <%= render :partial => "partials/dropdown",
-          :locals => { :classname => @zones, :column => "number", :label => "zone" } %>
+          :locals => { :classname => @zones, :column => "name", :label => "zone" } %>
       </div>
     </div>
 
@@ -59,7 +59,7 @@
       </div>
       <div class="form-group">
         <%= render :partial => "partials/dropdown",
-          :locals => { :classname => ImageSubject.sorted, :column => "subject" } %>
+          :locals => { :classname => ImageSubject.sorted, :column => "name" } %>
       </div>
     </div>
   </div> <!-- /row -->

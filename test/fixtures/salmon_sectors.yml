@@ -1,15 +1,15 @@
 # Incomplete list of salmon sectors
 1:
-  salmon_sector: behind back wall
+  name: behind back wall
 2:
-  salmon_sector: center of pueblo
+  name: center of pueblo
 3:
-  salmon_sector: central
+  name: central
 4:
-  salmon_sector: east
+  name: east
 5:
-  salmon_sector: east of great kiva
+  name: east of great kiva
 6:
-  salmon_sector: in plaza
+  name: in plaza
 7:
-  salmon_sector: n/a
+  name: n/a

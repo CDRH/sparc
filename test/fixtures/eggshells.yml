@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  room: 1
+  unit: 1
   strat: MyString
-  salmon_museum_id_no: MyString
+  salmon_museum_no: MyString
   record_field_key_no: MyString
   grid: MyString
   quad: MyString
@@ -16,9 +16,9 @@ one:
   eggshell_item_id: 1
 
 two:
-  room: 1
+  unit: 1
   strat: MyString
-  salmon_museum_id_no: MyString
+  salmon_museum_no: MyString
   record_field_key_no: MyString
   grid: MyString
   quad: MyString

@@ -1,14 +1,14 @@
 class ImageSubject < ActiveRecord::Base
   has_and_belongs_to_many :images
 
-  validates_uniqueness_of :subject
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("subject")
+    order("name")
   end
 
   def to_label
-    subject
+    name
   end
 
 end

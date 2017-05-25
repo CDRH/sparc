@@ -2,7 +2,7 @@ require 'test_helper'
 
 class OrnamentPeriodTest < ActiveSupport::TestCase
   def setup
-    @item = OrnamentPeriod.create(:period => "test")
+    @item = OrnamentPeriod.create(:name => "test")
     @item.ornaments << Ornament.first
   end
 

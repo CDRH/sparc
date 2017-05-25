@@ -1,15 +1,15 @@
 # incomplete list
 1:
-  type_description: back wall unit
+  name: back wall unit
 2:
-  type_description: gallery
+  name: gallery
 3:
-  type_description: great kiva
+  name: great kiva
 4:
-  type_description: in plaza
+  name: in plaza
 5:
-  type_description: interstitial around Tower Kiva
+  name: interstitial around Tower Kiva
 6:
-  type_description: interstitial room around kiva
+  name: interstitial room around kiva
 7:
-  type_description: large, rectangular
+  name: large, rectangular

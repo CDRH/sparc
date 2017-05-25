@@ -1,10 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 1:
-  irregular_shape: n/a
+  name: n/a
 2:
-  irregular_shape: No
+  name: No
 3:
-  irregular_shape: no data
+  name: no data
 4:
-  irregular_shape: Yes
+  name: Yes

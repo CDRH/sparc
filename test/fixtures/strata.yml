@@ -6,9 +6,9 @@ one:
   strat_all: MyString
   strat_alpha: MyString
   strat_type_id: 1
-  stratum_one: MyString
-  stratum_two: MyString
-  stratum_three: MyString
+  strat_one: MyString
+  strat_two: MyString
+  strat_three: MyString
   strat_occupation_id: 1
   comments: MyText
 
@@ -18,8 +18,8 @@ two:
   strat_all: MyString
   strat_alpha: MyString
   strat_type_id: 1
-  stratum_one: MyString
-  stratum_two: MyString
-  stratum_three: MyString
+  strat_one: MyString
+  strat_two: MyString
+  strat_three: MyString
   strat_occupation_id: 1
   comments: MyText

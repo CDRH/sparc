@@ -2,7 +2,7 @@ require 'test_helper'
 
 class BoneToolOccupationTest < ActiveSupport::TestCase
   def setup
-    @item = BoneToolOccupation.create(:occupation => "test")
+    @item = BoneToolOccupation.create(:name => "test")
     @item.bone_tools << BoneTool.first
   end
 

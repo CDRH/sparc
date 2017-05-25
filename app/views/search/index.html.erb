@@ -12,31 +12,31 @@
         <%= text_field_tag "unit_no", params["unit_no"], placeholder: "BW", class: "form-control" %>
       </div>
       <%= render :partial => "partials/dropdown",
-        :locals => { :column => "excavation_status", :classname => ExcavationStatus.sorted } %>
+        :locals => { :column => "name", :classname => ExcavationStatus.sorted } %>
     </div>
 
     <!-- description -->
     <div class="col-md-3">
       <%= render :partial => "partials/dropdown",
-        :locals => { :column => "intact_roof", :classname => IntactRoof.sorted } %>
+        :locals => { :column => "name", :classname => IntactRoof.sorted } %>
       <%= render :partial => "partials/dropdown",
-        :locals => { :column => "irregular_shape", :classname => IrregularShape.sorted } %>
+        :locals => { :column => "name", :classname => IrregularShape.sorted } %>
     </div>
 
     <!-- other description -->
     <div class="col-md-3">
       <%= render :partial => "partials/dropdown",
-        :locals => { :column => "story", :classname => Story.sorted } %>
+        :locals => { :column => "name", :classname => Story.sorted } %>
       <%= render :partial => "partials/dropdown",
-        :locals => { :column => "occupation", :classname => UnitOccupation.sorted } %>
+        :locals => { :column => "name", :classname => UnitOccupation.sorted } %>
     </div>
 
     <!-- function -->
     <div class="col-md-3">
       <%= render :partial => "partials/dropdown",
-        :locals => { :column => "inferred_function", :classname => InferredFunction.sorted } %>
+        :locals => { :column => "name", :classname => InferredFunction.sorted } %>
       <%= render :partial => "partials/dropdown",
-        :locals => { :column => "unit_class", :classname => UnitClass.sorted } %>
+        :locals => { :column => "name", :classname => UnitClass.sorted } %>
     </div>
 
   </div> <!-- /row -->
@@ -50,9 +50,9 @@
         <!-- location -->
           <div class="col-md-3">
             <%= render :partial => "partials/dropdown",
-              :locals => { :classname => Zone.sorted, :column => "number", :label => "zone" } %>
+              :locals => { :classname => Zone.sorted, :column => "name", :label => "zone" } %>
             <%= render :partial => "partials/dropdown",
-              :locals => { :column => "salmon_sector", :classname => SalmonSector.sorted } %>
+              :locals => { :column => "name", :classname => SalmonSector.sorted } %>
           </div>
 
           <!-- unit type description -->
@@ -65,7 +65,7 @@
               <%= select_tag("room_type", options_for_select(room_types, params["room_type"]), :include_blank => true, class: "form-control") %>
             </div>
             <%= render :partial => "partials/dropdown",
-              :locals => { :column => "type_description", :classname => TypeDescription.sorted } %>
+              :locals => { :column => "name", :classname => TypeDescription.sorted } %>
           </div>
 
           <!-- ? -->
@@ -138,9 +138,9 @@
         <div class="col-md-2">
           <h2><%= link_to unit.unit_no, unit_path(unit.unit_no) %></h2>
           <ul>
-            <li>Occupation: <%= unit.unit_occupation.occupation if unit.unit_occupation %>
-            <li>Type: <%= unit.type_description.type_description if unit.type_description %>
-            <li>Inferred Function: <%= unit.inferred_function.inferred_function if unit.inferred_function %></li>
+            <li>Occupation: <%= unit.unit_occupation.name if unit.unit_occupation %>
+            <li>Type: <%= unit.type_description.name if unit.type_description %>
+            <li>Inferred Function: <%= unit.inferred_function.name if unit.inferred_function %></li>
             <li>Number of Images: <%= unit.images.size %></li>
           </ul>
         </div>

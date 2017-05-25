@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DoorwaySealedTest < ActiveSupport::TestCase
   def setup
-    @item = DoorwaySealed.create(:doorway_sealed => "test")
+    @item = DoorwaySealed.create(:name => "test")
     @item.features << Feature.first
   end
 
@@ -15,9 +15,9 @@ class DoorwaySealedTest < ActiveSupport::TestCase
     all = DoorwaySealed.all
     sorted = DoorwaySealed.sorted
     assert_equal all.size, sorted.size
-    assert_equal all.first.doorway_sealed, "n/a"
-    assert_equal all.last.doorway_sealed, "test"
-    assert_equal sorted.first.doorway_sealed, "??"
-    assert_equal sorted.last.doorway_sealed, "yes"
+    assert_equal all.first.name, "n/a"
+    assert_equal all.last.name, "test"
+    assert_equal sorted.first.name, "??"
+    assert_equal sorted.last.name, "yes"
   end
 end

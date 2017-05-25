@@ -1,22 +1,22 @@
 # there are many more besides these
 1:
   id: 1
-  inferred_function: antechamber
+  name: antechamber
 2:
   id: 2
-  inferred_function: corn mealing
+  name: corn mealing
 3:
   id: 3
-  inferred_function: corn storage
+  name: corn storage
 4:
   id: 4
-  inferred_function: corn storage; ritual artifact storage
+  name: corn storage; ritual artifact storage
 5:
   id: 5
-  inferred_function: fill
+  name: fill
 6:
   id: 6
-  inferred_function: habitation
+  name: habitation
 7:
   id: 7
-  inferred_function: kiva
+  name: kiva

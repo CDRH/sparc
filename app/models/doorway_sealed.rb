@@ -1,13 +1,13 @@
 class DoorwaySealed < ActiveRecord::Base
   has_many :features
 
-  validates_uniqueness_of :doorway_sealed
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("doorway_sealed")
+    order("name")
   end
 
   def to_label
-    doorway_sealed
+    name
   end
 end

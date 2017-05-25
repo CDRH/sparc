@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ExcavationStatusTest < ActiveSupport::TestCase
   def setup
-    @item = ExcavationStatus.create(:excavation_status => "test")
+    @item = ExcavationStatus.create(:name => "test")
     @item.units << Unit.first
   end
 

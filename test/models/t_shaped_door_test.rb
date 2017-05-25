@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TShapedDoorTest < ActiveSupport::TestCase
   def setup
-    @item = TShapedDoor.create(:t_shaped_door => "test")
+    @item = TShapedDoor.create(:name => "test")
     @item.features << Feature.first
   end
 
