@@ -412,44 +412,63 @@ end
 # Bone Inventory #
 ##################
 def seed_bone_inventory files
-  puts "Loading Bone Inventory ..."
-
   s = Roo::Excelx.new(files[:bone_inventory])
 
-  s.sheet('Sheet1').each do |entry|
-    row = convert_empty_to_none(entry)
+  puts "\n\n\nCreating Bone Inventories\n"
 
-    if row[0] != 'SITE'
-      bone_inventory = {}
-      bone_inventory[:site] = row[0]
-      bone_inventory[:box] = row[1]
-      bone_inventory[:fs] = row[2]
-      bone_inventory[:bone_inventory_count] = row[3]
-      bone_inventory[:gridew] = row[6]
-      bone_inventory[:gridns] = row[7]
-      bone_inventory[:quad] = row[8]
-      bone_inventory[:exactprov] = row[9]
-      bone_inventory[:depthbeg] = row[10]
-      bone_inventory[:depthend] = row[11]
-      bone_inventory[:stratalpha] = row[12]
-      bone_inventory[:strat_one] = row[13]
-      bone_inventory[:strat_two] = row[14]
-      bone_inventory[:othstrats] = row[15]
-      bone_inventory[:field_date] = row[16]
-      bone_inventory[:excavator] = row[17]
-      bone_inventory[:art_type] = row[18]
-      bone_inventory[:sano] = row[19]
-      bone_inventory[:recordkey] = row[20]
-      bone_inventory[:comments] = row[22]
-      bone_inventory[:entby] = row[23]
-      bone_inventory[:location] = row[24]
+  columns = {
+    site: "SITE",
+    box: "BOX",
+    fs: "FS",
+    bone_inventory_count: "COUNT",
+    room: "ROOM",
+    stratum: "STRATUM",
+    gridew: "GRIDEW",
+    gridns: "GRIDNS",
+    quad: "QUAD",
+    exactprov: "EXACTPROV",
+    depthbeg: "DEPTHBEG",
+    depthend: "DEPTHEND",
+    stratalpha: "STRATALPHA",
+    strat_one: "STRAT1",
+    strat_two: "STRAT2",
+    othstrats: "OTHSTRATS",
+    field_date: "DATE",
+    excavator: "EXCAVATOR",
+    art_type: "ARTTYPE",
+    sano: "SANO",
+    recordkey: "RECORDKEY",
+    feature: "FEATURE",
+    comments: "COMMENTS",
+    entby: "ENTBY",
+    location: "LOCATION"
+  }
 
-      unit = select_or_create_unit(row[4], 'bone_inventories')
-      # bone_inventory[:room] = unit.unit_no
+  last_room = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:room] == "ROOM"
 
-      bone_inventory_row = BoneInventory.create(bone_inventory)
-      associate_strata_features(unit, row[5], row[21], bone_inventory_row, "bone_inventory")
-    end
+    bone_inv = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+    puts "\nRoom #{bone_inv[:room]}:" if bone_inv[:room] != last_room
+    last_room = bone_inv[:room]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(bone_inv[:room], 'Bone Inventories')
+
+    bone_inv[:features] = []
+    associate_strata_features(unit, bone_inv[:stratum], bone_inv[:feature], bone_inv, "Bone Inventory")
+
+    # TODO Add room, stratum, & feature columns to BoneInventory model
+    bone_inv.delete :room
+    bone_inv.delete :stratum
+    bone_inv.delete :feature
+
+    # Output and create
+    puts bone_inv[:fs]
+    BoneInventory.create(bone_inv)
   end
 end
 
