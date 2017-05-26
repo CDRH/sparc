@@ -633,7 +633,7 @@ def seed_eggshells files
     last_room = eggshell[:room]
 
     # Handle foreign keys
-    unit = select_or_create_unit(row[0], 'eggshells')
+    unit = select_or_create_unit(eggshell[:room], 'eggshells')
 
     eggshell[:features] = []
     associate_strata_features(unit, eggshell[:strat], eggshell[:feature_no], eggshell, "Eggshells")
