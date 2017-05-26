@@ -38,10 +38,12 @@ files = {
 def associate_strata_features unit, aStrata, aFeatures, related_item, source
   # pull out all of the strata from a single column
   strata = aStrata.split(/[;,]/).map { |s| s.strip }
+  strata.uniq!
   strata.each do |strat_no|
     stratum = select_or_create_stratum(unit, strat_no, source)
     # pull out all of the features from a single column
     features = aFeatures.split(/[;,]/).map { |f| f.strip }
+    features.uniq!
     features.each do |feat|
       feat_no = get_feature_number(feat, source)
       # at this point the given stratum should be associated with a specific unit, so
@@ -57,9 +59,9 @@ def associate_strata_features unit, aStrata, aFeatures, related_item, source
       end
       # associate the feature with the strata
       # associate the feature with the specific record (ornament, perishable, etc)
-      stratum.features << feature unless stratum.features.include?(feature)
+      stratum.features << feature
       if related_item
-        related_item.features << feature unless related_item.features.include?(feature)
+        related_item[:features] << feature
       end
     end
   end
@@ -445,41 +447,50 @@ end
 # Eggshells #
 #############
 def seed_eggshells files
-  puts "Loading Eggshells..."
-
   s = Roo::Excel.new(files[:eggshells])
 
-  s.sheet('eggshell').each do |row|
-    room = nil
-    if row[0] != 'Room'
-      room = select_or_create_unit(row[0], 'eggshells')
+  puts "\n\n\nCreating Eggshells\n"
 
-      ea = nil
-      if row[11]
-        ea = create_if_not_exists(EggshellAffiliation, :affiliation, row[11])
-      end
-      ei = nil
-      if row[12]
-        ei = create_if_not_exists(EggshellItem, :item, row[12]) if row[12]
-      end
-      e = Eggshell.create(
-        depth: row[6],
-        eggshell_affiliation: ea.nil? ? nil : ea,
-        eggshell_item: ei.nil? ? nil : ei,
-        feature_no: row[7],
-        field_date: row[10],
-        grid: row[4],
-        museum_date: row[9],
-        quad: row[5],
-        record_field_key_no: row[3],
-        room: row[0],
-        salmon_museum_id_no: row[2],
-        storage_bin: row[8],
-        strat: row[1],
-      )
-     
-      associate_strata_features(room, row[1], row[7], e, "eggshell")
-    end
+  columns = {
+    room: "Room",
+    strat: "Strata",
+    salmon_museum_id_no: "Salmon Museum ID No.",
+    record_field_key_no: "Record (Field) Key No.",
+    grid: "Grid",
+    quad: "Quad",
+    depth: "Depth",
+    feature_no: "Feature No.",
+    storage_bin: "Storage Bin",
+    museum_date: "Museum Date",
+    field_date: "Field Date",
+    eggshell_affiliation: "Affiliation",
+    eggshell_item: "Item"
+  }
+
+  last_room = ""
+  s.sheet('eggshell').each(columns) do |row|
+    # Skip header row
+    next if row[:room] == "Room"
+
+    eggshell = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+    puts "\nRoom #{eggshell[:room]}:" if eggshell[:room] != last_room
+    last_room = eggshell[:room]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(row[0], 'eggshells')
+
+    eggshell[:features] = []
+    associate_strata_features(unit, eggshell[:strat], eggshell[:feature_no], eggshell, "Eggshells")
+
+    eggshell[:eggshell_affiliation] = (eggshell[:eggshell_affiliation]) ? create_if_not_exists(EggshellAffiliation, :affiliation, eggshell[:eggshell_affiliation]) : nil
+
+    eggshell[:eggshell_item] = (eggshell[:eggshell_item]) ? create_if_not_exists(EggshellItem, :item, eggshell[:eggshell_item]) : nil
+
+    # Output and save
+    puts eggshell[:salmon_museum_id_no]
+    Eggshell.create(eggshell)
   end
 end
 
