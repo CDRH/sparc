@@ -395,45 +395,50 @@ end
 # Bone Tools #
 ##############
 def seed_bone_tools files
-  puts "Loading Bone Tools..."
-
   s = Roo::Excelx.new(files[:bonetools])
 
-  s.sheet('data').each do |row|
-    room = nil
-    if row[0] != 'Room'
-      room = select_or_create_unit(row[0], 'bonetools')
+  puts "\n\n\nCreating Bone Tools\n"
 
-      o = create_if_not_exists(BoneToolOccupation, :occupation, row[4])
-      b = BoneTool.create(
-        bone_tool_occupation: o,
-        comments: row[9],
-        depth: row[3],
-        field_specimen_no: row[2],
-        grid: row[5],
-        room: row[0],
-        species_code: row[8],
-        strat: row[1],
-        tool_type: row[7],
-        tool_type_code: row[6]
-      )
-     
-      a = b.strat.to_s.gsub(';', ',').split(',').map{|bstrat| bstrat.strip}
-      a.each do |strats|
-        s = Stratum.where(strat_all: strats, unit_id: room.id).first
-        if s.nil?
-          report "stratum", "#{room.unit_no}:#{row[0]}", "bonetool #{b.id}"
-          s = Stratum.create(
-            strat_all: strats,
-            unit_id: room ? room.id : nil,
-            comments: 'imported none'
-          )
-        end
-        b.strata << s unless b.strata.include?(s)
-      end
+  bonetools_columns = {
+    room: "Room",
+    strat: "Strata",
+    field_specimen_no: "Field Specimen No",
+    depth: "Depth (meters below datum)",
+    bone_tool_occupation: "Occupation",
+    grid: "Grid",
+    tool_type_code: "Tool Type Code",
+    tool_type: "Tool Type",
+    species_code: "Species Code",
+    comments: "Comments"
+  }
+
+  last_room = ""
+  s.sheet('data').each(bonetools_columns) do |row|
+    # Skip header row
+    next if row[:room] == "Room"
+
+    bonetool = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+    puts "\nRoom #{bonetool[:room]}:" if bonetool[:room] != last_room
+    last_room = bonetool[:room]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(bonetool[:room], "Bone Tools")
+
+    bonetool[:bone_tool_occupation] = create_if_not_exists(BoneToolOccupation, :occupation, bonetool[:bone_tool_occupation])
+
+    bonetool[:strata] = []
+    strats = bonetool[:strat].split(/[;,]/).map{ |strat| strat.strip }
+    strats.uniq!
+    strats.each do |strat|
+      bonetool[:strata] << find_or_create_and_log("Bone Tool #{bonetool[:field_specimen_no]}", Stratum, strat_all: strat, unit_id: unit.id)
     end
-  end
 
+    # Output and save
+    puts bonetool[:field_specimen_no]
+    BoneTool.create(bonetool)
+  end
 end
 
 #############
