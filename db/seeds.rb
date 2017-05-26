@@ -124,7 +124,7 @@ def report category, value, source
   # filter out all of the stratum and features that are "none"
   # but keep those that might be attached TO a "none" stratum, unit, etc
   puts "Creating #{category} #{value} for #{source}"
-  if !value.end_with?("none") && !value.end_with?("no data")
+  if !value.to_s.end_with?("none") && !value.to_s.end_with?("no data")
     @handcheck << {category: category, value: value, source: source}
   end
 end
@@ -652,52 +652,60 @@ end
 # Ornaments #
 #############
 def seed_ornaments files
-  puts "Loading Ornaments..."
-
   s = Roo::Excelx.new(files[:ornaments])
 
-  s.sheet('data').each do |entry|
-    row = convert_empty_to_none(entry)
+  puts "\n\n\nCreating Ornaments\n"
 
-    if row[0] != 'Museum Specimen No.'
-      orna = {}
-      orna[:analysis_lab_no] = row[1]
-      orna[:analyst] = row[10]
-      orna[:analyzed] = row[11]
-      orna[:count] = row[13]
-      orna[:depth] = row[6]
-      orna[:field_date] = row[7]
-      orna[:grid] = row[4]
-      orna[:item] = row[14]
-      orna[:museum_specimen_no] = row[0]
-      orna[:photographer] = row[12]
-      orna[:quad] = row[5]
-      orna[:room] = row[2]
+  columns = {
+    museum_specimen_no: "Museum Specimen No.",
+    analysis_lab_no: "Analysis Lab No.",
+    room: "Room",
+    strat: "Strata",
+    grid: "Grid",
+    quad: "Quad",
+    depth: "Depth       (m below datum)",
+    field_date: "Field Date",
+    ornament_period: "PERIOD",
+    feature: "Feature or Selected Artifact (SA) No.",
+    analyst: "Analyst",
+    analyzed: "Analyzed",
+    photographer: "Photographer",
+    count: "Count",
+    item: "Item"
+  }
 
-      unit = select_or_create_unit(row[2], "ornaments")
+  last_room = ""
+  s.sheet('data').each(columns) do |row|
+    next if row[:room] == "Room"
 
-      stratum = Stratum.where(strat_all: row[3], unit_id: unit.id).first
-      if !stratum
-        stratum = Stratum.create(strat_all: row[3], unit_id: unit.id)
-      end
-      # does not link the stratum object directly to ornament, just string
-      orna[:strat] = row[3]
+    ornament = convert_empty_hash_values_to_none(row)
 
-      feature_no = get_feature_number(row[9], "ornaments")
-      feature = Feature.where(feature_no: feature, unit_no: orna[:room]).first
-      if feature.nil?
-        feature = Feature.create(
-          unit_no: orna[:room],
-          feature_no: feature_no
-        )
-        feature.strata << stratum unless feature.strata.include?(stratum)
-      end
-      orna[:feature] = feature
-      orna[:ornament_period_id] = create_if_not_exists(OrnamentPeriod, :period, row[8]).id
+    # Output context for creation
+    puts "\nRoom #{ornament[:room]}:" if ornament[:room] != last_room
+    last_room = ornament[:room]
 
-      # should already have the stratum and feature related, so we're done!
-      Ornament.create(orna)
+    # Handle foreign keys
+    unit = select_or_create_unit(ornament[:room], "Ornaments")
+
+    feature_no = get_feature_number(ornament[:feature], "Ornaments")
+    ornament[:feature] = find_or_create_and_log("Ornament #{ornament[:museum_specimen_no]}", Feature, feature_no: feature_no, unit_no: ornament[:room])
+
+    # TODO Review handling of CSV strat value
+    # Process each stratum in Strat column
+    strats = ornament[:strat].split(/[;,]/).map{ |strat| strat.strip }
+    strats.uniq!
+    strats.each do |strat|
+      stratum = find_or_create_and_log("Ornament #{ornament[:museum_specimen_no]}", Stratum, strat_all: strat, unit_id: unit.id)
+
+      # Associate strata through feature
+      ornament[:feature].strata << stratum
     end
+
+    ornament[:ornament_period] = create_if_not_exists(OrnamentPeriod, :period, ornament[:ornament_period])
+
+    # Output and save
+    puts ornament[:museum_specimen_no]
+    Ornament.create(ornament)
   end
 end
 
