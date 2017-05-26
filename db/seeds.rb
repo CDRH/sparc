@@ -830,13 +830,11 @@ end
 # Soils #
 #########
 def seed_soils files
-  puts "Loading Soils..."
-
   s = Roo::Excelx.new(files[:soils])
 
+  puts "\n\n\nCreating Soils\n"
+
   columns = {
-    # Ordered as seen in spreadsheet
-    # Comment columns not used or saved in database
     site: "SITE",
     room: "ROOM",
     strat: "STRATUM",
@@ -854,29 +852,35 @@ def seed_soils files
     otherstrat: "OTHSTRATS",
     date: "DATE",
     excavator: "EXCAVATOR",
-    arttype: "ARTTYPE",
+    art_type: "ARTTYPE",
     sample_no: "SAMPLE NO",
     comments: "COMMENTS",
     data_entry: "DATA ENTRY",
     location: "LOCATION",
   }
 
-  s.sheet('Sheet1').each(columns) do |row_hash|
-    soil = convert_empty_hash_values_to_none(row_hash)
-
+  last_room = ""
+  s.sheet('Sheet1').each(columns) do |row|
     # Skip header row
-    next if soil[:site] == "SITE"
+    next if row[:room] == "ROOM"
 
-    soil[:art_type_id] = create_if_not_exists(ArtType, :art_type, soil[:arttype]).id
+    soil = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+    puts "\nRoom #{soil[:room]}:" if soil[:room] != last_room
+    last_room = soil[:room]
+
+    # Handle foreign keys
+    soil[:art_type] = create_if_not_exists(ArtType, :art_type, soil[:art_type])
 
     unit = select_or_create_unit(:room, 'soils')
-    soil[:room] = unit.unit_no
 
-    # Delete columns used but not saved in database
-    soil.delete :arttype
+    soil[:features] = []
+    associate_strata_features(unit, soil[:room], soil[:strat], soil, "Soils")
 
+    # Output and save
+    puts soil[:fs]
     soil_record = Soil.create(soil)
-    associate_strata_features(unit, soil[:room], soil[:strat], soil_record, "soil")
   end
 end
 
