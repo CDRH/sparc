@@ -476,44 +476,64 @@ end
 # Ceramic Inventory #
 #####################
 def seed_ceramic_inventory files
-  puts "Loading Ceramic Inventory ..."
-
   s = Roo::Excelx.new(files[:ceramic_inventory])
 
-  s.sheet('Sheet1').each do |entry|
-    row = convert_empty_to_none(entry)
+  puts "\n\n\nCreating Ceramic Inventories\n"
 
-    if row[0] != 'SITE'
-      ceramic_inventory = {}
-      ceramic_inventory[:site] = row[0]
-      ceramic_inventory[:box] = row[1]
-      ceramic_inventory[:fs] = row[2]
-      ceramic_inventory[:ceramic_inventory_count] = row[3]
-      ceramic_inventory[:gridew] = row[6]
-      ceramic_inventory[:gridns] = row[7]
-      ceramic_inventory[:quad] = row[8]
-      ceramic_inventory[:exactprov] = row[9]
-      ceramic_inventory[:depthbeg] = row[10]
-      ceramic_inventory[:depthend] = row[11]
-      ceramic_inventory[:stratalpha] = row[12]
-      ceramic_inventory[:strat_one] = row[13]
-      ceramic_inventory[:strat_two] = row[14]
-      ceramic_inventory[:othstrats] = row[15]
-      ceramic_inventory[:field_date] = row[16]
-      ceramic_inventory[:excavator] = row[17]
-      ceramic_inventory[:art_type] = row[18]
-      ceramic_inventory[:sano] = row[19]
-      ceramic_inventory[:recordkey] = row[20]
-      ceramic_inventory[:comments] = row[22]
-      ceramic_inventory[:entby] = row[23]
-      ceramic_inventory[:location] = row[24]
+  columns = {
+    site: "SITE",
+    box: "BOX",
+    fs: "FS",
+    ceramic_inventory_count: "COUNT",
+    room: "ROOM",
+    stratum: "STRATUM",
+    gridew: "GRIDEW",
+    gridns: "GRIDNS",
+    quad: "QUAD",
+    exactprov: "EXACTPROV",
+    depthbeg: "DEPTHBEG",
+    depthend: "DEPTHEND",
+    stratalpha: "STRATALPHA",
+    strat_one: "STRAT1",
+    strat_two: "STRAT2",
+    othstrats: "OTHSTRATS",
+    field_date: "DATE",
+    excavator: "EXCAVATOR",
+    art_type: "ARTTYPE",
+    sano: "SANO",
+    recordkey: "RECORDKEY",
+    feature: "FEATURE",
+    comments: "COMMENTS",
+    entby: "ENTBY",
+    status: "STATUS",
+    location: "LOCATION"
+  }
 
-      unit = select_or_create_unit(row[4], 'ceramic_inventories')
-      # ceramic_inventory[:room] = unit.unit_no
+  last_room = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:room] == "ROOM"
 
-      ceramic_inventory_row = CeramicInventory.create(ceramic_inventory)
-      associate_strata_features(unit, row[5], row[21], ceramic_inventory_row, "ceramic_inventory")
-    end
+    ceramic_inv = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+    puts "\nRoom #{ceramic_inv[:room]}:" if ceramic_inv[:room] != last_room
+    last_room = ceramic_inv[:room]
+
+    unit = select_or_create_unit(ceramic_inv[:room], "Ceramic Inventories")
+
+    ceramic_inv[:features] = []
+    associate_strata_features(unit, ceramic_inv[:stratum], ceramic_inv[:feature], ceramic_inv, "Ceramic Inventories")
+
+    # TODO Add room, stratum, feature, and status columns to CeramicInventory model
+    ceramic_inv.delete :room
+    ceramic_inv.delete :stratum
+    ceramic_inv.delete :feature
+    ceramic_inv.delete :status
+
+    # Output and save
+    puts ceramic_inv[:fs]
+    CeramicInventory.create(ceramic_inv)
   end
 end
 
