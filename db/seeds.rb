@@ -772,53 +772,57 @@ end
 # Select Artifacts #
 ####################
 def seed_select_artifacts files
-  puts "Loading Select Artifacts..."
-
   s = Roo::Excel.new(files[:select_artifacts])
 
-  s.sheet('main data').each do |entry|
-    row = convert_empty_to_none(entry)
+  puts "\n\n\nCreating Select Artifacts\n"
 
-    if row[0] != 'Room'
-      sa = {}
-      sa[:artifact_count] = row[10]
-      sa[:artifact_no] = row[1]
-      # Note: The below could be parsed into specific features
-      # at which point the select_artifacts_strata table should
-      # be removed and a join set up with features instead
-      sa[:associated_feature_artifacts] = row[5]
-      sa[:comments] = row[12]
-      sa[:depth] = row[7]
-      sa[:floor_association] = row[3]
-      sa[:grid] = row[6]
-      sa[:location_in_room] = row[11]
-      sa[:select_artifact_occupation_id] = create_if_not_exists(SelectArtifactOccupation, :occupation, row[8]).id
-      sa[:select_artifact_type] = row[9]
-      sa[:sa_form] = row[4]
-      # Note: Select Artifacts have an actual relationship with strata
-      # but I'm copying the string from the spreadsheet since there
-      # is a specific database field that seems to be for it
-      sa[:strat] = row[2]
+  columns = {
+    room: "Room",
+    artifact_no: "Artifact No.",
+    strat: "Strat",
+    floor_association: "Floor Association",
+    sa_form: "SA Form",
+    associated_feature_artifacts: "Associated Features/Artifacts",
+    grid: "Grid",
+    depth: "Depth (MBD)",
+    select_artifact_occupation: "Occupation",
+    select_artifact_type: "Type",
+    artifact_count: "Artifact Count",
+    location_in_room: "Location in Room",
+    comments: "Comments"
+  }
 
-      unit = select_or_create_unit(row[0], "select artifacts")
-      sa[:room] = unit.unit_no
+  last_room = ""
+  s.sheet('main data').each(columns) do |row|
+    # Skip header row
+    next if row[:room] == "Room"
 
-      select_artifact = SelectArtifact.create(sa)
+    sa = convert_empty_hash_values_to_none(row)
 
-      sa_strata = row[2].split(/[,;]/).map{ |stratum| stratum.strip }
-      sa_strata.each do |sa_str|
-        stratum = Stratum.where(strat_all: sa_str, unit_id: unit.id).first
-        if stratum.nil?
-          report "stratum", "#{unit.id}:#{sa_str}", "select artifact #{select_artifact.id}"
-          stratum = Stratum.create(
-            strat_all: sa_str,
-            unit: unit,
-            comments: 'imported from select artifacts spreadsheet'
-          )
-        end
-        select_artifact.strata << stratum unless select_artifact.strata.include?(stratum)
-      end
+    # Output context for creation
+    puts "\nRoom #{sa[:room]}:" if sa[:room] != last_room
+    last_room = sa[:room]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(sa[:room], "Select Artifacts")
+
+    # Process each stratum in Strat column
+    sa[:strata] = []
+    strats = sa[:strat].split(/[;,]/).map{ |strat| strat.strip }
+    strats.uniq!
+    strats.each do |strat|
+      sa[:strata] << find_or_create_and_log("Select Artifact #{sa[:artifact_no]}", Stratum, strat_all: strat, unit_id: unit.id)
     end
+
+    sa[:select_artifact_occupation] = create_if_not_exists(SelectArtifactOccupation, :occupation, sa[:select_artifact_occupation])
+
+    # NOTE: associated_feature_artifacts considered for model associations
+    # If done, the select_artifacts_strata table should be removed
+    # and a join set up with features instead
+
+    # Output and create
+    puts sa[:artifact_no]
+    SelectArtifact.create(sa)
   end
 end
 
