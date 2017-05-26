@@ -714,48 +714,57 @@ end
 ###############
 # NOTE:  Perishables may belong to more than one unit
 def seed_perishables files
-  puts "Loading Perishables..."
-
   s = Roo::Excel.new(files[:perishables])
 
-  s.sheet('all').each do |entry|
-    # empty fields should say "none" to standardize
-    row = convert_empty_to_none(entry)
+  puts "\n\n\nCreating Perishables\n"
 
-    if row[0] != 'FS Number'
-      perish = {}
-      perish[:artifact_structure] = row[12]
-      perish[:artifact_type] = row[10]
-      perish[:comments] = row[13]
-      perish[:depth] = row[6]
-      # TODO not sure what column to use for this
-      perish[:exhibit_location] = row[16]
-      perish[:field_date] = row[19]
-      perish[:fs_number] = row[0]
-      perish[:grid] = row[4]
-      perish[:museum_lab_no] = row[18]
-      perish[:original_analysis] = row[20]
-      perish[:other_comments] = row[14]
-      perish[:perishable_count] = row[11]
-      perish[:quad] = row[5]
-      perish[:record_key_no] = row[17]
-      perish[:room] = row[2]
-      perish[:sa_no] = row[9]
-      perish[:salmon_museum_number] = row[1]
-      perish[:storage_location] = row[15]
-      perish[:strat] = row[3]
+  columns = {
+    fs_number: "FS Number",
+    salmon_museum_number: "Salmon Museum No.",
+    room: "Room",
+    strat: "Stratum",
+    grid: "Grid",
+    quad: "Quad",
+    depth: "Depth (m below datum)",
+    asso_feature: "Asso. Feature",
+    perishable_period: "Period",
+    sa_no: "SA No. ",
+    artifact_type: "Artifact Type",
+    perishable_count: "Count",
+    artifact_structure: "Artifact Structure",
+    comments: "Comments",
+    other_comments: "Other Comments",
+    storage_location: "Storage Location",
+    exhibit_location: "Exhibit Location",
+    record_key_no: "Record Key No.",
+    museum_lab_no: "Museum Lab. No",
+    field_date: "Field Date",
+    original_analysis: "Original Analysis "
+  }
 
-      # period
-      perish[:perishable_period_id] = create_if_not_exists(PerishablePeriod, :period, row[8]).id
+  last_room = ""
+  s.sheet('all').each(columns) do |row|
+    next if row[:room] == "Room"
 
-      perish_row = Perishable.create(perish)
+    perishable = convert_empty_hash_values_to_none(row)
 
-      units = row[2].split(/[,;]/).map { |u| u.strip }
-      units.each do |unit_str|
-        unit = select_or_create_unit(unit_str, "perishables")
-        associate_strata_features(unit, row[3], row[7], perish_row, "perishables")
-      end
+    # Output context for creation
+    puts "\nRoom #{perishable[:room]}:" if perishable[:room] != last_room
+    last_room = perishable[:room]
+
+    # Handle foreign keys
+    perishable[:perishable_period] = create_if_not_exists(PerishablePeriod, :period, perishable[:perishable_period])
+
+    perishable[:features] = []
+    units = perishable[:room].split(/[,;]/).map { |u| u.strip }
+    units.each do |unit|
+      unit = select_or_create_unit(unit, "Perishables")
+      associate_strata_features(unit, perishable[:strat], perishable[:asso_feature], perishable, "Perishables")
     end
+
+    # Output and save
+    puts perishable[:fs_number]
+    Perishable.create(perishable)
   end
 end
 
