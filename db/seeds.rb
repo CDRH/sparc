@@ -300,6 +300,10 @@ def seed_strata files
 
     stratum = convert_empty_hash_values_to_none(row)
 
+    # Output context for creation
+    puts "\nUnit #{stratum[:unit]}:" if stratum[:unit] != last_unit
+    last_unit = stratum[:unit]
+
     # Handle foreign key columns
     # TODO same note here as above, can there be more than one with unit_no?
     if Unit.where(:unit_no => stratum[:unit]).size < 1
@@ -313,9 +317,6 @@ def seed_strata files
     stratum[:strat_type] = StratType.where(code: stratum[:strat_alpha]).first
 
     # Output and save
-    puts "\nUnit #{stratum[:unit].unit_no}:" if stratum[:unit].unit_no != last_unit
-    last_unit = stratum[:unit].unit_no
-
     puts stratum[:strat_all]
     Stratum.create(stratum)
   end
