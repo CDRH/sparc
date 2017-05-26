@@ -367,13 +367,13 @@ def seed_features files
 
     # Handle foreign key columns
 
+    unit = find_or_create_and_log("Feature #{feature[:feature_no]}", Unit, unit_no: feature[:unit_no])
+
     # Process each stratum in Strat column
     feature[:strata] = []
     strats = feature[:strat].split(/[;,]/).map{ |strat| strat.strip }
     strats.uniq!
     strats.each do |strat|
-      unit = find_or_create_and_log("Feature #{feature[:feature_no]}", Unit, unit_no: feature[:unit_no])
-
       feature[:strata] << find_or_create_and_log("Feature #{feature[:feature_no]}", Stratum, strat_all: strat, unit_id: unit.id)
     end
 
