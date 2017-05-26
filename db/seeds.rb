@@ -541,44 +541,63 @@ end
 # Lithic Inventories #
 ######################
 def seed_lithic_inventories files
-  puts "Loading Lithic Inventory ..."
-
   s = Roo::Excelx.new(files[:lithic_inventory])
 
-  s.sheet('Sheet1').each do |entry|
-    row = convert_empty_to_none(entry)
+  puts "\n\n\nCreating Lithic Inventories\n"
 
-    if row[0] != 'SITE'
-      lithic = {}
-      lithic[:site] = row[0]
-      lithic[:box] = row[1]
-      lithic[:fs] = row[2]
-      lithic[:lithic_inventory_count] = row[3]
-      lithic[:gridew] = row[6]
-      lithic[:gridns] = row[7]
-      lithic[:quad] = row[8]
-      lithic[:exactprov] = row[9]
-      lithic[:depthbeg] = row[10]
-      lithic[:depthend] = row[11]
-      lithic[:stratalpha] = row[12]
-      lithic[:strat_one] = row[13]
-      lithic[:strat_two] = row[14]
-      lithic[:othstrats] = row[15]
-      lithic[:field_date] = row[16]
-      lithic[:excavator] = row[17]
-      lithic[:art_type] = row[18]
-      lithic[:sano] = row[19]
-      lithic[:recordkey] = row[20]
-      lithic[:comments] = row[22]
-      lithic[:entby] = row[23]
-      lithic[:location] = row[24]
+  columns = {
+    site: "SITE",
+    box: "BOX",
+    fs: "FS",
+    lithic_inventory_count: "COUNT",
+    room: "ROOM",
+    stratum: "STRATUM",
+    gridew: "GRIDEW",
+    gridns: "GRIDNS",
+    quad: "QUAD",
+    exactprov: "EXACTPROV",
+    depthbeg: "DEPTHBEG",
+    depthend: "DEPTHEND",
+    stratalpha: "STRATALPHA",
+    strat_one: "STRAT1",
+    strat_two: "STRAT2",
+    othstrats: "OTHSTRATS",
+    field_date: "DATE",
+    excavator: "EXCAVATOR",
+    art_type: "ARTTYPE",
+    sano: "SANO",
+    recordkey: "RECORDKEY",
+    feature: "FEATURE",
+    comments: "COMMENTS",
+    entby: "ENTBY",
+    location: "LOCATION"
+  }
 
-      unit = select_or_create_unit(row[4], 'lithic_inventories')
-      # lithic[:room] = unit.unit_no
+  last_room = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:room] == "ROOM"
 
-      lithic_row = LithicInventory.create(lithic)
-      associate_strata_features(unit, row[5], row[21], lithic_row, "lithic_inventory")
-    end
+    lithic = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+    puts "\nRoom #{lithic[:room]}:" if lithic[:room] != last_room
+    last_room = lithic[:room]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(lithic[:room], "Lithic Inventories")
+
+    lithic[:features] = []
+    associate_strata_features(unit, lithic[:stratum], lithic[:feature], lithic, "Lithic Inventories")
+
+    # TODO Add room, stratum, and feature columns to LithicInventory model
+    lithic.delete :room
+    lithic.delete :stratum
+    lithic.delete :feature
+
+    # Output and save
+    puts lithic[:fs]
+    LithicInventory.create(lithic)
   end
 end
 
