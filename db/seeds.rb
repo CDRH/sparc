@@ -7,25 +7,25 @@
 
 files = {
   # Primary Tables
-  units: 'xls/Unit_Summary_CCHedits.xlsx',
-  strata: 'xls/Strata.xls',
-  features: 'xls/Features_CCHedits.xls',
+  units: 'xls/UnitSummary2017-CCH.xlsx',
+  strata: 'xls/Strata2017.xls',
+  features: 'xls/Features2017.xls',
 
   # Inventory Tables
-  bone_inventory: 'xls/BoneInventory2016-CCH.xlsx',
-  ceramic_inventory: 'xls/CeramicInventory2016.xlsx',
-  lithic_inventory: 'xls/LithicInventory2016.xlsx',
+  bone_inventory: 'xls/Bone Inventory PARTIAL 11 rows.xlsx',
+  ceramic_inventory: 'xls/Ceramic Inventory 2017.xlsx',
+  lithic_inventory: 'xls/LithicInventory2017.xlsx',
 
   # Analysis Tables
-  bonetools: 'xls/Bone_tool_DB.xlsx',
-  eggshells: 'xls/Eggshell_CCHedits.xls',
-  ornaments: 'xls/Ornament_DB_CCHedits.xlsx',
-  perishables: 'xls/Perishables-CCHedits-Nov13-2016.xls',
-  select_artifacts: 'xls/Select_Artifacts.xls',
-  soils: 'xls/Soil_Master.xlsx',
+  bonetools: 'xls/BoneToolDB.xlsx',
+  eggshells: 'xls/Eggshell2017.xls',
+  ornaments: 'xls/OrnamentDB2017.xlsx',
+  perishables: 'xls/Perishables2017.xls',
+  select_artifacts: 'xls/SelectArtifacts2017.xls',
+  soils: 'xls/SoilMaster2017.xlsx',
 
   # Images
-  images: 'xls/Images.xlsx'
+  images: 'xls/old/Images.xlsx'
 }
 
 # will contain an array of hashes
@@ -298,10 +298,10 @@ def seed_strata files
   strata_columns = {
     # Order as seen in spreadsheet
     unit: "ROOM",
-    strat_all: "STRAT-ALL",
-    strat_alpha: "STRAT-ALPHA",
-    stratum_one: "STRATUM 1",
-    stratum_two: "STRATUM 2",
+    strat_all: "STRATUM",
+    strat_alpha: "STRATUM-ALPHA",
+    strat_one: "STRATUM 1",
+    strat_two: "STRATUM 2",
     strat_occupation: "OCCUPATION",
     comments: "COMMENTS"
   }
@@ -346,7 +346,8 @@ def seed_features files
   feature_columns = {
     unit_no: "Room",
     feature_no: "Feature No.",
-    strat: "Strat",
+    strat: "Stratum",
+    strat_other: "Other Strata",
     floor_association: "Floor Association",
     feature_form: "Feature Form",
     other_associated_features: "Other Associated Features",
@@ -398,6 +399,9 @@ def seed_features files
     feature[:door_between_multiple_room] = create_if_not_exists(DoorBetweenMultipleRoom, :name, feature[:door_between_multiple_room])
     feature[:doorway_sealed] = create_if_not_exists(DoorwaySealed, :name, feature[:doorway_sealed])
 
+    # TODO Add strat_other column
+    feature.delete :strat_other
+
     # Output and save
     puts feature[:feature_no]
     Feature.create(feature)
@@ -424,20 +428,18 @@ def seed_bone_inventory files
     room: "ROOM",
     stratum: "STRATUM",
     strat_other: "OTHER STRATA",
+    feature: "FEATURE NO",
     sa_no: "SA NO",
     grid_ew: "GRID EW",
     grid_ns: "GRID NS",
     quad: "QUAD",
-    stratalpha: "STRATALPHA",
-    strat_one: "STRAT1",
-    strat_two: "STRAT2",
     exact_prov: "EXACTPROV",
     depth_begin: "DEPTHBEG",
     depth_end: "DEPTHEND",
     field_date: "DATE",
     excavator: "EXCAVATOR",
     art_type: "ARTTYPE",
-    feature: "FEATURE",
+    # Empty column
     record_field_key_no: "RECORDKEY",
     comments: "COMMENTS",
     entered_by: "ENTBY",
@@ -466,6 +468,8 @@ def seed_bone_inventory files
     bone_inv.delete :stratum
     bone_inv.delete :feature
 
+    # TODO Remove strat_alpha, strat_one, and strat_two from schema
+
     # Output and create
     puts bone_inv[:fs_no]
     BoneInventory.create(bone_inv)
@@ -488,20 +492,17 @@ def seed_ceramic_inventory files
     room: "ROOM",
     stratum: "STRATUM",
     strat_other: "OTHER STRATA",
+    feature: "FEATURE",
     sa_no: "SA NO",
     grid_ew: "GRID EW",
     grid_ns: "GRID NS",
     quad: "QUAD",
-    stratalpha: "STRATALPHA",
-    strat_one: "STRAT1",
-    strat_two: "STRAT2",
-    field_date: "DATE",
     exact_prov: "EXACTPROV",
     depth_begin: "DEPTHBEG",
     depth_end: "DEPTHEND",
+    field_date: "FIELD DATE",
     excavator: "EXCAVATOR",
     art_type: "ARTTYPE",
-    feature: "FEATURE",
     record_field_key_no: "RECORDKEY",
     comments: "COMMENTS",
     entered_by: "ENTBY",
@@ -531,6 +532,8 @@ def seed_ceramic_inventory files
     ceramic_inv.delete :feature
     ceramic_inv.delete :status
 
+    # TODO Remove strat_alpha, strat_one, and strat_two from schema
+
     # Output and save
     puts ceramic_inv[:fs_no]
     CeramicInventory.create(ceramic_inv)
@@ -550,25 +553,23 @@ def seed_lithic_inventories files
     box: "BOX",
     fs_no: "FS No.",
     count: "COUNT",
-"ROOM",
+    room: "ROOM",
     stratum: "STRATUM",
-    strat_    strat_other: "OTHSTRATS",
+    strat_other: "OTHSTRATS",
+    feature: "FEATURE",
     sa_no: "SA NO",
     grid_ew: "GRIDEW",
     grid_ns: "GRIDNS",
-grid_ew: "GRIDEW",t_one: "STRAT1",
-    strat_two: "STRAT2",
+    quad: "QUAD",
     exact_prov: "EXACTPROV",
-    depth    exact_prov: "EXACTPROV",
     depth_begin: "DEPTHBEG",
     depth_end: "DEPTHEND",
-h_end: "DEPTHEND",
     field_date: "DATE",
     excavator: "EXCAVATOR",
-    ar record_field_key_no: "R    record_field_key_no: "RECORDKEY",
-ECORDKEY",
-    comments: "    entered_by: "ENTBY",
-ed_by: "ENTBY",
+    art_type: "ARTTYPE",
+    record_field_key_no: "RECORDKEY",
+    comments: "COMMENTS",
+    entered_by: "ENTBY",
     location: "LOCATION"
   }
 
@@ -594,8 +595,10 @@ ed_by: "ENTBY",
     lithic.delete :stratum
     lithic.delete :feature
 
-    #     puts lithic[:fs_no]
-uts lithic[:fs_no]
+    # TODO Remove strat_alpha, strat_one, and strat_two from schema
+
+    # Output and save
+    puts lithic[:fs_no]
     LithicInventory.create(lithic)
   end
 end
@@ -613,8 +616,11 @@ def seed_bone_tools files
   puts "\n\n\nCreating Bone Tools\n"
 
   bonetools_columns = {
-    strat: "Strata",
     unit: "Room",
+    strat: "Stratum",
+    strat_other: "Other Strata ",
+    feature: "Feature No",
+    sa_no: "Select Artifact No.",
     fs_no: "FS No",
     depth: "Depth (meters below datum)",
     bone_tool_occupation: "Occupation",
@@ -648,6 +654,11 @@ def seed_bone_tools files
       bonetool[:strata] << find_or_create_and_log("Bone Tool #{bonetool[:fs_no]}", Stratum, strat_all: strat, unit_id: unit.id)
     end
 
+    # TODO Add strat_other, feature, and sa_no to schema
+    bonetool.delete :strat_other
+    bonetool.delete :feature
+    bonetool.delete :sa_no
+
     # Output and save
     puts bonetool[:fs_no]
     BoneTool.create(bonetool)
@@ -663,19 +674,20 @@ def seed_eggshells files
   puts "\n\n\nCreating Eggshells\n"
 
   columns = {
-    strat: "Strata",
-    record_field_key_no: "Record (Field) Key No.",
-    grid: "Grid",
-    quad: "Quad",
-    depth: "Depth",
-    feature_no: "Feature No.",
-    storage_bin: "Storage Bin",
-    museum_date: "Museum Date",
-    field_date: "Field Date",
-    eggshell_affiliation: "Affiliation",
-    eggshell_item: "Item"
     unit: "ROOM",
+    strat: "STRATUM",
+    strat_other: "OTHER STRATA",
+    feature_no: "FEATURE NO",
+    grid: "GRID",
+    quad: "QUAD",
+    depth: "DEPTH",
+    record_field_key_no: "RECORD KEY NO",
     salmon_museum_no: "SALMON MUSEUM ID NO",
+    storage_bin: "STORAGE BIN",
+    museum_date: "MUSEUM DATE",
+    field_date: "FIELD DATE",
+    eggshell_affiliation: "AFFILIATION",
+    eggshell_item: "ITEM"
   }
 
   last_unit = ""
@@ -699,6 +711,8 @@ def seed_eggshells files
 
     eggshell[:eggshell_item] = (eggshell[:eggshell_item]) ? create_if_not_exists(EggshellItem, :name, eggshell[:eggshell_item]) : nil
 
+    # TODO Add strat_other to schema
+    eggshell.delete :strat_other
 
     # Output and save
     puts eggshell[:salmon_museum_no]
@@ -715,21 +729,23 @@ def seed_ornaments files
   puts "\n\n\nCreating Ornaments\n"
 
   columns = {
-    analysis_lab_no: "Analysis Lab No.",
-    strat: "Strata",
-    grid: "Grid",
-    quad: "Quad",
-    depth: "Depth       (m below datum)",
-    field_date: "Field Date",
     salmon_museum_no: "MUSEUM SPECIMEN NO",
+    analysis_lab_no: "ANALYSIS LAB NO",
     unit: "UNIT",
+    strat: "STRATUM",
+    strat_other: "OTHER STRATA",
+    feature: "FEATURE NO",
+    sa_no: "SA NO",
+    grid: "GRID",
+    quad: "QUAD",
+    depth: "DEPTH       (m below datum)",
+    field_date: "FIELD DATE",
     ornament_period: "PERIOD",
-    feature: "Feature or Selected Artifact (SA) No.",
-    analyst: "Analyst",
-    analyzed: "Analyzed",
-    photographer: "Photographer",
-    count: "Count",
-    item: "Item"
+    analyst: "ANALYST",
+    analyzed: "ANALYZED",
+    photographer: "PHOTOGRAPHER",
+    count: "COUNT",
+    item: "ITEM"
   }
 
   last_unit = ""
@@ -761,6 +777,10 @@ def seed_ornaments files
 
     ornament[:ornament_period] = create_if_not_exists(OrnamentPeriod, :name, ornament[:ornament_period])
 
+    # TODO Add strat_other and sa_no to schema
+    ornament.delete :strat_other
+    ornament.delete :sa_no
+
     # Output and save
     puts ornament[:salmon_museum_no]
     Ornament.create(ornament)
@@ -781,12 +801,13 @@ def seed_perishables files
     salmon_museum_number: "Salmon Museum No.",
     unit: "Room",
     strat: "Stratum",
+    strat_other: "Other Strata",
     associated_feature: "Feature No",
+    sa_no: "SA No",
+    perishable_period: "Period",
     grid: "Grid",
     quad: "Quad",
     depth: "Depth (m below datum)",
-    perishable_period: "Period",
-    sa_no: "SA No. ",
     artifact_type: "Artifact Type",
     count: "Count",
     artifact_structure: "Artifact Structure",
@@ -820,6 +841,9 @@ def seed_perishables files
       associate_strata_features(unit, perishable[:strat], perishable[:associated_feature], perishable, "Perishables")
     end
 
+    # TODO Add strat_other to schema
+    perishable.delete :strat_other
+
     # Output and save
     puts perishable[:fs_no]
     Perishable.create(perishable)
@@ -835,12 +859,14 @@ def seed_select_artifacts files
   puts "\n\n\nCreating Select Artifacts\n"
 
   columns = {
-    artifact_no: "Artifact No.",
-    strat: "Strat",
     unit: "Room",
+    artifact_no: "Artifact No",
+    strat: "Stratum",
+    strat_other: "Other Strata",
+    feature: "Feature No",
     floor_association: "Floor Association",
     sa_form: "SA Form",
-    associated_feature_artifacts: "Associated Features/Artifacts",
+    associated_feature_artifacts: "Associated SA Artifacts",
     grid: "Grid",
     depth: "Depth (MBD)",
     select_artifact_occupation: "Occupation",
@@ -878,6 +904,10 @@ def seed_select_artifacts files
     # If done, the select_artifacts_strata table should be removed
     # and a join set up with features instead
 
+    # TODO Add strat_other and feature to schema
+    sa.delete :strat_other
+    sa.delete :feature
+
     # Output and create
     puts sa[:artifact_no]
     SelectArtifact.create(sa)
@@ -898,9 +928,9 @@ def seed_soils files
     strat: "STRATUM",
     strat_other: "OTHER STRATA",
     feature_key: "FEATURE",
+    sa_no: "SA NO",
     fs_no: "FS NO",
     box: "BOX",
-    period: "PERIOD",
     count: "COUNT",
     grid_ew: "GRIDEW",
     grid_ns: "GRIDNS",
@@ -935,6 +965,9 @@ def seed_soils files
 
     soil[:features] = []
     associate_strata_features(unit, soil[:unit], soil[:strat], soil, "Soils")
+
+    # TODO Add sa_no to and remove period from to schema
+    soil.delete :sa_no
 
     # Output and save
     puts soil[:fs_no]
