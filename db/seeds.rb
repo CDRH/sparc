@@ -161,7 +161,7 @@ def select_or_create_unit unit, spreadsheet, log=true
     end
   else
     if Unit.where(:unit_no => "Other").size < 1
-      zone = Zone.create(:number => "Other")
+      zone = Zone.create(name: "Other")
       room = Unit.create(:unit_no => "Other", :zone => zone)
       puts "Creating \"Other\" for #{unit}"
     else
@@ -174,12 +174,12 @@ end
 
 def select_or_create_zone_from_unit unit_str, spreadsheet, log=true
   num = unit_str.sub(/^0*/, "").sub(/[A-Z\/]*$/, "")
-  if Zone.where(:number => num).size < 1
+  if Zone.where(name: num).size < 1
     puts "\nZone #{num}:"
     report "Zone", num, spreadsheet if log
-    return Zone.create(:number => num)
+    return Zone.create(name: num)
   else
-    return Zone.where(:number => num).first
+    return Zone.where(name: num).first
   end
 end
 
@@ -249,16 +249,16 @@ def seed_units files
     unit = convert_empty_hash_values_to_none(row)
 
     # Handle foreign key columns
-    unit[:excavation_status] = create_if_not_exists(ExcavationStatus, :excavation_status, unit[:excavation_status])
-    unit[:unit_occupation] = create_if_not_exists(UnitOccupation, :occupation, unit[:unit_occupation])
-    unit[:unit_class] = create_if_not_exists(UnitClass, :unit_class, unit[:unit_class])
-    unit[:story] = create_if_not_exists(Story, :story, unit[:story])
-    unit[:intact_roof] = create_if_not_exists(IntactRoof, :intact_roof, unit[:intact_roof])
+    unit[:excavation_status] = create_if_not_exists(ExcavationStatus, :name, unit[:excavation_status])
+    unit[:unit_occupation] = create_if_not_exists(UnitOccupation, :name, unit[:unit_occupation])
+    unit[:unit_class] = create_if_not_exists(UnitClass, :name, unit[:unit_class])
+    unit[:story] = create_if_not_exists(Story, :name, unit[:story])
+    unit[:intact_roof] = create_if_not_exists(IntactRoof, :name, unit[:intact_roof])
     unit[:room_type_id] = unit[:salmon_type_code] != "n/a" ? unit[:salmon_type_code].to_i : nil
-    unit[:type_description] = create_if_not_exists(TypeDescription, :type_description, unit[:type_description])
-    unit[:inferred_function] = create_if_not_exists(InferredFunction, :inferred_function, unit[:inferred_function])
-    unit[:salmon_sector] = create_if_not_exists(SalmonSector, :salmon_sector, unit[:salmon_sector])
-    unit[:irregular_shape] = create_if_not_exists(IrregularShape, :irregular_shape, unit[:irregular_shape])
+    unit[:type_description] = create_if_not_exists(TypeDescription, :name, unit[:type_description])
+    unit[:inferred_function] = create_if_not_exists(InferredFunction, :name, unit[:inferred_function])
+    unit[:salmon_sector] = create_if_not_exists(SalmonSector, :name, unit[:salmon_sector])
+    unit[:irregular_shape] = create_if_not_exists(IrregularShape, :name, unit[:irregular_shape])
 
     u = select_or_create_unit unit[:unit_no], "Units", false
     u.update(unit)
@@ -276,7 +276,7 @@ def seed_strata files
   strata_type_columns = {
     # Order as seen in spreadsheet
     code: "CODE",
-    strat_type: "STRATTYPE"
+    name: "STRATTYPE"
   }
 
   s.sheet('strat descp').each(strata_type_columns) do |row|
@@ -288,7 +288,7 @@ def seed_strata files
     next if StratType.where(code: strata_type[:code]).size > 0
 
     # Output and save
-    puts "#{strata_type[:code]} => #{strata_type[:strat_type]}"
+    puts "#{strata_type[:code]} => #{strata_type[:name]}"
     StratType.create(strata_type)
   end
 
@@ -326,7 +326,7 @@ def seed_strata files
       stratum[:unit] = Unit.where(:unit_no => stratum[:unit]).first
     end
 
-    stratum[:strat_occupation] = create_if_not_exists(StratOccupation, :occupation, stratum[:strat_occupation])
+    stratum[:strat_occupation] = create_if_not_exists(StratOccupation, :name, stratum[:strat_occupation])
     stratum[:strat_type] = StratType.where(code: stratum[:strat_alpha]).first
 
     # Output and save
@@ -351,10 +351,10 @@ def seed_features files
     feature_form: "Feature Form",
     other_associated_features: "Other Associated Features",
     grid: "Grid",
-    depth_m_b_d: "Depth (MBD)",
+    depth_mbd: "Depth (MBD)",
     feature_occupation: "Occupation",
     feature_type: "Feature Type",
-    feature_count: "Feature Count",
+    count: "Feature Count",
     feature_group: "Feature Group",
     residential_feature: "Residential Feature",
     location_in_room: "Location in Room",
@@ -390,13 +390,13 @@ def seed_features files
       feature[:strata] << find_or_create_and_log("Feature #{feature[:feature_no]}", Stratum, strat_all: strat, unit_id: unit.id)
     end
 
-    feature[:feature_occupation] = create_if_not_exists(FeatureOccupation, :occupation, feature[:feature_occupation])
-    feature[:feature_type] = create_if_not_exists(FeatureType, :feature_type, feature[:feature_type])
-    feature[:feature_group] = create_if_not_exists(FeatureGroup, :feature_group, feature[:feature_group])
-    feature[:residential_feature] = create_if_not_exists(ResidentialFeature, :residential_feature, feature[:residential_feature])
-    feature[:t_shaped_door] = create_if_not_exists(TShapedDoor, :t_shaped_door, feature[:t_shaped_door])
-    feature[:door_between_multiple_room] = create_if_not_exists(DoorBetweenMultipleRoom, :door_between_multiple_rooms, feature[:door_between_multiple_room])
-    feature[:doorway_sealed] = create_if_not_exists(DoorwaySealed, :doorway_sealed, feature[:doorway_sealed])
+    feature[:feature_occupation] = create_if_not_exists(FeatureOccupation, :name, feature[:feature_occupation])
+    feature[:feature_type] = create_if_not_exists(FeatureType, :name, feature[:feature_type])
+    feature[:feature_group] = create_if_not_exists(FeatureGroup, :name, feature[:feature_group])
+    feature[:residential_feature] = create_if_not_exists(ResidentialFeature, :name, feature[:residential_feature])
+    feature[:t_shaped_door] = create_if_not_exists(TShapedDoor, :name, feature[:t_shaped_door])
+    feature[:door_between_multiple_room] = create_if_not_exists(DoorBetweenMultipleRoom, :name, feature[:door_between_multiple_room])
+    feature[:doorway_sealed] = create_if_not_exists(DoorwaySealed, :name, feature[:doorway_sealed])
 
     # Output and save
     puts feature[:feature_no]
@@ -419,28 +419,28 @@ def seed_bone_inventory files
   columns = {
     site: "SITE",
     box: "BOX",
-    fs: "FS",
-    bone_inventory_count: "COUNT",
+    fs_no: "FS",
+    count: "COUNT",
     room: "ROOM",
     stratum: "STRATUM",
-    gridew: "GRIDEW",
-    gridns: "GRIDNS",
+    strat_other: "OTHER STRATA",
+    sa_no: "SA NO",
+    grid_ew: "GRID EW",
+    grid_ns: "GRID NS",
     quad: "QUAD",
-    exactprov: "EXACTPROV",
-    depthbeg: "DEPTHBEG",
-    depthend: "DEPTHEND",
     stratalpha: "STRATALPHA",
     strat_one: "STRAT1",
     strat_two: "STRAT2",
-    othstrats: "OTHSTRATS",
+    exact_prov: "EXACTPROV",
+    depth_begin: "DEPTHBEG",
+    depth_end: "DEPTHEND",
     field_date: "DATE",
     excavator: "EXCAVATOR",
     art_type: "ARTTYPE",
-    sano: "SANO",
-    recordkey: "RECORDKEY",
     feature: "FEATURE",
+    record_field_key_no: "RECORDKEY",
     comments: "COMMENTS",
-    entby: "ENTBY",
+    entered_by: "ENTBY",
     location: "LOCATION"
   }
 
@@ -467,7 +467,7 @@ def seed_bone_inventory files
     bone_inv.delete :feature
 
     # Output and create
-    puts bone_inv[:fs]
+    puts bone_inv[:fs_no]
     BoneInventory.create(bone_inv)
   end
 end
@@ -483,28 +483,28 @@ def seed_ceramic_inventory files
   columns = {
     site: "SITE",
     box: "BOX",
-    fs: "FS",
-    ceramic_inventory_count: "COUNT",
+    fs_no: "FS",
+    count: "COUNT",
     room: "ROOM",
     stratum: "STRATUM",
-    gridew: "GRIDEW",
-    gridns: "GRIDNS",
+    strat_other: "OTHER STRATA",
+    sa_no: "SA NO",
+    grid_ew: "GRID EW",
+    grid_ns: "GRID NS",
     quad: "QUAD",
-    exactprov: "EXACTPROV",
-    depthbeg: "DEPTHBEG",
-    depthend: "DEPTHEND",
     stratalpha: "STRATALPHA",
     strat_one: "STRAT1",
     strat_two: "STRAT2",
-    othstrats: "OTHSTRATS",
     field_date: "DATE",
+    exact_prov: "EXACTPROV",
+    depth_begin: "DEPTHBEG",
+    depth_end: "DEPTHEND",
     excavator: "EXCAVATOR",
     art_type: "ARTTYPE",
-    sano: "SANO",
-    recordkey: "RECORDKEY",
     feature: "FEATURE",
+    record_field_key_no: "RECORDKEY",
     comments: "COMMENTS",
-    entby: "ENTBY",
+    entered_by: "ENTBY",
     status: "STATUS",
     location: "LOCATION"
   }
@@ -532,7 +532,7 @@ def seed_ceramic_inventory files
     ceramic_inv.delete :status
 
     # Output and save
-    puts ceramic_inv[:fs]
+    puts ceramic_inv[:fs_no]
     CeramicInventory.create(ceramic_inv)
   end
 end
@@ -548,28 +548,27 @@ def seed_lithic_inventories files
   columns = {
     site: "SITE",
     box: "BOX",
-    fs: "FS",
-    lithic_inventory_count: "COUNT",
-    room: "ROOM",
+    fs_no: "FS No.",
+    count: "COUNT",
+"ROOM",
     stratum: "STRATUM",
-    gridew: "GRIDEW",
-    gridns: "GRIDNS",
-    quad: "QUAD",
-    exactprov: "EXACTPROV",
-    depthbeg: "DEPTHBEG",
-    depthend: "DEPTHEND",
-    stratalpha: "STRATALPHA",
-    strat_one: "STRAT1",
+    strat_    strat_other: "OTHSTRATS",
+    sa_no: "SA NO",
+    grid_ew: "GRIDEW",
+    grid_ns: "GRIDNS",
+grid_ew: "GRIDEW",t_one: "STRAT1",
     strat_two: "STRAT2",
-    othstrats: "OTHSTRATS",
+    exact_prov: "EXACTPROV",
+    depth    exact_prov: "EXACTPROV",
+    depth_begin: "DEPTHBEG",
+    depth_end: "DEPTHEND",
+h_end: "DEPTHEND",
     field_date: "DATE",
     excavator: "EXCAVATOR",
-    art_type: "ARTTYPE",
-    sano: "SANO",
-    recordkey: "RECORDKEY",
-    feature: "FEATURE",
-    comments: "COMMENTS",
-    entby: "ENTBY",
+    ar record_field_key_no: "R    record_field_key_no: "RECORDKEY",
+ECORDKEY",
+    comments: "    entered_by: "ENTBY",
+ed_by: "ENTBY",
     location: "LOCATION"
   }
 
@@ -595,8 +594,8 @@ def seed_lithic_inventories files
     lithic.delete :stratum
     lithic.delete :feature
 
-    # Output and save
-    puts lithic[:fs]
+    #     puts lithic[:fs_no]
+uts lithic[:fs_no]
     LithicInventory.create(lithic)
   end
 end
@@ -614,9 +613,9 @@ def seed_bone_tools files
   puts "\n\n\nCreating Bone Tools\n"
 
   bonetools_columns = {
-    room: "Room",
     strat: "Strata",
-    field_specimen_no: "Field Specimen No",
+    unit: "Room",
+    fs_no: "FS No",
     depth: "Depth (meters below datum)",
     bone_tool_occupation: "Occupation",
     grid: "Grid",
@@ -626,31 +625,31 @@ def seed_bone_tools files
     comments: "Comments"
   }
 
-  last_room = ""
+  last_unit = ""
   s.sheet('data').each(bonetools_columns) do |row|
     # Skip header row
-    next if row[:room] == "Room"
+    next if row[:unit] == "Room"
 
     bonetool = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nRoom #{bonetool[:room]}:" if bonetool[:room] != last_room
-    last_room = bonetool[:room]
+    puts "\nUnit #{bonetool[:unit]}:" if bonetool[:unit] != last_unit
+    last_unit = bonetool[:unit]
 
     # Handle foreign keys
-    unit = select_or_create_unit(bonetool[:room], "Bone Tools")
+    unit = select_or_create_unit(bonetool[:unit], "Bone Tools")
 
-    bonetool[:bone_tool_occupation] = create_if_not_exists(BoneToolOccupation, :occupation, bonetool[:bone_tool_occupation])
+    bonetool[:bone_tool_occupation] = create_if_not_exists(BoneToolOccupation, :name, bonetool[:bone_tool_occupation])
 
     bonetool[:strata] = []
     strats = bonetool[:strat].split(/[;,]/).map{ |strat| strat.strip }
     strats.uniq!
     strats.each do |strat|
-      bonetool[:strata] << find_or_create_and_log("Bone Tool #{bonetool[:field_specimen_no]}", Stratum, strat_all: strat, unit_id: unit.id)
+      bonetool[:strata] << find_or_create_and_log("Bone Tool #{bonetool[:fs_no]}", Stratum, strat_all: strat, unit_id: unit.id)
     end
 
     # Output and save
-    puts bonetool[:field_specimen_no]
+    puts bonetool[:fs_no]
     BoneTool.create(bonetool)
   end
 end
@@ -664,9 +663,7 @@ def seed_eggshells files
   puts "\n\n\nCreating Eggshells\n"
 
   columns = {
-    room: "Room",
     strat: "Strata",
-    salmon_museum_id_no: "Salmon Museum ID No.",
     record_field_key_no: "Record (Field) Key No.",
     grid: "Grid",
     quad: "Quad",
@@ -677,31 +674,34 @@ def seed_eggshells files
     field_date: "Field Date",
     eggshell_affiliation: "Affiliation",
     eggshell_item: "Item"
+    unit: "ROOM",
+    salmon_museum_no: "SALMON MUSEUM ID NO",
   }
 
-  last_room = ""
+  last_unit = ""
   s.sheet('eggshell').each(columns) do |row|
     # Skip header row
-    next if row[:room] == "Room"
+    next if row[:unit] == "Room"
 
     eggshell = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nRoom #{eggshell[:room]}:" if eggshell[:room] != last_room
-    last_room = eggshell[:room]
+    puts "\nUnit #{eggshell[:unit]}:" if eggshell[:unit] != last_unit
+    last_unit = eggshell[:unit]
 
     # Handle foreign keys
-    unit = select_or_create_unit(eggshell[:room], 'eggshells')
+    unit = select_or_create_unit(eggshell[:unit], 'eggshells')
 
     eggshell[:features] = []
     associate_strata_features(unit, eggshell[:strat], eggshell[:feature_no], eggshell, "Eggshells")
 
-    eggshell[:eggshell_affiliation] = (eggshell[:eggshell_affiliation]) ? create_if_not_exists(EggshellAffiliation, :affiliation, eggshell[:eggshell_affiliation]) : nil
+    eggshell[:eggshell_affiliation] = (eggshell[:eggshell_affiliation]) ? create_if_not_exists(EggshellAffiliation, :name, eggshell[:eggshell_affiliation]) : nil
 
-    eggshell[:eggshell_item] = (eggshell[:eggshell_item]) ? create_if_not_exists(EggshellItem, :item, eggshell[:eggshell_item]) : nil
+    eggshell[:eggshell_item] = (eggshell[:eggshell_item]) ? create_if_not_exists(EggshellItem, :name, eggshell[:eggshell_item]) : nil
+
 
     # Output and save
-    puts eggshell[:salmon_museum_id_no]
+    puts eggshell[:salmon_museum_no]
     Eggshell.create(eggshell)
   end
 end
@@ -715,14 +715,14 @@ def seed_ornaments files
   puts "\n\n\nCreating Ornaments\n"
 
   columns = {
-    museum_specimen_no: "Museum Specimen No.",
     analysis_lab_no: "Analysis Lab No.",
-    room: "Room",
     strat: "Strata",
     grid: "Grid",
     quad: "Quad",
     depth: "Depth       (m below datum)",
     field_date: "Field Date",
+    salmon_museum_no: "MUSEUM SPECIMEN NO",
+    unit: "UNIT",
     ornament_period: "PERIOD",
     feature: "Feature or Selected Artifact (SA) No.",
     analyst: "Analyst",
@@ -732,37 +732,37 @@ def seed_ornaments files
     item: "Item"
   }
 
-  last_room = ""
+  last_unit = ""
   s.sheet('data').each(columns) do |row|
-    next if row[:room] == "Room"
+    next if row[:unit] == "Room"
 
     ornament = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nRoom #{ornament[:room]}:" if ornament[:room] != last_room
-    last_room = ornament[:room]
+    puts "\nUnit #{ornament[:unit]}:" if ornament[:unit] != last_unit
+    last_unit = ornament[:unit]
 
     # Handle foreign keys
-    unit = select_or_create_unit(ornament[:room], "Ornaments")
+    unit = select_or_create_unit(ornament[:unit], "Ornaments")
 
     feature_no = get_feature_number(ornament[:feature], "Ornaments")
-    ornament[:feature] = find_or_create_and_log("Ornament #{ornament[:museum_specimen_no]}", Feature, feature_no: feature_no, unit_no: ornament[:room])
+    ornament[:feature] = find_or_create_and_log("Ornament #{ornament[:salmon_museum_no]}", Feature, feature_no: feature_no, unit_no: ornament[:unit])
 
     # TODO Review handling of CSV strat value
     # Process each stratum in Strat column
     strats = ornament[:strat].split(/[;,]/).map{ |strat| strat.strip }
     strats.uniq!
     strats.each do |strat|
-      stratum = find_or_create_and_log("Ornament #{ornament[:museum_specimen_no]}", Stratum, strat_all: strat, unit_id: unit.id)
+      stratum = find_or_create_and_log("Ornament #{ornament[:salmon_museum_no]}", Stratum, strat_all: strat, unit_id: unit.id)
 
       # Associate strata through feature
       ornament[:feature].strata << stratum
     end
 
-    ornament[:ornament_period] = create_if_not_exists(OrnamentPeriod, :period, ornament[:ornament_period])
+    ornament[:ornament_period] = create_if_not_exists(OrnamentPeriod, :name, ornament[:ornament_period])
 
     # Output and save
-    puts ornament[:museum_specimen_no]
+    puts ornament[:salmon_museum_no]
     Ornament.create(ornament)
   end
 end
@@ -777,51 +777,51 @@ def seed_perishables files
   puts "\n\n\nCreating Perishables\n"
 
   columns = {
-    fs_number: "FS Number",
+    fs_no: "FS Number",
     salmon_museum_number: "Salmon Museum No.",
-    room: "Room",
+    unit: "Room",
     strat: "Stratum",
+    associated_feature: "Feature No",
     grid: "Grid",
     quad: "Quad",
     depth: "Depth (m below datum)",
-    asso_feature: "Asso. Feature",
     perishable_period: "Period",
     sa_no: "SA No. ",
     artifact_type: "Artifact Type",
-    perishable_count: "Count",
+    count: "Count",
     artifact_structure: "Artifact Structure",
     comments: "Comments",
-    other_comments: "Other Comments",
+    comments_other: "Other Comments",
     storage_location: "Storage Location",
     exhibit_location: "Exhibit Location",
-    record_key_no: "Record Key No.",
+    record_field_key_no: "Record Key No.",
     museum_lab_no: "Museum Lab. No",
     field_date: "Field Date",
     original_analysis: "Original Analysis "
   }
 
-  last_room = ""
+  last_unit = ""
   s.sheet('all').each(columns) do |row|
-    next if row[:room] == "Room"
+    next if row[:unit] == "Room"
 
     perishable = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nRoom #{perishable[:room]}:" if perishable[:room] != last_room
-    last_room = perishable[:room]
+    puts "\nUnit #{perishable[:unit]}:" if perishable[:unit] != last_unit
+    last_unit = perishable[:unit]
 
     # Handle foreign keys
-    perishable[:perishable_period] = create_if_not_exists(PerishablePeriod, :period, perishable[:perishable_period])
+    perishable[:perishable_period] = create_if_not_exists(PerishablePeriod, :name, perishable[:perishable_period])
 
     perishable[:features] = []
-    units = perishable[:room].split(/[,;]/).map { |u| u.strip }
+    units = perishable[:unit].split(/[,;]/).map { |u| u.strip }
     units.each do |unit|
       unit = select_or_create_unit(unit, "Perishables")
-      associate_strata_features(unit, perishable[:strat], perishable[:asso_feature], perishable, "Perishables")
+      associate_strata_features(unit, perishable[:strat], perishable[:associated_feature], perishable, "Perishables")
     end
 
     # Output and save
-    puts perishable[:fs_number]
+    puts perishable[:fs_no]
     Perishable.create(perishable)
   end
 end
@@ -835,9 +835,9 @@ def seed_select_artifacts files
   puts "\n\n\nCreating Select Artifacts\n"
 
   columns = {
-    room: "Room",
     artifact_no: "Artifact No.",
     strat: "Strat",
+    unit: "Room",
     floor_association: "Floor Association",
     sa_form: "SA Form",
     associated_feature_artifacts: "Associated Features/Artifacts",
@@ -850,19 +850,19 @@ def seed_select_artifacts files
     comments: "Comments"
   }
 
-  last_room = ""
+  last_unit = ""
   s.sheet('main data').each(columns) do |row|
     # Skip header row
-    next if row[:room] == "Room"
+    next if row[:unit] == "Room"
 
     sa = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nRoom #{sa[:room]}:" if sa[:room] != last_room
-    last_room = sa[:room]
+    puts "\nUnit #{sa[:unit]}:" if sa[:unit] != last_unit
+    last_unit = sa[:unit]
 
     # Handle foreign keys
-    unit = select_or_create_unit(sa[:room], "Select Artifacts")
+    unit = select_or_create_unit(sa[:unit], "Select Artifacts")
 
     # Process each stratum in Strat column
     sa[:strata] = []
@@ -872,7 +872,7 @@ def seed_select_artifacts files
       sa[:strata] << find_or_create_and_log("Select Artifact #{sa[:artifact_no]}", Stratum, strat_all: strat, unit_id: unit.id)
     end
 
-    sa[:select_artifact_occupation] = create_if_not_exists(SelectArtifactOccupation, :occupation, sa[:select_artifact_occupation])
+    sa[:select_artifact_occupation] = create_if_not_exists(SelectArtifactOccupation, :name, sa[:select_artifact_occupation])
 
     # NOTE: associated_feature_artifacts considered for model associations
     # If done, the select_artifacts_strata table should be removed
@@ -894,50 +894,50 @@ def seed_soils files
 
   columns = {
     site: "SITE",
-    room: "ROOM",
+    unit: "ROOM",
     strat: "STRATUM",
+    strat_other: "OTHER STRATA",
     feature_key: "FEATURE",
-    fs: "FS",
+    fs_no: "FS NO",
     box: "BOX",
     period: "PERIOD",
-    soil_count: "COUNT",
-    gridew: "GRIDEW",
-    gridns: "GRIDNS",
+    count: "COUNT",
+    grid_ew: "GRIDEW",
+    grid_ns: "GRIDNS",
     quad: "QUAD",
-    exactprov: "EXACTPROV",
-    depthbeg: "DEPTHBEG",
-    depthend: "DEPTHEND",
-    otherstrat: "OTHSTRATS",
+    exact_prov: "EXACTPROV",
+    depth_begin: "DEPTHBEG",
+    depth_end: "DEPTHEND",
     date: "DATE",
     excavator: "EXCAVATOR",
     art_type: "ARTTYPE",
-    sample_no: "SAMPLE NO",
+    sample_no: "OTHER SAMPLE NO",
     comments: "COMMENTS",
-    data_entry: "DATA ENTRY",
-    location: "LOCATION",
+    entered_by: "DATA ENTRY",
+    location: "LOCATION"
   }
 
-  last_room = ""
+  last_unit = ""
   s.sheet('Sheet1').each(columns) do |row|
     # Skip header row
-    next if row[:room] == "ROOM"
+    next if row[:unit] == "ROOM"
 
     soil = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nRoom #{soil[:room]}:" if soil[:room] != last_room
-    last_room = soil[:room]
+    puts "\nUnit #{soil[:unit]}:" if soil[:unit] != last_unit
+    last_unit = soil[:unit]
 
     # Handle foreign keys
-    soil[:art_type] = create_if_not_exists(ArtType, :art_type, soil[:art_type])
+    soil[:art_type] = create_if_not_exists(ArtType, :name, soil[:art_type])
 
-    unit = select_or_create_unit(:room, 'soils')
+    unit = select_or_create_unit(:unit, 'soils')
 
     soil[:features] = []
-    associate_strata_features(unit, soil[:room], soil[:strat], soil, "Soils")
+    associate_strata_features(unit, soil[:unit], soil[:strat], soil, "Soils")
 
     # Output and save
-    puts soil[:fs]
+    puts soil[:fs_no]
     soil_record = Soil.create(soil)
   end
 end
@@ -960,20 +960,20 @@ def seed_images files
 
     if row[0] != 'Site'
       record = {}
-      record[:asso_features] = row[16]
+      record[:associated_features] = row[16]
       record[:comments] = row[24]
-      record[:data_entry] = row[26]
+      record[:entered_by] = row[26]
       record[:date] = row[14]
-      record[:dep_beg] = row[11]
-      record[:dep_end] = row[12]
-      record[:gride] = row[8]
-      record[:gridn] = row[9]
+      record[:depth_begin] = row[11]
+      record[:depth_end] = row[12]
+      record[:grid_ew] = row[8]
+      record[:grid_ns] = row[9]
       record[:image_no] = row[3]
       record[:image_type] = row[5]
       record[:notes] = row[28]
       record[:other_no] = row[18]
-      record[:room] = row[1]
-      record[:signi_art_no] = row[17]
+      record[:unit] = row[1]
+      record[:sa_no] = row[17]
       record[:site] = row[0]
       record[:storage_location] = row[25]
       record[:strat] = row[2]
@@ -1001,7 +1001,7 @@ def seed_images files
 
       [row[21], row[22], row[23]].each do |subj|
         if subj != "none"
-          subject = create_if_not_exists(ImageSubject, "subject", subj)
+          subject = create_if_not_exists(ImageSubject, :name, subj)
           image.image_subjects << subject
         end
       end
@@ -1039,7 +1039,7 @@ seed_select_artifacts(files) if SelectArtifact.all.size < 1
 seed_soils(files) if Soil.all.size < 1
 
 # Images
-seed_images(files) if Image.all.size < 1
+#seed_images(files) if Image.all.size < 1
 
 # Logging
 File.open("reports/please_check_for_accuracy.txt", "w") do |file|
