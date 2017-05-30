@@ -166,7 +166,7 @@ def select_or_create_unit unit, spreadsheet, log=true
       puts "Creating \"Other\" for #{unit}"
     else
       room = Unit.where(:unit_no => 'Other').first
-      puts "Using \"Other\" for #{unit}"
+#      puts "Using \"Other\" for #{unit}"
     end
   end
   return room
@@ -454,7 +454,7 @@ def seed_bone_inventory files
     bone_inv = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nRoom #{bone_inv[:room]}:" if bone_inv[:room] != last_room
+#    puts "\nRoom #{bone_inv[:room]}:" if bone_inv[:room] != last_room
     last_room = bone_inv[:room]
 
     # Handle foreign keys
@@ -471,7 +471,7 @@ def seed_bone_inventory files
     # TODO Remove strat_alpha, strat_one, and strat_two from schema
 
     # Output and create
-    puts bone_inv[:fs_no]
+#    puts bone_inv[:fs_no]
     BoneInventory.create(bone_inv)
   end
 end
@@ -518,7 +518,7 @@ def seed_ceramic_inventory files
     ceramic_inv = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nRoom #{ceramic_inv[:room]}:" if ceramic_inv[:room] != last_room
+#    puts "\nRoom #{ceramic_inv[:room]}:" if ceramic_inv[:room] != last_room
     last_room = ceramic_inv[:room]
 
     unit = select_or_create_unit(ceramic_inv[:room], "Ceramic Inventories")
@@ -535,7 +535,7 @@ def seed_ceramic_inventory files
     # TODO Remove strat_alpha, strat_one, and strat_two from schema
 
     # Output and save
-    puts ceramic_inv[:fs_no]
+#    puts ceramic_inv[:fs_no]
     CeramicInventory.create(ceramic_inv)
   end
 end
@@ -581,7 +581,7 @@ def seed_lithic_inventories files
     lithic = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nRoom #{lithic[:room]}:" if lithic[:room] != last_room
+#    puts "\nRoom #{lithic[:room]}:" if lithic[:room] != last_room
     last_room = lithic[:room]
 
     # Handle foreign keys
@@ -598,7 +598,7 @@ def seed_lithic_inventories files
     # TODO Remove strat_alpha, strat_one, and strat_two from schema
 
     # Output and save
-    puts lithic[:fs_no]
+#    puts lithic[:fs_no]
     LithicInventory.create(lithic)
   end
 end
@@ -639,7 +639,7 @@ def seed_bone_tools files
     bonetool = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nUnit #{bonetool[:unit]}:" if bonetool[:unit] != last_unit
+#    puts "\nUnit #{bonetool[:unit]}:" if bonetool[:unit] != last_unit
     last_unit = bonetool[:unit]
 
     # Handle foreign keys
@@ -660,7 +660,7 @@ def seed_bone_tools files
     bonetool.delete :sa_no
 
     # Output and save
-    puts bonetool[:fs_no]
+#    puts bonetool[:fs_no]
     BoneTool.create(bonetool)
   end
 end
@@ -698,7 +698,7 @@ def seed_eggshells files
     eggshell = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nUnit #{eggshell[:unit]}:" if eggshell[:unit] != last_unit
+#    puts "\nUnit #{eggshell[:unit]}:" if eggshell[:unit] != last_unit
     last_unit = eggshell[:unit]
 
     # Handle foreign keys
@@ -715,7 +715,7 @@ def seed_eggshells files
     eggshell.delete :strat_other
 
     # Output and save
-    puts eggshell[:salmon_museum_no]
+#    puts eggshell[:salmon_museum_no]
     Eggshell.create(eggshell)
   end
 end
@@ -755,7 +755,7 @@ def seed_ornaments files
     ornament = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nUnit #{ornament[:unit]}:" if ornament[:unit] != last_unit
+#    puts "\nUnit #{ornament[:unit]}:" if ornament[:unit] != last_unit
     last_unit = ornament[:unit]
 
     # Handle foreign keys
@@ -782,7 +782,7 @@ def seed_ornaments files
     ornament.delete :sa_no
 
     # Output and save
-    puts ornament[:salmon_museum_no]
+#    puts ornament[:salmon_museum_no]
     Ornament.create(ornament)
   end
 end
@@ -828,7 +828,7 @@ def seed_perishables files
     perishable = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nUnit #{perishable[:unit]}:" if perishable[:unit] != last_unit
+#    puts "\nUnit #{perishable[:unit]}:" if perishable[:unit] != last_unit
     last_unit = perishable[:unit]
 
     # Handle foreign keys
@@ -845,7 +845,7 @@ def seed_perishables files
     perishable.delete :strat_other
 
     # Output and save
-    puts perishable[:fs_no]
+#    puts perishable[:fs_no]
     Perishable.create(perishable)
   end
 end
@@ -884,7 +884,7 @@ def seed_select_artifacts files
     sa = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nUnit #{sa[:unit]}:" if sa[:unit] != last_unit
+#    puts "\nUnit #{sa[:unit]}:" if sa[:unit] != last_unit
     last_unit = sa[:unit]
 
     # Handle foreign keys
@@ -909,7 +909,7 @@ def seed_select_artifacts files
     sa.delete :feature
 
     # Output and create
-    puts sa[:artifact_no]
+#    puts sa[:artifact_no]
     SelectArtifact.create(sa)
   end
 end
@@ -955,7 +955,7 @@ def seed_soils files
     soil = convert_empty_hash_values_to_none(row)
 
     # Output context for creation
-    puts "\nUnit #{soil[:unit]}:" if soil[:unit] != last_unit
+#    puts "\nUnit #{soil[:unit]}:" if soil[:unit] != last_unit
     last_unit = soil[:unit]
 
     # Handle foreign keys
@@ -970,7 +970,7 @@ def seed_soils files
     soil.delete :sa_no
 
     # Output and save
-    puts soil[:fs_no]
+#    puts soil[:fs_no]
     soil_record = Soil.create(soil)
   end
 end
