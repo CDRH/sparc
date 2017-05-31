@@ -1,16 +1,16 @@
 1:
-  unit_class: Antechamber
+  name: Antechamber
 2:
-  unit_class: backwall
+  name: backwall
 3:
-  unit_class: Kiva
+  name: Kiva
 4:
-  unit_class: n/a
+  name: n/a
 5:
-  unit_class: plaza
+  name: plaza
 6:
-  unit_class: Room
+  name: Room
 7:
-  unit_class: test trench
+  name: test trench
 8:
-  unit_class: test unit
+  name: test unit

@@ -2,14 +2,14 @@ class UnitOccupation < ActiveRecord::Base
   has_many :units
   has_many :images, :through => :units
 
-  validates_uniqueness_of :occupation
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("occupation")
+    order("name")
   end
 
   def to_label
-    occupation
+    name
   end
   def authorized_for_update?
     puts "---------#{current_user}"

@@ -3,49 +3,49 @@
 one:
   site: MyString
   box: MyString
-  fs: MyString
-  bone_inventory_count: 1
-  gridew: MyString
-  gridns: MyString
+  fs_no: MyString
+  count: 1
+  grid_ew: MyString
+  grid_ns: MyString
   quad: MyString
-  exactprov: MyString
-  depthbeg: MyString
-  depthend: MyString
-  stratalpha: MyString
+  exact_prov: MyString
+  depth_begin: MyString
+  depth_end: MyString
+  strat_alpha: MyString
   strat_one: 1
   strat_two: 1
-  othstrats: MyString
+  strat_other: MyString
   field_date: MyString
   excavator: MyString
   art_type: MyString
-  sano: MyString
-  recordkey: MyString
+  sa_no: MyString
+  record_field_key_no: MyString
   feature_id: 1
   comments: MyText
-  entby: MyString
+  entered_by: MyString
   location: MyString
 
 two:
   site: MyString
   box: MyString
-  fs: MyString
-  bone_inventory_count: 1
-  gridew: MyString
-  gridns: MyString
+  fs_no: MyString
+  count: 1
+  grid_ew: MyString
+  grid_ns: MyString
   quad: MyString
-  exactprov: MyString
-  depthbeg: MyString
-  depthend: MyString
-  stratalpha: MyString
+  exact_prov: MyString
+  depth_begin: MyString
+  depth_end: MyString
+  strat_alpha: MyString
   strat_one: 1
   strat_two: 1
-  othstrats: MyString
+  strat_other: MyString
   field_date: MyString
   excavator: MyString
   art_type: MyString
-  sano: MyString
-  recordkey: MyString
+  sa_no: MyString
+  record_field_key_no: MyString
   feature_id: 1
   comments: MyText
-  entby: MyString
+  entered_by: MyString
   location: MyString

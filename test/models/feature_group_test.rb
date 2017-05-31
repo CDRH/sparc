@@ -2,7 +2,7 @@ require 'test_helper'
 
 class FeatureGroupTest < ActiveSupport::TestCase
   def setup
-    @item = FeatureGroup.create(:feature_group => "test")
+    @item = FeatureGroup.create(:name => "test")
     @item.features << Feature.first
   end
 

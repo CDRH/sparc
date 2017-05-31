@@ -1,13 +1,13 @@
 class ResidentialFeature < ActiveRecord::Base
   has_many :features
 
-  validates_uniqueness_of :residential_feature
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("residential_feature")
+    order("name")
   end
 
   def to_label
-    residential_feature
+    name
   end
 end

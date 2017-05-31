@@ -1,13 +1,13 @@
 class ArtType < ApplicationRecord
   has_many :soils
 
-  validates_uniqueness_of :art_type
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("art_type")
+    order("name")
   end
 
   def to_label
-    art_type
+    name
   end
 end

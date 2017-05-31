@@ -1,8 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 1:
-  item: eggshell
+  name: eggshell
 2:
-  item: eggshell, corn cobs
+  name: eggshell, corn cobs
 3:
-  item: zoological
+  name: zoological

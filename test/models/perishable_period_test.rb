@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PerishablePeriodTest < ActiveSupport::TestCase
   def setup
-    @item = PerishablePeriod.create(:period => "test")
+    @item = PerishablePeriod.create(:name => "test")
     @item.perishables << Perishable.first
   end
 

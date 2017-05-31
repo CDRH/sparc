@@ -6,11 +6,11 @@ class Eggshell < ActiveRecord::Base
   has_many :units, :through => :strata
   
   def self.sorted
-    order("salmon_museum_id_no")
+    order("salmon_museum_no")
   end
 
   def to_label
-    salmon_museum_id_no
+    salmon_museum_no
   end
 
   def authorized_for_update?

@@ -2,16 +2,16 @@
 
 1:
   id: 1
-  art_type: Adobe
+  name: Adobe
 2:
   id: 2
-  art_type: Mortar
+  name: Mortar
 3:
   id: 3
-  art_type: Soil
+  name: Soil
 4:
   id: 4
-  art_type: Soil/Pollen
+  name: Soil/Pollen
 5:
   id: 5
-  art_type: Soils
+  name: Soils

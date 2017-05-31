@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DoorBetweenMultipleRoomTest < ActiveSupport::TestCase
   def setup
-    @item = DoorBetweenMultipleRoom.create(:door_between_multiple_rooms => "test")
+    @item = DoorBetweenMultipleRoom.create(:name => "test")
     @item.features << Feature.first
   end
 

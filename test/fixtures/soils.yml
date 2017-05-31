@@ -3,49 +3,49 @@
 one:
   id: 1
   site: MyString
-  room: MyString
+  unit: MyString
   strat: MyString
   feature_key: MyString
-  fs: MyString
+  fs_no: MyString
   box: MyString
   period: MyString
-  soil_count: 1
-  gridew: MyString
-  gridns: MyString
+  count: 1
+  grid_ew: MyString
+  grid_ns: MyString
   quad: MyString
-  exactprov: MyString
-  depthbeg: MyString
-  depthend: MyString
-  otherstrat: MyString
+  exact_prov: MyString
+  depth_begin: MyString
+  depth_end: MyString
+  strat_other: MyString
   date: MyString
   excavator: MyString
   art_type_id: 1
   sample_no: MyString
   comments: MyText
-  data_entry: MyText
+  entered_by: MyText
   location: MyString
 
 two:
   id: 2
   site: MyString
-  room: MyString
+  unit: MyString
   strat: MyString
   feature_key: MyString
-  fs: MyString
+  fs_no: MyString
   box: MyString
   period: MyString
-  soil_count: 1
-  gridew: MyString
-  gridns: MyString
+  count: 1
+  grid_ew: MyString
+  grid_ns: MyString
   quad: MyString
-  exactprov: MyString
-  depthbeg: MyString
-  depthend: MyString
-  otherstrat: MyString
+  exact_prov: MyString
+  depth_begin: MyString
+  depth_end: MyString
+  strat_other: MyString
   date: MyString
   excavator: MyString
   art_type_id: 1
   sample_no: MyString
   comments: MyText
-  data_entry: MyText
+  entered_by: MyText
   location: MyString

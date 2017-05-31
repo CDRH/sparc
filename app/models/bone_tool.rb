@@ -4,11 +4,11 @@ class BoneTool < ActiveRecord::Base
   has_many :units, :through => :strata
   
   def self.sorted
-    order("field_specimen_no")
+    order("fs_no")
   end
 
   def to_label
-    field_specimen_no
+    fs_no
   end
 
   def authorized_for_update?

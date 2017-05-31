@@ -2,7 +2,7 @@ require 'test_helper'
 
 class IntactRoofTest < ActiveSupport::TestCase
   def setup
-    @item = IntactRoof.create(:intact_roof => "test")
+    @item = IntactRoof.create(:name => "test")
     @item.units << Unit.first
   end
 

@@ -1,16 +1,16 @@
 # incomplete list
 1:
   code: A
-  strat_type: A
+  name: A
 2:
   code: B
-  strat_type: MyString
+  name: MyString
 3:
   code: C
-  strat_type: MyString
+  name: MyString
 4:
   code: D
-  strat_type: MyString
+  name: MyString
 5:
   code: E
-  strat_type: MyString
+  name: MyString

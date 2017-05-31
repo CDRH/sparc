@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 1:
-  affiliation: Chacoan
+  name: Chacoan
 2:
-  affiliation: Mixed Chacoan and San Juan
+  name: Mixed Chacoan and San Juan
 3:
-  affiliation: no data
+  name: no data
 4:
-  affiliation: San Juan
+  name: San Juan
 5:
-  affiliation: San Juan?
+  name: San Juan?
 6:
-  affiliation: Unknown
+  name: Unknown

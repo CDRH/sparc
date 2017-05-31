@@ -1,14 +1,14 @@
 class Story < ActiveRecord::Base
   has_many :units
 
-  validates_uniqueness_of :story
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("story")
+    order("name")
   end
 
   def to_label
-    story
+    name
   end
   def authorized_for_update?
     puts "---------#{current_user}"

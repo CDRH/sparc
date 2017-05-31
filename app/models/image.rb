@@ -55,11 +55,11 @@ class Image < ActiveRecord::Base
   end
 
   def occupation_list
-    unit_occupations.map {|o| o.occupation }
+    unit_occupations.map {|o| o.name }
   end
 
   def subject_list
-    image_subjects.map {|s| s.subject }
+    image_subjects.map {|s| s.name }
   end
 
   def unit_list
@@ -67,7 +67,7 @@ class Image < ActiveRecord::Base
   end
 
   def zone_list
-    zones.map {|z| z.number }
+    zones.map {|z| z.name }
   end
 
 
