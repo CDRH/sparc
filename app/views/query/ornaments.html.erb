@@ -1,0 +1,96 @@
+<h3>Artifact Search</h3>
+
+<%= render "artifact_nav" %>
+
+<br>
+
+<%= form_tag ornaments_path, method: :get do %>
+  <div class="row">
+    <!-- Ornaments table and search options -->
+    <div class="col-md-8">
+
+      <!-- ornament query navigation -->
+      <ul class="nav nav-tabs" id="artifacts_ornaments_tab">
+        <li><a href="#all" data-toggle="tab">All</a></li>
+        <li class="active"><a href="#ornaments" data-toggle="tab">Ornaments</a></li>
+      </ul>
+
+      <div class="tab-content">
+
+        <!-- all -->
+        <div class="tab-pane" id="all">
+          <p>This is where a summary of stuff about ornaments would go and some search options</p>
+          <p>There are <%= pluralize @total_om, "ornament" %> in this database</p>
+        </div>
+
+        <!-- ornaments -->
+        <div class="tab-pane active" id="ornaments">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag "om_smin", "Salmon Museum ID #" %>
+                <%= text_field_tag "om_smin", params["om_smin"], placeholder: "FR80-000233-MSP", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "om_alno", "Analysis Lab #" %>
+                <%= text_field_tag "om_alno", params["om_alno"], placeholder: "LI 35773", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "om_grid", "Grid" %>
+                <%= text_field_tag "om_grid", params["om_grid"], placeholder: "20E/07N", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "om_fldt", "Field Date" %>
+                <%= text_field_tag "om_fldt", params["om_fldt"], placeholder: "1976-07-21", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "om_dep", "Depth" %>
+                <%= text_field_tag "om_dep", params["om_dep"], placeholder: "4.76-5.25", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "om_anlz", "Analyzed" %>
+                <%= text_field_tag "om_anlz", params["om_anlz"], placeholder: "9-12-79, RS 7-78", class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag "om_quad", "Quad" %>
+                <%= select_tag "om_quad", options_for_select(@om_quad, params["om_quad"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "om_perd", "Period" %>
+                <%= select_tag "om_perd", options_from_collection_for_select(@om_perd, "id", "period", params["om_perd"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "om_anly", "Analyst" %>
+                <%= select_tag "om_anly", options_for_select(@om_anly, params["om_anly"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "om_phot", "Photographer" %>
+                <%= select_tag "om_phot", options_for_select(@om_phot, params["om_phot"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "om_ct", "Count" %>
+                <%= select_tag "om_ct", options_for_select(@om_ct, params["om_ct"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "om_item", "Item" %>
+                <%= select_tag "om_item", options_for_select(@om_item, params["om_item"]),
+                    class: "form-control", include_blank: true, multiple: true %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- /tab-content -->
+    </div> <!-- /col-md-8 -->
+
+    <%= render "artifact_global_opts" %>
+  </div>
+<% end %>

@@ -1,0 +1,132 @@
+<h3>Artifact Search</h3>
+
+<%= render "artifact_nav" %>
+
+<br>
+
+<%= form_tag bones_path, method: :get do %>
+  <div class="row">
+    <!-- Bone tables and search options -->
+    <div class="col-md-8">
+
+      <!-- bone tool query navigation -->
+      <ul class="nav nav-tabs" id="artifacts_bones_tab">
+        <li><a href="#all" data-toggle="tab">All</a></li>
+        <li class="active"><a href="#tool" data-toggle="tab">Bone Tool</a></li>
+        <li><a href="#inventory" data-toggle="tab">Bone Inventory</a></li>
+      </ul>
+
+      <div class="tab-content">
+
+        <!-- all -->
+        <div class="tab-pane" id="all">
+          <p>This is where a summary of stuff about bone tools would go and some search options</p>
+          <p>There are <%= pluralize @total_bi, "bone inventory" %> in this database</p>
+          <p>There are <%= pluralize @total_bt, "bone tool" %> in this database</p>
+        </div>
+
+        <!-- bone tools -->
+        <div class="tab-pane active" id="tool">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag "bt_fsno", "FS #" %>
+                <%= text_field_tag "bt_fsno", params["bt_fsno"], placeholder: "8107", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bt_dep", "Depth" %>
+                <%= text_field_tag "bt_dep", params["bt_dep"], placeholder: "5.1", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bt_cmmt", "Comments" %>
+                <%= text_field_tag "bt_cmmt", params["bt_cmmt"], placeholder: "complete pin", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bt_grid", "Grid" %>
+                <%= text_field_tag "bt_grid", params["bt_grid"], placeholder: "11W/10N", class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag "bt_type", "Type (this is an example of multiselect)" %>
+                <%= select_tag "bt_type", options_for_select(@bt_type, params["bt_type"]),
+                    class: "form-control", include_blank: true, multiple: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bt_tpcd", "Type Code" %>
+                <%= select_tag "bt_tpcd", options_for_select(@bt_tpcd, params["bt_tpcd"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bt_spcd", "Species Code" %>
+                <%= select_tag "bt_spcd", options_for_select(@bt_spcd, params["bt_spcd"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- inventory -->
+        <div class="tab-pane" id="inventory">
+          <div class="row">
+            <div class="col-md-6">
+              <%= render "inventory_common_fields" %>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag "bi_quad", "Quad" %>
+                <%= select_tag "bi_quad", options_for_select(@bi_quad, params["bi_quad"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bi_sano", "Select Artifact #" %>
+                <%= select_tag "bi_sano", options_for_select(@bi_sano, params["bi_sano"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bi_enby", "Data Entry" %>
+                <%= select_tag "bi_enby", options_for_select(@bi_enby, params["bi_enby"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bi_loca", "Location" %>
+                <%= select_tag "bi_loca", options_for_select(@bi_loca, params["bi_loca"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- /tab-content -->
+
+      <div class="search_results">
+        <p>Found <%= pluralize @res.count, "result" %>:</p>
+        <p><strong>NOTE: This is NOT what the search results will look like, but is a workspace while roughing in queries</strong></p>
+        <% @res.each do |res| %>
+          <div class="well">
+            <div class="row">
+              <div class="col-md-2">
+                <strong>FS#: <%= res.fs_no %></strong>
+              </div>
+              <div class="col-md-4">
+                <p><strong>Unit:</strong> <%= res.units.map { |u| u.unit_no }.join("; ") %></p>
+                <p><strong>Occupation:</strong> <%= res.bone_tool_occupation.name %></p>
+                <p><strong>Grid:</strong> <%= res.grid %></p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Type:</strong> <%= res.tool_type %></p>
+                <p><strong>Type Code:</strong> <%= res.tool_type_code %></p>
+                <p><strong>Depth:</strong> <%= res.depth %></p>
+                <p><strong>Comments:</strong> <%= res.comments %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div> <!-- /col-md-8 -->
+
+    <%= render "artifact_global_opts" %>
+  </div>
+<% end %>

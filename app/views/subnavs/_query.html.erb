@@ -1,0 +1,26 @@
+<% subsection = @subsection || params["action"] %>
+
+<div class="navbar navbar-default sparc_subnavbar">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li <%= "class=active" if subsection == "samples" %>>
+        <%= link_to "Samples", query_path %>
+      </li>
+      <li <%= "class=active" if subsection == "artifacts" %>>
+        <%= link_to "Artifacts", artifacts_path %>
+      </li>
+      <li <%= "class=active" if subsection == "features" %>>
+        <%= link_to "Features", query_path %>
+      </li>
+      <li <%= "class=active" if subsection == "strata" %>>
+        <%= link_to "Strata", query_path %>
+      </li>
+      <li <%= "class=active" if subsection == "images" %>>
+        <%= link_to "Images", gallery_path %>
+      </li>
+      <li <%= "class=active" if subsection == "canned" %>>
+        <%= link_to "Canned Queries", query_path %>
+      </li>
+    </ul>
+  </div>
+</div>

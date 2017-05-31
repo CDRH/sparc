@@ -1,0 +1,30 @@
+<% sel = params["action"] %>
+
+<!-- bootstrap nav pills -->
+<ul class="nav nav-pills">
+  <li role="presentation" <%= "class=active" if sel == "bones"%>>
+    <%= link_to "Bones", bones_path %>
+  </li>
+  <li role="presentation" <%= "class=active" if sel == "ceramics"%>>
+    <%= link_to "Ceramics", ceramics_path %>
+  </li>
+  <li role="presentation" <%= "class=active" if sel == "eggshells"%>>
+    <%= link_to "Eggshells", eggshells_path %>
+  </li>
+  <li role="presentation" <%= "class=active" if sel == "lithics"%>>
+    <%= link_to "Lithics", lithics_path %>
+  </li>
+  <li role="presentation" <%= "class=active" if sel == "ornaments"%>>
+    <%= link_to "Ornaments", ornaments_path %>
+  </li>
+  <li role="presentation" <%= "class=active" if sel == "perishables"%>>
+    <%= link_to "Perishables", perishables_path %>
+  </li>
+  <li role="presentation" <%= "class=active" if sel == "soils"%>>
+    <%= link_to "Soils", soils_path %>
+  </li>
+  <li role="presentation" <%= "class=active" if sel == "wood"%>>
+    <%= link_to "Woods", woods_path %>
+  </li>
+</ul>
+<!-- /bootstrap nav pills -->

@@ -1,0 +1,87 @@
+<h3>Artifact Search</h3>
+
+<%= render "artifact_nav" %>
+
+<br>
+
+<%= form_tag lithics_path, method: :get do %>
+  <div class="row">
+    <!-- Lithics tables and search options -->
+    <div class="col-md-8">
+
+      <!-- lithics query navigation -->
+      <ul class="nav nav-tabs" id="myTab">
+        <li><a href="#all" data-toggle="tab">All</a></li>
+        <li><a href="#tool" data-toggle="tab">Lithic Tool</a></li>
+        <li class="active"><a href="#inventory" data-toggle="tab">Lithic Inventory</a></li>
+        <li><a href="#debitage" data-toggle="tab">Lithic Debitage</a></li>
+        <li><a href="#obsidian" data-toggle="tab">Obsidian</a></li>
+      </ul>
+
+      <div class="tab-content">
+
+        <!-- all -->
+        <div class="tab-pane" id="all">
+          <p>Information about lithics</p>
+        </div>
+
+        <!-- tool -->
+        <div class="tab-pane" id="tool">
+          <p>This is not yet loaded in the database</p>
+        </div>
+
+        <!-- inventory -->
+        <div class="tab-pane active" id="inventory">
+          <div class="row">
+            <div class="col-md-6">
+              <%= render "inventory_common_fields" %>
+
+              <!-- Note: not using as dropdown because too many options -->
+              <div class="form-group">
+                <%= label_tag "li_sano", "Selected Artifact #" %>
+                <%= text_field_tag "li_sano", params["li_sano"], placeholder: "SA129W106", class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag "li_ct", "Count" %>
+                <%= select_tag "li_ct", options_for_select(@li_ct, params["li_ct"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "li_artp", "Art Type" %>
+                <%= select_tag "li_artp", options_for_select(@li_artp, params["li_artp"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "li_enby", "Data Entry" %>
+                <%= select_tag "li_enby", options_for_select(@li_enby, params["li_enby"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "li_loca", "Location" %>
+                <%= select_tag "li_loca", options_for_select(@li_loca, params["li_loca"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- debitage -->
+        <div class="tab-pane" id="debitage">
+          <p>This is not yet loaded in the database</p>
+        </div>
+
+        <!-- obsidian -->
+        <div class="tab-pane" id="obsidian">
+          <p>This is not yet loaded in the database</p>
+        </div>
+
+      </div> <!-- /tab-content -->
+    </div> <!-- /col-md-8 -->
+
+    <%= render "artifact_global_opts" %>
+
+  </div>
+<% end %>

@@ -1,0 +1,180 @@
+<div class="col-md-4">
+<!-- clear and submit -->
+  <div class="pull-right">
+    <%= link_to "Clear all search options", { controller: params["controller"], action: params["action"] }, class: "btn btn-danger" %>
+    <%# note: form begins on specific artifact views (see ceramics, lithics, etc) %>
+    <%= submit_tag "Submit", class: "btn btn-primary" %>
+  </div>
+  <br>
+  <br>
+
+  <!-- common search options accordian -->
+
+  <div class="panel-group combined_selections" id="accordion" role="tablist" aria-multiselectable="true">
+
+    <!-- unit type filters -->
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="heading-unitclass">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion"
+             href="#collapse-unitclass" aria-expanded="true" aria-controls="collapse-unitclass">
+            Unit Type
+          </a>
+          <div class="form-inline pull-right check_all">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" class="select_all"/> Select All
+              </label>
+            </div>
+          </div>
+        </h4>
+      </div>
+      <div id="collapse-unitclass" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-unit">
+        <div>
+          <ul class="list-group checked-list-box">
+            <% UnitClass.all.each do |u| %>
+              <li class="list-group-item">
+                <div class="form-inline">
+                  <div class="checkbox">
+                    <%= check_box_tag "unitclass[#{u.id}]", u.id, checked?(u.id, params["unitclass"]), class: "select_all", name: "unitclass[]" %>
+                    <%= label_tag "unitclass[#{u.id}]", u.name %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- unit num filters -->
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="heading-unitnum">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion"
+             href="#collapse-unitnum" aria-expanded="false" aria-controls="collapse-unitnum">
+            Unit Number
+          </a>
+          <div class="form-inline pull-right check_all">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" class="select_all"/> Select All
+              </label>
+            </div>
+          </div>
+        </h4>
+      </div>
+      <div id="collapse-unitnum" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-num">
+        <div>
+          <ul class="list-group checked-list-box">
+            <% Unit.all.each do |u| %>
+              <li class="list-group-item">
+                <div class="form-inline">
+                  <div class="checkbox">
+                    <%= check_box_tag "unitno[#{u.id}]", u.id, checked?(u.id, params["unitno"]), class: "select_all", name: "unitno[]" %>
+                    <%= label_tag "unitno[#{u.id}]", u.unit_no %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- occupation filters -->
+    <%# TODO need a single occupation table before hooking this up %>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="heading-occupation">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+             href="#collapse-occupation" aria-expanded="false" aria-controls="collapse-occupation">
+            Occupation 
+          </a>
+          <div class="form-inline pull-right check_all">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" class="select_all"/> Select All
+              </label>
+            </div>
+          </div>
+        </h4>
+      </div>
+      <div id="collapse-occupation" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-occupation">
+        <div>
+          <ul class="list-group checked-list-box">
+            <li class="list-group-item"><div class="form-inline" ><div class="checkbox"><label><input type="checkbox"/> <span>Chacoan</span></label></div></div></li>
+            <li class="list-group-item"><div class="form-inline" ><div class="checkbox"><label><input type="checkbox"/> <span>Chacoan (Suspected)</span></label></div></div></li>
+            <li class="list-group-item"><div class="form-inline" ><div class="checkbox"><label><input type="checkbox"/> <span>San Juan</span></label></div></div></li>
+            <li class="list-group-item"><div class="form-inline" ><div class="checkbox"><label><input type="checkbox"/> <span>San Juan (Suspected)</span></label></div></div></li>
+            <li class="list-group-item"><div class="form-inline" ><div class="checkbox"><label><input type="checkbox"/> <span>Other</span></label></div></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- strata filters -->
+    <%# TODO need a strata type "grouping" before this can be populated %>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="heading-stratum">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-stratum" aria-expanded="false" aria-controls="collapse-stratum">
+            Strata
+          </a>
+          <div class="form-inline pull-right check_all" >
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" class="select_all"/> Select All
+              </label>
+            </div>
+          </div>
+        </h4>
+      </div>
+      <div id="collapse-stratum" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-stratum">
+        <div>
+          <ul class="list-group checked-list-box">
+            <li class="list-group-item"><div class="form-inline" ><div class="checkbox"><label><input type="checkbox"/> <span>Floor</span></label></div></div></li>
+            <li class="list-group-item"><div class="form-inline" ><div class="checkbox"><label><input type="checkbox"/> <span>Midden (?)</span></label></div></div></li>
+            <li class="list-group-item"><div class="form-inline" ><div class="checkbox"><label><input type="checkbox"/> <span>Roof Fell</span></label></div></div></li>
+            <li class="list-group-item"><div class="form-inline" ><div class="checkbox"><label><input type="checkbox"/> <span>Other</span></label></div></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- features filters -->
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="heading-feature">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+             href="#collapse-feature" aria-expanded="false" aria-controls="collapse-feature">
+            Feature
+          </a>
+          <div class="form-inline pull-right check_all" >
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" class="select_all"/> Select All
+              </label>
+            </div>
+          </div>
+        </h4>
+      </div>
+      <div id="collapse-feature" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-feature">
+        <div>
+          <ul class="list-group checked-list-box">
+            <% FeatureGroup.all.each do |fg| %>
+              <li class="list-group-item">
+                <div class="form-inline">
+                  <div class="checkbox">
+                    <%= check_box_tag "featgrp[#{fg.id}]", fg.id, checked?(fg.id, params["featgrp"]), class: "select_all", name: "featgrp[]" %>
+                    <%= label_tag "featgrp[#{fg.id}]", fg.name %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
