@@ -14,10 +14,10 @@
 
     <!-- unit type filters -->
     <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading-unittype">
+      <div class="panel-heading" role="tab" id="heading-unitclass">
         <h4 class="panel-title">
           <a role="button" data-toggle="collapse" data-parent="#accordion"
-             href="#collapse-unittype" aria-expanded="true" aria-controls="collapse-unittype">
+             href="#collapse-unitclass" aria-expanded="true" aria-controls="collapse-unitclass">
             Unit Type
           </a>
           <div class="form-inline pull-right check_all">
@@ -29,16 +29,15 @@
           </div>
         </h4>
       </div>
-      <div id="collapse-unittype" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-unit">
+      <div id="collapse-unitclass" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-unit">
         <div>
           <ul class="list-group checked-list-box">
             <% UnitClass.all.each do |u| %>
               <li class="list-group-item">
                 <div class="form-inline">
-                  <%# TODO: unit_class will be renamed in the near future %>
                   <div class="checkbox">
-                    <%= check_box_tag "unittype[#{u.id}]", u.id, checked?(u.id, params["unittype"]), class: "select_all", name: "unittype[]" %>
-                    <%= label_tag "unittype[#{u.id}]", u.unit_class %>
+                    <%= check_box_tag "unitclass[#{u.id}]", u.id, checked?(u.id, params["unitclass"]), class: "select_all", name: "unitclass[]" %>
+                    <%= label_tag "unitclass[#{u.id}]", u.name %>
                   </div>
                 </div>
               </li>
@@ -71,7 +70,6 @@
             <% Unit.all.each do |u| %>
               <li class="list-group-item">
                 <div class="form-inline">
-                  <%# TODO: unit_no will be renamed in the near future %>
                   <div class="checkbox">
                     <%= check_box_tag "unitno[#{u.id}]", u.id, checked?(u.id, params["unitno"]), class: "select_all", name: "unitno[]" %>
                     <%= label_tag "unitno[#{u.id}]", u.unit_no %>
@@ -168,9 +166,8 @@
               <li class="list-group-item">
                 <div class="form-inline">
                   <div class="checkbox">
-                    <%# TODO the column name for feature_group will change in the near future %>
                     <%= check_box_tag "featgrp[#{fg.id}]", fg.id, checked?(fg.id, params["featgrp"]), class: "select_all", name: "featgrp[]" %>
-                    <%= label_tag "featgrp[#{fg.id}]", fg.feature_group %>
+                    <%= label_tag "featgrp[#{fg.id}]", fg.name %>
                   </div>
                 </div>
               </li>

@@ -108,11 +108,11 @@
           <div class="well">
             <div class="row">
               <div class="col-md-2">
-                <strong>FS#: <%= res.field_specimen_no %></strong>
+                <strong>FS#: <%= res.fs_no %></strong>
               </div>
               <div class="col-md-4">
                 <p><strong>Unit:</strong> <%= res.units.map { |u| u.unit_no }.join("; ") %></p>
-                <p><strong>Occupation:</strong> <%= res.bone_tool_occupation.occupation %></p>
+                <p><strong>Occupation:</strong> <%= res.bone_tool_occupation.name %></p>
                 <p><strong>Grid:</strong> <%= res.grid %></p>
               </div>
               <div class="col-md-6">
