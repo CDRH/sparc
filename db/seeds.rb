@@ -6,19 +6,26 @@
 ################
 
 files = {
-  bone_inventory: 'xls/BoneInventory2016-CCH.xlsx',
-  bonetools: 'xls/Bone_tool_DB.xlsx',
-  ceramic_inventory: 'xls/CeramicInventory2016.xlsx',
-  eggshells: 'xls/Eggshell_CCHedits.xls',
-  features: 'xls/Features_CCHedits.xls',
-  images: 'xls/Images.xlsx',
-  lithic_inventory: 'xls/LithicInventory2016.xlsx',
-  ornaments: 'xls/Ornament_DB_CCHedits.xlsx',
-  perishables: 'xls/Perishables-CCHedits-Nov13-2016.xls',
-  select_artifacts: 'xls/Select_Artifacts.xls',
-  soils: 'xls/Soil_Master.xlsx',
-  strata: 'xls/Strata.xls',
-  units: 'xls/Unit_Summary_CCHedits.xlsx',
+  # Primary Tables
+  units: 'xls/UnitSummary2017-CCH.xlsx',
+  strata: 'xls/Strata2017.xls',
+  features: 'xls/Features2017.xls',
+
+  # Inventory Tables
+  bone_inventory: 'xls/Bone Inventory PARTIAL 11 rows.xlsx',
+  ceramic_inventory: 'xls/Ceramic Inventory 2017.xlsx',
+  lithic_inventory: 'xls/LithicInventory2017.xlsx',
+
+  # Analysis Tables
+  bonetools: 'xls/BoneToolDB.xlsx',
+  eggshells: 'xls/Eggshell2017.xls',
+  ornaments: 'xls/OrnamentDB2017.xlsx',
+  perishables: 'xls/Perishables2017.xls',
+  select_artifacts: 'xls/SelectArtifacts2017.xls',
+  soils: 'xls/SoilMaster2017.xlsx',
+
+  # Images
+  images: 'xls/old/Images.xlsx'
 }
 
 # will contain an array of hashes
@@ -38,10 +45,12 @@ files = {
 def associate_strata_features unit, aStrata, aFeatures, related_item, source
   # pull out all of the strata from a single column
   strata = aStrata.split(/[;,]/).map { |s| s.strip }
+  strata.uniq!
   strata.each do |strat_no|
     stratum = select_or_create_stratum(unit, strat_no, source)
     # pull out all of the features from a single column
     features = aFeatures.split(/[;,]/).map { |f| f.strip }
+    features.uniq!
     features.each do |feat|
       feat_no = get_feature_number(feat, source)
       # at this point the given stratum should be associated with a specific unit, so
@@ -57,9 +66,9 @@ def associate_strata_features unit, aStrata, aFeatures, related_item, source
       end
       # associate the feature with the strata
       # associate the feature with the specific record (ornament, perishable, etc)
-      stratum.features << feature unless stratum.features.include?(feature)
+      stratum.features << feature if !stratum.features.include?(feature)
       if related_item
-        related_item.features << feature unless related_item.features.include?(feature)
+        related_item[:features] << feature
       end
     end
   end
@@ -75,6 +84,20 @@ end
 def convert_empty_to_none entry
   return entry.map do |field|
     (field.nil? || field == "") ? "none" : field
+  end
+end
+
+# Rename this after all sheets have been refactored
+def convert_empty_hash_values_to_none entry_hash
+  return entry_hash.each do |key, value|
+    entry_hash[key] = "none" if value.blank?
+  end
+end
+
+def find_or_create_and_log(source, model, **attributes)
+  model.find_or_create_by(attributes) do |record|
+    record.comments = "Imported from #{source}"
+    report model, attributes.values.first, source
   end
 end
 
@@ -97,12 +120,12 @@ def get_feature_number feat_str, source
   return feature
 end
 
-def report type, num, source
+def report category, value, source
   # filter out all of the stratum and features that are "none"
   # but keep those that might be attached TO a "none" stratum, unit, etc
-  puts "creating #{type} #{num} for #{source}"
-  if !num.end_with?("none") && !num.end_with?("no data")
-    @handcheck << { type: type, num: num, source: source }
+  puts "Creating #{category} #{value} for #{source}"
+  if !value.to_s.end_with?("none") && !value.to_s.end_with?("no data")
+    @handcheck << {category: category, value: value, source: source}
   end
 end
 
@@ -130,19 +153,20 @@ def select_or_create_unit unit, spreadsheet, log=true
       # extract the zone from the unit
       # and create zone if necessary
       zone = select_or_create_zone_from_unit unit, spreadsheet, log
-      room = Unit.create(:unit_no => unit, :zone => zone, :comments => "Created from #{spreadsheet}")
-      report "unit", unit, spreadsheet if log
+      puts unit
+      room = Unit.create(:unit_no => unit, :zone => zone)
+      report "Unit", unit, spreadsheet if log
     else
       room = Unit.where(:unit_no => unit).first
     end
   else
     if Unit.where(:unit_no => "Other").size < 1
-      zone = Zone.create(:number => "Other")
+      zone = Zone.create(name: "Other")
       room = Unit.create(:unit_no => "Other", :zone => zone)
-      puts "creating Unit Other for #{unit}"
+      puts "Creating \"Other\" for #{unit}"
     else
       room = Unit.where(:unit_no => 'Other').first
-      puts "using Unit Other for #{unit} from #{spreadsheet}"
+#      puts "Using \"Other\" for #{unit}"
     end
   end
   return room
@@ -150,669 +174,934 @@ end
 
 def select_or_create_zone_from_unit unit_str, spreadsheet, log=true
   num = unit_str.sub(/^0*/, "").sub(/[A-Z\/]*$/, "")
-  if Zone.where(:number => num).size < 1
-    puts "creating zone #{num} from #{spreadsheet}"
-    report "zone", num, spreadsheet if log
-    return Zone.create(:number => num)
+  if Zone.where(name: num).size < 1
+    puts "\nZone #{num}:"
+    report "Zone", num, spreadsheet if log
+    return Zone.create(name: num)
   else
-    return Zone.where(:number => num).first
+    return Zone.where(name: num).first
   end
 end
+
+##################
+# PRIMARY TABLES #
+##################
 
 #########
 # Units #
 #########
-
-if Unit.all.size < 1
+def seed_units files
   s = Roo::Excelx.new(files[:units])
-  s.sheet('room typology').each do |row|
-    if row[0] != 'Type No.'
-      id = row[0].to_i
-      room_type = RoomType.where(id: id)
-      if room_type.size == 0
-        room_type = RoomType.create(
-          id: id,
-          description: row[1],
-          location: row[3],
-          period: row[2]
-        )
-      end
-    end
+
+  puts "\n\n\nCreating Room Types\n"
+
+  room_type_columns = {
+    # Order as seen in spreadsheet
+    id: "Type No.",
+    description: "Description",
+    period: "Period",
+    location: "Location"
+  }
+
+  s.sheet('room typology').each(room_type_columns) do |row|
+    # Skip header row
+    next if row[:id] == "Type No."
+
+    room_type = convert_empty_hash_values_to_none(row)
+
+    room_type[:id] = room_type[:id].to_i
+    next if RoomType.where(id: room_type[:id]).size > 0
+
+    puts "\n#{room_type[:id]}"
+    puts "  When  : #{room_type[:period]}"
+    puts "  Where : #{room_type[:location]}"
+    puts "  Descrp: #{room_type[:description]}"
+    RoomType.create(room_type)
   end
 
-  s.sheet('data').each do |row|
-    if row[0] != 'Unit No.'
-      unit = select_or_create_unit row[0], "units", false
-      u = {}
-      u[:comments] = row[15]
-      u[:excavation_status] = create_if_not_exists(ExcavationStatus, :excavation_status, row[1])
-      u[:floor_area] = row[14]
-      u[:inferred_function] = create_if_not_exists(InferredFunction, :inferred_function, row[8])
-      u[:intact_roof] = create_if_not_exists(IntactRoof, :intact_roof, row[5])
-      u[:irregular_shape] = create_if_not_exists(IrregularShape, :irregular_shape, row[11])
-      u[:length] = row[12]
-      u[:other_description] = row[10]
-      u[:room_type_id] = row[6] != 'n/a' ? row[6].to_i : nil
-      u[:salmon_sector] = create_if_not_exists(SalmonSector, :salmon_sector, row[9])
-      u[:story] = create_if_not_exists(Story, :story, row[4])
-      u[:type_description] = create_if_not_exists(TypeDescription, :type_description, row[7])
-      u[:unit_class] = create_if_not_exists(UnitClass, :unit_class, row[3])
-      u[:unit_occupation] = create_if_not_exists(UnitOccupation, :occupation, row[2])
-      u[:width] = row[13]
-      unit.update(u)
-    end
 
+  puts "\n\n\nCreating Units\n"
+
+  unit_columns = {
+    # Order as seen in spreadsheet
+    unit_no: "Unit No.",
+    excavation_status: "Excavation Status",
+    unit_occupation: "Occupation",
+    unit_class: "Class",
+    story: "Stories",
+    intact_roof: "Intact Roof",
+    salmon_type_code: "Salmon Type Code",
+    type_description: "Type Description",
+    inferred_function: "Inferred Function",
+    salmon_sector: "Salmon Sector",
+    other_description: "Other Descrp",
+    irregular_shape: "Irregular Shape",
+    length: "Length",
+    width: "Width",
+    floor_area: "Floor Area",
+    comments: "Comments"
+  }
+
+  s.sheet('data').each(unit_columns) do |row|
+    # Skip header row
+    next if row[:unit_no] == "Unit No."
+
+    unit = convert_empty_hash_values_to_none(row)
+
+    # Handle foreign key columns
+    unit[:excavation_status] = create_if_not_exists(ExcavationStatus, :name, unit[:excavation_status])
+    unit[:unit_occupation] = create_if_not_exists(UnitOccupation, :name, unit[:unit_occupation])
+    unit[:unit_class] = create_if_not_exists(UnitClass, :name, unit[:unit_class])
+    unit[:story] = create_if_not_exists(Story, :name, unit[:story])
+    unit[:intact_roof] = create_if_not_exists(IntactRoof, :name, unit[:intact_roof])
+    unit[:room_type_id] = unit[:salmon_type_code] != "n/a" ? unit[:salmon_type_code].to_i : nil
+    unit[:type_description] = create_if_not_exists(TypeDescription, :name, unit[:type_description])
+    unit[:inferred_function] = create_if_not_exists(InferredFunction, :name, unit[:inferred_function])
+    unit[:salmon_sector] = create_if_not_exists(SalmonSector, :name, unit[:salmon_sector])
+    unit[:irregular_shape] = create_if_not_exists(IrregularShape, :name, unit[:irregular_shape])
+
+    u = select_or_create_unit unit[:unit_no], "Units", false
+    u.update(unit)
   end
 end
 
 ##########
 # Strata #
 ##########
-
-if Stratum.all.size < 1
+def seed_strata files
   s = Roo::Excel.new(files[:strata])
 
-  s.sheet('strat descp').each do |row|
-    if row[0] != 'CODE'
-      strat_type = StratType.where(code: row[0])
-      if strat_type.size == 0
-        strat_type = StratType.create(code: row[0], strat_type: row[1])
-      end
-    end
+  puts "\n\n\nCreating Strata Types\n"
+
+  strata_type_columns = {
+    # Order as seen in spreadsheet
+    code: "CODE",
+    name: "STRATTYPE"
+  }
+
+  s.sheet('strat descp').each(strata_type_columns) do |row|
+    # Skip header row
+    next if row[:code] == "CODE"
+
+    strata_type = convert_empty_hash_values_to_none(row)
+
+    next if StratType.where(code: strata_type[:code]).size > 0
+
+    # Output and save
+    puts "#{strata_type[:code]} => #{strata_type[:name]}"
+    StratType.create(strata_type)
   end
 
-  s.sheet('data').each do |row|
-    if row[0] != 'ROOM'
-      # TODO same note here as above, can there be more than one with unit_no?
-      units = Unit.where(:unit_no => row[0])
-      if units.size < 1
-        report "unit", row[0], "stratum #{row[1]}"
-        unit = Unit.create(:unit_no => row[0])
-      else
-        unit = Unit.where(:unit_no => row[0]).first
-      end
-      strata = Stratum.where(:unit_id => unit.id, strat_all: row[1])
-      if strata.size < 1
-        puts "Creating Stratum for #{row[0]} #{row[1]}"
-        stratum = Stratum.create(:unit_id => unit.id, strat_all: row[1])
-      else
-        stratum = Stratum.where(:unit_id => unit.id, strat_all: row[1]).first
-      end
-      st = StratType.where(code: row[2]).first
-      so = StratOccupation.where(occupation: row[5]).first
-      if !so
-        so = StratOccupation.create(occupation: row[5])
-      end
-      stratum.update_columns(strat_all: row[1], strat_alpha: row[2], strat_type_id: st != nil ? st.id : nil, stratum_one: row[3], stratum_two: row[4], strat_occupation_id: so.id, comments: row[6])
+
+  puts "\n\n\nCreating Strata\n"
+
+  strata_columns = {
+    # Order as seen in spreadsheet
+    unit: "ROOM",
+    strat_all: "STRATUM",
+    strat_alpha: "STRATUM-ALPHA",
+    strat_one: "STRATUM 1",
+    strat_two: "STRATUM 2",
+    strat_occupation: "OCCUPATION",
+    comments: "COMMENTS"
+  }
+
+  last_unit = ""
+  s.sheet('data').each(strata_columns) do |row|
+    # Skip header row
+    next if row[:unit] == "ROOM"
+
+    stratum = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+    puts "\nUnit #{stratum[:unit]}:" if stratum[:unit] != last_unit
+    last_unit = stratum[:unit]
+
+    # Handle foreign key columns
+    # TODO same note here as above, can there be more than one with unit_no?
+    if Unit.where(:unit_no => stratum[:unit]).size < 1
+      report "Unit", stratum[:unit], "Stratum #{stratum[:strat_all]}"
+      stratum[:unit] = Unit.create(:unit_no => stratum[:unit])
+    else
+      stratum[:unit] = Unit.where(:unit_no => stratum[:unit]).first
     end
+
+    stratum[:strat_occupation] = create_if_not_exists(StratOccupation, :name, stratum[:strat_occupation])
+    stratum[:strat_type] = StratType.where(code: stratum[:strat_alpha]).first
+
+    # Output and save
+    puts stratum[:strat_all]
+    Stratum.create(stratum)
   end
 end
 
 ############
 # Features #
 ############
-
-if Feature.all.size < 1
+def seed_features files
   s = Roo::Excel.new(files[:features])
 
-  s.sheet('Data').each do |row|
-    if row[0] != 'Room'
-      fo = create_if_not_exists(FeatureOccupation, :occupation, row[8])
-      ft = create_if_not_exists(FeatureType, :feature_type, row[9])
-      fg = create_if_not_exists(FeatureGroup, :feature_group, row[11])
-      rf = create_if_not_exists(ResidentialFeature, :residential_feature, row[12])
-      td = create_if_not_exists(TShapedDoor, :t_shaped_door, row[14])
-      dm = create_if_not_exists(DoorBetweenMultipleRoom, :door_between_multiple_rooms, row[15])
-      ds = create_if_not_exists(DoorwaySealed, :doorway_sealed, row[16])
-      Feature.create(
-        comments: row[20],
-        depth_height: row[19],
-        door_between_multiple_room: dm ? dm : nil,
-        doorway_sealed: ds ? ds : nil,
-        grid: row[6], depth_m_b_d: row[7],
-        feature_count: row[10],
-        feature_form: row[4],
-        feature_group: fg ? fg : nil,
-        feature_no: row[1],
-        feature_occupation: fo != nil ? fo : nil,
-        feature_type: ft ? ft : nil,
-        floor_association: row[3],
-        length: row[17],
-        location_in_room: row[13],
-        other_associated_features: row[5],
-        residential_feature: rf ? rf : nil,
-        strat: row[2],
-        t_shaped_door: td ? td : nil,
-        unit_no: row[0],
-        width: row[18]
-      )
+  puts "\n\n\nCreating Features\n"
+
+  feature_columns = {
+    unit_no: "Room",
+    feature_no: "Feature No.",
+    strat: "Stratum",
+    strat_other: "Other Strata",
+    floor_association: "Floor Association",
+    feature_form: "Feature Form",
+    other_associated_features: "Other Associated Features",
+    grid: "Grid",
+    depth_mbd: "Depth (MBD)",
+    feature_occupation: "Occupation",
+    feature_type: "Feature Type",
+    count: "Feature Count",
+    feature_group: "Feature Group",
+    residential_feature: "Residential Feature",
+    location_in_room: "Location in Room",
+    t_shaped_door: "T-Shaped Door",
+    door_between_multiple_room: "Door between Multiple Rooms",
+    doorway_sealed: "Doorway Sealed",
+    length: "Length",
+    width: "Width",
+    depth_height: "Depth/Height",
+    comments: "Comments"
+  }
+
+  last_unit = ""
+  s.sheet('Data').each(feature_columns) do |row|
+    # Skip header row
+    next if row[:unit_no] == "Room"
+
+    feature = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+    puts "\nUnit #{feature[:unit_no]}:" if feature[:unit_no] != last_unit
+    last_unit = feature[:unit_no]
+
+    # Handle foreign key columns
+
+    unit = find_or_create_and_log("Feature #{feature[:feature_no]}", Unit, unit_no: feature[:unit_no])
+
+    # Process each stratum in Strat column
+    feature[:strata] = []
+    strats = feature[:strat].split(/[;,]/).map{ |strat| strat.strip }
+    strats.uniq!
+    strats.each do |strat|
+      feature[:strata] << find_or_create_and_log("Feature #{feature[:feature_no]}", Stratum, strat_all: strat, unit_id: unit.id)
     end
-  end
 
-  Feature.all.each do |f|
-    a = f.strat.to_s.gsub(';',',').split(',').map{|o| o.strip}
-    # a.uniq!
-    a.each do |o|
-      r = Unit.where(unit_no:f.unit_no).first
-      if r.nil?
-        r = Unit.create(unit_no:f.unit_no, comments: 'imported from feature')
-        report "unit", f.unit_no, "feature #{f.feature_no}"
-      end
-      s = Stratum.where(strat_all: o, unit_id: r.id).first
-      if s.nil?
-        s = Stratum.create(strat_all: o, unit_id: r.id, comments: 'imported stratum none from features')
-        report "stratum", "#{f.unit_no}:#{o}", "feature #{f.feature_no}"
-      end
-      f.strata << s unless f.strata.include?(s)
-    end
-  end
-end
+    feature[:feature_occupation] = create_if_not_exists(FeatureOccupation, :name, feature[:feature_occupation])
+    feature[:feature_type] = create_if_not_exists(FeatureType, :name, feature[:feature_type])
+    feature[:feature_group] = create_if_not_exists(FeatureGroup, :name, feature[:feature_group])
+    feature[:residential_feature] = create_if_not_exists(ResidentialFeature, :name, feature[:residential_feature])
+    feature[:t_shaped_door] = create_if_not_exists(TShapedDoor, :name, feature[:t_shaped_door])
+    feature[:door_between_multiple_room] = create_if_not_exists(DoorBetweenMultipleRoom, :name, feature[:door_between_multiple_room])
+    feature[:doorway_sealed] = create_if_not_exists(DoorwaySealed, :name, feature[:doorway_sealed])
 
-#############
-# BoneTools #
-#############
+    # TODO Add strat_other column
+    feature.delete :strat_other
 
-if BoneTool.all.size < 1
-  s = Roo::Excelx.new(files[:bonetools])
-  puts 'Loading Bonetools'
-  
-  s.sheet('data').each do |row|
-    room = nil
-    if row[0] != 'Room'
-      room = select_or_create_unit(row[0], 'bonetools')
-
-      o = create_if_not_exists(BoneToolOccupation, :occupation, row[4])
-      b = BoneTool.create(
-        bone_tool_occupation: o,
-        comments: row[9],
-        depth: row[3],
-        field_specimen_no: row[2],
-        grid: row[5],
-        room: row[0],
-        species_code: row[8],
-        strat: row[1],
-        tool_type: row[7],
-        tool_type_code: row[6]
-      )
-     
-      a = b.strat.to_s.gsub(';', ',').split(',').map{|bstrat| bstrat.strip}
-      a.each do |strats|
-        s = Stratum.where(strat_all: strats, unit_id: room.id).first
-        if s.nil?
-          report "stratum", "#{room.unit_no}:#{row[0]}", "bonetool #{b.id}"
-          s = Stratum.create(
-            strat_all: strats,
-            unit_id: room ? room.id : nil,
-            comments: 'imported none'
-          )
-        end
-        b.strata << s unless b.strata.include?(s)
-      end
-    end
-  end
-
-end
-
-#############
-# Eggshells #
-#############
-
-if Eggshell.all.size < 1
-  puts 'Loading Eggshells...'
-  s = Roo::Excel.new(files[:eggshells])
-
-  s.sheet('eggshell').each do |row|
-    room = nil
-    if row[0] != 'Room'
-      room = select_or_create_unit(row[0], 'eggshells')
-
-      ea = nil
-      if row[11]
-        ea = create_if_not_exists(EggshellAffiliation, :affiliation, row[11])
-      end
-      ei = nil
-      if row[12]
-        ei = create_if_not_exists(EggshellItem, :item, row[12]) if row[12]
-      end
-      e = Eggshell.create(
-        depth: row[6],
-        eggshell_affiliation: ea.nil? ? nil : ea,
-        eggshell_item: ei.nil? ? nil : ei,
-        feature_no: row[7],
-        field_date: row[10],
-        grid: row[4],
-        museum_date: row[9],
-        quad: row[5],
-        record_field_key_no: row[3],
-        room: row[0],
-        salmon_museum_id_no: row[2],
-        storage_bin: row[8],
-        strat: row[1],
-      )
-     
-      associate_strata_features(room, row[1], row[7], e, "eggshell")
-    end
+    # Output and save
+    puts feature[:feature_no]
+    Feature.create(feature)
   end
 end
-
-#########
-# Soils #
-#########
-
-if Soil.all.size < 1
-  puts 'Loading Soils...'
-  s = Roo::Excelx.new(files[:soils])
-
-  s.sheet('Sheet1').each do |entry|
-    row = convert_empty_to_none(entry)
-
-    if row[0] != 'SITE'
-      soil = {}
-      soil[:box] = row[5]
-      soil[:comments] = row[19]
-      soil[:data_entry] = row[20]
-      soil[:date] = row[15]
-      soil[:depthbeg] = row[12]
-      soil[:depthend] = row[13]
-      soil[:exactprov] = row[11]
-      soil[:excavator] = row[16]
-      soil[:feature_key] = row[3]
-      soil[:fs] = row[4]
-      soil[:gridew] = row[8]
-      soil[:gridns] = row[9]
-      soil[:location] = row[21]
-      soil[:otherstrat] = row[14]
-      soil[:period] = row[6]
-      soil[:quad] = row[10]
-      soil[:sample_no] = row[18]
-      soil[:site] = row[0]
-      soil[:soil_count] = row[7]
-      soil[:strat] = row[2]
-
-      soil[:art_type_id] = create_if_not_exists(ArtType, :art_type, row[17]).id
-
-      unit = select_or_create_unit(row[1], 'soils')
-      soil[:room] = unit.unit_no
-
-      soil_row = Soil.create(soil)
-      associate_strata_features(unit, row[2], row[3], soil_row, "soil")
-    end
-  end
-end
-
-###############
-# Perishables #
-###############
-
-# NOTE:  Perishables may belong to more than one unit
-
-if Perishable.all.size < 1
-  puts 'Loading Perishables...'
-  s = Roo::Excel.new(files[:perishables])
-
-  s.sheet('all').each do |entry|
-    # empty fields should say "none" to standardize
-    row = convert_empty_to_none(entry)
-
-    if row[0] != 'FS Number'
-      perish = {}
-      perish[:artifact_structure] = row[12]
-      perish[:artifact_type] = row[10]
-      perish[:comments] = row[13]
-      perish[:depth] = row[6]
-      # TODO not sure what column to use for this
-      perish[:exhibit_location] = row[16]
-      perish[:field_date] = row[19]
-      perish[:fs_number] = row[0]
-      perish[:grid] = row[4]
-      perish[:museum_lab_no] = row[18]
-      perish[:original_analysis] = row[20]
-      perish[:other_comments] = row[14]
-      perish[:perishable_count] = row[11]
-      perish[:quad] = row[5]
-      perish[:record_key_no] = row[17]
-      perish[:room] = row[2]
-      perish[:sa_no] = row[9]
-      perish[:salmon_museum_number] = row[1]
-      perish[:storage_location] = row[15]
-      perish[:strat] = row[3]
-
-      # period
-      perish[:perishable_period_id] = create_if_not_exists(PerishablePeriod, :period, row[8]).id
-
-      perish_row = Perishable.create(perish)
-
-      units = row[2].split(/[,;]/).map { |u| u.strip }
-      units.each do |unit_str|
-        unit = select_or_create_unit(unit_str, "perishables")
-        associate_strata_features(unit, row[3], row[7], perish_row, "perishables")
-      end
-    end
-  end
-end
-
-#############
-# Ornaments #
-#############
-
-if Ornament.all.size < 1
-  puts 'Loading Ornaments...'
-  s = Roo::Excelx.new(files[:ornaments])
-
-  s.sheet('data').each do |entry|
-    row = convert_empty_to_none(entry)
-
-    if row[0] != 'Museum Specimen No.'
-      orna = {}
-      orna[:analysis_lab_no] = row[1]
-      orna[:analyst] = row[10]
-      orna[:analyzed] = row[11]
-      orna[:count] = row[13]
-      orna[:depth] = row[6]
-      orna[:field_date] = row[7]
-      orna[:grid] = row[4]
-      orna[:item] = row[14]
-      orna[:museum_specimen_no] = row[0]
-      orna[:photographer] = row[12]
-      orna[:quad] = row[5]
-      orna[:room] = row[2]
-
-      unit = select_or_create_unit(row[2], "ornaments")
-
-      stratum = Stratum.where(strat_all: row[3], unit_id: unit.id).first
-      if !stratum
-        stratum = Stratum.create(strat_all: row[3], unit_id: unit.id)
-      end
-      # does not link the stratum object directly to ornament, just string
-      orna[:strat] = row[3]
-
-      feature_no = get_feature_number(row[9], "ornaments")
-      feature = Feature.where(feature_no: feature, unit_no: orna[:room]).first
-      if feature.nil?
-        feature = Feature.create(
-          unit_no: orna[:room],
-          feature_no: feature_no
-        )
-        feature.strata << stratum unless feature.strata.include?(stratum)
-      end
-      orna[:feature] = feature
-      orna[:ornament_period_id] = create_if_not_exists(OrnamentPeriod, :period, row[8]).id
-
-      # should already have the stratum and feature related, so we're done!
-      Ornament.create(orna)
-    end
-  end
-end
-
 
 ####################
-# Select Artifacts #
+# INVENTORY TABLES #
 ####################
 
-if SelectArtifact.all.size < 1
-  puts 'Loading Select Artifacts...'
-  s = Roo::Excel.new(files[:select_artifacts])
+##################
+# Bone Inventory #
+##################
+def seed_bone_inventory files
+  s = Roo::Excelx.new(files[:bone_inventory])
 
-  s.sheet('main data').each do |entry|
-    row = convert_empty_to_none(entry)
+  puts "\n\n\nCreating Bone Inventories\n"
 
-    if row[0] != 'Room'
-      sa = {}
-      sa[:artifact_count] = row[10]
-      sa[:artifact_no] = row[1]
-      # Note: The below could be parsed into specific features
-      # at which point the select_artifacts_strata table should
-      # be removed and a join set up with features instead
-      sa[:associated_feature_artifacts] = row[5]
-      sa[:comments] = row[12]
-      sa[:depth] = row[7]
-      sa[:floor_association] = row[3]
-      sa[:grid] = row[6]
-      sa[:location_in_room] = row[11]
-      sa[:select_artifact_occupation_id] = create_if_not_exists(SelectArtifactOccupation, :occupation, row[8]).id
-      sa[:select_artifact_type] = row[9]
-      sa[:sa_form] = row[4]
-      # Note: Select Artifacts have an actual relationship with strata
-      # but I'm copying the string from the spreadsheet since there
-      # is a specific database field that seems to be for it
-      sa[:strat] = row[2]
+  columns = {
+    site: "SITE",
+    box: "BOX",
+    fs_no: "FS",
+    count: "COUNT",
+    room: "ROOM",
+    stratum: "STRATUM",
+    strat_other: "OTHER STRATA",
+    feature: "FEATURE NO",
+    sa_no: "SA NO",
+    grid_ew: "GRID EW",
+    grid_ns: "GRID NS",
+    quad: "QUAD",
+    exact_prov: "EXACTPROV",
+    depth_begin: "DEPTHBEG",
+    depth_end: "DEPTHEND",
+    field_date: "DATE",
+    excavator: "EXCAVATOR",
+    art_type: "ARTTYPE",
+    # Empty column
+    record_field_key_no: "RECORDKEY",
+    comments: "COMMENTS",
+    entered_by: "ENTBY",
+    location: "LOCATION"
+  }
 
-      unit = select_or_create_unit(row[0], "select artifacts")
-      sa[:room] = unit.unit_no
+  last_room = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:room] == "ROOM"
 
-      select_artifact = SelectArtifact.create(sa)
+    bone_inv = convert_empty_hash_values_to_none(row)
 
-      sa_strata = row[2].split(/[,;]/).map{ |stratum| stratum.strip }
-      sa_strata.each do |sa_str|
-        stratum = Stratum.where(strat_all: sa_str, unit_id: unit.id).first
-        if stratum.nil?
-          report "stratum", "#{unit.id}:#{sa_str}", "select artifact #{select_artifact.id}"
-          stratum = Stratum.create(
-            strat_all: sa_str,
-            unit: unit,
-            comments: 'imported from select artifacts spreadsheet'
-          )
-        end
-        select_artifact.strata << stratum unless select_artifact.strata.include?(stratum)
-      end
-    end
+    # Output context for creation
+#    puts "\nRoom #{bone_inv[:room]}:" if bone_inv[:room] != last_room
+    last_room = bone_inv[:room]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(bone_inv[:room], 'Bone Inventories')
+
+    bone_inv[:features] = []
+    associate_strata_features(unit, bone_inv[:stratum], bone_inv[:feature], bone_inv, "Bone Inventory")
+
+    # TODO Add room, stratum, & feature columns to BoneInventory model
+    bone_inv.delete :room
+    bone_inv.delete :stratum
+    bone_inv.delete :feature
+
+    # TODO Remove strat_alpha, strat_one, and strat_two from schema
+
+    # Output and create
+#    puts bone_inv[:fs_no]
+    BoneInventory.create(bone_inv)
+  end
+end
+
+#####################
+# Ceramic Inventory #
+#####################
+def seed_ceramic_inventory files
+  s = Roo::Excelx.new(files[:ceramic_inventory])
+
+  puts "\n\n\nCreating Ceramic Inventories\n"
+
+  columns = {
+    site: "SITE",
+    box: "BOX",
+    fs_no: "FS",
+    count: "COUNT",
+    room: "ROOM",
+    stratum: "STRATUM",
+    strat_other: "OTHER STRATA",
+    feature: "FEATURE",
+    sa_no: "SA NO",
+    grid_ew: "GRID EW",
+    grid_ns: "GRID NS",
+    quad: "QUAD",
+    exact_prov: "EXACTPROV",
+    depth_begin: "DEPTHBEG",
+    depth_end: "DEPTHEND",
+    field_date: "FIELD DATE",
+    excavator: "EXCAVATOR",
+    art_type: "ARTTYPE",
+    record_field_key_no: "RECORDKEY",
+    comments: "COMMENTS",
+    entered_by: "ENTBY",
+    status: "STATUS",
+    location: "LOCATION"
+  }
+
+  last_room = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:room] == "ROOM"
+
+    ceramic_inv = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+#    puts "\nRoom #{ceramic_inv[:room]}:" if ceramic_inv[:room] != last_room
+    last_room = ceramic_inv[:room]
+
+    unit = select_or_create_unit(ceramic_inv[:room], "Ceramic Inventories")
+
+    ceramic_inv[:features] = []
+    associate_strata_features(unit, ceramic_inv[:stratum], ceramic_inv[:feature], ceramic_inv, "Ceramic Inventories")
+
+    # TODO Add room, stratum, feature, and status columns to CeramicInventory model
+    ceramic_inv.delete :room
+    ceramic_inv.delete :stratum
+    ceramic_inv.delete :feature
+    ceramic_inv.delete :status
+
+    # TODO Remove strat_alpha, strat_one, and strat_two from schema
+
+    # Output and save
+#    puts ceramic_inv[:fs_no]
+    CeramicInventory.create(ceramic_inv)
   end
 end
 
 ######################
 # Lithic Inventories #
 ######################
-
-if LithicInventory.all.size < 1
-  puts 'Loading Lithic Inventory ...'
+def seed_lithic_inventories files
   s = Roo::Excelx.new(files[:lithic_inventory])
 
-  s.sheet('Sheet1').each do |entry|
-    row = convert_empty_to_none(entry)
+  puts "\n\n\nCreating Lithic Inventories\n"
 
-    if row[0] != 'SITE'
-      lithic = {}
-      lithic[:site] = row[0]
-      lithic[:box] = row[1]
-      lithic[:fs] = row[2]
-      lithic[:lithic_inventory_count] = row[3]
-      lithic[:gridew] = row[6]
-      lithic[:gridns] = row[7]
-      lithic[:quad] = row[8]
-      lithic[:exactprov] = row[9]
-      lithic[:depthbeg] = row[10]
-      lithic[:depthend] = row[11]
-      lithic[:stratalpha] = row[12]
-      lithic[:strat_one] = row[13]
-      lithic[:strat_two] = row[14]
-      lithic[:othstrats] = row[15]
-      lithic[:field_date] = row[16]
-      lithic[:excavator] = row[17]
-      lithic[:art_type] = row[18]
-      lithic[:sano] = row[19]
-      lithic[:recordkey] = row[20]
-      lithic[:comments] = row[22]
-      lithic[:entby] = row[23]
-      lithic[:location] = row[24]
+  columns = {
+    site: "SITE",
+    box: "BOX",
+    fs_no: "FS No.",
+    count: "COUNT",
+    room: "ROOM",
+    stratum: "STRATUM",
+    strat_other: "OTHSTRATS",
+    feature: "FEATURE",
+    sa_no: "SA NO",
+    grid_ew: "GRIDEW",
+    grid_ns: "GRIDNS",
+    quad: "QUAD",
+    exact_prov: "EXACTPROV",
+    depth_begin: "DEPTHBEG",
+    depth_end: "DEPTHEND",
+    field_date: "DATE",
+    excavator: "EXCAVATOR",
+    art_type: "ARTTYPE",
+    record_field_key_no: "RECORDKEY",
+    comments: "COMMENTS",
+    entered_by: "ENTBY",
+    location: "LOCATION"
+  }
 
-      unit = select_or_create_unit(row[4], 'lithic_inventories')
-      # lithic[:room] = unit.unit_no
+  last_room = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:room] == "ROOM"
 
-      lithic_row = LithicInventory.create(lithic)
-      associate_strata_features(unit, row[5], row[21], lithic_row, "lithic_inventory")
+    lithic = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+#    puts "\nRoom #{lithic[:room]}:" if lithic[:room] != last_room
+    last_room = lithic[:room]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(lithic[:room], "Lithic Inventories")
+
+    lithic[:features] = []
+    associate_strata_features(unit, lithic[:stratum], lithic[:feature], lithic, "Lithic Inventories")
+
+    # TODO Add room, stratum, and feature columns to LithicInventory model
+    lithic.delete :room
+    lithic.delete :stratum
+    lithic.delete :feature
+
+    # TODO Remove strat_alpha, strat_one, and strat_two from schema
+
+    # Output and save
+#    puts lithic[:fs_no]
+    LithicInventory.create(lithic)
+  end
+end
+
+###################
+# ANALYSIS TABLES #
+###################
+
+##############
+# Bone Tools #
+##############
+def seed_bone_tools files
+  s = Roo::Excelx.new(files[:bonetools])
+
+  puts "\n\n\nCreating Bone Tools\n"
+
+  bonetools_columns = {
+    unit: "Room",
+    strat: "Stratum",
+    strat_other: "Other Strata ",
+    feature: "Feature No",
+    sa_no: "Select Artifact No.",
+    fs_no: "FS No",
+    depth: "Depth (meters below datum)",
+    bone_tool_occupation: "Occupation",
+    grid: "Grid",
+    tool_type_code: "Tool Type Code",
+    tool_type: "Tool Type",
+    species_code: "Species Code",
+    comments: "Comments"
+  }
+
+  last_unit = ""
+  s.sheet('data').each(bonetools_columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    bonetool = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+#    puts "\nUnit #{bonetool[:unit]}:" if bonetool[:unit] != last_unit
+    last_unit = bonetool[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(bonetool[:unit], "Bone Tools")
+
+    bonetool[:bone_tool_occupation] = create_if_not_exists(BoneToolOccupation, :name, bonetool[:bone_tool_occupation])
+
+    bonetool[:strata] = []
+    strats = bonetool[:strat].split(/[;,]/).map{ |strat| strat.strip }
+    strats.uniq!
+    strats.each do |strat|
+      bonetool[:strata] << find_or_create_and_log("Bone Tool #{bonetool[:fs_no]}", Stratum, strat_all: strat, unit_id: unit.id)
     end
+
+    # TODO Add strat_other, feature, and sa_no to schema
+    bonetool.delete :strat_other
+    bonetool.delete :feature
+    bonetool.delete :sa_no
+
+    # Output and save
+#    puts bonetool[:fs_no]
+    BoneTool.create(bonetool)
+  end
+end
+
+#############
+# Eggshells #
+#############
+def seed_eggshells files
+  s = Roo::Excel.new(files[:eggshells])
+
+  puts "\n\n\nCreating Eggshells\n"
+
+  columns = {
+    unit: "ROOM",
+    strat: "STRATUM",
+    strat_other: "OTHER STRATA",
+    feature_no: "FEATURE NO",
+    grid: "GRID",
+    quad: "QUAD",
+    depth: "DEPTH",
+    record_field_key_no: "RECORD KEY NO",
+    salmon_museum_no: "SALMON MUSEUM ID NO",
+    storage_bin: "STORAGE BIN",
+    museum_date: "MUSEUM DATE",
+    field_date: "FIELD DATE",
+    eggshell_affiliation: "AFFILIATION",
+    eggshell_item: "ITEM"
+  }
+
+  last_unit = ""
+  s.sheet('eggshell').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    eggshell = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+#    puts "\nUnit #{eggshell[:unit]}:" if eggshell[:unit] != last_unit
+    last_unit = eggshell[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(eggshell[:unit], 'eggshells')
+
+    eggshell[:features] = []
+    associate_strata_features(unit, eggshell[:strat], eggshell[:feature_no], eggshell, "Eggshells")
+
+    eggshell[:eggshell_affiliation] = (eggshell[:eggshell_affiliation]) ? create_if_not_exists(EggshellAffiliation, :name, eggshell[:eggshell_affiliation]) : nil
+
+    eggshell[:eggshell_item] = (eggshell[:eggshell_item]) ? create_if_not_exists(EggshellItem, :name, eggshell[:eggshell_item]) : nil
+
+    # TODO Add strat_other to schema
+    eggshell.delete :strat_other
+
+    # Output and save
+#    puts eggshell[:salmon_museum_no]
+    Eggshell.create(eggshell)
+  end
+end
+
+#############
+# Ornaments #
+#############
+def seed_ornaments files
+  s = Roo::Excelx.new(files[:ornaments])
+
+  puts "\n\n\nCreating Ornaments\n"
+
+  columns = {
+    salmon_museum_no: "MUSEUM SPECIMEN NO",
+    analysis_lab_no: "ANALYSIS LAB NO",
+    unit: "UNIT",
+    strat: "STRATUM",
+    strat_other: "OTHER STRATA",
+    feature: "FEATURE NO",
+    sa_no: "SA NO",
+    grid: "GRID",
+    quad: "QUAD",
+    depth: "DEPTH       (m below datum)",
+    field_date: "FIELD DATE",
+    ornament_period: "PERIOD",
+    analyst: "ANALYST",
+    analyzed: "ANALYZED",
+    photographer: "PHOTOGRAPHER",
+    count: "COUNT",
+    item: "ITEM"
+  }
+
+  last_unit = ""
+  s.sheet('data').each(columns) do |row|
+    next if row[:unit] == "Room"
+
+    ornament = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+#    puts "\nUnit #{ornament[:unit]}:" if ornament[:unit] != last_unit
+    last_unit = ornament[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(ornament[:unit], "Ornaments")
+
+    feature_no = get_feature_number(ornament[:feature], "Ornaments")
+    ornament[:feature] = find_or_create_and_log("Ornament #{ornament[:salmon_museum_no]}", Feature, feature_no: feature_no, unit_no: ornament[:unit])
+
+    # TODO Review handling of CSV strat value
+    # Process each stratum in Strat column
+    strats = ornament[:strat].split(/[;,]/).map{ |strat| strat.strip }
+    strats.uniq!
+    strats.each do |strat|
+      stratum = find_or_create_and_log("Ornament #{ornament[:salmon_museum_no]}", Stratum, strat_all: strat, unit_id: unit.id)
+
+      # Associate strata through feature
+      ornament[:feature].strata << stratum
+    end
+
+    ornament[:ornament_period] = create_if_not_exists(OrnamentPeriod, :name, ornament[:ornament_period])
+
+    # TODO Add strat_other and sa_no to schema
+    ornament.delete :strat_other
+    ornament.delete :sa_no
+
+    # Output and save
+#    puts ornament[:salmon_museum_no]
+    Ornament.create(ornament)
+  end
+end
+
+###############
+# Perishables #
+###############
+# NOTE:  Perishables may belong to more than one unit
+def seed_perishables files
+  s = Roo::Excel.new(files[:perishables])
+
+  puts "\n\n\nCreating Perishables\n"
+
+  columns = {
+    fs_no: "FS Number",
+    salmon_museum_number: "Salmon Museum No.",
+    unit: "Room",
+    strat: "Stratum",
+    strat_other: "Other Strata",
+    associated_feature: "Feature No",
+    sa_no: "SA No",
+    perishable_period: "Period",
+    grid: "Grid",
+    quad: "Quad",
+    depth: "Depth (m below datum)",
+    artifact_type: "Artifact Type",
+    count: "Count",
+    artifact_structure: "Artifact Structure",
+    comments: "Comments",
+    comments_other: "Other Comments",
+    storage_location: "Storage Location",
+    exhibit_location: "Exhibit Location",
+    record_field_key_no: "Record Key No.",
+    museum_lab_no: "Museum Lab. No",
+    field_date: "Field Date",
+    original_analysis: "Original Analysis "
+  }
+
+  last_unit = ""
+  s.sheet('all').each(columns) do |row|
+    next if row[:unit] == "Room"
+
+    perishable = convert_empty_hash_values_to_none(row)
+
+    # Output context for creation
+#    puts "\nUnit #{perishable[:unit]}:" if perishable[:unit] != last_unit
+    last_unit = perishable[:unit]
+
+    # Handle foreign keys
+    perishable[:perishable_period] = create_if_not_exists(PerishablePeriod, :name, perishable[:perishable_period])
+
+    perishable[:features] = []
+    units = perishable[:unit].split(/[,;]/).map { |u| u.strip }
+    units.each do |unit|
+      unit = select_or_create_unit(unit, "Perishables")
+      associate_strata_features(unit, perishable[:strat], perishable[:associated_feature], perishable, "Perishables")
+    end
+
+    # TODO Add strat_other to schema
+    perishable.delete :strat_other
+
+    # Output and save
+#    puts perishable[:fs_no]
+    Perishable.create(perishable)
   end
 end
 
 ####################
-# Bone Inventories #
+# Select Artifacts #
 ####################
+def seed_select_artifacts files
+  s = Roo::Excel.new(files[:select_artifacts])
 
-if BoneInventory.all.size < 1
-  puts 'Loading Bone Inventory ...'
-  s = Roo::Excelx.new(files[:bone_inventory])
+  puts "\n\n\nCreating Select Artifacts\n"
 
-  s.sheet('Sheet1').each do |entry|
-    row = convert_empty_to_none(entry)
+  columns = {
+    unit: "Room",
+    artifact_no: "Artifact No",
+    strat: "Stratum",
+    strat_other: "Other Strata",
+    feature: "Feature No",
+    floor_association: "Floor Association",
+    sa_form: "SA Form",
+    associated_feature_artifacts: "Associated SA Artifacts",
+    grid: "Grid",
+    depth: "Depth (MBD)",
+    select_artifact_occupation: "Occupation",
+    select_artifact_type: "Type",
+    artifact_count: "Artifact Count",
+    location_in_room: "Location in Room",
+    comments: "Comments"
+  }
 
-    if row[0] != 'SITE'
-      bone_inventory = {}
-      bone_inventory[:site] = row[0]
-      bone_inventory[:box] = row[1]
-      bone_inventory[:fs] = row[2]
-      bone_inventory[:bone_inventory_count] = row[3]
-      bone_inventory[:gridew] = row[6]
-      bone_inventory[:gridns] = row[7]
-      bone_inventory[:quad] = row[8]
-      bone_inventory[:exactprov] = row[9]
-      bone_inventory[:depthbeg] = row[10]
-      bone_inventory[:depthend] = row[11]
-      bone_inventory[:stratalpha] = row[12]
-      bone_inventory[:strat_one] = row[13]
-      bone_inventory[:strat_two] = row[14]
-      bone_inventory[:othstrats] = row[15]
-      bone_inventory[:field_date] = row[16]
-      bone_inventory[:excavator] = row[17]
-      bone_inventory[:art_type] = row[18]
-      bone_inventory[:sano] = row[19]
-      bone_inventory[:recordkey] = row[20]
-      bone_inventory[:comments] = row[22]
-      bone_inventory[:entby] = row[23]
-      bone_inventory[:location] = row[24]
+  last_unit = ""
+  s.sheet('main data').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
 
-      unit = select_or_create_unit(row[4], 'bone_inventories')
-      # bone_inventory[:room] = unit.unit_no
+    sa = convert_empty_hash_values_to_none(row)
 
-      bone_inventory_row = BoneInventory.create(bone_inventory)
-      associate_strata_features(unit, row[5], row[21], bone_inventory_row, "bone_inventory")
+    # Output context for creation
+#    puts "\nUnit #{sa[:unit]}:" if sa[:unit] != last_unit
+    last_unit = sa[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(sa[:unit], "Select Artifacts")
+
+    # Process each stratum in Strat column
+    sa[:strata] = []
+    strats = sa[:strat].split(/[;,]/).map{ |strat| strat.strip }
+    strats.uniq!
+    strats.each do |strat|
+      sa[:strata] << find_or_create_and_log("Select Artifact #{sa[:artifact_no]}", Stratum, strat_all: strat, unit_id: unit.id)
     end
+
+    sa[:select_artifact_occupation] = create_if_not_exists(SelectArtifactOccupation, :name, sa[:select_artifact_occupation])
+
+    # NOTE: associated_feature_artifacts considered for model associations
+    # If done, the select_artifacts_strata table should be removed
+    # and a join set up with features instead
+
+    # TODO Add strat_other and feature to schema
+    sa.delete :strat_other
+    sa.delete :feature
+
+    # Output and create
+#    puts sa[:artifact_no]
+    SelectArtifact.create(sa)
   end
 end
 
-#######################
-# Ceramic Inventories #
-#######################
+#########
+# Soils #
+#########
+def seed_soils files
+  s = Roo::Excelx.new(files[:soils])
 
-if CeramicInventory.all.size < 1
-  puts 'Loading Ceramic Inventory ...'
-  s = Roo::Excelx.new(files[:ceramic_inventory])
+  puts "\n\n\nCreating Soils\n"
 
-  s.sheet('Sheet1').each do |entry|
-    row = convert_empty_to_none(entry)
+  columns = {
+    site: "SITE",
+    unit: "ROOM",
+    strat: "STRATUM",
+    strat_other: "OTHER STRATA",
+    feature_key: "FEATURE",
+    sa_no: "SA NO",
+    fs_no: "FS NO",
+    box: "BOX",
+    count: "COUNT",
+    grid_ew: "GRIDEW",
+    grid_ns: "GRIDNS",
+    quad: "QUAD",
+    exact_prov: "EXACTPROV",
+    depth_begin: "DEPTHBEG",
+    depth_end: "DEPTHEND",
+    date: "DATE",
+    excavator: "EXCAVATOR",
+    art_type: "ARTTYPE",
+    sample_no: "OTHER SAMPLE NO",
+    comments: "COMMENTS",
+    entered_by: "DATA ENTRY",
+    location: "LOCATION"
+  }
 
-    if row[0] != 'SITE'
-      ceramic_inventory = {}
-      ceramic_inventory[:site] = row[0]
-      ceramic_inventory[:box] = row[1]
-      ceramic_inventory[:fs] = row[2]
-      ceramic_inventory[:ceramic_inventory_count] = row[3]
-      ceramic_inventory[:gridew] = row[6]
-      ceramic_inventory[:gridns] = row[7]
-      ceramic_inventory[:quad] = row[8]
-      ceramic_inventory[:exactprov] = row[9]
-      ceramic_inventory[:depthbeg] = row[10]
-      ceramic_inventory[:depthend] = row[11]
-      ceramic_inventory[:stratalpha] = row[12]
-      ceramic_inventory[:strat_one] = row[13]
-      ceramic_inventory[:strat_two] = row[14]
-      ceramic_inventory[:othstrats] = row[15]
-      ceramic_inventory[:field_date] = row[16]
-      ceramic_inventory[:excavator] = row[17]
-      ceramic_inventory[:art_type] = row[18]
-      ceramic_inventory[:sano] = row[19]
-      ceramic_inventory[:recordkey] = row[20]
-      ceramic_inventory[:comments] = row[22]
-      ceramic_inventory[:entby] = row[23]
-      ceramic_inventory[:location] = row[24]
+  last_unit = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "ROOM"
 
-      unit = select_or_create_unit(row[4], 'ceramic_inventories')
-      # ceramic_inventory[:room] = unit.unit_no
+    soil = convert_empty_hash_values_to_none(row)
 
-      ceramic_inventory_row = CeramicInventory.create(ceramic_inventory)
-      associate_strata_features(unit, row[5], row[21], ceramic_inventory_row, "ceramic_inventory")
-    end
+    # Output context for creation
+#    puts "\nUnit #{soil[:unit]}:" if soil[:unit] != last_unit
+    last_unit = soil[:unit]
+
+    # Handle foreign keys
+    soil[:art_type] = create_if_not_exists(ArtType, :name, soil[:art_type])
+
+    unit = select_or_create_unit(soil[:unit], "Soils")
+
+    soil[:features] = []
+    associate_strata_features(unit, soil[:unit], soil[:strat], soil, "Soils")
+
+    # TODO Add sa_no to and remove period from to schema
+    soil.delete :sa_no
+
+    # Output and save
+#    puts soil[:fs_no]
+    soil_record = Soil.create(soil)
   end
 end
 
 ##########
 # Images #
 ##########
-
-if Image.all.size < 1
-  puts 'Loading Images...'
+def seed_images files
   s = Roo::Excelx.new(files[:images])
+
+  puts "\n\n\nCreating Images\n"
 
   # NOTE:  I suspect that some of the single units are actually
   # ranges, so this whole thing will need to be redone so that
   # a given feature is attached to multiple strata attached to
   # multiple units (great sadness)
 
-  s.sheet('data').each do |entry|
-    row = convert_empty_to_none(entry)
+  columns = {
+    site: "Site",
+    unit: "Room",
+    strat: "Strata",
+    image_no: "Photo No",
+    image_format: "Image",
+    image_type: "Type",
+    image_assocnoeg: "Assocnoeg",
+    image_box: "Box",
+    grid_ew: "GridE",
+    grid_ns: "GridN",
+    image_orientation: "Orientation",
+    depth_begin: "DepBeg",
+    depth_end: "DepEnd",
+    date_original: "Date",
+    date: "CDRH: Date",
+    image_creator: "Photographer",
+    associated_features: "Feature No",
+    sa_no: "Signi Art No",
+    other_no: "Other No",
+    image_human_remain: "CDRH: Human Remains \n(y/n)",
+    image_subject1: "CDRH: Subject Category 1",
+    image_subject2: "CDRH: Subject Category 2",
+    image_subject3: "CDRH: Subject Category 3",
+    comments: "Comments",
+    storage_location: "Storage Location",
+    entered_by: "Data Entry",
+    image_quality: "CDRH: Image Quality Notes",
+    notes: "CDRH: Notes"
+  }
 
-    if row[0] != 'Site'
-      record = {}
-      record[:asso_features] = row[16]
-      record[:comments] = row[24]
-      record[:data_entry] = row[26]
-      record[:date] = row[14]
-      record[:dep_beg] = row[11]
-      record[:dep_end] = row[12]
-      record[:gride] = row[8]
-      record[:gridn] = row[9]
-      record[:image_no] = row[3]
-      record[:image_type] = row[5]
-      record[:notes] = row[28]
-      record[:other_no] = row[18]
-      record[:room] = row[1]
-      record[:signi_art_no] = row[17]
-      record[:site] = row[0]
-      record[:storage_location] = row[25]
-      record[:strat] = row[2]
+  last_unit = ""
+  s.sheet('data').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
 
-      image = Image.create(record)
+    image = convert_empty_hash_values_to_none(row)
 
-      # create / select and assign related image tables
-      belongs_to = {
-        ImageAssocnoeg => row[6],
-        ImageBox => row[7],
-        ImageCreator => row[15],
-        ImageFormat => row[4],
-        ImageHumanRemain => row[19],
-        ImageOrientation => row[10],
-        ImageQuality => row[27]
-      }
-      belongs_to.each do |table, data|
-        record = create_if_not_exists(table, "name", data)
-        relation = table.to_s.underscore
-        # equivalent to `image.image_box = 'P1281'`
-        image.send("#{relation}=", record)
-      end
+    # Output context for creation
+    #puts "\nUnit #{image[:unit]}:" if image[:unit] != last_unit
+    last_unit = image[:unit]
 
-      image.save
+    # Handle foreign keys
+    image[:image_assocnoeg] = create_if_not_exists(ImageAssocnoeg, :name, image[:image_assocnoeg])
+    image[:image_box] = create_if_not_exists(ImageBox, :name, image[:image_box])
+    image[:image_creator] = create_if_not_exists(ImageCreator, :name, image[:image_creator])
+    image[:image_format] = create_if_not_exists(ImageFormat, :name, image[:image_format])
+    image[:image_human_remain] = create_if_not_exists(ImageHumanRemain, :name, image[:image_human_remain])
+    image[:image_orientation] = create_if_not_exists(ImageOrientation, :name, image[:image_orientation])
+    image[:image_quality] = create_if_not_exists(ImageQuality, :name, image[:image_quality])
 
-      [row[21], row[22], row[23]].each do |subj|
-        if subj != "none"
-          subject = create_if_not_exists(ImageSubject, "subject", subj)
-          image.image_subjects << subject
-        end
-      end
-
-      # TODO remove this once the spreadsheet is revised with correct unit assignments
-      if row[1].to_s.include?("-")
-        report "unit", row[1], "images (actually NOT added because of the hyphen)"
-      else
-        unit = select_or_create_unit(row[1], "images")
-        associate_strata_features(unit, row[2], row[16], image, "images")
-      end
+    image[:image_subjects] = []
+    if image[:image_subject1] != "none"
+      image[:image_subjects] << create_if_not_exists(ImageSubject, :name, image[:image_subject1])
     end
+    if image[:image_subject2] != "none"
+      image[:image_subjects] << create_if_not_exists(ImageSubject, :name, image[:image_subject2])
+    end
+    if image[:image_subject3] != "none"
+      image[:image_subjects] << create_if_not_exists(ImageSubject, :name, image[:image_subject3])
+    end
+
+    # Remove from image hash the three strings used to create associations
+    image.delete :image_subject1
+    image.delete :image_subject2
+    image.delete :image_subject3
+
+    if image[:unit].to_s.include?("-")
+      # TODO Remove once spreadsheet is revised with correct unit assignments
+      report "unit", image[:unit], "Image with hyphen in unit NOT added"
+    else
+      unit = select_or_create_unit(image[:unit], "Images")
+
+      image[:features] = []
+      associate_strata_features(unit, image[:strat], image[:associated_features], image, "Images")
+    end
+
+    # TODO Add date_original to schema?
+    image.delete :date_original
+
+    # Output and save
+    #puts image[:image_no]
+    Image.create(image)
   end
 end
 
+###################
+# Seeding Control #
+###################
+# Primary Tables
+seed_units(files) if Unit.all.size < 1
+seed_strata(files) if Stratum.all.size < 1
+seed_features(files) if Feature.all.size < 1
 
+# Inventory Tables
+seed_bone_inventory(files) if BoneInventory.all.size < 1
+seed_ceramic_inventory(files) if CeramicInventory.all.size < 1
+seed_lithic_inventories(files) if LithicInventory.all.size < 1
+
+# Analysis Tables
+seed_bone_tools(files) if BoneTool.all.size < 1
+seed_eggshells(files) if Eggshell.all.size < 1
+seed_ornaments(files) if Ornament.all.size < 1
+seed_perishables(files) if Perishable.all.size < 1
+seed_select_artifacts(files) if SelectArtifact.all.size < 1
+seed_soils(files) if Soil.all.size < 1
+
+# Images
+seed_images(files) if Image.all.size < 1
+
+# Logging
 File.open("reports/please_check_for_accuracy.txt", "w") do |file|
   file.write("Please review the following and verify that units, strata, etc, were added correctly\n")
   @handcheck.each do |added|
-    file.write("\n#{added[:type]} number #{added[:num]} was added from the #{added[:source]} spreadsheet")
+    file.write("\n#{added[:category]} #{added[:value]} created from #{added[:source]}")
   end
 end

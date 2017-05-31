@@ -1,14 +1,14 @@
 class SalmonSector < ActiveRecord::Base
   has_many :units
 
-  validates_uniqueness_of :salmon_sector
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("salmon_sector")
+    order("name")
   end
 
   def to_label
-    salmon_sector
+    name
   end
 
   def authorized_for_update?

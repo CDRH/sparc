@@ -1,14 +1,14 @@
 class IrregularShape < ActiveRecord::Base
   has_many :units
 
-  validates_uniqueness_of :irregular_shape
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("irregular_shape")
+    order("name")
   end
 
   def to_label
-    irregular_shape
+    name
   end
 
   def authorized_for_update?

@@ -1,13 +1,13 @@
 class FeatureType < ActiveRecord::Base
   has_many :features
 
-  validates_uniqueness_of :feature_type
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("feature_type")
+    order("name")
   end
 
   def to_label
-    feature_type
+    name
   end
 end

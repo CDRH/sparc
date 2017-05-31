@@ -10,7 +10,5 @@ def add_as_extension item
     post 'search_ids'
     get 'search_form'
     post 'search_post'
-    puts "adding routes for collection #{item}"
   end
-  
 end

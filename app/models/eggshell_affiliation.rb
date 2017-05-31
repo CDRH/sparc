@@ -1,13 +1,13 @@
 class EggshellAffiliation < ApplicationRecord
   has_many :eggshells
 
-  validates_uniqueness_of :affiliation
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("affiliation")
+    order("name")
   end
 
   def to_label
-    affiliation
+    name
   end
 end

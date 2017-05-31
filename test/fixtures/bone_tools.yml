@@ -2,9 +2,9 @@
 
 one:
   id: 1
-  room: 1
+  unit: 1
   strat: MyString
-  field_specimen_no: MyString
+  fs_no: MyString
   depth: MyString
   bone_tool_occupation_id: 1
   grid: MyString
@@ -15,9 +15,9 @@ one:
 
 two:
   id: 2
-  room: 1
+  unit: 1
   strat: MyString
-  field_specimen_no: MyString
+  fs_no: MyString
   depth: MyString
   bone_tool_occupation_id: 1
   grid: MyString

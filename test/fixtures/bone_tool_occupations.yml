@@ -2,13 +2,13 @@
 
 1:
   id: 1
-  occupation: Chacoan
+  name: Chacoan
 2:
   id: 2
-  occupation: Mixed Chacoan and San Juan
+  name: Mixed Chacoan and San Juan
 3:
   id: 3
-  occupation: San Juan
+  name: San Juan
 4:
   id: 4
-  occupation: unknown
+  name: unknown

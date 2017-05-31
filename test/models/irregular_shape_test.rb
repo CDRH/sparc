@@ -2,7 +2,7 @@ require 'test_helper'
 
 class IrregularShapeTest < ActiveSupport::TestCase
   def setup
-    @item = IrregularShape.create(:irregular_shape => "test")
+    @item = IrregularShape.create(:name => "test")
     @item.units << Unit.first
   end
 

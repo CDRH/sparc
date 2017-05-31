@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EggshellItemTest < ActiveSupport::TestCase
   def setup
-    @item = EggshellItem.create(:item => "test")
+    @item = EggshellItem.create(:name => "test")
     @item.eggshells << Eggshell.first
   end
 

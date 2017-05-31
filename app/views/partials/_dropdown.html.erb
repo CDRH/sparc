@@ -5,7 +5,7 @@
 %>
 
 <div class="form-group">
-  <% label = local_assigns[:label].nil? ? column : label %>
+  <% label = local_assigns[:label].nil? ? classname.class : label %>
   <%= label_tag label %>
 
   <%# dropdown %>

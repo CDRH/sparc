@@ -5,11 +5,11 @@ class Perishable < ApplicationRecord
   has_many :units, :through => :strata
 
   def self.sorted
-    order("fs_number")
+    order("fs_no")
   end
 
   def to_label
-    fs_number
+    fs_no
   end
 
   def authorized_for_update?

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UnitOccupationTest < ActiveSupport::TestCase
   def setup
-    @item = UnitOccupation.create(:occupation => "test")
+    @item = UnitOccupation.create(:name => "test")
     feat = Feature.first
     feat.images << Image.first
     strat = Stratum.first

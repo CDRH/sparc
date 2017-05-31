@@ -1,14 +1,14 @@
 class TypeDescription < ActiveRecord::Base
   has_many :units
 
-  validates_uniqueness_of :type_description
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("type_description")
+    order("name")
   end
 
   def to_label
-    type_description
+    name
   end
 
   def authorized_for_update?

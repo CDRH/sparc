@@ -5,11 +5,11 @@ class Ornament < ApplicationRecord
   has_many :units, :through => :strata
 
   def self.sorted
-    order("museum_specimen_no")
+    order("salmon_museum_no")
   end
 
   def to_label
-    museum_specimen_no
+    salmon_museum_no
   end
 
   def authorized_for_update?

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class StratTypeTest < ActiveSupport::TestCase
   def setup
-    @item = StratType.create(:code => "test")
+    @item = StratType.create(:name => "test", :code => "S")
     @item.strata << Stratum.first
   end
 

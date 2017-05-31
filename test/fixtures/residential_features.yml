@@ -1,10 +1,10 @@
 1:
-  residential_feature: n/a
+  name: n/a
 2:
-  residential_feature: no
+  name: no
 3:
-  residential_feature: no data
+  name: no data
 4:
-  residential_feature: unknown
+  name: unknown
 5:
-  residential_feature: yes
+  name: yes

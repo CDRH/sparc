@@ -1,14 +1,14 @@
 class InferredFunction < ActiveRecord::Base
   has_many :units
 
-  validates_uniqueness_of :inferred_function
+  validates_uniqueness_of :name
 
   def self.sorted
-    order("inferred_function")
+    order("name")
   end
 
   def to_label
-    inferred_function
+    name
   end
 
   def authorized_for_update?

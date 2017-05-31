@@ -2,7 +2,7 @@ require 'test_helper'
 
 class StoryTest < ActiveSupport::TestCase
   def setup
-    @item = Story.create(:story => "test")
+    @item = Story.create(:name => "test")
     @item.units << Unit.first
   end
 

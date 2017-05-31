@@ -2,7 +2,7 @@ require 'test_helper'
 
 class StratOccupationTest < ActiveSupport::TestCase
   def setup
-    @item = StratOccupation.create(:occupation => "test")
+    @item = StratOccupation.create(:name => "test")
     @item.strata << Stratum.first
   end
 

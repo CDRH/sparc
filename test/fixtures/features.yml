@@ -9,10 +9,10 @@ one:
   feature_form: MyString
   other_associated_features: MyString
   grid: MyString
-  depth_m_b_d: MyString
+  depth_mbd: MyString
   feature_occupation_id: 1
   feature_type: MyString
-  feature_count: 
+  count:
   feature_group: MyString
   residential_feature: MyString
   real_feature: MyString
@@ -28,10 +28,10 @@ two:
   feature_form: MyString
   other_associated_features: MyString
   grid: MyString
-  depth_m_b_d: MyString
+  depth_mbd: MyString
   feature_occupation_id: 1
   feature_type: MyString
-  feature_count: 
+  count:
   feature_group: MyString
   residential_feature: MyString
   real_feature: MyString
