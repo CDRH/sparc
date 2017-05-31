@@ -693,7 +693,7 @@ def seed_eggshells files
   last_unit = ""
   s.sheet('eggshell').each(columns) do |row|
     # Skip header row
-    next if row[:unit] == "Room"
+    next if row[:unit] == "ROOM"
 
     eggshell = convert_empty_hash_values_to_none(row)
 
@@ -750,7 +750,7 @@ def seed_ornaments files
 
   last_unit = ""
   s.sheet('data').each(columns) do |row|
-    next if row[:unit] == "Room"
+    next if row[:unit] == "UNIT"
 
     ornament = convert_empty_hash_values_to_none(row)
 
