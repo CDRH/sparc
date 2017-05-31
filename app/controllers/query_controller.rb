@@ -10,10 +10,10 @@ class QueryController < ApplicationController
     @bt_spcd = BoneTool.pluck(:species_code).uniq.sort
     # inventory
     @total_bi = BoneInventory.count
-    @bi_enby = BoneInventory.pluck(:entby).uniq.sort
+    @bi_enby = BoneInventory.pluck(:entered_by).uniq.sort
     @bi_loca = BoneInventory.pluck(:location).uniq.sort
     @bi_quad = BoneInventory.pluck(:quad).uniq.sort
-    @bi_sano = BoneInventory.pluck(:sano).uniq.sort
+    @bi_sano = BoneInventory.pluck(:sa_no).uniq.sort
 
     #### SEARCH RES ####
     # tools
@@ -21,7 +21,7 @@ class QueryController < ApplicationController
       :bone_tool_occupation,
     )
     # text searches
-    res = res.where("field_specimen_no LIKE ?", "%#{params['bt_fsno']}%") if params["bt_fsno"].present?
+    res = res.where("fs_no LIKE ?", "%#{params['bt_fsno']}%") if params["bt_fsno"].present?
     res = res.where("depth LIKE ?", "%#{params['bt_dep']}%") if params["bt_dep"].present?
     res = res.where("comments LIKE ?", "%#{params['bt_cmmt']}%") if params["bt_cmmt"].present?
     res = res.where("grid LIKE ?", "%#{params['bt_grid']}%") if params["bt_grid"].present?
@@ -122,7 +122,7 @@ class QueryController < ApplicationController
   def global_search res
     res = res.joins(:units)
     res = res.where(units: { id: params["unitno"] }) if params["unitno"].present?
-    res = res.where(units: { unit_class_id: params["unittype"] }) if params["unittype"].present?
+    res = res.where(units: { unit_class_id: params["unitclass"] }) if params["unitclass"].present?
     return res
   end
 
