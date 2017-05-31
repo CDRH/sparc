@@ -226,7 +226,7 @@ def seed_units files
     # Order as seen in spreadsheet
     unit_no: "Unit No.",
     excavation_status: "Excavation Status",
-    unit_occupation: "Occupation",
+    occupation: "Occupation",
     unit_class: "Class",
     story: "Stories",
     intact_roof: "Intact Roof",
@@ -250,7 +250,7 @@ def seed_units files
 
     # Handle foreign key columns
     unit[:excavation_status] = create_if_not_exists(ExcavationStatus, :name, unit[:excavation_status])
-    unit[:unit_occupation] = create_if_not_exists(UnitOccupation, :name, unit[:unit_occupation])
+    unit[:occupation] = create_if_not_exists(Occupation, :name, unit[:occupation])
     unit[:unit_class] = create_if_not_exists(UnitClass, :name, unit[:unit_class])
     unit[:story] = create_if_not_exists(Story, :name, unit[:story])
     unit[:intact_roof] = create_if_not_exists(IntactRoof, :name, unit[:intact_roof])
@@ -302,7 +302,7 @@ def seed_strata files
     strat_alpha: "STRATUM-ALPHA",
     strat_one: "STRATUM 1",
     strat_two: "STRATUM 2",
-    strat_occupation: "OCCUPATION",
+    occupation: "OCCUPATION",
     comments: "COMMENTS"
   }
 
@@ -326,7 +326,7 @@ def seed_strata files
       stratum[:unit] = Unit.where(:unit_no => stratum[:unit]).first
     end
 
-    stratum[:strat_occupation] = create_if_not_exists(StratOccupation, :name, stratum[:strat_occupation])
+    stratum[:occupation] = create_if_not_exists(Occupation, :name, stratum[:occupation])
     stratum[:strat_type] = StratType.where(code: stratum[:strat_alpha]).first
 
     # Output and save
@@ -353,7 +353,7 @@ def seed_features files
     other_associated_features: "Other Associated Features",
     grid: "Grid",
     depth_mbd: "Depth (MBD)",
-    feature_occupation: "Occupation",
+    occupation: "Occupation",
     feature_type: "Feature Type",
     count: "Feature Count",
     feature_group: "Feature Group",
@@ -391,7 +391,7 @@ def seed_features files
       feature[:strata] << find_or_create_and_log("Feature #{feature[:feature_no]}", Stratum, strat_all: strat, unit_id: unit.id)
     end
 
-    feature[:feature_occupation] = create_if_not_exists(FeatureOccupation, :name, feature[:feature_occupation])
+    feature[:occupation] = create_if_not_exists(Occupation, :name, feature[:occupation])
     feature[:feature_type] = create_if_not_exists(FeatureType, :name, feature[:feature_type])
     feature[:feature_group] = create_if_not_exists(FeatureGroup, :name, feature[:feature_group])
     feature[:residential_feature] = create_if_not_exists(ResidentialFeature, :name, feature[:residential_feature])
@@ -623,7 +623,7 @@ def seed_bone_tools files
     sa_no: "Select Artifact No.",
     fs_no: "FS No",
     depth: "Depth (meters below datum)",
-    bone_tool_occupation: "Occupation",
+    occupation: "Occupation",
     grid: "Grid",
     tool_type_code: "Tool Type Code",
     tool_type: "Tool Type",
@@ -645,7 +645,7 @@ def seed_bone_tools files
     # Handle foreign keys
     unit = select_or_create_unit(bonetool[:unit], "Bone Tools")
 
-    bonetool[:bone_tool_occupation] = create_if_not_exists(BoneToolOccupation, :name, bonetool[:bone_tool_occupation])
+    bonetool[:occupation] = create_if_not_exists(Occupation, :name, bonetool[:occupation])
 
     bonetool[:strata] = []
     strats = bonetool[:strat].split(/[;,]/).map{ |strat| strat.strip }
@@ -686,7 +686,7 @@ def seed_eggshells files
     storage_bin: "STORAGE BIN",
     museum_date: "MUSEUM DATE",
     field_date: "FIELD DATE",
-    eggshell_affiliation: "AFFILIATION",
+    occupation: "AFFILIATION",
     eggshell_item: "ITEM"
   }
 
@@ -707,7 +707,7 @@ def seed_eggshells files
     eggshell[:features] = []
     associate_strata_features(unit, eggshell[:strat], eggshell[:feature_no], eggshell, "Eggshells")
 
-    eggshell[:eggshell_affiliation] = (eggshell[:eggshell_affiliation]) ? create_if_not_exists(EggshellAffiliation, :name, eggshell[:eggshell_affiliation]) : nil
+    eggshell[:occupation] = (eggshell[:occupation]) ? create_if_not_exists(Occupation, :name, eggshell[:occupation]) : nil
 
     eggshell[:eggshell_item] = (eggshell[:eggshell_item]) ? create_if_not_exists(EggshellItem, :name, eggshell[:eggshell_item]) : nil
 
@@ -740,7 +740,7 @@ def seed_ornaments files
     quad: "QUAD",
     depth: "DEPTH       (m below datum)",
     field_date: "FIELD DATE",
-    ornament_period: "PERIOD",
+    occupation: "PERIOD",
     analyst: "ANALYST",
     analyzed: "ANALYZED",
     photographer: "PHOTOGRAPHER",
@@ -775,7 +775,7 @@ def seed_ornaments files
       ornament[:feature].strata << stratum
     end
 
-    ornament[:ornament_period] = create_if_not_exists(OrnamentPeriod, :name, ornament[:ornament_period])
+    ornament[:occupation] = create_if_not_exists(Occupation, :name, ornament[:occupation])
 
     # TODO Add strat_other and sa_no to schema
     ornament.delete :strat_other
@@ -869,7 +869,7 @@ def seed_select_artifacts files
     associated_feature_artifacts: "Associated SA Artifacts",
     grid: "Grid",
     depth: "Depth (MBD)",
-    select_artifact_occupation: "Occupation",
+    occupation: "Occupation",
     select_artifact_type: "Type",
     artifact_count: "Artifact Count",
     location_in_room: "Location in Room",
@@ -898,7 +898,7 @@ def seed_select_artifacts files
       sa[:strata] << find_or_create_and_log("Select Artifact #{sa[:artifact_no]}", Stratum, strat_all: strat, unit_id: unit.id)
     end
 
-    sa[:select_artifact_occupation] = create_if_not_exists(SelectArtifactOccupation, :name, sa[:select_artifact_occupation])
+    sa[:occupation] = create_if_not_exists(Occupation, :name, sa[:occupation])
 
     # NOTE: associated_feature_artifacts considered for model associations
     # If done, the select_artifacts_strata table should be removed

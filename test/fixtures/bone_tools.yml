@@ -6,7 +6,7 @@ one:
   strat: MyString
   fs_no: MyString
   depth: MyString
-  bone_tool_occupation_id: 1
+  occupation_id: 1
   grid: MyString
   tool_type_code: 1
   tool_type: MyString
@@ -19,7 +19,7 @@ two:
   strat: MyString
   fs_no: MyString
   depth: MyString
-  bone_tool_occupation_id: 1
+  occupation_id: 1
   grid: MyString
   tool_type_code: 1
   tool_type: MyString

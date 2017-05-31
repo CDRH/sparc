@@ -18,7 +18,7 @@ class QueryController < ApplicationController
     #### SEARCH RES ####
     # tools
     res = BoneTool.includes(
-      :bone_tool_occupation,
+      :occupation,
     )
     # text searches
     res = res.where("fs_no LIKE ?", "%#{params['bt_fsno']}%") if params["bt_fsno"].present?
@@ -40,10 +40,10 @@ class QueryController < ApplicationController
     #### SEARCH UI ####
     # inventory
     @total_ci = CeramicInventory.count
-    @ci_enby = CeramicInventory.pluck(:entby).uniq.sort
+    @ci_enby = CeramicInventory.pluck(:entered_by).uniq.sort
     @ci_loca = CeramicInventory.pluck(:location).uniq.sort
     @ci_quad = CeramicInventory.pluck(:quad).uniq.sort
-    @ci_sano = CeramicInventory.pluck(:sano).uniq.sort
+    @ci_sano = CeramicInventory.pluck(:sa_no).uniq.sort
   end
 
   def eggshells
@@ -66,8 +66,8 @@ class QueryController < ApplicationController
     # inventory
     @total_li = LithicInventory.count
     @li_artp = LithicInventory.pluck(:art_type).uniq.sort
-    @li_ct = LithicInventory.pluck(:lithic_inventory_count).uniq.sort
-    @li_enby = LithicInventory.pluck(:entby).uniq.sort
+    @li_ct = LithicInventory.pluck(:count).uniq.sort
+    @li_enby = LithicInventory.pluck(:entered_by).uniq.sort
     @li_loca = LithicInventory.pluck(:location).uniq.sort
   end
 
@@ -80,7 +80,7 @@ class QueryController < ApplicationController
     @om_anly = Ornament.pluck(:analyst).uniq.sort
     @om_ct = Ornament.pluck(:count).uniq.sort
     @om_item = Ornament.pluck(:item).uniq.sort
-    @om_perd = OrnamentPeriod.all
+    @om_occu = Occupation.all.order("name")
     @om_phot = Ornament.pluck(:photographer).uniq.sort
     @om_quad = Ornament.pluck(:quad).uniq.sort
   end
@@ -92,7 +92,7 @@ class QueryController < ApplicationController
     # perishables
     @total_ps = Perishable.count
     @ps_arst = Perishable.pluck(:artifact_structure).uniq.sort
-    @ps_ct = Perishable.pluck(:perishable_count).uniq.sort
+    @ps_ct = Perishable.pluck(:count).uniq.sort
     @ps_exlc = Perishable.pluck(:exhibit_location).uniq.sort
     @ps_perd = PerishablePeriod.all
     @ps_quad = Perishable.pluck(:quad).uniq.sort
@@ -107,7 +107,7 @@ class QueryController < ApplicationController
     # soils (inventory?)
     @total_sl = Soil.count
     @sl_artp = ArtType.all
-    @sl_enby = Soil.pluck(:data_entry).uniq.sort
+    @sl_enby = Soil.pluck(:entered_by).uniq.sort
     @sl_loca = Soil.pluck(:location).uniq.sort
     @sl_quad = Soil.pluck(:quad).uniq.sort
 

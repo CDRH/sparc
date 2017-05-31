@@ -22,7 +22,7 @@
       <div class="form-group">
         <div class="form-group">
           <%= label_tag "occupation", "Occupation" %>
-          <%= select_tag "occupation", options_from_collection_for_select(UnitOccupation.sorted, "id", "name", params["occupation"]), class: "form-control", multiple: true, include_blank: true %>
+          <%= select_tag "occupation", options_from_collection_for_select(Occupation.sorted, "id", "name", params["occupation"]), class: "form-control", multiple: true, include_blank: true %>
         </div>
       </div>
     </div>

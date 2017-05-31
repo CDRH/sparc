@@ -4,7 +4,7 @@ class BoneToolTest < ActiveSupport::TestCase
   def setup
     @item = BoneTool.create
     @item.strata << Stratum.first
-    @item.bone_tool_occupation = BoneToolOccupation.first
+    @item.occupation = Occupation.first
     @item.save
   end
 
@@ -12,6 +12,6 @@ class BoneToolTest < ActiveSupport::TestCase
     # check generally that these respond with collections, not nil, etc
     assert_not_empty @item.strata
     assert_not_empty @item.units
-    assert_not_nil @item.bone_tool_occupation
+    assert_not_nil @item.occupation
   end
 end

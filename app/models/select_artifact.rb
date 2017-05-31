@@ -1,5 +1,5 @@
 class SelectArtifact < ApplicationRecord
-  belongs_to :select_artifact_occupation
+  belongs_to :occupation
   has_and_belongs_to_many :strata
   has_many :units, :through => :strata
 

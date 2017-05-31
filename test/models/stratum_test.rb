@@ -7,7 +7,7 @@ class StratumTest < ActiveSupport::TestCase
     @item.features << Feature.first
     @item.select_artifacts << SelectArtifact.first
 
-    @item.strat_occupation = StratOccupation.first
+    @item.occupation = Occupation.first
     @item.strat_type = StratType.first
     @item.unit = Unit.first
     @item.save
@@ -19,7 +19,7 @@ class StratumTest < ActiveSupport::TestCase
     assert_not_empty @item.features
     assert_not_empty @item.select_artifacts
 
-    assert_not_nil @item.strat_occupation
+    assert_not_nil @item.occupation
     assert_not_nil @item.strat_type
     assert_not_nil @item.unit
     assert_equal @item.unit.id, Unit.first.id

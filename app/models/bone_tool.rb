@@ -1,5 +1,5 @@
 class BoneTool < ActiveRecord::Base
-  belongs_to :bone_tool_occupation
+  belongs_to :occupation
   has_and_belongs_to_many :strata
   has_many :units, -> { distinct }, :through => :strata
   
