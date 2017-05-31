@@ -979,74 +979,98 @@ end
 # Images #
 ##########
 def seed_images files
-  puts "Loading Images..."
-
   s = Roo::Excelx.new(files[:images])
+
+  puts "\n\n\nCreating Images\n"
 
   # NOTE:  I suspect that some of the single units are actually
   # ranges, so this whole thing will need to be redone so that
   # a given feature is attached to multiple strata attached to
   # multiple units (great sadness)
 
-  s.sheet('data').each do |entry|
-    row = convert_empty_to_none(entry)
+  columns = {
+    site: "Site",
+    unit: "Room",
+    strat: "Strata",
+    image_no: "Photo No",
+    image_format: "Image",
+    image_type: "Type",
+    image_assocnoeg: "Assocnoeg",
+    image_box: "Box",
+    grid_ew: "GridE",
+    grid_ns: "GridN",
+    image_orientation: "Orientation",
+    depth_begin: "DepBeg",
+    depth_end: "DepEnd",
+    date_original: "Date",
+    date: "CDRH: Date",
+    image_creator: "Photographer",
+    associated_features: "Feature No",
+    sa_no: "Signi Art No",
+    other_no: "Other No",
+    image_human_remain: "CDRH: Human Remains \n(y/n)",
+    image_subject1: "CDRH: Subject Category 1",
+    image_subject2: "CDRH: Subject Category 2",
+    image_subject3: "CDRH: Subject Category 3",
+    comments: "Comments",
+    storage_location: "Storage Location",
+    entered_by: "Data Entry",
+    image_quality: "CDRH: Image Quality Notes",
+    notes: "CDRH: Notes"
+  }
 
-    if row[0] != 'Site'
-      record = {}
-      record[:associated_features] = row[16]
-      record[:comments] = row[24]
-      record[:entered_by] = row[26]
-      record[:date] = row[14]
-      record[:depth_begin] = row[11]
-      record[:depth_end] = row[12]
-      record[:grid_ew] = row[8]
-      record[:grid_ns] = row[9]
-      record[:image_no] = row[3]
-      record[:image_type] = row[5]
-      record[:notes] = row[28]
-      record[:other_no] = row[18]
-      record[:unit] = row[1]
-      record[:sa_no] = row[17]
-      record[:site] = row[0]
-      record[:storage_location] = row[25]
-      record[:strat] = row[2]
+  last_unit = ""
+  s.sheet('data').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
 
-      image = Image.create(record)
+    image = convert_empty_hash_values_to_none(row)
 
-      # create / select and assign related image tables
-      belongs_to = {
-        ImageAssocnoeg => row[6],
-        ImageBox => row[7],
-        ImageCreator => row[15],
-        ImageFormat => row[4],
-        ImageHumanRemain => row[19],
-        ImageOrientation => row[10],
-        ImageQuality => row[27]
-      }
-      belongs_to.each do |table, data|
-        record = create_if_not_exists(table, "name", data)
-        relation = table.to_s.underscore
-        # equivalent to `image.image_box = 'P1281'`
-        image.send("#{relation}=", record)
-      end
+    # Output context for creation
+    #puts "\nUnit #{image[:unit]}:" if image[:unit] != last_unit
+    last_unit = image[:unit]
 
-      image.save
+    # Handle foreign keys
+    image[:image_assocnoeg] = create_if_not_exists(ImageAssocnoeg, :name, image[:image_assocnoeg])
+    image[:image_box] = create_if_not_exists(ImageBox, :name, image[:image_box])
+    image[:image_creator] = create_if_not_exists(ImageCreator, :name, image[:image_creator])
+    image[:image_format] = create_if_not_exists(ImageFormat, :name, image[:image_format])
+    image[:image_human_remain] = create_if_not_exists(ImageHumanRemain, :name, image[:image_human_remain])
+    image[:image_orientation] = create_if_not_exists(ImageOrientation, :name, image[:image_orientation])
+    image[:image_quality] = create_if_not_exists(ImageQuality, :name, image[:image_quality])
 
-      [row[21], row[22], row[23]].each do |subj|
-        if subj != "none"
-          subject = create_if_not_exists(ImageSubject, :name, subj)
-          image.image_subjects << subject
-        end
-      end
-
-      # TODO remove this once the spreadsheet is revised with correct unit assignments
-      if row[1].to_s.include?("-")
-        report "unit", row[1], "images (actually NOT added because of the hyphen)"
-      else
-        unit = select_or_create_unit(row[1], "images")
-        associate_strata_features(unit, row[2], row[16], image, "images")
-      end
+    image[:image_subjects] = []
+    if image[:image_subject1] != "none"
+      image[:image_subjects] << create_if_not_exists(ImageSubject, :name, image[:image_subject1])
     end
+    if image[:image_subject2] != "none"
+      image[:image_subjects] << create_if_not_exists(ImageSubject, :name, image[:image_subject2])
+    end
+    if image[:image_subject3] != "none"
+      image[:image_subjects] << create_if_not_exists(ImageSubject, :name, image[:image_subject3])
+    end
+
+    # Remove from image hash the three strings used to create associations
+    image.delete :image_subject1
+    image.delete :image_subject2
+    image.delete :image_subject3
+
+    if image[:unit].to_s.include?("-")
+      # TODO Remove once spreadsheet is revised with correct unit assignments
+      report "unit", image[:unit], "Image with hyphen in unit NOT added"
+    else
+      unit = select_or_create_unit(image[:unit], "Images")
+
+      image[:features] = []
+      associate_strata_features(unit, image[:strat], image[:associated_features], image, "Images")
+    end
+
+    # TODO Add date_original to schema?
+    image.delete :date_original
+
+    # Output and save
+    #puts image[:image_no]
+    Image.create(image)
   end
 end
 
@@ -1072,7 +1096,7 @@ seed_select_artifacts(files) if SelectArtifact.all.size < 1
 seed_soils(files) if Soil.all.size < 1
 
 # Images
-#seed_images(files) if Image.all.size < 1
+seed_images(files) if Image.all.size < 1
 
 # Logging
 File.open("reports/please_check_for_accuracy.txt", "w") do |file|
