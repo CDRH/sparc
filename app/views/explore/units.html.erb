@@ -11,32 +11,46 @@
         <%= label_tag "unit_no", "Unit Number" %>
         <%= text_field_tag "unit_no", params["unit_no"], placeholder: "BW", class: "form-control" %>
       </div>
-      <%= render :partial => "partials/dropdown",
-        :locals => { :column => "name", :classname => ExcavationStatus.sorted } %>
+      <div class="form-group">
+        <%= label_tag "excavation_status", "Excavation Status" %>
+        <%= select_tag "excavation_status", options_from_collection_for_select(ExcavationStatus.sorted, "id", "name", params["excavation_status"]), class: "form-control", multiple: true, include_blank: true %>
+      </div>
     </div>
 
     <!-- description -->
     <div class="col-md-3">
-      <%= render :partial => "partials/dropdown",
-        :locals => { :column => "name", :classname => IntactRoof.sorted } %>
-      <%= render :partial => "partials/dropdown",
-        :locals => { :column => "name", :classname => IrregularShape.sorted } %>
+      <div class="form-group">
+        <%= label_tag "intact_roof", "IntactRoof" %>
+        <%= select_tag "intact_roof", options_from_collection_for_select(IntactRoof.sorted, "id", "name", params["intact_roof"]), class: "form-control", multiple: true, include_blank: true %>
+      </div>
+      <div class="form-group">
+        <%= label_tag "irregular_shape", "IrregularShape" %>
+        <%= select_tag "irregular_shape", options_from_collection_for_select(IrregularShape.sorted, "id", "name", params["irregular_shape"]), class: "form-control", multiple: true, include_blank: true %>
+      </div>
     </div>
 
     <!-- other description -->
     <div class="col-md-3">
-      <%= render :partial => "partials/dropdown",
-        :locals => { :column => "name", :classname => Story.sorted } %>
-      <%= render :partial => "partials/dropdown",
-        :locals => { :column => "name", :classname => UnitOccupation.sorted } %>
+      <div class="form-group">
+        <%= label_tag "story", "Story" %>
+        <%= select_tag "story", options_from_collection_for_select(Story.sorted, "id", "name", params["story"]), class: "form-control", multiple: true, include_blank: true %>
+      </div>
+      <div class="form-group">
+        <%= label_tag "occupation", "Occupation" %>
+        <%= select_tag "occupation", options_from_collection_for_select(UnitOccupation.sorted, "id", "name", params["occupation"]), class: "form-control", multiple: true, include_blank: true %>
+      </div>
     </div>
 
     <!-- function -->
     <div class="col-md-3">
-      <%= render :partial => "partials/dropdown",
-        :locals => { :column => "name", :classname => InferredFunction.sorted } %>
-      <%= render :partial => "partials/dropdown",
-        :locals => { :column => "name", :classname => UnitClass.sorted } %>
+      <div class="form-group">
+        <%= label_tag "inferred_function", "Inferred Function" %>
+        <%= select_tag "inferred_function", options_from_collection_for_select(InferredFunction.sorted, "id", "name", params["inferred_function"]), class: "form-control", multiple: true, include_blank: true %>
+      </div>
+      <div class="form-group">
+        <%= label_tag "unit_class", "Unit Class" %>
+        <%= select_tag "unit_class", options_from_collection_for_select(UnitClass.sorted, "id", "name", params["unit_class"]), class: "form-control", multiple: true, include_blank: true %>
+      </div>
     </div>
 
   </div> <!-- /row -->
@@ -49,10 +63,14 @@
 
         <!-- location -->
           <div class="col-md-3">
-            <%= render :partial => "partials/dropdown",
-              :locals => { :classname => Zone.sorted, :column => "name", :label => "zone" } %>
-            <%= render :partial => "partials/dropdown",
-              :locals => { :column => "name", :classname => SalmonSector.sorted } %>
+            <div class="form-group">
+              <%= label_tag "zone", "Zone" %>
+              <%= select_tag "zone", options_from_collection_for_select(Zone.sorted, "id", "name", params["zone"]), class: "form-control", multiple: true, include_blank: true %>
+            </div>
+            <div class="form-group">
+              <%= label_tag "salmon_sector", "Salmon Sector" %>
+              <%= select_tag "salmon_sector", options_from_collection_for_select(SalmonSector.sorted, "id", "name", params["salmon_sector"]), class: "form-control", multiple: true, include_blank: true %>
+            </div>
           </div>
 
           <!-- unit type description -->
@@ -62,10 +80,12 @@
             <% end %>
             <div class="form-group">
               <%= label_tag "room_type" %>
-              <%= select_tag("room_type", options_for_select(room_types, params["room_type"]), :include_blank => true, class: "form-control") %>
+              <%= select_tag("room_type", options_for_select(room_types, params["room_type"]), include_blank: true, multiple: true, class: "form-control") %>
             </div>
-            <%= render :partial => "partials/dropdown",
-              :locals => { :column => "name", :classname => TypeDescription.sorted } %>
+            <div class="form-group">
+              <%= label_tag "type_description", "Type Description" %>
+              <%= select_tag "type_description", options_from_collection_for_select(TypeDescription.sorted, "id", "name", params["type_description"]), class: "form-control", multiple: true, include_blank: true %>
+            </div>
           </div>
 
           <!-- ? -->

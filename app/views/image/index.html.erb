@@ -14,40 +14,54 @@
         <%= text_field_tag "image_no", params["image_no"], placeholder: "00946", class: "form-control" %>
       </div>
       <div class="form-group">
-        <%= render :partial => "partials/dropdown",
-          :locals => { :classname => ImageCreator.sorted, :column => "name", :label => "creator" } %>
+        <div class="form-group">
+          <%= label_tag "creator", "Creator" %>
+          <%= select_tag "creator", options_from_collection_for_select(ImageCreator.sorted, "id", "name", params["creator"]), class: "form-control", multiple: true, include_blank: true %>
+        </div>
       </div>
       <div class="form-group">
-        <%= render :partial => "partials/dropdown",
-          :locals => { :classname => @occupations, :column => "name" } %>
+        <div class="form-group">
+          <%= label_tag "occupation", "Occupation" %>
+          <%= select_tag "occupation", options_from_collection_for_select(UnitOccupation.sorted, "id", "name", params["occupation"]), class: "form-control", multiple: true, include_blank: true %>
+        </div>
       </div>
     </div>
 
     <!-- common options -->
     <div class="col-md-3">
       <div class="form-group">
-        <%= render :partial => "partials/dropdown",
-          :locals => { :classname => ImageFormat.sorted, :column => "name", :label => "format" } %>
+        <div class="form-group">
+          <%= label_tag "format", "Format" %>
+          <%= select_tag "format", options_from_collection_for_select(ImageFormat.sorted, "id", "name", params["format"]), class: "form-control", multiple: true, include_blank: true %>
+        </div>
       </div>
       <div class="form-group">
-        <%= render :partial => "partials/dropdown",
-          :locals => { :classname => @units, :column => "unit_no", :label => "unit" } %>
+        <div class="form-group">
+          <%= label_tag "unit", "Unit" %>
+          <%= select_tag "unit", options_from_collection_for_select(Unit.sorted, "id", "unit_no", params["unit"]), class: "form-control", multiple: true, include_blank: true %>
+        </div>
       </div>
       <div class="form-group">
-        <%= render :partial => "partials/dropdown",
-          :locals => { :classname => @zones, :column => "name", :label => "zone" } %>
+        <div class="form-group">
+          <%= label_tag "zone", "Zone" %>
+          <%= select_tag "zone", options_from_collection_for_select(Zone.sorted, "id", "name", params["zone"]), class: "form-control", multiple: true, include_blank: true %>
+        </div>
       </div>
     </div>
 
     <!-- qualitative -->
     <div class="col-md-3">
       <div class="form-group">
-        <%= render :partial => "partials/dropdown",
-          :locals => { :classname => ImageOrientation.sorted, :column => "name", :label => "orientation" } %>
+        <div class="form-group">
+          <%= label_tag "orientation", "Orientation" %>
+          <%= select_tag "orientation", options_from_collection_for_select(ImageOrientation.sorted, "id", "name", params["orientation"]), class: "form-control", multiple: true, include_blank: true %>
+        </div>
       </div>
       <div class="form-group">
-        <%= render :partial => "partials/dropdown",
-          :locals => { :classname => ImageQuality.sorted, :column => "name", :label => "quality" } %>
+        <div class="form-group">
+          <%= label_tag "quality", "Quality" %>
+          <%= select_tag "quality", options_from_collection_for_select(ImageQuality.sorted, "id", "name", params["quality"]), class: "form-control", multiple: true, include_blank: true %>
+        </div>
       </div>
     </div>
 
@@ -58,8 +72,10 @@
         <%= text_field_tag "comments", params["comments"], placeholder: "wall section", class: "form-control" %>
       </div>
       <div class="form-group">
-        <%= render :partial => "partials/dropdown",
-          :locals => { :classname => ImageSubject.sorted, :column => "name" } %>
+        <div class="form-group">
+          <%= label_tag "subject", "Subject" %>
+          <%= select_tag "subject", options_from_collection_for_select(ImageSubject.sorted, "id", "name", params["subject"]), class: "form-control", multiple: true, include_blank: true %>
+        </div>
       </div>
     </div>
   </div> <!-- /row -->
@@ -69,16 +85,22 @@
       <div class="well">
         <div class="row">
           <div class="col-md-3">
-            <%= render :partial => "partials/dropdown",
-              :locals => { :classname => ImageBox.sorted, :column => "name", :label => "box" } %>
+            <div class="form-group">
+              <%= label_tag "box", "Box" %>
+              <%= select_tag "box", options_from_collection_for_select(ImageBox.sorted, "id", "name", params["box"]), class: "form-control", multiple: true, include_blank: true %>
             </div>
-          <div class="col-md-3">
-            <%= render :partial => "partials/dropdown",
-              :locals => { :classname => ImageHumanRemain.sorted, :column => "name", :label => "human_remain" } %>
           </div>
           <div class="col-md-3">
-            <%= render :partial => "partials/dropdown",
-              :locals => { :classname => ImageAssocnoeg.sorted, :column => "name", :label => "associated_negative" } %>
+            <div class="form-group">
+              <%= label_tag "human_remain", "Human Remains?" %>
+              <%= select_tag "human_remain", options_from_collection_for_select(ImageHumanRemain.sorted, "id", "name", params["human_remain"]), class: "form-control", multiple: true, include_blank: true %>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <%= label_tag "associated_negative", "Associated Negative" %>
+              <%= select_tag "associated_negative", options_from_collection_for_select(ImageAssocnoeg.sorted, "id", "name", params["associated_negative"]), class: "form-control", multiple: true, include_blank: true %>
+            </div>
           </div>
         </div> <!-- /row -->
       </div> <!-- /well -->
