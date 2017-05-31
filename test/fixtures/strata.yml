@@ -9,7 +9,7 @@ one:
   strat_one: MyString
   strat_two: MyString
   strat_three: MyString
-  strat_occupation_id: 1
+  occupation_id: 1
   comments: MyText
 
 two:
@@ -21,5 +21,5 @@ two:
   strat_one: MyString
   strat_two: MyString
   strat_three: MyString
-  strat_occupation_id: 1
+  occupation_id: 1
   comments: MyText

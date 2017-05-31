@@ -20,7 +20,7 @@ class UnitTest < ActiveSupport::TestCase
     @item.story = Story.first
     @item.type_description = TypeDescription.first
     @item.unit_class = UnitClass.first
-    @item.unit_occupation = UnitOccupation.first
+    @item.occupation = Occupation.first
     @item.zone = Zone.first
     @item.save
 
@@ -40,7 +40,7 @@ class UnitTest < ActiveSupport::TestCase
     assert_not_nil @item.story
     assert_not_nil @item.type_description
     assert_not_nil @item.unit_class
-    assert_not_nil @item.unit_occupation
+    assert_not_nil @item.occupation
     assert_not_nil @item.zone
   end
 end

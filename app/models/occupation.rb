@@ -1,4 +1,4 @@
-class UnitOccupation < ActiveRecord::Base
+class Occupation < ActiveRecord::Base
   has_many :units
   has_many :images, :through => :units
 

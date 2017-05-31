@@ -37,7 +37,7 @@
       </div>
       <div class="form-group">
         <%= label_tag "occupation", "Occupation" %>
-        <%= select_tag "occupation", options_from_collection_for_select(UnitOccupation.sorted, "id", "name", params["occupation"]), class: "form-control", multiple: true, include_blank: true %>
+        <%= select_tag "occupation", options_from_collection_for_select(Occupation.sorted, "id", "name", params["occupation"]), class: "form-control", multiple: true, include_blank: true %>
       </div>
     </div>
 
@@ -158,7 +158,7 @@
         <div class="col-md-2">
           <h2><%= link_to unit.unit_no, unit_path(unit.unit_no) %></h2>
           <ul>
-            <li>Occupation: <%= unit.unit_occupation.name if unit.unit_occupation %>
+            <li>Occupation: <%= unit.occupation.name if unit.occupation %>
             <li>Type: <%= unit.type_description.name if unit.type_description %>
             <li>Inferred Function: <%= unit.inferred_function.name if unit.inferred_function %></li>
             <li>Number of Images: <%= unit.images.size %></li>

@@ -4,7 +4,7 @@ class ExploreController < ApplicationController
     units = Unit.includes(
       :inferred_function,
       :type_description,
-      :unit_occupation,
+      :occupation,
     )
 
     # text searches
@@ -23,7 +23,7 @@ class ExploreController < ApplicationController
     units = add_to_query(units, :stories, params["story"], :story)
     units = add_to_query(units, :type_descriptions, params["type_description"], :type_description, false)
     units = add_to_query(units, :unit_classes, params["unit_class"], :unit_class)
-    units = add_to_query(units, :unit_occupations, params["occupation"], :unit_occupation, false)
+    units = add_to_query(units, :occupations, params["occupation"], :occupation, false)
     units = add_to_query(units, :zones, params["zone"], :zone)
 
     # left joins where not null

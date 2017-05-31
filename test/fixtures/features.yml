@@ -10,7 +10,7 @@ one:
   other_associated_features: MyString
   grid: MyString
   depth_mbd: MyString
-  feature_occupation_id: 1
+  occupation_id: 1
   feature_type: MyString
   count:
   feature_group: MyString
@@ -29,7 +29,7 @@ two:
   other_associated_features: MyString
   grid: MyString
   depth_mbd: MyString
-  feature_occupation_id: 1
+  occupation_id: 1
   feature_type: MyString
   count:
   feature_group: MyString
