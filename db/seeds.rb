@@ -87,11 +87,19 @@ def convert_empty_to_none entry
   end
 end
 
-# Rename this after all sheets have been refactored
-def convert_empty_hash_values_to_none entry_hash
-  return entry_hash.each do |key, value|
-    entry_hash[key] = "none" if value.blank?
+def find_or_create_occupation(occupation)
+  # change any of the below keys into the value
+  mapping = {
+    "Chaco" => "Chacoan",
+    "Mixed Chaco and San Juan" => "Mixed Chacoan and San Juan",
+    "Mixed" => "Mixed Chacoan and San Juan",
+  }
+  name = mapping[occupation] || occupation
+  occ = Occupation.where(:name => name).first
+  if occ.nil?
+    occ = Occupation.create(:name => name)
   end
+  return occ
 end
 
 def find_or_create_and_log(source, model, **attributes)
@@ -118,6 +126,17 @@ def get_feature_number feat_str, source
     end
   end
   return feature
+end
+
+# TODO "none" will fail for integer column, etc
+# but I'm leaving it because it would have already been failing
+def prepare_cell_values entry_hash
+  return entry_hash.each do |key, value|
+    value = "none" if value.blank?
+    if value.class == String
+      entry_hash[key] = value.strip
+    end
+  end
 end
 
 def report category, value, source
@@ -207,7 +226,7 @@ def seed_units files
     # Skip header row
     next if row[:id] == "Type No."
 
-    room_type = convert_empty_hash_values_to_none(row)
+    room_type = prepare_cell_values(row)
 
     room_type[:id] = room_type[:id].to_i
     next if RoomType.where(id: room_type[:id]).size > 0
@@ -246,11 +265,11 @@ def seed_units files
     # Skip header row
     next if row[:unit_no] == "Unit No."
 
-    unit = convert_empty_hash_values_to_none(row)
+    unit = prepare_cell_values(row)
 
     # Handle foreign key columns
     unit[:excavation_status] = create_if_not_exists(ExcavationStatus, :name, unit[:excavation_status])
-    unit[:occupation] = create_if_not_exists(Occupation, :name, unit[:occupation])
+    unit[:occupation] = find_or_create_occupation(unit[:occupation])
     unit[:unit_class] = create_if_not_exists(UnitClass, :name, unit[:unit_class])
     unit[:story] = create_if_not_exists(Story, :name, unit[:story])
     unit[:intact_roof] = create_if_not_exists(IntactRoof, :name, unit[:intact_roof])
@@ -283,7 +302,7 @@ def seed_strata files
     # Skip header row
     next if row[:code] == "CODE"
 
-    strata_type = convert_empty_hash_values_to_none(row)
+    strata_type = prepare_cell_values(row)
 
     next if StratType.where(code: strata_type[:code]).size > 0
 
@@ -311,7 +330,7 @@ def seed_strata files
     # Skip header row
     next if row[:unit] == "ROOM"
 
-    stratum = convert_empty_hash_values_to_none(row)
+    stratum = prepare_cell_values(row)
 
     # Output context for creation
     puts "\nUnit #{stratum[:unit]}:" if stratum[:unit] != last_unit
@@ -326,7 +345,7 @@ def seed_strata files
       stratum[:unit] = Unit.where(:unit_no => stratum[:unit]).first
     end
 
-    stratum[:occupation] = create_if_not_exists(Occupation, :name, stratum[:occupation])
+    stratum[:occupation] = find_or_create_occupation(stratum[:occupation])
     stratum[:strat_type] = StratType.where(code: stratum[:strat_alpha]).first
 
     # Output and save
@@ -373,7 +392,7 @@ def seed_features files
     # Skip header row
     next if row[:unit_no] == "Room"
 
-    feature = convert_empty_hash_values_to_none(row)
+    feature = prepare_cell_values(row)
 
     # Output context for creation
     puts "\nUnit #{feature[:unit_no]}:" if feature[:unit_no] != last_unit
@@ -391,7 +410,7 @@ def seed_features files
       feature[:strata] << find_or_create_and_log("Feature #{feature[:feature_no]}", Stratum, strat_all: strat, unit_id: unit.id)
     end
 
-    feature[:occupation] = create_if_not_exists(Occupation, :name, feature[:occupation])
+    feature[:occupation] = find_or_create_occupation(feature[:occupation])
     feature[:feature_type] = create_if_not_exists(FeatureType, :name, feature[:feature_type])
     feature[:feature_group] = create_if_not_exists(FeatureGroup, :name, feature[:feature_group])
     feature[:residential_feature] = create_if_not_exists(ResidentialFeature, :name, feature[:residential_feature])
@@ -451,7 +470,7 @@ def seed_bone_inventory files
     # Skip header row
     next if row[:room] == "ROOM"
 
-    bone_inv = convert_empty_hash_values_to_none(row)
+    bone_inv = prepare_cell_values(row)
 
     # Output context for creation
 #    puts "\nRoom #{bone_inv[:room]}:" if bone_inv[:room] != last_room
@@ -515,7 +534,7 @@ def seed_ceramic_inventory files
     # Skip header row
     next if row[:room] == "ROOM"
 
-    ceramic_inv = convert_empty_hash_values_to_none(row)
+    ceramic_inv = prepare_cell_values(row)
 
     # Output context for creation
 #    puts "\nRoom #{ceramic_inv[:room]}:" if ceramic_inv[:room] != last_room
@@ -578,7 +597,7 @@ def seed_lithic_inventories files
     # Skip header row
     next if row[:room] == "ROOM"
 
-    lithic = convert_empty_hash_values_to_none(row)
+    lithic = prepare_cell_values(row)
 
     # Output context for creation
 #    puts "\nRoom #{lithic[:room]}:" if lithic[:room] != last_room
@@ -636,7 +655,7 @@ def seed_bone_tools files
     # Skip header row
     next if row[:unit] == "Room"
 
-    bonetool = convert_empty_hash_values_to_none(row)
+    bonetool = prepare_cell_values(row)
 
     # Output context for creation
 #    puts "\nUnit #{bonetool[:unit]}:" if bonetool[:unit] != last_unit
@@ -645,7 +664,7 @@ def seed_bone_tools files
     # Handle foreign keys
     unit = select_or_create_unit(bonetool[:unit], "Bone Tools")
 
-    bonetool[:occupation] = create_if_not_exists(Occupation, :name, bonetool[:occupation])
+    bonetool[:occupation] = find_or_create_occupation(bonetool[:occupation])
 
     bonetool[:strata] = []
     strats = bonetool[:strat].split(/[;,]/).map{ |strat| strat.strip }
@@ -695,7 +714,7 @@ def seed_eggshells files
     # Skip header row
     next if row[:unit] == "ROOM"
 
-    eggshell = convert_empty_hash_values_to_none(row)
+    eggshell = prepare_cell_values(row)
 
     # Output context for creation
 #    puts "\nUnit #{eggshell[:unit]}:" if eggshell[:unit] != last_unit
@@ -707,7 +726,7 @@ def seed_eggshells files
     eggshell[:features] = []
     associate_strata_features(unit, eggshell[:strat], eggshell[:feature_no], eggshell, "Eggshells")
 
-    eggshell[:occupation] = (eggshell[:occupation]) ? create_if_not_exists(Occupation, :name, eggshell[:occupation]) : nil
+    eggshell[:occupation] = (eggshell[:occupation]) ? find_or_create_occupation(eggshell[:occupation]) : nil
 
     eggshell[:eggshell_item] = (eggshell[:eggshell_item]) ? create_if_not_exists(EggshellItem, :name, eggshell[:eggshell_item]) : nil
 
@@ -752,7 +771,7 @@ def seed_ornaments files
   s.sheet('data').each(columns) do |row|
     next if row[:unit] == "UNIT"
 
-    ornament = convert_empty_hash_values_to_none(row)
+    ornament = prepare_cell_values(row)
 
     # Output context for creation
 #    puts "\nUnit #{ornament[:unit]}:" if ornament[:unit] != last_unit
@@ -775,7 +794,7 @@ def seed_ornaments files
       ornament[:feature].strata << stratum
     end
 
-    ornament[:occupation] = create_if_not_exists(Occupation, :name, ornament[:occupation])
+    ornament[:occupation] = find_or_create_occupation(ornament[:occupation])
 
     # TODO Add strat_other and sa_no to schema
     ornament.delete :strat_other
@@ -825,7 +844,7 @@ def seed_perishables files
   s.sheet('all').each(columns) do |row|
     next if row[:unit] == "Room"
 
-    perishable = convert_empty_hash_values_to_none(row)
+    perishable = prepare_cell_values(row)
 
     # Output context for creation
 #    puts "\nUnit #{perishable[:unit]}:" if perishable[:unit] != last_unit
@@ -881,7 +900,7 @@ def seed_select_artifacts files
     # Skip header row
     next if row[:unit] == "Room"
 
-    sa = convert_empty_hash_values_to_none(row)
+    sa = prepare_cell_values(row)
 
     # Output context for creation
 #    puts "\nUnit #{sa[:unit]}:" if sa[:unit] != last_unit
@@ -952,7 +971,7 @@ def seed_soils files
     # Skip header row
     next if row[:unit] == "ROOM"
 
-    soil = convert_empty_hash_values_to_none(row)
+    soil = prepare_cell_values(row)
 
     # Output context for creation
 #    puts "\nUnit #{soil[:unit]}:" if soil[:unit] != last_unit
@@ -1024,7 +1043,7 @@ def seed_images files
     # Skip header row
     next if row[:unit] == "Room"
 
-    image = convert_empty_hash_values_to_none(row)
+    image = prepare_cell_values(row)
 
     # Output context for creation
     #puts "\nUnit #{image[:unit]}:" if image[:unit] != last_unit
