@@ -66,7 +66,7 @@ def associate_strata_features unit, aStrata, aFeatures, related_item, source
       end
       # associate the feature with the strata
       # associate the feature with the specific record (ornament, perishable, etc)
-      stratum.features << feature
+      stratum.features << feature if !stratum.features.include?(feature)
       if related_item
         related_item[:features] << feature
       end
@@ -961,7 +961,7 @@ def seed_soils files
     # Handle foreign keys
     soil[:art_type] = create_if_not_exists(ArtType, :name, soil[:art_type])
 
-    unit = select_or_create_unit(:unit, 'soils')
+    unit = select_or_create_unit(soil[:unit], "Soils")
 
     soil[:features] = []
     associate_strata_features(unit, soil[:unit], soil[:strat], soil, "Soils")
