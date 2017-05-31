@@ -3,21 +3,32 @@ Rails.application.routes.draw do
   devise_for :users
 
   get '/', to: 'static#index', as: :home
+  # documents
+  get '/documents', to: 'document#index', as: :documents
   # explore
   get '/explore', to: 'explore#index', as: :explore
   get '/explore/early-zoom', to: 'explore#early-zoom', as: :explore_e_zoom
   get '/explore/early-zoom-links', to: 'explore#early-zoom-links', as: :explore_e_zoom_links
   get '/explore/late', to: 'explore#late', as: :explore_l
   get '/explore/late-zoom', to: 'explore#late-zoom', as: :explore_l_zoom
+  get '/explore/units', to: 'explore#units', as: :units
+  get '/explore/unit/:number', to: 'explore#unit', as: :unit
+  get '/explore/zone/:number', to: 'explore#zone', as: :search_zone
   # images
   get '/gallery', to: 'image#index', as: :gallery
   get '/gallery/:number', to: 'image#show', as: :image
   # search and browse
-  get '/search', to: 'search#index', as: :search
-  get '/search/unit/:number', to: 'search#unit', as: :unit
-  get '/search/zone/:number', to: 'search#zone', as: :search_zone
+  get '/query', to: 'query#index', as: :query
+  get '/query/artifacts', to: 'query#artifacts', as: :artifacts
+  get '/query/artifacts/bones', to: 'query#bones', as: :bones
+  get '/query/artifacts/ceramics', to: 'query#ceramics', as: :ceramics
+  get '/query/artifacts/eggshells', to: 'query#eggshells', as: :eggshells
+  get '/query/artifacts/lithics', to: 'query#lithics', as: :lithics
+  get '/query/artifacts/ornaments', to: 'query#ornaments', as: :ornaments
+  get '/query/artifacts/perishables', to: 'query#perishables', as: :perishables
+  get '/query/artifacts/soils', to: 'query#soils', as: :soils
+  get '/query/artifacts/woods', to: 'query#woods', as: :woods
   # placeholders
-  get '/query', to: 'static#query', as: :query
   get '/about', to: 'static#about', as: :about
 
 

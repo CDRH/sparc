@@ -1,0 +1,14 @@
+<% subsection = params["action"] %>
+
+<div class="navbar navbar-default sparc_subnavbar">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li <%= "class=active" if subsection == "index" %>>
+        <%= link_to "Explore the Map", explore_path %>
+      </li>
+      <li <%= "class=active" if subsection == "units" || subsection == "unit" || subsection == "zone" %>>
+        <%= link_to "Browse Units", units_path %>
+      </li>
+    </ul>
+  </div>
+</div>

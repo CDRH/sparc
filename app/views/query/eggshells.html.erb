@@ -1,0 +1,87 @@
+<h3>Artifact Search</h3>
+
+<%= render "artifact_nav" %>
+
+<br>
+
+<%= form_tag eggshells_path, method: :get do %>
+  <div class="row">
+    <!-- Eggshells table and search options -->
+    <div class="col-md-8">
+
+      <!-- eggshell query navigation -->
+      <ul class="nav nav-tabs" id="artifacts_ceramics_tab">
+        <li><a href="#all" data-toggle="tab">All</a></li>
+        <li class="active"><a href="#eggs" data-toggle="tab">Eggshells</a></li>
+      </ul>
+
+      <div class="tab-content">
+
+        <!-- all -->
+        <div class="tab-pane" id="all">
+          <p>This is where a summary of stuff about eggshells would go and some search options</p>
+          <p>There are <%= pluralize @total_eg, "eggshell" %> in this database</p>
+        </div>
+
+        <!-- eggs -->
+        <div class="tab-pane active" id="eggs">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag "eg_smin", "Salmon Museum ID #" %>
+                <%= text_field_tag "eg_smin", params["eg_smin"], placeholder: "FR80-000233-MSP", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "eg_rfkn", "Record Field Key #" %>
+                <%= text_field_tag "eg_rfkn", params["eg_rfkn"], placeholder: "51298.0", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "eg_grid", "Grid" %>
+                <%= text_field_tag "eg_grid", params["eg_grid"], placeholder: "20E/07N", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "eg_dep", "Depth" %>
+                <%= text_field_tag "eg_dep", params["eg_dep"], placeholder: "4.76-5.25", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "eg_fldt", "Field Date" %>
+                <%= text_field_tag "eg_fldt", params["eg_fldt"], placeholder: "1976-07-08", class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag "eg_quad", "Quad" %>
+                <%= select_tag "eg_quad", options_for_select(@eg_quad, params["eg_quad"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "eg_sbin", "Storage Bin" %>
+                <%= select_tag "eg_sbin", options_for_select(@eg_sbin, params["eg_sbin"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "eg_msdt", "Museum Date" %>
+                <%= select_tag "eg_msdt", options_for_select(@eg_msdt, params["eg_msdt"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "eg_affl", "Affiliation (Occupation?)" %>
+                <%= select_tag "eg_affl", options_from_collection_for_select(@eg_affl, "id", "affiliation", params["eg_affl"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "eg_item", "Item" %>
+                <%= select_tag "eg_item", options_from_collection_for_select(@eg_item, "id", "item", params["eg_item"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- /tab-content -->
+    </div> <!-- /col-md-8 -->
+
+    <%= render "artifact_global_opts" %>
+  </div>
+<% end %>

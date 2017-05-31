@@ -1,0 +1,41 @@
+<h3>Artifact Search</h3>
+
+<%= render "artifact_nav" %>
+
+<br>
+
+<%= form_tag woods_path, method: :get do %>
+  <div class="row">
+    <!-- Woods tables and search options -->
+    <div class="col-md-8">
+
+      <!-- woods query navigation -->
+      <ul class="nav nav-tabs" id="artifacts_woods_tab">
+        <li class="active"><a href="#all" data-toggle="tab">All</a></li>
+        <li><a href="#wood" data-toggle="tab">Wood</a></li>
+      </ul>
+
+      <div class="tab-content">
+
+        <!-- all -->
+        <div class="tab-pane active" id="all">
+          <p>This is where a summary of stuff about wood would go and some search options</p>
+        </div>
+
+        <!-- inventory -->
+        <div class="tab-pane" id="wood">
+          <div class="row">
+            <div class="col-md-6">
+            </div>
+
+            <div class="col-md-6">
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- /tab-content -->
+    </div> <!-- /col-md-8 -->
+
+    <%= render "artifact_global_opts" %>
+  </div>
+<% end %>
