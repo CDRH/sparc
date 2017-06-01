@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     :lithic_inventories,
     :ornaments,
     :perishables,
+    :pollen_inventories,
     :room_types,
     :select_artifacts,
     :soils,

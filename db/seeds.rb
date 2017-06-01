@@ -15,6 +15,7 @@
   bone_inventory: 'xls/Bone Inventory PARTIAL 11 rows.xlsx',
   ceramic_inventory: 'xls/Ceramic Inventory 2017.xlsx',
   lithic_inventory: 'xls/LithicInventory2017.xlsx',
+  pollen_inventory: 'xls/PollenInventory2017.xlsx',
 
   # Analysis Tables
   bonetools: 'xls/BoneToolDB.xlsx',
@@ -630,6 +631,57 @@ def seed_lithic_inventories
     # Output and save
 #    puts lithic[:fs_no]
     LithicInventory.create(lithic)
+  end
+end
+
+######################
+# Pollen Inventories #
+######################
+def seed_pollen_inventories
+  s = Roo::Excelx.new(@files[:pollen_inventory])
+
+  puts "\n\n\nCreating Pollen Inventories\n"
+
+  columns = {
+    salmon_museum_no: "Salmon Museum No",
+    unit: "Room",
+    strat: "Stratum",
+    strat_other: "Other Strata",
+    feature_no: "Feature No",
+    sa_no: "SA No",
+    grid: "Grid",
+    quad: "Quad",
+    depth: "Depth",
+    box: "Storage Box",
+    record_field_key_no: "Record Key No",
+    other_sample_no: "Other Sample No.",
+    date: "Field Date",
+    analysis_completed: "Analysis Completed",
+    frequency: "Frequency"
+  }
+
+  last_room = ""
+  s.sheet('POLLEN').each(columns) do |row|
+    # Skip header row
+    next if row[:salmon_museum_no] == "Salmon Museum No"
+
+    pollen = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nRoom #{pollen[:unit]}:" if pollen[:unit] != last_room
+    last_room = pollen[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(pollen[:unit], "Pollen Inventories")
+
+    pollen[:features] = []
+    # TODO will need to revisit after splitting strata into primary / other
+    # in join table
+    associate_strata_features(unit, pollen[:strat], pollen[:feature_no], pollen, "Pollen Inventories")
+    pollen.delete(:feature_no)
+    # Output and save
+    # puts pollen[:salmon_museum_no]
+    PollenInventory.create(pollen)
   end
 end
 
@@ -1263,11 +1315,12 @@ seed_features if Feature.count < 1
 # seed_bone_inventory if BoneInventory.count < 1
 # seed_ceramic_inventory if CeramicInventory.count < 1
 # seed_lithic_inventories if LithicInventory.count < 1
+seed_pollen_inventories if PollenInventory.count < 1
 
 # Analysis Tables
 # seed_bone_tools if BoneTool.count < 1
 # seed_burials if Burial.count < 1
-seed_ceramics if Ceramic.count < 1
+# seed_ceramics if Ceramic.count < 1
 # seed_eggshells if Eggshell.count < 1
 # seed_ornaments if Ornament.count < 1
 # seed_perishables if Perishable.count < 1

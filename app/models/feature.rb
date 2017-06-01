@@ -18,6 +18,7 @@ class Feature < ActiveRecord::Base
   has_and_belongs_to_many :images
   has_and_belongs_to_many :lithic_inventories
   has_and_belongs_to_many :perishables
+  has_and_belongs_to_many :pollen_inventories
   has_and_belongs_to_many :soils
 
   def to_label
