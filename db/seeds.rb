@@ -412,7 +412,8 @@ def seed_features
     last_unit = feature[:unit_no]
 
     # Handle foreign key columns
-
+    # standardize feature number
+    feature[:feature_no] = get_feature_number feature[:feature_no], "features"
     unit = find_or_create_and_log("Feature #{feature[:feature_no]}", Unit, unit_no: feature[:unit_no])
 
     # Process each stratum in Strat column
