@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601193151) do
+ActiveRecord::Schema.define(version: 20170601204029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -432,6 +432,13 @@ ActiveRecord::Schema.define(version: 20170601193151) do
     t.index ["stratum_id"], name: "index_features_strata_on_stratum_id", using: :btree
   end
 
+  create_table "features_wood_inventories", id: false, force: :cascade do |t|
+    t.integer "wood_inventory_id"
+    t.integer "feature_id"
+    t.index ["feature_id"], name: "index_features_wood_inventories_on_feature_id", using: :btree
+    t.index ["wood_inventory_id"], name: "index_features_wood_inventories_on_wood_inventory_id", using: :btree
+  end
+
   create_table "image_assocnoegs", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -818,6 +825,27 @@ ActiveRecord::Schema.define(version: 20170601193151) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "wood_inventories", force: :cascade do |t|
+    t.string "site"
+    t.string "unit"
+    t.string "strat"
+    t.string "strat_other"
+    t.string "feature_no"
+    t.string "sa_no"
+    t.string "salmon_museum_no"
+    t.string "storage_location"
+    t.string "display"
+    t.string "museum_date"
+    t.string "grid"
+    t.string "quad"
+    t.string "depth"
+    t.string "record_field_key_no"
+    t.string "field_date"
+    t.string "lab"
+    t.string "analysis"
+    t.string "description"
+  end
+
   create_table "zones", force: :cascade do |t|
     t.string "name"
     t.text   "comments"
@@ -852,6 +880,8 @@ ActiveRecord::Schema.define(version: 20170601193151) do
   add_foreign_key "features_soils", "soils"
   add_foreign_key "features_strata", "features"
   add_foreign_key "features_strata", "strata"
+  add_foreign_key "features_wood_inventories", "features"
+  add_foreign_key "features_wood_inventories", "wood_inventories"
   add_foreign_key "image_subjects_images", "image_subjects", column: "image_subjects_id"
   add_foreign_key "image_subjects_images", "images", column: "images_id"
   add_foreign_key "images", "image_assocnoegs"

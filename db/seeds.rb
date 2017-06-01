@@ -16,6 +16,7 @@
   ceramic_inventory: 'xls/Ceramic Inventory 2017.xlsx',
   lithic_inventory: 'xls/LithicInventory2017.xlsx',
   pollen_inventory: 'xls/PollenInventory2017.xlsx',
+  wood_inventory: 'xls/WoodInventory2017.xls',
 
   # Analysis Tables
   bonetools: 'xls/BoneToolDB.xlsx',
@@ -685,6 +686,60 @@ def seed_pollen_inventories
   end
 end
 
+######################
+# Wood Inventories #
+######################
+def seed_wood_inventories
+  s = Roo::Excel.new(@files[:wood_inventory])
+
+  puts "\n\n\nCreating Wood Inventories\n"
+
+  columns = {
+    site: "SITE",
+    unit: "ROOM",
+    strat: "STRATUM",
+    strat_other: "OTHER STRATA",
+    feature_no: "FEATURE NO",
+    sa_no: "SA NO",
+    salmon_museum_no: "MUSEUM NO",
+    storage_location: "STORAGE LOCATION",
+    display: "DISPLAY",
+    museum_date: "MUSEUM DATE",
+    grid: "GRID",
+    quad: "QUAD",
+    depth: "DEPTH (mbd)",
+    record_field_key_no: "RECORD KEY",
+    field_date: "FIELD DATE",
+    lab: "LAB NO",
+    analysis: "ANALYSIS",
+    description: "DESCRIPTION"
+  }
+
+  last_room = ""
+  s.sheet('data').each(columns) do |row|
+    # Skip header row
+    next if row[:site] == "SITE"
+
+    wood = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nRoom #{wood[:unit]}:" if wood[:unit] != last_room
+    last_room = wood[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(wood[:unit], "Wood Inventories")
+
+    wood[:features] = []
+    # TODO will need to revisit after splitting strata into primary / other
+    # in join table
+    associate_strata_features(unit, wood[:strat], wood[:feature_no], wood, "Wood Inventories")
+    wood.delete(:feature_no)
+    # Output and save
+    # puts wood[:salmon_museum_no]
+    WoodInventory.create(wood)
+  end
+end
+
 ###################
 # ANALYSIS TABLES #
 ###################
@@ -1315,7 +1370,8 @@ seed_features if Feature.count < 1
 # seed_bone_inventory if BoneInventory.count < 1
 # seed_ceramic_inventory if CeramicInventory.count < 1
 # seed_lithic_inventories if LithicInventory.count < 1
-seed_pollen_inventories if PollenInventory.count < 1
+# seed_pollen_inventories if PollenInventory.count < 1
+seed_wood_inventories if WoodInventory.count < 1
 
 # Analysis Tables
 # seed_bone_tools if BoneTool.count < 1

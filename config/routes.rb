@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     :soils,
     :strata,
     :units,
+    :wood_inventories,
     :zones
   ]
 
