@@ -30,7 +30,7 @@
         <ul>
           <li><strong>Class:</strong> <%= @unit.unit_class.name if @unit.unit_class %></li>
           <li><strong>Excavation Status:</strong> <%= @unit.excavation_status.name if @unit.excavation_status %></li>
-          <li><strong>Occupation:</strong> <%= @unit.unit_occupation.name if @unit.unit_occupation %></li>
+          <li><strong>Occupation:</strong> <%= @unit.occupation.name if @unit.occupation %></li>
         </ul>
       </div>
       <div class="col-md-6">
@@ -48,7 +48,7 @@
       <div class="col-md-6">
         <ul>
           <li>Excavation Status: <%= @unit.excavation_status.name if @unit.excavation_status %></li>
-          <li>Occupation: <%= @unit.unit_occupation.name if @unit.unit_occupation %></li>
+          <li>Occupation: <%= @unit.occupation.name if @unit.occupation %></li>
           <li>Class: <%= @unit.unit_class.name if @unit.unit_class %></li>
           <li>Stories: <%= @unit.story.name if @unit.story %></li>
           <li>Intact Roof: <%= @unit.intact_roof.name if @unit.intact_roof %></li>
@@ -124,7 +124,7 @@
       <ul>
         <!-- STRATUM DESC -->
         <li>Type: <%= stratum.strat_type.name if stratum.strat_type %></li>
-        <li>Occupation: <%= stratum.strat_occupation.name if stratum.strat_occupation %></li>
+        <li>Occupation: <%= stratum.occupation.name if stratum.occupation %></li>
         <% if stratum.bone_tools.size > 0 %>
           <li>
             <!-- BONE TOOLS -->
@@ -137,7 +137,7 @@
                     <li>Specimen No: <%= item.field_specimen_no %></li>
                     <li>Depth: <%= item.depth %></li>
                     <li>Grid: <%= item.grid %></li>
-                    <li>Occupation: <%= item.bone_tool_occupation.name if item.bone_tool_occupation %></li>
+                    <li>Occupation: <%= item.occupation.name if item.occupation %></li>
                     <li>Tool Type: <%= item.tool_type_code %></li>
                     <li>Tool Type: <%= item.tool_type %></li>
                     <li>Species Code: <%= item.species_code %></li>
@@ -170,7 +170,7 @@
                   <li>Door Between Rooms: <%= feature.door_between_multiple_room.name if feature.door_between_multiple_room %></li>
                   <li>Doorway Sealed: <%= feature.doorway_sealed.name if feature.doorway_sealed %></li>
                   <li>Group: <%= feature.feature_group.name if feature.feature_group %></li>
-                  <li>Occupation: <%= feature.feature_occupation.name if feature.feature_occupation %></li>
+                  <li>Occupation: <%= feature.occupation.name if feature.occupation %></li>
                   <li>Residential Feature: <%= feature.residential_feature.name if feature.residential_feature %></li>
                   <li>T-Shaped Door: <%= feature.t_shaped_door.name if feature.t_shaped_door %></li>
                   <li>Type: <%= feature.feature_type.name if feature.feature_type %></li>

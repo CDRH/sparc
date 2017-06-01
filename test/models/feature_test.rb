@@ -4,7 +4,7 @@ class FeatureTest < ActiveSupport::TestCase
   def setup
     @item = Feature.create
     @item.feature_group = FeatureGroup.first
-    @item.feature_occupation = FeatureOccupation.first
+    @item.occupation = Occupation.first
     @item.feature_type = FeatureType.first
     @item.doorway_sealed = DoorwaySealed.first
     @item.door_between_multiple_room = DoorBetweenMultipleRoom.first
@@ -25,7 +25,7 @@ class FeatureTest < ActiveSupport::TestCase
 
   test "associations" do
     assert_not_nil @item.feature_group
-    assert_not_nil @item.feature_occupation
+    assert_not_nil @item.occupation
     assert_not_nil @item.feature_type
     assert_not_nil @item.doorway_sealed
     assert_not_nil @item.door_between_multiple_room

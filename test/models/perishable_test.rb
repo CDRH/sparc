@@ -3,7 +3,7 @@ require 'test_helper'
 class PerishableTest < ActiveSupport::TestCase
   def setup
     @item = Perishable.create
-    @item.perishable_period = PerishablePeriod.first
+    @item.occupation = Occupation.first
     @item.save
 
     @item.features << Feature.first
@@ -15,6 +15,6 @@ class PerishableTest < ActiveSupport::TestCase
     assert_not_empty @item.strata
     assert_not_empty @item.units
 
-    assert_equal @item.perishable_period.id, PerishablePeriod.first.id
+    assert_equal @item.occupation.id, Occupation.first.id
   end
 end

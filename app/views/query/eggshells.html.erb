@@ -66,13 +66,13 @@
                     class: "form-control", include_blank: true %>
               </div>
               <div class="form-group">
-                <%= label_tag "eg_affl", "Affiliation (Occupation?)" %>
-                <%= select_tag "eg_affl", options_from_collection_for_select(@eg_affl, "id", "affiliation", params["eg_affl"]),
+                <%= label_tag "occu", "Occupation" %>
+                <%= select_tag "occu", options_from_collection_for_select(Occupation.order("name"), "id", "name", params["occu"]),
                     class: "form-control", include_blank: true %>
               </div>
               <div class="form-group">
                 <%= label_tag "eg_item", "Item" %>
-                <%= select_tag "eg_item", options_from_collection_for_select(@eg_item, "id", "item", params["eg_item"]),
+                <%= select_tag "eg_item", options_from_collection_for_select(@eg_item, "id", "name", params["eg_item"]),
                     class: "form-control", include_blank: true %>
               </div>
             </div>

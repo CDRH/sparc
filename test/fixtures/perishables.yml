@@ -9,7 +9,7 @@ one:
   quad: MyString
   depth: MyString
   associated_feature: MyString
-  perishable_period_id: 1
+  occupation_id: 1
   sa_no: MyString
   artifact_type: MyString
   count: 1
@@ -32,7 +32,7 @@ two:
   quad: MyString
   depth: MyString
   associated_feature: MyString
-  perishable_period_id: 1
+  occupation_id: 1
   sa_no: MyString
   artifact_type: MyString
   count: 1

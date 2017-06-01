@@ -4,7 +4,7 @@ one:
   id: 1
   unit_no: 101A
   excavation_status_id: 1
-  unit_occupation: 1
+  occupation: 1
   unit_class_id: 1
   story_id: 1
   intact_roof_id: 1
@@ -24,7 +24,7 @@ two:
   id: 2
   unit_no: 101W
   excavation_status_id: 2
-  unit_occupation: 2
+  occupation: 2
   unit_class_id: 2
   story_id: 2
   intact_roof_id: 2

@@ -3,7 +3,7 @@ class Image < ActiveRecord::Base
   has_many :strata, :through => :features
   has_many :units, :through => :strata
   has_many :zones, :through => :units
-  has_many :unit_occupations, :through => :units
+  has_many :occupations, :through => :units
 
   has_and_belongs_to_many :image_subjects
   belongs_to :image_assocnoeg
@@ -55,7 +55,7 @@ class Image < ActiveRecord::Base
   end
 
   def occupation_list
-    unit_occupations.map {|o| o.name }
+    occupations.map {|o| o.name }
   end
 
   def subject_list

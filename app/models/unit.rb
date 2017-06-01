@@ -8,7 +8,7 @@ class Unit < ActiveRecord::Base
   belongs_to :story
   belongs_to :type_description
   belongs_to :unit_class
-  belongs_to :unit_occupation
+  belongs_to :occupation
   belongs_to :zone
 
   has_many :strata
