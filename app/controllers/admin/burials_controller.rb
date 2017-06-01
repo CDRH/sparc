@@ -27,5 +27,4 @@ class Admin::BurialsController < ApplicationController
     conf.actions.swap :search, :field_search
   end
 
-
 end
