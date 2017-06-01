@@ -19,6 +19,7 @@
   # Analysis Tables
   bonetools: 'xls/BoneToolDB.xlsx',
   burials: 'xls/Burials2017.xls',
+  ceramics: 'xls/Ceramic Analysis DB 2005 final.xlsx',
   eggshells: 'xls/Eggshell2017.xls',
   ornaments: 'xls/OrnamentDB2017.xlsx',
   perishables: 'xls/Perishables2017.xls',
@@ -751,6 +752,95 @@ def seed_burials
   end
 end
 
+###################
+# Ceramics (2005) #
+###################
+
+def seed_ceramics
+  s = Roo::Excelx.new(@files[:ceramics])
+  puts "\n\n\nCreating Ceramics\n"
+
+  columns = {
+    site: "Site No",
+    fs_no: "FS No",
+    lot_no: "Lot No",
+    cat_no: "Cat No",
+    unit: "Room No",
+    strat: "Stratum",
+    feature_no: "Feature No",
+    sa_no: "SA No",
+    pulled_sample: "Pulled sample",
+    ceramic_vessel_form: "Vessel Form",
+    ceramic_vessel_part: "Vessel Part",
+    wall_thickness: "Wall Thickness",
+    rim_radius: "Rim Radius",
+    rim_arc: "Rim Arc",
+    rim_eversion: "Rim Eversion",
+    ceramic_exterior_pigment: "Exterior Pigment",
+    ceramic_interior_pigment: "Interior Pigment",
+    ceramic_exterior_surface: "Exterior Surface",
+    ceramic_interior_surface: "Interior Surface",
+    ceramic_vessel_appendage: "Vessel Appendage",
+    residues: "Use Wear/Residue",
+    modification: "Retooling/Modification",
+    ceramic_temper: "Temper",
+    ceramic_paste: "Paste",
+    ceramic_slip: "Slip",
+    ceramic_tradition: "Tradition",
+    ceramic_variety: "Variety",
+    ceramic_ware: "Ware",
+    ceramic_specific_type: "SPECTYPT",
+    ceramic_style: "Style",
+    count: "Count",
+    weight: "Weight",
+    vessel_no: "Vessel Number",
+    comments: "Comments"
+  }
+
+  last_unit = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:site] == "Site No"
+
+    ceramic = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nUnit #{ceramic[:unit]}:" if ceramic[:unit] != last_unit
+    last_unit = ceramic[:unit]
+
+    # Handle foreign keys
+    # Note: ceramic may only have one feature
+    unit = select_or_create_unit(ceramic[:unit], "ceramics")
+    feature_no = get_feature_number(ceramic[:feature_no], "Ceramics")
+    ceramic[:feature] = find_or_create_and_log("Ceramic #{ceramic[:fs_no]}", Feature, feature_no: feature_no, unit_no: ceramic[:unit])
+
+    # there is only one stratum per ceramic, whoo hoo
+    stratum = find_or_create_and_log("Ceramic #{ceramic[:fs_no]}", Stratum, strat_all: ceramic[:strat], unit_id: unit.id)
+    ceramic[:feature].strata << stratum
+
+    # all those ceramic tables....
+    ceramic[:ceramic_vessel_form] = create_if_not_exists(CeramicVesselForm, :name, ceramic[:ceramic_vessel_form])
+    ceramic[:ceramic_vessel_part] = create_if_not_exists(CeramicVesselPart, :name, ceramic[:ceramic_vessel_part])
+    ceramic[:ceramic_exterior_pigment] = create_if_not_exists(CeramicExteriorPigment, :name, ceramic[:ceramic_exterior_pigment])
+    ceramic[:ceramic_interior_pigment] = create_if_not_exists(CeramicInteriorPigment, :name, ceramic[:ceramic_interior_pigment])
+    ceramic[:ceramic_exterior_surface] = create_if_not_exists(CeramicExteriorSurface, :name, ceramic[:ceramic_exterior_surface])
+    ceramic[:ceramic_interior_surface] = create_if_not_exists(CeramicInteriorSurface, :name, ceramic[:ceramic_interior_surface])
+    ceramic[:ceramic_vessel_appendage] = create_if_not_exists(CeramicVesselAppendage, :name, ceramic[:ceramic_vessel_appendage])
+    ceramic[:ceramic_temper] = create_if_not_exists(CeramicTemper, :name, ceramic[:ceramic_temper])
+    ceramic[:ceramic_paste] = create_if_not_exists(CeramicPaste, :name, ceramic[:ceramic_paste])
+    ceramic[:ceramic_slip] = create_if_not_exists(CeramicSlip, :name, ceramic[:ceramic_slip])
+    ceramic[:ceramic_tradition] = create_if_not_exists(CeramicTradition, :name, ceramic[:ceramic_tradition])
+    ceramic[:ceramic_variety] = create_if_not_exists(CeramicVariety, :name, ceramic[:ceramic_variety])
+    ceramic[:ceramic_ware] = create_if_not_exists(CeramicWare, :name, ceramic[:ceramic_ware])
+    ceramic[:ceramic_specific_type] = create_if_not_exists(CeramicSpecificType, :name, ceramic[:ceramic_specific_type])
+    ceramic[:ceramic_style] = create_if_not_exists(CeramicStyle, :name, ceramic[:ceramic_style])
+
+    # Output and save
+    # puts ceramic[:fs_no]
+    Ceramic.create(ceramic)
+  end
+end
+
 #############
 # Eggshells #
 #############
@@ -1165,26 +1255,27 @@ end
 # Seeding Control #
 ###################
 # Primary Tables
-seed_units if Unit.all.size < 1
-seed_strata if Stratum.all.size < 1
-seed_features if Feature.all.size < 1
+seed_units if Unit.count < 1
+seed_strata if Stratum.count < 1
+seed_features if Feature.count < 1
 
 # Inventory Tables
-# seed_bone_inventory if BoneInventory.all.size < 1
-# seed_ceramic_inventory if CeramicInventory.all.size < 1
-# seed_lithic_inventories if LithicInventory.all.size < 1
+# seed_bone_inventory if BoneInventory.count < 1
+# seed_ceramic_inventory if CeramicInventory.count < 1
+# seed_lithic_inventories if LithicInventory.count < 1
 
 # Analysis Tables
-# seed_bone_tools if BoneTool.all.size < 1
-seed_burials if Burial.all.size < 1
-# seed_eggshells if Eggshell.all.size < 1
-# seed_ornaments if Ornament.all.size < 1
-# seed_perishables if Perishable.all.size < 1
-# seed_select_artifacts if SelectArtifact.all.size < 1
-# seed_soils if Soil.all.size < 1
+# seed_bone_tools if BoneTool.count < 1
+# seed_burials if Burial.count < 1
+seed_ceramics if Ceramic.count < 1
+# seed_eggshells if Eggshell.count < 1
+# seed_ornaments if Ornament.count < 1
+# seed_perishables if Perishable.count < 1
+# seed_select_artifacts if SelectArtifact.count < 1
+# seed_soils if Soil.count < 1
 
 # Images
-# seed_images if Image.all.size < 1
+# seed_images if Image.count < 1
 
 # Logging
 File.open("reports/please_check_for_accuracy.txt", "w") do |file|

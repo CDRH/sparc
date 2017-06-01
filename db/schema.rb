@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601160656) do
+ActiveRecord::Schema.define(version: 20170601175711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,30 @@ ActiveRecord::Schema.define(version: 20170601160656) do
     t.index ["occupation_id"], name: "index_burials_on_occupation_id", using: :btree
   end
 
+  create_table "ceramic_exterior_pigments", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_exterior_surfaces", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_interior_pigments", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_interior_surfaces", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ceramic_inventories", force: :cascade do |t|
     t.string   "site"
     t.string   "box"
@@ -145,6 +169,128 @@ ActiveRecord::Schema.define(version: 20170601160656) do
     t.integer "ceramic_inventory_id"
     t.index ["ceramic_inventory_id"], name: "index_ceramic_inventories_features_on_ceramic_inventory_id", using: :btree
     t.index ["feature_id"], name: "index_ceramic_inventories_features_on_feature_id", using: :btree
+  end
+
+  create_table "ceramic_pastes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_slips", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_specific_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_styles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_tempers", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_traditions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_varieties", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_vessel_appendages", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_vessel_forms", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_vessel_parts", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_wares", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramics", force: :cascade do |t|
+    t.string   "site"
+    t.string   "fs_no"
+    t.integer  "lot_no"
+    t.integer  "cat_no"
+    t.string   "unit"
+    t.string   "strat"
+    t.string   "feature_no"
+    t.string   "sa_no"
+    t.string   "pulled_sample"
+    t.decimal  "wall_thickness"
+    t.decimal  "rim_radius"
+    t.integer  "rim_arc"
+    t.integer  "rim_eversion"
+    t.string   "residues"
+    t.string   "modification"
+    t.integer  "count"
+    t.decimal  "weight"
+    t.string   "vessel_no"
+    t.string   "comments"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "feature_id"
+    t.integer  "ceramic_vessel_form_id"
+    t.integer  "ceramic_vessel_part_id"
+    t.integer  "ceramic_exterior_pigment_id"
+    t.integer  "ceramic_interior_pigment_id"
+    t.integer  "ceramic_exterior_surface_id"
+    t.integer  "ceramic_interior_surface_id"
+    t.integer  "ceramic_vessel_appendage_id"
+    t.integer  "ceramic_temper_id"
+    t.integer  "ceramic_paste_id"
+    t.integer  "ceramic_slip_id"
+    t.integer  "ceramic_tradition_id"
+    t.integer  "ceramic_variety_id"
+    t.integer  "ceramic_ware_id"
+    t.integer  "ceramic_specific_type_id"
+    t.integer  "ceramic_style_id"
+    t.index ["ceramic_exterior_pigment_id"], name: "index_ceramics_on_ceramic_exterior_pigment_id", using: :btree
+    t.index ["ceramic_exterior_surface_id"], name: "index_ceramics_on_ceramic_exterior_surface_id", using: :btree
+    t.index ["ceramic_interior_pigment_id"], name: "index_ceramics_on_ceramic_interior_pigment_id", using: :btree
+    t.index ["ceramic_interior_surface_id"], name: "index_ceramics_on_ceramic_interior_surface_id", using: :btree
+    t.index ["ceramic_paste_id"], name: "index_ceramics_on_ceramic_paste_id", using: :btree
+    t.index ["ceramic_slip_id"], name: "index_ceramics_on_ceramic_slip_id", using: :btree
+    t.index ["ceramic_specific_type_id"], name: "index_ceramics_on_ceramic_specific_type_id", using: :btree
+    t.index ["ceramic_style_id"], name: "index_ceramics_on_ceramic_style_id", using: :btree
+    t.index ["ceramic_temper_id"], name: "index_ceramics_on_ceramic_temper_id", using: :btree
+    t.index ["ceramic_tradition_id"], name: "index_ceramics_on_ceramic_tradition_id", using: :btree
+    t.index ["ceramic_variety_id"], name: "index_ceramics_on_ceramic_variety_id", using: :btree
+    t.index ["ceramic_vessel_appendage_id"], name: "index_ceramics_on_ceramic_vessel_appendage_id", using: :btree
+    t.index ["ceramic_vessel_form_id"], name: "index_ceramics_on_ceramic_vessel_form_id", using: :btree
+    t.index ["ceramic_vessel_part_id"], name: "index_ceramics_on_ceramic_vessel_part_id", using: :btree
+    t.index ["ceramic_ware_id"], name: "index_ceramics_on_ceramic_ware_id", using: :btree
+    t.index ["feature_id"], name: "index_ceramics_on_feature_id", using: :btree
   end
 
   create_table "door_between_multiple_rooms", force: :cascade do |t|
