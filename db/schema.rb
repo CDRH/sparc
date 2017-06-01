@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531182249) do
+ActiveRecord::Schema.define(version: 20170601134756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -420,13 +420,6 @@ ActiveRecord::Schema.define(version: 20170531182249) do
     t.index ["occupation_id"], name: "index_ornaments_on_occupation_id", using: :btree
   end
 
-  create_table "perishable_periods", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_perishable_periods_on_name", unique: true, using: :btree
-  end
-
   create_table "perishables", force: :cascade do |t|
     t.string   "fs_no"
     t.string   "salmon_museum_number"
@@ -436,7 +429,6 @@ ActiveRecord::Schema.define(version: 20170531182249) do
     t.string   "quad"
     t.string   "depth"
     t.string   "associated_feature"
-    t.integer  "perishable_period_id"
     t.string   "sa_no"
     t.string   "artifact_type"
     t.integer  "count"
@@ -451,6 +443,8 @@ ActiveRecord::Schema.define(version: 20170531182249) do
     t.text     "original_analysis"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.integer  "occupation_id"
+    t.index ["occupation_id"], name: "index_perishables_on_occupation_id", using: :btree
   end
 
   create_table "residential_features", force: :cascade do |t|
@@ -462,10 +456,11 @@ ActiveRecord::Schema.define(version: 20170531182249) do
 
   create_table "room_types", force: :cascade do |t|
     t.string   "description"
-    t.string   "period"
     t.string   "location"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "occupation_id"
+    t.index ["occupation_id"], name: "index_room_types_on_occupation_id", using: :btree
   end
 
   create_table "salmon_sectors", force: :cascade do |t|
@@ -508,7 +503,6 @@ ActiveRecord::Schema.define(version: 20170531182249) do
     t.string   "feature_key"
     t.string   "fs_no"
     t.string   "box"
-    t.string   "period"
     t.integer  "count"
     t.string   "grid_ew"
     t.string   "grid_ns"
@@ -582,7 +576,6 @@ ActiveRecord::Schema.define(version: 20170531182249) do
   create_table "units", force: :cascade do |t|
     t.string   "unit_no",              null: false
     t.integer  "excavation_status_id"
-    t.integer  "unit_occupation_id"
     t.integer  "unit_class_id"
     t.integer  "story_id"
     t.integer  "intact_roof_id"
@@ -666,7 +659,6 @@ ActiveRecord::Schema.define(version: 20170531182249) do
   add_foreign_key "images", "image_qualities"
   add_foreign_key "lithic_inventories", "features"
   add_foreign_key "ornaments", "features"
-  add_foreign_key "perishables", "perishable_periods"
   add_foreign_key "select_artifacts_strata", "select_artifacts"
   add_foreign_key "select_artifacts_strata", "strata"
   add_foreign_key "soils", "art_types"

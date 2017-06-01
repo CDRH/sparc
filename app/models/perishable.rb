@@ -1,5 +1,5 @@
 class Perishable < ApplicationRecord
-  belongs_to :perishable_period
+  belongs_to :occupation
   has_and_belongs_to_many :features
   has_many :strata, :through => :features
   has_many :units, :through => :strata

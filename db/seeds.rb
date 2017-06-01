@@ -91,9 +91,17 @@ def find_or_create_occupation(occupation)
   # change any of the below keys into the value
   mapping = {
     "Chaco" => "Chacoan",
+    "Chaco?" => "Chacoan?",
+    "Chaco, San Juan" => "Mixed Chacoan and San Juan",
+    "historic" => "Historic",
     "Mixed Chaco and San Juan" => "Mixed Chacoan and San Juan",
+    "Mixed Chacoan & San Juan" => "Mixed Chacoan and San Juan",
     "Mixed" => "Mixed Chacoan and San Juan",
+    "no data" => "No Data",
+    "unknown" => "Unknown"
   }
+  # strip the occupation before trying to match
+  occupation.strip!
   name = mapping[occupation] || occupation
   occ = Occupation.where(:name => name).first
   if occ.nil?
@@ -218,7 +226,7 @@ def seed_units files
     # Order as seen in spreadsheet
     id: "Type No.",
     description: "Description",
-    period: "Period",
+    occupation: "Period",
     location: "Location"
   }
 
@@ -230,9 +238,10 @@ def seed_units files
 
     room_type[:id] = room_type[:id].to_i
     next if RoomType.where(id: room_type[:id]).size > 0
+    room_type[:occupation] = find_or_create_occupation(room_type[:occupation])
 
     puts "\n#{room_type[:id]}"
-    puts "  When  : #{room_type[:period]}"
+    puts "  When  : #{room_type[:occupation]}"
     puts "  Where : #{room_type[:location]}"
     puts "  Descrp: #{room_type[:description]}"
     RoomType.create(room_type)
@@ -823,7 +832,7 @@ def seed_perishables files
     strat_other: "Other Strata",
     associated_feature: "Feature No",
     sa_no: "SA No",
-    perishable_period: "Period",
+    occupation: "Period",
     grid: "Grid",
     quad: "Quad",
     depth: "Depth (m below datum)",
@@ -851,7 +860,7 @@ def seed_perishables files
     last_unit = perishable[:unit]
 
     # Handle foreign keys
-    perishable[:perishable_period] = create_if_not_exists(PerishablePeriod, :name, perishable[:perishable_period])
+    perishable[:occupation] = find_or_create_occupation(perishable[:occupation])
 
     perishable[:features] = []
     units = perishable[:unit].split(/[,;]/).map { |u| u.strip }
@@ -965,6 +974,7 @@ def seed_soils files
     entered_by: "DATA ENTRY",
     location: "LOCATION"
   }
+  # TODO what is column "I fo" and should it be in the DB?
 
   last_unit = ""
   s.sheet('Sheet1').each(columns) do |row|
@@ -985,7 +995,7 @@ def seed_soils files
     soil[:features] = []
     associate_strata_features(unit, soil[:unit], soil[:strat], soil, "Soils")
 
-    # TODO Add sa_no to and remove period from to schema
+    # TODO Add sa_no to schema
     soil.delete :sa_no
 
     # Output and save
