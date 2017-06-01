@@ -52,7 +52,6 @@ class QueryController < ApplicationController
     #### SEARCH UI ####
     # eggshells
     @total_eg = Eggshell.count
-    @eg_affl = EggshellAffiliation.all
     @eg_item = EggshellItem.all
     @eg_msdt = Eggshell.pluck(:museum_date).uniq.sort
     @eg_quad = Eggshell.pluck(:quad).uniq.sort
