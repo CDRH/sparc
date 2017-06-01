@@ -1,9 +1,9 @@
 one:
   description: MyString
-  period: MyString
+  occupation_id: 1
   location: MyString
 
 two:
   description: MyString
-  period: MyString
+  occupation_id: 1
   location: MyString

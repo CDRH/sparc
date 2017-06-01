@@ -93,7 +93,6 @@ class QueryController < ApplicationController
     @ps_arst = Perishable.pluck(:artifact_structure).uniq.sort
     @ps_ct = Perishable.pluck(:count).uniq.sort
     @ps_exlc = Perishable.pluck(:exhibit_location).uniq.sort
-    @ps_perd = PerishablePeriod.all
     @ps_quad = Perishable.pluck(:quad).uniq.sort
     @ps_stlc = Perishable.pluck(:storage_location).uniq.sort
     @ps_type = Perishable.pluck(:artifact_type).uniq.sort

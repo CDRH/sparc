@@ -80,8 +80,8 @@
                     class: "form-control", include_blank: true %>
               </div>
               <div class="form-group">
-                <%= label_tag "ps_perd", "Period" %>
-                <%= select_tag "ps_perd", options_from_collection_for_select(@ps_perd, "id", "name", params["ps_perd"]),
+                <%= label_tag "ps_perd", "Occupation" %>
+                <%= select_tag "ps_perd", options_from_collection_for_select(Occupation.sorted, "id", "name", params["ps_perd"]),
                     class: "form-control", include_blank: true %>
               </div>
               <div class="form-group">

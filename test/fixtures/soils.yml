@@ -8,7 +8,6 @@ one:
   feature_key: MyString
   fs_no: MyString
   box: MyString
-  period: MyString
   count: 1
   grid_ew: MyString
   grid_ns: MyString
@@ -33,7 +32,6 @@ two:
   feature_key: MyString
   fs_no: MyString
   box: MyString
-  period: MyString
   count: 1
   grid_ew: MyString
   grid_ns: MyString
