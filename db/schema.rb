@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601134756) do
+ActiveRecord::Schema.define(version: 20170601160656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,38 @@ ActiveRecord::Schema.define(version: 20170601134756) do
     t.integer "stratum_id"
     t.index ["bone_tool_id"], name: "index_bone_tools_strata_on_bone_tool_id", using: :btree
     t.index ["stratum_id"], name: "index_bone_tools_strata_on_stratum_id", using: :btree
+  end
+
+  create_table "burial_sexes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "burials", force: :cascade do |t|
+    t.string   "unit"
+    t.string   "strat"
+    t.string   "feature_no"
+    t.string   "new_burial_no"
+    t.string   "age"
+    t.string   "grid_ns"
+    t.string   "grid_ew"
+    t.string   "quad"
+    t.string   "depth_begin"
+    t.string   "depth_end"
+    t.string   "date"
+    t.string   "excavator"
+    t.string   "record_field_key_no"
+    t.string   "associated_artifacts"
+    t.string   "description"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "feature_id"
+    t.integer  "burial_sex_id"
+    t.integer  "occupation_id"
+    t.index ["burial_sex_id"], name: "index_burials_on_burial_sex_id", using: :btree
+    t.index ["feature_id"], name: "index_burials_on_feature_id", using: :btree
+    t.index ["occupation_id"], name: "index_burials_on_occupation_id", using: :btree
   end
 
   create_table "ceramic_inventories", force: :cascade do |t|

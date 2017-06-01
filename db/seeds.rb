@@ -5,7 +5,7 @@
 # Spreadsheets #
 ################
 
-files = {
+@files = {
   # Primary Tables
   units: 'xls/UnitSummary2017-CCH.xlsx',
   strata: 'xls/Strata2017.xls',
@@ -18,6 +18,7 @@ files = {
 
   # Analysis Tables
   bonetools: 'xls/BoneToolDB.xlsx',
+  burials: 'xls/Burials2017.xls',
   eggshells: 'xls/Eggshell2017.xls',
   ornaments: 'xls/OrnamentDB2017.xlsx',
   perishables: 'xls/Perishables2017.xls',
@@ -217,8 +218,8 @@ end
 #########
 # Units #
 #########
-def seed_units files
-  s = Roo::Excelx.new(files[:units])
+def seed_units
+  s = Roo::Excelx.new(@files[:units])
 
   puts "\n\n\nCreating Room Types\n"
 
@@ -296,8 +297,8 @@ end
 ##########
 # Strata #
 ##########
-def seed_strata files
-  s = Roo::Excel.new(files[:strata])
+def seed_strata
+  s = Roo::Excel.new(@files[:strata])
 
   puts "\n\n\nCreating Strata Types\n"
 
@@ -366,8 +367,8 @@ end
 ############
 # Features #
 ############
-def seed_features files
-  s = Roo::Excel.new(files[:features])
+def seed_features
+  s = Roo::Excel.new(@files[:features])
 
   puts "\n\n\nCreating Features\n"
 
@@ -443,8 +444,8 @@ end
 ##################
 # Bone Inventory #
 ##################
-def seed_bone_inventory files
-  s = Roo::Excelx.new(files[:bone_inventory])
+def seed_bone_inventory
+  s = Roo::Excelx.new(@files[:bone_inventory])
 
   puts "\n\n\nCreating Bone Inventories\n"
 
@@ -507,8 +508,8 @@ end
 #####################
 # Ceramic Inventory #
 #####################
-def seed_ceramic_inventory files
-  s = Roo::Excelx.new(files[:ceramic_inventory])
+def seed_ceramic_inventory
+  s = Roo::Excelx.new(@files[:ceramic_inventory])
 
   puts "\n\n\nCreating Ceramic Inventories\n"
 
@@ -571,8 +572,8 @@ end
 ######################
 # Lithic Inventories #
 ######################
-def seed_lithic_inventories files
-  s = Roo::Excelx.new(files[:lithic_inventory])
+def seed_lithic_inventories
+  s = Roo::Excelx.new(@files[:lithic_inventory])
 
   puts "\n\n\nCreating Lithic Inventories\n"
 
@@ -638,8 +639,8 @@ end
 ##############
 # Bone Tools #
 ##############
-def seed_bone_tools files
-  s = Roo::Excelx.new(files[:bonetools])
+def seed_bone_tools
+  s = Roo::Excelx.new(@files[:bonetools])
 
   puts "\n\n\nCreating Bone Tools\n"
 
@@ -694,10 +695,67 @@ def seed_bone_tools files
 end
 
 #############
+# Burials #
+#############
+def seed_burials
+  s = Roo::Excel.new(@files[:burials])
+  puts "\n\n\nCreating Burials\n"
+
+  columns = {
+    unit: "Room",
+    strat: "Stratum",
+    feature_no: "Feature No",
+    new_burial_no: "New Burial No.",
+    occupation: "Occupation",
+    age: "Age (years)",
+    burial_sex: "Sex",
+    grid_ew: "Easting",
+    grid_ns: "Northing",
+    quad: "Quad",
+    depth_begin: "DepthBeg",
+    depth_end: "DeptEnd",
+    date: "Date",
+    excavator: "Excavator",
+    record_field_key_no: "RecKey",
+    associated_artifacts: "AssocArt",
+    description: "Description"
+  }
+
+  last_unit = ""
+  s.sheet('data').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    burial = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nUnit #{burial[:unit]}:" if burial[:unit] != last_unit
+    last_unit = burial[:unit]
+
+    # Handle foreign keys
+    # Note: burial may only have one feature
+    unit = select_or_create_unit(burial[:unit], "burials")
+    feature_no = get_feature_number(burial[:feature_no], "Burials")
+    burial[:feature] = find_or_create_and_log("Burial #{burial[:new_burial_no]}", Feature, feature_no: feature_no, unit_no: burial[:unit])
+
+    # there is only one stratum per burial, whoo hoo
+    stratum = find_or_create_and_log("Burial #{burial[:new_burial_no]}", Stratum, strat_all: burial[:strat], unit_id: unit.id)
+    burial[:feature].strata << stratum
+
+    burial[:occupation] = find_or_create_occupation(burial[:occupation])
+    burial[:burial_sex] = create_if_not_exists(BurialSex, :name, burial[:burial_sex])
+
+    # Output and save
+    # puts burial[:new_burial_no]
+    Burial.create(burial)
+  end
+end
+
+#############
 # Eggshells #
 #############
-def seed_eggshells files
-  s = Roo::Excel.new(files[:eggshells])
+def seed_eggshells
+  s = Roo::Excel.new(@files[:eggshells])
 
   puts "\n\n\nCreating Eggshells\n"
 
@@ -751,8 +809,8 @@ end
 #############
 # Ornaments #
 #############
-def seed_ornaments files
-  s = Roo::Excelx.new(files[:ornaments])
+def seed_ornaments
+  s = Roo::Excelx.new(@files[:ornaments])
 
   puts "\n\n\nCreating Ornaments\n"
 
@@ -819,8 +877,8 @@ end
 # Perishables #
 ###############
 # NOTE:  Perishables may belong to more than one unit
-def seed_perishables files
-  s = Roo::Excel.new(files[:perishables])
+def seed_perishables
+  s = Roo::Excel.new(@files[:perishables])
 
   puts "\n\n\nCreating Perishables\n"
 
@@ -881,8 +939,8 @@ end
 ####################
 # Select Artifacts #
 ####################
-def seed_select_artifacts files
-  s = Roo::Excel.new(files[:select_artifacts])
+def seed_select_artifacts
+  s = Roo::Excel.new(@files[:select_artifacts])
 
   puts "\n\n\nCreating Select Artifacts\n"
 
@@ -945,8 +1003,8 @@ end
 #########
 # Soils #
 #########
-def seed_soils files
-  s = Roo::Excelx.new(files[:soils])
+def seed_soils
+  s = Roo::Excelx.new(@files[:soils])
 
   puts "\n\n\nCreating Soils\n"
 
@@ -1007,8 +1065,8 @@ end
 ##########
 # Images #
 ##########
-def seed_images files
-  s = Roo::Excelx.new(files[:images])
+def seed_images
+  s = Roo::Excelx.new(@files[:images])
 
   puts "\n\n\nCreating Images\n"
 
@@ -1107,25 +1165,26 @@ end
 # Seeding Control #
 ###################
 # Primary Tables
-seed_units(files) if Unit.all.size < 1
-seed_strata(files) if Stratum.all.size < 1
-seed_features(files) if Feature.all.size < 1
+seed_units if Unit.all.size < 1
+seed_strata if Stratum.all.size < 1
+seed_features if Feature.all.size < 1
 
 # Inventory Tables
-seed_bone_inventory(files) if BoneInventory.all.size < 1
-seed_ceramic_inventory(files) if CeramicInventory.all.size < 1
-seed_lithic_inventories(files) if LithicInventory.all.size < 1
+# seed_bone_inventory if BoneInventory.all.size < 1
+# seed_ceramic_inventory if CeramicInventory.all.size < 1
+# seed_lithic_inventories if LithicInventory.all.size < 1
 
 # Analysis Tables
-seed_bone_tools(files) if BoneTool.all.size < 1
-seed_eggshells(files) if Eggshell.all.size < 1
-seed_ornaments(files) if Ornament.all.size < 1
-seed_perishables(files) if Perishable.all.size < 1
-seed_select_artifacts(files) if SelectArtifact.all.size < 1
-seed_soils(files) if Soil.all.size < 1
+# seed_bone_tools if BoneTool.all.size < 1
+seed_burials if Burial.all.size < 1
+# seed_eggshells if Eggshell.all.size < 1
+# seed_ornaments if Ornament.all.size < 1
+# seed_perishables if Perishable.all.size < 1
+# seed_select_artifacts if SelectArtifact.all.size < 1
+# seed_soils if Soil.all.size < 1
 
 # Images
-seed_images(files) if Image.all.size < 1
+# seed_images if Image.all.size < 1
 
 # Logging
 File.open("reports/please_check_for_accuracy.txt", "w") do |file|
