@@ -1,5 +1,5 @@
 class Ornament < ApplicationRecord
-  belongs_to :ornament_period
+  belongs_to :occupation
   belongs_to :feature
   has_many :strata, :through => :feature
   has_many :units, :through => :strata

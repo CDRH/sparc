@@ -3,7 +3,7 @@ require 'test_helper'
 class SelectArtifactTest < ActiveSupport::TestCase
   def setup
     @item = SelectArtifact.create
-    @item.select_artifact_occupation = SelectArtifactOccupation.first
+    @item.occupation = Occupation.first
     @item.save
 
     @item.strata << Stratum.first
@@ -14,6 +14,6 @@ class SelectArtifactTest < ActiveSupport::TestCase
     assert_not_empty @item.strata
     assert_not_empty @item.units
 
-    assert_not_nil @item.select_artifact_occupation
+    assert_not_nil @item.occupation
   end
 end

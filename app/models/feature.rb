@@ -1,6 +1,6 @@
 class Feature < ActiveRecord::Base
   belongs_to :feature_group
-  belongs_to :feature_occupation
+  belongs_to :occupation
   belongs_to :feature_type
   belongs_to :doorway_sealed
   belongs_to :door_between_multiple_room

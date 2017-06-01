@@ -3,13 +3,13 @@ require 'test_helper'
 class OrnamentTest < ActiveSupport::TestCase
   def setup
     @item = Ornament.create
-    @item.ornament_period = OrnamentPeriod.first
+    @item.occupation = Occupation.first
     @item.feature = Feature.first
     @item.save
   end
 
   test "associations" do
-    assert_not_nil @item.ornament_period
+    assert_not_nil @item.occupation
     assert_not_nil @item.feature
     assert_equal @item.feature.id, Feature.first.id
 

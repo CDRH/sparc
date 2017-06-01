@@ -8,7 +8,7 @@ one:
   associated_feature_artifacts: MyString
   grid: MyString
   depth: MyString
-  select_artifact_occupation_id: 1
+  occupation_id: 1
   select_artifact_type: MyString
   artifact_count: MyString
   location_in_room: MyString
@@ -22,7 +22,7 @@ two:
   associated_feature_artifacts: MyString
   grid: MyString
   depth: MyString
-  select_artifact_occupation_id: 1
+  occupation_id: 1
   select_artifact_type: MyString
   artifact_count: MyString
   location_in_room: MyString
