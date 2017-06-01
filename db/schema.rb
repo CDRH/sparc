@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601175711) do
+ActiveRecord::Schema.define(version: 20170601193151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -411,6 +411,13 @@ ActiveRecord::Schema.define(version: 20170601175711) do
     t.index ["perishable_id"], name: "index_features_perishables_on_perishable_id", using: :btree
   end
 
+  create_table "features_pollen_inventories", id: false, force: :cascade do |t|
+    t.integer "pollen_inventory_id"
+    t.integer "feature_id"
+    t.index ["feature_id"], name: "index_features_pollen_inventories_on_feature_id", using: :btree
+    t.index ["pollen_inventory_id"], name: "index_features_pollen_inventories_on_pollen_inventory_id", using: :btree
+  end
+
   create_table "features_soils", id: false, force: :cascade do |t|
     t.integer "soil_id"
     t.integer "feature_id"
@@ -625,6 +632,23 @@ ActiveRecord::Schema.define(version: 20170601175711) do
     t.index ["occupation_id"], name: "index_perishables_on_occupation_id", using: :btree
   end
 
+  create_table "pollen_inventories", force: :cascade do |t|
+    t.string "unit"
+    t.string "strat"
+    t.string "strat_other"
+    t.string "salmon_museum_no"
+    t.string "sa_no"
+    t.string "grid"
+    t.string "quad"
+    t.string "depth"
+    t.string "box"
+    t.string "record_field_key_no"
+    t.string "other_sample_no"
+    t.string "date"
+    t.string "analysis_completed"
+    t.string "frequency"
+  end
+
   create_table "residential_features", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -822,6 +846,8 @@ ActiveRecord::Schema.define(version: 20170601175711) do
   add_foreign_key "features_lithic_inventories", "lithic_inventories"
   add_foreign_key "features_perishables", "features"
   add_foreign_key "features_perishables", "perishables"
+  add_foreign_key "features_pollen_inventories", "features"
+  add_foreign_key "features_pollen_inventories", "pollen_inventories"
   add_foreign_key "features_soils", "features"
   add_foreign_key "features_soils", "soils"
   add_foreign_key "features_strata", "features"
