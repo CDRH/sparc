@@ -30,7 +30,7 @@
   tree_rings: 'xls/Tree-rings2017.xlsx',
 
   # Images
-  images: 'xls/old/Images.xlsx'
+  images: 'xls/Images.xlsx'
 }
 
 # will contain an array of hashes
