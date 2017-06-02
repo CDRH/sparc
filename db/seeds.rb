@@ -1419,25 +1419,25 @@ seed_strata if Stratum.count < 1
 seed_features if Feature.count < 1
 
 # Inventory Tables
-# seed_bone_inventory if BoneInventory.count < 1
-# seed_ceramic_inventory if CeramicInventory.count < 1
-# seed_lithic_inventories if LithicInventory.count < 1
-# seed_pollen_inventories if PollenInventory.count < 1
+seed_bone_inventory if BoneInventory.count < 1
+seed_ceramic_inventory if CeramicInventory.count < 1
+seed_lithic_inventories if LithicInventory.count < 1
+seed_pollen_inventories if PollenInventory.count < 1
 seed_wood_inventories if WoodInventory.count < 1
 
 # Analysis Tables
-# seed_bone_tools if BoneTool.count < 1
-# seed_burials if Burial.count < 1
-# seed_ceramics if Ceramic.count < 1
-# seed_eggshells if Eggshell.count < 1
-# seed_ornaments if Ornament.count < 1
-# seed_perishables if Perishable.count < 1
-# seed_select_artifacts if SelectArtifact.count < 1
-# seed_soils if Soil.count < 1
+seed_bone_tools if BoneTool.count < 1
+seed_burials if Burial.count < 1
+seed_ceramics if Ceramic.count < 1
+seed_eggshells if Eggshell.count < 1
+seed_ornaments if Ornament.count < 1
+seed_perishables if Perishable.count < 1
+seed_select_artifacts if SelectArtifact.count < 1
+seed_soils if Soil.count < 1
 seed_tree_rings if TreeRing.count < 1
 
 # Images
-# seed_images if Image.count < 1
+seed_images if Image.count < 1
 
 # Logging
 File.open("reports/please_check_for_accuracy.txt", "w") do |file|
