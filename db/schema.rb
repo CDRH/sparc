@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601204029) do
+ActiveRecord::Schema.define(version: 20170602141059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -731,6 +731,12 @@ ActiveRecord::Schema.define(version: 20170601204029) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "species_tree_rings", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "stories", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -766,6 +772,29 @@ ActiveRecord::Schema.define(version: 20170601204029) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_t_shaped_doors_on_name", unique: true, using: :btree
+  end
+
+  create_table "tree_rings", force: :cascade do |t|
+    t.string  "site"
+    t.string  "unit_no"
+    t.string  "record_field_key_no"
+    t.string  "strat"
+    t.string  "feature_no"
+    t.string  "trl_no"
+    t.string  "year_dated"
+    t.string  "windes_sample"
+    t.string  "field_no"
+    t.string  "inner_date"
+    t.string  "outer_date"
+    t.string  "symbol"
+    t.string  "cutting_date"
+    t.string  "comments"
+    t.integer "stratum_id"
+    t.integer "occupation_id"
+    t.integer "species_tree_ring_id"
+    t.index ["occupation_id"], name: "index_tree_rings_on_occupation_id", using: :btree
+    t.index ["species_tree_ring_id"], name: "index_tree_rings_on_species_tree_ring_id", using: :btree
+    t.index ["stratum_id"], name: "index_tree_rings_on_stratum_id", using: :btree
   end
 
   create_table "type_descriptions", force: :cascade do |t|

@@ -1,15 +1,17 @@
-class Stratum < ActiveRecord::Base
-  belongs_to :unit
-  belongs_to :strat_type
+class TreeRing < ApplicationRecord
   belongs_to :occupation
-  has_many :tree_rings
-  has_and_belongs_to_many :bone_tools
-  has_and_belongs_to_many :features
-  has_and_belongs_to_many :select_artifacts
+  belongs_to :species_tree_ring
+  belongs_to :stratum
+  has_one :unit, :through => :stratum
+
+  def self.sorted
+    order("trl_no")
+  end
 
   def to_label
-    "#{unit.to_label if unit} : #{strat_all} #{strat_alpha}"
+    trl_no
   end
+
   def authorized_for_update?
     puts "---------#{current_user}"
     current_user != nil ? true : false
