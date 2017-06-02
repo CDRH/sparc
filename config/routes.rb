@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     :select_artifacts,
     :soils,
     :strata,
+    :tree_rings,
     :units,
     :wood_inventories,
     :zones

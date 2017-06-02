@@ -27,6 +27,7 @@
   perishables: 'xls/Perishables2017.xls',
   select_artifacts: 'xls/SelectArtifacts2017.xls',
   soils: 'xls/SoilMaster2017.xlsx',
+  tree_rings: 'xls/Tree-rings2017.xlsx',
 
   # Images
   images: 'xls/old/Images.xlsx'
@@ -1260,6 +1261,56 @@ def seed_soils
   end
 end
 
+##############
+# Tree Rings #
+##############
+def seed_tree_rings
+  s = Roo::Excelx.new(@files[:tree_rings])
+
+  puts "\n\n\nCreating Tree Rings\n"
+
+  columns = {
+    site: "Site",
+    unit_no: "Room",
+    strat: "Stratum",
+    feature_no: "Feature No",
+    occupation: "Period",
+    trl_no: "TRL No.",
+    year_dated: "Year Dated",
+    windes_sample: "Windes Sample",
+    record_field_key_no: "Record Key",
+    species_tree_ring: "Species",
+    inner_date: "Inner Date",
+    outer_date: "Outer Date",
+    symbol: "Symbol",
+    cutting_date: "Cutting Date",
+    comments: "Comments"
+  }
+
+  last_unit = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:site] == "Site"
+
+    ring = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nUnit #{ring[:unit]}:" if ring[:unit] != last_unit
+    last_unit = ring[:unit]
+
+    # Handle foreign keys
+    ring[:occupation] = find_or_create_occupation(ring[:occupation])
+    ring[:species_tree_ring] = create_if_not_exists(SpeciesTreeRing, :name, ring[:species_tree_ring])
+
+    unit = select_or_create_unit(ring[:unit_no], "Tree Rings")
+    ring[:stratum] = find_or_create_and_log("Tree Ring #{ring[:trl_no]}", Stratum, strat_all: ring[:strat], unit_id: unit.id)
+
+    # Output and save
+    # puts ring[:fs_no]
+    TreeRing.create(ring)
+  end
+end
+
 ##########
 # Images #
 ##########
@@ -1383,6 +1434,7 @@ seed_wood_inventories if WoodInventory.count < 1
 # seed_perishables if Perishable.count < 1
 # seed_select_artifacts if SelectArtifact.count < 1
 # seed_soils if Soil.count < 1
+seed_tree_rings if TreeRing.count < 1
 
 # Images
 # seed_images if Image.count < 1
