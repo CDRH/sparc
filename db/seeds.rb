@@ -7,27 +7,27 @@
 
 @files = {
   # Primary Tables
-  units: 'xls/UnitSummary2017-CCH.xlsx',
-  strata: 'xls/Strata2017.xls',
-  features: 'xls/Features2017.xls',
+  units: 'xls/Units.xlsx',
+  strata: 'xls/Strata.xls',
+  features: 'xls/Features.xls',
 
   # Inventory Tables
-  bone_inventory: 'xls/Bone Inventory PARTIAL 11 rows.xlsx',
-  ceramic_inventory: 'xls/Ceramic Inventory 2017.xlsx',
-  lithic_inventory: 'xls/LithicInventory2017.xlsx',
-  pollen_inventory: 'xls/PollenInventory2017.xlsx',
-  wood_inventory: 'xls/WoodInventory2017.xls',
+  bone_inventory: 'xls/BoneInventory_partial.xlsx',
+  ceramic_inventory: 'xls/CeramicInventory.xlsx',
+  lithic_inventory: 'xls/LithicInventory.xlsx',
+  pollen_inventory: 'xls/PollenInventory.xlsx',
+  wood_inventory: 'xls/WoodInventory.xls',
 
   # Analysis Tables
-  bonetools: 'xls/BoneToolDB.xlsx',
-  burials: 'xls/Burials2017.xls',
-  ceramics: 'xls/Ceramic Analysis DB 2005 final.xlsx',
-  eggshells: 'xls/Eggshell2017.xls',
-  ornaments: 'xls/OrnamentDB2017.xlsx',
-  perishables: 'xls/Perishables2017.xls',
-  select_artifacts: 'xls/SelectArtifacts2017.xls',
-  soils: 'xls/SoilMaster2017.xlsx',
-  tree_rings: 'xls/Tree-rings2017.xlsx',
+  bonetools: 'xls/BoneTools.xlsx',
+  burials: 'xls/Burials.xls',
+  ceramics: 'xls/CeramicAnalysis.xlsx',
+  eggshells: 'xls/Eggshells.xls',
+  ornaments: 'xls/Ornaments.xlsx',
+  perishables: 'xls/Perishables.xls',
+  select_artifacts: 'xls/SelectArtifacts.xls',
+  soils: 'xls/Soils.xlsx',
+  tree_rings: 'xls/TreeRings.xlsx',
 
   # Images
   images: 'xls/Images.xlsx'
