@@ -846,11 +846,21 @@ def seed_burials
     # Note: burial may only have one feature
     unit = select_or_create_unit(burial[:unit], "burials")
     feature_no = get_feature_number(burial[:feature_no], "Burials")
-    burial[:feature] = find_or_create_and_log("Burial #{burial[:new_burial_no]}", Feature, feature_no: feature_no, unit_no: burial[:unit])
-
-    # there is only one stratum per burial, whoo hoo
-    stratum = find_or_create_and_log("Burial #{burial[:new_burial_no]}", Stratum, strat_all: burial[:strat], unit_id: unit.id)
-    burial[:feature].strata << stratum
+    # need to make the stratum first in order to properly find / create feature
+    # TODO there might be a better way to pair this with the associate_strat_features method
+    # as this is duplicating some of its effort
+    stratum = select_or_create_stratum(unit, burial[:strat], "Burial #{burial[:new_burial_no]}")
+    feature = stratum.features.where(feature_no: feature_no).first
+    if feature.nil?
+      feature = Feature.create(
+        feature_no: feature_no,
+        unit_no: unit.unit_no,
+        comments: "imported from burials"
+      )
+      report "feature", "#{unit.unit_no}:#{burial[:strat]}:#{feature_no}", "burials"
+    end
+    stratum.features << feature unless stratum.features.include?(feature)
+    burial[:feature] = feature
 
     burial[:occupation] = find_or_create_occupation(burial[:occupation])
     burial[:burial_sex] = create_if_not_exists(BurialSex, :name, burial[:burial_sex])
@@ -921,11 +931,22 @@ def seed_ceramics
     # Note: ceramic may only have one feature
     unit = select_or_create_unit(ceramic[:unit], "ceramics")
     feature_no = get_feature_number(ceramic[:feature_no], "Ceramics")
-    ceramic[:feature] = find_or_create_and_log("Ceramic #{ceramic[:fs_no]}", Feature, feature_no: feature_no, unit_no: ceramic[:unit])
 
-    # there is only one stratum per ceramic, whoo hoo
-    stratum = find_or_create_and_log("Ceramic #{ceramic[:fs_no]}", Stratum, strat_all: ceramic[:strat], unit_id: unit.id)
-    ceramic[:feature].strata << stratum
+    # need to make the stratum first in order to properly find / create feature
+    # TODO there might be a better way to pair this with the associate_strat_features method
+    # as this is duplicating some of its effort
+    stratum = select_or_create_stratum(unit, ceramic[:strat], "Ceramics #{ceramic[:fs_no]}")
+    feature = stratum.features.where(feature_no: feature_no).first
+    if feature.nil?
+      feature = Feature.create(
+        feature_no: feature_no,
+        unit_no: unit.unit_no,
+        comments: "imported from ceramics"
+      )
+      report "feature", "#{unit.unit_no}:#{ceramic[:strat]}:#{feature_no}", "ceramics"
+    end
+    stratum.features << feature unless stratum.features.include?(feature)
+    ceramic[:feature] = feature
 
     # all those ceramic tables....
     ceramic[:ceramic_vessel_form] = create_if_not_exists(CeramicVesselForm, :name, ceramic[:ceramic_vessel_form])
@@ -1047,17 +1068,25 @@ def seed_ornaments
     unit = select_or_create_unit(ornament[:unit], "Ornaments")
 
     feature_no = get_feature_number(ornament[:feature], "Ornaments")
-    ornament[:feature] = find_or_create_and_log("Ornament #{ornament[:salmon_museum_no]}", Feature, feature_no: feature_no, unit_no: ornament[:unit])
 
-    # TODO Review handling of CSV strat value
-    # Process each stratum in Strat column
+    # need to make the stratum first in order to properly find / create feature
+    # TODO there might be a better way to pair this with the associate_strat_features method
+    # as this is duplicating some of its effort
     strats = ornament[:strat].split(/[;,]/).map{ |strat| strat.strip }
     strats.uniq!
     strats.each do |strat|
-      stratum = find_or_create_and_log("Ornament #{ornament[:salmon_museum_no]}", Stratum, strat_all: strat, unit_id: unit.id)
-
-      # Associate strata through feature
-      ornament[:feature].strata << stratum
+      stratum = select_or_create_stratum(unit, strat, "Ornament #{ornament[:salmon_museum_no]}")
+      feature = stratum.features.where(feature_no: feature_no).first
+      if feature.nil?
+        feature = Feature.create(
+          feature_no: feature_no,
+          unit_no: unit.unit_no,
+          comments: "imported from ornaments"
+        )
+        report "feature", "#{unit.unit_no}:#{strat}:#{feature_no}", "ornaments"
+      end
+      stratum.features << feature unless stratum.features.include?(feature)
+      ornament[:feature] = feature
     end
 
     ornament[:occupation] = find_or_create_occupation(ornament[:occupation])
