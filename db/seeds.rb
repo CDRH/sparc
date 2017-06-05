@@ -422,7 +422,7 @@ def seed_features
     strats = feature[:strat].split(/[;,]/).map{ |strat| strat.strip }
     strats.uniq!
     strats.each do |strat|
-      feature[:strata] << find_or_create_and_log("Feature #{feature[:feature_no]}", Stratum, strat_all: strat, unit_id: unit.id)
+      feature[:strata] << select_or_create_stratum(unit, strat, "Feature #{feature[:feature_no]}")
     end
 
     feature[:occupation] = find_or_create_occupation(feature[:occupation])
@@ -790,7 +790,7 @@ def seed_bone_tools
     strats = bonetool[:strat].split(/[;,]/).map{ |strat| strat.strip }
     strats.uniq!
     strats.each do |strat|
-      bonetool[:strata] << find_or_create_and_log("Bone Tool #{bonetool[:fs_no]}", Stratum, strat_all: strat, unit_id: unit.id)
+      bonetool[:strata] << select_or_create_stratum(unit, strat, "Bone Tool: #{bonetool[:fs_no]}")
     end
 
     # TODO Add strat_other, feature, and sa_no to schema
@@ -1120,7 +1120,7 @@ def seed_perishables
     perishable[:occupation] = find_or_create_occupation(perishable[:occupation])
 
     perishable[:features] = []
-    units = perishable[:unit].split(/[,;]/).map { |u| u.strip }
+    units = perishable[:unit].split(/[,;]/).map { |u| u.strip }.uniq
     units.each do |unit|
       unit = select_or_create_unit(unit, "Perishables")
       associate_strata_features(unit, perishable[:strat], perishable[:associated_feature], perishable, "Perishables")
@@ -1130,7 +1130,7 @@ def seed_perishables
     perishable.delete :strat_other
 
     # Output and save
-#    puts perishable[:fs_no]
+    # puts perishable[:fs_no]
     Perishable.create(perishable)
   end
 end
@@ -1180,7 +1180,7 @@ def seed_select_artifacts
     strats = sa[:strat].split(/[;,]/).map{ |strat| strat.strip }
     strats.uniq!
     strats.each do |strat|
-      sa[:strata] << find_or_create_and_log("Select Artifact #{sa[:artifact_no]}", Stratum, strat_all: strat, unit_id: unit.id)
+      sa[:strata] << select_or_create_stratum(unit, strat, "SA #{sa[:artifact_no]}")
     end
 
     sa[:occupation] = create_if_not_exists(Occupation, :name, sa[:occupation])
@@ -1303,7 +1303,7 @@ def seed_tree_rings
     ring[:species_tree_ring] = create_if_not_exists(SpeciesTreeRing, :name, ring[:species_tree_ring])
 
     unit = select_or_create_unit(ring[:unit_no], "Tree Rings")
-    ring[:stratum] = find_or_create_and_log("Tree Ring #{ring[:trl_no]}", Stratum, strat_all: ring[:strat], unit_id: unit.id)
+    ring[:stratum] = select_or_create_stratum(unit, ring[:strat], "Tree Ring #{ring[:trl_no]}")
 
     # Output and save
     # puts ring[:fs_no]
