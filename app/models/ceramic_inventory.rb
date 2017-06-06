@@ -1,7 +1,7 @@
 class CeramicInventory < ApplicationRecord
   has_and_belongs_to_many :features
-  has_many :strata, :through => :features
-  has_many :units, :through => :strata
+  has_many :strata, -> {distinct}, :through => :features
+  has_many :units, -> {distinct}, :through => :strata
   
   def self.sorted
     order("comments")
