@@ -1279,7 +1279,7 @@ def seed_soils
     unit = select_or_create_unit(soil[:unit], "Soils")
 
     soil[:features] = []
-    associate_strata_features(unit, soil[:unit], soil[:strat], soil, "Soils")
+    associate_strata_features(unit, soil[:strat], soil[:feature_key], soil, "Soils")
 
     # TODO Add sa_no to schema
     soil.delete :sa_no
