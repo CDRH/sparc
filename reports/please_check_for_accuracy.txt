@@ -1,1091 +1,1514 @@
 Please review the following and verify that units, strata, etc, were added correctly
 
-unit number 029W was added from the stratum A-1-1 spreadsheet
-unit number 112P was added from the stratum A-1-1 spreadsheet
-unit number 113P was added from the stratum A-1-1 spreadsheet
-unit number 212P was added from the stratum A-1-1 spreadsheet
-unit number 213P was added from the stratum B-1-2 spreadsheet
-unit number 313P was added from the stratum A-1-1 spreadsheet
-unit number 413P was added from the stratum A-1-2 spreadsheet
-unit number 513P was added from the stratum B-1-2 spreadsheet
-stratum number 006A:L-5-8 was added from the feature 100.0 spreadsheet
-stratum number 018P:Q-1-07 was added from the feature 4.0 spreadsheet
-stratum number 021P:Q-.7-8.1 was added from the feature 18.0 spreadsheet
-stratum number 031W:B-1-2 was added from the feature 1.0 spreadsheet
-stratum number 033C:L-1-5.5 was added from the feature 3.2 spreadsheet
-stratum number 033W:L-1-5.5 was added from the feature 6.0 spreadsheet
-stratum number 036W:B-2-3 was added from the feature 1.0 spreadsheet
-stratum number 036W:not used was added from the feature 4.0 spreadsheet
-stratum number 036W:N-1-13/F-1-15 was added from the feature 100.0 spreadsheet
-stratum number 062A:I-1-06 was added from the feature 12.0 spreadsheet
-stratum number 062W:I-1-4.2 was added from the feature 3.0 spreadsheet
-stratum number 067W:W-1-00 was added from the feature 1.0 spreadsheet
-stratum number 089W:H-1-12 was added from the feature 1.0 spreadsheet
-stratum number 092W:B-4-5 was added from the feature 5.0 spreadsheet
-stratum number 093W:L-0.5.-8.5 was added from the feature 12.0 spreadsheet
-stratum number 097B:N-1-3 was added from the feature 2.2 spreadsheet
-stratum number 097B:H-1-5 was added from the feature 7.0 spreadsheet
-stratum number 099W:H-1-9 was added from the feature 26.0 spreadsheet
-stratum number 100W:not used was added from the feature 1002.0 spreadsheet
-stratum number 102A:H-1-14 was added from the feature 4009.0 spreadsheet
-stratum number 119W:L-3-15 was added from the feature 24.0 spreadsheet
-stratum number 119W:I-11.6-39.6 was added from the feature 116.0 spreadsheet
-stratum number 121A:L-6-11 was added from the feature 23.0 spreadsheet
-stratum number 121E:D-2-4 was added from the feature 46.0 spreadsheet
-unit number 122A/W was added from the feature 1.0 spreadsheet
-stratum number 122A/W:C-0-0 was added from the feature 1.0 spreadsheet
-stratum number 122A/W:D-0-0 was added from the feature 7.0 spreadsheet
-stratum number 122A/W:I-0-0 was added from the feature 8.0 spreadsheet
-stratum number 122A/W:K-0-0 was added from the feature 10.0 spreadsheet
-stratum number 123B:nono was added from the feature 20.0 spreadsheet
-stratum number 124W:L-3-13 was added from the feature 13.0 spreadsheet
-stratum number 124W:Q-1-6 was added from the feature 27.0 spreadsheet
-stratum number 124W:H-1-9 was added from the feature 100.0 spreadsheet
-stratum number 127W:D-3-11 was added from the feature 97.0 spreadsheet
-stratum number 128A:I-2-6 was added from the feature 3.1 spreadsheet
-stratum number 128A:L-6-11? was added from the feature 8.0 spreadsheet
-stratum number 129W:C-70-78 was added from the feature 77.0 spreadsheet
-unit number 138W/Z was added from the feature 1.0 spreadsheet
-stratum number 138W/Z:L-1-2.5 was added from the feature 1.0 spreadsheet
-stratum number 138W/Z:L-2-9 was added from the feature 2.0 spreadsheet
-stratum number 062W:062W was added from the bonetool 4 spreadsheet
-stratum number 060A:060A was added from the bonetool 31 spreadsheet
-stratum number 008BW:008BW was added from the bonetool 39 spreadsheet
-stratum number 005W:005W was added from the bonetool 105 spreadsheet
-stratum number 093W:093W was added from the bonetool 118 spreadsheet
-unit number 085A/B/W was added from the bonetools spreadsheet
-stratum number 085A/B/W:085A/B/W was added from the bonetool 121 spreadsheet
-stratum number 040W:040W was added from the bonetool 201 spreadsheet
-stratum number 064W:064W was added from the bonetool 203 spreadsheet
-stratum number 091A:091A was added from the bonetool 206 spreadsheet
-stratum number 094A:094A was added from the bonetool 209 spreadsheet
-stratum number 094B:094B was added from the bonetool 210 spreadsheet
-stratum number 094W:094W was added from the bonetool 211 spreadsheet
-stratum number Other:123A or 123B was added from the bonetool 219 spreadsheet
-stratum number 036W:C-15-19 was added from the eggshell spreadsheet
-stratum number 036W:P-0-0 was added from the eggshell spreadsheet
-stratum number 037W:P-0-0 was added from the eggshell spreadsheet
-feature number 043W:G-1.1-10.1:42.0 was added from the eggshell spreadsheet
-stratum number 059W:P-0-1.5 was added from the eggshell spreadsheet
-stratum number 062W:C-2.5-7.2 was added from the eggshell spreadsheet
-feature number 062W:C-2.5-7.5:2.0 was added from the eggshell spreadsheet
-feature number 062W:C-2-7:2.0 was added from the eggshell spreadsheet
-feature number 062W:C-2-7.1:63.0 was added from the eggshell spreadsheet
-feature number 062W:L-2-7.1:63.0 was added from the eggshell spreadsheet
-stratum number 062W:multiple strata was added from the eggshell spreadsheet
-feature number 062W:no data:64.0 was added from the eggshell spreadsheet
-stratum number 062W:P-1-4.5 was added from the eggshell spreadsheet
-feature number 064W:L-4-12:118.0 was added from the eggshell spreadsheet
-stratum number 091W:I-.8-29.8 was added from the eggshell spreadsheet
-feature number 092A:B-4-5:4.0 was added from the eggshell spreadsheet
-stratum number 093W:G-1-16 was added from the eggshell spreadsheet
-stratum number 097W:M-1-5 was added from the eggshell spreadsheet
-stratum number 102D:D-1-31 was added from the eggshell spreadsheet
-stratum number 102D:T-1-31 was added from the eggshell spreadsheet
-stratum number 121E:P-0-0 was added from the eggshell spreadsheet
-stratum number 129W:C-28-35 was added from the eggshell spreadsheet
-stratum number 129W:C-29.5-36.5 was added from the eggshell spreadsheet
-stratum number 129W:MN-1.8-86.8 was added from the eggshell spreadsheet
-stratum number 129W:G-0.1-92.1 was added from the eggshell spreadsheet
-feature number 129W:P-0-0:101.0 was added from the eggshell spreadsheet
-feature number 130W:F-1-3:4.0 was added from the eggshell spreadsheet
-stratum number 006W:N-1-5.1 was added from the soil spreadsheet
-stratum number 006W:C-2-5 was added from the soil spreadsheet
-stratum number 006W:B-2-3 was added from the soil spreadsheet
-stratum number 018P:R-1-11 was added from the soil spreadsheet
-stratum number 020P:J-1-11 was added from the soil spreadsheet
-stratum number 020P:Q-2-4 was added from the soil spreadsheet
-stratum number 020P:L-12-4 was added from the soil spreadsheet
-stratum number 020P:B-3-4 was added from the soil spreadsheet
-stratum number 020P:L-5-4 was added from the soil spreadsheet
-stratum number 020P:L-1-4 was added from the soil spreadsheet
-stratum number 020P:L-1-3 was added from the soil spreadsheet
-stratum number 020P:L-1-5 was added from the soil spreadsheet
-stratum number 020P:B-4-3 was added from the soil spreadsheet
-stratum number 020P:L-4-3 was added from the soil spreadsheet
-stratum number 021P:Q-6-8 was added from the soil spreadsheet
-stratum number 021P:L-0-5 was added from the soil spreadsheet
-stratum number 021P:J-1-14 was added from the soil spreadsheet
-stratum number 030W:B-1-2 was added from the soil spreadsheet
-stratum number 033W:S-1-14 was added from the soil spreadsheet
-stratum number 033W:L-2-17 was added from the soil spreadsheet
-stratum number 033W:B-1-2 was added from the soil spreadsheet
-feature number 033W:W-1-18:3012.0 was added from the soil spreadsheet
-feature number 033W:W-1-18:3013.0 was added from the soil spreadsheet
-feature number 033W:W-1-18:3014.0 was added from the soil spreadsheet
-feature number 033W:no data:3015.0 was added from the soil spreadsheet
-feature number 033W:no data:3017.0 was added from the soil spreadsheet
-feature number 033W:no data:3016.0 was added from the soil spreadsheet
-feature number 037A:no data:68.0 was added from the soil spreadsheet
-stratum number 037W:O-2-17 was added from the soil spreadsheet
-stratum number 037W:J-1-1 was added from the soil spreadsheet
-stratum number 037W:L-2-13 was added from the soil spreadsheet
-feature number 037W:L-2-13:79.0 was added from the soil spreadsheet
-stratum number 037W:K-1-18 was added from the soil spreadsheet
-stratum number 037W:G-2-12.1 was added from the soil spreadsheet
-stratum number 037W:L-3-13 was added from the soil spreadsheet
-stratum number 037W:U-1-10 was added from the soil spreadsheet
-stratum number 067W:NC-2-5 was added from the soil spreadsheet
-stratum number 067W:NB-2-5 was added from the soil spreadsheet
-stratum number 081W:E-2-13 was added from the soil spreadsheet
-stratum number 081W:F-2-12 was added from the soil spreadsheet
-stratum number 082W:L-4-15 was added from the soil spreadsheet
-stratum number 083W:L-1-7 was added from the soil spreadsheet
-stratum number 083W:H-1-8 was added from the soil spreadsheet
-stratum number 084W:C-2-6 was added from the soil spreadsheet
-stratum number 084W:C-3-7 was added from the soil spreadsheet
-stratum number 090W:C-2-9 was added from the soil spreadsheet
-stratum number 090W:H-1-11 was added from the soil spreadsheet
-stratum number 090W:F-1-9 was added from the soil spreadsheet
-stratum number 090W:H-1-10 was added from the soil spreadsheet
-stratum number 090W:C-1-11 was added from the soil spreadsheet
-stratum number 090W:L-6-20 was added from the soil spreadsheet
-stratum number 091B:L-1-77 was added from the soil spreadsheet
-stratum number 091D:D-1-2 was added from the soil spreadsheet
-stratum number 091W:C-2-19 was added from the soil spreadsheet
-stratum number 091W:H-2-11 was added from the soil spreadsheet
-stratum number 093W:L-23-39 was added from the soil spreadsheet
-stratum number 093W:L-21-39 was added from the soil spreadsheet
-stratum number 093W:L-9-43 was added from the soil spreadsheet
-stratum number 093W:L-15-36 was added from the soil spreadsheet
-stratum number 093W:L-17-39 was added from the soil spreadsheet
-stratum number 093W:L-12-47 was added from the soil spreadsheet
-stratum number 093W:L-13-36 was added from the soil spreadsheet
-stratum number 093W:L-20-41 was added from the soil spreadsheet
-stratum number 093W:L-18-36 was added from the soil spreadsheet
-stratum number 094A:L-1-3 was added from the soil spreadsheet
-stratum number 094W:L-1-4 was added from the soil spreadsheet
-stratum number 097W:D-1-11 was added from the soil spreadsheet
-stratum number 098W:F-1-3 was added from the soil spreadsheet
-stratum number 099W:H-1-03 was added from the soil spreadsheet
-stratum number 099W:H-1-08 was added from the soil spreadsheet
-stratum number 100W:I-1-19 was added from the soil spreadsheet
-feature number 100W:L-11-31:5014.0 was added from the soil spreadsheet
-stratum number 100W:I-2-22 was added from the soil spreadsheet
-stratum number 100W:L-16-40 was added from the soil spreadsheet
-feature number 100W:L-16-40:5019.0 was added from the soil spreadsheet
-feature number 100W:L-19-43:5021.0 was added from the soil spreadsheet
-stratum number 100W:H-2-22 was added from the soil spreadsheet
-stratum number 100W:L-14-24 was added from the soil spreadsheet
-feature number 100W:L-14-24:5017.0 was added from the soil spreadsheet
-feature number 100W:L-6-26:5005.0 was added from the soil spreadsheet
-stratum number 100W:T-1-34 was added from the soil spreadsheet
-feature number 101W:G-1-8:101.0 was added from the soil spreadsheet
-stratum number 101W:H-1-8 was added from the soil spreadsheet
-feature number 101W:L-4-15:101.0 was added from the soil spreadsheet
-stratum number 102A:C-2-24 was added from the soil spreadsheet
-stratum number 102A:L-11-21 was added from the soil spreadsheet
-stratum number 102A:D-2-23 was added from the soil spreadsheet
-stratum number 102A:C-4-15 was added from the soil spreadsheet
-stratum number 102A:D-1-23 was added from the soil spreadsheet
-stratum number 102A:L-5-9 was added from the soil spreadsheet
-stratum number 102A:C-2-9 was added from the soil spreadsheet
-zone number 112 was added from the soils spreadsheet
-unit number 112W was added from the soils spreadsheet
-stratum number 112W:M-2-6 was added from the soil spreadsheet
-feature number 118W:H-3-19:71.0 was added from the soil spreadsheet
-stratum number 118W:O-1-16 was added from the soil spreadsheet
-stratum number 118W:FG-3-17 was added from the soil spreadsheet
-stratum number 118W:H-3-9 was added from the soil spreadsheet
-stratum number 118W:H-3-49 was added from the soil spreadsheet
-stratum number 118W:O-1-16.5 was added from the soil spreadsheet
-feature number 119W:F-3-20:14.0 was added from the soil spreadsheet
-stratum number 119W:D-3-14 was added from the soil spreadsheet
-stratum number 119W:L-5-19 was added from the soil spreadsheet
-stratum number 121C:D-1-3 was added from the soil spreadsheet
-stratum number 121W:D-3-25 was added from the soil spreadsheet
-stratum number 121W:D-4-25 was added from the soil spreadsheet
-stratum number 121W:D-2-24 was added from the soil spreadsheet
-stratum number 122W:F-1-2 was added from the soil spreadsheet
-stratum number 123A:C-1-7 was added from the soil spreadsheet
-stratum number 123A:G-1-9 was added from the soil spreadsheet
-stratum number 123A:C-2-8 was added from the soil spreadsheet
-stratum number 123A:I-2-10 was added from the soil spreadsheet
-stratum number 123B:I-2-8 was added from the soil spreadsheet
-stratum number 123B:I-1-6 was added from the soil spreadsheet
-stratum number 123B:L-1-12 was added from the soil spreadsheet
-stratum number 123B:I-3-11 was added from the soil spreadsheet
-stratum number 123B:B-3-5 was added from the soil spreadsheet
-feature number 124A:E-1-3:17.0 was added from the soil spreadsheet
-stratum number 124A:C-1-6 was added from the soil spreadsheet
-feature number 124A:C-1-6:16.0 was added from the soil spreadsheet
-stratum number 124W:H-1-6 was added from the soil spreadsheet
-stratum number 124W:C-2-8 was added from the soil spreadsheet
-feature number 124W:H-2-9:13.0 was added from the soil spreadsheet
-stratum number 124W:B-1-2 was added from the soil spreadsheet
-stratum number 124W:L-1-8 was added from the soil spreadsheet
-feature number 124W:L-1-8:12.0 was added from the soil spreadsheet
-feature number 124W:H-2-9:69.0 was added from the soil spreadsheet
-stratum number 124W:E-1-3 was added from the soil spreadsheet
-feature number 124W:H-2-9:68.0 was added from the soil spreadsheet
-stratum number 124W:G-1-5 was added from the soil spreadsheet
-feature number 124W:G-1-5:11.0 was added from the soil spreadsheet
-stratum number 124W:L-4-7 was added from the soil spreadsheet
-feature number 124W:L-4-7:15.0 was added from the soil spreadsheet
-stratum number 124W:L-5-7 was added from the soil spreadsheet
-stratum number 124W:F-1-4 was added from the soil spreadsheet
-stratum number 124W:L-7-7 was added from the soil spreadsheet
-stratum number 124W:L-2-2 was added from the soil spreadsheet
-feature number 124W:L-2-2:14.0 was added from the soil spreadsheet
-stratum number 124W:J-1-8 was added from the soil spreadsheet
-stratum number 124W:J-1-11 was added from the soil spreadsheet
-stratum number 127W:I-3-38 was added from the soil spreadsheet
-stratum number 127W:I-35-38 was added from the soil spreadsheet
-stratum number 127W:J-1-15 was added from the soil spreadsheet
-stratum number 127W:O-1-15 was added from the soil spreadsheet
-stratum number 127W:W-1-36 was added from the soil spreadsheet
-stratum number 129W:I-83-91 was added from the soil spreadsheet
-stratum number 129W:I-72-92 was added from the soil spreadsheet
-stratum number 129W:G-2-92 was added from the soil spreadsheet
-stratum number 129W:G-1-92 was added from the soil spreadsheet
-stratum number 129W:F-1-08 was added from the soil spreadsheet
-stratum number 129W:F-1-83 was added from the soil spreadsheet
-stratum number 130W:C-5-16 was added from the soil spreadsheet
-stratum number 130W:G-5-8 was added from the soil spreadsheet
-stratum number 130W:L-80-22 was added from the soil spreadsheet
-stratum number 130W:C-2-11 was added from the soil spreadsheet
-stratum number 130W:H-2-5 was added from the soil spreadsheet
-stratum number 130W:F-1-03 was added from the soil spreadsheet
-stratum number 138W:L-2-9 was added from the soil spreadsheet
-feature number 138W:L-2-9:2.0 was added from the soil spreadsheet
-stratum number 143W:L-4-4 was added from the soil spreadsheet
-zone number P/5 was added from the soils spreadsheet
-unit number P/5 was added from the soils spreadsheet
-zone number P/PL5- was added from the soils spreadsheet
-unit number P/PL5- was added from the soils spreadsheet
-zone number PL/5 was added from the soils spreadsheet
-unit number PL/5 was added from the soils spreadsheet
-zone number PL4-1 was added from the soils spreadsheet
-unit number PL4-1 was added from the soils spreadsheet
-zone number PL4-2 was added from the soils spreadsheet
-unit number PL4-2 was added from the soils spreadsheet
-zone number PL4-3 was added from the soils spreadsheet
-unit number PL4-3 was added from the soils spreadsheet
-zone number PL4-4 was added from the soils spreadsheet
-unit number PL4-4 was added from the soils spreadsheet
-zone number PL4-5 was added from the soils spreadsheet
-unit number PL4-5 was added from the soils spreadsheet
-zone number PL4-6 was added from the soils spreadsheet
-unit number PL4-6 was added from the soils spreadsheet
-zone number PL5 was added from the soils spreadsheet
-unit number PL5 was added from the soils spreadsheet
-zone number PL5-3 was added from the soils spreadsheet
-unit number PL5-3 was added from the soils spreadsheet
-stratum number 004A:B-4-08 was added from the perishables spreadsheet
-feature number 004A:B-4-08:2.0 was added from the perishables spreadsheet
-stratum number 030W:F-1-02 was added from the perishables spreadsheet
-stratum number 030W:G-1-03 was added from the perishables spreadsheet
-stratum number 030W:G-2-08 was added from the perishables spreadsheet
-stratum number 030W:M-1-06 was added from the perishables spreadsheet
-stratum number 031A:G-1-04 was added from the perishables spreadsheet
-stratum number 031A:MIXED was added from the perishables spreadsheet
-stratum number 031W:F-1-06 was added from the perishables spreadsheet
-stratum number 031W:L-1-07 was added from the perishables spreadsheet
-feature number 031W:no data:17.0 was added from the perishables spreadsheet
-stratum number 033B:F-1-03 was added from the perishables spreadsheet
-feature number 033B:F-1-03:1.0 was added from the perishables spreadsheet
-feature number 033B:F-1-03:2.0 was added from the perishables spreadsheet
-stratum number 033B:L-1-03 was added from the perishables spreadsheet
-feature number 033B:L-1-03:1.0 was added from the perishables spreadsheet
-feature number 033B:L-1-03:3.0 was added from the perishables spreadsheet
-feature number 033B:L-1-03:2.0 was added from the perishables spreadsheet
-stratum number 033C:C-1-07 was added from the perishables spreadsheet
-stratum number 033W:F-2-09 was added from the perishables spreadsheet
-stratum number 036W:B-1-02 was added from the perishables spreadsheet
-stratum number 036W:C-25-04.5 was added from the perishables spreadsheet
-feature number 036W:C-25-04.5:29.0 was added from the perishables spreadsheet
-stratum number 036W:C-3-05 was added from the perishables spreadsheet
-stratum number 036W:L-1-05.5 was added from the perishables spreadsheet
-feature number 036W:L-1-05.5:3.0 was added from the perishables spreadsheet
-feature number 036W:C-6.2-8.2:31.0 was added from the perishables spreadsheet
-stratum number 037W:C-2-08 was added from the perishables spreadsheet
-stratum number 037W:C-3-09 was added from the perishables spreadsheet
-stratum number 037W:F-2-05 was added from the perishables spreadsheet
-stratum number 037W:F-2-05 & C-2-08 was added from the perishables spreadsheet
-stratum number 043W:B-4-09 was added from the perishables spreadsheet
-stratum number 043W:F-1.5-0.6 was added from the perishables spreadsheet
-feature number 043W:F-1.5-0.6:57.0 was added from the perishables spreadsheet
-stratum number 043W:F-1.5-06 was added from the perishables spreadsheet
-feature number 043W:F-1.5-06:19.0 was added from the perishables spreadsheet
-feature number 043W:F-1.5-06:57.0 was added from the perishables spreadsheet
-stratum number 043W:F-15-06 was added from the perishables spreadsheet
-stratum number 043W:F-2-07 was added from the perishables spreadsheet
-feature number 043W:F-2-07:57.0 was added from the perishables spreadsheet
-stratum number 043W:L-4-06.7 was added from the perishables spreadsheet
-feature number 043W:L-4-06.7:57.0 was added from the perishables spreadsheet
-stratum number 043W:F-3-08 was added from the perishables spreadsheet
-feature number 043W:F-3-08:57.0 was added from the perishables spreadsheet
-stratum number 043W:I-4-06.7 was added from the perishables spreadsheet
-feature number 043W:I-4-06.7:57.0 was added from the perishables spreadsheet
-stratum number 043W:L-1-06.5 was added from the perishables spreadsheet
-feature number 043W:L-1-06.5:5.0 was added from the perishables spreadsheet
-stratum number 043W:L-2-07.5 was added from the perishables spreadsheet
-feature number 043W:L-2-07.5:3.0 was added from the perishables spreadsheet
-stratum number 043W:L-406.7 was added from the perishables spreadsheet
-feature number 043W:L-406.7:57.0 was added from the perishables spreadsheet
-stratum number 043W:R-4-09 was added from the perishables spreadsheet
-stratum number 043W:S-2-06.6 was added from the perishables spreadsheet
-feature number 043W:S-2-06.6:19.0 was added from the perishables spreadsheet
-stratum number 043W:X-3-10 (?) was added from the perishables spreadsheet
-feature number 043W:X-3-10 (?):42.0 was added from the perishables spreadsheet
-feature number 043W:none:57.0 was added from the perishables spreadsheet
-stratum number 059W:C-1-04 was added from the perishables spreadsheet
-stratum number 059W:C-2-05 was added from the perishables spreadsheet
-stratum number 059W:C-3-06 was added from the perishables spreadsheet
-stratum number 059W:E-1-03 was added from the perishables spreadsheet
-stratum number 059W:P-1-01.5 was added from the perishables spreadsheet
-stratum number 059W:F-1-03 was added from the perishables spreadsheet
-stratum number 059W:S-1.4-05.4 was added from the perishables spreadsheet
-stratum number 059W:S-14-05.4 was added from the perishables spreadsheet
-stratum number 060B:E was added from the perishables spreadsheet
-stratum number 061A:D-1-02 was added from the perishables spreadsheet
-stratum number 061A:D-2-03 was added from the perishables spreadsheet
-stratum number 062A:C-2-07 was added from the perishables spreadsheet
-stratum number 062A:F-1-04 was added from the perishables spreadsheet
-stratum number 062A:H-2-05.5 was added from the perishables spreadsheet
-stratum number 062A:H-2-O5.5 was added from the perishables spreadsheet
-stratum number 062A:X-1-10 was added from the perishables spreadsheet
-stratum number 062W:C-2-07 was added from the perishables spreadsheet
-stratum number 062B:C-2-06.9 was added from the perishables spreadsheet
-stratum number 062W:C-2-06.9 was added from the perishables spreadsheet
-stratum number 062W:C-2.5-07.5 was added from the perishables spreadsheet
-stratum number 062W:L-2.0-7.1 was added from the perishables spreadsheet
-feature number 062W:C-2-07:2.0 was added from the perishables spreadsheet
-stratum number 062W:L-2-07.1 was added from the perishables spreadsheet
-feature number 062W:L-2-07.1:2.0 was added from the perishables spreadsheet
-stratum number 062W:L-2- 07.1 was added from the perishables spreadsheet
-stratum number 062W:C-25-07.5 was added from the perishables spreadsheet
-stratum number 062W:C-27.5 - 27.5 was added from the perishables spreadsheet
-stratum number 062W:C-3-08 was added from the perishables spreadsheet
-stratum number 062W:C-4-09 was added from the perishables spreadsheet
-stratum number 062W:get from F# was added from the perishables spreadsheet
-feature number 062W:get from F#:63.0 was added from the perishables spreadsheet
-stratum number 062W:L-1-7.1 was added from the perishables spreadsheet
-stratum number 062W:L-2.0-07 was added from the perishables spreadsheet
-feature number 062W:L-2.0-07:2.0 was added from the perishables spreadsheet
-stratum number 062W:L-2.0-07.1 was added from the perishables spreadsheet
-stratum number 062W:L-2.07.1 was added from the perishables spreadsheet
-feature number 062W:L-2.07.1:63.0 was added from the perishables spreadsheet
-feature number 062W:C-2.5-07.5:63.0 was added from the perishables spreadsheet
-stratum number 062W:L-2-07 was added from the perishables spreadsheet
-feature number 062W:L-2-07:63.0 was added from the perishables spreadsheet
-feature number 062W:L-2-07.1:63.0 was added from the perishables spreadsheet
-feature number 062W:L-2-07.1:62.0 was added from the perishables spreadsheet
-stratum number 062W:L-2-07-1 was added from the perishables spreadsheet
-stratum number 062W:P-0-00 was added from the perishables spreadsheet
-feature number 062W:none:2.0 was added from the perishables spreadsheet
-feature number 062W:none:122.0 was added from the perishables spreadsheet
-zone number 62W? was added from the perishables spreadsheet
-unit number 062W? was added from the perishables spreadsheet
-stratum number 062W?:C-2-05 was added from the perishables spreadsheet
-feature number 062W?:C-2-05:0.0 was added from the perishables spreadsheet
-stratum number 062W?:C-2-07 was added from the perishables spreadsheet
-feature number 062W?:C-2-07:0.0 was added from the perishables spreadsheet
-stratum number 062W?:L-2-07.1 was added from the perishables spreadsheet
-feature number 062W?:L-2-07.1:0.0 was added from the perishables spreadsheet
-feature number 062W?:none:2.0 was added from the perishables spreadsheet
-feature number 062W?:none:0.0 was added from the perishables spreadsheet
-stratum number 064W:BENCH WALL was added from the perishables spreadsheet
-stratum number 064W:F-1-06 was added from the perishables spreadsheet
-feature number 064W:F-1-06:118.0 was added from the perishables spreadsheet
-stratum number 064W:H-1-08 was added from the perishables spreadsheet
-feature number 064W:H-1-08:4.0 was added from the perishables spreadsheet
-feature number 064W:H-1-08:118.0 was added from the perishables spreadsheet
-stratum number 067W:FC-2.5-05.5 was added from the perishables spreadsheet
-stratum number 067W:B-3-09 was added from the perishables spreadsheet
-stratum number 084W:C-1-05 was added from the perishables spreadsheet
-stratum number 084W:N-2-04 was added from the perishables spreadsheet
-stratum number 084W:W-2-04 was added from the perishables spreadsheet
-stratum number 088W:H-1-06 was added from the perishables spreadsheet
-stratum number 090W:C-2-07 was added from the perishables spreadsheet
-stratum number 093W:C-4-06 was added from the perishables spreadsheet
-stratum number 097A:H-1-04 was added from the perishables spreadsheet
-feature number 097A:H-1-04:1001.0 was added from the perishables spreadsheet
-feature number 097A:none:1001.0 was added from the perishables spreadsheet
-stratum number 097B:X-1-06 was added from the perishables spreadsheet
-feature number 097B:X-1-06:2.0 was added from the perishables spreadsheet
-stratum number 097W:D-1.5-11.5 was added from the perishables spreadsheet
-feature number 097W:D-2-13:2007.0 was added from the perishables spreadsheet
-stratum number 097W:L-3-08 was added from the perishables spreadsheet
-feature number 097W:L-3-08:2007.0 was added from the perishables spreadsheet
-stratum number 097W:N-1-03 was added from the perishables spreadsheet
-feature number 097W:N-1-03:1007.0 was added from the perishables spreadsheet
-feature number 097W:N-1-03:1006.0 was added from the perishables spreadsheet
-stratum number 098W:B-1-05 was added from the perishables spreadsheet
-stratum number 098W:H-1-08 was added from the perishables spreadsheet
-stratum number 100W:N-1-03 was added from the perishables spreadsheet
-feature number 100W:N-1-03:14.0 was added from the perishables spreadsheet
-stratum number 100W:C-1-04.2 was added from the perishables spreadsheet
-feature number 100W:none:302.0 was added from the perishables spreadsheet
-feature number 100W:none:0.0 was added from the perishables spreadsheet
-stratum number 101W:C-1-06 was added from the perishables spreadsheet
-stratum number 101W:C-2-07 was added from the perishables spreadsheet
-stratum number 101W:G-1-08 was added from the perishables spreadsheet
-stratum number 101W:L-1-06 was added from the perishables spreadsheet
-unit number 102W was added from the perishables spreadsheet
-stratum number 102W:L-1-03.5 was added from the perishables spreadsheet
-feature number 102W:L-1-03.5:1.0 was added from the perishables spreadsheet
-stratum number 118W:F-2-05.1 was added from the perishables spreadsheet
-feature number 118W:F-2-05.1:12.0 was added from the perishables spreadsheet
-stratum number 121W:L-16-13 was added from the perishables spreadsheet
-feature number 121W:L-16-13:33.0 was added from the perishables spreadsheet
-stratum number 122A:L was added from the perishables spreadsheet
-feature number 122W:D-0-0:1.0 was added from the perishables spreadsheet
-stratum number 123B:C-1-03 was added from the perishables spreadsheet
-feature number 123B:C-1-03:5.0 was added from the perishables spreadsheet
-stratum number 127B:D-2-05 was added from the perishables spreadsheet
-feature number 127B:D-2-05:1.0 was added from the perishables spreadsheet
-stratum number 127W:F-1-04 was added from the perishables spreadsheet
-stratum number 127W:L-1-08 was added from the perishables spreadsheet
-feature number 127W:L-1-08:55.0 was added from the perishables spreadsheet
-stratum number 127W:L-2-1.5 was added from the perishables spreadsheet
-feature number 127W:L-2-1.5:99.0 was added from the perishables spreadsheet
-stratum number 127W:L-23.44 was added from the perishables spreadsheet
-feature number 127W:L-23.44:147.0 was added from the perishables spreadsheet
-feature number 127W:none:107.0 was added from the perishables spreadsheet
-feature number 127W:none:115.0 was added from the perishables spreadsheet
-feature number 127W:none:126.0 was added from the perishables spreadsheet
-feature number 129W:F-1-08:7.0 was added from the perishables spreadsheet
-stratum number 129W:F-1-08.1 was added from the perishables spreadsheet
-stratum number 129W:F-1-08.3 was added from the perishables spreadsheet
-stratum number 129W:M-1-06 was added from the perishables spreadsheet
-stratum number 130W:H-1-05 was added from the perishables spreadsheet
-feature number 130W:H-1-05:30.0 was added from the perishables spreadsheet
-zone number unknown was added from the ornaments spreadsheet
-unit number unknown was added from the ornaments spreadsheet
-zone number 123W-A- was added from the ornaments spreadsheet
-unit number 123W-A-B was added from the ornaments spreadsheet
-zone number Unknown was added from the ornaments spreadsheet
-unit number Unknown was added from the ornaments spreadsheet
-zone number TT1 was added from the ornaments spreadsheet
-unit number TT1 was added from the ornaments spreadsheet
-zone number Surface was added from the ornaments spreadsheet
-unit number Surface was added from the ornaments spreadsheet
-stratum number 77:F-2-5 was added from the select artifact 144 spreadsheet
-stratum number 77:L-2-9 was added from the select artifact 165 spreadsheet
-stratum number 51:G-1-6 was added from the select artifact 219 spreadsheet
-stratum number 34:L-1-08 was added from the select artifact 540 spreadsheet
-stratum number 174:K-1-11.5 was added from the select artifact 587 spreadsheet
-stratum number 167:H-1-6 was added from the select artifact 607 spreadsheet
-stratum number 160:W-1-91 was added from the select artifact 709 spreadsheet
-stratum number 160:H-4.5-22.5 was added from the select artifact 794 spreadsheet
-stratum number 001W:I-1-55 was added from the lithic_inventory spreadsheet
-stratum number 002BW:L-1-3 was added from the lithic_inventory spreadsheet
-stratum number 002BW:M-1-2 was added from the lithic_inventory spreadsheet
-stratum number 002BW:M-2-3 was added from the lithic_inventory spreadsheet
-stratum number 002BW:R-0-3 was added from the lithic_inventory spreadsheet
-stratum number 004A:B-2-2 was added from the lithic_inventory spreadsheet
-stratum number 004W:B-1-2 was added from the lithic_inventory spreadsheet
-stratum number 004W:F-3-10 was added from the lithic_inventory spreadsheet
-stratum number 004W:F-3-18 was added from the lithic_inventory spreadsheet
-stratum number 005A:G-2-6 was added from the lithic_inventory spreadsheet
-feature number 005A:no data:10.0 was added from the lithic_inventory spreadsheet
-stratum number 005W:H-1-5 was added from the lithic_inventory spreadsheet
-feature number 005W:H-1-5:10.0 was added from the lithic_inventory spreadsheet
-stratum number 006W:L-1-1 was added from the lithic_inventory spreadsheet
-feature number 006W:L-1-1:25.0 was added from the lithic_inventory spreadsheet
-stratum number 008A:M-1-7 was added from the lithic_inventory spreadsheet
-stratum number 008BW:C-1-6 was added from the lithic_inventory spreadsheet
-stratum number 008BW:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 009W:G-1-4 was added from the lithic_inventory spreadsheet
-feature number 011P:J-1-11:18.0 was added from the lithic_inventory spreadsheet
-stratum number 011P:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 011P:Q-0-2 was added from the lithic_inventory spreadsheet
-stratum number 011P:Q-1-4 was added from the lithic_inventory spreadsheet
-stratum number 011P:Q-1-5 was added from the lithic_inventory spreadsheet
-stratum number 011P:Q-2-5 was added from the lithic_inventory spreadsheet
-stratum number 014W:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 016P:C-1-3 was added from the lithic_inventory spreadsheet
-stratum number 016P:C-2-7 was added from the lithic_inventory spreadsheet
-stratum number 016P:C-2-8 was added from the lithic_inventory spreadsheet
-stratum number 016P:C-3-14 was added from the lithic_inventory spreadsheet
-stratum number 016P:D-2-19 was added from the lithic_inventory spreadsheet
-stratum number 016P:D-3-21 was added from the lithic_inventory spreadsheet
-stratum number 016P:D-5-8 was added from the lithic_inventory spreadsheet
-stratum number 016P:D-6-14 was added from the lithic_inventory spreadsheet
-feature number 016P:L-10-32:3.0 was added from the lithic_inventory spreadsheet
-stratum number 016P:L-12-22 was added from the lithic_inventory spreadsheet
-stratum number 016P:L-3-10 was added from the lithic_inventory spreadsheet
-stratum number 017P:C-2-7 was added from the lithic_inventory spreadsheet
-stratum number 018P:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 018P:Q-1-5 was added from the lithic_inventory spreadsheet
-feature number 018P:Q-1-7:7.0 was added from the lithic_inventory spreadsheet
-stratum number 019P:P-0-0 was added from the lithic_inventory spreadsheet
-feature number 020P:L-12-4.94:12.0 was added from the lithic_inventory spreadsheet
-feature number 020P:Q-0.7-3.5:12.0 was added from the lithic_inventory spreadsheet
-stratum number 021P:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 030W:D-2.3-26.3 was added from the lithic_inventory spreadsheet
-stratum number 030W:E-1-2 was added from the lithic_inventory spreadsheet
-stratum number 030W:I-3-23 was added from the lithic_inventory spreadsheet
-stratum number 030W:P-0-00 was added from the lithic_inventory spreadsheet
-feature number 031A:G-1-4:3.0 was added from the lithic_inventory spreadsheet
-stratum number 031A:G-2-4 was added from the lithic_inventory spreadsheet
-feature number 031A:I-1-6:5.0 was added from the lithic_inventory spreadsheet
-feature number 031A:I-2-9:1.0 was added from the lithic_inventory spreadsheet
-feature number 031A:I-2-9:2.0 was added from the lithic_inventory spreadsheet
-stratum number 031W:C-3-3 was added from the lithic_inventory spreadsheet
-stratum number 031W:H-1-11 was added from the lithic_inventory spreadsheet
-stratum number 031W:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 032W:C-1-2 was added from the lithic_inventory spreadsheet
-stratum number 033B:C-1-3 was added from the lithic_inventory spreadsheet
-stratum number 033W:C-1-12 was added from the lithic_inventory spreadsheet
-stratum number 033W:C-3-13 was added from the lithic_inventory spreadsheet
-stratum number 033W:F-2-4 was added from the lithic_inventory spreadsheet
-feature number 033W:F-4-15:43.0 was added from the lithic_inventory spreadsheet
-stratum number 033W:H-2-77 was added from the lithic_inventory spreadsheet
-stratum number 036W:C-3-6 was added from the lithic_inventory spreadsheet
-stratum number 036W:L-4-5 was added from the lithic_inventory spreadsheet
-feature number 036W:L-4-5:30.0 was added from the lithic_inventory spreadsheet
-feature number 036W:N-1-13:41.0 was added from the lithic_inventory spreadsheet
-stratum number 036W:P-1 was added from the lithic_inventory spreadsheet
-stratum number 039W:B-1-2 was added from the lithic_inventory spreadsheet
-feature number 043W:B-4-9:42.0 was added from the lithic_inventory spreadsheet
-feature number 043W:F-2-7:57.0 was added from the lithic_inventory spreadsheet
-feature number 043W:F-2-7:5.0 was added from the lithic_inventory spreadsheet
-feature number 043W:F-3-8:42.0 was added from the lithic_inventory spreadsheet
-feature number 043W:H-1-15:42.0 was added from the lithic_inventory spreadsheet
-stratum number 043W:M-2-8 was added from the lithic_inventory spreadsheet
-stratum number 043W:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 057W:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 058W:H-2-7 was added from the lithic_inventory spreadsheet
-stratum number 058W:I-1-4 was added from the lithic_inventory spreadsheet
-stratum number 058W:L-1-10 was added from the lithic_inventory spreadsheet
-stratum number 059W:C-104 was added from the lithic_inventory spreadsheet
-stratum number 059W:C-1-43 was added from the lithic_inventory spreadsheet
-feature number 059W:C-3-6:6.0 was added from the lithic_inventory spreadsheet
-stratum number 060A:B-2-3 was added from the lithic_inventory spreadsheet
-stratum number 060B:F-1-5.1 was added from the lithic_inventory spreadsheet
-stratum number 062A:C-2-7 was added from the lithic_inventory spreadsheet
-feature number 062A:H-2-5.5:27.0 was added from the lithic_inventory spreadsheet
-feature number 062A:I-2-6:27.0 was added from the lithic_inventory spreadsheet
-stratum number 062A:L-2-7.1 was added from the lithic_inventory spreadsheet
-feature number 062A:L-2-7.1:63.0 was added from the lithic_inventory spreadsheet
-stratum number 062W:C-1-3 was added from the lithic_inventory spreadsheet
-stratum number 062W:C-20-29 was added from the lithic_inventory spreadsheet
-feature number 062W:C-21.3-21.3:21.0 was added from the lithic_inventory spreadsheet
-feature number 062W:C-21.5-21.5:21.0 was added from the lithic_inventory spreadsheet
-stratum number 062W:C-22.1-22.1 was added from the lithic_inventory spreadsheet
-feature number 062W:C-22.3-22.3:21.0 was added from the lithic_inventory spreadsheet
-stratum number 062W:C-26-21 was added from the lithic_inventory spreadsheet
-stratum number 062W:C-26-6 was added from the lithic_inventory spreadsheet
-stratum number 062W:C-26-8 was added from the lithic_inventory spreadsheet
-feature number 062W:C-2-7:3.0 was added from the lithic_inventory spreadsheet
-stratum number 062W:C-27-67 was added from the lithic_inventory spreadsheet
-stratum number 062W:C-28 -28 was added from the lithic_inventory spreadsheet
-stratum number 062W:C-28.5-28.5 was added from the lithic_inventory spreadsheet
-feature number 062W:C-32-32:21.0 was added from the lithic_inventory spreadsheet
-feature number 062W:C-34-34:121.0 was added from the lithic_inventory spreadsheet
-stratum number 062W:C-45-45 was added from the lithic_inventory spreadsheet
-feature number 062W:C-4-9:2.0 was added from the lithic_inventory spreadsheet
-stratum number 062W:L-7-34 was added from the lithic_inventory spreadsheet
-feature number 062W:L-7-34:121.0 was added from the lithic_inventory spreadsheet
-feature number 062W:no data:97.0 was added from the lithic_inventory spreadsheet
-feature number 064W:F-1-6:4.0 was added from the lithic_inventory spreadsheet
-feature number 064W:F-1-6:118.0 was added from the lithic_inventory spreadsheet
-stratum number 064W:I-1-8 was added from the lithic_inventory spreadsheet
-stratum number 064W:W-0-0 was added from the lithic_inventory spreadsheet
-stratum number 064W:W-0-00 was added from the lithic_inventory spreadsheet
-stratum number 065W:C-0-0 was added from the lithic_inventory spreadsheet
-stratum number 068W:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 069W:B-1-2 was added from the lithic_inventory spreadsheet
-stratum number 073W:B-1-2 was added from the lithic_inventory spreadsheet
-stratum number 074W:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 081W:F-1-3 was added from the lithic_inventory spreadsheet
-stratum number 081W:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 082W:C-11-23 was added from the lithic_inventory spreadsheet
-stratum number 082W:C-1-3 was added from the lithic_inventory spreadsheet
-stratum number 082W:C-1-5 was added from the lithic_inventory spreadsheet
-stratum number 082W:C-2-20 was added from the lithic_inventory spreadsheet
-stratum number 082W:C-2-4 was added from the lithic_inventory spreadsheet
-stratum number 082W:C-4-4 was added from the lithic_inventory spreadsheet
-stratum number 082W:L-19-44 was added from the lithic_inventory spreadsheet
-feature number 082W:L-19-44:109.0 was added from the lithic_inventory spreadsheet
-feature number 082W:L-3-12:11.0 was added from the lithic_inventory spreadsheet
-stratum number 082W:P-0-00 was added from the lithic_inventory spreadsheet
-feature number 083W:H-1-8:5001.0 was added from the lithic_inventory spreadsheet
-stratum number 084W:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 086W:D-1-18 was added from the lithic_inventory spreadsheet
-stratum number 086W:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 088W:B-4-5 was added from the lithic_inventory spreadsheet
-feature number 088W:C-1-4:2.0 was added from the lithic_inventory spreadsheet
-stratum number 088W:C-1-5 was added from the lithic_inventory spreadsheet
-stratum number 088W:P-0-0 was added from the lithic_inventory spreadsheet
-feature number 091A:L-1-5:1.0 was added from the lithic_inventory spreadsheet
-stratum number 091C:H-1-7 was added from the lithic_inventory spreadsheet
-feature number 091C:H-1-7:9.0 was added from the lithic_inventory spreadsheet
-stratum number 091W:C-15-19 was added from the lithic_inventory spreadsheet
-stratum number 091W:C-2-21.7 was added from the lithic_inventory spreadsheet
-feature number 092A:L-4-15:8.0 was added from the lithic_inventory spreadsheet
-stratum number 092W:D-1-16 was added from the lithic_inventory spreadsheet
-feature number 092W:L-1.1-10.1:44.0 was added from the lithic_inventory spreadsheet
-feature number 092W:L-1.3-10.3:48.0 was added from the lithic_inventory spreadsheet
-stratum number 093W:C was added from the lithic_inventory spreadsheet
-feature number 093W:C-10-13:4.0 was added from the lithic_inventory spreadsheet
-stratum number 093W:I-1-14 was added from the lithic_inventory spreadsheet
-stratum number 093W:I-15 was added from the lithic_inventory spreadsheet
-feature number 093W:I-15:4.0 was added from the lithic_inventory spreadsheet
-stratum number 093W:I-2-22 was added from the lithic_inventory spreadsheet
-feature number 093W:I-3-27:9.0 was added from the lithic_inventory spreadsheet
-feature number 093W:I-3-27:5.0 was added from the lithic_inventory spreadsheet
-feature number 093W:I-3-27:6.0 was added from the lithic_inventory spreadsheet
-feature number 093W:J-1-50:47.0 was added from the lithic_inventory spreadsheet
-feature number 093W:L-0.5-8.5:12.0 was added from the lithic_inventory spreadsheet
-feature number 093W:O-1-26.6:16.0 was added from the lithic_inventory spreadsheet
-stratum number 093W:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 093W:T-1-15 was added from the lithic_inventory spreadsheet
-feature number 094W:B-1-2:5.0 was added from the lithic_inventory spreadsheet
-stratum number 096W:C-2-8 was added from the lithic_inventory spreadsheet
-feature number 096W:H-1-5:9.0 was added from the lithic_inventory spreadsheet
-feature number 096W:L-15-26:121.0 was added from the lithic_inventory spreadsheet
-stratum number 096W:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 097W:I-1-6 was added from the lithic_inventory spreadsheet
-stratum number 097W:P-0-0 was added from the lithic_inventory spreadsheet
-feature number 097W:T-1-18:4034.0 was added from the lithic_inventory spreadsheet
-feature number 100W:C-2-5.2:303.0 was added from the lithic_inventory spreadsheet
-stratum number 100W:C-2-6 was added from the lithic_inventory spreadsheet
-stratum number 100W:C-3-4 was added from the lithic_inventory spreadsheet
-stratum number 100W:N-3-6 was added from the lithic_inventory spreadsheet
-stratum number 102A:D-1-31 was added from the lithic_inventory spreadsheet
-stratum number 102A:D-2-55 was added from the lithic_inventory spreadsheet
-feature number 102A:H-1-13:4007.0 was added from the lithic_inventory spreadsheet
-stratum number 102A:I-2-22 was added from the lithic_inventory spreadsheet
-feature number 102A:L-2-4:305.0 was added from the lithic_inventory spreadsheet
-stratum number 102A:P-0-0 was added from the lithic_inventory spreadsheet
-feature number 102B:C-2-6:2.0 was added from the lithic_inventory spreadsheet
-stratum number 102B:C-5-6 was added from the lithic_inventory spreadsheet
-stratum number 102B:L-1-10 was added from the lithic_inventory spreadsheet
-feature number 102B:L-1-10:3.0 was added from the lithic_inventory spreadsheet
-stratum number 102B:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number 104W:A-1-1 was added from the lithic_inventory spreadsheet
-stratum number 108W:B-1-2 was added from the lithic_inventory spreadsheet
-stratum number 112W:B-1-2 was added from the lithic_inventory spreadsheet
-feature number 118W:D-1.5-16.5:59.0 was added from the lithic_inventory spreadsheet
-feature number 118W:D-1-16:59.0 was added from the lithic_inventory spreadsheet
-feature number 118W:U-2-10.5:13.0 was added from the lithic_inventory spreadsheet
-stratum number 119W:C-0.9-7.9 was added from the lithic_inventory spreadsheet
-stratum number 119W:C-4-48 was added from the lithic_inventory spreadsheet
-stratum number 119W:C-6-14 was added from the lithic_inventory spreadsheet
-stratum number 119W:CU-1-4.3 was added from the lithic_inventory spreadsheet
-feature number 119W:D-3-14.7:26.0 was added from the lithic_inventory spreadsheet
-feature number 119W:D-4-27:73.0 was added from the lithic_inventory spreadsheet
-feature number 119W:F-3-20:73.0 was added from the lithic_inventory spreadsheet
-feature number 119W:H-2-3.52:3.0 was added from the lithic_inventory spreadsheet
-feature number 119W:H-6-14:20.0 was added from the lithic_inventory spreadsheet
-feature number 119W:H-8-22:77.0 was added from the lithic_inventory spreadsheet
-feature number 119W:H-9-32:131.0 was added from the lithic_inventory spreadsheet
-feature number 119W:H-9-32:132.0 was added from the lithic_inventory spreadsheet
-feature number 119W:I-5-9.5:4.0 was added from the lithic_inventory spreadsheet
-feature number 119W:I-8-26:90.0 was added from the lithic_inventory spreadsheet
-feature number 119W:I-8-26:100.0 was added from the lithic_inventory spreadsheet
-feature number 119W:I-8-26:74.0 was added from the lithic_inventory spreadsheet
-feature number 119W:L-2-11:4.0 was added from the lithic_inventory spreadsheet
-feature number 119W:L-7-40:104.0 was added from the lithic_inventory spreadsheet
-stratum number 121B:B-1-2 was added from the lithic_inventory spreadsheet
-stratum number 121B:C-4-1-3.6 was added from the lithic_inventory spreadsheet
-stratum number 122W:L-0-0 was added from the lithic_inventory spreadsheet
-stratum number 122W:M-0-0 was added from the lithic_inventory spreadsheet
-stratum number 122W:N-0-0 was added from the lithic_inventory spreadsheet
-stratum number 122W:O-0-0 was added from the lithic_inventory spreadsheet
-stratum number 124A:G-2-8 was added from the lithic_inventory spreadsheet
-stratum number 124A:I-1-5 was added from the lithic_inventory spreadsheet
-feature number 127W:H-1-5:55.0 was added from the lithic_inventory spreadsheet
-feature number 127W:L-19-39:140.0 was added from the lithic_inventory spreadsheet
-feature number 127W:L-9-21:109.0 was added from the lithic_inventory spreadsheet
-feature number 128A:L-1-3:5.0 was added from the lithic_inventory spreadsheet
-stratum number 129W:C-24-31 was added from the lithic_inventory spreadsheet
-stratum number 129W:C-3-12 was added from the lithic_inventory spreadsheet
-stratum number 129W:C-5-9 was added from the lithic_inventory spreadsheet
-stratum number 129W:C-79-86 was added from the lithic_inventory spreadsheet
-stratum number 129W:C-81-91 was added from the lithic_inventory spreadsheet
-stratum number 129W:C-83-91 was added from the lithic_inventory spreadsheet
-stratum number 129W:C-85-110 was added from the lithic_inventory spreadsheet
-stratum number 129W:C-94-190 was added from the lithic_inventory spreadsheet
-stratum number 129W:C-99-113 was added from the lithic_inventory spreadsheet
-feature number 129W:D-0.1-91.1:153.0 was added from the lithic_inventory spreadsheet
-stratum number 129W:F-2-96 was added from the lithic_inventory spreadsheet
-feature number 129W:H-2-94:153.0 was added from the lithic_inventory spreadsheet
-feature number 129W:H-3-137:161.0 was added from the lithic_inventory spreadsheet
-feature number 129W:H-4-139:15.0 was added from the lithic_inventory spreadsheet
-feature number 129W:H-4-139:16.0 was added from the lithic_inventory spreadsheet
-feature number 129W:H-4-139:157.0 was added from the lithic_inventory spreadsheet
-feature number 129W:H-4-139:159.0 was added from the lithic_inventory spreadsheet
-feature number 129W:H-4-139:176.0 was added from the lithic_inventory spreadsheet
-feature number 129W:L-8-144:167.0 was added from the lithic_inventory spreadsheet
-feature number 130W:C-2-39:45.0 was added from the lithic_inventory spreadsheet
-feature number 130W:C-2-39:41.0 was added from the lithic_inventory spreadsheet
-feature number 130W:C-2-39:43.0 was added from the lithic_inventory spreadsheet
-feature number 130W:F-1-3:1.0 was added from the lithic_inventory spreadsheet
-feature number 130W:F-1-3:9.0 was added from the lithic_inventory spreadsheet
-feature number 130W:F-1-3:29.0 was added from the lithic_inventory spreadsheet
-feature number 130W:F-1-3:24.0 was added from the lithic_inventory spreadsheet
-feature number 130W:H-2-9:43.0 was added from the lithic_inventory spreadsheet
-feature number 130W:I-1-6:45.0 was added from the lithic_inventory spreadsheet
-feature number 130W:I-1-6:12.0 was added from the lithic_inventory spreadsheet
-feature number 130W:I-1-6:67.0 was added from the lithic_inventory spreadsheet
-stratum number 130W:I-1-7 was added from the lithic_inventory spreadsheet
-stratum number 130W:I-2-10 was added from the lithic_inventory spreadsheet
-stratum number 130W:I-2-6 was added from the lithic_inventory spreadsheet
-feature number 130W:I-2-6:12.0 was added from the lithic_inventory spreadsheet
-feature number 130W:J-1-14:39.0 was added from the lithic_inventory spreadsheet
-stratum number 130W:L-13-33 was added from the lithic_inventory spreadsheet
-feature number 130W:L-13-33:45.0 was added from the lithic_inventory spreadsheet
-feature number 130W:L-2.1-11.1:29.0 was added from the lithic_inventory spreadsheet
-feature number 130W:L-2.3-11.3:29.0 was added from the lithic_inventory spreadsheet
-feature number 130W:L-20.27-36.27:49.27 was added from the lithic_inventory spreadsheet
-feature number 130W:L-20.33-36.33:49.33 was added from the lithic_inventory spreadsheet
-feature number 130W:L-20.37-36.37:49.37 was added from the lithic_inventory spreadsheet
-feature number 130W:L-20.46-36.46:49.46 was added from the lithic_inventory spreadsheet
-feature number 130W:L-20.5-36.5:49.5 was added from the lithic_inventory spreadsheet
-feature number 130W:L-6-18:33.0 was added from the lithic_inventory spreadsheet
-feature number 130W:L-7-21:30.0 was added from the lithic_inventory spreadsheet
-stratum number 130W:L-7-33 was added from the lithic_inventory spreadsheet
-feature number 130W:L-7-33:45.0 was added from the lithic_inventory spreadsheet
-stratum number 130W:N-1-3 was added from the lithic_inventory spreadsheet
-feature number 136W:H-1-4:1.0 was added from the lithic_inventory spreadsheet
-feature number 138Z:L-2-9:2.0 was added from the lithic_inventory spreadsheet
-stratum number 143W:D-1-3 was added from the lithic_inventory spreadsheet
-stratum number 151W:P-1-1 was added from the lithic_inventory spreadsheet
-stratum number 162W:B-1-2 was added from the lithic_inventory spreadsheet
-feature number 313P:L-1-7:2.0 was added from the lithic_inventory spreadsheet
-stratum number Other:B-1-5 was added from the lithic_inventory spreadsheet
-stratum number Other:C-1-3 was added from the lithic_inventory spreadsheet
-stratum number Other:C-1-5 was added from the lithic_inventory spreadsheet
-stratum number Other:C-2-7 was added from the lithic_inventory spreadsheet
-stratum number Other:F-1-10 was added from the lithic_inventory spreadsheet
-stratum number Other:F-1-15 was added from the lithic_inventory spreadsheet
-stratum number Other:L-1 was added from the lithic_inventory spreadsheet
-stratum number Other:O-1-2 was added from the lithic_inventory spreadsheet
-stratum number Other:P-0-0 was added from the lithic_inventory spreadsheet
-stratum number TT10:B-1-4 was added from the lithic_inventory spreadsheet
-stratum number 002BW:R-0.51-3.61 was added from the bone_inventory spreadsheet
-feature number 002W:no data:10.0 was added from the bone_inventory spreadsheet
-stratum number 008BW:C-1-5 was added from the bone_inventory spreadsheet
-stratum number 011P:L-4-14 was added from the bone_inventory spreadsheet
-stratum number 016P:L-8-38 was added from the bone_inventory spreadsheet
-feature number 016P:L-8-38:11.0 was added from the bone_inventory spreadsheet
-stratum number 020P:B-1.3-3.5 was added from the bone_inventory spreadsheet
-stratum number 021P:B-9-10 was added from the bone_inventory spreadsheet
-stratum number 031W:C-1-3 was added from the bone_inventory spreadsheet
-stratum number 033W:M-2-11 was added from the bone_inventory spreadsheet
-stratum number 033W:M-2-15 was added from the bone_inventory spreadsheet
-stratum number 036W:C-3-7 was added from the bone_inventory spreadsheet
-stratum number 036W:L-5-5 was added from the bone_inventory spreadsheet
-feature number 036W:L-5-5:30.0 was added from the bone_inventory spreadsheet
-stratum number 036W:L-6-5 was added from the bone_inventory spreadsheet
-feature number 036W:L-6-5:30.0 was added from the bone_inventory spreadsheet
-stratum number 036W:S-1-4 was added from the bone_inventory spreadsheet
-feature number 043W:F-1.5-6:57.0 was added from the bone_inventory spreadsheet
-stratum number 043W:M-1-6 was added from the bone_inventory spreadsheet
-stratum number 051W:N-1-3 was added from the bone_inventory spreadsheet
-stratum number 056W:F-2-4 was added from the bone_inventory spreadsheet
-stratum number 059W:C-2-6 was added from the bone_inventory spreadsheet
-stratum number 062W:C-26.67-26.6 was added from the bone_inventory spreadsheet
-stratum number 062W:C-27-247 was added from the bone_inventory spreadsheet
-feature number 062W:P-0-0:64.0 was added from the bone_inventory spreadsheet
-stratum number 067W:B-2-6 was added from the bone_inventory spreadsheet
-stratum number 067W:C-3-11 was added from the bone_inventory spreadsheet
-feature number 067W:L-2-14:10.0 was added from the bone_inventory spreadsheet
-feature number 067W:L-4-16:9.0 was added from the bone_inventory spreadsheet
-feature number 083W:B-1-2:100.0 was added from the bone_inventory spreadsheet
-feature number 083W:M-1-4.1:100.0 was added from the bone_inventory spreadsheet
-stratum number 083W:M-2-4 was added from the bone_inventory spreadsheet
-feature number 083W:M-2-4:100.0 was added from the bone_inventory spreadsheet
-feature number 083W:M-2-4.5:100.0 was added from the bone_inventory spreadsheet
-stratum number 086W:H-2-14 was added from the bone_inventory spreadsheet
-stratum number 086W:L-16.5-12.4 was added from the bone_inventory spreadsheet
-feature number 086W:L-16.5-12.4:124.0 was added from the bone_inventory spreadsheet
-feature number 093W:C-11-18:5.0 was added from the bone_inventory spreadsheet
-feature number 097W:L-3-8:0.0 was added from the bone_inventory spreadsheet
-stratum number 100W:C-4-14 was added from the bone_inventory spreadsheet
-stratum number 100W:C-6-11 was added from the bone_inventory spreadsheet
-stratum number 100W:C-8-12 was added from the bone_inventory spreadsheet
-feature number 100W:C-8-13:302.0 was added from the bone_inventory spreadsheet
-feature number 102B:L-2-5:2.0 was added from the bone_inventory spreadsheet
-stratum number 102C:D-1-31 was added from the bone_inventory spreadsheet
-stratum number 102D:P-0-0 was added from the bone_inventory spreadsheet
-stratum number 105W:B-1-2 was added from the bone_inventory spreadsheet
-stratum number 109W:B-1-2 was added from the bone_inventory spreadsheet
-zone number 110 was added from the bone_inventories spreadsheet
-unit number 110W was added from the bone_inventories spreadsheet
-stratum number 110W:B-1-2 was added from the bone_inventory spreadsheet
-zone number 111 was added from the bone_inventories spreadsheet
-unit number 111W was added from the bone_inventories spreadsheet
-stratum number 111W:B-1-2 was added from the bone_inventory spreadsheet
-stratum number 118W:B-4-9 was added from the bone_inventory spreadsheet
-stratum number 118W:P-0-0 was added from the bone_inventory spreadsheet
-stratum number 119W:F-4-30 was added from the bone_inventory spreadsheet
-stratum number 119W:G-2-5 was added from the bone_inventory spreadsheet
-stratum number 119W:G-3-3 was added from the bone_inventory spreadsheet
-stratum number 123B:B-2-4 was added from the bone_inventory spreadsheet
-stratum number 123B:J-2-10 was added from the bone_inventory spreadsheet
-stratum number 123B:J-2-9 was added from the bone_inventory spreadsheet
-stratum number 124W:F-1-8 was added from the bone_inventory spreadsheet
-stratum number 124W:G-1-3 was added from the bone_inventory spreadsheet
-stratum number 124W:P-0-0 was added from the bone_inventory spreadsheet
-stratum number 129W:C-15-35 was added from the bone_inventory spreadsheet
-stratum number 129W:C-25.5-35.5 was added from the bone_inventory spreadsheet
-stratum number 129W:C-30-45 was added from the bone_inventory spreadsheet
-stratum number 129W:C-31.8-35.8 was added from the bone_inventory spreadsheet
-stratum number 129W:C-39-46 was added from the bone_inventory spreadsheet
-stratum number 129W:C-40-47 was added from the bone_inventory spreadsheet
-stratum number 129W:C-7-14 was added from the bone_inventory spreadsheet
-stratum number 129W:C-98-115 was added from the bone_inventory spreadsheet
-stratum number 129W:D-1-91.1 was added from the bone_inventory spreadsheet
-stratum number 129W:G-2-92.2 was added from the bone_inventory spreadsheet
-stratum number 129W:I-3-137 was added from the bone_inventory spreadsheet
-stratum number 129W:I-4-139 was added from the bone_inventory spreadsheet
-feature number 130W:F-1-3:3.0 was added from the bone_inventory spreadsheet
-feature number 130W:H-1.5-7.2:12.0 was added from the bone_inventory spreadsheet
-feature number 130W:H-1-5:4.0 was added from the bone_inventory spreadsheet
-feature number 130W:H-1-5:30.0 was added from the bone_inventory spreadsheet
-stratum number 130W:L.17.1-33.1 was added from the bone_inventory spreadsheet
-feature number 130W:L.17.1-33.1:45.0 was added from the bone_inventory spreadsheet
-feature number 130W:L-17.1-33.1:45.0 was added from the bone_inventory spreadsheet
-feature number 130W:L-1-8:8.0 was added from the bone_inventory spreadsheet
-stratum number 138W:P-0-0 was added from the bone_inventory spreadsheet
-feature number 100W:L-1-10:1002.0 was added from the ceramic_inventory spreadsheet
-stratum number 034W:B-1-2 was added from the ceramic_inventory spreadsheet
-stratum number 149W:C-1-3 was added from the ceramic_inventory spreadsheet
-feature number 059W:no data:1.0 was added from the ceramic_inventory spreadsheet
-stratum number 130W:L-17-38 was added from the ceramic_inventory spreadsheet
-feature number 130W:L-17-38:45.0 was added from the ceramic_inventory spreadsheet
-feature number 033W:no data:43.0 was added from the ceramic_inventory spreadsheet
-feature number 090W:F-2-9:44.0 was added from the ceramic_inventory spreadsheet
-feature number 102A:C-1-3:302.0 was added from the ceramic_inventory spreadsheet
-feature number 101W:G-1-8:9.0 was added from the ceramic_inventory spreadsheet
-feature number 119W:L-5.5-19.5:39.0 was added from the ceramic_inventory spreadsheet
-stratum number 043W:G-1-0 was added from the ceramic_inventory spreadsheet
-feature number 043W:G-1-0:42.0 was added from the ceramic_inventory spreadsheet
-feature number 119W:L-2.5-11.5:4.0 was added from the ceramic_inventory spreadsheet
-feature number 119W:L-2.3-11.3:4.0 was added from the ceramic_inventory spreadsheet
-feature number 062A:no data:13.0 was added from the ceramic_inventory spreadsheet
-feature number 064W:F-1-6:114.0 was added from the ceramic_inventory spreadsheet
-feature number 130W:L-20.24-36.24:49.4 was added from the ceramic_inventory spreadsheet
-feature number 130W:L-20.31-36.31:49.31 was added from the ceramic_inventory spreadsheet
-feature number 130W:L-20.38-36.38:49.38 was added from the ceramic_inventory spreadsheet
-feature number 130W:L-20.5-36.5:49.01 was added from the ceramic_inventory spreadsheet
-feature number 043W:F-1.5-6:19.0 was added from the ceramic_inventory spreadsheet
-feature number 129W:L-4-134:136.0 was added from the ceramic_inventory spreadsheet
-feature number 096W:B-1-2:13.0 was added from the ceramic_inventory spreadsheet
-feature number 130W:I-1-6:30.0 was added from the ceramic_inventory spreadsheet
-feature number 130W:F-1-3:10.0 was added from the ceramic_inventory spreadsheet
-feature number 130W:F-1-3:11.0 was added from the ceramic_inventory spreadsheet
-stratum number Other:A-1-1 was added from the ceramic_inventory spreadsheet
-stratum number 127W:L-12-36 was added from the ceramic_inventory spreadsheet
-feature number 127W:L-12-36:126.0 was added from the ceramic_inventory spreadsheet
-feature number 062W:C-4-9:64.0 was added from the ceramic_inventory spreadsheet
-feature number 118W:F-2-5:12.0 was added from the ceramic_inventory spreadsheet
-stratum number 043W:S-2.6.6 was added from the ceramic_inventory spreadsheet
-feature number 043W:S-2.6.6:19.0 was added from the ceramic_inventory spreadsheet
-stratum number 119W:D-2.5-11.5 was added from the ceramic_inventory spreadsheet
-stratum number 091C:P-0-0 was added from the ceramic_inventory spreadsheet
-stratum number 062A:F-1-5 was added from the ceramic_inventory spreadsheet
-stratum number TT10:A-1-1 was added from the ceramic_inventory spreadsheet
-feature number 062W:CT-45-45:120.0 was added from the ceramic_inventory spreadsheet
-feature number 093W:W-1-41:23.0 was added from the ceramic_inventory spreadsheet
-feature number 130W:W-1-15:29.0 was added from the ceramic_inventory spreadsheet
-feature number 130W:P-0-0:29.0 was added from the ceramic_inventory spreadsheet
-stratum number 107W:B-1-2 was added from the ceramic_inventory spreadsheet
-stratum number 123W:l-2-5 was added from the ceramic_inventory spreadsheet
-stratum number 123A:H-1-4 was added from the ceramic_inventory spreadsheet
-stratum number 119W:B-8-22 was added from the ceramic_inventory spreadsheet
-stratum number 030W:P-0-0 was added from the ceramic_inventory spreadsheet
-feature number 004W:G-2-7:1.0 was added from the ceramic_inventory spreadsheet
-zone number T01 was added from the ceramic_inventories spreadsheet
-unit number T01EW was added from the ceramic_inventories spreadsheet
-stratum number T01EW:P-0-0 was added from the ceramic_inventory spreadsheet
-feature number 091A:C-3-17:3.0 was added from the ceramic_inventory spreadsheet
-feature number 030B:B-1-2:7.0 was added from the ceramic_inventory spreadsheet
-feature number 127A:H-1-5:8.0 was added from the ceramic_inventory spreadsheet
-feature number 033W:no data:3.0 was added from the ceramic_inventory spreadsheet
-feature number 033W:no data:4.0 was added from the ceramic_inventory spreadsheet
-stratum number 006A:L-0-00 was added from the ceramic_inventory spreadsheet
-stratum number 102A:L-11-25 was added from the ceramic_inventory spreadsheet
-feature number 102A:L-11-25:4009.0 was added from the ceramic_inventory spreadsheet
-feature number 093W:T-1-47:47.0 was added from the ceramic_inventory spreadsheet
-feature number 086W:L-14.7-21.7:106.0 was added from the ceramic_inventory spreadsheet
-feature number 086W:L-14.7-21.7:17.0 was added from the ceramic_inventory spreadsheet
-feature number 094C:L-2-4:1.0 was added from the ceramic_inventory spreadsheet
-feature number 097W:C-2-5:1006.0 was added from the ceramic_inventory spreadsheet
-feature number 088W:no data:1.0 was added from the ceramic_inventory spreadsheet
-feature number 062W:G-1-40:122.0 was added from the ceramic_inventory spreadsheet
-stratum number 043W:H-1-13 was added from the ceramic_inventory spreadsheet
-feature number 093W:D-2-35.5:11.0 was added from the ceramic_inventory spreadsheet
-feature number 082W:L-7-31:68.0 was added from the ceramic_inventory spreadsheet
-feature number 127W:L-14-29:125.0 was added from the ceramic_inventory spreadsheet
-feature number 100W:no data:5016.0 was added from the ceramic_inventory spreadsheet
-stratum number TT10:B-1-2 was added from the ceramic_inventory spreadsheet
-feature number 033C:F-1-5:28.0 was added from the ceramic_inventory spreadsheet
-feature number 100W:no data:5023.0 was added from the ceramic_inventory spreadsheet
-stratum number 036W:H-2-11 was added from the ceramic_inventory spreadsheet
-stratum number 036W:I-1-11 was added from the ceramic_inventory spreadsheet
-stratum number 033W:I-1-8 was added from the ceramic_inventory spreadsheet
-stratum number 005A:I-1-5 was added from the ceramic_inventory spreadsheet
-stratum number 007W:I-1-4 was added from the ceramic_inventory spreadsheet
-stratum number 062A:I-1-6 was added from the ceramic_inventory spreadsheet
-stratum number 129W:H-1-92 was added from the ceramic_inventory spreadsheet
-feature number 130W:H-1-5:3.0 was added from the ceramic_inventory spreadsheet
-feature number 062A:I-2-6:64.0 was added from the ceramic_inventory spreadsheet
-feature number 130W:L-13-29:36.0 was added from the ceramic_inventory spreadsheet
-feature number 020P:B-4-4.4:5.0 was added from the ceramic_inventory spreadsheet
-feature number 151W:L-1-9:101.0 was added from the ceramic_inventory spreadsheet
-feature number 151W:L-3-16:101.0 was added from the ceramic_inventory spreadsheet
-feature number 100W:no data:5015.0 was added from the ceramic_inventory spreadsheet
-feature number 100W:no data:5013.0 was added from the ceramic_inventory spreadsheet
-feature number 100W:no data:5033.0 was added from the ceramic_inventory spreadsheet
-feature number 006A:L-0-00:1.0 was added from the ceramic_inventory spreadsheet
-feature number 100W:no data:5011.0 was added from the ceramic_inventory spreadsheet
-feature number 036W:C-15-21:41.0 was added from the ceramic_inventory spreadsheet
-stratum number 121B:D-1-3 was added from the ceramic_inventory spreadsheet
-feature number 130W:H-1-5:9.0 was added from the ceramic_inventory spreadsheet
-feature number 031W:C-3-8:50.0 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:B-3-13 was added from the ceramic_inventory spreadsheet
-stratum number 094W:L-1.1-4.1 was added from the ceramic_inventory spreadsheet
-feature number 094W:L-1.1-4.1:33.0 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:B-2-11 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:P-1-2 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:B-4-18 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:C-2-12 was added from the ceramic_inventory spreadsheet
-feature number 021P:L-7-15:6.0 was added from the ceramic_inventory spreadsheet
-stratum number 021P:L-10.1-21.1 was added from the ceramic_inventory spreadsheet
-feature number 021P:L-10.1-21.1:10.0 was added from the ceramic_inventory spreadsheet
-feature number 130W:P-0-0:8.0 was added from the ceramic_inventory spreadsheet
-feature number 130W:P-0-0:5.0 was added from the ceramic_inventory spreadsheet
-feature number 100W:no data:5007.0 was added from the ceramic_inventory spreadsheet
-stratum number 097W:W-0-0 was added from the ceramic_inventory spreadsheet
-feature number 097W:W-0-0:1012.0 was added from the ceramic_inventory spreadsheet
-stratum number 052W:B-1-2 was added from the ceramic_inventory spreadsheet
-feature number 030A:F-1-3:101.0 was added from the ceramic_inventory spreadsheet
-feature number 130W:O-1-10:50.0 was added from the ceramic_inventory spreadsheet
-feature number 100W:no data:5017.0 was added from the ceramic_inventory spreadsheet
-feature number 100W:L-7-27.1:5006.0 was added from the ceramic_inventory spreadsheet
-feature number 100W:L-7-27.2:5006.0 was added from the ceramic_inventory spreadsheet
-feature number 100W:L-7-27.3:5006.0 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:C-1-8 was added from the ceramic_inventory spreadsheet
-feature number 021P:L-15.3-8.63:15.0 was added from the ceramic_inventory spreadsheet
-feature number 021P:L-15.2-8.62:15.0 was added from the ceramic_inventory spreadsheet
-feature number 021P:L-15.4-8.64:15.0 was added from the ceramic_inventory spreadsheet
-feature number 037W:C-3.5-11.5:76.0 was added from the ceramic_inventory spreadsheet
-feature number 127A:L-1-7:50.0 was added from the ceramic_inventory spreadsheet
-feature number 129W:C-71-78:77.0 was added from the ceramic_inventory spreadsheet
-feature number 093W:W-1-41:22.0 was added from the ceramic_inventory spreadsheet
-feature number 093W:C-10-13:22.0 was added from the ceramic_inventory spreadsheet
-feature number 011P:Q-2-6:1.0 was added from the ceramic_inventory spreadsheet
-feature number 004W:I-2-9:1.0 was added from the ceramic_inventory spreadsheet
-feature number 127A:F-1-4:9.0 was added from the ceramic_inventory spreadsheet
-feature number 033C:G-1-4:6.0 was added from the ceramic_inventory spreadsheet
-stratum number 032W:C was added from the ceramic_inventory spreadsheet
-stratum number 129W:C-41.2-48.7 was added from the ceramic_inventory spreadsheet
-stratum number 091D:I-2-12 was added from the ceramic_inventory spreadsheet
-stratum number 014P:P-1-5 was added from the ceramic_inventory spreadsheet
-stratum number Other:B-2-3 was added from the ceramic_inventory spreadsheet
-feature number 006A:N-1-5.1:1.0 was added from the ceramic_inventory spreadsheet
-stratum number 062W:F-1-4 was added from the ceramic_inventory spreadsheet
-stratum number 059W:P-0-0 was added from the ceramic_inventory spreadsheet
-stratum number 062W:A-1-1 was added from the ceramic_inventory spreadsheet
-stratum number 075W:A-1-1 was added from the ceramic_inventory spreadsheet
-stratum number 075W:B-1-2 was added from the ceramic_inventory spreadsheet
-stratum number 062W:B-1-2 was added from the ceramic_inventory spreadsheet
-stratum number 060B:B-2-6 was added from the ceramic_inventory spreadsheet
-stratum number 059W:N-1-3 was added from the ceramic_inventory spreadsheet
-stratum number 059W:B-2-5 was added from the ceramic_inventory spreadsheet
-stratum number 062W:C29-29 was added from the ceramic_inventory spreadsheet
-stratum number 062W:C27-27 was added from the ceramic_inventory spreadsheet
-stratum number 062W:C-26.0-26.2 was added from the ceramic_inventory spreadsheet
-stratum number 060B:S-1-6 was added from the ceramic_inventory spreadsheet
-stratum number 062W:C-29-29- was added from the ceramic_inventory spreadsheet
-stratum number 058W:N-2-7 was added from the ceramic_inventory spreadsheet
-stratum number 071W:A-1-1 was added from the ceramic_inventory spreadsheet
-stratum number 073W:A-1-1 was added from the ceramic_inventory spreadsheet
-stratum number 060B:B-3-7 was added from the ceramic_inventory spreadsheet
-stratum number 037A:C-3.5-11.5 was added from the ceramic_inventory spreadsheet
-stratum number 213P:M-1-2 was added from the ceramic_inventory spreadsheet
-stratum number 014P:P-1-1 was added from the ceramic_inventory spreadsheet
-stratum number 037W:G-2-12 was added from the ceramic_inventory spreadsheet
-stratum number 014P:Q-3-5 was added from the ceramic_inventory spreadsheet
-stratum number 037B:G-1-4 was added from the ceramic_inventory spreadsheet
-stratum number 036W:L-1-5 was added from the ceramic_inventory spreadsheet
-stratum number 036W:C-6-9 was added from the ceramic_inventory spreadsheet
-stratum number 036W:C-6-1 was added from the ceramic_inventory spreadsheet
-stratum number 036W:B-2-11 was added from the ceramic_inventory spreadsheet
-stratum number 036W:C-9-13 was added from the ceramic_inventory spreadsheet
-stratum number 036W:M-1-13 was added from the ceramic_inventory spreadsheet
-stratum number 033W:G-2-7 was added from the ceramic_inventory spreadsheet
-stratum number 020P:C-1-3 was added from the ceramic_inventory spreadsheet
-stratum number 043W:B-4-7 was added from the ceramic_inventory spreadsheet
-stratum number 092A:F-1-6 was added from the ceramic_inventory spreadsheet
-stratum number 032W:B-1-2 was added from the ceramic_inventory spreadsheet
-stratum number 091A:C-1-14 was added from the ceramic_inventory spreadsheet
-stratum number 091C:C-3-17 was added from the ceramic_inventory spreadsheet
-stratum number 091A:C-2-13 was added from the ceramic_inventory spreadsheet
-stratum number 091A:I-4-15 was added from the ceramic_inventory spreadsheet
-stratum number 039W:A-1-1 was added from the ceramic_inventory spreadsheet
-stratum number 039W:B-1-1 was added from the ceramic_inventory spreadsheet
-stratum number 091B:P-0-0 was added from the ceramic_inventory spreadsheet
-stratum number 091A:C-1-7 was added from the ceramic_inventory spreadsheet
-stratum number 089W:P-0-0 was added from the ceramic_inventory spreadsheet
-stratum number 091A:C-3-14 was added from the ceramic_inventory spreadsheet
-stratum number 021P:Q-0.6-8.6 was added from the ceramic_inventory spreadsheet
-stratum number 021P:Q-0.5-5.2 was added from the ceramic_inventory spreadsheet
-stratum number TT10:C-1-2 was added from the ceramic_inventory spreadsheet
-stratum number 006W:B-1-2 was added from the ceramic_inventory spreadsheet
-stratum number 047W:B-1-2 was added from the ceramic_inventory spreadsheet
-stratum number 086W:D-2-12 was added from the ceramic_inventory spreadsheet
-stratum number 094A:C-1-4 was added from the ceramic_inventory spreadsheet
-stratum number 093W:B-2-5.25 was added from the ceramic_inventory spreadsheet
-stratum number 048W:A-1-1 was added from the ceramic_inventory spreadsheet
-stratum number 045W:A-1-1 was added from the ceramic_inventory spreadsheet
-stratum number 004W:P-0-0 was added from the ceramic_inventory spreadsheet
-feature number 004W:F-3-11:1.0 was added from the ceramic_inventory spreadsheet
-stratum number 102A:C-4-8 was added from the ceramic_inventory spreadsheet
-stratum number 018P:C-2-5 was added from the ceramic_inventory spreadsheet
-stratum number 097W:N-1-5 was added from the ceramic_inventory spreadsheet
-stratum number 018P:C-4-7.1 was added from the ceramic_inventory spreadsheet
-stratum number 097W:G-2-5 was added from the ceramic_inventory spreadsheet
-stratum number 097B:F-1-4 was added from the ceramic_inventory spreadsheet
-stratum number 122A:D-0-0 was added from the ceramic_inventory spreadsheet
-stratum number 122W:P-0-00 was added from the ceramic_inventory spreadsheet
-stratum number 123W:C-2-08 was added from the ceramic_inventory spreadsheet
-stratum number 129W:C-27.5-35.5 was added from the ceramic_inventory spreadsheet
-stratum number 129W:C-27.5-35.7 was added from the ceramic_inventory spreadsheet
-stratum number 162W:A-1-1 was added from the ceramic_inventory spreadsheet
-stratum number 123W:C-1-5 was added from the ceramic_inventory spreadsheet
-zone number 114 was added from the ceramic_inventories spreadsheet
-unit number 114W was added from the ceramic_inventories spreadsheet
-stratum number 114W:A-1-1 was added from the ceramic_inventory spreadsheet
-stratum number 129W:C-4.6-12.6 was added from the ceramic_inventory spreadsheet
-stratum number 121W:E-1-7 was added from the ceramic_inventory spreadsheet
-stratum number 129W:C-1-93 was added from the ceramic_inventory spreadsheet
-stratum number 123W:B-1-2 was added from the ceramic_inventory spreadsheet
-stratum number 123W:C was added from the ceramic_inventory spreadsheet
-stratum number 129W:G-0.2-92 was added from the ceramic_inventory spreadsheet
-stratum number 129W:C-22.9-30.9 was added from the ceramic_inventory spreadsheet
-stratum number 119W:C-0.4-3.40 was added from the ceramic_inventory spreadsheet
-stratum number 123W:C-1-09 was added from the ceramic_inventory spreadsheet
-stratum number 160W:A-1-1 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:MW-1-9 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:C-3-14 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:M-2-5 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:C-4-15 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:P-2-10 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:C-5-16 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:B-1-3 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:J-1-7 was added from the ceramic_inventory spreadsheet
-stratum number T01EW:M-1-4 was added from the ceramic_inventory spreadsheet
-stratum number 091A:C-3-16 was added from the ceramic_inventory spreadsheet
-stratum number 037A:C-1-3 was added from the ceramic_inventory spreadsheet
-stratum number 001BW:P-0-0 was added from the ceramic_inventory spreadsheet
-stratum number 036W:C-2-8 was added from the ceramic_inventory spreadsheet
-stratum number 037A:L-1-6 was added from the ceramic_inventory spreadsheet
-stratum number 007W:A-1-1 was added from the ceramic_inventory spreadsheet
-stratum number 087W:B-1-2 was added from the ceramic_inventory spreadsheet
-stratum number 151W:L-7-21 was added from the ceramic_inventory spreadsheet
-feature number 130W:F-1-3:23.0 was added from the ceramic_inventory spreadsheet
-feature number 093W:C-1-3:7.0 was added from the ceramic_inventory spreadsheet
-stratum number 030W:H-3-22 was added from the ceramic_inventory spreadsheet
-stratum number 065W:B-1-2 was added from the ceramic_inventory spreadsheet
-stratum number 097W:N-1-6 was added from the ceramic_inventory spreadsheet
-stratum number 036W:C-5-9 was added from the ceramic_inventory spreadsheet
-stratum number 082A:H-1-6 was added from the ceramic_inventory spreadsheet
-stratum number 020P:P-0-0 was added from the ceramic_inventory spreadsheet
-feature number 090W:F-2-9:38.0 was added from the ceramic_inventory spreadsheet
+Unit 049W created from Stratum A-1-1
+Unit 110W created from Stratum B-1-2
+Unit 111W created from Stratum B-1-2
+Unit 112W created from Stratum B-1-2
+stratum 031W:B-1-2 created from Feature 1.0
+stratum 033W:L-1-5.5 created from Feature 6.0
+stratum 036W:B-2-3 created from Feature 1.0
+stratum 036W:n/a created from Feature 8.0
+stratum 062A:I-1-6 created from Feature 12.0
+stratum 062W:I-1-4.2 created from Feature 3.0
+stratum 089W:H-1-12 created from Feature 1.0
+stratum 092W:B-4-5 created from Feature 5.0
+stratum 093W:L-0.5.-8.5 created from Feature 12.0
+stratum 099W:H-1-9 created from Feature 26.0
+stratum 119W:L-3-15 created from Feature 24.0
+stratum 119W:I-11.6-39.6 created from Feature 116.0
+stratum 121E:D-2-4 created from Feature 48.0
+stratum 127W:D-3-11 created from Feature 97.0
+stratum 129W:C-70-78 created from Feature 77.0
+feature 062W:CT-45-45:120.0 created from Ceramic Inventories
+feature 100W:L-7-27.1:5006.0 created from Ceramic Inventories
+stratum 129W:C-28-35 created from Ceramic Inventories
+stratum 062W:C27-27 created from Ceramic Inventories
+stratum 062W:C-29-29- created from Ceramic Inventories
+feature 127A:F-1-4:9.0 created from Ceramic Inventories
+feature 127W:L-14-29:125.0 created from Ceramic Inventories
+feature 127W:L-8-20:115.0 created from Ceramic Inventories
+stratum 127W:L-12-36 created from Ceramic Inventories
+feature 127W:L-12-36:126.0 created from Ceramic Inventories
+feature 100W:no data:5011.0 created from Ceramic Inventories
+feature 100W:no data:5033.0 created from Ceramic Inventories
+feature 100W:no data:5015.0 created from Ceramic Inventories
+feature 100W:L-22-46.1:5032.0 created from Ceramic Inventories
+feature 100W:L-7-27.3:5006.0 created from Ceramic Inventories
+feature 100W:no data:5023.0 created from Ceramic Inventories
+feature 100W:L-7-27.2:5006.0 created from Ceramic Inventories
+stratum 100W:P-0-00 created from Ceramic Inventories
+stratum 062W:C29-29 created from Ceramic Inventories
+feature 100W:no data:5016.0 created from Ceramic Inventories
+feature 100W:no data:5007.0 created from Ceramic Inventories
+feature 100W:no data:5013.0 created from Ceramic Inventories
+feature 100W:no data:5017.0 created from Ceramic Inventories
+feature 062W:L-6-41.6:120.0 created from Ceramic Inventories
+feature 062W:G-1-40:122.0 created from Ceramic Inventories
+stratum 129W:C-41.2-48.7 created from Ceramic Inventories
+stratum 129W:C-4.6-12.6 created from Ceramic Inventories
+stratum 123W:C-2-08 created from Ceramic Inventories
+stratum 123W:C created from Ceramic Inventories
+stratum 123W:C-1-09 created from Ceramic Inventories
+stratum 123W:C-1-5 created from Ceramic Inventories
+feature 090W:F-2-9:44.0 created from Ceramic Inventories
+feature 062W:C-2-7:2.0 created from Ceramic Inventories
+feature 062W:C-4-9:64.0 created from Ceramic Inventories
+feature 129W:C-71-78:77.0 created from Ceramic Inventories
+feature 064W:F-1-6:114.0 created from Ceramic Inventories
+feature 064W:F-1-6:118.0 created from Ceramic Inventories
+feature 064W:F-1-6:4.0 created from Ceramic Inventories
+feature 130W:F-1-3:9.0 created from Ceramic Inventories
+feature 130W:F-1-3:4.0 created from Ceramic Inventories
+feature 130W:F-1-3:11.0 created from Ceramic Inventories
+feature 088W:no data:1.0 created from Ceramic Inventories
+feature 090W:F-2-9:38.0 created from Ceramic Inventories
+feature 090W:L-1-8.2:18.0 created from Ceramic Inventories
+stratum 062W:C-28.5-28.5 created from Ceramic Inventories
+stratum 062W:B-1-2 created from Ceramic Inventories
+stratum 149W:C-1-3 created from Ceramic Inventories
+stratum 062W:C-26.0-26.2 created from Ceramic Inventories
+feature 130W:P-0-0:5.0 created from Ceramic Inventories
+feature 130W:P-0-0:8.0 created from Ceramic Inventories
+feature 129W:D-0.1-91.1:153.0 created from Ceramic Inventories
+feature 004W:G-2-7:1.0 created from Ceramic Inventories
+feature 004W:I-2-9:1.0 created from Ceramic Inventories
+feature 004W:F-3-11:1.0 created from Ceramic Inventories
+feature 130W:L-7-21:30.0 created from Ceramic Inventories
+feature 130W:H-1-5:4.0 created from Ceramic Inventories
+feature 130W:H-1-5:3.0 created from Ceramic Inventories
+feature 130W:O-1-10:50.0 created from Ceramic Inventories
+feature 093W:C-6-8:7.0 created from Ceramic Inventories
+stratum Other:C-1-3 created from Ceramic Inventories
+stratum Other:B-1-2 created from Ceramic Inventories
+feature 127A:L-1-7:9.0 created from Ceramic Inventories
+stratum 062W:F-1-4 created from Ceramic Inventories
+feature 062A:no data:13.0 created from Ceramic Inventories
+stratum 062A:F-1-5 created from Ceramic Inventories
+feature 062A:I-2-6:27.0 created from Ceramic Inventories
+feature 062A:I-2-6:64.0 created from Ceramic Inventories
+feature 030B:B-1-2:7.0 created from Ceramic Inventories
+feature 130W:F-1-3:10.0 created from Ceramic Inventories
+feature 130W:F-1-3:23.0 created from Ceramic Inventories
+stratum 129W:C-27.5-35.5 created from Ceramic Inventories
+stratum 129W:C-27.5-35.7 created from Ceramic Inventories
+feature 130W:L-2.1-11.1:29.0 created from Ceramic Inventories
+feature 130W:L-17.1-33.1:45.0 created from Ceramic Inventories
+stratum 130W:L-17-38 created from Ceramic Inventories
+feature 130W:L-17-38:45.0 created from Ceramic Inventories
+feature 130W:L-2.3-11.3:29.0 created from Ceramic Inventories
+feature 130W:L-20.24-36.24:49.4 created from Ceramic Inventories
+feature 130W:L-20.5-36.5:49.01 created from Ceramic Inventories
+feature 130W:H-1-5:9.0 created from Ceramic Inventories
+feature 130W:I-1-6:12.0 created from Ceramic Inventories
+feature 130W:I-1-6:30.0 created from Ceramic Inventories
+stratum 037W:G-2-12 created from Ceramic Inventories
+stratum Other:A-1-1 created from Ceramic Inventories
+feature 043W:G-1.1-10.1:42.0 created from Ceramic Inventories
+feature 043W:F-2-7:57.0 created from Ceramic Inventories
+stratum 005A:I-1-5 created from Ceramic Inventories
+stratum 032W:C created from Ceramic Inventories
+stratum 032W:B-1-2 created from Ceramic Inventories
+stratum 092A:F-1-6 created from Ceramic Inventories
+feature 092A:B-4-5:4.0 created from Ceramic Inventories
+stratum 091A:C-1-7 created from Ceramic Inventories
+feature 043W:C-2-12:42.0 created from Ceramic Inventories
+feature 043W:F-1.5-6:19.0 created from Ceramic Inventories
+feature 043W:F-1.5-6:57.0 created from Ceramic Inventories
+stratum 043W:S-2.6.6 created from Ceramic Inventories
+feature 043W:S-2.6.6:19.0 created from Ceramic Inventories
+stratum 043W:P-0-0 created from Ceramic Inventories
+feature 130W:P-0-0:29.0 created from Ceramic Inventories
+stratum 107W:B-1-2 created from Ceramic Inventories
+stratum 097W:P-0-0 created from Ceramic Inventories
+stratum 093W:P-0-0 created from Ceramic Inventories
+stratum 091B:P-0-0 created from Ceramic Inventories
+stratum 089W:P-0-0 created from Ceramic Inventories
+stratum 084W:P-0-0 created from Ceramic Inventories
+stratum 059W:P-0-0 created from Ceramic Inventories
+stratum 057W:P-0-0 created from Ceramic Inventories
+stratum 052W:B-1-2 created from Ceramic Inventories
+stratum 036W:P-0-0 created from Ceramic Inventories
+feature 006A:N-1-5.1:1.0 created from Ceramic Inventories
+stratum 006A:L-0-00 created from Ceramic Inventories
+feature 006A:L-0-00:1.0 created from Ceramic Inventories
+feature 036W:L-4-5.8:30.0 created from Ceramic Inventories
+feature 036W:L-5-5.9:30.0 created from Ceramic Inventories
+stratum 036W:I-1-11 created from Ceramic Inventories
+feature 033C:G-1-4:6.0 created from Ceramic Inventories
+feature 313P:L-1-7:2.0 created from Ceramic Inventories
+stratum 213P:M-1-2 created from Ceramic Inventories
+feature 094C:L-2-4:1.0 created from Ceramic Inventories
+feature 011P:Q-2-6:1.0 created from Ceramic Inventories
+stratum 102B:P-0-0 created from Ceramic Inventories
+feature 102B:L-1-3.5:2.0 created from Ceramic Inventories
+stratum 062W:A-1-1 created from Ceramic Inventories
+stratum 129W:C-22.9-30.9 created from Ceramic Inventories
+stratum 037A:L-1-6 created from Ceramic Inventories
+stratum 037A:C-3.5-11.5 created from Ceramic Inventories
+feature 037W:C-3.5-11.5:76.0 created from Ceramic Inventories
+stratum 037W:G-2-12.1 created from Ceramic Inventories
+Zone 114 created from Ceramic Inventories
+Unit 114W created from Ceramic Inventories
+stratum 114W:A-1-1 created from Ceramic Inventories
+stratum 018P:P-0-0 created from Ceramic Inventories
+stratum 030W:P-0-0 created from Ceramic Inventories
+stratum 086W:P-0-0 created from Ceramic Inventories
+stratum 091C:P-0-0 created from Ceramic Inventories
+stratum 118W:P-0-0 created from Ceramic Inventories
+feature 102A:C-1-3:302.0 created from Ceramic Inventories
+feature 020P:B-4-4.4:5.0 created from Ceramic Inventories
+stratum 091C:C-3-17 created from Ceramic Inventories
+stratum 091A:C-1-14 created from Ceramic Inventories
+stratum 091A:C-2-13 created from Ceramic Inventories
+stratum 014P:P-1-1 created from Ceramic Inventories
+stratum 014P:Q-3-5 created from Ceramic Inventories
+feature 031W:C-3-8:50.0 created from Ceramic Inventories
+feature 097W:C-2-5:1006.0 created from Ceramic Inventories
+stratum 062W:C-1-3 created from Ceramic Inventories
+stratum 019P:P-0-0 created from Ceramic Inventories
+stratum 030W:H-3-22 created from Ceramic Inventories
+stratum 036W:M-1-15 created from Ceramic Inventories
+feature 097A:H-1-4:1002.0 created from Ceramic Inventories
+stratum 020P:C-1-3 created from Ceramic Inventories
+stratum 004W:P-0-0 created from Ceramic Inventories
+stratum 001BW:P-0-0 created from Ceramic Inventories
+stratum 021P:P-0-0 created from Ceramic Inventories
+feature 093W:C-10-13:22.0 created from Ceramic Inventories
+stratum 036W:H-2-11 created from Ceramic Inventories
+stratum 036W:C-2-8 created from Ceramic Inventories
+feature 033W:no data:43.0 created from Ceramic Inventories
+feature 033C:F-1-5:28.0 created from Ceramic Inventories
+feature 033W:F-4-15:43.0 created from Ceramic Inventories
+stratum 081W:P-0-0 created from Ceramic Inventories
+stratum 102D:P-0-0 created from Ceramic Inventories
+feature 093W:C-10-13:4.0 created from Ceramic Inventories
+feature 100W:C-8-13:302.0 created from Ceramic Inventories
+stratum 124W:L-3-13 created from Ceramic Inventories
+feature 124W:L-3-13:13.0 created from Ceramic Inventories
+stratum 124W:G-1-5 created from Ceramic Inventories
+stratum 094A:C-1-4 created from Ceramic Inventories
+stratum 094W:L-1.1-4.1 created from Ceramic Inventories
+feature 094W:L-1.1-4.1:33.0 created from Ceramic Inventories
+stratum 060B:B-2-6 created from Ceramic Inventories
+stratum 014P:P-1-5 created from Ceramic Inventories
+stratum 082W:C-2-4 created from Ceramic Inventories
+feature 082W:L-7-31:68.0 created from Ceramic Inventories
+feature 082W:T-1-36:84.0 created from Ceramic Inventories
+feature 011W:L-1-1:1.0 created from Ceramic Inventories
+stratum 060B:S-1-6 created from Ceramic Inventories
+stratum 060B:B-3-7 created from Ceramic Inventories
+feature 151W:L-3-16:101.0 created from Ceramic Inventories
+stratum 151W:L-7-21 created from Ceramic Inventories
+feature 151W:L-1-9:101.0 created from Ceramic Inventories
+feature 021P:L-15.3-8.63:15.0 created from Ceramic Inventories
+feature 021P:L-15.2-8.62:15.0 created from Ceramic Inventories
+stratum 021P:Q-0.5-5.2 created from Ceramic Inventories
+stratum 021P:L-10.1-21.1 created from Ceramic Inventories
+feature 021P:L-10.1-21.1:10.0 created from Ceramic Inventories
+stratum TT10:C-1-2 created from Ceramic Inventories
+feature 086W:L-1-6:17.0 created from Ceramic Inventories
+feature 088W:C-1-4:2.0 created from Ceramic Inventories
+feature 119W:L-2.5-11.5:4.0 created from Ceramic Inventories
+feature 119W:L-2.3-11.3:4.0 created from Ceramic Inventories
+stratum 119W:B-8-22 created from Ceramic Inventories
+feature 119W:L-2-11:4.0 created from Ceramic Inventories
+stratum 097W:N-1-5 created from Ceramic Inventories
+stratum 097W:N-1-6 created from Ceramic Inventories
+stratum 121C:D-1-3 created from Ceramic Inventories
+stratum 121B:D-1-3 created from Ceramic Inventories
+Zone T01 created from Ceramic Inventories
+Unit T01EW created from Ceramic Inventories
+stratum T01EW:B-2-11 created from Ceramic Inventories
+stratum T01EW:P-1-2 created from Ceramic Inventories
+stratum T01EW:MW-1-9 created from Ceramic Inventories
+stratum T01EW:B-4-18 created from Ceramic Inventories
+stratum T01EW:C-1-8 created from Ceramic Inventories
+stratum T01EW:M-1-4 created from Ceramic Inventories
+stratum T01EW:P-0-0 created from Ceramic Inventories
+stratum T01EW:B-3-13 created from Ceramic Inventories
+stratum T01EW:J-1-7 created from Ceramic Inventories
+stratum T01EW:C-3-14 created from Ceramic Inventories
+stratum T01EW:M-2-5 created from Ceramic Inventories
+stratum T01EW:B-1-3 created from Ceramic Inventories
+stratum T01EW:C-2-12 created from Ceramic Inventories
+stratum T01EW:C-5-16 created from Ceramic Inventories
+stratum T01EW:C-4-15 created from Ceramic Inventories
+stratum T01EW:P-2-10 created from Ceramic Inventories
+stratum 039W:B-1-1 created from Ceramic Inventories
+stratum 123A:H-1-4 created from Ceramic Inventories
+feature 093W:L-0.5-8.5:12.0 created from Ceramic Inventories
+feature 093W:L-7-37:11.0 created from Ceramic Inventories
+feature 093W:D-2-35.5:11.0 created from Ceramic Inventories
+feature 093W:T-1-47:47.0 created from Ceramic Inventories
+stratum 058W:N-2-7 created from Ceramic Inventories
+stratum 123W:l-2-5 created from Ceramic Inventories
+feature 123W:L-4-15:11.0 created from Ceramic Inventories
+stratum 123W:B-1-2 created from Ceramic Inventories
+stratum 102A:L-11-25 created from Ceramic Inventories
+feature 102A:L-11-25:4009.0 created from Ceramic Inventories
+stratum 007W:A-1-1 created from Ceramic Inventories
+stratum 007W:I-1-4 created from Ceramic Inventories
+stratum 118W:B-4-9 created from Ceramic Inventories
+stratum 122A:D-0-0 created from Ceramic Inventories
+stratum 006W:B-1-2 created from Ceramic Inventories
+feature 101W:G-1-8:9.0 created from Ceramic Inventories
+stratum 129W:C-1-93 created from Ceramic Inventories
+stratum 129W:G-0.2-92 created from Ceramic Inventories
+stratum 093W:B-2-5.25 created from Ceramic Inventories
+stratum 119W:C-0.4-3.40 created from Ceramic Inventories
+stratum 119W:D-2.5-11.5 created from Ceramic Inventories
+stratum 039W:A-1-1 created from Ceramic Inventories
+stratum 004W:B-1-2 created from Ceramic Inventories
+stratum 121W:E-1-7 created from Ceramic Inventories
+stratum 122W:P-0-00 created from Ceramic Inventories
+feature 130W:F-1-3:3.0 created from Ceramic Inventories
+feature 118W:F-2-5:12.0 created from Ceramic Inventories
+feature 091A:C-3-17:3.0 created from Ceramic Inventories
+stratum 091A:C-3-14 created from Ceramic Inventories
+stratum 091D:I-2-12 created from Ceramic Inventories
+stratum 097B:F-1-4 created from Ceramic Inventories
+feature 043W:F-2-7:5.0 created from Ceramic Inventories
+feature 043W:G-1.2-10.2:42.0 created from Ceramic Inventories
+stratum 043W:B-4-7 created from Ceramic Inventories
+feature 043W:B-4-9:42.0 created from Ceramic Inventories
+stratum 043W:H-1-13 created from Ceramic Inventories
+stratum 086W:D-2-12 created from Ceramic Inventories
+feature 033W:no data:3.0 created from Ceramic Inventories
+feature 033W:no data:4.0 created from Ceramic Inventories
+stratum 033W:I-1-8 created from Ceramic Inventories
+stratum 122W:L-0-0 created from Ceramic Inventories
+stratum 122W:M-0-0 created from Ceramic Inventories
+stratum 122W:O-0-0 created from Ceramic Inventories
+stratum 122W:N-0-0 created from Ceramic Inventories
+feature 121W:L-16-33:33.0 created from Ceramic Inventories
+stratum 059W:B-2-5 created from Ceramic Inventories
+stratum 059W:N-1-3 created from Ceramic Inventories
+stratum 037B:G-1-4 created from Ceramic Inventories
+stratum 018P:C-2-5 created from Ceramic Inventories
+feature 130W:W-1-15:29.0 created from Ceramic Inventories
+feature 130W:J-1-14:39.0 created from Ceramic Inventories
+stratum 036W:L-1-5 created from Ceramic Inventories
+stratum 036W:C-6-9 created from Ceramic Inventories
+stratum 036W:C-5-9 created from Ceramic Inventories
+stratum 036W:C-3-7 created from Ceramic Inventories
+stratum 043W:G-1-0 created from Ceramic Inventories
+feature 043W:G-1-0:42.0 created from Ceramic Inventories
+feature 093W:W-1-41:22.0 created from Ceramic Inventories
+feature 093W:W-1-41:23.0 created from Ceramic Inventories
+stratum 036W:M-1-13 created from Ceramic Inventories
+feature 021P:L-15.4-8.64:15.0 created from Ceramic Inventories
+feature 102A:L-13.3-53.3:5024.0 created from Ceramic Inventories
+stratum 102A:C-4-8 created from Ceramic Inventories
+feature 092A:L-2-11:6.0 created from Ceramic Inventories
+feature 092A:L-3-12:6.0 created from Ceramic Inventories
+feature 092W:L-8-21:30.0 created from Ceramic Inventories
+stratum 091A:I-4-15 created from Ceramic Inventories
+stratum 091A:C-3-16 created from Ceramic Inventories
+stratum 036W:C-15-19 created from Ceramic Inventories
+feature 129W:L-11-147:161.0 created from Ceramic Inventories
+feature 129W:L-4-134:136.0 created from Ceramic Inventories
+feature 129W:H-4-139:161.0 created from Ceramic Inventories
+stratum 018P:C-4-7.1 created from Ceramic Inventories
+stratum 036W:C-9-13 created from Ceramic Inventories
+stratum 036W:B-2-11 created from Ceramic Inventories
+feature 036W:C-15-21:41.0 created from Ceramic Inventories
+stratum 036W:C-6-1 created from Ceramic Inventories
+feature 037W:H-1-13:82.0 created from Ceramic Inventories
+feature 037W:H-1-13:79.0 created from Ceramic Inventories
+feature 033B:L-1-3:1.0 created from Ceramic Inventories
+feature 002W:no data:10.0 created from Ceramic Inventories
+stratum 020P:P-0-0 created from Ceramic Inventories
+stratum Other:P-0-0 created from Ceramic Inventories
+stratum 037A:C-1-3 created from Ceramic Inventories
+stratum 033W:G-2-7 created from Ceramic Inventories
+feature 127A:L-1-7:50.0 created from Ceramic Inventories
+stratum 034W:B-1-2 created from Ceramic Inventories
+stratum 129W:H-1-92 created from Ceramic Inventories
+stratum 021P:Q-0.6-8.6 created from Ceramic Inventories
+stratum Other:B-2-3 created from Ceramic Inventories
+feature 096W:B-1-2:13.0 created from Ceramic Inventories
+stratum 097W:W-0-0 created from Ceramic Inventories
+feature 097W:W-0-0:1012.0 created from Ceramic Inventories
+feature 086W:L-14.7-21.7:106.0 created from Ceramic Inventories
+feature 086W:L-14.7-21.7:17.0 created from Ceramic Inventories
+feature 059W:no data:1.0 created from Ceramic Inventories
+stratum 059W:C-2-6 created from Ceramic Inventories
+feature 119W:F-3-20:22.0 created from Ceramic Inventories
+feature 119W:H-8-22:77.0 created from Ceramic Inventories
+feature 093W:C-1-3:7.0 created from Ceramic Inventories
+feature 097W:L-4-9:2021.0 created from Ceramic Inventories
+stratum 097W:G-2-5 created from Ceramic Inventories
+stratum 097W:I-1-6 created from Ceramic Inventories
+stratum 001W:I-1-55 created from Lithic Inventories
+stratum 002BW:L-1-3 created from Lithic Inventories
+stratum 002BW:M-1-2 created from Lithic Inventories
+stratum 002BW:M-2-3 created from Lithic Inventories
+stratum 002BW:R-0-3 created from Lithic Inventories
+stratum 004A:B-2-2 created from Lithic Inventories
+stratum 004W:F-3-10 created from Lithic Inventories
+stratum 004W:F-3-18 created from Lithic Inventories
+feature 005A:no data:10.0 created from Lithic Inventories
+stratum 005A:G-2-6 created from Lithic Inventories
+stratum 005W:H-1-5 created from Lithic Inventories
+feature 005W:H-1-5:10.0 created from Lithic Inventories
+stratum 006W:L-1-1 created from Lithic Inventories
+feature 006W:L-1-1:25.0 created from Lithic Inventories
+stratum 008A:M-1-7 created from Lithic Inventories
+stratum 008BW:C-1-6 created from Lithic Inventories
+stratum 008BW:P-0-0 created from Lithic Inventories
+feature 011P:J-1-11:18.0 created from Lithic Inventories
+stratum 011P:Q-0-2 created from Lithic Inventories
+stratum 011P:Q-1-4 created from Lithic Inventories
+stratum 011P:Q-1-5 created from Lithic Inventories
+stratum 011P:Q-2-5 created from Lithic Inventories
+stratum 014W:P-0-0 created from Lithic Inventories
+stratum 016P:C-1-3 created from Lithic Inventories
+stratum 016P:C-2-7 created from Lithic Inventories
+stratum 016P:C-2-8 created from Lithic Inventories
+stratum 016P:C-3-14 created from Lithic Inventories
+stratum 016P:D-2-19 created from Lithic Inventories
+stratum 016P:D-3-21 created from Lithic Inventories
+stratum 016P:D-5-8 created from Lithic Inventories
+stratum 016P:D-6-14 created from Lithic Inventories
+feature 016P:L-10-32:3.0 created from Lithic Inventories
+stratum 016P:L-12-22 created from Lithic Inventories
+stratum 016P:L-3-10 created from Lithic Inventories
+stratum 017P:C-2-7 created from Lithic Inventories
+stratum 018P:Q-1-5 created from Lithic Inventories
+feature 020P:L-12-4.94:12.0 created from Lithic Inventories
+feature 020P:Q-0.7-3.5:12.0 created from Lithic Inventories
+stratum 030W:B-1-2 created from Lithic Inventories
+stratum 030W:D-2.3-26.3 created from Lithic Inventories
+stratum 030W:E-1-2 created from Lithic Inventories
+stratum 030W:I-3-23 created from Lithic Inventories
+stratum 030W:P-0-00 created from Lithic Inventories
+feature 031A:G-1-4:3.0 created from Lithic Inventories
+stratum 031A:G-2-4 created from Lithic Inventories
+feature 031A:I-1-6:5.0 created from Lithic Inventories
+feature 031A:I-2-9:1.0 created from Lithic Inventories
+feature 031A:I-2-9:2.0 created from Lithic Inventories
+stratum 031W:C-3-3 created from Lithic Inventories
+stratum 031W:H-1-11 created from Lithic Inventories
+stratum 031W:P-0-0 created from Lithic Inventories
+stratum 032W:C-1-2 created from Lithic Inventories
+stratum 033B:C-1-3 created from Lithic Inventories
+stratum 033W:C-1-12 created from Lithic Inventories
+stratum 033W:C-3-13 created from Lithic Inventories
+stratum 033W:F-2-4 created from Lithic Inventories
+stratum 033W:H-2-77 created from Lithic Inventories
+stratum 033W:P-0-00 created from Lithic Inventories
+stratum 036W:C-3-6 created from Lithic Inventories
+stratum 036W:L-4-5 created from Lithic Inventories
+feature 036W:L-4-5:30.0 created from Lithic Inventories
+feature 036W:N-1-13:41.0 created from Lithic Inventories
+feature 036W:F-1-15:100.0 created from Lithic Inventories
+stratum 036W:P-1 created from Lithic Inventories
+stratum 039W:B-1-2 created from Lithic Inventories
+feature 043W:F-3-8:42.0 created from Lithic Inventories
+feature 043W:H-1-15:42.0 created from Lithic Inventories
+stratum 043W:M-2-8 created from Lithic Inventories
+stratum 058W:H-2-7 created from Lithic Inventories
+stratum 058W:I-1-4 created from Lithic Inventories
+stratum 058W:L-1-10 created from Lithic Inventories
+stratum 059W:C-104 created from Lithic Inventories
+stratum 059W:C-1-43 created from Lithic Inventories
+stratum 060A:B-2-3 created from Lithic Inventories
+stratum 060B:F-1-5.1 created from Lithic Inventories
+stratum 062A:C-2-7 created from Lithic Inventories
+stratum 062A:L-2-7.1 created from Lithic Inventories
+feature 062A:L-2-7.1:63.0 created from Lithic Inventories
+stratum 062W:C-20-29 created from Lithic Inventories
+feature 062W:C-21.3-21.3:21.0 created from Lithic Inventories
+feature 062W:C-21.5-21.5:21.0 created from Lithic Inventories
+stratum 062W:C-22.1-22.1 created from Lithic Inventories
+feature 062W:C-22.3-22.3:21.0 created from Lithic Inventories
+stratum 062W:C-26-21 created from Lithic Inventories
+stratum 062W:C-26-6 created from Lithic Inventories
+stratum 062W:C-26-8 created from Lithic Inventories
+feature 062W:C-2-7:3.0 created from Lithic Inventories
+stratum 062W:C-27-67 created from Lithic Inventories
+stratum 062W:C-28 -28 created from Lithic Inventories
+feature 062W:C-32-32:21.0 created from Lithic Inventories
+feature 062W:C-34-34:121.0 created from Lithic Inventories
+stratum 062W:C-45-45 created from Lithic Inventories
+feature 062W:C-4-9:2.0 created from Lithic Inventories
+stratum 062W:L-7-34 created from Lithic Inventories
+feature 062W:L-7-34:121.0 created from Lithic Inventories
+feature 062W:no data:97.0 created from Lithic Inventories
+feature 064W:H-1-8:118.0 created from Lithic Inventories
+stratum 064W:I-1-8 created from Lithic Inventories
+stratum 064W:W-0-0 created from Lithic Inventories
+stratum 064W:W-0-00 created from Lithic Inventories
+stratum 074W:P-0-0 created from Lithic Inventories
+stratum 081W:F-1-3 created from Lithic Inventories
+stratum 082W:C-11-23 created from Lithic Inventories
+stratum 082W:C-1-3 created from Lithic Inventories
+stratum 082W:C-1-5 created from Lithic Inventories
+stratum 082W:C-2-20 created from Lithic Inventories
+stratum 082W:C-4-4 created from Lithic Inventories
+stratum 082W:L-19-44 created from Lithic Inventories
+feature 082W:L-19-44:109.0 created from Lithic Inventories
+feature 082W:L-3-12:11.0 created from Lithic Inventories
+stratum 082W:P-0-00 created from Lithic Inventories
+stratum 083W:H-1-8 created from Lithic Inventories
+feature 083W:H-1-8:5001.0 created from Lithic Inventories
+stratum 086W:D-1-18 created from Lithic Inventories
+stratum 088W:B-4-5 created from Lithic Inventories
+stratum 088W:C-1-5 created from Lithic Inventories
+stratum 088W:P-0-0 created from Lithic Inventories
+stratum 091C:H-1-7 created from Lithic Inventories
+feature 091C:H-1-7:9.0 created from Lithic Inventories
+stratum 091W:C-15-19 created from Lithic Inventories
+stratum 091W:C-2-21.7 created from Lithic Inventories
+feature 092A:L-4-15:8.0 created from Lithic Inventories
+stratum 092W:D-1-16 created from Lithic Inventories
+feature 092W:L-3.5-15.5:45.0 created from Lithic Inventories
+stratum 093W:C created from Lithic Inventories
+stratum 093W:I-1-14 created from Lithic Inventories
+stratum 093W:I-15 created from Lithic Inventories
+feature 093W:I-15:4.0 created from Lithic Inventories
+stratum 093W:I-2-22 created from Lithic Inventories
+feature 093W:I-3-27:9.0 created from Lithic Inventories
+feature 093W:I-3-27:5.0 created from Lithic Inventories
+feature 093W:I-3-27:6.0 created from Lithic Inventories
+feature 093W:J-1-50:47.0 created from Lithic Inventories
+feature 093W:O-1-26.6:16.0 created from Lithic Inventories
+stratum 093W:T-1-15 created from Lithic Inventories
+feature 094C:L-2-4:3002.0 created from Lithic Inventories
+feature 094W:B-1-2:5.0 created from Lithic Inventories
+stratum 096W:C-2-8 created from Lithic Inventories
+feature 096W:H-1-5:9.0 created from Lithic Inventories
+feature 096W:L-13.5-24.5:5114.0 created from Lithic Inventories
+feature 096W:L-15-26:121.0 created from Lithic Inventories
+feature 097W:T-1-18:4034.0 created from Lithic Inventories
+feature 100W:C-2-5.2:303.0 created from Lithic Inventories
+stratum 100W:C-2-6 created from Lithic Inventories
+stratum 100W:C-3-4 created from Lithic Inventories
+stratum 100W:N-3-6 created from Lithic Inventories
+stratum 102A:C-2-24 created from Lithic Inventories
+stratum 102A:D-1-31 created from Lithic Inventories
+stratum 102A:D-2-23 created from Lithic Inventories
+stratum 102A:D-2-55 created from Lithic Inventories
+feature 102A:H-1-13:4007.0 created from Lithic Inventories
+stratum 102A:I-2-22 created from Lithic Inventories
+feature 102A:L-2-4:305.0 created from Lithic Inventories
+feature 102B:C-2-6:2.0 created from Lithic Inventories
+stratum 102B:C-5-6 created from Lithic Inventories
+stratum 102B:L-1-10 created from Lithic Inventories
+feature 102B:L-1-10:3.0 created from Lithic Inventories
+Unit 102W created from Lithic Inventories
+feature 118W:D-1-16:59.0 created from Lithic Inventories
+feature 118W:D-1.5-16.5:59.0 created from Lithic Inventories
+feature 118W:H-3-19:59.0 created from Lithic Inventories
+feature 118W:U-2-10.5:13.0 created from Lithic Inventories
+stratum 119W:C-0.9-7.9 created from Lithic Inventories
+stratum 119W:C-4-48 created from Lithic Inventories
+stratum 119W:C-6-14 created from Lithic Inventories
+stratum 119W:CU-1-4.3 created from Lithic Inventories
+feature 119W:D-3-14.7:26.0 created from Lithic Inventories
+feature 119W:H-2-3.52:3.0 created from Lithic Inventories
+feature 119W:H-6-14:20.0 created from Lithic Inventories
+feature 119W:F-3-20:73.0 created from Lithic Inventories
+feature 119W:F-3-20:77.0 created from Lithic Inventories
+feature 119W:H-9-32:131.0 created from Lithic Inventories
+feature 119W:H-9-32:132.0 created from Lithic Inventories
+feature 119W:D-4-27:73.0 created from Lithic Inventories
+feature 119W:H-8-22:79.0 created from Lithic Inventories
+feature 119W:I-10-36:74.0 created from Lithic Inventories
+feature 119W:I-5-9.5:4.0 created from Lithic Inventories
+feature 119W:I-8-26:90.0 created from Lithic Inventories
+feature 119W:I-8-26:100.0 created from Lithic Inventories
+feature 119W:I-10-36:73.0 created from Lithic Inventories
+feature 119W:I-8-26:74.0 created from Lithic Inventories
+stratum 121B:B-1-2 created from Lithic Inventories
+stratum 121B:C-4-1-3.6 created from Lithic Inventories
+stratum 124A:G-2-8 created from Lithic Inventories
+stratum 124A:I-1-5 created from Lithic Inventories
+stratum 124W:B-1-2 created from Lithic Inventories
+feature 127W:H-1-5:55.0 created from Lithic Inventories
+feature 127W:L-19-39:140.0 created from Lithic Inventories
+feature 127W:L-9-21:109.0 created from Lithic Inventories
+stratum 129W:C-24-31 created from Lithic Inventories
+stratum 129W:C-3-12 created from Lithic Inventories
+stratum 129W:C-5-9 created from Lithic Inventories
+stratum 129W:C-79-86 created from Lithic Inventories
+stratum 129W:C-81-91 created from Lithic Inventories
+stratum 129W:C-83-91 created from Lithic Inventories
+stratum 129W:C-85-110 created from Lithic Inventories
+stratum 129W:C-94-190 created from Lithic Inventories
+stratum 129W:C-99-113 created from Lithic Inventories
+feature 129W:F-1-8.4:100.0 created from Lithic Inventories
+stratum 129W:F-2-96 created from Lithic Inventories
+feature 129W:H-2-94:153.0 created from Lithic Inventories
+feature 129W:H-3-137:161.0 created from Lithic Inventories
+feature 129W:H-4-139:15.0 created from Lithic Inventories
+feature 129W:H-4-139:16.0 created from Lithic Inventories
+feature 129W:H-4-139:157.0 created from Lithic Inventories
+feature 129W:H-4-139:159.0 created from Lithic Inventories
+feature 129W:H-4-139:176.0 created from Lithic Inventories
+feature 129W:L-8-144:167.0 created from Lithic Inventories
+feature 130W:C-2-39:45.0 created from Lithic Inventories
+feature 130W:C-2-39:41.0 created from Lithic Inventories
+feature 130W:C-2-39:43.0 created from Lithic Inventories
+feature 130W:F-1-3:1.0 created from Lithic Inventories
+feature 130W:F-1-3:29.0 created from Lithic Inventories
+feature 130W:F-1-3:24.0 created from Lithic Inventories
+stratum 130W:H-2-5 created from Lithic Inventories
+feature 130W:H-2-9:43.0 created from Lithic Inventories
+feature 130W:I-1-6:45.0 created from Lithic Inventories
+feature 130W:I-1-6:67.0 created from Lithic Inventories
+stratum 130W:I-1-7 created from Lithic Inventories
+stratum 130W:I-2-10 created from Lithic Inventories
+stratum 130W:I-2-6 created from Lithic Inventories
+feature 130W:I-2-6:12.0 created from Lithic Inventories
+stratum 130W:L-13-33 created from Lithic Inventories
+feature 130W:L-13-33:45.0 created from Lithic Inventories
+feature 130W:L-20.5-36.5:49.5 created from Lithic Inventories
+stratum 130W:L-7-33 created from Lithic Inventories
+feature 130W:L-7-33:45.0 created from Lithic Inventories
+stratum 130W:N-1-3 created from Lithic Inventories
+feature 136W:H-1-4:1.0 created from Lithic Inventories
+stratum 143W:D-1-3 created from Lithic Inventories
+stratum Other:B-1-5 created from Lithic Inventories
+stratum Other:C-1-5 created from Lithic Inventories
+stratum Other:C-2-7 created from Lithic Inventories
+stratum Other:F-1-10 created from Lithic Inventories
+stratum Other:F-1-15 created from Lithic Inventories
+stratum Other:L-1 created from Lithic Inventories
+stratum Other:O-1-2 created from Lithic Inventories
+stratum TT10:B-1-4 created from Lithic Inventories
+stratum 014P:P-1-4 created from Pollen Inventories
+stratum 018P:L-3-11.2 created from Pollen Inventories
+feature 018P:L-3-11.2:6.0 created from Pollen Inventories
+stratum 018P:R-1-6 created from Pollen Inventories
+stratum 021P:L-23-17.3 created from Pollen Inventories
+feature 021P:L-23-17.3:23.0 created from Pollen Inventories
+feature 021P:L-9.1-19.51:9.0 created from Pollen Inventories
+feature 021P:L-9.2-19.52:9.0 created from Pollen Inventories
+feature 021P:L-9.3-19.53:9.0 created from Pollen Inventories
+feature 021P:L-9.4-19.54:9.0 created from Pollen Inventories
+feature 021P:T-1-19:26.0 created from Pollen Inventories
+stratum 030A:F-1-2 created from Pollen Inventories
+stratum 030W:D-2.3-26.4 created from Pollen Inventories
+stratum 030W:J-1-29 created from Pollen Inventories
+stratum 030W:L-1-24.6 created from Pollen Inventories
+feature 030W:L-1-24.6:104.0 created from Pollen Inventories
+stratum 030W:X-2-27 created from Pollen Inventories
+stratum 033W:G-2-15.2 created from Pollen Inventories
+stratum 036W:F-1-5 created from Pollen Inventories
+feature 036W:no data:32.0 created from Pollen Inventories
+stratum 062A:C-2-8 created from Pollen Inventories
+stratum 062A:L-3-7.1 created from Pollen Inventories
+feature 062A:L-3-7.1:64.0 created from Pollen Inventories
+stratum 062W:G-2-4.75 created from Pollen Inventories
+stratum 062W:I-2-6 created from Pollen Inventories
+stratum 062W:M-1-26.66 created from Pollen Inventories
+stratum 062W:O-1-43 created from Pollen Inventories
+stratum 062W:S-1-42 created from Pollen Inventories
+stratum 091C:F-1-4 created from Pollen Inventories
+stratum 093W:F-2-27.75 created from Pollen Inventories
+stratum 093W:L-9.1-4.1 created from Pollen Inventories
+feature 093W:L-9.1-4.1:44.0 created from Pollen Inventories
+feature 093W:L-9.1-43.1:43.0 created from Pollen Inventories
+stratum 097W:H-1-4 created from Pollen Inventories
+stratum 100W:C-7-21.1 created from Pollen Inventories
+stratum 100W:H-1-17 created from Pollen Inventories
+stratum 100W:H-2-22 created from Pollen Inventories
+stratum 100W:I-2-22.5 created from Pollen Inventories
+feature 100W:L-19-43:5021.0 created from Pollen Inventories
+stratum 100W:N-1-4 created from Pollen Inventories
+stratum 100W:N-1-4.3 created from Pollen Inventories
+stratum 100W:T-1-34 created from Pollen Inventories
+stratum 102A:S-2-37 created from Pollen Inventories
+feature 119W:F-3-20:26.0 created from Pollen Inventories
+stratum 119W:H-2.3-41.3 created from Pollen Inventories
+stratum 119W:I-9-32 created from Pollen Inventories
+stratum 119W:L-5-19 created from Pollen Inventories
+stratum 121W:H-2.6-13.6 created from Pollen Inventories
+stratum 121W:H-2-11 created from Pollen Inventories
+stratum 121W:H-3.6-16.6 created from Pollen Inventories
+stratum 121W:H-5-25.3 created from Pollen Inventories
+stratum 121Z:G-1-2 created from Pollen Inventories
+stratum 128A:L-1-7 created from Pollen Inventories
+feature 128A:L-1-7:4.0 created from Pollen Inventories
+feature 128B:H-2-4:5.0 created from Pollen Inventories
+feature 128B:H-2-7:3.0 created from Pollen Inventories
+stratum 128W:H-2-5 created from Pollen Inventories
+stratum 128W:L-6-11 created from Pollen Inventories
+feature 128W:L-6-11:9.0 created from Pollen Inventories
+stratum 129W:` created from Pollen Inventories
+stratum 129W:C-29.5-36.5 created from Pollen Inventories
+stratum 129W:D-1-91.7 created from Pollen Inventories
+stratum 130W:D-1.5-6.2 created from Pollen Inventories
+stratum 130W:H-1.2-6.4 created from Pollen Inventories
+stratum 130W:H-1.5-7.3 created from Pollen Inventories
+feature 130W:H-1-5:6.0 created from Pollen Inventories
+feature 130W:L-2-11:3.0 created from Pollen Inventories
+feature 130W:L-3-12:4.0 created from Pollen Inventories
+feature 136Z:L-1-4:1.0 created from Pollen Inventories
+stratum none:A-1-1 created from Pollen Inventories
+feature 008BW:B-1-2:1.0 created from Wood Inventories
+stratum 043W:F-1-3 created from Wood Inventories
+feature 043W:F-1-3:1.0 created from Wood Inventories
+stratum 062W:C-27.67 created from Wood Inventories
+feature 062W:H-1-41:1015.0 created from Wood Inventories
+feature 062W:H-1-41:1016.0 created from Wood Inventories
+stratum 123B:J-2-6 created from Wood Inventories
+stratum 123B:I-2-5 created from Wood Inventories
+feature 130W:L-2.1-11.1:3.0 created from Wood Inventories
+stratum 060A:K-0-0 created from Bone Tool: 8051
+feature 007W:none:5.0 created from burials
+feature 031W:L-1-3.5:101.0 created from burials
+feature 037B:C-1-3:1.1 created from burials
+feature 037B:C-1-3:1.2 created from burials
+feature 056W:C-1-3:100.0 created from burials
+feature 062W:C-2-6.9:1.2 created from burials
+feature 083W:C-1-4:101.0 created from burials
+feature 083W:C-1-4:102.0 created from burials
+feature 083W:C-1-4:103.0 created from burials
+feature 083W:C-1-4:104.0 created from burials
+stratum 090W:H-0-0 created from Burial 45.0
+feature 090W:H-0-0:101.0 created from burials
+stratum 097B:C-2-5 created from Burial 61.0
+feature 097B:C-2-5:2.1 created from burials
+feature 149W:C-2-3:2.0 created from burials
+Zone None created from burials
+Unit None created from burials
+stratum 064W:L-1-10 created from Ceramics 22312
+feature 064W:L-1-10:1002.0 created from ceramics
+stratum 059W:P-0-1.5 created from Eggshells
+stratum 062W:C-2.5-7.2 created from Eggshells
+stratum 062W:C-2-7.1 created from Eggshells
+stratum 062W:L-3-6.1 created from Eggshells
+feature 062W:L-3-6.1:64.0 created from Eggshells
+stratum 062W:multiple strata created from Eggshells
+stratum 062W:P-1-4.5 created from Eggshells
+stratum 091W:C-8.5-20.6 created from Eggshells
+stratum 091W:C-8.5-22.6 created from Eggshells
+stratum 091W:I-.8-29.8 created from Eggshells
+stratum 093W:G-1-16 created from Eggshells
+stratum 097W:M-1-5 created from Eggshells
+stratum 102D:D-1-31 created from Eggshells
+stratum 102D:T-1-31 created from Eggshells
+stratum 121E:P-0-0 created from Eggshells
+stratum 129W:G-0.1-92.1 created from Eggshells
+feature 129W:P-0-0:101.0 created from Eggshells
+feature 130W:L-3-12:3.0 created from Eggshells
+feature 130W:L-3-12:29.0 created from Eggshells
+feature 036W:S-1-4.6:12.0 created from ornaments
+feature 062A:H-2-5.5:27.0 created from ornaments
+feature 064W:L-2-10:4.0 created from ornaments
+feature 064W:F-1-6:53.0 created from ornaments
+feature 064W:F-1-6:8.0 created from ornaments
+feature 064W:F-1-6:47.0 created from ornaments
+feature 082W:M-2-13.5:19.0 created from ornaments
+feature 082W:M-2-13.5:20.0 created from ornaments
+feature 130W:F-1-3:30.0 created from ornaments
+feature 130W:J-1-14:51.0 created from ornaments
+feature 130W:J-1-14:52.0 created from ornaments
+feature 130W:L-2.3-11.3:66.0 created from ornaments
+feature 130W:L-7-21:75.0 created from ornaments
+feature 130W:L-7-21:78.0 created from ornaments
+feature 130W:L-7-21:84.0 created from ornaments
+stratum 129W:C-59-66 created from Ornament OR80-000290-SSP
+stratum 102C:I-1-30 created from Ornament OR80-000419-SSP
+stratum 121W:G-1-3 created from Ornament OR80-000904-SSP
+stratum 033W:G-1-6 created from Ornament OR80-000740-SSP
+Zone Surface created from Ornaments
+Unit Surface created from Ornaments
+feature 097W:D-2-13:2007.0 created from Perishables
+feature 130W:H-1-5:30.0 created from Perishables
+stratum 097B:N-1-3 created from Perishables
+feature 097B:N-1-3:2.0 created from Perishables
+feature 097W:N-1-3:1006.0 created from Perishables
+feature 097W:N-1-3:1007.0 created from Perishables
+feature 100W:N-1-3:14.0 created from Perishables
+feature 033B:F-1-3:1.0 created from Perishables
+feature 036W:C-2.5-4.5:29.0 created from Perishables
+feature 043W:F-1.5-6:3.0 created from Perishables
+feature 043W:S-2-6.6:57.0 created from Perishables
+stratum 121W:L-16-13 created from Perishables
+feature 121W:L-16-13:33.0 created from Perishables
+stratum 127W:L-23.44 created from Perishables
+feature 127W:L-23.44:147.0 created from Perishables
+stratum 018P:L-1-08 created from SA SA018P002
+stratum 018P:Q-1-07 created from SA SA018P008
+stratum 057W:L-2-9 created from SA SA057W023
+stratum none:F-2-6 created from SA SA067W025
+stratum 119W:H-4.5-22.5 created from SA SA119W096
+stratum 119W:W-1-91 created from SA SA119W103
+stratum 121W:H-1-6 created from SA SA121W002
+stratum 020P:B-1-2.5 created from Soils
+stratum 020P:B-4.4-4.7 created from Soils
+feature 020P:L-10-13:16.0 created from Soils
+stratum 021P:J-1-14 created from Soils
+feature 033W:L-2-17.1:44.0 created from Soils
+feature 033W:L-2-17.1:45.0 created from Soils
+stratum 037W:O-2-17 created from Soils
+feature 082W:L-4-15.5:16.0 created from Soils
+feature 082W:L-4-15.5:17.0 created from Soils
+stratum 091B:C-1.5-7.6 created from Soils
+stratum 091D:C-2.5-14 created from Soils
+stratum 091D:C-2.5-15 created from Soils
+feature 100W:L-5-25:5012.0 created from Soils
+feature 100W:L-6-26:5005.0 created from Soils
+feature 119W:F-3-20:4.0 created from Soils
+feature 119W:F-3-20:17.0 created from Soils
+stratum 121W:D-4-25.5 created from Soils
+stratum 123A:I-1-2 created from Soils
+stratum 123W:C-1-7 created from Soils
+stratum 123W:G-1-9 created from Soils
+feature 124Z:L-19-19:44.0 created from Soils
+stratum 129W:F-2.1-86-1 created from Soils
+stratum 129W:F-2.2-86.2 created from Soils
+stratum 130W:F-1-03 created from Soils
+stratum 057W:F-1-4 created from Tree Ring SAL-596
+Zone W01 created from Images
+Unit W01 created from Images
+unit TT01-13P created from Image with hyphen in unit NOT added
+unit TT01-13P created from Image with hyphen in unit NOT added
+unit TT01-13P created from Image with hyphen in unit NOT added
+unit TT01-13P created from Image with hyphen in unit NOT added
+unit TT01-13P created from Image with hyphen in unit NOT added
+unit TT01-13P created from Image with hyphen in unit NOT added
+unit TT01-13P created from Image with hyphen in unit NOT added
+unit TT01-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT02-13P created from Image with hyphen in unit NOT added
+unit TT05-13P created from Image with hyphen in unit NOT added
+unit TT05-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT03-13P created from Image with hyphen in unit NOT added
+unit TT03-13/14P created from Image with hyphen in unit NOT added
+unit TT03-13/14P created from Image with hyphen in unit NOT added
+unit TT03-13/14P created from Image with hyphen in unit NOT added
+unit TT03-13/14P created from Image with hyphen in unit NOT added
+unit TT03-13/14P created from Image with hyphen in unit NOT added
+unit TT03-13/14P created from Image with hyphen in unit NOT added
+unit TT03-13/14P created from Image with hyphen in unit NOT added
+unit TT03-13/14P created from Image with hyphen in unit NOT added
+unit TT03-13/14P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT00-18/19P created from Image with hyphen in unit NOT added
+unit TT03-BW created from Image with hyphen in unit NOT added
+unit TT03-BW created from Image with hyphen in unit NOT added
+unit TT03-BW created from Image with hyphen in unit NOT added
+unit TT08-BW created from Image with hyphen in unit NOT added
+unit TT08-BW created from Image with hyphen in unit NOT added
+unit TT08-BW created from Image with hyphen in unit NOT added
+unit TT08-BW created from Image with hyphen in unit NOT added
+unit TT08-BW created from Image with hyphen in unit NOT added
+unit TT08-BW created from Image with hyphen in unit NOT added
+unit TT08-BW created from Image with hyphen in unit NOT added
+unit TT08-BW created from Image with hyphen in unit NOT added
+unit TT02-BW created from Image with hyphen in unit NOT added
+unit TT02-BW created from Image with hyphen in unit NOT added
+unit TT02-BW created from Image with hyphen in unit NOT added
+unit TT02-BW created from Image with hyphen in unit NOT added
+unit TT02-BW created from Image with hyphen in unit NOT added
+unit TT02-BW created from Image with hyphen in unit NOT added
+unit TT11-BW created from Image with hyphen in unit NOT added
+unit TT11-BW created from Image with hyphen in unit NOT added
+unit 18-19P created from Image with hyphen in unit NOT added
+unit TT00-11P created from Image with hyphen in unit NOT added
+unit TT00-11P created from Image with hyphen in unit NOT added
+unit TT00-11P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+unit TT00-20P created from Image with hyphen in unit NOT added
+Unit 003W created from Images
+feature 004A:no data:2.0 created from Images
+feature 004W:none:1.0 created from Images
+Zone PL04 created from Images
+Unit PL04 created from Images
+Unit PL04B created from Images
+Zone TM04 created from Images
+Unit TM04 created from Images
+Zone SA8 created from Images
+Unit SA8C created from Images
+Unit TT11P created from Images
+Unit TT12P created from Images
+feature 016P:none:1.0 created from Images
+feature 018P:none:1.0 created from Images
+Zone SA19 created from Images
+Unit SA19 created from Images
+feature 020P:none:19.0 created from Images
+Zone 20p created from Images
+Unit 020p created from Images
+unit 030A-B created from Image with hyphen in unit NOT added
+unit 030A-B created from Image with hyphen in unit NOT added
+unit 030A-B created from Image with hyphen in unit NOT added
+unit 030A-B created from Image with hyphen in unit NOT added
+unit 030A-B created from Image with hyphen in unit NOT added
+unit 030A-B created from Image with hyphen in unit NOT added
+unit 030A-B created from Image with hyphen in unit NOT added
+unit 030A-B created from Image with hyphen in unit NOT added
+unit 030A-B created from Image with hyphen in unit NOT added
+unit 031A-C created from Image with hyphen in unit NOT added
+unit 031A-C created from Image with hyphen in unit NOT added
+unit 031A-C created from Image with hyphen in unit NOT added
+unit 031A-C created from Image with hyphen in unit NOT added
+unit 031A-B created from Image with hyphen in unit NOT added
+unit 031A-B created from Image with hyphen in unit NOT added
+unit 031A-B created from Image with hyphen in unit NOT added
+unit 031A-B created from Image with hyphen in unit NOT added
+unit 031A-B created from Image with hyphen in unit NOT added
+unit 031A-B created from Image with hyphen in unit NOT added
+unit 031A-B created from Image with hyphen in unit NOT added
+unit 031A-B created from Image with hyphen in unit NOT added
+unit 031B-F created from Image with hyphen in unit NOT added
+unit 031A-E created from Image with hyphen in unit NOT added
+unit 031A-E created from Image with hyphen in unit NOT added
+unit 031A-E created from Image with hyphen in unit NOT added
+unit 031B-E created from Image with hyphen in unit NOT added
+unit 031A-D created from Image with hyphen in unit NOT added
+unit 031A-D created from Image with hyphen in unit NOT added
+unit 031B-F created from Image with hyphen in unit NOT added
+unit 031B-F created from Image with hyphen in unit NOT added
+unit 031A-B created from Image with hyphen in unit NOT added
+unit 031A-C created from Image with hyphen in unit NOT added
+unit 031A-C created from Image with hyphen in unit NOT added
+unit 031B-F created from Image with hyphen in unit NOT added
+feature 031W:none:11.0 created from Images
+feature 031W:none:13.0 created from Images
+feature 030W:none:13.0 created from Images
+unit 032A-C created from Image with hyphen in unit NOT added
+unit 032A-C created from Image with hyphen in unit NOT added
+unit 032A-C created from Image with hyphen in unit NOT added
+unit 032A-C created from Image with hyphen in unit NOT added
+unit 032A-C created from Image with hyphen in unit NOT added
+unit 032A-C created from Image with hyphen in unit NOT added
+unit 032A-C created from Image with hyphen in unit NOT added
+unit 032A-C created from Image with hyphen in unit NOT added
+unit 032A-C created from Image with hyphen in unit NOT added
+unit 032A-C created from Image with hyphen in unit NOT added
+unit 032A-C created from Image with hyphen in unit NOT added
+Unit 032C created from Images
+unit 032A-C created from Image with hyphen in unit NOT added
+unit 032A-C created from Image with hyphen in unit NOT added
+unit 032A-C created from Image with hyphen in unit NOT added
+unit 032A-C created from Image with hyphen in unit NOT added
+stratum 059W:C-1-5 created from Images
+Unit 060E created from Images
+Unit 060E/F created from Images
+Unit 060F/G created from Images
+Unit 060A/J created from Images
+Unit 060H created from Images
+Unit 060J created from Images
+unit 060A-K created from Image with hyphen in unit NOT added
+unit 060A-K created from Image with hyphen in unit NOT added
+unit 060A-K created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+feature 061A:none:25.0 created from Images
+unit 061A-D created from Image with hyphen in unit NOT added
+unit 061A-D created from Image with hyphen in unit NOT added
+unit 061A-D created from Image with hyphen in unit NOT added
+unit 061A-D created from Image with hyphen in unit NOT added
+unit 061A-D created from Image with hyphen in unit NOT added
+unit 061A-D created from Image with hyphen in unit NOT added
+unit 061B-D created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061A-C created from Image with hyphen in unit NOT added
+unit 061B-D created from Image with hyphen in unit NOT added
+unit 061B-D created from Image with hyphen in unit NOT added
+unit 061B-D created from Image with hyphen in unit NOT added
+unit 061A-D created from Image with hyphen in unit NOT added
+unit 062A-C created from Image with hyphen in unit NOT added
+Unit 062C created from Images
+Unit 062D created from Images
+feature 062A:none:1.0 created from Images
+Unit 032B created from Images
+feature 062A:none:42.0 created from Images
+feature 062W:none:103.0 created from Images
+feature 062W:none:122.0 created from Images
+feature 062W:none:82.0 created from Images
+feature 062W:none:1.0 created from Images
+Unit 063C created from Images
+Unit 063F created from Images
+feature 064W:none:11.0 created from Images
+feature 064W:none:13.0 created from Images
+feature 064W:none:35.0 created from Images
+feature 064W:none:12.0 created from Images
+feature 064W:none:90.0 created from Images
+feature 064W:none:120.0 created from Images
+feature 064W:none:96.0 created from Images
+feature 064W:none:89.0 created from Images
+Unit 033E created from Images
+Unit 033G created from Images
+Unit 033F created from Images
+feature 033B:none:1.0 created from Images
+feature 033B:none:2.0 created from Images
+Unit 033H created from Images
+feature 033W:none:12.0 created from Images
+Zone  created from Images
+Unit UNK created from Images
+unit 035A-E created from Image with hyphen in unit NOT added
+unit 035A-E created from Image with hyphen in unit NOT added
+unit 035A-E created from Image with hyphen in unit NOT added
+unit 035A-E created from Image with hyphen in unit NOT added
+unit 035A-E created from Image with hyphen in unit NOT added
+unit 035A-E created from Image with hyphen in unit NOT added
+unit 035A-E created from Image with hyphen in unit NOT added
+unit 035A-C created from Image with hyphen in unit NOT added
+unit 035A-C created from Image with hyphen in unit NOT added
+unit 035A-C created from Image with hyphen in unit NOT added
+unit 035A-C created from Image with hyphen in unit NOT added
+unit 035A-E created from Image with hyphen in unit NOT added
+unit 035A-E created from Image with hyphen in unit NOT added
+unit 035A-E created from Image with hyphen in unit NOT added
+unit 035A-E created from Image with hyphen in unit NOT added
+unit 035A-E created from Image with hyphen in unit NOT added
+unit 035A-E created from Image with hyphen in unit NOT added
+feature 036W:none:3.0 created from Images
+feature 036W:none:2.0 created from Images
+feature 036W:none:56.0 created from Images
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+feature 037B:none:1.0 created from Images
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+unit 037A-B created from Image with hyphen in unit NOT added
+feature 037W:none:75.0 created from Images
+feature 037W:none:83.0 created from Images
+feature 043W:none:57.0 created from Images
+feature 043W:none:3.0 created from Images
+feature 043W:none:43013.0 created from Images
+feature 043W:none:19.0 created from Images
+feature 043W:none:5.0 created from Images
+unit 090C-E created from Image with hyphen in unit NOT added
+unit 090C-E created from Image with hyphen in unit NOT added
+unit 090C-E created from Image with hyphen in unit NOT added
+unit 090C-D created from Image with hyphen in unit NOT added
+unit 090C-D created from Image with hyphen in unit NOT added
+unit 090C-D created from Image with hyphen in unit NOT added
+unit 090E-F created from Image with hyphen in unit NOT added
+unit 090E-F created from Image with hyphen in unit NOT added
+unit 090F-H created from Image with hyphen in unit NOT added
+unit 090F-H created from Image with hyphen in unit NOT added
+Unit 090H created from Images
+unit 090F-H created from Image with hyphen in unit NOT added
+unit 090G-I created from Image with hyphen in unit NOT added
+unit 090H-I created from Image with hyphen in unit NOT added
+unit 090G-H created from Image with hyphen in unit NOT added
+unit 090G-H created from Image with hyphen in unit NOT added
+unit 090G-H created from Image with hyphen in unit NOT added
+unit 090F-G created from Image with hyphen in unit NOT added
+unit 090F-G created from Image with hyphen in unit NOT added
+feature 090W:none:18.0 created from Images
+unit 091A-E created from Image with hyphen in unit NOT added
+unit 091A-E created from Image with hyphen in unit NOT added
+unit 091A-E created from Image with hyphen in unit NOT added
+unit 091A-D created from Image with hyphen in unit NOT added
+unit 092A-B created from Image with hyphen in unit NOT added
+unit 092A-B created from Image with hyphen in unit NOT added
+Unit 093B created from Images
+unit 093A-E created from Image with hyphen in unit NOT added
+unit 093A-E created from Image with hyphen in unit NOT added
+unit 093A-E created from Image with hyphen in unit NOT added
+unit 093A-E created from Image with hyphen in unit NOT added
+unit 093A-G created from Image with hyphen in unit NOT added
+unit 093A-G created from Image with hyphen in unit NOT added
+Unit 093E created from Images
+Unit 093I created from Images
+feature 094A:none:1.0 created from Images
+feature 094W:none:1.0 created from Images
+unit 097A-B created from Image with hyphen in unit NOT added
+feature 097B:none:1.0 created from Images
+feature 097B:none:2.0 created from Images
+feature 097W:none:2001.0 created from Images
+feature 097A:none:1001.0 created from Images
+feature 097A:none:1002.0 created from Images
+feature 097W:none:1007.0 created from Images
+feature 097W:none:1006.0 created from Images
+feature 100W:none:2001.0 created from Images
+feature 100W:none:303.0 created from Images
+feature 100W:none:302.0 created from Images
+feature 100W:none:313.0 created from Images
+feature 102B:none:1.0 created from Images
+feature 102B:none:2.0 created from Images
+feature 102B:none:3.0 created from Images
+unit 102C-D created from Image with hyphen in unit NOT added
+unit 102C-D created from Image with hyphen in unit NOT added
+unit 102C-D created from Image with hyphen in unit NOT added
+unit 102C-D created from Image with hyphen in unit NOT added
+unit 102C-D created from Image with hyphen in unit NOT added
+feature 143W:none:1.0 created from Images
+unit 121A-B created from Image with hyphen in unit NOT added
+unit 121A-B created from Image with hyphen in unit NOT added
+unit 121A-B created from Image with hyphen in unit NOT added
+unit 121A-C created from Image with hyphen in unit NOT added
+unit 121A-C created from Image with hyphen in unit NOT added
+unit 121A-C created from Image with hyphen in unit NOT added
+unit 121A-C created from Image with hyphen in unit NOT added
+feature 121W:none:33.1 created from Images
+feature 121W:none:33.2 created from Images
+feature 121Z:H-1-6:4.0 created from Images
+feature 127B:none:1.0 created from Images
+feature 127W:none:53.0 created from Images
+feature 127W:none:55.0 created from Images
+feature 127W:none:99.0 created from Images
+feature 127W:none:106.0 created from Images
+feature 127W:none:107.0 created from Images
+feature 127W:none:115.0 created from Images
+feature 127W:none:112.0 created from Images
+feature 127W:none:121.0 created from Images
+feature 127W:none:126.0 created from Images
+feature 127W:none:147.0 created from Images
+feature 127W:none:137.0 created from Images
+feature 128W:none:9.0 created from Images
+unit 128A-B created from Image with hyphen in unit NOT added
+feature 129W:none:7.0 created from Images
+feature 129W:none:8.0 created from Images
+feature 129W:none:101.0 created from Images
+unit 120A-B created from Image with hyphen in unit NOT added
+unit 120A-B created from Image with hyphen in unit NOT added
+unit 120A-B created from Image with hyphen in unit NOT added
+unit 120A-B created from Image with hyphen in unit NOT added
+Unit 122D created from Images
+feature 122D:none:1.0 created from Images
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+feature 123B:none:3.0 created from Images
+feature 123B:none:5.0 created from Images
+unit 123A-B created from Image with hyphen in unit NOT added
+unit 123A-B created from Image with hyphen in unit NOT added
+unit 123A-B created from Image with hyphen in unit NOT added
+unit 123A-B created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+unit 123B-C created from Image with hyphen in unit NOT added
+stratum 124Z:L-5-15 created from Images
+feature 124Z:L-5-15:38.0 created from Images
+feature 124W:none:35.0 created from Images
+feature 082W:none:14.0 created from Images
+feature 082W:none:15.0 created from Images
+feature 082W:none:0.0 created from Images
+Zone 82w created from Images
+Unit 082w created from Images
+feature 086W:none:76.0 created from Images
+feature 086W:none:106.0 created from Images
+feature 086W:none:108.0 created from Images
+feature 086W:none:121.0 created from Images
+unit 090A-C created from Image with hyphen in unit NOT added
+unit 090A-C created from Image with hyphen in unit NOT added
+unit 090A-C created from Image with hyphen in unit NOT added
+unit 090A-C created from Image with hyphen in unit NOT added
+unit 090A-C created from Image with hyphen in unit NOT added
+unit 090A-C created from Image with hyphen in unit NOT added
+unit 090A-C created from Image with hyphen in unit NOT added
+unit 090C-E created from Image with hyphen in unit NOT added
+unit 090A-C created from Image with hyphen in unit NOT added
+stratum 097W:C-4-15 created from Images
+stratum 100W:C-4-7 created from Images
+stratum 031W:C-2-6 created from Images
+stratum 062W:L-2-7 created from Images
+Zone TT01 created from Images
+Unit TT01 created from Images
+Unit TT created from Images
+stratum 031W:F-1-06 created from Images
+stratum 031W:M-3-3.68 created from Images
+stratum 031W:M-3-3.65 created from Images
+stratum 031W:N-1-03 created from Images
+stratum 020P:F-1-06 created from Images
+stratum 020P:N-1-03 created from Images
+stratum 020P:B-03-04.3 created from Images
+stratum 018P:L-01-08 created from Images
+stratum 033W:F-02-09 created from Images
+Unit 020W created from Images
+stratum 020W:F-02-09 created from Images
+stratum 091D:D-01-12.3 created from Images
+stratum 082W:L-04-15.5 created from Images
+stratum 033B:L-01-03 created from Images
+stratum 031W:F-01-06 created from Images
+stratum 033W:G-02-07 created from Images
+stratum 033W:C-01-03 created from Images
+stratum 037B:C-01-03 created from Images
+stratum 037W:F-02-05 created from Images
+stratum 043W:L-04-6.7 created from Images
+stratum 043W:F-02-05 created from Images
+stratum 058W:F-02-07 created from Images
+stratum none:W-01-03 created from Images
+stratum 056W:F-01-04 created from Images
+stratum 057W:W-01-03 created from Images
+stratum 058W:B-01-02 created from Images
+stratum 100W:C-02-5.2 created from Images
+stratum 062A:H-02-5.5 created from Images
+stratum 062W:C-04-09 created from Images
+stratum 062W:C26.8-26.8 created from Images
+stratum 062W:C26.8-26.9 created from Images
+stratum 062W:C26.8-26.10 created from Images
+stratum 062W:C26.8-26.11 created from Images
+stratum 090W:F-02-09 created from Images
+stratum 082W:M-02-13.5 created from Images
+stratum 082W:C-05-15 created from Images
+stratum 082W:M-01-13 created from Images
+stratum 081W:F-02-13 created from Images
+stratum 067W:F-01-04 created from Images
+stratum 062W:H-01-41 created from Images
+Unit 124 created from Images
+stratum 124W:L-108.5 created from Images
+stratum 124Z:J-02-12 created from Images
+stratum 127W:L-02-11.5 created from Images
+stratum 127W:F-01-04 created from Images
+stratum 127W:L-01-08 created from Images
+stratum 100W:W-01-03 created from Images
+stratum 033W:C-03-12 created from Images
+stratum 102W:L-01-3.5 created from Images
+stratum 119W:C-02-05 created from Images
+stratum 119W:F-03-20 created from Images
+stratum 119W:B-05-21 created from Images
+stratum 127B:D-01-03 created from Images
+stratum 127W:L-08-20 created from Images
+stratum 129W:F-01-08 created from Images
+stratum 138W:L-02-09 created from Images
+stratum 143W:L-01-04 created from Images
+stratum 142W:L-01-04 created from Images
+stratum 143W:B-01-02 created from Images
+stratum 033W:L-01-12 created from Images
+stratum Other:C-30-30 created from Images
+stratum Other:F-01-15 created from Images
+stratum Other:M-01-19 created from Images
+stratum Other:C-15-21 created from Images
+stratum Other:M-01-14 created from Images
+stratum 043W:B-04-09 created from Images
+stratum none:C-04-07 created from Images
+stratum 051W:D-02-08 created from Images
+stratum 091W:C-06-20 created from Images
+stratum 093W:L-18.7 created from Images
+stratum 093W:L-36.7 created from Images
+stratum 094A:L-01 created from Images
+stratum 094A:L-01-03 created from Images
+stratum 094C:L-01-03 created from Images
+stratum 094W:L-01-03 created from Images
+stratum 098W:L-01-08 created from Images
+stratum 097W:N-01-00 created from Images
+stratum 097W:N-01-01 created from Images
+stratum 097W:N-01-02 created from Images
+stratum 097W:N-01-03 created from Images
+stratum 097W:C-04-15 created from Images
+stratum 097W:T-01-16 created from Images
+stratum 097W:D-02-16 created from Images
+stratum 097W:C-01-45 created from Images
+stratum 100W:N-01-3 created from Images
+stratum 100W:N-01-03 created from Images
+stratum 059W:P-01-1.5 created from Images
+stratum 043W:B-02-03 created from Images
+stratum 043W:F-01-03 created from Images
+stratum 088W:B-01-02 created from Images
+stratum 056W:F-02-04.5 created from Images
+stratum 062W:C-02-07 created from Images
+stratum 100W:C-03-06 created from Images
+stratum 100W:C-02-05.3 created from Images
+stratum 102C:C-01-23 created from Images
+stratum 102C:C-02-24 created from Images
+Unit 02BW created from Images
+stratum 02BW:M-01-03 created from Images
+Unit 08BW created from Images
+stratum 08BW:B-03-07 created from Images
+stratum 011P:B-05-08 created from Images
+Unit 30BW created from Images
+stratum 031B:G-01-04 created from Images
+stratum 031W:C-02-06.5 created from Images
+Unit 05A created from Images
+stratum 05A:G-01-04 created from Images
+Unit 6 created from Images
+stratum 6:C-01-04 created from Images
+stratum 011P:C-01-04 created from Images
+stratum 011P:B-01-02 created from Images
+stratum 013W:C-01-03 created from Images
+Unit 013P created from Images
+stratum 013P:C-02-04 created from Images
+stratum 014P:C-01-04 created from Images
+stratum 016P:C-02-08 created from Images
+stratum 018P:B-01-02 created from Images
+stratum 020P:B-01-02 created from Images
+stratum 030W:C-03-09 created from Images
+stratum 030W:C-02-08 created from Images
+stratum 033W:G-01.5-14.5 created from Images
+stratum 033W:F-03-13 created from Images
+stratum 033W:S-01-14.6 created from Images
+stratum 036W:F-01-15 created from Images
+stratum 033W:M-01-11 created from Images
+stratum 036W:S-01-4.6 created from Images
+stratum 036W:C-02.5-04.5 created from Images
+stratum 036W:C-05-07 created from Images
+stratum 036W:M-01-14 created from Images
+stratum 043W:F-02-07 created from Images
+stratum 047W:C-01-15 created from Images
+stratum 051W:H-02-09 created from Images
+stratum 057W:CF-02-05 created from Images
+stratum 057W:C-F1-04 created from Images
+stratum 062W:C33-33 created from Images
+stratum 058W:H-01-08 created from Images
+stratum 059W:P-01-01.5 created from Images
+stratum 062A:F-01-04 created from Images
+stratum 062W:L-02-07.1 created from Images
+stratum 064W:C-01-03 created from Images
+stratum 064W:B-02-03 created from Images
+stratum 064W:B-04-05 created from Images
+stratum 067W:WB-2.6-05.6 created from Images
+stratum 067W:NC-2.5-5.5 created from Images
+stratum 067W:NB-2.6-5.6 created from Images
+stratum 067W:P-00-00 created from Images
+stratum 081W:C-02-07 created from Images
+stratum 081W:N-01-06 created from Images
+stratum 081W:C-05-10 created from Images
+stratum 082W:C-01-04 created from Images
+stratum 084W:C-01-05 created from Images
+stratum 084W:H01-08 created from Images
+stratum 084W:D-01-09 created from Images
+stratum 084W:H-01-08 created from Images
+stratum 084W:N-02-04 created from Images
+stratum 086W:F-01-04 created from Images
+stratum 086W:H-03-14 created from Images
+stratum 089W:B-01-02 created from Images
+stratum 089W:M-01-05 created from Images
+stratum 091C:F-01-03 created from Images
+stratum 091C:H-02-11 created from Images
+stratum 091W:C-05-19 created from Images
+stratum 091W:C-07-21 created from Images
+stratum 091D:C-03-17 created from Images
+stratum 092W:L-02-11 created from Images
+stratum 093W:C-07-09 created from Images
+stratum 093W:F-01-10 created from Images
+stratum 093W:L-14.5-30.5 created from Images
+stratum 097A:H-01-04 created from Images
+stratum 100W:C-01-04.2 created from Images
+stratum 100W:C-01-04 created from Images
+stratum 100W:C-02-05 created from Images
+stratum 100W:C-02-05.2 created from Images
+stratum 100W:C-07-12.1 created from Images
+stratum 100W:FG-01-16 created from Images
+stratum 102A:H-01-13 created from Images
+stratum 102A:C-01-03 created from Images
+stratum 102A:I-02-30 created from Images
+stratum 102A:L-08-19 created from Images
+stratum 102W:C-07-09 created from Images
+stratum 118W:F-02-05 created from Images
+stratum 118W:D-01-16 created from Images
+stratum 118W:G-03-17 created from Images
+stratum 121W:L-06-11 created from Images
+stratum 127W:U-01-45 created from Images
+stratum 129W:F-01-08.3 created from Images
+stratum 141W:B-01-02 created from Images
+stratum 146W:B-01-02 created from Images
+stratum 08BW:C-01-03 created from Images
+stratum 08BW:B-02-06 created from Images
+stratum 011P:B-02-03 created from Images
+stratum 011P:Q-01-04 created from Images
+stratum 011P:C-01-05 created from Images
+stratum 011P:Q-04-10 created from Images
+stratum 014P:C-02-05 created from Images
+stratum 015P:M-01-02 created from Images
+stratum 020P:C-01-03 created from Images
+stratum 019P:C-05-08.9 created from Images
+stratum 020P:Q-02-06 created from Images
+stratum 020P:L-01.5-04.6 created from Images
+stratum 030W:C-01-05.5 created from Images
+stratum 031A:I-02-05 created from Images
+stratum 033W:M-03-12 created from Images
+stratum 036W:C-03-05 created from Images
+stratum 036W:L-02-05.6 created from Images
+stratum 036W:H-01-11 created from Images
+stratum 036W:S-01-04.6 created from Images
+stratum 037A:C-01-05 created from Images
+stratum 037W:C-02-08 created from Images
+stratum 037W:C-02-80 created from Images
+stratum 037W:C-04-10 created from Images
+stratum 037W:C-03-09 created from Images
+stratum 037W:B-02-11 created from Images
+stratum 043W:G-01-10 created from Images
+stratum 043W:F-03-08 created from Images
+stratum 057W:F-02-05 created from Images
+stratum 057W:L-02-09 created from Images
+stratum 059W:C-01-04 created from Images
+stratum 059W:C-03-06 created from Images
+stratum 062W:C-02-07.2 created from Images
+stratum 062W:C-03-08 created from Images
+stratum 064W:L-01-09 created from Images
+stratum 067W:FC-2.5-05.5 created from Images
+stratum 067W:FC-2.5-2.5 created from Images
+stratum 081W:C-04-09 created from Images
+stratum 083W:M-01-04.1 created from Images
+stratum 084W:N-01-03 created from Images
+stratum 086W:I-03-17 created from Images
+stratum 091W:C-04-18 created from Images
+stratum 092W:C-01-05 created from Images
+stratum 093W:C-03-05 created from Images
+stratum 097A:C-01-03 created from Images
+stratum 100W:C-07-17 created from Images
+stratum 100W:C-01-04.3 created from Images
+stratum 100W:C-07-12 created from Images
+stratum 100W:C-03-04 created from Images
+stratum 100W:C-08-13 created from Images
+stratum 100W:C-09-14 created from Images
+stratum 102A:C-02-04 created from Images
+stratum 102B:C-03-07 created from Images
+stratum 118W:F-03-17 created from Images
+stratum 119W:C-03-06 created from Images
+stratum 121E:D-01-03 created from Images
+stratum 121E:D-02-04 created from Images
+stratum 124W:C-01-01.2 created from Images
+stratum 127W:J-01-15 created from Images
+stratum 129W:C-04.5-12.5 created from Images
+stratum 129W:P-00-00 created from Images
+stratum 129W:C-10.1-11.7 created from Images
+stratum 129W:F-02.5-86.5 created from Images
+stratum 130W:F-01-03 created from Images
