@@ -2,7 +2,7 @@ class TreeRing < ApplicationRecord
   belongs_to :occupation
   belongs_to :species_tree_ring
   belongs_to :stratum
-  has_one :unit, :through => :stratum
+  has_one :unit, -> {distinct}, :through => :stratum
 
   def self.sorted
     order("trl_no")

@@ -1,7 +1,7 @@
 class Ceramic < ActiveRecord::Base
   belongs_to :feature
-  has_many :strata, :through => :feature
-  has_many :units, :through => :strata
+  has_many :strata, -> {distinct}, :through => :feature
+  has_many :units, -> {distinct}, :through => :strata
 
   belongs_to :ceramic_vessel_appendage
   belongs_to :ceramic_vessel_form

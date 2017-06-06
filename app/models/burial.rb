@@ -2,8 +2,8 @@ class Burial < ActiveRecord::Base
   belongs_to :burial_sex
   belongs_to :occupation
   belongs_to :feature
-  has_many :strata, :through => :feature
-  has_many :units, :through => :strata
+  has_many :strata, -> {distinct}, :through => :feature
+  has_many :units, -> {distinct}, :through => :strata
 
   def self.sorted
     order("new_burial_no")
