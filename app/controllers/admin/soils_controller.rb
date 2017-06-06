@@ -1,7 +1,7 @@
 class Admin::SoilsController < ApplicationController
 
   active_scaffold :soil do |conf|
-    conf.columns = [:site, :units, :strata, :features, :fs_no, :box, :period, :count, :grid_ew, :grid_ns, :quad, :exact_prov, :depth_begin, :depth_end, :strat_other, :date, :excavator, :art_type, :sample_no, :comments, :entered_by, :location]
+    conf.columns = [:site, :units, :strata, :features, :fs_no, :box, :count, :grid_ew, :grid_ns, :quad, :exact_prov, :depth_begin, :depth_end, :strat_other, :date, :excavator, :art_type, :sample_no, :comments, :entered_by, :location]
     conf.columns[:art_type].form_ui = :select
     conf.columns[:units].form_ui = :record_select
     conf.columns[:strata].form_ui = :record_select
