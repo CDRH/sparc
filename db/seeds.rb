@@ -48,7 +48,7 @@
 # returns the features
 #   unit has many strata which have many features
 #   feature is uniquely identified by unit, stratum, and feature_no
-def associate_strata_features unit, aStrata, aFeatures, related_item, source
+def associate_strata_features unit, aStrata, aFeatures, related_item, source, mult_feature=true
   # pull out all of the strata from a single column
   strata = aStrata.split(/[;,]/).map { |s| s.strip }
   strata.uniq!
@@ -74,9 +74,8 @@ def associate_strata_features unit, aStrata, aFeatures, related_item, source
       # associate the feature with the specific record (ornament, perishable, etc)
       stratum.features << feature if !stratum.features.include?(feature)
       if related_item
-        # check if singular or plural features
-        if defined? related_item.features
-          related_item[:features] = [] if related[:features].blank?
+        if mult_feature
+          related_item[:features] = [] if related_item[:features].blank?
           related_item[:features] << feature
         else
           related_item[:feature] = feature
@@ -912,24 +911,9 @@ def seed_burials
     last_unit = burial[:unit]
 
     # Handle foreign keys
-    # Note: burial may only have one feature
     unit = select_or_create_unit(burial[:unit], "burials")
-    feature_no = get_feature_number(burial[:feature_no], "Burials")
-    # need to make the stratum first in order to properly find / create feature
-    # TODO there might be a better way to pair this with the associate_strat_features method
-    # as this is duplicating some of its effort
-    stratum = select_or_create_stratum(unit, burial[:strat], "Burial #{burial[:new_burial_no]}")
-    feature = stratum.features.where(feature_no: feature_no).first
-    if feature.nil?
-      feature = Feature.create(
-        feature_no: feature_no,
-        unit_no: unit.unit_no,
-        comments: "imported from burials"
-      )
-      report "feature", "#{unit.unit_no}:#{burial[:strat]}:#{feature_no}", "burials"
-    end
-    stratum.features << feature unless stratum.features.include?(feature)
-    burial[:feature] = feature
+    # Note: burial may only have one feature
+    associate_strata_features(unit, burial[:strat], burial[:feature_no], burial, "Burial", false)
 
     burial[:occupation] = find_or_create_occupation(burial[:occupation])
     burial[:burial_sex] = create_if_not_exists(BurialSex, :name, burial[:burial_sex])
@@ -999,23 +983,7 @@ def seed_ceramics
     # Handle foreign keys
     # Note: ceramic may only have one feature
     unit = select_or_create_unit(ceramic[:unit], "ceramics")
-    feature_no = get_feature_number(ceramic[:feature_no], "Ceramics")
-
-    # need to make the stratum first in order to properly find / create feature
-    # TODO there might be a better way to pair this with the associate_strat_features method
-    # as this is duplicating some of its effort
-    stratum = select_or_create_stratum(unit, ceramic[:strat], "Ceramics #{ceramic[:fs_no]}")
-    feature = stratum.features.where(feature_no: feature_no).first
-    if feature.nil?
-      feature = Feature.create(
-        feature_no: feature_no,
-        unit_no: unit.unit_no,
-        comments: "imported from ceramics"
-      )
-      report "feature", "#{unit.unit_no}:#{ceramic[:strat]}:#{feature_no}", "ceramics"
-    end
-    stratum.features << feature unless stratum.features.include?(feature)
-    ceramic[:feature] = feature
+    associate_strata_features(unit, ceramic[:strat], ceramic[:feature_no], ceramic, "Ceramics", false)
 
     # all those ceramic tables....
     ceramic[:ceramic_vessel_form] = create_if_not_exists(CeramicVesselForm, :name, ceramic[:ceramic_vessel_form])
@@ -1135,28 +1103,7 @@ def seed_ornaments
 
     # Handle foreign keys
     unit = select_or_create_unit(ornament[:unit], "Ornaments")
-
-    feature_no = get_feature_number(ornament[:feature], "Ornaments")
-
-    # need to make the stratum first in order to properly find / create feature
-    # TODO there might be a better way to pair this with the associate_strat_features method
-    # as this is duplicating some of its effort
-    strats = ornament[:strat].split(/[;,]/).map{ |strat| strat.strip }
-    strats.uniq!
-    strats.each do |strat|
-      stratum = select_or_create_stratum(unit, strat, "Ornament #{ornament[:salmon_museum_no]}")
-      feature = stratum.features.where(feature_no: feature_no).first
-      if feature.nil?
-        feature = Feature.create(
-          feature_no: feature_no,
-          unit_no: unit.unit_no,
-          comments: "imported from ornaments"
-        )
-        report "feature", "#{unit.unit_no}:#{strat}:#{feature_no}", "ornaments"
-      end
-      stratum.features << feature unless stratum.features.include?(feature)
-      ornament[:feature] = feature
-    end
+    associate_strata_features(unit, ornament[:strat], ornament[:feature], ornament, "Ornament", false)
 
     ornament[:occupation] = find_or_create_occupation(ornament[:occupation])
 
