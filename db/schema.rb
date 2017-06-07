@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601134756) do
+ActiveRecord::Schema.define(version: 20170602141059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,62 @@ ActiveRecord::Schema.define(version: 20170601134756) do
     t.index ["stratum_id"], name: "index_bone_tools_strata_on_stratum_id", using: :btree
   end
 
+  create_table "burial_sexes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "burials", force: :cascade do |t|
+    t.string   "unit"
+    t.string   "strat"
+    t.string   "feature_no"
+    t.string   "new_burial_no"
+    t.string   "age"
+    t.string   "grid_ns"
+    t.string   "grid_ew"
+    t.string   "quad"
+    t.string   "depth_begin"
+    t.string   "depth_end"
+    t.string   "date"
+    t.string   "excavator"
+    t.string   "record_field_key_no"
+    t.string   "associated_artifacts"
+    t.string   "description"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "feature_id"
+    t.integer  "burial_sex_id"
+    t.integer  "occupation_id"
+    t.index ["burial_sex_id"], name: "index_burials_on_burial_sex_id", using: :btree
+    t.index ["feature_id"], name: "index_burials_on_feature_id", using: :btree
+    t.index ["occupation_id"], name: "index_burials_on_occupation_id", using: :btree
+  end
+
+  create_table "ceramic_exterior_pigments", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_exterior_surfaces", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_interior_pigments", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_interior_surfaces", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ceramic_inventories", force: :cascade do |t|
     t.string   "site"
     t.string   "box"
@@ -113,6 +169,128 @@ ActiveRecord::Schema.define(version: 20170601134756) do
     t.integer "ceramic_inventory_id"
     t.index ["ceramic_inventory_id"], name: "index_ceramic_inventories_features_on_ceramic_inventory_id", using: :btree
     t.index ["feature_id"], name: "index_ceramic_inventories_features_on_feature_id", using: :btree
+  end
+
+  create_table "ceramic_pastes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_slips", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_specific_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_styles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_tempers", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_traditions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_varieties", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_vessel_appendages", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_vessel_forms", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_vessel_parts", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramic_wares", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ceramics", force: :cascade do |t|
+    t.string   "site"
+    t.string   "fs_no"
+    t.integer  "lot_no"
+    t.integer  "cat_no"
+    t.string   "unit"
+    t.string   "strat"
+    t.string   "feature_no"
+    t.string   "sa_no"
+    t.string   "pulled_sample"
+    t.decimal  "wall_thickness"
+    t.decimal  "rim_radius"
+    t.integer  "rim_arc"
+    t.integer  "rim_eversion"
+    t.string   "residues"
+    t.string   "modification"
+    t.integer  "count"
+    t.decimal  "weight"
+    t.string   "vessel_no"
+    t.string   "comments"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "feature_id"
+    t.integer  "ceramic_vessel_form_id"
+    t.integer  "ceramic_vessel_part_id"
+    t.integer  "ceramic_exterior_pigment_id"
+    t.integer  "ceramic_interior_pigment_id"
+    t.integer  "ceramic_exterior_surface_id"
+    t.integer  "ceramic_interior_surface_id"
+    t.integer  "ceramic_vessel_appendage_id"
+    t.integer  "ceramic_temper_id"
+    t.integer  "ceramic_paste_id"
+    t.integer  "ceramic_slip_id"
+    t.integer  "ceramic_tradition_id"
+    t.integer  "ceramic_variety_id"
+    t.integer  "ceramic_ware_id"
+    t.integer  "ceramic_specific_type_id"
+    t.integer  "ceramic_style_id"
+    t.index ["ceramic_exterior_pigment_id"], name: "index_ceramics_on_ceramic_exterior_pigment_id", using: :btree
+    t.index ["ceramic_exterior_surface_id"], name: "index_ceramics_on_ceramic_exterior_surface_id", using: :btree
+    t.index ["ceramic_interior_pigment_id"], name: "index_ceramics_on_ceramic_interior_pigment_id", using: :btree
+    t.index ["ceramic_interior_surface_id"], name: "index_ceramics_on_ceramic_interior_surface_id", using: :btree
+    t.index ["ceramic_paste_id"], name: "index_ceramics_on_ceramic_paste_id", using: :btree
+    t.index ["ceramic_slip_id"], name: "index_ceramics_on_ceramic_slip_id", using: :btree
+    t.index ["ceramic_specific_type_id"], name: "index_ceramics_on_ceramic_specific_type_id", using: :btree
+    t.index ["ceramic_style_id"], name: "index_ceramics_on_ceramic_style_id", using: :btree
+    t.index ["ceramic_temper_id"], name: "index_ceramics_on_ceramic_temper_id", using: :btree
+    t.index ["ceramic_tradition_id"], name: "index_ceramics_on_ceramic_tradition_id", using: :btree
+    t.index ["ceramic_variety_id"], name: "index_ceramics_on_ceramic_variety_id", using: :btree
+    t.index ["ceramic_vessel_appendage_id"], name: "index_ceramics_on_ceramic_vessel_appendage_id", using: :btree
+    t.index ["ceramic_vessel_form_id"], name: "index_ceramics_on_ceramic_vessel_form_id", using: :btree
+    t.index ["ceramic_vessel_part_id"], name: "index_ceramics_on_ceramic_vessel_part_id", using: :btree
+    t.index ["ceramic_ware_id"], name: "index_ceramics_on_ceramic_ware_id", using: :btree
+    t.index ["feature_id"], name: "index_ceramics_on_feature_id", using: :btree
   end
 
   create_table "door_between_multiple_rooms", force: :cascade do |t|
@@ -233,6 +411,13 @@ ActiveRecord::Schema.define(version: 20170601134756) do
     t.index ["perishable_id"], name: "index_features_perishables_on_perishable_id", using: :btree
   end
 
+  create_table "features_pollen_inventories", id: false, force: :cascade do |t|
+    t.integer "pollen_inventory_id"
+    t.integer "feature_id"
+    t.index ["feature_id"], name: "index_features_pollen_inventories_on_feature_id", using: :btree
+    t.index ["pollen_inventory_id"], name: "index_features_pollen_inventories_on_pollen_inventory_id", using: :btree
+  end
+
   create_table "features_soils", id: false, force: :cascade do |t|
     t.integer "soil_id"
     t.integer "feature_id"
@@ -245,6 +430,13 @@ ActiveRecord::Schema.define(version: 20170601134756) do
     t.integer "stratum_id"
     t.index ["feature_id"], name: "index_features_strata_on_feature_id", using: :btree
     t.index ["stratum_id"], name: "index_features_strata_on_stratum_id", using: :btree
+  end
+
+  create_table "features_wood_inventories", id: false, force: :cascade do |t|
+    t.integer "wood_inventory_id"
+    t.integer "feature_id"
+    t.index ["feature_id"], name: "index_features_wood_inventories_on_feature_id", using: :btree
+    t.index ["wood_inventory_id"], name: "index_features_wood_inventories_on_wood_inventory_id", using: :btree
   end
 
   create_table "image_assocnoegs", force: :cascade do |t|
@@ -447,6 +639,23 @@ ActiveRecord::Schema.define(version: 20170601134756) do
     t.index ["occupation_id"], name: "index_perishables_on_occupation_id", using: :btree
   end
 
+  create_table "pollen_inventories", force: :cascade do |t|
+    t.string "unit"
+    t.string "strat"
+    t.string "strat_other"
+    t.string "salmon_museum_no"
+    t.string "sa_no"
+    t.string "grid"
+    t.string "quad"
+    t.string "depth"
+    t.string "box"
+    t.string "record_field_key_no"
+    t.string "other_sample_no"
+    t.string "date"
+    t.string "analysis_completed"
+    t.string "frequency"
+  end
+
   create_table "residential_features", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -522,6 +731,12 @@ ActiveRecord::Schema.define(version: 20170601134756) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "species_tree_rings", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "stories", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -557,6 +772,29 @@ ActiveRecord::Schema.define(version: 20170601134756) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_t_shaped_doors_on_name", unique: true, using: :btree
+  end
+
+  create_table "tree_rings", force: :cascade do |t|
+    t.string  "site"
+    t.string  "unit_no"
+    t.string  "record_field_key_no"
+    t.string  "strat"
+    t.string  "feature_no"
+    t.string  "trl_no"
+    t.string  "year_dated"
+    t.string  "windes_sample"
+    t.string  "field_no"
+    t.string  "inner_date"
+    t.string  "outer_date"
+    t.string  "symbol"
+    t.string  "cutting_date"
+    t.string  "comments"
+    t.integer "stratum_id"
+    t.integer "occupation_id"
+    t.integer "species_tree_ring_id"
+    t.index ["occupation_id"], name: "index_tree_rings_on_occupation_id", using: :btree
+    t.index ["species_tree_ring_id"], name: "index_tree_rings_on_species_tree_ring_id", using: :btree
+    t.index ["stratum_id"], name: "index_tree_rings_on_stratum_id", using: :btree
   end
 
   create_table "type_descriptions", force: :cascade do |t|
@@ -616,6 +854,27 @@ ActiveRecord::Schema.define(version: 20170601134756) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "wood_inventories", force: :cascade do |t|
+    t.string "site"
+    t.string "unit"
+    t.string "strat"
+    t.string "strat_other"
+    t.string "feature_no"
+    t.string "sa_no"
+    t.string "salmon_museum_no"
+    t.string "storage_location"
+    t.string "display"
+    t.string "museum_date"
+    t.string "grid"
+    t.string "quad"
+    t.string "depth"
+    t.string "record_field_key_no"
+    t.string "field_date"
+    t.string "lab"
+    t.string "analysis"
+    t.string "description"
+  end
+
   create_table "zones", force: :cascade do |t|
     t.string "name"
     t.text   "comments"
@@ -644,10 +903,14 @@ ActiveRecord::Schema.define(version: 20170601134756) do
   add_foreign_key "features_lithic_inventories", "lithic_inventories"
   add_foreign_key "features_perishables", "features"
   add_foreign_key "features_perishables", "perishables"
+  add_foreign_key "features_pollen_inventories", "features"
+  add_foreign_key "features_pollen_inventories", "pollen_inventories"
   add_foreign_key "features_soils", "features"
   add_foreign_key "features_soils", "soils"
   add_foreign_key "features_strata", "features"
   add_foreign_key "features_strata", "strata"
+  add_foreign_key "features_wood_inventories", "features"
+  add_foreign_key "features_wood_inventories", "wood_inventories"
   add_foreign_key "image_subjects_images", "image_subjects", column: "image_subjects_id"
   add_foreign_key "image_subjects_images", "images", column: "images_id"
   add_foreign_key "images", "image_assocnoegs"

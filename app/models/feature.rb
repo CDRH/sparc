@@ -10,6 +10,7 @@ class Feature < ActiveRecord::Base
   has_and_belongs_to_many :strata
   has_many :units, :through => :strata
 
+  has_many :burials
   has_many :ornaments
   has_and_belongs_to_many :bone_inventories
   has_and_belongs_to_many :ceramic_inventories
@@ -17,7 +18,9 @@ class Feature < ActiveRecord::Base
   has_and_belongs_to_many :images
   has_and_belongs_to_many :lithic_inventories
   has_and_belongs_to_many :perishables
+  has_and_belongs_to_many :pollen_inventories
   has_and_belongs_to_many :soils
+  has_and_belongs_to_many :wood_inventories
 
   def to_label
     "#{strata.map{|s| s.to_label}.join(', ')} : #{feature_no}"
