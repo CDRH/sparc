@@ -15,6 +15,7 @@
   bone_inventory: 'xls/BoneInventory_partial.xlsx',
   ceramic_inventory: 'xls/CeramicInventory.xlsx',
   lithic_inventory: 'xls/LithicInventory.xlsx',
+  obsidian_inventory: 'xls/ObsidianInventory.xlsx',
   pollen_inventory: 'xls/PollenInventory.xlsx',
   wood_inventory: 'xls/WoodInventory.xls',
 
@@ -73,7 +74,13 @@ def associate_strata_features unit, aStrata, aFeatures, related_item, source
       # associate the feature with the specific record (ornament, perishable, etc)
       stratum.features << feature if !stratum.features.include?(feature)
       if related_item
-        related_item[:features] << feature
+        # check if singular or plural features
+        if defined? related_item.features
+          related_item[:features] = [] if related[:features].blank?
+          related_item[:features] << feature
+        else
+          related_item[:feature] = feature
+        end
       end
     end
   end
@@ -634,6 +641,68 @@ def seed_lithic_inventories
     # Output and save
 #    puts lithic[:fs_no]
     LithicInventory.create(lithic)
+  end
+end
+
+########################
+# Obsidian Inventories #
+########################
+def seed_obsidian_inventory
+  s = Roo::Excelx.new(@files[:obsidian_inventory])
+
+  puts "\n\n\nCreating Obsidian Inventories\n"
+
+  columns = {
+    site: "SITE",
+    box: "BOX",
+    fs_no: "FS",
+    unit: "ROOM",
+    strat: "STRATUM",
+    strat_other: "OTHSTRATS",
+    feature_no: "FEATURE",
+    lithic_id: "Lithic ID No",
+    count: "COUNT",
+    occupation: "PERIOD",
+    material_type: "MATERIAL TYPE",
+    shackley_sourcing: "Shackley Sourcing",
+    obsidian_identified_source: "ID'ed Source",
+    grid_ew: "GRIDEW",
+    grid_ns: "GRIDNS",
+    quad: "QUAD",
+    exact_prov: "EXACTPROV",
+    artifact_type: "ART TYPE",
+    depth_begin: "DEPTHBEG",
+    depth_end: "DEPTHEND",
+    date: "DATE",
+    excavator: "EXCAVATOR",
+    record_field_key_no: "RECORDKEY",
+    comments: "COMMENTS",
+    entered_by: "ENTBY",
+    location: "LOCATION"
+  }
+
+  last_room = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:site] == "SITE"
+
+    obsidian = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nRoom #{obsidian[:unit]}:" if obsidian[:unit] != last_room
+    last_room = obsidian[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(obsidian[:unit], "Obsidian Inventories")
+
+    associate_strata_features(unit, obsidian[:strat], obsidian[:feature_no], obsidian, "Obsidian Inventories")
+
+    obsidian[:occupation] = find_or_create_occupation(obsidian[:occupation])
+    obsidian[:obsidian_identified_source] = create_if_not_exists(ObsidianIdentifiedSource, :name, obsidian[:obsidian_identified_source])
+
+    # Output and save
+    # puts obsidian[:fs_no]
+    ObsidianInventory.create(obsidian)
   end
 end
 
@@ -1451,6 +1520,7 @@ seed_features if Feature.count < 1
 seed_bone_inventory if BoneInventory.count < 1
 seed_ceramic_inventory if CeramicInventory.count < 1
 seed_lithic_inventories if LithicInventory.count < 1
+seed_obsidian_inventory if ObsidianInventory.count < 1
 seed_pollen_inventories if PollenInventory.count < 1
 seed_wood_inventories if WoodInventory.count < 1
 
