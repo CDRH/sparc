@@ -1,7 +1,7 @@
 class SelectArtifact < ApplicationRecord
   belongs_to :occupation
   has_and_belongs_to_many :strata
-  has_many :units, :through => :strata
+  has_many :units, -> {distinct}, :through => :strata
 
   def self.sorted
     order("artifact_no")

@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   tables = [
     :bone_inventories,
     :bone_tools,
+    :burials,
+    :ceramics,
     :ceramic_inventories,
     :eggshells,
     :features,
@@ -42,11 +44,14 @@ Rails.application.routes.draw do
     :lithic_inventories,
     :ornaments,
     :perishables,
+    :pollen_inventories,
     :room_types,
     :select_artifacts,
     :soils,
     :strata,
+    :tree_rings,
     :units,
+    :wood_inventories,
     :zones
   ]
 

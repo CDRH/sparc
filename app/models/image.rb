@@ -1,9 +1,9 @@
 class Image < ActiveRecord::Base
   has_and_belongs_to_many :features
-  has_many :strata, :through => :features
-  has_many :units, :through => :strata
-  has_many :zones, :through => :units
-  has_many :occupations, :through => :units
+  has_many :strata, -> {distinct}, :through => :features
+  has_many :units, -> {distinct}, :through => :strata
+  has_many :zones, -> {distinct}, :through => :units
+  has_many :occupations, -> {distinct}, :through => :units
 
   has_and_belongs_to_many :image_subjects
   belongs_to :image_assocnoeg

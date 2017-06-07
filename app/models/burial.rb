@@ -1,15 +1,16 @@
-class Perishable < ApplicationRecord
+class Burial < ActiveRecord::Base
+  belongs_to :burial_sex
   belongs_to :occupation
-  has_and_belongs_to_many :features
-  has_many :strata, -> {distinct}, :through => :features
+  belongs_to :feature
+  has_many :strata, -> {distinct}, :through => :feature
   has_many :units, -> {distinct}, :through => :strata
 
   def self.sorted
-    order("fs_no")
+    order("new_burial_no")
   end
 
   def to_label
-    fs_no
+    new_burial_no
   end
 
   def authorized_for_update?

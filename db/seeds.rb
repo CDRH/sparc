@@ -5,27 +5,32 @@
 # Spreadsheets #
 ################
 
-files = {
+@files = {
   # Primary Tables
-  units: 'xls/UnitSummary2017-CCH.xlsx',
-  strata: 'xls/Strata2017.xls',
-  features: 'xls/Features2017.xls',
+  units: 'xls/Units.xlsx',
+  strata: 'xls/Strata.xls',
+  features: 'xls/Features.xls',
 
   # Inventory Tables
-  bone_inventory: 'xls/Bone Inventory PARTIAL 11 rows.xlsx',
-  ceramic_inventory: 'xls/Ceramic Inventory 2017.xlsx',
-  lithic_inventory: 'xls/LithicInventory2017.xlsx',
+  bone_inventory: 'xls/BoneInventory_partial.xlsx',
+  ceramic_inventory: 'xls/CeramicInventory.xlsx',
+  lithic_inventory: 'xls/LithicInventory.xlsx',
+  pollen_inventory: 'xls/PollenInventory.xlsx',
+  wood_inventory: 'xls/WoodInventory.xls',
 
   # Analysis Tables
-  bonetools: 'xls/BoneToolDB.xlsx',
-  eggshells: 'xls/Eggshell2017.xls',
-  ornaments: 'xls/OrnamentDB2017.xlsx',
-  perishables: 'xls/Perishables2017.xls',
-  select_artifacts: 'xls/SelectArtifacts2017.xls',
-  soils: 'xls/SoilMaster2017.xlsx',
+  bonetools: 'xls/BoneTools.xlsx',
+  burials: 'xls/Burials.xls',
+  ceramics: 'xls/CeramicAnalysis.xlsx',
+  eggshells: 'xls/Eggshells.xls',
+  ornaments: 'xls/Ornaments.xlsx',
+  perishables: 'xls/Perishables.xls',
+  select_artifacts: 'xls/SelectArtifacts.xls',
+  soils: 'xls/Soils.xlsx',
+  tree_rings: 'xls/TreeRings.xlsx',
 
   # Images
-  images: 'xls/old/Images.xlsx'
+  images: 'xls/Images.xlsx'
 }
 
 # will contain an array of hashes
@@ -217,8 +222,8 @@ end
 #########
 # Units #
 #########
-def seed_units files
-  s = Roo::Excelx.new(files[:units])
+def seed_units
+  s = Roo::Excelx.new(@files[:units])
 
   puts "\n\n\nCreating Room Types\n"
 
@@ -296,8 +301,8 @@ end
 ##########
 # Strata #
 ##########
-def seed_strata files
-  s = Roo::Excel.new(files[:strata])
+def seed_strata
+  s = Roo::Excel.new(@files[:strata])
 
   puts "\n\n\nCreating Strata Types\n"
 
@@ -366,8 +371,8 @@ end
 ############
 # Features #
 ############
-def seed_features files
-  s = Roo::Excel.new(files[:features])
+def seed_features
+  s = Roo::Excel.new(@files[:features])
 
   puts "\n\n\nCreating Features\n"
 
@@ -408,7 +413,8 @@ def seed_features files
     last_unit = feature[:unit_no]
 
     # Handle foreign key columns
-
+    # standardize feature number
+    feature[:feature_no] = get_feature_number feature[:feature_no], "features"
     unit = find_or_create_and_log("Feature #{feature[:feature_no]}", Unit, unit_no: feature[:unit_no])
 
     # Process each stratum in Strat column
@@ -416,7 +422,7 @@ def seed_features files
     strats = feature[:strat].split(/[;,]/).map{ |strat| strat.strip }
     strats.uniq!
     strats.each do |strat|
-      feature[:strata] << find_or_create_and_log("Feature #{feature[:feature_no]}", Stratum, strat_all: strat, unit_id: unit.id)
+      feature[:strata] << select_or_create_stratum(unit, strat, "Feature #{feature[:feature_no]}")
     end
 
     feature[:occupation] = find_or_create_occupation(feature[:occupation])
@@ -443,8 +449,8 @@ end
 ##################
 # Bone Inventory #
 ##################
-def seed_bone_inventory files
-  s = Roo::Excelx.new(files[:bone_inventory])
+def seed_bone_inventory
+  s = Roo::Excelx.new(@files[:bone_inventory])
 
   puts "\n\n\nCreating Bone Inventories\n"
 
@@ -507,8 +513,8 @@ end
 #####################
 # Ceramic Inventory #
 #####################
-def seed_ceramic_inventory files
-  s = Roo::Excelx.new(files[:ceramic_inventory])
+def seed_ceramic_inventory
+  s = Roo::Excelx.new(@files[:ceramic_inventory])
 
   puts "\n\n\nCreating Ceramic Inventories\n"
 
@@ -571,8 +577,8 @@ end
 ######################
 # Lithic Inventories #
 ######################
-def seed_lithic_inventories files
-  s = Roo::Excelx.new(files[:lithic_inventory])
+def seed_lithic_inventories
+  s = Roo::Excelx.new(@files[:lithic_inventory])
 
   puts "\n\n\nCreating Lithic Inventories\n"
 
@@ -631,6 +637,111 @@ def seed_lithic_inventories files
   end
 end
 
+######################
+# Pollen Inventories #
+######################
+def seed_pollen_inventories
+  s = Roo::Excelx.new(@files[:pollen_inventory])
+
+  puts "\n\n\nCreating Pollen Inventories\n"
+
+  columns = {
+    salmon_museum_no: "Salmon Museum No",
+    unit: "Room",
+    strat: "Stratum",
+    strat_other: "Other Strata",
+    feature_no: "Feature No",
+    sa_no: "SA No",
+    grid: "Grid",
+    quad: "Quad",
+    depth: "Depth",
+    box: "Storage Box",
+    record_field_key_no: "Record Key No",
+    other_sample_no: "Other Sample No.",
+    date: "Field Date",
+    analysis_completed: "Analysis Completed",
+    frequency: "Frequency"
+  }
+
+  last_room = ""
+  s.sheet('POLLEN').each(columns) do |row|
+    # Skip header row
+    next if row[:salmon_museum_no] == "Salmon Museum No"
+
+    pollen = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nRoom #{pollen[:unit]}:" if pollen[:unit] != last_room
+    last_room = pollen[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(pollen[:unit], "Pollen Inventories")
+
+    pollen[:features] = []
+    # TODO will need to revisit after splitting strata into primary / other
+    # in join table
+    associate_strata_features(unit, pollen[:strat], pollen[:feature_no], pollen, "Pollen Inventories")
+    pollen.delete(:feature_no)
+    # Output and save
+    # puts pollen[:salmon_museum_no]
+    PollenInventory.create(pollen)
+  end
+end
+
+######################
+# Wood Inventories #
+######################
+def seed_wood_inventories
+  s = Roo::Excel.new(@files[:wood_inventory])
+
+  puts "\n\n\nCreating Wood Inventories\n"
+
+  columns = {
+    site: "SITE",
+    unit: "ROOM",
+    strat: "STRATUM",
+    strat_other: "OTHER STRATA",
+    feature_no: "FEATURE NO",
+    sa_no: "SA NO",
+    salmon_museum_no: "MUSEUM NO",
+    storage_location: "STORAGE LOCATION",
+    display: "DISPLAY",
+    museum_date: "MUSEUM DATE",
+    grid: "GRID",
+    quad: "QUAD",
+    depth: "DEPTH (mbd)",
+    record_field_key_no: "RECORD KEY",
+    field_date: "FIELD DATE",
+    lab: "LAB NO",
+    analysis: "ANALYSIS",
+    description: "DESCRIPTION"
+  }
+
+  last_room = ""
+  s.sheet('data').each(columns) do |row|
+    # Skip header row
+    next if row[:site] == "SITE"
+
+    wood = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nRoom #{wood[:unit]}:" if wood[:unit] != last_room
+    last_room = wood[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(wood[:unit], "Wood Inventories")
+
+    wood[:features] = []
+    # TODO will need to revisit after splitting strata into primary / other
+    # in join table
+    associate_strata_features(unit, wood[:strat], wood[:feature_no], wood, "Wood Inventories")
+    wood.delete(:feature_no)
+    # Output and save
+    # puts wood[:salmon_museum_no]
+    WoodInventory.create(wood)
+  end
+end
+
 ###################
 # ANALYSIS TABLES #
 ###################
@@ -638,8 +749,8 @@ end
 ##############
 # Bone Tools #
 ##############
-def seed_bone_tools files
-  s = Roo::Excelx.new(files[:bonetools])
+def seed_bone_tools
+  s = Roo::Excelx.new(@files[:bonetools])
 
   puts "\n\n\nCreating Bone Tools\n"
 
@@ -679,7 +790,7 @@ def seed_bone_tools files
     strats = bonetool[:strat].split(/[;,]/).map{ |strat| strat.strip }
     strats.uniq!
     strats.each do |strat|
-      bonetool[:strata] << find_or_create_and_log("Bone Tool #{bonetool[:fs_no]}", Stratum, strat_all: strat, unit_id: unit.id)
+      bonetool[:strata] << select_or_create_stratum(unit, strat, "Bone Tool: #{bonetool[:fs_no]}")
     end
 
     # TODO Add strat_other, feature, and sa_no to schema
@@ -694,10 +805,177 @@ def seed_bone_tools files
 end
 
 #############
+# Burials #
+#############
+def seed_burials
+  s = Roo::Excel.new(@files[:burials])
+  puts "\n\n\nCreating Burials\n"
+
+  columns = {
+    unit: "Room",
+    strat: "Stratum",
+    feature_no: "Feature No",
+    new_burial_no: "New Burial No.",
+    occupation: "Occupation",
+    age: "Age (years)",
+    burial_sex: "Sex",
+    grid_ew: "Easting",
+    grid_ns: "Northing",
+    quad: "Quad",
+    depth_begin: "DepthBeg",
+    depth_end: "DeptEnd",
+    date: "Date",
+    excavator: "Excavator",
+    record_field_key_no: "RecKey",
+    associated_artifacts: "AssocArt",
+    description: "Description"
+  }
+
+  last_unit = ""
+  s.sheet('data').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    burial = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nUnit #{burial[:unit]}:" if burial[:unit] != last_unit
+    last_unit = burial[:unit]
+
+    # Handle foreign keys
+    # Note: burial may only have one feature
+    unit = select_or_create_unit(burial[:unit], "burials")
+    feature_no = get_feature_number(burial[:feature_no], "Burials")
+    # need to make the stratum first in order to properly find / create feature
+    # TODO there might be a better way to pair this with the associate_strat_features method
+    # as this is duplicating some of its effort
+    stratum = select_or_create_stratum(unit, burial[:strat], "Burial #{burial[:new_burial_no]}")
+    feature = stratum.features.where(feature_no: feature_no).first
+    if feature.nil?
+      feature = Feature.create(
+        feature_no: feature_no,
+        unit_no: unit.unit_no,
+        comments: "imported from burials"
+      )
+      report "feature", "#{unit.unit_no}:#{burial[:strat]}:#{feature_no}", "burials"
+    end
+    stratum.features << feature unless stratum.features.include?(feature)
+    burial[:feature] = feature
+
+    burial[:occupation] = find_or_create_occupation(burial[:occupation])
+    burial[:burial_sex] = create_if_not_exists(BurialSex, :name, burial[:burial_sex])
+
+    # Output and save
+    # puts burial[:new_burial_no]
+    Burial.create(burial)
+  end
+end
+
+###################
+# Ceramics (2005) #
+###################
+
+def seed_ceramics
+  s = Roo::Excelx.new(@files[:ceramics])
+  puts "\n\n\nCreating Ceramics\n"
+
+  columns = {
+    site: "Site No",
+    fs_no: "FS No",
+    lot_no: "Lot No",
+    cat_no: "Cat No",
+    unit: "Room No",
+    strat: "Stratum",
+    feature_no: "Feature No",
+    sa_no: "SA No",
+    pulled_sample: "Pulled sample",
+    ceramic_vessel_form: "Vessel Form",
+    ceramic_vessel_part: "Vessel Part",
+    wall_thickness: "Wall Thickness",
+    rim_radius: "Rim Radius",
+    rim_arc: "Rim Arc",
+    rim_eversion: "Rim Eversion",
+    ceramic_exterior_pigment: "Exterior Pigment",
+    ceramic_interior_pigment: "Interior Pigment",
+    ceramic_exterior_surface: "Exterior Surface",
+    ceramic_interior_surface: "Interior Surface",
+    ceramic_vessel_appendage: "Vessel Appendage",
+    residues: "Use Wear/Residue",
+    modification: "Retooling/Modification",
+    ceramic_temper: "Temper",
+    ceramic_paste: "Paste",
+    ceramic_slip: "Slip",
+    ceramic_tradition: "Tradition",
+    ceramic_variety: "Variety",
+    ceramic_ware: "Ware",
+    ceramic_specific_type: "SPECTYPT",
+    ceramic_style: "Style",
+    count: "Count",
+    weight: "Weight",
+    vessel_no: "Vessel Number",
+    comments: "Comments"
+  }
+
+  last_unit = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:site] == "Site No"
+
+    ceramic = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nUnit #{ceramic[:unit]}:" if ceramic[:unit] != last_unit
+    last_unit = ceramic[:unit]
+
+    # Handle foreign keys
+    # Note: ceramic may only have one feature
+    unit = select_or_create_unit(ceramic[:unit], "ceramics")
+    feature_no = get_feature_number(ceramic[:feature_no], "Ceramics")
+
+    # need to make the stratum first in order to properly find / create feature
+    # TODO there might be a better way to pair this with the associate_strat_features method
+    # as this is duplicating some of its effort
+    stratum = select_or_create_stratum(unit, ceramic[:strat], "Ceramics #{ceramic[:fs_no]}")
+    feature = stratum.features.where(feature_no: feature_no).first
+    if feature.nil?
+      feature = Feature.create(
+        feature_no: feature_no,
+        unit_no: unit.unit_no,
+        comments: "imported from ceramics"
+      )
+      report "feature", "#{unit.unit_no}:#{ceramic[:strat]}:#{feature_no}", "ceramics"
+    end
+    stratum.features << feature unless stratum.features.include?(feature)
+    ceramic[:feature] = feature
+
+    # all those ceramic tables....
+    ceramic[:ceramic_vessel_form] = create_if_not_exists(CeramicVesselForm, :name, ceramic[:ceramic_vessel_form])
+    ceramic[:ceramic_vessel_part] = create_if_not_exists(CeramicVesselPart, :name, ceramic[:ceramic_vessel_part])
+    ceramic[:ceramic_exterior_pigment] = create_if_not_exists(CeramicExteriorPigment, :name, ceramic[:ceramic_exterior_pigment])
+    ceramic[:ceramic_interior_pigment] = create_if_not_exists(CeramicInteriorPigment, :name, ceramic[:ceramic_interior_pigment])
+    ceramic[:ceramic_exterior_surface] = create_if_not_exists(CeramicExteriorSurface, :name, ceramic[:ceramic_exterior_surface])
+    ceramic[:ceramic_interior_surface] = create_if_not_exists(CeramicInteriorSurface, :name, ceramic[:ceramic_interior_surface])
+    ceramic[:ceramic_vessel_appendage] = create_if_not_exists(CeramicVesselAppendage, :name, ceramic[:ceramic_vessel_appendage])
+    ceramic[:ceramic_temper] = create_if_not_exists(CeramicTemper, :name, ceramic[:ceramic_temper])
+    ceramic[:ceramic_paste] = create_if_not_exists(CeramicPaste, :name, ceramic[:ceramic_paste])
+    ceramic[:ceramic_slip] = create_if_not_exists(CeramicSlip, :name, ceramic[:ceramic_slip])
+    ceramic[:ceramic_tradition] = create_if_not_exists(CeramicTradition, :name, ceramic[:ceramic_tradition])
+    ceramic[:ceramic_variety] = create_if_not_exists(CeramicVariety, :name, ceramic[:ceramic_variety])
+    ceramic[:ceramic_ware] = create_if_not_exists(CeramicWare, :name, ceramic[:ceramic_ware])
+    ceramic[:ceramic_specific_type] = create_if_not_exists(CeramicSpecificType, :name, ceramic[:ceramic_specific_type])
+    ceramic[:ceramic_style] = create_if_not_exists(CeramicStyle, :name, ceramic[:ceramic_style])
+
+    # Output and save
+    # puts ceramic[:fs_no]
+    Ceramic.create(ceramic)
+  end
+end
+
+#############
 # Eggshells #
 #############
-def seed_eggshells files
-  s = Roo::Excel.new(files[:eggshells])
+def seed_eggshells
+  s = Roo::Excel.new(@files[:eggshells])
 
   puts "\n\n\nCreating Eggshells\n"
 
@@ -751,8 +1029,8 @@ end
 #############
 # Ornaments #
 #############
-def seed_ornaments files
-  s = Roo::Excelx.new(files[:ornaments])
+def seed_ornaments
+  s = Roo::Excelx.new(@files[:ornaments])
 
   puts "\n\n\nCreating Ornaments\n"
 
@@ -790,17 +1068,25 @@ def seed_ornaments files
     unit = select_or_create_unit(ornament[:unit], "Ornaments")
 
     feature_no = get_feature_number(ornament[:feature], "Ornaments")
-    ornament[:feature] = find_or_create_and_log("Ornament #{ornament[:salmon_museum_no]}", Feature, feature_no: feature_no, unit_no: ornament[:unit])
 
-    # TODO Review handling of CSV strat value
-    # Process each stratum in Strat column
+    # need to make the stratum first in order to properly find / create feature
+    # TODO there might be a better way to pair this with the associate_strat_features method
+    # as this is duplicating some of its effort
     strats = ornament[:strat].split(/[;,]/).map{ |strat| strat.strip }
     strats.uniq!
     strats.each do |strat|
-      stratum = find_or_create_and_log("Ornament #{ornament[:salmon_museum_no]}", Stratum, strat_all: strat, unit_id: unit.id)
-
-      # Associate strata through feature
-      ornament[:feature].strata << stratum
+      stratum = select_or_create_stratum(unit, strat, "Ornament #{ornament[:salmon_museum_no]}")
+      feature = stratum.features.where(feature_no: feature_no).first
+      if feature.nil?
+        feature = Feature.create(
+          feature_no: feature_no,
+          unit_no: unit.unit_no,
+          comments: "imported from ornaments"
+        )
+        report "feature", "#{unit.unit_no}:#{strat}:#{feature_no}", "ornaments"
+      end
+      stratum.features << feature unless stratum.features.include?(feature)
+      ornament[:feature] = feature
     end
 
     ornament[:occupation] = find_or_create_occupation(ornament[:occupation])
@@ -819,8 +1105,8 @@ end
 # Perishables #
 ###############
 # NOTE:  Perishables may belong to more than one unit
-def seed_perishables files
-  s = Roo::Excel.new(files[:perishables])
+def seed_perishables
+  s = Roo::Excel.new(@files[:perishables])
 
   puts "\n\n\nCreating Perishables\n"
 
@@ -863,7 +1149,7 @@ def seed_perishables files
     perishable[:occupation] = find_or_create_occupation(perishable[:occupation])
 
     perishable[:features] = []
-    units = perishable[:unit].split(/[,;]/).map { |u| u.strip }
+    units = perishable[:unit].split(/[,;]/).map { |u| u.strip }.uniq
     units.each do |unit|
       unit = select_or_create_unit(unit, "Perishables")
       associate_strata_features(unit, perishable[:strat], perishable[:associated_feature], perishable, "Perishables")
@@ -873,7 +1159,7 @@ def seed_perishables files
     perishable.delete :strat_other
 
     # Output and save
-#    puts perishable[:fs_no]
+    # puts perishable[:fs_no]
     Perishable.create(perishable)
   end
 end
@@ -881,8 +1167,8 @@ end
 ####################
 # Select Artifacts #
 ####################
-def seed_select_artifacts files
-  s = Roo::Excel.new(files[:select_artifacts])
+def seed_select_artifacts
+  s = Roo::Excel.new(@files[:select_artifacts])
 
   puts "\n\n\nCreating Select Artifacts\n"
 
@@ -923,7 +1209,7 @@ def seed_select_artifacts files
     strats = sa[:strat].split(/[;,]/).map{ |strat| strat.strip }
     strats.uniq!
     strats.each do |strat|
-      sa[:strata] << find_or_create_and_log("Select Artifact #{sa[:artifact_no]}", Stratum, strat_all: strat, unit_id: unit.id)
+      sa[:strata] << select_or_create_stratum(unit, strat, "SA #{sa[:artifact_no]}")
     end
 
     sa[:occupation] = create_if_not_exists(Occupation, :name, sa[:occupation])
@@ -945,8 +1231,8 @@ end
 #########
 # Soils #
 #########
-def seed_soils files
-  s = Roo::Excelx.new(files[:soils])
+def seed_soils
+  s = Roo::Excelx.new(@files[:soils])
 
   puts "\n\n\nCreating Soils\n"
 
@@ -993,7 +1279,7 @@ def seed_soils files
     unit = select_or_create_unit(soil[:unit], "Soils")
 
     soil[:features] = []
-    associate_strata_features(unit, soil[:unit], soil[:strat], soil, "Soils")
+    associate_strata_features(unit, soil[:strat], soil[:feature_key], soil, "Soils")
 
     # TODO Add sa_no to schema
     soil.delete :sa_no
@@ -1004,11 +1290,61 @@ def seed_soils files
   end
 end
 
+##############
+# Tree Rings #
+##############
+def seed_tree_rings
+  s = Roo::Excelx.new(@files[:tree_rings])
+
+  puts "\n\n\nCreating Tree Rings\n"
+
+  columns = {
+    site: "Site",
+    unit_no: "Room",
+    strat: "Stratum",
+    feature_no: "Feature No",
+    occupation: "Period",
+    trl_no: "TRL No.",
+    year_dated: "Year Dated",
+    windes_sample: "Windes Sample",
+    record_field_key_no: "Record Key",
+    species_tree_ring: "Species",
+    inner_date: "Inner Date",
+    outer_date: "Outer Date",
+    symbol: "Symbol",
+    cutting_date: "Cutting Date",
+    comments: "Comments"
+  }
+
+  last_unit = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:site] == "Site"
+
+    ring = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nUnit #{ring[:unit]}:" if ring[:unit] != last_unit
+    last_unit = ring[:unit]
+
+    # Handle foreign keys
+    ring[:occupation] = find_or_create_occupation(ring[:occupation])
+    ring[:species_tree_ring] = create_if_not_exists(SpeciesTreeRing, :name, ring[:species_tree_ring])
+
+    unit = select_or_create_unit(ring[:unit_no], "Tree Rings")
+    ring[:stratum] = select_or_create_stratum(unit, ring[:strat], "Tree Ring #{ring[:trl_no]}")
+
+    # Output and save
+    # puts ring[:fs_no]
+    TreeRing.create(ring)
+  end
+end
+
 ##########
 # Images #
 ##########
-def seed_images files
-  s = Roo::Excelx.new(files[:images])
+def seed_images
+  s = Roo::Excelx.new(@files[:images])
 
   puts "\n\n\nCreating Images\n"
 
@@ -1107,25 +1443,30 @@ end
 # Seeding Control #
 ###################
 # Primary Tables
-seed_units(files) if Unit.all.size < 1
-seed_strata(files) if Stratum.all.size < 1
-seed_features(files) if Feature.all.size < 1
+seed_units if Unit.count < 1
+seed_strata if Stratum.count < 1
+seed_features if Feature.count < 1
 
 # Inventory Tables
-seed_bone_inventory(files) if BoneInventory.all.size < 1
-seed_ceramic_inventory(files) if CeramicInventory.all.size < 1
-seed_lithic_inventories(files) if LithicInventory.all.size < 1
+seed_bone_inventory if BoneInventory.count < 1
+seed_ceramic_inventory if CeramicInventory.count < 1
+seed_lithic_inventories if LithicInventory.count < 1
+seed_pollen_inventories if PollenInventory.count < 1
+seed_wood_inventories if WoodInventory.count < 1
 
 # Analysis Tables
-seed_bone_tools(files) if BoneTool.all.size < 1
-seed_eggshells(files) if Eggshell.all.size < 1
-seed_ornaments(files) if Ornament.all.size < 1
-seed_perishables(files) if Perishable.all.size < 1
-seed_select_artifacts(files) if SelectArtifact.all.size < 1
-seed_soils(files) if Soil.all.size < 1
+seed_bone_tools if BoneTool.count < 1
+seed_burials if Burial.count < 1
+seed_ceramics if Ceramic.count < 1
+seed_eggshells if Eggshell.count < 1
+seed_ornaments if Ornament.count < 1
+seed_perishables if Perishable.count < 1
+seed_select_artifacts if SelectArtifact.count < 1
+seed_soils if Soil.count < 1
+seed_tree_rings if TreeRing.count < 1
 
 # Images
-seed_images(files) if Image.all.size < 1
+seed_images if Image.count < 1
 
 # Logging
 File.open("reports/please_check_for_accuracy.txt", "w") do |file|

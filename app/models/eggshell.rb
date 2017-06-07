@@ -2,8 +2,8 @@ class Eggshell < ActiveRecord::Base
   belongs_to :eggshell_item
   belongs_to :occupation
   has_and_belongs_to_many :features
-  has_many :strata, :through => :features
-  has_many :units, :through => :strata
+  has_many :strata, -> {distinct}, :through => :features
+  has_many :units, -> {distinct}, :through => :strata
   
   def self.sorted
     order("salmon_museum_no")

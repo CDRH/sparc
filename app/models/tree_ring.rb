@@ -1,15 +1,15 @@
-class Perishable < ApplicationRecord
+class TreeRing < ApplicationRecord
   belongs_to :occupation
-  has_and_belongs_to_many :features
-  has_many :strata, -> {distinct}, :through => :features
-  has_many :units, -> {distinct}, :through => :strata
+  belongs_to :species_tree_ring
+  belongs_to :stratum
+  has_one :unit, -> {distinct}, :through => :stratum
 
   def self.sorted
-    order("fs_no")
+    order("trl_no")
   end
 
   def to_label
-    fs_no
+    trl_no
   end
 
   def authorized_for_update?
