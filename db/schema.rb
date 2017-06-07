@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170602141059) do
+ActiveRecord::Schema.define(version: 20170607142032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -582,6 +582,47 @@ ActiveRecord::Schema.define(version: 20170602141059) do
     t.string   "location"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+  end
+
+  create_table "obsidian_identified_sources", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "obsidian_inventories", force: :cascade do |t|
+    t.string   "site"
+    t.string   "box"
+    t.string   "fs_no"
+    t.integer  "count"
+    t.string   "unit"
+    t.string   "strat"
+    t.string   "strat_other"
+    t.string   "feature_no"
+    t.string   "lithic_id"
+    t.string   "material_type"
+    t.string   "shackley_sourcing"
+    t.string   "grid_ew"
+    t.string   "grid_ns"
+    t.string   "quad"
+    t.string   "exact_prov"
+    t.string   "artifact_type"
+    t.string   "depth_begin"
+    t.string   "depth_end"
+    t.string   "date"
+    t.string   "excavator"
+    t.string   "record_field_key_no"
+    t.string   "comments"
+    t.string   "entered_by"
+    t.string   "location"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "obsidian_identified_source_id"
+    t.integer  "feature_id"
+    t.integer  "occupation_id"
+    t.index ["feature_id"], name: "index_obsidian_inventories_on_feature_id", using: :btree
+    t.index ["obsidian_identified_source_id"], name: "index_obsidian_inventories_on_obsidian_identified_source_id", using: :btree
+    t.index ["occupation_id"], name: "index_obsidian_inventories_on_occupation_id", using: :btree
   end
 
   create_table "occupations", force: :cascade do |t|
