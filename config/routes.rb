@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     :features,
     :images,
     :lithic_inventories,
+    :obsidian_inventories,
     :ornaments,
     :perishables,
     :pollen_inventories,
