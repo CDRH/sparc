@@ -3,86 +3,80 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
   <li role="presentation" class="active">
-    <a href="#overview" aria-controls="overview"
-        role="tab" data-toggle="tab">Overview</a>
+    <a href="#summary" aria-controls="summary"
+        role="tab" data-toggle="tab">Summary</a>
   </li>
   <li role="presentation">
-    <a href="#description" aria-controls="description"
-        role="tab" data-toggle="tab">Description</a>
+    <a href="#overview" aria-controls="overview"
+        role="tab" data-toggle="tab">Overview</a>
   </li>
   <li role="presentation">
     <a href="#images" aria-controls="images"
         role="tab" data-toggle="tab">Image Gallery</a>
   </li>
   <li role="presentation">
-    <a href="#items" aria-controls="items"
-        role="tab" data-toggle="tab">Associated Strata and Items</a>
+    <a href="#documents" aria-controls="documents"
+        role="tab" data-toggle="tab">Documents</a>
+  </li>
+  <li role="presentation">
+    <a href="#strata" aria-controls="strata"
+        role="tab" data-toggle="tab">Associated Strata</a>
+  </li>
+  <li role="presentation">
+    <a href="#features" aria-controls="features"
+        role="tab" data-toggle="tab">Associated Features</a>
   </li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
 
-  <!-- overview -->
-  <div role="tabpanel" class="tab-pane active" id="overview">
+  <!-- summary -->
+  <div role="tabpanel" class="tab-pane active" id="summary">
     <div class="row">
       <div class="col-md-6">
-        <ul>
-          <li><strong>Class:</strong> <%= @unit.unit_class.name if @unit.unit_class %></li>
-          <li><strong>Excavation Status:</strong> <%= @unit.excavation_status.name if @unit.excavation_status %></li>
-          <li><strong>Occupation:</strong> <%= @unit.occupation.name if @unit.occupation %></li>
-        </ul>
-      </div>
-      <div class="col-md-6">
-        <ul>
-        <li><%= pluralize @unit.strata.size, "stratum" %></li>
-        <li><%= pluralize @unit.features.size, "feature" %></li>
-        </ul>
+        We have a saboteur aboard. Mr. Crusher, ready a collision course with the Borg ship. We could cause a diplomatic crisis. Take the ship into the Neutral Zone Computer, lights up! Maybe if we felt any human loss as keenly as we feel one of those close to us, human history would be far less bloody. Ensign Babyface! Shields up! Rrrrred alert! Now we know what they mean by 'advanced' tactical training. Your shields were failing, sir. What? We're not at all alike! I'll be sure to note that in my log. When has justice ever been as simple as a rule book? You did exactly what you had to do. You considered all your options, you tried every alternative and then you made the hard choice.
       </div>
     </div>
   </div>
 
-  <!-- description -->
-  <div role="tabpanel" class="tab-pane" id="description">
+  <!-- overview -->
+  <div role="tabpanel" class="tab-pane" id="overview">
     <div class="row">
       <div class="col-md-6">
         <ul>
-          <li>Excavation Status: <%= @unit.excavation_status.name if @unit.excavation_status %></li>
-          <li>Occupation: <%= @unit.occupation.name if @unit.occupation %></li>
-          <li>Class: <%= @unit.unit_class.name if @unit.unit_class %></li>
-          <li>Stories: <%= @unit.story.name if @unit.story %></li>
-          <li>Intact Roof: <%= @unit.intact_roof.name if @unit.intact_roof %></li>
-          <li>Type: <%= @unit.salmon_type_code %></li>
-          <li>Type Description: <%= @unit.type_description.name if @unit.type_description %></li>
-          <li>Inferred Function: <%= @unit.inferred_function.name if @unit.inferred_function %></li>
-          <li>Sector: <%= @unit.salmon_sector.name if @unit.salmon_sector %></li>
+          <li><strong>Occupation:</strong> <%= @unit.occupation.name if @unit.occupation %></li>
+          <li><strong>Class:</strong> <%= @unit.unit_class.name if @unit.unit_class %></li>
+          <li><strong>Excavation Status:</strong> <%= @unit.excavation_status.name if @unit.excavation_status %></li>
+          <li><strong>Sector:</strong> <%= @unit.salmon_sector.name if @unit.salmon_sector %></li>
+          <li><%= pluralize @unit.strata.size, "stratum" %></li>
+          <li><%= pluralize @unit.features.size, "feature" %></li>
+          <li><strong>Stories:</strong> <%= @unit.story.name if @unit.story %></li>
+          <li><strong>Intact Roof:</strong> <%= @unit.intact_roof.name if @unit.intact_roof %></li>
+          <li><strong>Type:</strong> <%= @unit.salmon_type_code %></li>
+          <li><strong>Type Description:</strong> <%= @unit.type_description.name if @unit.type_description %></li>
+          <li><strong>Inferred Function:</strong> <%= @unit.inferred_function.name if @unit.inferred_function %></li>
           <li>Other Description: <%= @unit.other_description if @unit.other_description %></li>
           <li>Irregular Shape: <%= @unit.irregular_shape.name if @unit.irregular_shape %></li>
         </ul>
       </div>
       <!-- ROOM TYPE -->
       <div class="col-md-6">
-        <a href="#unit_room_type" data-toggle="collapse" aria-expanded="false" aria-controls="unit_room_type">Room Type Info</a>
-        <div class="collapse" id="unit_room_type">
-          <div class="well">
-            <% type = @unit.room_type %>
-            <% if type %>
-              Room Type: <%= type.description %>
-              <ul>
-                <li>Room Type Period: <%= type.period %></li>
-                <li>Room Type Location: <%= type.location %></li>
-              </ul>
-            <% else %>
-              Room Type:  None Found in DB!
-            <% end %>
-          </div>
-        </div>
         <ul>
-          <li>Length: <%= @unit.length %></li>
-          <li>Width: <%= @unit.width %></li>
-          <li>Floor Area: <%= @unit.floor_area %></li>
-          <li>Comments: <%= @unit.comments %></li>
+          <% type = @unit.room_type %>
+          <% if type %>
+            <li><strong>Room Type:</strong> <%= type.description if type.description %>
+            <li><strong>Room Type Period:</strong> <%= type.occupation.name if type.occupation %></li>
+            <li><strong>Room Type Location:</strong> <%= type.location %></li>
+          <% end %>
+          <li><strong>Length:</strong> <%= @unit.length %></li>
+          <li><strong>Width:</strong> <%= @unit.width %></li>
+          <li><strong>Floor Area:</strong> <%= @unit.floor_area %></li>
+          <li><strong>Comments:</strong> <%= @unit.comments %></li>
         </ul>
+        <p><a href="#">View faunal bones in this unit [link todo]</a></p>
+        <p><a href="#">View ceramics in this unit [link todo]</a></p>
+        <p><a href="#">TODO add when these searches are active</a></p>
       </div>
     </div>
   </div>
@@ -117,100 +111,83 @@
     </div>
   </div>
 
-  <!-- strata and features -->
-  <div role="tabpanel" class="tab-pane" id="items">
-    <% @unit.strata.each_with_index do |stratum, i| %>
-      <h4>Strata: <%= link_to stratum.strat_all, admin_stratum_path(stratum.id) %></h4>
-      <ul>
-        <!-- STRATUM DESC -->
-        <li>Type: <%= stratum.strat_type.name if stratum.strat_type %></li>
-        <li>Occupation: <%= stratum.occupation.name if stratum.occupation %></li>
-        <% if stratum.bone_tools.size > 0 %>
-          <li>
-            <!-- BONE TOOLS -->
-            <% stratum.bone_tools.each_with_index do |item, j| %>
-              <a href="#bonetools_<%= i %>_<%= j %>" data-toggle="collapse" aria-expanded="false" aria-controls="bonetools_<%= i %>_<%= j %>">Bone Tool More Info <%= item.field_specimen_no %></a>
-              <div class="collapse" id="bonetools_<%= i %>_<%= j %>">
-                <div class="well">
-                  <%# link_to "More info for #{item.field_specimen_no}", admin_bone_tool_path(item.id) %>
-                  <ul>
-                    <li>Specimen No: <%= item.field_specimen_no %></li>
-                    <li>Depth: <%= item.depth %></li>
-                    <li>Grid: <%= item.grid %></li>
-                    <li>Occupation: <%= item.occupation.name if item.occupation %></li>
-                    <li>Tool Type: <%= item.tool_type_code %></li>
-                    <li>Tool Type: <%= item.tool_type %></li>
-                    <li>Species Code: <%= item.species_code %></li>
-                  </ul>
-                </div>
-              </div>
-            <% end %>
-          </li>
-        <% else %>
-          <li>No Bone Tools</li>
-        <% end %>
-        <!-- SELECT ARTIFACTS -->
-        <% if stratum.select_artifacts.size > 0 %>
-          <li>Stuff about <%= pluralize(stratum.select_artifacts.size, "Select Artifact") %> might go here</li>
-        <% else %>
-          <li>No Select Artifacts</li>
-        <% end %>
-      </ul>
-      <!-- FEATURES -->
-      <h5>Features</h5>
-      <ul>
-        <% stratum.features.each_with_index do |feature, j| %>
-          <li>
-            <a href="#feature_<%= i %>_<%= j %>" data-toggle="collapse" aria-expanded="false" aria-controls="feature_<%= i %>_<%= j %>">Feature More Info <%= feature.feature_no %></a>
-            <div class="collapse" id="feature_<%= i %>_<%= j %>">
-              <div class="well">
-                <%= link_to feature.feature_no, admin_feature_path(feature.id) %>
-                <!-- FEATURE DESC -->
-                <ul>
-                  <li>Door Between Rooms: <%= feature.door_between_multiple_room.name if feature.door_between_multiple_room %></li>
-                  <li>Doorway Sealed: <%= feature.doorway_sealed.name if feature.doorway_sealed %></li>
-                  <li>Group: <%= feature.feature_group.name if feature.feature_group %></li>
-                  <li>Occupation: <%= feature.occupation.name if feature.occupation %></li>
-                  <li>Residential Feature: <%= feature.residential_feature.name if feature.residential_feature %></li>
-                  <li>T-Shaped Door: <%= feature.t_shaped_door.name if feature.t_shaped_door %></li>
-                  <li>Type: <%= feature.feature_type.name if feature.feature_type %></li>
+  <!-- documents -->
+  <div role="tabpanel" class="tab-pane" id="documents">
+    <p>TODO display all documents for this unit in document viewer</p>
+  </div>
 
-                  <!-- EGGSHELLS -->
-                  <% if feature.eggshells.size > 0 %>
-                    <li>Stuff about <%= pluralize(feature.eggshells.size, "Eggshell") %> might go here</li>
-                  <% else %>
-                    <li>No Eggshells</li>
-                  <% end %>
+  <!-- strata -->
+  <div role="tabpanel" class="tab-pane" id="strata">
+    <table>
+      <tr>
+        <th>Stratum Number</th>
+        <th>Stratum Type</th>
+        <th>Features</th>
+        <th>Occupation</th>
+      </tr>
+      <% @unit.strata.each do |stratum| %>
+        <tr>
+          <td><%= stratum.strat_all %></td>
+          <td><%= stratum.strat_type.name if stratum.strat_type %></td>
+          <td><%= stratum.features.map {|f| f.feature_no }.join("; ") %></td>
+          <td><%= stratum.occupation.name if stratum.occupation %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 
-                  <!-- ORNAMENTS -->
-                  <!-- TODO the relationship between ornament and features is defined multiple ways in the DB, verify which is correct -->
-                  <% if false %>
-                    <li>Stuff about ornaments <%# pluralize(feature.ornaments.size, "Ornament") %> might go here</li>
-                  <% else %>
-                    <li>No Ornaments right now because DB schema / models hooked up incorrectly</li>
-                  <% end %>
-
-                  <!-- PERISHABLES -->
-                  <% if feature.perishables.size > 0 %>
-                    <li>Stuff about <%= pluralize(feature.perishables.size, "Perishable") %> might go here</li>
-                  <% else %>
-                    <li>No Perishables</li>
-                  <% end %>
-
-                  <!-- SOILS -->
-                  <% if feature.soils.size > 0 %>
-                    <li>Stuff about <%= pluralize(feature.soils.size, "Soil") %> might go here</li>
-                  <% else %>
-                    <li>No Soils</li>
-                  <% end %>
-                </ul>
-              </div>
-            </div>
-          </li>
-
-        <% end %>
-      </ul>
-    <% end %>
+  <!-- features -->
+  <div role="tabpanel" class="tab-pane" id="features">
+    <table>
+      <tr>
+        <th>Feature Number</th>
+        <th>Strata</th>
+        <th>Floor Association</th>
+        <th>Occupation</th>
+        <th>Feature Form</th>
+        <th>Associated Features</th>
+        <th>Grid</th>
+        <th>Depth</th>
+        <th>Feature Type</th>
+        <th>Count</th>
+        <th>Residential Feature</th>
+        <th>Real Feature</th>
+        <th>Location in Room</th>
+        <th>Feature Group</th>
+        <th>Doorway Sealed</th>
+        <th>T Shaped Door</th>
+        <th>Door Between Multiple Rooms</th>
+        <th>Length</th>
+        <th>Width</th>
+        <th>Depth / Height</th>
+        <th>Comments</th>
+      </tr>
+      <% @unit.features.each do |feature| %>
+        <tr>
+          <td><%= feature.feature_no %></td>
+          <td><%= feature.strata.map {|s| s.strat_all }.join("; ") %></td>
+          <td><%= feature.floor_association %></td>
+          <td><%= feature.occupation.name if feature.occupation %></td>
+          <td><%= feature.feature_form %></td>
+          <td><%= feature.other_associated_features %></td>
+          <td><%= feature.grid %></td>
+          <td><%= feature.depth_mbd %></td>
+          <td><%= feature.feature_type.name if feature.feature_type %></td>
+          <td><%= feature.count %></td>
+          <td><%= feature.residential_feature.name if feature.residential_feature %></td>
+          <td><%= feature.real_feature %></td>
+          <td><%= feature.location_in_room %></td>
+          <td><%= feature.feature_group.name if feature.feature_group %></td>
+          <td><%= feature.doorway_sealed.name if feature.doorway_sealed %></td>
+          <td><%= feature.t_shaped_door.name if feature.t_shaped_door %></td>
+          <td><%= feature.door_between_multiple_room.name if feature.door_between_multiple_room %></td>
+          <td><%= feature.length %></td>
+          <td><%= feature.width %></td>
+          <td><%= feature.depth_height %></td>
+          <td><%= feature.comments %></td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 
 </div> <!-- /tab-content -->
