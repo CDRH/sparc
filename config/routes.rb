@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     :ceramics,
     :ceramic_claps,
     :ceramic_inventories,
+    :ceramic_vessels,
     :eggshells,
     :features,
     :images,
