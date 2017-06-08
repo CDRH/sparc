@@ -326,6 +326,7 @@ ActiveRecord::Schema.define(version: 20170608154025) do
     t.string  "lori_reed_analysis"
     t.string  "comments_lori_reed"
     t.string  "comments_other"
+    t.integer "feature_id"
     t.integer "ceramic_whole_vessel_form_id"
     t.integer "ceramic_vessel_lori_reed_form_id"
     t.integer "ceramic_vessel_type_id"
@@ -334,13 +335,7 @@ ActiveRecord::Schema.define(version: 20170608154025) do
     t.index ["ceramic_vessel_lori_reed_type_id"], name: "index_ceramic_vessels_on_ceramic_vessel_lori_reed_type_id", using: :btree
     t.index ["ceramic_vessel_type_id"], name: "index_ceramic_vessels_on_ceramic_vessel_type_id", using: :btree
     t.index ["ceramic_whole_vessel_form_id"], name: "index_ceramic_vessels_on_ceramic_whole_vessel_form_id", using: :btree
-  end
-
-  create_table "ceramic_vessels_features", id: false, force: :cascade do |t|
-    t.integer "ceramic_vessel_id"
-    t.integer "feature_id"
-    t.index ["ceramic_vessel_id"], name: "index_ceramic_vessels_features_on_ceramic_vessel_id", using: :btree
-    t.index ["feature_id"], name: "index_ceramic_vessels_features_on_feature_id", using: :btree
+    t.index ["feature_id"], name: "index_ceramic_vessels_on_feature_id", using: :btree
   end
 
   create_table "ceramic_wares", force: :cascade do |t|
@@ -1049,8 +1044,6 @@ ActiveRecord::Schema.define(version: 20170608154025) do
   add_foreign_key "ceramic_inventories", "features"
   add_foreign_key "ceramic_inventories_features", "ceramic_inventories"
   add_foreign_key "ceramic_inventories_features", "features"
-  add_foreign_key "ceramic_vessels_features", "ceramic_vessels"
-  add_foreign_key "ceramic_vessels_features", "features"
   add_foreign_key "eggshells", "eggshell_items"
   add_foreign_key "eggshells_features", "eggshells"
   add_foreign_key "eggshells_features", "features"

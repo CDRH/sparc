@@ -1,6 +1,6 @@
 class CeramicVessel < ActiveRecord::Base
-  has_and_belongs_to_many :features
-  has_many :strata, -> {distinct}, :through => :features
+  belongs_to :feature
+  has_many :strata, -> {distinct}, :through => :feature
   has_many :units, -> {distinct}, :through => :strata
 
   belongs_to :ceramic_whole_vessel_form
