@@ -1122,7 +1122,7 @@ def seed_ceramic_vessels
 
     # Handle foreign keys
     unit = select_or_create_unit(vessel[:unit], "ceramics vessel")
-    associate_strata_features(unit, vessel[:strat], vessel[:feature_no], vessel, "Ceramic Vessels")
+    associate_strata_features(unit, vessel[:strat], vessel[:feature_no], vessel, "Ceramic Vessels", false)
 
     # all those vessel tables....
     vessel[:ceramic_whole_vessel_form] = create_if_not_exists(CeramicWholeVesselForm, :name, vessel[:ceramic_whole_vessel_form])

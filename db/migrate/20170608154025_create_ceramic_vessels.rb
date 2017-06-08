@@ -18,13 +18,6 @@ class CreateCeramicVessels < ActiveRecord::Migration[5.0]
 
     # creating this migration while working from a partial table, so
     # there may be other controlled vocab tables to create later
-    # and I am also making the assumption that vessels may have multiple
-    # features because of the presence of the "other strata" column
-
-    create_join_table :ceramic_vessels, :features do |t|
-      t.references :feature, index: true, foreign_key: true
-      t.references :ceramic_vessel, index: true, foreign_key: true
-    end
 
     # using "whole" in the title to distinguish between ceramic_vessel_forms table
     create_table :ceramic_whole_vessel_forms do |t|
@@ -47,7 +40,7 @@ class CreateCeramicVessels < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-
+    add_reference :ceramic_vessels, :feature
     add_reference :ceramic_vessels, :ceramic_whole_vessel_form
     add_reference :ceramic_vessels, :ceramic_vessel_lori_reed_form
     add_reference :ceramic_vessels, :ceramic_vessel_type

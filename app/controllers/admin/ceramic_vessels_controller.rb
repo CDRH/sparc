@@ -10,7 +10,7 @@ class Admin::CeramicVesselsController < ApplicationController
     conf.columns = [
       :units,
       :strata,
-      :features,
+      :feature,
       :sa_no,
       :fs_no,
       :salmon_vessel_no,
@@ -27,7 +27,7 @@ class Admin::CeramicVesselsController < ApplicationController
     end
     conf.columns[:units].form_ui = :record_select
     conf.columns[:strata].form_ui = :record_select
-    conf.columns[:features].form_ui = :record_select
+    conf.columns[:feature].form_ui = :record_select
     conf.actions.swap :search, :field_search
   end
 

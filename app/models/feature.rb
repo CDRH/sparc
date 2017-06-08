@@ -11,12 +11,12 @@ class Feature < ActiveRecord::Base
   has_many :units, :through => :strata
 
   has_many :burials
+  has_many :ceramic_vessels
   has_many :obsidian_inventories
   has_many :ornaments
   has_and_belongs_to_many :bone_inventories
   has_and_belongs_to_many :ceramic_claps
   has_and_belongs_to_many :ceramic_inventories
-  has_and_belongs_to_many :ceramic_vessels
   has_and_belongs_to_many :eggshells
   has_and_belongs_to_many :images
   has_and_belongs_to_many :lithic_inventories
