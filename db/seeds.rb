@@ -24,6 +24,7 @@
   burials: 'xls/Burials.xls',
   ceramics: 'xls/CeramicAnalysis.xlsx',
   ceramic_claps: 'xls/Clap.xls',
+  ceramic_vessels: 'xls/CeramicVessels_partial.xlsx',
   eggshells: 'xls/Eggshells.xls',
   ornaments: 'xls/Ornaments.xlsx',
   perishables: 'xls/Perishables.xls',
@@ -131,7 +132,7 @@ end
 
 def get_feature_number feat_str, source
   feature = nil
-  if feat_str == "no data" || feat_str == "none"
+  if feat_str == "no data" || feat_str == "none" || feat_str == "unknown"
     feature = feat_str
   elsif feat_str == "NO INFO" || feat_str == "no info"
     feature = "no data"
@@ -1080,6 +1081,61 @@ def seed_ceramic_claps
   end
 end
 
+###################
+# Ceramic Vessels #
+###################
+
+def seed_ceramic_vessels
+  s = Roo::Excelx.new(@files[:ceramic_vessels])
+  puts "\n\n\nCreating Ceramic Vessels\n"
+
+  columns = {
+    unit: "Room",
+    strat: "Stratum",
+    strat_other: "Other Strata",
+    feature_no: "Feature No",
+    sa_no: "SA No",
+    fs_no: "FS No",
+    salmon_vessel_no: "Salmon Vessel No",
+    pottery_order_no: "Pottery Order No",
+    record_field_key_no: "Record Key",
+    vessel_percentage: "Vessel Percentage",
+    lori_reed_analysis: "Lori Reed Analysis",
+    ceramic_vessel_lori_reed_type: "Lori Reed Ceramic Type",
+    ceramic_vessel_lori_reed_form: "Lori Reed Vessel Form",
+    comments_lori_reed: "Lori Reed Comments",
+    ceramic_vessel_type: "Original Vessel Type",
+    ceramic_whole_vessel_form: "Original Vessel Form",
+    comments_other: "Other Comments"
+  }
+
+  last_unit = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    vessel = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nUnit #{vessel[:unit]}:" if vessel[:unit] != last_unit
+    last_unit = vessel[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(vessel[:unit], "ceramics vessel")
+    associate_strata_features(unit, vessel[:strat], vessel[:feature_no], vessel, "Ceramic Vessels")
+
+    # all those vessel tables....
+    vessel[:ceramic_whole_vessel_form] = create_if_not_exists(CeramicWholeVesselForm, :name, vessel[:ceramic_whole_vessel_form])
+    vessel[:ceramic_vessel_lori_reed_form] = create_if_not_exists(CeramicVesselLoriReedForm, :name, vessel[:ceramic_vessel_lori_reed_form])
+    vessel[:ceramic_vessel_type] = create_if_not_exists(CeramicVesselType, :name, vessel[:ceramic_vessel_type])
+    vessel[:ceramic_vessel_lori_reed_type] = create_if_not_exists(CeramicVesselLoriReedType, :name, vessel[:ceramic_vessel_lori_reed_type])
+
+    # Output and save
+    # puts vessel[:record_key_no]
+    CeramicVessel.create(vessel)
+  end
+end
+
 #############
 # Eggshells #
 #############
@@ -1548,6 +1604,7 @@ seed_bone_tools if BoneTool.count < 1
 seed_burials if Burial.count < 1
 seed_ceramics if Ceramic.count < 1
 seed_ceramic_claps if CeramicClap.count < 1
+seed_ceramic_vessels if CeramicVessel.count < 1
 seed_eggshells if Eggshell.count < 1
 seed_ornaments if Ornament.count < 1
 seed_perishables if Perishable.count < 1
