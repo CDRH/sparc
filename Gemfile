@@ -43,6 +43,10 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # will kill postgres processes related to the database connection
+  # which allows for the database to be dropped even when using phusion passenger
+  gem 'pgreset'
 end
 
 # postgres database for active record

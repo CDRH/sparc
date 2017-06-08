@@ -119,6 +119,7 @@ GEM
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
     pg (0.19.0)
+    pgreset (0.1.1)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -220,6 +221,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   pg
+  pgreset
   rails (= 5.0.0.1)
   recordselect!
   roo

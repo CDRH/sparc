@@ -23,6 +23,8 @@
   bonetools: 'xls/BoneTools.xlsx',
   burials: 'xls/Burials.xls',
   ceramics: 'xls/CeramicAnalysis.xlsx',
+  ceramic_claps: 'xls/Clap.xls',
+  ceramic_vessels: 'xls/CeramicVessels_partial.xlsx',
   eggshells: 'xls/Eggshells.xls',
   ornaments: 'xls/Ornaments.xlsx',
   perishables: 'xls/Perishables.xls',
@@ -130,7 +132,7 @@ end
 
 def get_feature_number feat_str, source
   feature = nil
-  if feat_str == "no data" || feat_str == "none"
+  if feat_str == "no data" || feat_str == "none" || feat_str == "unknown"
     feature = feat_str
   elsif feat_str == "NO INFO" || feat_str == "no info"
     feature = "no data"
@@ -1008,6 +1010,132 @@ def seed_ceramics
   end
 end
 
+################
+# Ceramic CLAP #
+################
+
+def seed_ceramic_claps
+  s = Roo::Excel.new(@files[:ceramic_claps])
+  puts "\n\n\nCreating Ceramic CLAP\n"
+
+  columns = {
+    unit: "Room",
+    strat: "Stratum",
+    feature_no: "Feature No",
+    ceramic_clap_type: "Ceramic Type",
+    ceramic_clap_group_type: "Group Ceramic Type",
+    ceramic_clap_tradition: "Tradition-Ware",
+    ceramic_clap_vessel_form: "Vessel Form",
+    ceramic_clap_temper: "Temper",
+    record_field_key_no: "Record Key No",
+    grid: "Grid",
+    depth_begin: "Beg Depth",
+    depth_end: "End Depth",
+    field_year: "Field Year",
+    sherd_lot_no: "Sherd Lot No",
+    frequency: "Frequency",
+    comments: "Comments"
+  }
+
+  last_unit = ""
+  s.sheet('data').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    clap = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nUnit #{clap[:unit]}:" if clap[:unit] != last_unit
+    last_unit = clap[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(clap[:unit], "ceramics clap")
+    associate_strata_features(unit, clap[:strat], clap[:feature_no], clap, "Ceramics CLAP")
+
+    # all those clap tables....
+    # the clap type columns are sometimes cut off, replace in those cases
+    claptype = clap[:ceramic_clap_type]
+    case claptype
+    when "Mesa Verde B/W band design (hachure and so"
+      claptype = "Mesa Verde B/W band design (hachure and solid)"
+    when "Unident. Plain brown (White Mtn. Red serie"
+      claptype = "Unident. Plain brown (White Mtn. Red series)"
+    when "Unident. smudged brown/red (Forestdale ser"
+      claptype = "Unident. smudged brown/red (Forestdale series)"
+    end
+
+    vesselform = clap[:ceramic_clap_vessel_form]
+    if vesselform == "undifferentiated mug/pitcher/cyli"
+      vesselform = "undifferentiated mug/pitcher/cylindrical jar"
+    end
+
+    clap[:ceramic_clap_type] = create_if_not_exists(CeramicClapType, :name, claptype)
+    clap[:ceramic_clap_group_type] = create_if_not_exists(CeramicClapGroupType, :name, clap[:ceramic_clap_group_type])
+    clap[:ceramic_clap_tradition] = create_if_not_exists(CeramicClapTradition, :name, clap[:ceramic_clap_tradition])
+    clap[:ceramic_clap_vessel_form] = create_if_not_exists(CeramicClapVesselForm, :name, vesselform)
+    clap[:ceramic_clap_temper] = create_if_not_exists(CeramicClapTemper, :name, clap[:ceramic_clap_temper])
+
+    # Output and save
+    # puts clap[:record_key_no]
+    CeramicClap.create(clap)
+  end
+end
+
+###################
+# Ceramic Vessels #
+###################
+
+def seed_ceramic_vessels
+  s = Roo::Excelx.new(@files[:ceramic_vessels])
+  puts "\n\n\nCreating Ceramic Vessels\n"
+
+  columns = {
+    unit: "Room",
+    strat: "Stratum",
+    strat_other: "Other Strata",
+    feature_no: "Feature No",
+    sa_no: "SA No",
+    fs_no: "FS No",
+    salmon_vessel_no: "Salmon Vessel No",
+    pottery_order_no: "Pottery Order No",
+    record_field_key_no: "Record Key",
+    vessel_percentage: "Vessel Percentage",
+    lori_reed_analysis: "Lori Reed Analysis",
+    ceramic_vessel_lori_reed_type: "Lori Reed Ceramic Type",
+    ceramic_vessel_lori_reed_form: "Lori Reed Vessel Form",
+    comments_lori_reed: "Lori Reed Comments",
+    ceramic_vessel_type: "Original Vessel Type",
+    ceramic_whole_vessel_form: "Original Vessel Form",
+    comments_other: "Other Comments"
+  }
+
+  last_unit = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    vessel = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nUnit #{vessel[:unit]}:" if vessel[:unit] != last_unit
+    last_unit = vessel[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(vessel[:unit], "ceramics vessel")
+    associate_strata_features(unit, vessel[:strat], vessel[:feature_no], vessel, "Ceramic Vessels", false)
+
+    # all those vessel tables....
+    vessel[:ceramic_whole_vessel_form] = create_if_not_exists(CeramicWholeVesselForm, :name, vessel[:ceramic_whole_vessel_form])
+    vessel[:ceramic_vessel_lori_reed_form] = create_if_not_exists(CeramicVesselLoriReedForm, :name, vessel[:ceramic_vessel_lori_reed_form])
+    vessel[:ceramic_vessel_type] = create_if_not_exists(CeramicVesselType, :name, vessel[:ceramic_vessel_type])
+    vessel[:ceramic_vessel_lori_reed_type] = create_if_not_exists(CeramicVesselLoriReedType, :name, vessel[:ceramic_vessel_lori_reed_type])
+
+    # Output and save
+    # puts vessel[:record_key_no]
+    CeramicVessel.create(vessel)
+  end
+end
+
 #############
 # Eggshells #
 #############
@@ -1475,6 +1603,8 @@ seed_wood_inventories if WoodInventory.count < 1
 seed_bone_tools if BoneTool.count < 1
 seed_burials if Burial.count < 1
 seed_ceramics if Ceramic.count < 1
+seed_ceramic_claps if CeramicClap.count < 1
+seed_ceramic_vessels if CeramicVessel.count < 1
 seed_eggshells if Eggshell.count < 1
 seed_ornaments if Ornament.count < 1
 seed_perishables if Perishable.count < 1
