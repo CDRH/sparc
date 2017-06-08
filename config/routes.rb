@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     :bone_tools,
     :burials,
     :ceramics,
+    :ceramic_claps,
     :ceramic_inventories,
     :eggshells,
     :features,
