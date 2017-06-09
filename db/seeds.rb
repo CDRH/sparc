@@ -729,7 +729,7 @@ def seed_obsidian_inventory
     # Handle foreign keys
     unit = select_or_create_unit(obsidian[:unit], "Obsidian Inventories")
 
-    associate_strata_features(unit, obsidian[:strat], obsidian[:feature_no], obsidian, "Obsidian Inventories")
+    associate_strata_features(unit, obsidian[:strat], obsidian[:feature_no], obsidian, "Obsidian Inventories", false)
 
     obsidian[:occupation] = find_or_create_occupation(obsidian[:occupation])
     obsidian[:obsidian_identified_source] = create_if_not_exists(ObsidianIdentifiedSource, :name, obsidian[:obsidian_identified_source])
