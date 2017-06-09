@@ -1,16 +1,20 @@
-class BoneInventory < ApplicationRecord
+class CeramicClap < ActiveRecord::Base
   has_and_belongs_to_many :features
   has_many :strata, -> {distinct}, :through => :features
   has_many :units, -> {distinct}, :through => :strata
 
-  has_many :bone_tools
+  belongs_to :ceramic_clap_type
+  belongs_to :ceramic_clap_group_type
+  belongs_to :ceramic_clap_tradition
+  belongs_to :ceramic_clap_vessel_form
+  belongs_to :ceramic_clap_temper
 
   def self.sorted
-    order("comments")
+    order("record_field_key_no")
   end
 
   def to_label
-    comments
+    record_field_key_no
   end
 
   def authorized_for_update?

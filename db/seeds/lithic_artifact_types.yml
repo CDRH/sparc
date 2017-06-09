@@ -1,0 +1,28 @@
+- code: AXE
+  name: Axe
+- code: BIF
+  name: Biface
+- code: CHO
+  name: Chopper
+- code: COR
+  name: Core
+- code: COH
+  name: Core/Hammerstone
+- code: DEB
+  name: Debitage
+- code: HAM
+  name: Hammerstone
+- code: HOE
+  name: Hoe
+- code: MAN
+  name: Mano
+- code: MET
+  name: Metate
+- code: PPT
+  name: Projectile Point
+- code: RET
+  name: Retouched Flake
+- code: UNI
+  name: Uniface
+- code: UTL
+  name: Utilized Debitage/Flake Tool

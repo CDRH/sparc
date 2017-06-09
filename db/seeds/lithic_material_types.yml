@@ -1,0 +1,22 @@
+- code: 1
+  name: Chert
+- code: 2
+  name: Chalcedony
+- code: 3
+  name: Silicified Wood
+- code: 4
+  name: Quartzite
+- code: 5
+  name: Basalt
+- code: 6
+  name: Obsidian
+- code: 7
+  name: Other Igneous (Andesite, Diorite, Rhyolite, Etc)
+- code: 8
+  name: Sedimentary
+- code: 9
+  name: Metamorphic
+- code: 10 
+  name: Other Mineral (Turquoise, Selenite, Etc)
+- code: 99
+  name: Unknown

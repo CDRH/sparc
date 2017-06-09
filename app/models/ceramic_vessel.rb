@@ -1,16 +1,21 @@
-class BoneInventory < ApplicationRecord
-  has_and_belongs_to_many :features
-  has_many :strata, -> {distinct}, :through => :features
+class CeramicVessel < ActiveRecord::Base
+  belongs_to :feature
+  has_many :strata, -> {distinct}, :through => :feature
   has_many :units, -> {distinct}, :through => :strata
 
-  has_many :bone_tools
+  belongs_to :ceramic_inventory
+
+  belongs_to :ceramic_whole_vessel_form
+  belongs_to :ceramic_vessel_lori_reed_form
+  belongs_to :ceramic_vessel_type
+  belongs_to :ceramic_vessel_lori_reed_type
 
   def self.sorted
-    order("comments")
+    order("fs_no")
   end
 
   def to_label
-    comments
+    fs_no
   end
 
   def authorized_for_update?
