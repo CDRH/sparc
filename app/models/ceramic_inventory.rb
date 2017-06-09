@@ -2,13 +2,16 @@ class CeramicInventory < ApplicationRecord
   has_and_belongs_to_many :features
   has_many :strata, -> {distinct}, :through => :features
   has_many :units, -> {distinct}, :through => :strata
-  
+
+  has_many :ceramics
+  has_many :ceramic_vessels
+
   def self.sorted
-    order("comments")
+    order("fs_no")
   end
 
   def to_label
-    comments
+    fs_no
   end
 
   def authorized_for_update?
