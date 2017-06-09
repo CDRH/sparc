@@ -1,4 +1,5 @@
 class LithicTermination < ActiveRecord::Base
+  has_many :lithic_debitages
   has_many :lithic_tools
 
   validates_uniqueness_of :name

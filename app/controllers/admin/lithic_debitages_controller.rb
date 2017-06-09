@@ -1,14 +1,13 @@
-class Admin::LithicToolsController < ApplicationController
+class Admin::LithicDebitagesController < ApplicationController
   lithic_tables = [
     :lithic_inventory,
-    :lithic_artifact_type,
     :lithic_material_type,
     :lithic_condition,
     :lithic_platform_type,
     :lithic_termination
   ]
 
-  active_scaffold :lithic_tool do |conf|
+  active_scaffold :lithic_debitage do |conf|
     conf.columns = [
       :units,
       :strata,
@@ -24,7 +23,7 @@ class Admin::LithicToolsController < ApplicationController
       :thickness,
       :weight,
       :comments,
-      :pii
+      :total_flakes_in_bag
     ]
     lithic_tables.each do |t|
       conf.columns << t

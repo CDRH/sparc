@@ -35,6 +35,7 @@ seeds = Rails.root.join('db', 'seeds')
   ceramic_claps: 'xls/Clap.xls',
   ceramic_vessels: 'xls/CeramicVessels_partial.xlsx',
   eggshells: 'xls/Eggshells.xls',
+  lithic_debitages: 'xls/LithicDebitage.xlsx',
   lithic_tools: 'xls/LithicTools.xlsx',
   ornaments: 'xls/Ornaments.xlsx',
   perishables: 'xls/Perishables.xls',
@@ -853,24 +854,28 @@ end
 ######################
 
 def seed_lithic_controlled_vocab
-  puts "\n\n\nCreating Lithic Controlled Vocab"
   if LithicArtifactType.count < 1
+    puts "\n\n\nCreating Lithic Artifacts"
     lithic_artifact_types = load_yaml @files[:lithic_artifact_types]
     LithicArtifactType.create(lithic_artifact_types)
   end
   if LithicCondition.count < 1
+    puts "\n\n\nCreating Lithic Conditions"
     lithic_conditions = load_yaml @files[:lithic_conditions]
     LithicCondition.create(lithic_conditions)
   end
   if LithicMaterialType.count < 1
+    puts "\n\n\nCreating Lithic Materials"
     lithic_material_types = load_yaml @files[:lithic_material_types]
     LithicMaterialType.create(lithic_material_types)
   end
   if LithicPlatformType.count < 1
+    puts "\n\n\nCreating Lithic Platforms"
     lithic_platform_types = load_yaml @files[:lithic_platform_types]
     LithicPlatformType.create(lithic_platform_types)
   end
   if LithicTermination.count < 1
+    puts "\n\n\nCreating Lithic Terminations"
     lithic_terminations = load_yaml @files[:lithic_terminations]
     LithicTermination.create(lithic_terminations)
   end
@@ -1257,6 +1262,68 @@ def seed_eggshells
     # Output and save
 #    puts eggshell[:salmon_museum_no]
     Eggshell.create(eggshell)
+  end
+end
+
+###################
+# Lithic Debitage #
+###################
+def seed_lithic_debitages
+  s = Roo::Excelx.new(@files[:lithic_debitages])
+
+  puts "\n\n\nCreating Lithic Debitages\n"
+
+  columns = {
+    unit: "Room",
+    fs_no: "FS #",
+    artifact_no: "Artifact #",
+    lithic_material_type: "Material Type",
+    lithic_condition: "Condition",
+    fire_altered: "Fire Altered",
+    utilized: "Utilized",
+    cortex_percentage: "Cortex %",
+    lithic_platform_type: "Platform Type",
+    lithic_termination: "Termination",
+    length: "Length",
+    width: "Width",
+    thickness: "Thickness",
+    weight: "Weight",
+    comments: "Notes",
+    total_flakes_in_bag: "Total Flakes in Bag"
+  }
+
+  last_unit = ""
+  s.sheet('Debitage').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    deb = prepare_cell_values(row)
+
+    # Output context for creation
+#    puts "\nUnit #{deb[:unit]}:" if deb[:unit] != last_unit
+    last_unit = deb[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(deb[:unit], 'debitages')
+
+    # get the features from matching inventories, else use "none"
+    inventory = associate_analysis_with_inventory LithicInventory, deb[:fs_no], unit
+    if inventory
+      deb[:lithic_inventory] = inventory
+      deb[:features] = inventory.features || []
+    else
+      associate_strata_features(unit, "none", "none", deb, "Lithic Debitages")
+    end
+
+    # use existing seeded lithic_deb values
+    deb[:lithic_condition] = LithicCondition.where(code: deb[:lithic_condition]).first
+    deb[:lithic_material_type] = LithicMaterialType.where(code: deb[:lithic_material_type]).first
+    deb[:lithic_platform_type] = LithicPlatformType.where(code: deb[:lithic_platform_type]).first
+    deb[:lithic_termination] = LithicTermination.where(code: deb[:lithic_termination]).first
+
+    # Output and save
+#    puts deb[:fs_no]
+    LithicDebitage.create(deb)
   end
 end
 
@@ -1744,6 +1811,7 @@ seed_ceramics if Ceramic.count < 1
 seed_ceramic_claps if CeramicClap.count < 1
 seed_ceramic_vessels if CeramicVessel.count < 1
 seed_eggshells if Eggshell.count < 1
+seed_lithic_debitages if LithicDebitage.count < 1
 seed_lithic_tools if LithicTool.count < 1
 seed_ornaments if Ornament.count < 1
 seed_perishables if Perishable.count < 1

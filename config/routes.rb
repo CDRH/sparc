@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     :eggshells,
     :features,
     :images,
+    :lithic_debitages,
     :lithic_inventories,
     :lithic_tools,
     :obsidian_inventories,
