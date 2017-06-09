@@ -577,6 +577,7 @@ stratum Other:F-1-15 created from Lithic Inventories
 stratum Other:L-1 created from Lithic Inventories
 stratum Other:O-1-2 created from Lithic Inventories
 stratum TT10:B-1-4 created from Lithic Inventories
+feature 100W:C-2-5:303.0 created from Obsidian Inventories
 stratum 014P:P-1-4 created from Pollen Inventories
 stratum 018P:L-3-11.2 created from Pollen Inventories
 feature 018P:L-3-11.2:6.0 created from Pollen Inventories
@@ -657,25 +658,55 @@ stratum 123B:J-2-6 created from Wood Inventories
 stratum 123B:I-2-5 created from Wood Inventories
 feature 130W:L-2.1-11.1:3.0 created from Wood Inventories
 stratum 060A:K-0-0 created from Bone Tool: 8051
-feature 007W:none:5.0 created from burials
-feature 031W:L-1-3.5:101.0 created from burials
-feature 037B:C-1-3:1.1 created from burials
-feature 037B:C-1-3:1.2 created from burials
-feature 056W:C-1-3:100.0 created from burials
-feature 062W:C-2-6.9:1.2 created from burials
-feature 083W:C-1-4:101.0 created from burials
-feature 083W:C-1-4:102.0 created from burials
-feature 083W:C-1-4:103.0 created from burials
-feature 083W:C-1-4:104.0 created from burials
-stratum 090W:H-0-0 created from Burial 45.0
-feature 090W:H-0-0:101.0 created from burials
-stratum 097B:C-2-5 created from Burial 61.0
-feature 097B:C-2-5:2.1 created from burials
-feature 149W:C-2-3:2.0 created from burials
+feature 007W:none:5.0 created from Burial
+feature 031W:L-1-3.5:101.0 created from Burial
+feature 037B:C-1-3:1.1 created from Burial
+feature 037B:C-1-3:1.2 created from Burial
+feature 056W:C-1-3:100.0 created from Burial
+feature 062W:C-2-6.9:1.2 created from Burial
+feature 083W:C-1-4:101.0 created from Burial
+feature 083W:C-1-4:102.0 created from Burial
+feature 083W:C-1-4:103.0 created from Burial
+feature 083W:C-1-4:104.0 created from Burial
+stratum 090W:H-0-0 created from Burial
+feature 090W:H-0-0:101.0 created from Burial
+stratum 097B:C-2-5 created from Burial
+feature 097B:C-2-5:2.1 created from Burial
+feature 149W:C-2-3:2.0 created from Burial
 Zone None created from burials
 Unit None created from burials
-stratum 064W:L-1-10 created from Ceramics 22312
-feature 064W:L-1-10:1002.0 created from ceramics
+stratum 064W:L-1-10 created from Ceramics
+feature 064W:L-1-10:1002.0 created from Ceramics
+feature 002BW:L-1-3.5:4.0 created from Ceramics CLAP
+stratum 031W:E-2-9 created from Ceramics CLAP
+stratum 037A:F-2-5 created from Ceramics CLAP
+stratum 061A:AB -1-1 created from Ceramics CLAP
+feature 092W:L-1.3-10.3:47.0 created from Ceramics CLAP
+stratum 093W:C-0-0 created from Ceramics CLAP
+stratum 093W:D-0-0 created from Ceramics CLAP
+stratum 093W:I-0-0 created from Ceramics CLAP
+stratum 097W:C-4-15 created from Ceramics CLAP
+stratum 097W:D-1.5-11.5 created from Ceramics CLAP
+feature 097W:L-4-9:2007.0 created from Ceramics CLAP
+stratum 097W:T-2-18 created from Ceramics CLAP
+stratum 098W:F-1-3 created from Ceramics CLAP
+stratum 100W:C-6-11 created from Ceramics CLAP
+stratum 121A:H-1-5 created from Ceramics CLAP
+stratum 124A:K-1-11.5 created from Ceramics CLAP
+stratum 130W:B-2-5 created from Ceramics CLAP
+feature 130W:L-2.2-11.2:3.0 created from Ceramics CLAP
+feature 130W:L-2.2-11.2:29.0 created from Ceramics CLAP
+feature 130W:L-7-21:4.0 created from Ceramics CLAP
+stratum 004A:B-4-8 created from Ceramic Vessels
+feature 004A:B-4-8:unknown created from Ceramic Vessels
+feature 020P:B-3-4.3:unknown created from Ceramic Vessels
+feature 031W:L-2-10:unknown created from Ceramic Vessels
+feature 033B:L-1-3:unknown created from Ceramic Vessels
+feature 033B:C-1-12:unknown created from Ceramic Vessels
+feature 036W:B-1-2:unknown created from Ceramic Vessels
+feature 037W:F-2-5:unknown created from Ceramic Vessels
+feature 037B:C-1-3:unknown created from Ceramic Vessels
+feature 043W:L-4-6.7:unknown created from Ceramic Vessels
 stratum 059W:P-0-1.5 created from Eggshells
 stratum 062W:C-2.5-7.2 created from Eggshells
 stratum 062W:C-2-7.1 created from Eggshells
@@ -695,25 +726,27 @@ stratum 129W:G-0.1-92.1 created from Eggshells
 feature 129W:P-0-0:101.0 created from Eggshells
 feature 130W:L-3-12:3.0 created from Eggshells
 feature 130W:L-3-12:29.0 created from Eggshells
-feature 036W:S-1-4.6:12.0 created from ornaments
-feature 062A:H-2-5.5:27.0 created from ornaments
-feature 064W:L-2-10:4.0 created from ornaments
-feature 064W:F-1-6:53.0 created from ornaments
-feature 064W:F-1-6:8.0 created from ornaments
-feature 064W:F-1-6:47.0 created from ornaments
-feature 082W:M-2-13.5:19.0 created from ornaments
-feature 082W:M-2-13.5:20.0 created from ornaments
-feature 130W:F-1-3:30.0 created from ornaments
-feature 130W:J-1-14:51.0 created from ornaments
-feature 130W:J-1-14:52.0 created from ornaments
-feature 130W:L-2.3-11.3:66.0 created from ornaments
-feature 130W:L-7-21:75.0 created from ornaments
-feature 130W:L-7-21:78.0 created from ornaments
-feature 130W:L-7-21:84.0 created from ornaments
-stratum 129W:C-59-66 created from Ornament OR80-000290-SSP
-stratum 102C:I-1-30 created from Ornament OR80-000419-SSP
-stratum 121W:G-1-3 created from Ornament OR80-000904-SSP
-stratum 033W:G-1-6 created from Ornament OR80-000740-SSP
+Zone # created from tools
+Unit #N/A created from tools
+feature 036W:S-1-4.6:12.0 created from Ornament
+feature 062A:H-2-5.5:27.0 created from Ornament
+feature 064W:L-2-10:4.0 created from Ornament
+feature 064W:F-1-6:53.0 created from Ornament
+feature 064W:F-1-6:8.0 created from Ornament
+feature 064W:F-1-6:47.0 created from Ornament
+feature 082W:M-2-13.5:19.0 created from Ornament
+feature 082W:M-2-13.5:20.0 created from Ornament
+feature 130W:F-1-3:30.0 created from Ornament
+feature 130W:J-1-14:51.0 created from Ornament
+feature 130W:J-1-14:52.0 created from Ornament
+feature 130W:L-2.3-11.3:66.0 created from Ornament
+feature 130W:L-7-21:75.0 created from Ornament
+feature 130W:L-7-21:78.0 created from Ornament
+feature 130W:L-7-21:84.0 created from Ornament
+stratum 129W:C-59-66 created from Ornament
+stratum 102C:I-1-30 created from Ornament
+stratum 121W:G-1-3 created from Ornament
+stratum 033W:G-1-6 created from Ornament
 Zone Surface created from Ornaments
 Unit Surface created from Ornaments
 feature 097W:D-2-13:2007.0 created from Perishables
@@ -1255,7 +1288,6 @@ unit 090A-C created from Image with hyphen in unit NOT added
 unit 090A-C created from Image with hyphen in unit NOT added
 unit 090C-E created from Image with hyphen in unit NOT added
 unit 090A-C created from Image with hyphen in unit NOT added
-stratum 097W:C-4-15 created from Images
 stratum 100W:C-4-7 created from Images
 stratum 031W:C-2-6 created from Images
 stratum 062W:L-2-7 created from Images
