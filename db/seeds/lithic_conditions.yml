@@ -1,0 +1,22 @@
+- code: 1
+  name: Complete Flake
+- code: 2
+  name: Broken Flake
+- code: 3
+  name: Flake Fragment
+- code: 4
+  name: Debris
+- code: 5
+  name: Complete Tool
+- code: 6
+  name: Nearly Complete Tool
+- code: 7
+  name: Tool Fragment
+- code: 8
+  name: Useable Core
+- code: 9
+  name: Exhausted Core
+- code: 98
+  name: Other
+- code: 99
+  name: Unknown

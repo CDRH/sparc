@@ -1,0 +1,14 @@
+- code: 0
+  name: Not Applicable
+- code: 1
+  name: Feathered
+- code: 2
+  name: Hinge
+- code: 3
+  name: Step
+- code: 4
+  name: Outre Passe
+- code: 90
+  name: Missing
+- code: 99
+  name: Unknown

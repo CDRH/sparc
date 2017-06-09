@@ -5,6 +5,8 @@
 # Spreadsheets #
 ################
 
+seeds = Rails.root.join('db', 'seeds')
+
 @files = {
   # Primary Tables
   units: 'xls/Units.xlsx',
@@ -19,6 +21,13 @@
   pollen_inventory: 'xls/PollenInventory.xlsx',
   wood_inventory: 'xls/WoodInventory.xls',
 
+  # Seeds
+  lithic_artifact_types: "#{seeds}/lithic_artifact_types.yml",
+  lithic_conditions: "#{seeds}/lithic_conditions.yml",
+  lithic_material_types: "#{seeds}/lithic_material_types.yml",
+  lithic_platform_types: "#{seeds}/lithic_platform_types.yml",
+  lithic_terminations: "#{seeds}/lithic_terminations.yml",
+
   # Analysis Tables
   bonetools: 'xls/BoneTools.xlsx',
   burials: 'xls/Burials.xls',
@@ -26,6 +35,7 @@
   ceramic_claps: 'xls/Clap.xls',
   ceramic_vessels: 'xls/CeramicVessels_partial.xlsx',
   eggshells: 'xls/Eggshells.xls',
+  lithic_tools: 'xls/LithicTools.xlsx',
   ornaments: 'xls/Ornaments.xlsx',
   perishables: 'xls/Perishables.xls',
   select_artifacts: 'xls/SelectArtifacts.xls',
@@ -49,13 +59,18 @@
 # eventually we should not need the unit_no, but since there are duplicated
 # fs_nos in the inventory spreadsheets, this attempts to narrow it down
 # and then takes the FIRST one that matches
-def associate_analysis_with_inventory model, unit, fs_no
-  begin
-    model.joins(:units).where(units: { unit_no: unit.unit_no }).where(fs_no: fs_no).first
-  rescue => e
-    puts "COULD NOT JOIN #{model} WITH UNITS: #{e}"
-    return nil
+# unit is optional
+def associate_analysis_with_inventory model, fs_no, unit=nil
+  query = model.where(fs_no: fs_no)
+  if unit
+    begin
+      query.joins(:units).where(units: { unit_no: unit.unit_no })
+    rescue => e
+      puts "COULD NOT JOIN #{model} WITH UNITS: #{e}"
+      return nil
+    end
   end
+  return query.first
 end
 
 # given a specific unit with a list of strata and features, find or create
@@ -160,6 +175,10 @@ def get_feature_number feat_str, source
     end
   end
   return feature
+end
+
+def load_yaml file
+  YAML::load_file(file)
 end
 
 # TODO "none" will fail for integer column, etc
@@ -825,6 +844,38 @@ def seed_wood_inventories
   end
 end
 
+#########################
+# ANALYSIS VOCAB TABLES #
+#########################
+
+######################
+# Lithic Tools Vocab #
+######################
+
+def seed_lithic_controlled_vocab
+  puts "\n\n\nCreating Lithic Controlled Vocab"
+  if LithicArtifactType.count < 1
+    lithic_artifact_types = load_yaml @files[:lithic_artifact_types]
+    LithicArtifactType.create(lithic_artifact_types)
+  end
+  if LithicCondition.count < 1
+    lithic_conditions = load_yaml @files[:lithic_conditions]
+    LithicCondition.create(lithic_conditions)
+  end
+  if LithicMaterialType.count < 1
+    lithic_material_types = load_yaml @files[:lithic_material_types]
+    LithicMaterialType.create(lithic_material_types)
+  end
+  if LithicPlatformType.count < 1
+    lithic_platform_types = load_yaml @files[:lithic_platform_types]
+    LithicPlatformType.create(lithic_platform_types)
+  end
+  if LithicTermination.count < 1
+    lithic_terminations = load_yaml @files[:lithic_terminations]
+    LithicTermination.create(lithic_terminations)
+  end
+end
+
 ###################
 # ANALYSIS TABLES #
 ###################
@@ -868,7 +919,7 @@ def seed_bone_tools
     unit = select_or_create_unit(bonetool[:unit], "Bone Tools")
 
     bonetool[:occupation] = find_or_create_occupation(bonetool[:occupation])
-    bonetool[:bone_inventory] = associate_analysis_with_inventory(BoneInventory, unit, bonetool[:fs_no])
+    bonetool[:bone_inventory] = associate_analysis_with_inventory(BoneInventory, bonetool[:fs_no], unit)
 
     bonetool[:strata] = []
     strats = bonetool[:strat].split(/[;,]/).map{ |strat| strat.strip }
@@ -1001,7 +1052,7 @@ def seed_ceramics
     unit = select_or_create_unit(ceramic[:unit], "ceramics")
     associate_strata_features(unit, ceramic[:strat], ceramic[:feature_no], ceramic, "Ceramics", false)
 
-    ceramic[:ceramic_inventory] = associate_analysis_with_inventory(CeramicInventory, unit, ceramic[:fs_no])
+    ceramic[:ceramic_inventory] = associate_analysis_with_inventory(CeramicInventory, ceramic[:fs_no], unit)
 
     # all those ceramic tables....
     ceramic[:ceramic_vessel_form] = create_if_not_exists(CeramicVesselForm, :name, ceramic[:ceramic_vessel_form])
@@ -1140,7 +1191,7 @@ def seed_ceramic_vessels
     unit = select_or_create_unit(vessel[:unit], "ceramics vessel")
     associate_strata_features(unit, vessel[:strat], vessel[:feature_no], vessel, "Ceramic Vessels", false)
 
-    vessel[:ceramic_inventory] = associate_analysis_with_inventory(CeramicInventory, unit, vessel[:fs_no])
+    vessel[:ceramic_inventory] = associate_analysis_with_inventory(CeramicInventory, vessel[:fs_no], unit)
 
     # all those vessel tables....
     vessel[:ceramic_whole_vessel_form] = create_if_not_exists(CeramicWholeVesselForm, :name, vessel[:ceramic_whole_vessel_form])
@@ -1206,6 +1257,72 @@ def seed_eggshells
     # Output and save
 #    puts eggshell[:salmon_museum_no]
     Eggshell.create(eggshell)
+  end
+end
+
+################
+# Lithic Tools #
+################
+def seed_lithic_tools
+  s = Roo::Excelx.new(@files[:lithic_tools])
+
+  puts "\n\n\nCreating Lithic Tools\n"
+
+  columns = {
+    unit: "Room",
+    fs_no: "FS #",
+    artifact_no: "Artifact #",
+    lithic_artifact_type: "Artifact Type",
+    lithic_material_type: "Material Type",
+    lithic_condition: "Condition",
+    fire_altered: "Fire Altered",
+    utilized: "Utilized",
+    cortex_percentage: "Cortex %",
+    lithic_platform_type: "Platform Type",
+    lithic_termination: "Termination",
+    cortical_flakes: "Cortical Flakes",
+    non_cortical_flakes: "Non-Cortical Flakes",
+    length: "Length",
+    width: "Width",
+    thickness: "Thickness",
+    weight: "Weight",
+    comments: "Notes",
+    pii: "PII?"
+  }
+
+  last_unit = ""
+  s.sheet('Tools').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    tool = prepare_cell_values(row)
+
+    # Output context for creation
+#    puts "\nUnit #{tool[:unit]}:" if tool[:unit] != last_unit
+    last_unit = tool[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(tool[:unit], 'tools')
+
+    # get the features from matching inventories, else use "none"
+    inventory = associate_analysis_with_inventory LithicInventory, tool[:fs_no], unit
+    if inventory
+      tool[:lithic_inventory] = inventory
+      tool[:features] = inventory.features || []
+    else
+      associate_strata_features(unit, "none", "none", tool, "Lithic Tools")
+    end
+
+    # use existing seeded lithic_tool values
+    tool[:lithic_artifact_type] = LithicArtifactType.where(code: tool[:lithic_artifact_type]).first
+    tool[:lithic_condition] = LithicCondition.where(code: tool[:lithic_condition]).first
+    tool[:lithic_material_type] = LithicMaterialType.where(code: tool[:lithic_material_type]).first
+    tool[:lithic_platform_type] = LithicPlatformType.where(code: tool[:lithic_platform_type]).first
+    tool[:lithic_termination] = LithicTermination.where(code: tool[:lithic_termination]).first
+
+    # Output and save
+#    puts tool[:fs_no]
+    LithicTool.create(tool)
   end
 end
 
@@ -1374,7 +1491,7 @@ def seed_select_artifacts
       sa[:strata] << select_or_create_stratum(unit, strat, "SA #{sa[:artifact_no]}")
     end
 
-    sa[:occupation] = create_if_not_exists(Occupation, :name, sa[:occupation])
+    sa[:occupation] = find_or_create_occupation(sa[:occupation])
 
     # NOTE: associated_feature_artifacts considered for model associations
     # If done, the select_artifacts_strata table should be removed
@@ -1617,6 +1734,9 @@ seed_obsidian_inventory if ObsidianInventory.count < 1
 seed_pollen_inventories if PollenInventory.count < 1
 seed_wood_inventories if WoodInventory.count < 1
 
+# Analysis Controlled Vocab Tables
+seed_lithic_controlled_vocab
+
 # Analysis Tables
 seed_bone_tools if BoneTool.count < 1
 seed_burials if Burial.count < 1
@@ -1624,6 +1744,7 @@ seed_ceramics if Ceramic.count < 1
 seed_ceramic_claps if CeramicClap.count < 1
 seed_ceramic_vessels if CeramicVessel.count < 1
 seed_eggshells if Eggshell.count < 1
+seed_lithic_tools if LithicTool.count < 1
 seed_ornaments if Ornament.count < 1
 seed_perishables if Perishable.count < 1
 seed_select_artifacts if SelectArtifact.count < 1

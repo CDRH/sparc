@@ -1,16 +1,14 @@
-class LithicInventory < ApplicationRecord
-  has_and_belongs_to_many :features
-  has_many :strata, -> {distinct}, :through => :features
-  has_many :units, -> {distinct}, :through => :strata
-
+class LithicPlatformType < ActiveRecord::Base
   has_many :lithic_tools
 
+  validates_uniqueness_of :name
+
   def self.sorted
-    order("fs_no")
+    order("name")
   end
 
   def to_label
-    fs_no
+    name
   end
 
   def authorized_for_update?
