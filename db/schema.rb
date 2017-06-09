@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170609144414) do
+ActiveRecord::Schema.define(version: 20170609174510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -516,6 +516,13 @@ ActiveRecord::Schema.define(version: 20170609144414) do
     t.index ["image_id"], name: "index_features_images_on_image_id", using: :btree
   end
 
+  create_table "features_lithic_debitages", id: false, force: :cascade do |t|
+    t.integer "lithic_debitage_id"
+    t.integer "feature_id"
+    t.index ["feature_id"], name: "index_features_lithic_debitages_on_feature_id", using: :btree
+    t.index ["lithic_debitage_id"], name: "index_features_lithic_debitages_on_lithic_debitage_id", using: :btree
+  end
+
   create_table "features_lithic_inventories", id: false, force: :cascade do |t|
     t.integer "lithic_inventory_id"
     t.integer "feature_id"
@@ -694,6 +701,34 @@ ActiveRecord::Schema.define(version: 20170609144414) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "lithic_debitages", force: :cascade do |t|
+    t.string  "unit"
+    t.string  "fs_no"
+    t.string  "artifact_no"
+    t.string  "artifact_type"
+    t.string  "fire_altered"
+    t.string  "utilized"
+    t.integer "cortex_percentage"
+    t.integer "cortical_flakes"
+    t.integer "non_cortical_flakes"
+    t.decimal "length"
+    t.decimal "width"
+    t.decimal "thickness"
+    t.decimal "weight"
+    t.string  "comments"
+    t.integer "total_flakes_in_bag"
+    t.integer "lithic_inventory_id"
+    t.integer "lithic_material_type_id"
+    t.integer "lithic_condition_id"
+    t.integer "lithic_platform_type_id"
+    t.integer "lithic_termination_id"
+    t.index ["lithic_condition_id"], name: "index_lithic_debitages_on_lithic_condition_id", using: :btree
+    t.index ["lithic_inventory_id"], name: "index_lithic_debitages_on_lithic_inventory_id", using: :btree
+    t.index ["lithic_material_type_id"], name: "index_lithic_debitages_on_lithic_material_type_id", using: :btree
+    t.index ["lithic_platform_type_id"], name: "index_lithic_debitages_on_lithic_platform_type_id", using: :btree
+    t.index ["lithic_termination_id"], name: "index_lithic_debitages_on_lithic_termination_id", using: :btree
   end
 
   create_table "lithic_inventories", force: :cascade do |t|
@@ -1132,6 +1167,8 @@ ActiveRecord::Schema.define(version: 20170609144414) do
   add_foreign_key "features", "t_shaped_doors"
   add_foreign_key "features_images", "features"
   add_foreign_key "features_images", "images"
+  add_foreign_key "features_lithic_debitages", "features"
+  add_foreign_key "features_lithic_debitages", "lithic_debitages"
   add_foreign_key "features_lithic_inventories", "features"
   add_foreign_key "features_lithic_inventories", "lithic_inventories"
   add_foreign_key "features_lithic_tools", "features"
