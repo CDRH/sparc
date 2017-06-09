@@ -1,5 +1,6 @@
 class Admin::CeramicVesselsController < ApplicationController
   ceramic_tables = [
+    :ceramic_inventory,
     :ceramic_whole_vessel_form,
     :ceramic_vessel_lori_reed_form,
     :ceramic_vessel_type,
@@ -23,7 +24,7 @@ class Admin::CeramicVesselsController < ApplicationController
     ]
     ceramic_tables.each do |t|
       conf.columns << t
-      conf.columns[t].form_ui = :select
+      conf.columns[t].form_ui = :record_select
     end
     conf.columns[:units].form_ui = :record_select
     conf.columns[:strata].form_ui = :record_select

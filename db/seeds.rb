@@ -45,6 +45,19 @@
 # Helpers #
 ###########
 
+# return the id of an inventory record with a matching fs_no AND unit_no
+# eventually we should not need the unit_no, but since there are duplicated
+# fs_nos in the inventory spreadsheets, this attempts to narrow it down
+# and then takes the FIRST one that matches
+def associate_analysis_with_inventory model, unit, fs_no
+  begin
+    model.joins(:units).where(units: { unit_no: unit.unit_no }).where(fs_no: fs_no).first
+  rescue => e
+    puts "COULD NOT JOIN #{model} WITH UNITS: #{e}"
+    return nil
+  end
+end
+
 # given a specific unit with a list of strata and features, find or create
 # all the items and create appropriate relationships
 # returns the features
@@ -855,6 +868,7 @@ def seed_bone_tools
     unit = select_or_create_unit(bonetool[:unit], "Bone Tools")
 
     bonetool[:occupation] = find_or_create_occupation(bonetool[:occupation])
+    bonetool[:bone_inventory] = associate_analysis_with_inventory(BoneInventory, unit, bonetool[:fs_no])
 
     bonetool[:strata] = []
     strats = bonetool[:strat].split(/[;,]/).map{ |strat| strat.strip }
@@ -986,6 +1000,8 @@ def seed_ceramics
     # Note: ceramic may only have one feature
     unit = select_or_create_unit(ceramic[:unit], "ceramics")
     associate_strata_features(unit, ceramic[:strat], ceramic[:feature_no], ceramic, "Ceramics", false)
+
+    ceramic[:ceramic_inventory] = associate_analysis_with_inventory(CeramicInventory, unit, ceramic[:fs_no])
 
     # all those ceramic tables....
     ceramic[:ceramic_vessel_form] = create_if_not_exists(CeramicVesselForm, :name, ceramic[:ceramic_vessel_form])
@@ -1123,6 +1139,8 @@ def seed_ceramic_vessels
     # Handle foreign keys
     unit = select_or_create_unit(vessel[:unit], "ceramics vessel")
     associate_strata_features(unit, vessel[:strat], vessel[:feature_no], vessel, "Ceramic Vessels", false)
+
+    vessel[:ceramic_inventory] = associate_analysis_with_inventory(CeramicInventory, unit, vessel[:fs_no])
 
     # all those vessel tables....
     vessel[:ceramic_whole_vessel_form] = create_if_not_exists(CeramicWholeVesselForm, :name, vessel[:ceramic_whole_vessel_form])

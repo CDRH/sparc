@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608154025) do
+ActiveRecord::Schema.define(version: 20170609135414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,9 +67,11 @@ ActiveRecord::Schema.define(version: 20170608154025) do
     t.string   "tool_type"
     t.integer  "species_code"
     t.text     "comments"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "occupation_id"
+    t.integer  "bone_inventory_id"
+    t.index ["bone_inventory_id"], name: "index_bone_tools_on_bone_inventory_id", using: :btree
     t.index ["occupation_id"], name: "index_bone_tools_on_occupation_id", using: :btree
   end
 
@@ -331,6 +333,8 @@ ActiveRecord::Schema.define(version: 20170608154025) do
     t.integer "ceramic_vessel_lori_reed_form_id"
     t.integer "ceramic_vessel_type_id"
     t.integer "ceramic_vessel_lori_reed_type_id"
+    t.integer "ceramic_inventory_id"
+    t.index ["ceramic_inventory_id"], name: "index_ceramic_vessels_on_ceramic_inventory_id", using: :btree
     t.index ["ceramic_vessel_lori_reed_form_id"], name: "index_ceramic_vessels_on_ceramic_vessel_lori_reed_form_id", using: :btree
     t.index ["ceramic_vessel_lori_reed_type_id"], name: "index_ceramic_vessels_on_ceramic_vessel_lori_reed_type_id", using: :btree
     t.index ["ceramic_vessel_type_id"], name: "index_ceramic_vessels_on_ceramic_vessel_type_id", using: :btree
@@ -388,10 +392,12 @@ ActiveRecord::Schema.define(version: 20170608154025) do
     t.integer  "ceramic_ware_id"
     t.integer  "ceramic_specific_type_id"
     t.integer  "ceramic_style_id"
+    t.integer  "ceramic_inventory_id"
     t.index ["ceramic_exterior_pigment_id"], name: "index_ceramics_on_ceramic_exterior_pigment_id", using: :btree
     t.index ["ceramic_exterior_surface_id"], name: "index_ceramics_on_ceramic_exterior_surface_id", using: :btree
     t.index ["ceramic_interior_pigment_id"], name: "index_ceramics_on_ceramic_interior_pigment_id", using: :btree
     t.index ["ceramic_interior_surface_id"], name: "index_ceramics_on_ceramic_interior_surface_id", using: :btree
+    t.index ["ceramic_inventory_id"], name: "index_ceramics_on_ceramic_inventory_id", using: :btree
     t.index ["ceramic_paste_id"], name: "index_ceramics_on_ceramic_paste_id", using: :btree
     t.index ["ceramic_slip_id"], name: "index_ceramics_on_ceramic_slip_id", using: :btree
     t.index ["ceramic_specific_type_id"], name: "index_ceramics_on_ceramic_specific_type_id", using: :btree
