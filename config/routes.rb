@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     :features,
     :images,
     :lithic_inventories,
+    :lithic_tools,
     :obsidian_inventories,
     :ornaments,
     :perishables,

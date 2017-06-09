@@ -1,0 +1,26 @@
+- code: 0
+  name: Not Applicable
+- code: 1
+  name: Single Faceted
+- code: 2
+  name: Dihedral
+- code: 3
+  name: Multifaceted/Retouched
+- code: 4
+  name: Cortical
+- code: 5
+  name: Ground
+- code: 6
+  name: Crushed
+- code: 7
+  name: Battered
+- code: 8
+  name: Conical/Point
+- code: 9
+  name: Collapsed
+- code: 90
+  name: Missing
+- code: 98
+  name: Other
+- code: 99
+  name: Unknown

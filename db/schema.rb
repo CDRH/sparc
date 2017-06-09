@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170609135414) do
+ActiveRecord::Schema.define(version: 20170609144414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -523,6 +523,13 @@ ActiveRecord::Schema.define(version: 20170609135414) do
     t.index ["lithic_inventory_id"], name: "index_features_lithic_inventories_on_lithic_inventory_id", using: :btree
   end
 
+  create_table "features_lithic_tools", id: false, force: :cascade do |t|
+    t.integer "lithic_tool_id"
+    t.integer "feature_id"
+    t.index ["feature_id"], name: "index_features_lithic_tools_on_feature_id", using: :btree
+    t.index ["lithic_tool_id"], name: "index_features_lithic_tools_on_lithic_tool_id", using: :btree
+  end
+
   create_table "features_perishables", id: false, force: :cascade do |t|
     t.integer "perishable_id"
     t.integer "feature_id"
@@ -675,6 +682,20 @@ ActiveRecord::Schema.define(version: 20170609135414) do
     t.index ["name"], name: "index_irregular_shapes_on_name", unique: true, using: :btree
   end
 
+  create_table "lithic_artifact_types", force: :cascade do |t|
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lithic_conditions", force: :cascade do |t|
+    t.integer  "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "lithic_inventories", force: :cascade do |t|
     t.string   "site"
     t.string   "box"
@@ -701,6 +722,56 @@ ActiveRecord::Schema.define(version: 20170609135414) do
     t.string   "location"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+  end
+
+  create_table "lithic_material_types", force: :cascade do |t|
+    t.integer  "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lithic_platform_types", force: :cascade do |t|
+    t.integer  "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lithic_terminations", force: :cascade do |t|
+    t.integer  "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lithic_tools", force: :cascade do |t|
+    t.string  "unit"
+    t.string  "fs_no"
+    t.string  "artifact_no"
+    t.string  "fire_altered"
+    t.string  "utilized"
+    t.integer "cortex_percentage"
+    t.integer "cortical_flakes"
+    t.integer "non_cortical_flakes"
+    t.integer "length"
+    t.integer "width"
+    t.integer "thickness"
+    t.integer "weight"
+    t.string  "comments"
+    t.string  "pii"
+    t.integer "lithic_inventory_id"
+    t.integer "lithic_artifact_type_id"
+    t.integer "lithic_material_type_id"
+    t.integer "lithic_condition_id"
+    t.integer "lithic_platform_type_id"
+    t.integer "lithic_termination_id"
+    t.index ["lithic_artifact_type_id"], name: "index_lithic_tools_on_lithic_artifact_type_id", using: :btree
+    t.index ["lithic_condition_id"], name: "index_lithic_tools_on_lithic_condition_id", using: :btree
+    t.index ["lithic_inventory_id"], name: "index_lithic_tools_on_lithic_inventory_id", using: :btree
+    t.index ["lithic_material_type_id"], name: "index_lithic_tools_on_lithic_material_type_id", using: :btree
+    t.index ["lithic_platform_type_id"], name: "index_lithic_tools_on_lithic_platform_type_id", using: :btree
+    t.index ["lithic_termination_id"], name: "index_lithic_tools_on_lithic_termination_id", using: :btree
   end
 
   create_table "obsidian_identified_sources", force: :cascade do |t|
@@ -1063,6 +1134,8 @@ ActiveRecord::Schema.define(version: 20170609135414) do
   add_foreign_key "features_images", "images"
   add_foreign_key "features_lithic_inventories", "features"
   add_foreign_key "features_lithic_inventories", "lithic_inventories"
+  add_foreign_key "features_lithic_tools", "features"
+  add_foreign_key "features_lithic_tools", "lithic_tools"
   add_foreign_key "features_perishables", "features"
   add_foreign_key "features_perishables", "perishables"
   add_foreign_key "features_pollen_inventories", "features"
