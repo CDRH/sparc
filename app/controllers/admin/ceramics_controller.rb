@@ -1,5 +1,6 @@
 class Admin::CeramicsController < ApplicationController
   ceramic_tables = [
+    :ceramic_inventory,
     :ceramic_vessel_form,
     :ceramic_vessel_part,
     :ceramic_exterior_pigment,

@@ -5,6 +5,8 @@
 # Spreadsheets #
 ################
 
+seeds = Rails.root.join('db', 'seeds')
+
 @files = {
   # Primary Tables
   units: 'xls/Units.xlsx',
@@ -19,11 +21,22 @@
   pollen_inventory: 'xls/PollenInventory.xlsx',
   wood_inventory: 'xls/WoodInventory.xls',
 
+  # Seeds
+  lithic_artifact_types: "#{seeds}/lithic_artifact_types.yml",
+  lithic_conditions: "#{seeds}/lithic_conditions.yml",
+  lithic_material_types: "#{seeds}/lithic_material_types.yml",
+  lithic_platform_types: "#{seeds}/lithic_platform_types.yml",
+  lithic_terminations: "#{seeds}/lithic_terminations.yml",
+
   # Analysis Tables
   bonetools: 'xls/BoneTools.xlsx',
   burials: 'xls/Burials.xls',
   ceramics: 'xls/CeramicAnalysis.xlsx',
+  ceramic_claps: 'xls/Clap.xls',
+  ceramic_vessels: 'xls/CeramicVessels_partial.xlsx',
   eggshells: 'xls/Eggshells.xls',
+  lithic_debitages: 'xls/LithicDebitage.xlsx',
+  lithic_tools: 'xls/LithicTools.xlsx',
   ornaments: 'xls/Ornaments.xlsx',
   perishables: 'xls/Perishables.xls',
   select_artifacts: 'xls/SelectArtifacts.xls',
@@ -42,6 +55,24 @@
 ###########
 # Helpers #
 ###########
+
+# return the id of an inventory record with a matching fs_no AND unit_no
+# eventually we should not need the unit_no, but since there are duplicated
+# fs_nos in the inventory spreadsheets, this attempts to narrow it down
+# and then takes the FIRST one that matches
+# unit is optional
+def associate_analysis_with_inventory model, fs_no, unit=nil
+  query = model.where(fs_no: fs_no)
+  if unit
+    begin
+      query.joins(:units).where(units: { unit_no: unit.unit_no })
+    rescue => e
+      puts "COULD NOT JOIN #{model} WITH UNITS: #{e}"
+      return nil
+    end
+  end
+  return query.first
+end
 
 # given a specific unit with a list of strata and features, find or create
 # all the items and create appropriate relationships
@@ -130,7 +161,7 @@ end
 
 def get_feature_number feat_str, source
   feature = nil
-  if feat_str == "no data" || feat_str == "none"
+  if feat_str == "no data" || feat_str == "none" || feat_str == "unknown"
     feature = feat_str
   elsif feat_str == "NO INFO" || feat_str == "no info"
     feature = "no data"
@@ -145,6 +176,10 @@ def get_feature_number feat_str, source
     end
   end
   return feature
+end
+
+def load_yaml file
+  YAML::load_file(file)
 end
 
 # TODO "none" will fail for integer column, etc
@@ -694,7 +729,7 @@ def seed_obsidian_inventory
     # Handle foreign keys
     unit = select_or_create_unit(obsidian[:unit], "Obsidian Inventories")
 
-    associate_strata_features(unit, obsidian[:strat], obsidian[:feature_no], obsidian, "Obsidian Inventories")
+    associate_strata_features(unit, obsidian[:strat], obsidian[:feature_no], obsidian, "Obsidian Inventories", false)
 
     obsidian[:occupation] = find_or_create_occupation(obsidian[:occupation])
     obsidian[:obsidian_identified_source] = create_if_not_exists(ObsidianIdentifiedSource, :name, obsidian[:obsidian_identified_source])
@@ -810,6 +845,42 @@ def seed_wood_inventories
   end
 end
 
+#########################
+# ANALYSIS VOCAB TABLES #
+#########################
+
+######################
+# Lithic Tools Vocab #
+######################
+
+def seed_lithic_controlled_vocab
+  if LithicArtifactType.count < 1
+    puts "\n\n\nCreating Lithic Artifacts"
+    lithic_artifact_types = load_yaml @files[:lithic_artifact_types]
+    LithicArtifactType.create(lithic_artifact_types)
+  end
+  if LithicCondition.count < 1
+    puts "\n\n\nCreating Lithic Conditions"
+    lithic_conditions = load_yaml @files[:lithic_conditions]
+    LithicCondition.create(lithic_conditions)
+  end
+  if LithicMaterialType.count < 1
+    puts "\n\n\nCreating Lithic Materials"
+    lithic_material_types = load_yaml @files[:lithic_material_types]
+    LithicMaterialType.create(lithic_material_types)
+  end
+  if LithicPlatformType.count < 1
+    puts "\n\n\nCreating Lithic Platforms"
+    lithic_platform_types = load_yaml @files[:lithic_platform_types]
+    LithicPlatformType.create(lithic_platform_types)
+  end
+  if LithicTermination.count < 1
+    puts "\n\n\nCreating Lithic Terminations"
+    lithic_terminations = load_yaml @files[:lithic_terminations]
+    LithicTermination.create(lithic_terminations)
+  end
+end
+
 ###################
 # ANALYSIS TABLES #
 ###################
@@ -853,6 +924,7 @@ def seed_bone_tools
     unit = select_or_create_unit(bonetool[:unit], "Bone Tools")
 
     bonetool[:occupation] = find_or_create_occupation(bonetool[:occupation])
+    bonetool[:bone_inventory] = associate_analysis_with_inventory(BoneInventory, bonetool[:fs_no], unit)
 
     bonetool[:strata] = []
     strats = bonetool[:strat].split(/[;,]/).map{ |strat| strat.strip }
@@ -985,6 +1057,8 @@ def seed_ceramics
     unit = select_or_create_unit(ceramic[:unit], "ceramics")
     associate_strata_features(unit, ceramic[:strat], ceramic[:feature_no], ceramic, "Ceramics", false)
 
+    ceramic[:ceramic_inventory] = associate_analysis_with_inventory(CeramicInventory, ceramic[:fs_no], unit)
+
     # all those ceramic tables....
     ceramic[:ceramic_vessel_form] = create_if_not_exists(CeramicVesselForm, :name, ceramic[:ceramic_vessel_form])
     ceramic[:ceramic_vessel_part] = create_if_not_exists(CeramicVesselPart, :name, ceramic[:ceramic_vessel_part])
@@ -1005,6 +1079,134 @@ def seed_ceramics
     # Output and save
     # puts ceramic[:fs_no]
     Ceramic.create(ceramic)
+  end
+end
+
+################
+# Ceramic CLAP #
+################
+
+def seed_ceramic_claps
+  s = Roo::Excel.new(@files[:ceramic_claps])
+  puts "\n\n\nCreating Ceramic CLAP\n"
+
+  columns = {
+    unit: "Room",
+    strat: "Stratum",
+    feature_no: "Feature No",
+    ceramic_clap_type: "Ceramic Type",
+    ceramic_clap_group_type: "Group Ceramic Type",
+    ceramic_clap_tradition: "Tradition-Ware",
+    ceramic_clap_vessel_form: "Vessel Form",
+    ceramic_clap_temper: "Temper",
+    record_field_key_no: "Record Key No",
+    grid: "Grid",
+    depth_begin: "Beg Depth",
+    depth_end: "End Depth",
+    field_year: "Field Year",
+    sherd_lot_no: "Sherd Lot No",
+    frequency: "Frequency",
+    comments: "Comments"
+  }
+
+  last_unit = ""
+  s.sheet('data').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    clap = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nUnit #{clap[:unit]}:" if clap[:unit] != last_unit
+    last_unit = clap[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(clap[:unit], "ceramics clap")
+    associate_strata_features(unit, clap[:strat], clap[:feature_no], clap, "Ceramics CLAP")
+
+    # all those clap tables....
+    # the clap type columns are sometimes cut off, replace in those cases
+    claptype = clap[:ceramic_clap_type]
+    case claptype
+    when "Mesa Verde B/W band design (hachure and so"
+      claptype = "Mesa Verde B/W band design (hachure and solid)"
+    when "Unident. Plain brown (White Mtn. Red serie"
+      claptype = "Unident. Plain brown (White Mtn. Red series)"
+    when "Unident. smudged brown/red (Forestdale ser"
+      claptype = "Unident. smudged brown/red (Forestdale series)"
+    end
+
+    vesselform = clap[:ceramic_clap_vessel_form]
+    if vesselform == "undifferentiated mug/pitcher/cyli"
+      vesselform = "undifferentiated mug/pitcher/cylindrical jar"
+    end
+
+    clap[:ceramic_clap_type] = create_if_not_exists(CeramicClapType, :name, claptype)
+    clap[:ceramic_clap_group_type] = create_if_not_exists(CeramicClapGroupType, :name, clap[:ceramic_clap_group_type])
+    clap[:ceramic_clap_tradition] = create_if_not_exists(CeramicClapTradition, :name, clap[:ceramic_clap_tradition])
+    clap[:ceramic_clap_vessel_form] = create_if_not_exists(CeramicClapVesselForm, :name, vesselform)
+    clap[:ceramic_clap_temper] = create_if_not_exists(CeramicClapTemper, :name, clap[:ceramic_clap_temper])
+
+    # Output and save
+    # puts clap[:record_key_no]
+    CeramicClap.create(clap)
+  end
+end
+
+###################
+# Ceramic Vessels #
+###################
+
+def seed_ceramic_vessels
+  s = Roo::Excelx.new(@files[:ceramic_vessels])
+  puts "\n\n\nCreating Ceramic Vessels\n"
+
+  columns = {
+    unit: "Room",
+    strat: "Stratum",
+    strat_other: "Other Strata",
+    feature_no: "Feature No",
+    sa_no: "SA No",
+    fs_no: "FS No",
+    salmon_vessel_no: "Salmon Vessel No",
+    pottery_order_no: "Pottery Order No",
+    record_field_key_no: "Record Key",
+    vessel_percentage: "Vessel Percentage",
+    lori_reed_analysis: "Lori Reed Analysis",
+    ceramic_vessel_lori_reed_type: "Lori Reed Ceramic Type",
+    ceramic_vessel_lori_reed_form: "Lori Reed Vessel Form",
+    comments_lori_reed: "Lori Reed Comments",
+    ceramic_vessel_type: "Original Vessel Type",
+    ceramic_whole_vessel_form: "Original Vessel Form",
+    comments_other: "Other Comments"
+  }
+
+  last_unit = ""
+  s.sheet('Sheet1').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    vessel = prepare_cell_values(row)
+
+    # Output context for creation
+    # puts "\nUnit #{vessel[:unit]}:" if vessel[:unit] != last_unit
+    last_unit = vessel[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(vessel[:unit], "ceramics vessel")
+    associate_strata_features(unit, vessel[:strat], vessel[:feature_no], vessel, "Ceramic Vessels", false)
+
+    vessel[:ceramic_inventory] = associate_analysis_with_inventory(CeramicInventory, vessel[:fs_no], unit)
+
+    # all those vessel tables....
+    vessel[:ceramic_whole_vessel_form] = create_if_not_exists(CeramicWholeVesselForm, :name, vessel[:ceramic_whole_vessel_form])
+    vessel[:ceramic_vessel_lori_reed_form] = create_if_not_exists(CeramicVesselLoriReedForm, :name, vessel[:ceramic_vessel_lori_reed_form])
+    vessel[:ceramic_vessel_type] = create_if_not_exists(CeramicVesselType, :name, vessel[:ceramic_vessel_type])
+    vessel[:ceramic_vessel_lori_reed_type] = create_if_not_exists(CeramicVesselLoriReedType, :name, vessel[:ceramic_vessel_lori_reed_type])
+
+    # Output and save
+    # puts vessel[:record_key_no]
+    CeramicVessel.create(vessel)
   end
 end
 
@@ -1060,6 +1262,134 @@ def seed_eggshells
     # Output and save
 #    puts eggshell[:salmon_museum_no]
     Eggshell.create(eggshell)
+  end
+end
+
+###################
+# Lithic Debitage #
+###################
+def seed_lithic_debitages
+  s = Roo::Excelx.new(@files[:lithic_debitages])
+
+  puts "\n\n\nCreating Lithic Debitages\n"
+
+  columns = {
+    unit: "Room",
+    fs_no: "FS #",
+    artifact_no: "Artifact #",
+    lithic_material_type: "Material Type",
+    lithic_condition: "Condition",
+    fire_altered: "Fire Altered",
+    utilized: "Utilized",
+    cortex_percentage: "Cortex %",
+    lithic_platform_type: "Platform Type",
+    lithic_termination: "Termination",
+    length: "Length",
+    width: "Width",
+    thickness: "Thickness",
+    weight: "Weight",
+    comments: "Notes",
+    total_flakes_in_bag: "Total Flakes in Bag"
+  }
+
+  last_unit = ""
+  s.sheet('Debitage').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    deb = prepare_cell_values(row)
+
+    # Output context for creation
+#    puts "\nUnit #{deb[:unit]}:" if deb[:unit] != last_unit
+    last_unit = deb[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(deb[:unit], 'debitages')
+
+    # get the features from matching inventories, else use "none"
+    inventory = associate_analysis_with_inventory LithicInventory, deb[:fs_no], unit
+    if inventory
+      deb[:lithic_inventory] = inventory
+      deb[:features] = inventory.features || []
+    else
+      associate_strata_features(unit, "none", "none", deb, "Lithic Debitages")
+    end
+
+    # use existing seeded lithic_deb values
+    deb[:lithic_condition] = LithicCondition.where(code: deb[:lithic_condition]).first
+    deb[:lithic_material_type] = LithicMaterialType.where(code: deb[:lithic_material_type]).first
+    deb[:lithic_platform_type] = LithicPlatformType.where(code: deb[:lithic_platform_type]).first
+    deb[:lithic_termination] = LithicTermination.where(code: deb[:lithic_termination]).first
+
+    # Output and save
+#    puts deb[:fs_no]
+    LithicDebitage.create(deb)
+  end
+end
+
+################
+# Lithic Tools #
+################
+def seed_lithic_tools
+  s = Roo::Excelx.new(@files[:lithic_tools])
+
+  puts "\n\n\nCreating Lithic Tools\n"
+
+  columns = {
+    unit: "Room",
+    fs_no: "FS #",
+    artifact_no: "Artifact #",
+    lithic_artifact_type: "Artifact Type",
+    lithic_material_type: "Material Type",
+    lithic_condition: "Condition",
+    fire_altered: "Fire Altered",
+    utilized: "Utilized",
+    cortex_percentage: "Cortex %",
+    lithic_platform_type: "Platform Type",
+    lithic_termination: "Termination",
+    cortical_flakes: "Cortical Flakes",
+    non_cortical_flakes: "Non-Cortical Flakes",
+    length: "Length",
+    width: "Width",
+    thickness: "Thickness",
+    weight: "Weight",
+    comments: "Notes",
+    pii: "PII?"
+  }
+
+  last_unit = ""
+  s.sheet('Tools').each(columns) do |row|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    tool = prepare_cell_values(row)
+
+    # Output context for creation
+#    puts "\nUnit #{tool[:unit]}:" if tool[:unit] != last_unit
+    last_unit = tool[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(tool[:unit], 'tools')
+
+    # get the features from matching inventories, else use "none"
+    inventory = associate_analysis_with_inventory LithicInventory, tool[:fs_no], unit
+    if inventory
+      tool[:lithic_inventory] = inventory
+      tool[:features] = inventory.features || []
+    else
+      associate_strata_features(unit, "none", "none", tool, "Lithic Tools")
+    end
+
+    # use existing seeded lithic_tool values
+    tool[:lithic_artifact_type] = LithicArtifactType.where(code: tool[:lithic_artifact_type]).first
+    tool[:lithic_condition] = LithicCondition.where(code: tool[:lithic_condition]).first
+    tool[:lithic_material_type] = LithicMaterialType.where(code: tool[:lithic_material_type]).first
+    tool[:lithic_platform_type] = LithicPlatformType.where(code: tool[:lithic_platform_type]).first
+    tool[:lithic_termination] = LithicTermination.where(code: tool[:lithic_termination]).first
+
+    # Output and save
+#    puts tool[:fs_no]
+    LithicTool.create(tool)
   end
 end
 
@@ -1228,7 +1558,7 @@ def seed_select_artifacts
       sa[:strata] << select_or_create_stratum(unit, strat, "SA #{sa[:artifact_no]}")
     end
 
-    sa[:occupation] = create_if_not_exists(Occupation, :name, sa[:occupation])
+    sa[:occupation] = find_or_create_occupation(sa[:occupation])
 
     # NOTE: associated_feature_artifacts considered for model associations
     # If done, the select_artifacts_strata table should be removed
@@ -1471,11 +1801,18 @@ seed_obsidian_inventory if ObsidianInventory.count < 1
 seed_pollen_inventories if PollenInventory.count < 1
 seed_wood_inventories if WoodInventory.count < 1
 
+# Analysis Controlled Vocab Tables
+seed_lithic_controlled_vocab
+
 # Analysis Tables
 seed_bone_tools if BoneTool.count < 1
 seed_burials if Burial.count < 1
 seed_ceramics if Ceramic.count < 1
+seed_ceramic_claps if CeramicClap.count < 1
+seed_ceramic_vessels if CeramicVessel.count < 1
 seed_eggshells if Eggshell.count < 1
+seed_lithic_debitages if LithicDebitage.count < 1
+seed_lithic_tools if LithicTool.count < 1
 seed_ornaments if Ornament.count < 1
 seed_perishables if Perishable.count < 1
 seed_select_artifacts if SelectArtifact.count < 1
