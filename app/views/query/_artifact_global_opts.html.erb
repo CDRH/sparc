@@ -138,10 +138,17 @@
       <div id="collapse-stratum" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-stratum">
         <div>
           <ul class="list-group checked-list-box">
-            <li class="list-group-item"><div class="form-inline" ><div class="checkbox"><label><input type="checkbox"/> <span>Floor</span></label></div></div></li>
-            <li class="list-group-item"><div class="form-inline" ><div class="checkbox"><label><input type="checkbox"/> <span>Midden (?)</span></label></div></div></li>
-            <li class="list-group-item"><div class="form-inline" ><div class="checkbox"><label><input type="checkbox"/> <span>Roof Fell</span></label></div></div></li>
-            <li class="list-group-item"><div class="form-inline" ><div class="checkbox"><label><input type="checkbox"/> <span>Other</span></label></div></div></li>
+            <% StratGrouping.order("name").each do |s| %>
+              <li class="list-group-item">
+                <div class="form-inline">
+                  <div class="checkbox">
+                    <%= check_box_tag "stratgrouping[#{s.id}]", s.id, checked?(s.id, params["stratgrouping"]),
+                      class: "select_all", name: "stratgrouping[]" %>
+                    <%= label_tag "stratgrouping[#{s.id}]", s.name %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
           </ul>
         </div>
       </div>
