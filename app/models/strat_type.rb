@@ -1,4 +1,5 @@
 class StratType < ActiveRecord::Base
+  belongs_to :strat_grouping
   has_many :strata
 
   validates_uniqueness_of :name

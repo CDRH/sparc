@@ -3,11 +3,12 @@ class Admin::StrataController < ApplicationController
   active_scaffold :stratum do |conf|
     # conf.columns[:room].label = 'Unit'
     # conf.columns[:room_no].label = 'Unit no.'
-    conf.columns = [:unit, :strat_all, :strat_alpha, :strat_type, :strat_one, :strat_two, :occupation, :features, :comments] #, :features, :bone_tools, :eggshells]
+    conf.columns = [:unit, :strat_all, :strat_alpha, :strat_type, :strat_grouping, :strat_one, :strat_two, :occupation, :features, :comments] #, :features, :bone_tools, :eggshells]
     conf.columns[:unit].actions_for_association_links = [:show]
     conf.columns[:unit].form_ui = :record_select
     conf.columns[:features].form_ui = :record_select
     conf.columns[:strat_type].form_ui = :select
+    conf.columns[:strat_grouping].form_ui = :select
     conf.columns[:occupation].form_ui = :select
     conf.actions.swap :search, :field_search
   end
