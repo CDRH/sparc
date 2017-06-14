@@ -27,6 +27,7 @@ seeds = Rails.root.join('db', 'seeds')
   lithic_material_types: "#{seeds}/lithic_material_types.yml",
   lithic_platform_types: "#{seeds}/lithic_platform_types.yml",
   lithic_terminations: "#{seeds}/lithic_terminations.yml",
+  strat_groupings: "#{seeds}/strat_groupings.yml",
 
   # Analysis Tables
   bonetools: 'xls/BoneTools.xlsx',
@@ -360,6 +361,22 @@ def seed_strata
     strata_type = prepare_cell_values(row)
 
     next if StratType.where(code: strata_type[:code]).size > 0
+
+    # assign the type to a grouping
+    group_name = "Other"
+    case strata_type[:code]
+    when "E", "F", "FC", "N"
+      group_name = "Roof"
+    when "C", "CT", "CU", "M"
+      group_name = "Midden"
+    when "H", "I", "O"
+      group_name = "Floor"
+    when "L"
+      group_name = "Features"
+    when "G"
+      group_name = "Other"
+    end
+    strata_type[:strat_grouping] = StratGrouping.where(name: group_name).first
 
     # Output and save
     puts "#{strata_type[:code]} => #{strata_type[:name]}"
@@ -879,6 +896,12 @@ def seed_lithic_controlled_vocab
     lithic_terminations = load_yaml @files[:lithic_terminations]
     LithicTermination.create(lithic_terminations)
   end
+end
+
+def seed_strat_groupings
+  puts "\n\n\nCreating Strata Groupings"
+  strat_groupings = load_yaml @files[:strat_groupings]
+  StratGrouping.create(strat_groupings)
 end
 
 ###################
@@ -1790,6 +1813,7 @@ end
 ###################
 # Primary Tables
 seed_units if Unit.count < 1
+seed_strat_groupings if StratGrouping.count < 1
 seed_strata if Stratum.count < 1
 seed_features if Feature.count < 1
 
