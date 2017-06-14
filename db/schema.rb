@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170609174510) do
+ActiveRecord::Schema.define(version: 20170614152746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1010,12 +1010,20 @@ ActiveRecord::Schema.define(version: 20170609174510) do
     t.index ["name"], name: "index_stories_on_name", unique: true, using: :btree
   end
 
-  create_table "strat_types", force: :cascade do |t|
-    t.string   "code",       null: false
+  create_table "strat_groupings", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "strat_types", force: :cascade do |t|
+    t.string   "code",              null: false
+    t.string   "name"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "strat_grouping_id"
     t.index ["code"], name: "index_strat_types_on_code", unique: true, using: :btree
+    t.index ["strat_grouping_id"], name: "index_strat_types_on_strat_grouping_id", using: :btree
   end
 
   create_table "strata", force: :cascade do |t|
