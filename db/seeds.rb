@@ -1318,9 +1318,9 @@ def seed_lithic_debitages
   }
 
   last_unit = ""
-    # Skip header row
-    next if row[:unit] == "Room"
   s.sheet('Debitage').each_with_index(columns) do |row, index|
+    # Skip header rows
+    next if index < 2
 
     deb = prepare_cell_values(row, "Lithic Debitages", index)
 
@@ -1383,9 +1383,9 @@ def seed_lithic_tools
   }
 
   last_unit = ""
-    # Skip header row
-    next if row[:unit] == "Room"
   s.sheet('Tools').each_with_index(columns) do |row, index|
+    # Skip header rows
+    next if index < 2
 
     tool = prepare_cell_values(row, "Lithic Tools", index)
 
