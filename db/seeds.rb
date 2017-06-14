@@ -124,12 +124,6 @@ def create_if_not_exists model, field, column
   return record
 end
 
-def convert_empty_to_none entry
-  return entry.map do |field|
-    (field.nil? || field == "") ? "none" : field
-  end
-end
-
 def find_or_create_occupation(occupation)
   # change any of the below keys into the value
   mapping = {
@@ -185,9 +179,17 @@ end
 
 # TODO "none" will fail for integer column, etc
 # but I'm leaving it because it would have already been failing
-def prepare_cell_values entry_hash
+def prepare_cell_values entry_hash, source, index
   return entry_hash.each do |key, value|
-    value = "none" if value.blank?
+    if value.blank?
+      value = "[blank]"
+
+      # Report all blank cells except those in:
+      # comment columns and Images spreadsheet
+      if !key.to_s.downcase.include?("comment") && source != "Images"
+        report "[blank]", key.to_s.titleize, "#{source} row #{index + 1}"
+      end
+    end
     if value.class == String
       entry_hash[key] = value.strip
     end
@@ -277,11 +279,11 @@ def seed_units
     location: "Location"
   }
 
-  s.sheet('room typology').each(room_type_columns) do |row|
+  s.sheet('room typology').each_with_index(room_type_columns) do |row, index|
     # Skip header row
     next if row[:id] == "Type No."
 
-    room_type = prepare_cell_values(row)
+    room_type = prepare_cell_values(row, "Room Types", index)
 
     room_type[:id] = room_type[:id].to_i
     next if RoomType.where(id: room_type[:id]).size > 0
@@ -317,11 +319,11 @@ def seed_units
     comments: "Comments"
   }
 
-  s.sheet('data').each(unit_columns) do |row|
+  s.sheet('data').each_with_index(unit_columns) do |row, index|
     # Skip header row
     next if row[:unit_no] == "Unit No."
 
-    unit = prepare_cell_values(row)
+    unit = prepare_cell_values(row, "Units", index)
 
     # Handle foreign key columns
     unit[:excavation_status] = create_if_not_exists(ExcavationStatus, :name, unit[:excavation_status])
@@ -354,11 +356,11 @@ def seed_strata
     name: "STRATTYPE"
   }
 
-  s.sheet('strat descp').each(strata_type_columns) do |row|
+  s.sheet('strat descp').each_with_index(strata_type_columns) do |row, index|
     # Skip header row
     next if row[:code] == "CODE"
 
-    strata_type = prepare_cell_values(row)
+    strata_type = prepare_cell_values(row, "Strata Types", index)
 
     next if StratType.where(code: strata_type[:code]).size > 0
 
@@ -398,11 +400,11 @@ def seed_strata
   }
 
   last_unit = ""
-  s.sheet('data').each(strata_columns) do |row|
+  s.sheet('data').each_with_index(strata_columns) do |row, index|
     # Skip header row
     next if row[:unit] == "ROOM"
 
-    stratum = prepare_cell_values(row)
+    stratum = prepare_cell_values(row, "Strata", index)
 
     # Output context for creation
     puts "\nUnit #{stratum[:unit]}:" if stratum[:unit] != last_unit
@@ -460,11 +462,11 @@ def seed_features
   }
 
   last_unit = ""
-  s.sheet('Data').each(feature_columns) do |row|
+  s.sheet('Data').each_with_index(feature_columns) do |row, index|
     # Skip header row
     next if row[:unit_no] == "Room"
 
-    feature = prepare_cell_values(row)
+    feature = prepare_cell_values(row, "Features", index)
 
     # Output context for creation
     puts "\nUnit #{feature[:unit_no]}:" if feature[:unit_no] != last_unit
@@ -539,11 +541,11 @@ def seed_bone_inventory
   }
 
   last_room = ""
-  s.sheet('Sheet1').each(columns) do |row|
+  s.sheet('Sheet1').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:room] == "ROOM"
 
-    bone_inv = prepare_cell_values(row)
+    bone_inv = prepare_cell_values(row, "Bone Inventories", index)
 
     # Output context for creation
 #    puts "\nRoom #{bone_inv[:room]}:" if bone_inv[:room] != last_room
@@ -603,11 +605,11 @@ def seed_ceramic_inventory
   }
 
   last_room = ""
-  s.sheet('Sheet1').each(columns) do |row|
+  s.sheet('Sheet1').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:room] == "ROOM"
 
-    ceramic_inv = prepare_cell_values(row)
+    ceramic_inv = prepare_cell_values(row, "Ceramic Inventories", index)
 
     # Output context for creation
 #    puts "\nRoom #{ceramic_inv[:room]}:" if ceramic_inv[:room] != last_room
@@ -666,11 +668,11 @@ def seed_lithic_inventories
   }
 
   last_room = ""
-  s.sheet('Sheet1').each(columns) do |row|
+  s.sheet('Sheet1').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:room] == "ROOM"
 
-    lithic = prepare_cell_values(row)
+    lithic = prepare_cell_values(row, "Lithic Inventories", index)
 
     # Output context for creation
 #    puts "\nRoom #{lithic[:room]}:" if lithic[:room] != last_room
@@ -733,11 +735,11 @@ def seed_obsidian_inventory
   }
 
   last_room = ""
-  s.sheet('Sheet1').each(columns) do |row|
+  s.sheet('Sheet1').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:site] == "SITE"
 
-    obsidian = prepare_cell_values(row)
+    obsidian = prepare_cell_values(row, "Obsidian Inventories", index)
 
     # Output context for creation
     # puts "\nRoom #{obsidian[:unit]}:" if obsidian[:unit] != last_room
@@ -784,11 +786,11 @@ def seed_pollen_inventories
   }
 
   last_room = ""
-  s.sheet('POLLEN').each(columns) do |row|
+  s.sheet('POLLEN').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:salmon_museum_no] == "Salmon Museum No"
 
-    pollen = prepare_cell_values(row)
+    pollen = prepare_cell_values(row, "Pollen Inventories", index)
 
     # Output context for creation
     # puts "\nRoom #{pollen[:unit]}:" if pollen[:unit] != last_room
@@ -838,11 +840,11 @@ def seed_wood_inventories
   }
 
   last_room = ""
-  s.sheet('data').each(columns) do |row|
+  s.sheet('data').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:site] == "SITE"
 
-    wood = prepare_cell_values(row)
+    wood = prepare_cell_values(row, "Wood Inventories", index)
 
     # Output context for creation
     # puts "\nRoom #{wood[:unit]}:" if wood[:unit] != last_room
@@ -933,11 +935,11 @@ def seed_bone_tools
   }
 
   last_unit = ""
-  s.sheet('data').each(bonetools_columns) do |row|
+  s.sheet('data').each_with_index(bonetools_columns) do |row, index|
     # Skip header row
     next if row[:unit] == "Room"
 
-    bonetool = prepare_cell_values(row)
+    bonetool = prepare_cell_values(row, "Bone Tools", index)
 
     # Output context for creation
 #    puts "\nUnit #{bonetool[:unit]}:" if bonetool[:unit] != last_unit
@@ -967,9 +969,9 @@ def seed_bone_tools
   end
 end
 
-#############
+###########
 # Burials #
-#############
+###########
 def seed_burials
   s = Roo::Excel.new(@files[:burials])
   puts "\n\n\nCreating Burials\n"
@@ -995,20 +997,20 @@ def seed_burials
   }
 
   last_unit = ""
-  s.sheet('data').each(columns) do |row|
+  s.sheet('data').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:unit] == "Room"
 
-    burial = prepare_cell_values(row)
+    burial = prepare_cell_values(row, "Burials", index)
 
     # Output context for creation
     # puts "\nUnit #{burial[:unit]}:" if burial[:unit] != last_unit
     last_unit = burial[:unit]
 
     # Handle foreign keys
-    unit = select_or_create_unit(burial[:unit], "burials")
+    unit = select_or_create_unit(burial[:unit], "Burials")
     # Note: burial may only have one feature
-    associate_strata_features(unit, burial[:strat], burial[:feature_no], burial, "Burial", false)
+    associate_strata_features(unit, burial[:strat], burial[:feature_no], burial, "Burials", false)
 
     burial[:occupation] = find_or_create_occupation(burial[:occupation])
     burial[:burial_sex] = create_if_not_exists(BurialSex, :name, burial[:burial_sex])
@@ -1065,11 +1067,11 @@ def seed_ceramics
   }
 
   last_unit = ""
-  s.sheet('Sheet1').each(columns) do |row|
+  s.sheet('Sheet1').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:site] == "Site No"
 
-    ceramic = prepare_cell_values(row)
+    ceramic = prepare_cell_values(row, "Ceramics", index)
 
     # Output context for creation
     # puts "\nUnit #{ceramic[:unit]}:" if ceramic[:unit] != last_unit
@@ -1077,7 +1079,7 @@ def seed_ceramics
 
     # Handle foreign keys
     # Note: ceramic may only have one feature
-    unit = select_or_create_unit(ceramic[:unit], "ceramics")
+    unit = select_or_create_unit(ceramic[:unit], "Ceramics")
     associate_strata_features(unit, ceramic[:strat], ceramic[:feature_no], ceramic, "Ceramics", false)
 
     ceramic[:ceramic_inventory] = associate_analysis_with_inventory(CeramicInventory, ceramic[:fs_no], unit)
@@ -1105,9 +1107,9 @@ def seed_ceramics
   end
 end
 
-################
-# Ceramic CLAP #
-################
+#################
+# Ceramic CLAPs #
+#################
 
 def seed_ceramic_claps
   s = Roo::Excel.new(@files[:ceramic_claps])
@@ -1133,19 +1135,19 @@ def seed_ceramic_claps
   }
 
   last_unit = ""
-  s.sheet('data').each(columns) do |row|
+  s.sheet('data').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:unit] == "Room"
 
-    clap = prepare_cell_values(row)
+    clap = prepare_cell_values(row, "Ceramic CLAPs", index)
 
     # Output context for creation
     # puts "\nUnit #{clap[:unit]}:" if clap[:unit] != last_unit
     last_unit = clap[:unit]
 
     # Handle foreign keys
-    unit = select_or_create_unit(clap[:unit], "ceramics clap")
-    associate_strata_features(unit, clap[:strat], clap[:feature_no], clap, "Ceramics CLAP")
+    unit = select_or_create_unit(clap[:unit], "Ceramic CLAPs")
+    associate_strata_features(unit, clap[:strat], clap[:feature_no], clap, "Ceramic CLAPs")
 
     # all those clap tables....
     # the clap type columns are sometimes cut off, replace in those cases
@@ -1205,18 +1207,18 @@ def seed_ceramic_vessels
   }
 
   last_unit = ""
-  s.sheet('Sheet1').each(columns) do |row|
+  s.sheet('Sheet1').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:unit] == "Room"
 
-    vessel = prepare_cell_values(row)
+    vessel = prepare_cell_values(row, "Ceramic Vessels", index)
 
     # Output context for creation
     # puts "\nUnit #{vessel[:unit]}:" if vessel[:unit] != last_unit
     last_unit = vessel[:unit]
 
     # Handle foreign keys
-    unit = select_or_create_unit(vessel[:unit], "ceramics vessel")
+    unit = select_or_create_unit(vessel[:unit], "Ceramic Vessels")
     associate_strata_features(unit, vessel[:strat], vessel[:feature_no], vessel, "Ceramic Vessels", false)
 
     vessel[:ceramic_inventory] = associate_analysis_with_inventory(CeramicInventory, vessel[:fs_no], unit)
@@ -1259,18 +1261,18 @@ def seed_eggshells
   }
 
   last_unit = ""
-  s.sheet('eggshell').each(columns) do |row|
+  s.sheet('eggshell').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:unit] == "ROOM"
 
-    eggshell = prepare_cell_values(row)
+    eggshell = prepare_cell_values(row, "Eggshells", index)
 
     # Output context for creation
 #    puts "\nUnit #{eggshell[:unit]}:" if eggshell[:unit] != last_unit
     last_unit = eggshell[:unit]
 
     # Handle foreign keys
-    unit = select_or_create_unit(eggshell[:unit], 'eggshells')
+    unit = select_or_create_unit(eggshell[:unit], "Eggshells")
 
     eggshell[:features] = []
     associate_strata_features(unit, eggshell[:strat], eggshell[:feature_no], eggshell, "Eggshells")
@@ -1288,9 +1290,9 @@ def seed_eggshells
   end
 end
 
-###################
-# Lithic Debitage #
-###################
+####################
+# Lithic Debitages #
+####################
 def seed_lithic_debitages
   s = Roo::Excelx.new(@files[:lithic_debitages])
 
@@ -1316,18 +1318,18 @@ def seed_lithic_debitages
   }
 
   last_unit = ""
-  s.sheet('Debitage').each(columns) do |row|
     # Skip header row
     next if row[:unit] == "Room"
+  s.sheet('Debitage').each_with_index(columns) do |row, index|
 
-    deb = prepare_cell_values(row)
+    deb = prepare_cell_values(row, "Lithic Debitages", index)
 
     # Output context for creation
 #    puts "\nUnit #{deb[:unit]}:" if deb[:unit] != last_unit
     last_unit = deb[:unit]
 
     # Handle foreign keys
-    unit = select_or_create_unit(deb[:unit], 'debitages')
+    unit = select_or_create_unit(deb[:unit], "Lithic Debitages")
 
     # get the features from matching inventories, else use "none"
     inventory = associate_analysis_with_inventory LithicInventory, deb[:fs_no], unit
@@ -1381,18 +1383,18 @@ def seed_lithic_tools
   }
 
   last_unit = ""
-  s.sheet('Tools').each(columns) do |row|
     # Skip header row
     next if row[:unit] == "Room"
+  s.sheet('Tools').each_with_index(columns) do |row, index|
 
-    tool = prepare_cell_values(row)
+    tool = prepare_cell_values(row, "Lithic Tools", index)
 
     # Output context for creation
 #    puts "\nUnit #{tool[:unit]}:" if tool[:unit] != last_unit
     last_unit = tool[:unit]
 
     # Handle foreign keys
-    unit = select_or_create_unit(tool[:unit], 'tools')
+    unit = select_or_create_unit(tool[:unit], "Lithic Tools")
 
     # get the features from matching inventories, else use "none"
     inventory = associate_analysis_with_inventory LithicInventory, tool[:fs_no], unit
@@ -1445,10 +1447,10 @@ def seed_ornaments
   }
 
   last_unit = ""
-  s.sheet('data').each(columns) do |row|
+  s.sheet('data').each_with_index(columns) do |row, index|
     next if row[:unit] == "UNIT"
 
-    ornament = prepare_cell_values(row)
+    ornament = prepare_cell_values(row, "Ornaments", index)
 
     # Output context for creation
 #    puts "\nUnit #{ornament[:unit]}:" if ornament[:unit] != last_unit
@@ -1456,7 +1458,7 @@ def seed_ornaments
 
     # Handle foreign keys
     unit = select_or_create_unit(ornament[:unit], "Ornaments")
-    associate_strata_features(unit, ornament[:strat], ornament[:feature], ornament, "Ornament", false)
+    associate_strata_features(unit, ornament[:strat], ornament[:feature], ornament, "Ornaments", false)
 
     ornament[:occupation] = find_or_create_occupation(ornament[:occupation])
 
@@ -1505,10 +1507,10 @@ def seed_perishables
   }
 
   last_unit = ""
-  s.sheet('all').each(columns) do |row|
+  s.sheet('all').each_with_index(columns) do |row, index|
     next if row[:unit] == "Room"
 
-    perishable = prepare_cell_values(row)
+    perishable = prepare_cell_values(row, "Perishables", index)
 
     # Output context for creation
 #    puts "\nUnit #{perishable[:unit]}:" if perishable[:unit] != last_unit
@@ -1560,11 +1562,11 @@ def seed_select_artifacts
   }
 
   last_unit = ""
-  s.sheet('main data').each(columns) do |row|
+  s.sheet('main data').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:unit] == "Room"
 
-    sa = prepare_cell_values(row)
+    sa = prepare_cell_values(row, "Select Artifacts", index)
 
     # Output context for creation
 #    puts "\nUnit #{sa[:unit]}:" if sa[:unit] != last_unit
@@ -1632,11 +1634,11 @@ def seed_soils
   # TODO what is column "I fo" and should it be in the DB?
 
   last_unit = ""
-  s.sheet('Sheet1').each(columns) do |row|
+  s.sheet('Sheet1').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:unit] == "ROOM"
 
-    soil = prepare_cell_values(row)
+    soil = prepare_cell_values(row, "Soils", index)
 
     # Output context for creation
 #    puts "\nUnit #{soil[:unit]}:" if soil[:unit] != last_unit
@@ -1686,11 +1688,11 @@ def seed_tree_rings
   }
 
   last_unit = ""
-  s.sheet('Sheet1').each(columns) do |row|
+  s.sheet('Sheet1').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:site] == "Site"
 
-    ring = prepare_cell_values(row)
+    ring = prepare_cell_values(row, "Tree Rings", index)
 
     # Output context for creation
     # puts "\nUnit #{ring[:unit]}:" if ring[:unit] != last_unit
@@ -1754,11 +1756,11 @@ def seed_images
   }
 
   last_unit = ""
-  s.sheet('data').each(columns) do |row|
+  s.sheet('data').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:unit] == "Room"
 
-    image = prepare_cell_values(row)
+    image = prepare_cell_values(row, "Images", index)
 
     # Output context for creation
     #puts "\nUnit #{image[:unit]}:" if image[:unit] != last_unit
