@@ -374,7 +374,7 @@ def seed_strata
     when "L"
       group_name = "Features"
     when "G"
-      group_name = "Other"
+      group_name = "Occupational Fill"
     end
     strata_type[:strat_grouping] = StratGrouping.where(name: group_name).first
 
