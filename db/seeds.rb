@@ -156,7 +156,10 @@ end
 
 def get_feature_number feat_str, source
   feature = nil
-  if feat_str == "no data" || feat_str == "none" || feat_str == "unknown"
+
+  if feat_str == "[blank]"
+    feature = "none"
+  elsif feat_str == "no data" || feat_str == "none" || feat_str == "unknown"
     feature = feat_str
   elsif feat_str == "NO INFO" || feat_str == "no info"
     feature = "no data"
@@ -199,8 +202,8 @@ end
 def report category, value, source
   # filter out all of the stratum and features that are "none"
   # but keep those that might be attached TO a "none" stratum, unit, etc
+  if !value.to_s.end_with?("none") && !value.to_s.end_with?("no data") && !value.to_s.end_with?("[blank]")
   puts "Creating #{category} #{value} for #{source}"
-  if !value.to_s.end_with?("none") && !value.to_s.end_with?("no data")
     @handcheck << {category: category, value: value, source: source}
   end
 end
@@ -1776,13 +1779,13 @@ def seed_images
     image[:image_quality] = create_if_not_exists(ImageQuality, :name, image[:image_quality])
 
     image[:image_subjects] = []
-    if image[:image_subject1] != "none"
+    if image[:image_subject1] != "[blank]"
       image[:image_subjects] << create_if_not_exists(ImageSubject, :name, image[:image_subject1])
     end
-    if image[:image_subject2] != "none"
+    if image[:image_subject2] != "[blank]"
       image[:image_subjects] << create_if_not_exists(ImageSubject, :name, image[:image_subject2])
     end
-    if image[:image_subject3] != "none"
+    if image[:image_subject3] != "[blank]"
       image[:image_subjects] << create_if_not_exists(ImageSubject, :name, image[:image_subject3])
     end
 
