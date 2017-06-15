@@ -553,10 +553,6 @@ stratum 097W:I-1-6 created from Ceramic Inventories
 [blank] Entered By created from Ceramic Inventories row 24284
 [blank] Status created from Ceramic Inventories row 24284
 [blank] Location created from Ceramic Inventories row 24284
-Zone [blank] created from Ceramic Inventories
-Unit [blank] created from Ceramic Inventories
-stratum [blank]:[blank] created from Ceramic Inventories
-feature [blank]:[blank]:0.0 created from Ceramic Inventories
 [blank] Site created from Ceramic Inventories row 24285
 [blank] Box created from Ceramic Inventories row 24285
 [blank] Fs No created from Ceramic Inventories row 24285
@@ -3154,16 +3150,8 @@ stratum 129W:F-2.1-86-1 created from Soils
 stratum 129W:F-2.2-86.2 created from Soils
 stratum 130W:F-1-03 created from Soils
 stratum 057W:F-1-4 created from Tree Ring SAL-596
-stratum 001W:[blank] created from Images
-feature 001W:[blank]:0.0 created from Images
-stratum 100W:[blank] created from Images
-feature 100W:[blank]:0.0 created from Images
 Zone W01 created from Images
 Unit W01 created from Images
-stratum W01:[blank] created from Images
-feature W01:[blank]:0.0 created from Images
-stratum 002W:[blank] created from Images
-feature 002W:[blank]:0.0 created from Images
 unit TT01-13P created from Image with hyphen in unit NOT added
 unit TT01-13P created from Image with hyphen in unit NOT added
 unit TT01-13P created from Image with hyphen in unit NOT added
@@ -3252,8 +3240,6 @@ unit TT00-18/19P created from Image with hyphen in unit NOT added
 unit TT00-18/19P created from Image with hyphen in unit NOT added
 unit TT00-18/19P created from Image with hyphen in unit NOT added
 unit TT03-BW created from Image with hyphen in unit NOT added
-stratum 003BW:[blank] created from Images
-feature 003BW:[blank]:0.0 created from Images
 unit TT03-BW created from Image with hyphen in unit NOT added
 unit TT03-BW created from Image with hyphen in unit NOT added
 unit TT08-BW created from Image with hyphen in unit NOT added
@@ -3292,93 +3278,25 @@ unit TT00-20P created from Image with hyphen in unit NOT added
 unit TT00-20P created from Image with hyphen in unit NOT added
 unit TT00-20P created from Image with hyphen in unit NOT added
 unit TT00-20P created from Image with hyphen in unit NOT added
-stratum 002BW:[blank] created from Images
-feature 002BW:[blank]:0.0 created from Images
-stratum 020P:[blank] created from Images
-feature 020P:[blank]:0.0 created from Images
 Unit 003W created from Images
-stratum 003W:[blank] created from Images
-feature 003W:[blank]:0.0 created from Images
-stratum 004W:[blank] created from Images
-feature 004W:[blank]:0.0 created from Images
-feature 004A:no data:0.0 created from Images
 feature 004A:no data:2.0 created from Images
-feature 004B:B-1-2:0.0 created from Images
-feature 004B:H-1-3:0.0 created from Images
-stratum 004B:[blank] created from Images
-feature 004B:[blank]:0.0 created from Images
 feature 004W:[blank]:1.0 created from Images
 Zone PL04 created from Images
 Unit PL04 created from Images
-stratum PL04:[blank] created from Images
-feature PL04:[blank]:0.0 created from Images
 Unit PL04B created from Images
-stratum PL04B:[blank] created from Images
-feature PL04B:[blank]:0.0 created from Images
 Zone TM04 created from Images
 Unit TM04 created from Images
-stratum TM04:[blank] created from Images
-feature TM04:[blank]:0.0 created from Images
-stratum 005W:[blank] created from Images
-feature 005W:[blank]:0.0 created from Images
-feature 005A:G-1-4:0.0 created from Images
-feature 005A:H-1-5:0.0 created from Images
-feature 005A:no data:0.0 created from Images
-stratum 006W:[blank] created from Images
-feature 006W:[blank]:0.0 created from Images
-stratum 006A:[blank] created from Images
-feature 006A:[blank]:0.0 created from Images
-stratum 007A:[blank] created from Images
-feature 007A:[blank]:0.0 created from Images
-stratum 007W:[blank] created from Images
-feature 007W:[blank]:0.0 created from Images
 Zone SA8 created from Images
 Unit SA8C created from Images
-stratum SA8C:[blank] created from Images
-feature SA8C:[blank]:0.0 created from Images
-stratum 008BW:[blank] created from Images
-feature 008BW:[blank]:0.0 created from Images
-stratum 008A:[blank] created from Images
-feature 008A:[blank]:0.0 created from Images
-stratum TT10:[blank] created from Images
-feature TT10:[blank]:0.0 created from Images
-stratum 011W:[blank] created from Images
-feature 011W:[blank]:0.0 created from Images
 Unit TT11P created from Images
-stratum TT11P:[blank] created from Images
-feature TT11P:[blank]:0.0 created from Images
 Unit TT12P created from Images
-stratum TT12P:[blank] created from Images
-feature TT12P:[blank]:0.0 created from Images
-stratum 013W:[blank] created from Images
-feature 013W:[blank]:0.0 created from Images
-stratum 014W:[blank] created from Images
-feature 014W:[blank]:0.0 created from Images
-stratum Other:[blank] created from Images
-feature Other:[blank]:0.0 created from Images
-stratum 015P:[blank] created from Images
-feature 015P:[blank]:0.0 created from Images
-stratum 016P:[blank] created from Images
 feature 016P:[blank]:1.0 created from Images
-feature 016P:[blank]:0.0 created from Images
-stratum 017P:[blank] created from Images
-feature 017P:[blank]:0.0 created from Images
-stratum 018P:[blank] created from Images
 feature 018P:[blank]:1.0 created from Images
-feature 018P:[blank]:0.0 created from Images
-stratum 019P:[blank] created from Images
-feature 019P:[blank]:0.0 created from Images
 Zone SA19 created from Images
 Unit SA19 created from Images
-stratum SA19:[blank] created from Images
-feature SA19:[blank]:0.0 created from Images
 feature 020P:[blank]:19.0 created from Images
 Zone 20p created from Images
 Unit 020p created from Images
-stratum 020p:[blank] created from Images
-feature 020p:[blank]:0.0 created from Images
-stratum 021P:[blank] created from Images
-feature 021P:[blank]:0.0 created from Images
 unit 030A-B created from Image with hyphen in unit NOT added
 unit 030A-B created from Image with hyphen in unit NOT added
 unit 030A-B created from Image with hyphen in unit NOT added
@@ -3388,12 +3306,6 @@ unit 030A-B created from Image with hyphen in unit NOT added
 unit 030A-B created from Image with hyphen in unit NOT added
 unit 030A-B created from Image with hyphen in unit NOT added
 unit 030A-B created from Image with hyphen in unit NOT added
-stratum 030B:[blank] created from Images
-feature 030B:[blank]:0.0 created from Images
-stratum 030A:[blank] created from Images
-feature 030A:[blank]:0.0 created from Images
-stratum 030W:[blank] created from Images
-feature 030W:[blank]:0.0 created from Images
 unit 031A-C created from Image with hyphen in unit NOT added
 unit 031A-C created from Image with hyphen in unit NOT added
 unit 031A-C created from Image with hyphen in unit NOT added
@@ -3406,8 +3318,6 @@ unit 031A-B created from Image with hyphen in unit NOT added
 unit 031A-B created from Image with hyphen in unit NOT added
 unit 031A-B created from Image with hyphen in unit NOT added
 unit 031A-B created from Image with hyphen in unit NOT added
-stratum 031B:[blank] created from Images
-feature 031B:[blank]:0.0 created from Images
 unit 031B-F created from Image with hyphen in unit NOT added
 unit 031A-E created from Image with hyphen in unit NOT added
 unit 031A-E created from Image with hyphen in unit NOT added
@@ -3417,11 +3327,7 @@ unit 031A-D created from Image with hyphen in unit NOT added
 unit 031A-D created from Image with hyphen in unit NOT added
 unit 031B-F created from Image with hyphen in unit NOT added
 unit 031B-F created from Image with hyphen in unit NOT added
-stratum 031A:[blank] created from Images
-feature 031A:[blank]:0.0 created from Images
 unit 031A-B created from Image with hyphen in unit NOT added
-stratum 031W:[blank] created from Images
-feature 031W:[blank]:0.0 created from Images
 unit 031A-C created from Image with hyphen in unit NOT added
 unit 031A-C created from Image with hyphen in unit NOT added
 unit 031B-F created from Image with hyphen in unit NOT added
@@ -3440,45 +3346,21 @@ unit 032A-C created from Image with hyphen in unit NOT added
 unit 032A-C created from Image with hyphen in unit NOT added
 unit 032A-C created from Image with hyphen in unit NOT added
 Unit 032C created from Images
-stratum 032C:[blank] created from Images
-feature 032C:[blank]:0.0 created from Images
 unit 032A-C created from Image with hyphen in unit NOT added
 unit 032A-C created from Image with hyphen in unit NOT added
 unit 032A-C created from Image with hyphen in unit NOT added
 unit 032A-C created from Image with hyphen in unit NOT added
-stratum 058W:[blank] created from Images
-feature 058W:[blank]:0.0 created from Images
-stratum 059W:[blank] created from Images
-feature 059W:[blank]:0.0 created from Images
 stratum 059W:C-1-5 created from Images
-feature 059W:C-1-5:0.0 created from Images
 Unit 060E created from Images
-stratum 060E:[blank] created from Images
-feature 060E:[blank]:0.0 created from Images
 Unit 060E/F created from Images
-stratum 060E/F:[blank] created from Images
-feature 060E/F:[blank]:0.0 created from Images
 Unit 060F/G created from Images
-stratum 060F/G:[blank] created from Images
-feature 060F/G:[blank]:0.0 created from Images
 Unit 060A/J created from Images
-stratum 060A/J:[blank] created from Images
-feature 060A/J:[blank]:0.0 created from Images
 Unit 060H created from Images
-stratum 060H:[blank] created from Images
-feature 060H:[blank]:0.0 created from Images
 Unit 060J created from Images
-stratum 060J:[blank] created from Images
-feature 060J:[blank]:0.0 created from Images
-stratum 060B:[blank] created from Images
-feature 060B:[blank]:0.0 created from Images
 unit 060A-K created from Image with hyphen in unit NOT added
 unit 060A-K created from Image with hyphen in unit NOT added
 unit 060A-K created from Image with hyphen in unit NOT added
-stratum 061B:[blank] created from Images
-feature 061B:[blank]:0.0 created from Images
 unit 061A-C created from Image with hyphen in unit NOT added
-stratum 061A:[blank] created from Images
 feature 061A:[blank]:25.0 created from Images
 unit 061A-D created from Image with hyphen in unit NOT added
 unit 061A-D created from Image with hyphen in unit NOT added
@@ -3496,7 +3378,6 @@ unit 061A-C created from Image with hyphen in unit NOT added
 unit 061A-C created from Image with hyphen in unit NOT added
 unit 061A-C created from Image with hyphen in unit NOT added
 unit 061A-C created from Image with hyphen in unit NOT added
-feature 061A:[blank]:0.0 created from Images
 unit 061A-C created from Image with hyphen in unit NOT added
 unit 061A-C created from Image with hyphen in unit NOT added
 unit 061A-C created from Image with hyphen in unit NOT added
@@ -3526,34 +3407,18 @@ unit 061B-D created from Image with hyphen in unit NOT added
 unit 061B-D created from Image with hyphen in unit NOT added
 unit 061B-D created from Image with hyphen in unit NOT added
 unit 061A-D created from Image with hyphen in unit NOT added
-stratum 062W:[blank] created from Images
-feature 062W:[blank]:0.0 created from Images
 unit 062A-C created from Image with hyphen in unit NOT added
 Unit 062C created from Images
-stratum 062C:[blank] created from Images
-feature 062C:[blank]:0.0 created from Images
 Unit 062D created from Images
-stratum 062D:[blank] created from Images
-feature 062D:[blank]:0.0 created from Images
-stratum 062A:[blank] created from Images
 feature 062A:[blank]:1.0 created from Images
-feature 062A:[blank]:0.0 created from Images
 Unit 032B created from Images
-stratum 032B:[blank] created from Images
-feature 032B:[blank]:0.0 created from Images
 feature 062A:[blank]:42.0 created from Images
 feature 062W:[blank]:103.0 created from Images
 feature 062W:[blank]:122.0 created from Images
 feature 062W:[blank]:82.0 created from Images
 feature 062W:[blank]:1.0 created from Images
 Unit 063C created from Images
-stratum 063C:[blank] created from Images
-feature 063C:[blank]:0.0 created from Images
 Unit 063F created from Images
-stratum 063F:[blank] created from Images
-feature 063F:[blank]:0.0 created from Images
-stratum 064W:[blank] created from Images
-feature 064W:[blank]:0.0 created from Images
 feature 064W:[blank]:11.0 created from Images
 feature 064W:[blank]:13.0 created from Images
 feature 064W:[blank]:35.0 created from Images
@@ -3562,35 +3427,15 @@ feature 064W:[blank]:90.0 created from Images
 feature 064W:[blank]:120.0 created from Images
 feature 064W:[blank]:96.0 created from Images
 feature 064W:[blank]:89.0 created from Images
-stratum 051W:[blank] created from Images
-feature 051W:[blank]:0.0 created from Images
-stratum 033C:[blank] created from Images
-feature 033C:[blank]:0.0 created from Images
 Unit 033E created from Images
-stratum 033E:[blank] created from Images
-feature 033E:[blank]:0.0 created from Images
 Unit 033G created from Images
-stratum 033G:[blank] created from Images
-feature 033G:[blank]:0.0 created from Images
 Unit 033F created from Images
-stratum 033F:[blank] created from Images
-feature 033F:[blank]:0.0 created from Images
-stratum 033B:[blank] created from Images
-feature 033B:[blank]:0.0 created from Images
 feature 033B:[blank]:1.0 created from Images
-stratum 033W:[blank] created from Images
-feature 033W:[blank]:0.0 created from Images
 feature 033B:[blank]:2.0 created from Images
 Unit 033H created from Images
-stratum 033H:[blank] created from Images
-feature 033H:[blank]:0.0 created from Images
 feature 033W:[blank]:12.0 created from Images
-stratum 033A:[blank] created from Images
-feature 033A:[blank]:0.0 created from Images
 Zone  created from Images
 Unit UNK created from Images
-stratum UNK:[blank] created from Images
-feature UNK:[blank]:0.0 created from Images
 unit 035A-E created from Image with hyphen in unit NOT added
 unit 035A-E created from Image with hyphen in unit NOT added
 unit 035A-E created from Image with hyphen in unit NOT added
@@ -3608,15 +3453,9 @@ unit 035A-E created from Image with hyphen in unit NOT added
 unit 035A-E created from Image with hyphen in unit NOT added
 unit 035A-E created from Image with hyphen in unit NOT added
 unit 035A-E created from Image with hyphen in unit NOT added
-stratum 036W:[blank] created from Images
 feature 036W:[blank]:3.0 created from Images
 feature 036W:[blank]:2.0 created from Images
-feature 036W:[blank]:0.0 created from Images
 feature 036W:[blank]:56.0 created from Images
-stratum 037B:[blank] created from Images
-feature 037B:[blank]:0.0 created from Images
-stratum 037A:[blank] created from Images
-feature 037A:[blank]:0.0 created from Images
 unit 037A-B created from Image with hyphen in unit NOT added
 unit 037A-B created from Image with hyphen in unit NOT added
 unit 037A-B created from Image with hyphen in unit NOT added
@@ -3640,25 +3479,13 @@ unit 037A-B created from Image with hyphen in unit NOT added
 unit 037A-B created from Image with hyphen in unit NOT added
 unit 037A-B created from Image with hyphen in unit NOT added
 unit 037A-B created from Image with hyphen in unit NOT added
-stratum 037W:[blank] created from Images
 feature 037W:[blank]:75.0 created from Images
 feature 037W:[blank]:83.0 created from Images
-feature 037W:[blank]:0.0 created from Images
-stratum 043W:[blank] created from Images
-feature 043W:[blank]:0.0 created from Images
 feature 043W:[blank]:57.0 created from Images
 feature 043W:[blank]:3.0 created from Images
 feature 043W:[blank]:43013.0 created from Images
 feature 043W:[blank]:19.0 created from Images
 feature 043W:[blank]:5.0 created from Images
-stratum 044W:[blank] created from Images
-feature 044W:[blank]:0.0 created from Images
-stratum 053W:[blank] created from Images
-feature 053W:[blank]:0.0 created from Images
-stratum 056W:[blank] created from Images
-feature 056W:[blank]:0.0 created from Images
-stratum 057W:[blank] created from Images
-feature 057W:[blank]:0.0 created from Images
 unit 090C-E created from Image with hyphen in unit NOT added
 unit 090C-E created from Image with hyphen in unit NOT added
 unit 090C-E created from Image with hyphen in unit NOT added
@@ -3670,8 +3497,6 @@ unit 090E-F created from Image with hyphen in unit NOT added
 unit 090F-H created from Image with hyphen in unit NOT added
 unit 090F-H created from Image with hyphen in unit NOT added
 Unit 090H created from Images
-stratum 090H:[blank] created from Images
-feature 090H:[blank]:0.0 created from Images
 unit 090F-H created from Image with hyphen in unit NOT added
 unit 090G-I created from Image with hyphen in unit NOT added
 unit 090H-I created from Image with hyphen in unit NOT added
@@ -3680,38 +3505,14 @@ unit 090G-H created from Image with hyphen in unit NOT added
 unit 090G-H created from Image with hyphen in unit NOT added
 unit 090F-G created from Image with hyphen in unit NOT added
 unit 090F-G created from Image with hyphen in unit NOT added
-stratum 090W:[blank] created from Images
 feature 090W:[blank]:18.0 created from Images
-feature 090W:[blank]:0.0 created from Images
-stratum 091A:[blank] created from Images
-feature 091A:[blank]:0.0 created from Images
-stratum 091B:[blank] created from Images
-feature 091B:[blank]:0.0 created from Images
-stratum 091W:[blank] created from Images
-feature 091W:[blank]:0.0 created from Images
 unit 091A-E created from Image with hyphen in unit NOT added
 unit 091A-E created from Image with hyphen in unit NOT added
 unit 091A-E created from Image with hyphen in unit NOT added
 unit 091A-D created from Image with hyphen in unit NOT added
-stratum 091C:[blank] created from Images
-feature 091C:[blank]:0.0 created from Images
-stratum 091D:[blank] created from Images
-feature 091D:[blank]:0.0 created from Images
-stratum 092B:[blank] created from Images
-feature 092B:[blank]:0.0 created from Images
 unit 092A-B created from Image with hyphen in unit NOT added
 unit 092A-B created from Image with hyphen in unit NOT added
-stratum 092A:[blank] created from Images
-feature 092A:[blank]:0.0 created from Images
-stratum 092C:[blank] created from Images
-feature 092C:[blank]:0.0 created from Images
-stratum 092W:[blank] created from Images
-feature 092W:[blank]:0.0 created from Images
-stratum 093W:[blank] created from Images
-feature 093W:[blank]:0.0 created from Images
 Unit 093B created from Images
-stratum 093B:[blank] created from Images
-feature 093B:[blank]:0.0 created from Images
 unit 093A-E created from Image with hyphen in unit NOT added
 unit 093A-E created from Image with hyphen in unit NOT added
 unit 093A-E created from Image with hyphen in unit NOT added
@@ -3719,92 +3520,42 @@ unit 093A-E created from Image with hyphen in unit NOT added
 unit 093A-G created from Image with hyphen in unit NOT added
 unit 093A-G created from Image with hyphen in unit NOT added
 Unit 093E created from Images
-stratum 093E:[blank] created from Images
-feature 093E:[blank]:0.0 created from Images
 Unit 093I created from Images
-stratum 093I:[blank] created from Images
-feature 093I:[blank]:0.0 created from Images
-feature 093W:H-2-22:0.0 created from Images
-stratum 094W:[blank] created from Images
-feature 094W:[blank]:0.0 created from Images
-stratum 094A:[blank] created from Images
 feature 094A:[blank]:1.0 created from Images
 feature 094W:[blank]:1.0 created from Images
-stratum 096W:[blank] created from Images
-feature 096W:[blank]:0.0 created from Images
-stratum 096B:[blank] created from Images
-feature 096B:[blank]:0.0 created from Images
 unit 097A-B created from Image with hyphen in unit NOT added
-stratum 097B:[blank] created from Images
 feature 097B:[blank]:1.0 created from Images
 feature 097B:[blank]:2.0 created from Images
-stratum 097W:[blank] created from Images
-feature 097W:[blank]:0.0 created from Images
 feature 097W:[blank]:2001.0 created from Images
-stratum 097A:[blank] created from Images
 feature 097A:[blank]:1001.0 created from Images
 feature 097A:[blank]:1002.0 created from Images
-feature 097A:[blank]:0.0 created from Images
 feature 097W:[blank]:1007.0 created from Images
 feature 097W:[blank]:1006.0 created from Images
-stratum 127W:[blank] created from Images
-feature 127W:[blank]:0.0 created from Images
-stratum 098W:[blank] created from Images
-feature 098W:[blank]:0.0 created from Images
-stratum 099W:[blank] created from Images
-feature 099W:[blank]:0.0 created from Images
 feature 100W:[blank]:2001.0 created from Images
 feature 100W:[blank]:303.0 created from Images
 feature 100W:[blank]:302.0 created from Images
 feature 100W:[blank]:313.0 created from Images
-stratum 101W:[blank] created from Images
-feature 101W:[blank]:0.0 created from Images
-stratum 102B:[blank] created from Images
-feature 102B:[blank]:0.0 created from Images
 feature 102B:[blank]:1.0 created from Images
 feature 102B:[blank]:2.0 created from Images
-stratum 102A:[blank] created from Images
-feature 102A:[blank]:0.0 created from Images
 feature 102B:[blank]:3.0 created from Images
-stratum 102W:[blank] created from Images
-feature 102W:[blank]:0.0 created from Images
-stratum 102C:[blank] created from Images
-feature 102C:[blank]:0.0 created from Images
 unit 102C-D created from Image with hyphen in unit NOT added
 unit 102C-D created from Image with hyphen in unit NOT added
 unit 102C-D created from Image with hyphen in unit NOT added
 unit 102C-D created from Image with hyphen in unit NOT added
 unit 102C-D created from Image with hyphen in unit NOT added
-stratum 136W:[blank] created from Images
-feature 136W:[blank]:0.0 created from Images
-stratum 138W:[blank] created from Images
-feature 138W:[blank]:0.0 created from Images
-stratum 143W:[blank] created from Images
 feature 143W:[blank]:1.0 created from Images
-stratum 151W:[blank] created from Images
-feature 151W:[blank]:0.0 created from Images
-stratum 121A:[blank] created from Images
-feature 121A:[blank]:0.0 created from Images
 unit 121A-B created from Image with hyphen in unit NOT added
 unit 121A-B created from Image with hyphen in unit NOT added
 unit 121A-B created from Image with hyphen in unit NOT added
-stratum 121B:[blank] created from Images
-feature 121B:[blank]:0.0 created from Images
 unit 121A-C created from Image with hyphen in unit NOT added
 unit 121A-C created from Image with hyphen in unit NOT added
 unit 121A-C created from Image with hyphen in unit NOT added
 unit 121A-C created from Image with hyphen in unit NOT added
-stratum 121W:[blank] created from Images
-feature 121W:[blank]:0.0 created from Images
 feature 121W:[blank]:33.1 created from Images
 feature 121W:[blank]:33.2 created from Images
 feature 121Z:H-1-6:4.0 created from Images
-stratum 127A:[blank] created from Images
-feature 127A:[blank]:0.0 created from Images
-stratum 127B:[blank] created from Images
 feature 127B:[blank]:1.0 created from Images
 feature 127W:[blank]:53.0 created from Images
-feature 127W:L-1-8:0.0 created from Images
 feature 127W:[blank]:55.0 created from Images
 feature 127W:[blank]:99.0 created from Images
 feature 127W:[blank]:106.0 created from Images
@@ -3815,48 +3566,17 @@ feature 127W:[blank]:121.0 created from Images
 feature 127W:[blank]:126.0 created from Images
 feature 127W:[blank]:147.0 created from Images
 feature 127W:[blank]:137.0 created from Images
-stratum 128W:[blank] created from Images
-feature 128W:[blank]:0.0 created from Images
 feature 128W:[blank]:9.0 created from Images
 unit 128A-B created from Image with hyphen in unit NOT added
-stratum 129W:[blank] created from Images
-feature 129W:[blank]:0.0 created from Images
 feature 129W:[blank]:7.0 created from Images
 feature 129W:[blank]:8.0 created from Images
 feature 129W:[blank]:101.0 created from Images
-stratum 103W:[blank] created from Images
-feature 103W:[blank]:0.0 created from Images
-stratum 104W:[blank] created from Images
-feature 104W:[blank]:0.0 created from Images
-stratum 105W:[blank] created from Images
-feature 105W:[blank]:0.0 created from Images
-stratum 106W:[blank] created from Images
-feature 106W:[blank]:0.0 created from Images
-stratum 107W:[blank] created from Images
-feature 107W:[blank]:0.0 created from Images
-stratum 108W:[blank] created from Images
-feature 108W:[blank]:0.0 created from Images
-stratum 109W:[blank] created from Images
-feature 109W:[blank]:0.0 created from Images
-stratum 118W:[blank] created from Images
-feature 118W:[blank]:0.0 created from Images
-stratum 119W:[blank] created from Images
-feature 119W:[blank]:0.0 created from Images
 unit 120A-B created from Image with hyphen in unit NOT added
 unit 120A-B created from Image with hyphen in unit NOT added
 unit 120A-B created from Image with hyphen in unit NOT added
 unit 120A-B created from Image with hyphen in unit NOT added
 Unit 122D created from Images
-stratum 122D:[blank] created from Images
 feature 122D:[blank]:1.0 created from Images
-feature 122D:[blank]:0.0 created from Images
-unit 122A-B created from Image with hyphen in unit NOT added
-unit 122A-B created from Image with hyphen in unit NOT added
-unit 122A-B created from Image with hyphen in unit NOT added
-unit 122A-B created from Image with hyphen in unit NOT added
-unit 122A-B created from Image with hyphen in unit NOT added
-stratum 122A:[blank] created from Images
-feature 122A:[blank]:0.0 created from Images
 unit 122A-B created from Image with hyphen in unit NOT added
 unit 122A-B created from Image with hyphen in unit NOT added
 unit 122A-B created from Image with hyphen in unit NOT added
@@ -3871,18 +3591,19 @@ unit 122A-B created from Image with hyphen in unit NOT added
 unit 122A-B created from Image with hyphen in unit NOT added
 unit 122A-B created from Image with hyphen in unit NOT added
 unit 122A-B created from Image with hyphen in unit NOT added
-stratum 122W:[blank] created from Images
-feature 122W:[blank]:0.0 created from Images
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
+unit 122A-B created from Image with hyphen in unit NOT added
 unit 123B-C created from Image with hyphen in unit NOT added
 unit 123B-C created from Image with hyphen in unit NOT added
-stratum 123B:[blank] created from Images
 feature 123B:[blank]:3.0 created from Images
 feature 123B:[blank]:5.0 created from Images
 unit 123A-B created from Image with hyphen in unit NOT added
 unit 123A-B created from Image with hyphen in unit NOT added
 unit 123A-B created from Image with hyphen in unit NOT added
 unit 123A-B created from Image with hyphen in unit NOT added
-feature 123B:[blank]:0.0 created from Images
 unit 123B-C created from Image with hyphen in unit NOT added
 unit 123B-C created from Image with hyphen in unit NOT added
 unit 123B-C created from Image with hyphen in unit NOT added
@@ -3900,42 +3621,14 @@ unit 123B-C created from Image with hyphen in unit NOT added
 unit 123B-C created from Image with hyphen in unit NOT added
 unit 123B-C created from Image with hyphen in unit NOT added
 unit 123B-C created from Image with hyphen in unit NOT added
-stratum 123A:[blank] created from Images
-feature 123A:[blank]:0.0 created from Images
-stratum 124B:[blank] created from Images
-feature 124B:[blank]:0.0 created from Images
-stratum 124W:[blank] created from Images
-feature 124W:[blank]:0.0 created from Images
 stratum 124Z:L-5-15 created from Images
 feature 124Z:L-5-15:38.0 created from Images
-stratum 124Z:[blank] created from Images
-feature 124Z:[blank]:0.0 created from Images
-feature 124Z:J-2-12:0.0 created from Images
 feature 124W:[blank]:35.0 created from Images
-stratum 130W:[blank] created from Images
-feature 130W:[blank]:0.0 created from Images
-feature 130W:W-1-15:0.0 created from Images
-stratum 083W:[blank] created from Images
-feature 083W:[blank]:0.0 created from Images
-stratum 081W:[blank] created from Images
-feature 081W:[blank]:0.0 created from Images
-stratum 067W:[blank] created from Images
-feature 067W:[blank]:0.0 created from Images
-stratum 082W:[blank] created from Images
-feature 082W:[blank]:0.0 created from Images
 feature 082W:[blank]:14.0 created from Images
 feature 082W:[blank]:15.0 created from Images
-stratum 082A:[blank] created from Images
-feature 082A:[blank]:0.0 created from Images
+feature 082W:[blank]:0.0 created from Images
 Zone 82w created from Images
 Unit 082w created from Images
-stratum 082w:[blank] created from Images
-feature 082w:[blank]:0.0 created from Images
-feature 084W:N-2-4:0.0 created from Images
-stratum 084W:[blank] created from Images
-feature 084W:[blank]:0.0 created from Images
-stratum 086W:[blank] created from Images
-feature 086W:[blank]:0.0 created from Images
 feature 086W:[blank]:76.0 created from Images
 feature 086W:[blank]:106.0 created from Images
 feature 086W:[blank]:108.0 created from Images
@@ -3949,577 +3642,259 @@ unit 090A-C created from Image with hyphen in unit NOT added
 unit 090A-C created from Image with hyphen in unit NOT added
 unit 090C-E created from Image with hyphen in unit NOT added
 unit 090A-C created from Image with hyphen in unit NOT added
-feature 100W:C-7-12.5:0.0 created from Images
-feature 097W:C-4-15:0.0 created from Images
-feature 058W:H-1-8:0.0 created from Images
-feature 033W:F-2-9:0.0 created from Images
-feature 062A:F-1-4:0.0 created from Images
-feature 100W:N-1-3:0.0 created from Images
 stratum 100W:C-4-7 created from Images
-feature 100W:C-4-7:0.0 created from Images
-feature 093W:C-3-5:0.0 created from Images
-feature 118W:D-1-16:0.0 created from Images
-feature 057W:L-2-9:0.0 created from Images
 stratum 031W:C-2-6 created from Images
-feature 031W:C-2-6:0.0 created from Images
-feature 033W:C-3-12:0.0 created from Images
-feature 057W:F-1-4:0.0 created from Images
-feature 089W:B-1-2:0.0 created from Images
-feature 100W:C-1-4:0.0 created from Images
-feature 127B:D-1-3:0.0 created from Images
 stratum 062W:L-2-7 created from Images
-feature 062W:L-2-7:0.0 created from Images
-feature 031W:F-1-6:0.0 created from Images
-feature 081W:C-6-11:0.0 created from Images
-feature 091D:D-1-12.3:0.0 created from Images
 Zone TT01 created from Images
 Unit TT01 created from Images
-stratum TT01:[blank] created from Images
-feature TT01:[blank]:0.0 created from Images
-stratum 060A:[blank] created from Images
-feature 060A:[blank]:0.0 created from Images
-stratum 005A:[blank] created from Images
-feature 005A:[blank]:0.0 created from Images
 Unit TT created from Images
-stratum TT:[blank] created from Images
-feature TT:[blank]:0.0 created from Images
 stratum 031W:F-1-06 created from Images
-feature 031W:F-1-06:0.0 created from Images
 stratum 031W:M-3-3.68 created from Images
-feature 031W:M-3-3.68:0.0 created from Images
 stratum 031W:M-3-3.65 created from Images
-feature 031W:M-3-3.65:0.0 created from Images
 stratum 031W:N-1-03 created from Images
-feature 031W:N-1-03:0.0 created from Images
 stratum 020P:F-1-06 created from Images
-feature 020P:F-1-06:0.0 created from Images
 stratum 020P:N-1-03 created from Images
-feature 020P:N-1-03:0.0 created from Images
 stratum 020P:B-03-04.3 created from Images
-feature 020P:B-03-04.3:0.0 created from Images
 stratum 018P:L-01-08 created from Images
-feature 018P:L-01-08:0.0 created from Images
 stratum 033W:F-02-09 created from Images
-feature 033W:F-02-09:0.0 created from Images
 Unit 020W created from Images
 stratum 020W:F-02-09 created from Images
-feature 020W:F-02-09:0.0 created from Images
 stratum 091D:D-01-12.3 created from Images
-feature 091D:D-01-12.3:0.0 created from Images
 stratum 082W:L-04-15.5 created from Images
-feature 082W:L-04-15.5:0.0 created from Images
 stratum 033B:L-01-03 created from Images
-feature 033B:L-01-03:0.0 created from Images
 stratum 031W:F-01-06 created from Images
-feature 031W:F-01-06:0.0 created from Images
 stratum 033W:G-02-07 created from Images
-feature 033W:G-02-07:0.0 created from Images
 stratum 033W:C-01-03 created from Images
-feature 033W:C-01-03:0.0 created from Images
 stratum 037B:C-01-03 created from Images
-feature 037B:C-01-03:0.0 created from Images
 stratum 037W:F-02-05 created from Images
-feature 037W:F-02-05:0.0 created from Images
 stratum 043W:L-04-6.7 created from Images
-feature 043W:L-04-6.7:0.0 created from Images
 stratum 043W:F-02-05 created from Images
-feature 043W:F-02-05:0.0 created from Images
 stratum 058W:F-02-07 created from Images
-feature 058W:F-02-07:0.0 created from Images
 stratum [blank]:W-01-03 created from Images
-feature [blank]:W-01-03:0.0 created from Images
 stratum 056W:F-01-04 created from Images
-feature 056W:F-01-04:0.0 created from Images
 stratum 057W:W-01-03 created from Images
-feature 057W:W-01-03:0.0 created from Images
 stratum 058W:B-01-02 created from Images
-feature 058W:B-01-02:0.0 created from Images
 stratum 100W:C-02-5.2 created from Images
-feature 100W:C-02-5.2:0.0 created from Images
 stratum 062A:H-02-5.5 created from Images
-feature 062A:H-02-5.5:0.0 created from Images
 stratum 062W:C-04-09 created from Images
-feature 062W:C-04-09:0.0 created from Images
 stratum 062W:C26.8-26.8 created from Images
-feature 062W:C26.8-26.8:0.0 created from Images
 stratum 062W:C26.8-26.9 created from Images
-feature 062W:C26.8-26.9:0.0 created from Images
 stratum 062W:C26.8-26.10 created from Images
-feature 062W:C26.8-26.10:0.0 created from Images
 stratum 062W:C26.8-26.11 created from Images
-feature 062W:C26.8-26.11:0.0 created from Images
-feature 091W:C-6-20:0.0 created from Images
 stratum 090W:F-02-09 created from Images
-feature 090W:F-02-09:0.0 created from Images
 stratum 082W:M-02-13.5 created from Images
-feature 082W:M-02-13.5:0.0 created from Images
 stratum 082W:C-05-15 created from Images
-feature 082W:C-05-15:0.0 created from Images
 stratum 082W:M-01-13 created from Images
-feature 082W:M-01-13:0.0 created from Images
 stratum 081W:F-02-13 created from Images
-feature 081W:F-02-13:0.0 created from Images
 stratum 067W:F-01-04 created from Images
-feature 067W:F-01-04:0.0 created from Images
 stratum 062W:H-01-41 created from Images
-feature 062W:H-01-41:0.0 created from Images
-feature 062W:C-26.8-26.8:0.0 created from Images
-feature 121W:L-16-33:0.0 created from Images
 Unit 124 created from Images
-stratum 124:[blank] created from Images
-feature 124:[blank]:0.0 created from Images
 stratum 124W:L-108.5 created from Images
-feature 124W:L-108.5:0.0 created from Images
 stratum 124Z:J-02-12 created from Images
-feature 124Z:J-02-12:0.0 created from Images
 stratum 127W:L-02-11.5 created from Images
-feature 127W:L-02-11.5:0.0 created from Images
 stratum 127W:F-01-04 created from Images
-feature 127W:F-01-04:0.0 created from Images
 stratum 127W:L-01-08 created from Images
-feature 127W:L-01-08:0.0 created from Images
 stratum 100W:W-01-03 created from Images
-feature 100W:W-01-03:0.0 created from Images
 stratum 033W:C-03-12 created from Images
-feature 033W:C-03-12:0.0 created from Images
-feature 100W:L-20-44:0.0 created from Images
 stratum 102W:L-01-3.5 created from Images
-feature 102W:L-01-3.5:0.0 created from Images
 stratum 119W:C-02-05 created from Images
-feature 119W:C-02-05:0.0 created from Images
 stratum 119W:F-03-20 created from Images
-feature 119W:F-03-20:0.0 created from Images
 stratum 119W:B-05-21 created from Images
-feature 119W:B-05-21:0.0 created from Images
 stratum 127B:D-01-03 created from Images
-feature 127B:D-01-03:0.0 created from Images
 stratum 127W:L-08-20 created from Images
-feature 127W:L-08-20:0.0 created from Images
-feature 127W:L-12-26:0.0 created from Images
 stratum 129W:F-01-08 created from Images
-feature 129W:F-01-08:0.0 created from Images
-feature 130W:D-1.5-6.2:0.0 created from Images
 stratum 138W:L-02-09 created from Images
-feature 138W:L-02-09:0.0 created from Images
 stratum 143W:L-01-04 created from Images
-feature 143W:L-01-04:0.0 created from Images
 stratum 142W:L-01-04 created from Images
-feature 142W:L-01-04:0.0 created from Images
 stratum 143W:B-01-02 created from Images
-feature 143W:B-01-02:0.0 created from Images
 stratum 033W:L-01-12 created from Images
-feature 033W:L-01-12:0.0 created from Images
 stratum Other:C-30-30 created from Images
-feature Other:C-30-30:0.0 created from Images
 stratum Other:F-01-15 created from Images
-feature Other:F-01-15:0.0 created from Images
 stratum Other:M-01-19 created from Images
-feature Other:M-01-19:0.0 created from Images
 stratum Other:C-15-21 created from Images
-feature Other:C-15-21:0.0 created from Images
 stratum Other:M-01-14 created from Images
-feature Other:M-01-14:0.0 created from Images
 stratum 043W:B-04-09 created from Images
-feature 043W:B-04-09:0.0 created from Images
 stratum [blank]:C-04-07 created from Images
-feature [blank]:C-04-07:0.0 created from Images
 stratum 051W:D-02-08 created from Images
-feature 051W:D-02-08:0.0 created from Images
 stratum 091W:C-06-20 created from Images
-feature 091W:C-06-20:0.0 created from Images
 stratum 093W:L-18.7 created from Images
-feature 093W:L-18.7:0.0 created from Images
 stratum 093W:L-36.7 created from Images
-feature 093W:L-36.7:0.0 created from Images
 stratum 094A:L-01 created from Images
-feature 094A:L-01:0.0 created from Images
 stratum 094A:L-01-03 created from Images
-feature 094A:L-01-03:0.0 created from Images
 stratum 094C:L-01-03 created from Images
-feature 094C:L-01-03:0.0 created from Images
 stratum 094W:L-01-03 created from Images
-feature 094W:L-01-03:0.0 created from Images
 stratum 098W:L-01-08 created from Images
-feature 098W:L-01-08:0.0 created from Images
 stratum 097W:N-01-00 created from Images
-feature 097W:N-01-00:0.0 created from Images
 stratum 097W:N-01-01 created from Images
-feature 097W:N-01-01:0.0 created from Images
 stratum 097W:N-01-02 created from Images
-feature 097W:N-01-02:0.0 created from Images
 stratum 097W:N-01-03 created from Images
-feature 097W:N-01-03:0.0 created from Images
 stratum 097W:C-04-15 created from Images
-feature 097W:C-04-15:0.0 created from Images
 stratum 097W:T-01-16 created from Images
-feature 097W:T-01-16:0.0 created from Images
 stratum 097W:D-02-16 created from Images
-feature 097W:D-02-16:0.0 created from Images
 stratum 097W:C-01-45 created from Images
-feature 097W:C-01-45:0.0 created from Images
 stratum 100W:N-01-3 created from Images
-feature 100W:N-01-3:0.0 created from Images
 stratum 100W:N-01-03 created from Images
-feature 100W:N-01-03:0.0 created from Images
 stratum 059W:P-01-1.5 created from Images
-feature 059W:P-01-1.5:0.0 created from Images
 stratum 043W:B-02-03 created from Images
-feature 043W:B-02-03:0.0 created from Images
 stratum 043W:F-01-03 created from Images
-feature 043W:F-01-03:0.0 created from Images
 stratum 088W:B-01-02 created from Images
-feature 088W:B-01-02:0.0 created from Images
-feature 062W:C-21-21:0.0 created from Images
 stratum 056W:F-02-04.5 created from Images
-feature 056W:F-02-04.5:0.0 created from Images
 stratum 062W:C-02-07 created from Images
-feature 062W:C-02-07:0.0 created from Images
 stratum 100W:C-03-06 created from Images
-feature 100W:C-03-06:0.0 created from Images
 stratum 100W:C-02-05.3 created from Images
-feature 100W:C-02-05.3:0.0 created from Images
 stratum 102C:C-01-23 created from Images
-feature 102C:C-01-23:0.0 created from Images
 stratum 102C:C-02-24 created from Images
-feature 102C:C-02-24:0.0 created from Images
 Unit 02BW created from Images
 stratum 02BW:M-01-03 created from Images
-feature 02BW:M-01-03:0.0 created from Images
 Unit 08BW created from Images
 stratum 08BW:B-03-07 created from Images
-feature 08BW:B-03-07:0.0 created from Images
 stratum 011P:B-05-08 created from Images
-feature 011P:B-05-08:0.0 created from Images
 Unit 30BW created from Images
-stratum 30BW:[blank] created from Images
-feature 30BW:[blank]:0.0 created from Images
 stratum 031B:G-01-04 created from Images
-feature 031B:G-01-04:0.0 created from Images
 stratum 031W:C-02-06.5 created from Images
-feature 031W:C-02-06.5:0.0 created from Images
 Unit 05A created from Images
 stratum 05A:G-01-04 created from Images
-feature 05A:G-01-04:0.0 created from Images
 Unit 6 created from Images
 stratum 6:C-01-04 created from Images
-feature 6:C-01-04:0.0 created from Images
 stratum 011P:C-01-04 created from Images
-feature 011P:C-01-04:0.0 created from Images
 stratum 011P:B-01-02 created from Images
-feature 011P:B-01-02:0.0 created from Images
 stratum 013W:C-01-03 created from Images
-feature 013W:C-01-03:0.0 created from Images
 Unit 013P created from Images
 stratum 013P:C-02-04 created from Images
-feature 013P:C-02-04:0.0 created from Images
 stratum 014P:C-01-04 created from Images
-feature 014P:C-01-04:0.0 created from Images
 stratum 016P:C-02-08 created from Images
-feature 016P:C-02-08:0.0 created from Images
 stratum 018P:B-01-02 created from Images
-feature 018P:B-01-02:0.0 created from Images
 stratum 020P:B-01-02 created from Images
-feature 020P:B-01-02:0.0 created from Images
 stratum 030W:C-03-09 created from Images
-feature 030W:C-03-09:0.0 created from Images
 stratum 030W:C-02-08 created from Images
-feature 030W:C-02-08:0.0 created from Images
 stratum 033W:G-01.5-14.5 created from Images
-feature 033W:G-01.5-14.5:0.0 created from Images
 stratum 033W:F-03-13 created from Images
-feature 033W:F-03-13:0.0 created from Images
-feature 033W:G-1.5-14.5:0.0 created from Images
 stratum 033W:S-01-14.6 created from Images
-feature 033W:S-01-14.6:0.0 created from Images
 stratum 036W:F-01-15 created from Images
-feature 036W:F-01-15:0.0 created from Images
-feature 036W:C-11-17:0.0 created from Images
-feature 036W:C-13-19:0.0 created from Images
-feature 036W:C-14-20:0.0 created from Images
 stratum 033W:M-01-11 created from Images
-feature 033W:M-01-11:0.0 created from Images
 stratum 036W:S-01-4.6 created from Images
-feature 036W:S-01-4.6:0.0 created from Images
 stratum 036W:C-02.5-04.5 created from Images
-feature 036W:C-02.5-04.5:0.0 created from Images
 stratum 036W:C-05-07 created from Images
-feature 036W:C-05-07:0.0 created from Images
-feature 036W:C-15-21:0.0 created from Images
 stratum 036W:M-01-14 created from Images
-feature 036W:M-01-14:0.0 created from Images
-feature 036W:C-16-22:0.0 created from Images
 stratum 043W:F-02-07 created from Images
-feature 043W:F-02-07:0.0 created from Images
 stratum 047W:C-01-15 created from Images
-feature 047W:C-01-15:0.0 created from Images
 stratum 051W:H-02-09 created from Images
-feature 051W:H-02-09:0.0 created from Images
 stratum 057W:CF-02-05 created from Images
-feature 057W:CF-02-05:0.0 created from Images
 stratum 057W:C-F1-04 created from Images
-feature 057W:C-F1-04:0.0 created from Images
-feature 062W:C-30-30:0.0 created from Images
-feature 062W:C-36-36:0.0 created from Images
 stratum 062W:C33-33 created from Images
-feature 062W:C33-33:0.0 created from Images
-feature 062W:C-34-34:0.0 created from Images
 stratum 058W:H-01-08 created from Images
-feature 058W:H-01-08:0.0 created from Images
 stratum 059W:P-01-01.5 created from Images
-feature 059W:P-01-01.5:0.0 created from Images
 stratum 062A:F-01-04 created from Images
-feature 062A:F-01-04:0.0 created from Images
-feature 062W:C-35-35:0.0 created from Images
 stratum 062W:L-02-07.1 created from Images
-feature 062W:L-02-07.1:0.0 created from Images
-feature 062W:C-33-33:0.0 created from Images
 stratum 064W:C-01-03 created from Images
-feature 064W:C-01-03:0.0 created from Images
 stratum 064W:B-02-03 created from Images
-feature 064W:B-02-03:0.0 created from Images
 stratum 064W:B-04-05 created from Images
-feature 064W:B-04-05:0.0 created from Images
 stratum 067W:WB-2.6-05.6 created from Images
-feature 067W:WB-2.6-05.6:0.0 created from Images
-feature 067W:FC-2.5-5.5:0.0 created from Images
 stratum 067W:NC-2.5-5.5 created from Images
-feature 067W:NC-2.5-5.5:0.0 created from Images
 stratum 067W:NB-2.6-5.6 created from Images
-feature 067W:NB-2.6-5.6:0.0 created from Images
 stratum 067W:P-00-00 created from Images
-feature 067W:P-00-00:0.0 created from Images
 stratum 081W:C-02-07 created from Images
-feature 081W:C-02-07:0.0 created from Images
 stratum 081W:N-01-06 created from Images
-feature 081W:N-01-06:0.0 created from Images
 stratum 081W:C-05-10 created from Images
-feature 081W:C-05-10:0.0 created from Images
 stratum 082W:C-01-04 created from Images
-feature 082W:C-01-04:0.0 created from Images
 stratum 084W:C-01-05 created from Images
-feature 084W:C-01-05:0.0 created from Images
 stratum 084W:H01-08 created from Images
-feature 084W:H01-08:0.0 created from Images
 stratum 084W:D-01-09 created from Images
-feature 084W:D-01-09:0.0 created from Images
 stratum 084W:H-01-08 created from Images
-feature 084W:H-01-08:0.0 created from Images
 stratum 084W:N-02-04 created from Images
-feature 084W:N-02-04:0.0 created from Images
 stratum 086W:F-01-04 created from Images
-feature 086W:F-01-04:0.0 created from Images
 stratum 086W:H-03-14 created from Images
-feature 086W:H-03-14:0.0 created from Images
 stratum 089W:B-01-02 created from Images
-feature 089W:B-01-02:0.0 created from Images
 stratum 089W:M-01-05 created from Images
-feature 089W:M-01-05:0.0 created from Images
 stratum 091C:F-01-03 created from Images
-feature 091C:F-01-03:0.0 created from Images
 stratum 091C:H-02-11 created from Images
-feature 091C:H-02-11:0.0 created from Images
 stratum 091W:C-05-19 created from Images
-feature 091W:C-05-19:0.0 created from Images
 stratum 091W:C-07-21 created from Images
-feature 091W:C-07-21:0.0 created from Images
 stratum 091D:C-03-17 created from Images
-feature 091D:C-03-17:0.0 created from Images
 stratum 092W:L-02-11 created from Images
-feature 092W:L-02-11:0.0 created from Images
 stratum 093W:C-07-09 created from Images
-feature 093W:C-07-09:0.0 created from Images
 stratum 093W:F-01-10 created from Images
-feature 093W:F-01-10:0.0 created from Images
-feature 093W:L-12.2-47.2:0.0 created from Images
 stratum 093W:L-14.5-30.5 created from Images
-feature 093W:L-14.5-30.5:0.0 created from Images
-feature 093W:L-14.5-36.5:0.0 created from Images
 stratum 097A:H-01-04 created from Images
-feature 097A:H-01-04:0.0 created from Images
 stratum 100W:C-01-04.2 created from Images
-feature 100W:C-01-04.2:0.0 created from Images
 stratum 100W:C-01-04 created from Images
-feature 100W:C-01-04:0.0 created from Images
 stratum 100W:C-02-05 created from Images
-feature 100W:C-02-05:0.0 created from Images
 stratum 100W:C-02-05.2 created from Images
-feature 100W:C-02-05.2:0.0 created from Images
-feature 100W:C-10-15:0.0 created from Images
 stratum 100W:C-07-12.1 created from Images
-feature 100W:C-07-12.1:0.0 created from Images
 stratum 100W:FG-01-16 created from Images
-feature 100W:FG-01-16:0.0 created from Images
-feature 100W:C-11-16:0.0 created from Images
 stratum 102A:H-01-13 created from Images
-feature 102A:H-01-13:0.0 created from Images
 stratum 102A:C-01-03 created from Images
-feature 102A:C-01-03:0.0 created from Images
 stratum 102A:I-02-30 created from Images
-feature 102A:I-02-30:0.0 created from Images
 stratum 102A:L-08-19 created from Images
-feature 102A:L-08-19:0.0 created from Images
 stratum 102W:C-07-09 created from Images
-feature 102W:C-07-09:0.0 created from Images
-feature 118W:D-1.5-16.5:0.0 created from Images
 stratum 118W:F-02-05 created from Images
-feature 118W:F-02-05:0.0 created from Images
 stratum 118W:D-01-16 created from Images
-feature 118W:D-01-16:0.0 created from Images
 stratum 118W:G-03-17 created from Images
-feature 118W:G-03-17:0.0 created from Images
 stratum 121W:L-06-11 created from Images
-feature 121W:L-06-11:0.0 created from Images
-feature 127W:L-23-44:0.0 created from Images
 stratum 127W:U-01-45 created from Images
-feature 127W:U-01-45:0.0 created from Images
-feature 129W:C-66-73:0.0 created from Images
 stratum 129W:F-01-08.3 created from Images
-feature 129W:F-01-08.3:0.0 created from Images
-feature 129W:C-28-35.9:0.0 created from Images
 stratum 141W:B-01-02 created from Images
-feature 141W:B-01-02:0.0 created from Images
 stratum 146W:B-01-02 created from Images
-feature 146W:B-01-02:0.0 created from Images
 stratum 08BW:C-01-03 created from Images
-feature 08BW:C-01-03:0.0 created from Images
 stratum 08BW:B-02-06 created from Images
-feature 08BW:B-02-06:0.0 created from Images
 stratum 011P:B-02-03 created from Images
-feature 011P:B-02-03:0.0 created from Images
 stratum 011P:Q-01-04 created from Images
-feature 011P:Q-01-04:0.0 created from Images
 stratum 011P:C-01-05 created from Images
-feature 011P:C-01-05:0.0 created from Images
 stratum 011P:Q-04-10 created from Images
-feature 011P:Q-04-10:0.0 created from Images
 stratum 014P:C-02-05 created from Images
-feature 014P:C-02-05:0.0 created from Images
 stratum 015P:M-01-02 created from Images
-feature 015P:M-01-02:0.0 created from Images
 stratum 020P:C-01-03 created from Images
-feature 020P:C-01-03:0.0 created from Images
 stratum 019P:C-05-08.9 created from Images
-feature 019P:C-05-08.9:0.0 created from Images
 stratum 020P:Q-02-06 created from Images
-feature 020P:Q-02-06:0.0 created from Images
 stratum 020P:L-01.5-04.6 created from Images
-feature 020P:L-01.5-04.6:0.0 created from Images
 stratum 030W:C-01-05.5 created from Images
-feature 030W:C-01-05.5:0.0 created from Images
 stratum 031A:I-02-05 created from Images
-feature 031A:I-02-05:0.0 created from Images
 stratum 033W:M-03-12 created from Images
-feature 033W:M-03-12:0.0 created from Images
 stratum 036W:C-03-05 created from Images
-feature 036W:C-03-05:0.0 created from Images
 stratum 036W:L-02-05.6 created from Images
-feature 036W:L-02-05.6:0.0 created from Images
-feature 036W:C-6.2-8.2:0.0 created from Images
 stratum 036W:H-01-11 created from Images
-feature 036W:H-01-11:0.0 created from Images
 stratum 036W:S-01-04.6 created from Images
-feature 036W:S-01-04.6:0.0 created from Images
 stratum 037A:C-01-05 created from Images
-feature 037A:C-01-05:0.0 created from Images
 stratum 037W:C-02-08 created from Images
-feature 037W:C-02-08:0.0 created from Images
 stratum 037W:C-02-80 created from Images
-feature 037W:C-02-80:0.0 created from Images
 stratum 037W:C-04-10 created from Images
-feature 037W:C-04-10:0.0 created from Images
 stratum 037W:C-03-09 created from Images
-feature 037W:C-03-09:0.0 created from Images
 stratum 037W:B-02-11 created from Images
-feature 037W:B-02-11:0.0 created from Images
 stratum 043W:G-01-10 created from Images
-feature 043W:G-01-10:0.0 created from Images
 stratum 043W:F-03-08 created from Images
-feature 043W:F-03-08:0.0 created from Images
 stratum 057W:F-02-05 created from Images
-feature 057W:F-02-05:0.0 created from Images
 stratum 057W:L-02-09 created from Images
-feature 057W:L-02-09:0.0 created from Images
 stratum 059W:C-01-04 created from Images
-feature 059W:C-01-04:0.0 created from Images
 stratum 059W:C-03-06 created from Images
-feature 059W:C-03-06:0.0 created from Images
 stratum 062W:C-02-07.2 created from Images
-feature 062W:C-02-07.2:0.0 created from Images
 stratum 062W:C-03-08 created from Images
-feature 062W:C-03-08:0.0 created from Images
-feature 062W:C-22-22:0.0 created from Images
-feature 062W:C-23-23:0.0 created from Images
-feature 062W:C-24-24:0.0 created from Images
-feature 062W:C-24.2-24.2:0.0 created from Images
-feature 062W:C-26.2-26.2:0.0 created from Images
-feature 062W:C-29.5-29.5:0.0 created from Images
-feature 062W:C-26-26:0.0 created from Images
-feature 062W:C-26.1-26.1:0.0 created from Images
 stratum 064W:L-01-09 created from Images
-feature 064W:L-01-09:0.0 created from Images
 stratum 067W:FC-2.5-05.5 created from Images
-feature 067W:FC-2.5-05.5:0.0 created from Images
 stratum 067W:FC-2.5-2.5 created from Images
-feature 067W:FC-2.5-2.5:0.0 created from Images
 stratum 081W:C-04-09 created from Images
-feature 081W:C-04-09:0.0 created from Images
 stratum 083W:M-01-04.1 created from Images
-feature 083W:M-01-04.1:0.0 created from Images
 stratum 084W:N-01-03 created from Images
-feature 084W:N-01-03:0.0 created from Images
 stratum 086W:I-03-17 created from Images
-feature 086W:I-03-17:0.0 created from Images
 stratum 091W:C-04-18 created from Images
-feature 091W:C-04-18:0.0 created from Images
-feature 091W:C-9.5-23.5:0.0 created from Images
-feature 091W:C-14-28:0.0 created from Images
 stratum 092W:C-01-05 created from Images
-feature 092W:C-01-05:0.0 created from Images
 stratum 093W:C-03-05 created from Images
-feature 093W:C-03-05:0.0 created from Images
 stratum 097A:C-01-03 created from Images
-feature 097A:C-01-03:0.0 created from Images
 stratum 100W:C-07-17 created from Images
-feature 100W:C-07-17:0.0 created from Images
 stratum 100W:C-01-04.3 created from Images
-feature 100W:C-01-04.3:0.0 created from Images
 stratum 100W:C-07-12 created from Images
-feature 100W:C-07-12:0.0 created from Images
 stratum 100W:C-03-04 created from Images
-feature 100W:C-03-04:0.0 created from Images
 stratum 100W:C-08-13 created from Images
-feature 100W:C-08-13:0.0 created from Images
 stratum 100W:C-09-14 created from Images
-feature 100W:C-09-14:0.0 created from Images
-feature 100W:C-11-16.3:0.0 created from Images
 stratum 102A:C-02-04 created from Images
-feature 102A:C-02-04:0.0 created from Images
 stratum 102B:C-03-07 created from Images
-feature 102B:C-03-07:0.0 created from Images
 stratum 118W:F-03-17 created from Images
-feature 118W:F-03-17:0.0 created from Images
 stratum 119W:C-03-06 created from Images
-feature 119W:C-03-06:0.0 created from Images
 stratum 121E:D-01-03 created from Images
-feature 121E:D-01-03:0.0 created from Images
 stratum 121E:D-02-04 created from Images
-feature 121E:D-02-04:0.0 created from Images
 stratum 124W:C-01-01.2 created from Images
-feature 124W:C-01-01.2:0.0 created from Images
 stratum 127W:J-01-15 created from Images
-feature 127W:J-01-15:0.0 created from Images
-feature 129W:C-28-35:0.0 created from Images
-feature 129W:C-48-55:0.0 created from Images
 stratum 129W:C-04.5-12.5 created from Images
-feature 129W:C-04.5-12.5:0.0 created from Images
-feature 129W:C-37-44:0.0 created from Images
-feature 129W:C-53-60:0.0 created from Images
-feature 129W:C-18-26:0.0 created from Images
 stratum 129W:P-00-00 created from Images
-feature 129W:P-00-00:0.0 created from Images
 stratum 129W:C-10.1-11.7 created from Images
-feature 129W:C-10.1-11.7:0.0 created from Images
 stratum 129W:F-02.5-86.5 created from Images
-feature 129W:F-02.5-86.5:0.0 created from Images
 stratum 130W:F-01-03 created from Images
-feature 130W:F-01-03:0.0 created from Images
