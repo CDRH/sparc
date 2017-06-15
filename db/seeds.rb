@@ -359,7 +359,7 @@ def seed_strata
     name: "STRATTYPE"
   }
 
-  s.sheet('strat descp').each_with_index(strata_type_columns) do |row, index|
+  s.sheet('strat types').each_with_index(strata_type_columns) do |row, index|
     # Skip header row
     next if row[:code] == "CODE"
 
