@@ -135,10 +135,32 @@ class QueryController < ApplicationController
   private
 
   def global_search res
-    res = res.joins(:units)
-    res = res.where(units: { id: params["unitno"] }) if params["unitno"].present?
-    res = res.where(units: { unit_class_id: params["unitclass"] }) if params["unitclass"].present?
+    # Units
+    if params["unit"].present? || params["unit_class"].present? && res.reflect_on_all_associations.map { |a| a.name }.include?(:units)
+      res = res.joins(:units)
+      res = res.where(units: { id: params["unit"] }) if params["unit"].present?
+      res = res.where(units: { unit_class_id: params["unit_class"] }) if params["unit_class"].present?
+    end
+
+    # Occupations
+    if params["occupation"].present? && res.reflect_on_all_associations.map { |a| a.name }.include?(:occupations)
+      res = res.joins(:occupation).where(occupations: { id: params["occupation"] })
+    end
+
+    # Strat Types
+    if params["strat_grouping"].present? && res.reflect_on_all_associations.map { |a| a.name }.include?(:strata)
+      res = res.joins(strata: [strat_type: [:strat_grouping]]).where(strat_groupings: { id: params["strat_grouping"] })
+    end
+
+    # Feature Groups
+    if params["feature_group"].present?
+      if res.reflect_on_all_associations.map { |a| a.name }.include?(:features)
+        res = res.joins(features: [:feature_group]).where(feature_groups: { id: params["feature_group"] })
+      elsif res.reflect_on_all_associations.map { |a| a.name }.include?(:strata)
+        res = res.joins(strata: [features: [:feature_group]]).where(feature_groups: { id: params["feature_group"] }).uniq
+      end
+    end
+
     return res
   end
-
 end
