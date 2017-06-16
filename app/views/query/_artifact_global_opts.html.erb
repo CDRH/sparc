@@ -4,11 +4,9 @@
   <div class="pull-right">
     <%= link_to "Clear", { controller: params["controller"], action: params["action"] }, class: "btn btn-danger" %>
   </div>
-  <br>
-  <br>
+  <div class="clearfix buffer-bottom-sm"></div>
 
   <!-- common search options accordian -->
-
   <div class="panel-group combined_selections" id="accordion" role="tablist" aria-multiselectable="true">
 
     <!-- unit type filters -->
@@ -82,7 +80,6 @@
     </div>
 
     <!-- occupation filters -->
-    <%# TODO need a single occupation table before hooking this up %>
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="heading-occupation">
         <h4 class="panel-title">
@@ -118,7 +115,6 @@
     </div>
 
     <!-- strata filters -->
-    <%# TODO need a strata type "grouping" before this can be populated %>
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="heading-stratum">
         <h4 class="panel-title">

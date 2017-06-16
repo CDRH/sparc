@@ -2,17 +2,15 @@
 
 <%= render "artifact_nav" %>
 
-<br>
-
 <%= form_tag bones_results_path, method: :get do %>
   <div class="row">
     <!-- Bone tables and search options -->
     <div class="col-md-8">
 
       <!-- bone tool query navigation -->
-      <ul class="nav nav-tabs" id="artifacts_bones_tab">
-        <li class="active"><a href="#tool" data-toggle="tab">Bone Tool</a></li>
-        <li><a href="#inventory" data-toggle="tab">Bone Inventory</a></li>
+      <ul class="nav nav-tabs buffer-bottom" id="artifacts_bones_tab">
+        <li class="active"><a href="#tool" data-toggle="tab">Bone Tools</a></li>
+        <li><a href="#inventory" data-toggle="tab">Bone Inventories</a></li>
       </ul>
 
       <div class="tab-content">
