@@ -1,0 +1,35 @@
+<h3><%= @res_label %> Results</h3>
+
+<div class="search_results table-responsive">
+  <p>Found <%= pluralize @res.count, "match" %>:</p>
+
+  <%= will_paginate @res %>
+
+  <table class="table table-striped">
+    <tr>
+      <% @column_names.each do |column| %>
+        <% unless column[/(?:^id|_at)$/] %>
+          <th><%= column.titleize %></th>
+        <% end %>
+      <% end %>
+    </tr>
+    <% @res.each do |result| %>
+      <tr>
+        <% @column_names.each do |column| %>
+          <% if column[/_id$/] %>
+            <% assoc_col = column[/^(.+)_id$/, 1] %>
+              <% if result.respond_to?(assoc_col) %>
+                <td><%= result.send(assoc_col).present? ? result.send(assoc_col).name : "N/A" %></td>
+              <% else %>
+                <td><%= result.send(assoc_col.pluralize).present? ? result.send(assoc_col.pluralize).map{ |r| r.send(assoc_col << "_no") }.join("; ") : "N/A" %></td>
+              <% end %>
+          <% elsif !column[/(?:^id|_at)$/] %>
+            <td><%= result[column] %></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= will_paginate @res %>
+</div>
