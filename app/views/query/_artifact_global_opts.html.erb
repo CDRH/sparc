@@ -35,8 +35,8 @@
               <li class="list-group-item">
                 <div class="form-inline">
                   <div class="checkbox">
-                    <%= check_box_tag "unitclass[#{u.id}]", u.id, checked?(u.id, params["unitclass"]), class: "select_all", name: "unitclass[]" %>
-                    <%= label_tag "unitclass[#{u.id}]", u.name %>
+                    <%= check_box_tag "unit_class[#{u.id}]", u.id, checked?(u.id, params["unit_class"]), class: "select_all", name: "unit_class[]" %>
+                    <%= label_tag "unit_class[#{u.id}]", u.name %>
                   </div>
                 </div>
               </li>
@@ -70,8 +70,8 @@
               <li class="list-group-item">
                 <div class="form-inline">
                   <div class="checkbox">
-                    <%= check_box_tag "unitno[#{u.id}]", u.id, checked?(u.id, params["unitno"]), class: "select_all", name: "unitno[]" %>
-                    <%= label_tag "unitno[#{u.id}]", u.unit_no %>
+                    <%= check_box_tag "unit[#{u.id}]", u.id, checked?(u.id, params["unit"]), class: "select_all", name: "unit[]" %>
+                    <%= label_tag "unit[#{u.id}]", u.unit_no %>
                   </div>
                 </div>
               </li>
@@ -141,9 +141,9 @@
               <li class="list-group-item">
                 <div class="form-inline">
                   <div class="checkbox">
-                    <%= check_box_tag "stratgrouping[#{s.id}]", s.id, checked?(s.id, params["stratgrouping"]),
-                      class: "select_all", name: "stratgrouping[]" %>
-                    <%= label_tag "stratgrouping[#{s.id}]", s.name %>
+                    <%= check_box_tag "strat_grouping[#{s.id}]", s.id, checked?(s.id, params["strat_grouping"]),
+                      class: "select_all", name: "strat_grouping[]" %>
+                    <%= label_tag "strat_grouping[#{s.id}]", s.name %>
                   </div>
                 </div>
               </li>
@@ -177,8 +177,8 @@
               <li class="list-group-item">
                 <div class="form-inline">
                   <div class="checkbox">
-                    <%= check_box_tag "featgrp[#{fg.id}]", fg.id, checked?(fg.id, params["featgrp"]), class: "select_all", name: "featgrp[]" %>
-                    <%= label_tag "featgrp[#{fg.id}]", fg.name %>
+                    <%= check_box_tag "feature_group[#{fg.id}]", fg.id, checked?(fg.id, params["feature_group"]), class: "select_all", name: "feature_group[]" %>
+                    <%= label_tag "feature_group[#{fg.id}]", fg.name %>
                   </div>
                 </div>
               </li>
