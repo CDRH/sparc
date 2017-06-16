@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/query', to: 'query#index', as: :query
   get '/query/artifacts', to: 'query#artifacts', as: :artifacts
   get '/query/artifacts/bones', to: 'query#bones', as: :bones
+  get '/query/artifacts/bones/results', to: 'query#bones_results', as: :bones_results
   get '/query/artifacts/ceramics', to: 'query#ceramics', as: :ceramics
   get '/query/artifacts/eggshells', to: 'query#eggshells', as: :eggshells
   get '/query/artifacts/lithics', to: 'query#lithics', as: :lithics

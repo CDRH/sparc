@@ -1,9 +1,8 @@
 <div class="col-md-4">
-<!-- clear and submit -->
+  <h4 class="pull-left">Common Search Options</h4>
+
   <div class="pull-right">
-    <%= link_to "Clear all search options", { controller: params["controller"], action: params["action"] }, class: "btn btn-danger" %>
-    <%# note: form begins on specific artifact views (see ceramics, lithics, etc) %>
-    <%= submit_tag "Submit", class: "btn btn-primary" %>
+    <%= link_to "Clear", { controller: params["controller"], action: params["action"] }, class: "btn btn-danger" %>
   </div>
   <br>
   <br>
