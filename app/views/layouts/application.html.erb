@@ -11,6 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SPARC</title>
 
+    <link href="https://fonts.googleapis.com/css?family=Jura:400,600,700" rel="stylesheet">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -21,10 +23,46 @@
 
   <% section = @section || params["controller"] %>
 
-  <body class=<%# page_classes %>>
+  <body class='index'>
+
     <header class="body_head">
-      <div class="navbar navbar-inverse">
+      <!-- TODO: Add an if statement to only show on home page -->
+      <div class="header_top">
+        <div class="header_stuff container">
+
+          <div class="site_logo_container">
+            <div class="site_image">
+              <img src="effigy3.png">
+            </div>
+
+
+            <h1 class="header_words">
+            <a href="index.html">
+              <span class="head_sp">Salmon Pueblo</span>
+              <span class="head_arc">Archaeological Research Collection</span>
+              </a>
+            </h1>
+          </div><!-- site_logo_container -->
+
+
+        </div><!-- /header_stuff -->
+      </div><!-- /header_top -->
+
+      <!-- END if statement -->
+
+      <div class="navbar navbar-default">
         <div class="container">
+
+        <!-- TODO: Add an if statement to show everywhere BUT home page -->
+          <h1 class="header_words">
+            <a href="index.html">
+              <span class="head_sp">Salmon Pueblo</span>
+              <span class="head_arc">Archaeological Research Collection</span>
+              </a>
+          </h1>
+        <!-- END if statement-->
+
+        
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
