@@ -2,25 +2,31 @@ class QueryController < ApplicationController
 
   def bones
     @subsection = "artifacts"
+
     #### SEARCH UI ####
-    # tools
-    @total_bt = BoneTool.count
-
-    @bt_type = BoneTool.pluck(:tool_type).uniq.sort
-    @bt_tpcd = BoneTool.pluck(:tool_type_code).uniq.sort
-    @bt_spcd = BoneTool.pluck(:species_code).uniq.sort
-
-    # inventory
+    # Inventory
     @total_bi = BoneInventory.count
 
     @bi_enby = BoneInventory.pluck(:entered_by).uniq.sort
     @bi_loca = BoneInventory.pluck(:location).uniq.sort
     @bi_quad = BoneInventory.pluck(:quad).uniq.sort
     @bi_sano = BoneInventory.pluck(:sa_no).uniq.sort
+
+    # Tools
+    @total_bt = BoneTool.count
+
+    @bt_type = BoneTool.pluck(:tool_type).uniq.sort
+    @bt_tpcd = BoneTool.pluck(:tool_type_code).uniq.sort
+    @bt_spcd = BoneTool.pluck(:species_code).uniq.sort
   end
 
   def bones_results
-    if params[:commit] == "Search Bone Tools"
+    if params[:commit] == "Search Bone Inventory"
+      @res_label = "Bone Inventory"
+      @column_names = BoneInventory.columns.map(&:name)
+
+      res = BoneInventory.all
+    else
       @res_label = "Bone Tools"
       @column_names = BoneTool.columns.map(&:name)
 
@@ -36,14 +42,9 @@ class QueryController < ApplicationController
       res = res.where("tool_type IN (?)", params["bt_type"]) if params["bt_type"].present?
       res = res.where("tool_type_code = ?", params["bt_tpcd"]) if params["bt_tpcd"].present?
       res = res.where("species_code = ?", params["bt_spcd"]) if params["bt_spcd"].present?
-    else  # Search Bone Inventories
-      @res_label = "Bone Inventories"
-      @column_names = BoneInventory.columns.map(&:name)
-
-      res = BoneInventory.all
     end
 
-    # join searches
+    # Common search options
     res = global_search res
 
     @res = res.sorted.paginate(:page => params[:page], :per_page => 20)
@@ -134,7 +135,7 @@ class QueryController < ApplicationController
 
   private
 
-  def global_search res
+  def global_search(res)
     # Units
     if params["unit"].present? || params["unit_class"].present? && res.reflect_on_all_associations.map { |a| a.name }.include?(:units)
       res = res.joins(:units)
