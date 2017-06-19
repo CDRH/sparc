@@ -9,13 +9,46 @@
 
       <!-- bone tool query navigation -->
       <ul class="nav nav-tabs buffer-bottom" id="artifacts_bones_tab">
-        <li class="active"><a href="#tool" data-toggle="tab">Bone Tools</a></li>
-        <li><a href="#inventory" data-toggle="tab">Bone Inventories</a></li>
+        <li class="active"><a href="#inventory" data-toggle="tab">Inventory</a></li>
+        <li><a href="#tool" data-toggle="tab">Tools</a></li>
       </ul>
 
       <div class="tab-content">
-        <!-- bone tools -->
-        <div class="tab-pane active" id="tool">
+        <!-- Inventory -->
+        <div class="tab-pane active" id="inventory">
+          <div class="row">
+            <div class="col-md-6">
+              <%= render "inventory_common_fields" %>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag "bi_quad", "Quad" %>
+                <%= select_tag "bi_quad", options_for_select(@bi_quad, params["bi_quad"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bi_sano", "Select Artifact #" %>
+                <%= select_tag "bi_sano", options_for_select(@bi_sano, params["bi_sano"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bi_enby", "Data Entry" %>
+                <%= select_tag "bi_enby", options_for_select(@bi_enby, params["bi_enby"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "bi_loca", "Location" %>
+                <%= select_tag "bi_loca", options_for_select(@bi_loca, params["bi_loca"]),
+                    class: "form-control", include_blank: true %>
+              </div>
+            </div>
+          </div>
+          <%= submit_tag "Search Bone Inventory", class: "btn btn-primary" %>
+        </div>
+
+        <!-- Tools -->
+        <div class="tab-pane" id="tool">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
@@ -56,40 +89,6 @@
           </div>
           <%= submit_tag "Search Bone Tools", class: "btn btn-primary" %>
         </div>
-
-        <!-- inventory -->
-        <div class="tab-pane" id="inventory">
-          <div class="row">
-            <div class="col-md-6">
-              <%= render "inventory_common_fields" %>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <%= label_tag "bi_quad", "Quad" %>
-                <%= select_tag "bi_quad", options_for_select(@bi_quad, params["bi_quad"]),
-                    class: "form-control", include_blank: true %>
-              </div>
-              <div class="form-group">
-                <%= label_tag "bi_sano", "Select Artifact #" %>
-                <%= select_tag "bi_sano", options_for_select(@bi_sano, params["bi_sano"]),
-                    class: "form-control", include_blank: true %>
-              </div>
-              <div class="form-group">
-                <%= label_tag "bi_enby", "Data Entry" %>
-                <%= select_tag "bi_enby", options_for_select(@bi_enby, params["bi_enby"]),
-                    class: "form-control", include_blank: true %>
-              </div>
-              <div class="form-group">
-                <%= label_tag "bi_loca", "Location" %>
-                <%= select_tag "bi_loca", options_for_select(@bi_loca, params["bi_loca"]),
-                    class: "form-control", include_blank: true %>
-              </div>
-            </div>
-          </div>
-          <%= submit_tag "Search Bone Inventories", class: "btn btn-primary" %>
-        </div>
-
       </div> <!-- /tab-content -->
     </div> <!-- /col-md-8 -->
 
