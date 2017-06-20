@@ -11,9 +11,11 @@ class Unit < ActiveRecord::Base
   belongs_to :occupation
   belongs_to :zone
 
-  has_many :strata
+  has_and_belongs_to_many :documents
+  has_many :document_binders, -> {distinct}, :through => :documents
   has_many :features, :through => :strata
   has_many :images, :through => :features
+  has_many :strata
 
   # strata objects
   has_many :bone_tools, :through => :strata
