@@ -1,11 +1,4 @@
-/**************************************/
-/* Bootstrap IMPORT */
-@import "bootstrap-sprockets";
-@import "bootstrap";
-/* /Bootstrap IMPORT */
-/**************************************/
 
-/* Added styles */
 
 /* Styles for sparc subnavigation. Will probably want to refine this if we end up keeping it */
 
@@ -34,12 +27,9 @@
 /* Start Karin's CSS */
 
 
-/**************************************/
-/* Bootstrap IMPORT */
-@import "bootstrap-sprockets";
-@import "bootstrap";
-/* /Bootstrap IMPORT */
-/**************************************/
+html {
+  background-color: lighten($gray-base, 75%);
+}
 
 @font-face {
   font-family: 'joehand_2regular';
@@ -68,7 +58,7 @@ min-height:33px;
 /* Footer */
 
 .project_footer {
-  background-color: #F7ECDB;
+  background-color: lighten($gray-base, 75%);
   padding: 30px 0 60px 0;
   margin-top: 50px
 }
@@ -137,7 +127,7 @@ min-height:33px;
 
 .document_room_list li a:hover,
 .document_type_list li a:hover {
-  background-color: #f7ecdb;
+  background-color: lighten($gray-base, 75%);
 }
 
 .document_thumbnail {
@@ -157,7 +147,6 @@ min-height:33px;
 }
 
 .rt_esi, .rt_fn, .rt_fr, .rt_m, .rt_rr {
-  background-color: #aaa; 
   display: inline-block;
   padding:5px;
 }
@@ -209,50 +198,48 @@ min-height:33px;
   display: block;
   font-family: 'Jura', sans-serif;
   line-height: 1em;
-  font-size: .25em; 
+  font-size: .26em; 
   margin-top: -1.3em;
 }
 
 .site_image {
-  display: none;
-}
-
-/* Logo on main page */
-
-body.index .header_words a {
-  color: $gray-base;
-}
-
-body.index .header_words a:hover {
-  color: $gray-darker;
-}
-
-body.index .header_words {
-  margin-top: 90px;
-}
-
-body.index .head_sp {
-  font-size: 3em;
-}
-
-body.index .head_arc {
-  font-size: .8em;
-  margin-top: -1.5em;
-}
-
-body.index .site_image {
   display: inline;
   float: left;
 }
 
-body.index .site_image img {
+.site_image img {
   width: 240px; 
 }
+
+/* Logo on main page */
+
+.header_words_nav a {
+  color: $gray-base;
+}
+
+.header_words_nav a:hover {
+  color: $gray-darker;
+}
+
+.header_words_nav {
+  margin-top: 90px;
+}
+
+.header_words_nav .head_sp {
+  font-size: 3em;
+}
+
+.header_words_nav .head_arc {
+  font-size: .8em;
+  margin-top: -1.5em;
+}
+
+
 
 /* Navbar */
 
 .navbar-default {
-  background-color: #4C83AB;
+  background-color: $brand-primary;
 }
 
 .navbar-default a {
@@ -260,11 +247,11 @@ body.index .site_image img {
 }
 
 .header_top {
-  background: url('topographic_top.gif') center bottom no-repeat #F7ECDB;
+  background: url('topographic_top.gif') center bottom no-repeat lighten($gray-base, 75%);
 }
 
 .sparc_navbar {
-  background: url('topographic_bottom.jpg') center top no-repeat #4c83ab;
+  background: url('topographic_bottom.jpg') center top no-repeat $brand-primary;
   margin-top: -4px;
 }
 
@@ -318,9 +305,23 @@ body.index .site_image img {
   margin: 10px 0;
   padding: 10px;
   border-radius: 8px;
+  display: block;
 }
 
-.home_callout .content p {
+.home_callout a:hover {
+  text-decoration: none;
+}
+
+.home_callout .content:hover {
+  font-size: 1.2em;
+  height: 14em;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+  display: block;
+}
+
+.home_callout .inner_content {
   background-color: rgba(255,255,255,.7);
   width: 50%;
   padding: 10px;
@@ -330,16 +331,25 @@ body.index .site_image img {
 .home_callout1 .content,
 .home_callout4 .content {
   background: #F7ECDB;
-  border: 4px solid #ecd0a4;
+  border: 4px solid $gray-light; 
 }
 
 .home_callout2 .content,
 .home_callout3 .content{
-  border: 4px solid #2e6196;
+  border: 4px solid $gray-light;
+}
+
+.home_callout .content:hover {
+  border-color: $brand-primary;
+}
+
+.home_callout .content:hover .inner_content {
+  border-color: $brand-primary;
+  background-color: rgba(255,255,255,.9);
 }
 
 .home_callout1 .content {
-  background: url('writing.png') #4c83ab;
+  background: url('writing.png') #4c83ab !important;
   background-size: cover;
 }
 

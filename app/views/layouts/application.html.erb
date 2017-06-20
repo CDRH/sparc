@@ -23,43 +23,46 @@
 
   <% section = @section || params["controller"] %>
 
-  <body class='index'>
+  <body class='body_<%= params[:controller] %> body_<%= params[:action] %>'>
 
     <header class="body_head">
-      <!-- TODO: Add an if statement to only show on home page -->
+      <!-- if statement to only show on home page -->
+      <% if current_page?(home_path) %>
       <div class="header_top">
         <div class="header_stuff container">
 
           <div class="site_logo_container">
             <div class="site_image">
-              <img src="effigy3.png">
+              <img src="assets/effigy3.png">
             </div>
 
 
-            <h1 class="header_words">
-            <a href="index.html">
-              <span class="head_sp">Salmon Pueblo</span>
-              <span class="head_arc">Archaeological Research Collection</span>
-              </a>
+            <h1 class="header_words header_words_nav">
+              
+                <span class="head_sp">Salmon Pueblo</span>
+                <span class="head_arc">Archaeological Research Collection</span>
+             
             </h1>
           </div><!-- site_logo_container -->
 
 
         </div><!-- /header_stuff -->
       </div><!-- /header_top -->
-
+        <% end %>
       <!-- END if statement -->
 
-      <div class="navbar navbar-default">
+      <div class="navbar navbar-default sparc_navbar">
         <div class="container">
 
-        <!-- TODO: Add an if statement to show everywhere BUT home page -->
+        <!-- if statement to show everywhere BUT home page -->
+        <% if !current_page?(home_path) %>
           <h1 class="header_words">
-            <a href="index.html">
+            <%= link_to home_path, class: "home_links" do %>
               <span class="head_sp">Salmon Pueblo</span>
               <span class="head_arc">Archaeological Research Collection</span>
-              </a>
+            <% end %>
           </h1>
+          <% end %>
         <!-- END if statement-->
 
         
@@ -73,9 +76,9 @@
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li <%= "class=active" if section == "static" %>>
-                <%= link_to "SPARC Home", home_path %>
-              </li>
+              <!-- <li <#= "class=active" if section == "static" %>>
+                <#= link_to "SPARC Home", home_path %>
+              </li> -->
               <li <%= "class=active" if section == "explore" %>>
                 <%= link_to "Explore Pueblo", explore_path %>
               </li>
