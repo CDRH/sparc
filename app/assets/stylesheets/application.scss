@@ -14,12 +14,14 @@
  */
 
 @import "bootstrap-sprockets";
+@import "bootstrap/_variables";
 @import "bootstrap";
+
 @import "style";
 
-body {
-  padding: 15px;
-}
+// body {
+//   padding: 15px;
+// }
 
 label,
 input,
