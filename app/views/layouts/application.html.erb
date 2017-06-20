@@ -28,27 +28,20 @@
     <header class="body_head">
       <!-- if statement to only show on home page -->
       <% if current_page?(home_path) %>
-      <div class="header_top">
-        <div class="header_stuff container">
-
-          <div class="site_logo_container">
-            <div class="site_image">
-              <img src="assets/effigy3.png">
-            </div>
-
-
-            <h1 class="header_words header_words_nav">
-              
-                <span class="head_sp">Salmon Pueblo</span>
-                <span class="head_arc">Archaeological Research Collection</span>
-             
-            </h1>
-          </div><!-- site_logo_container -->
-
-
-        </div><!-- /header_stuff -->
-      </div><!-- /header_top -->
-        <% end %>
+        <div class="header_top">
+          <div class="header_stuff container">
+            <div class="site_logo_container">
+              <div class="site_image">
+                <img src="assets/effigy3.png">
+              </div>
+              <h1 class="header_words header_words_nav">
+                  <span class="head_sp">Salmon Pueblo</span>
+                  <span class="head_arc">Archaeological Research Collection</span>
+              </h1>
+            </div><!-- site_logo_container -->
+          </div><!-- /header_stuff -->
+        </div><!-- /header_top -->
+      <% end %>
       <!-- END if statement -->
 
       <div class="navbar navbar-default sparc_navbar">
@@ -62,7 +55,7 @@
               <span class="head_arc">Archaeological Research Collection</span>
             <% end %>
           </h1>
-          <% end %>
+        <% end %>
         <!-- END if statement-->
 
         
