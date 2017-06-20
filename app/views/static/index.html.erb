@@ -1,77 +1,142 @@
+
+<p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse enim justo, consectetur at nisl sed, dictum laoreet dolor. Proin eget gravida tellus. Mauris aliquam ante nulla. Nullam ipsum libero, tempus sit amet lacinia ac, dapibus ut arcu. Etiam a diam sagittis, euismod ante non, hendrerit neque. </p>
+
+</div><!-- container -->
+
+<div class="container-fluid home_first_band">
+  <div class="container">
+    <p>
+    Nullam ipsum libero, tempus sit amet lacinia ac, dapibus ut arcu. Etiam a diam sagittis, euismod ante non, hendrerit neque. Praesent elementum gravida lacus, et ullamcorper magna dignissim tincidunt.
+    </p>
+  </div>
+</div>
+
+<div class="container home_alternate_band">
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse enim justo, consectetur at nisl sed, dictum laoreet dolor. Proin eget gravida tellus. Mauris aliquam ante nulla. Nullam ipsum libero, tempus sit amet lacinia ac, dapibus ut arcu. Etiam a diam sagittis, euismod ante non, hendrerit neque. Praesent elementum gravida lacus, et ullamcorper magna dignissim tincidunt. Vestibulum a congue ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
+</div><!-- /container -->
+
+<div class="container home_alternate_band">
+
+<div class="row">
+  <div class="col-md-7 home_callout1 home_callout">
+    <%= link_to explore_path, class: "content" do %>
+      <div class="inner_content">
+        <h4>Explore</h4>
+        <p>Nullam ipsum libero, tempus sit amet lacinia ac, dapibus ut arcu. Etiam a diam sagittis</p>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-5 home_callout2 home_callout">
+    <%= link_to query_path, class: "content" do %>
+      <div class="inner_content">
+        <h4>Query</h4>
+        <p>Nullam ipsum libero, tempus sit amet lacinia ac, dapibus ut arcu. Etiam a diam sagittis</p>
+      </div>
+    <% end %>
+  </div>
+</div><!--/row-->
+
+<div class="row">
+  <div class="col-md-5 home_callout3 home_callout">
+    <%= link_to documents_path, class: "content" do %>
+      <div class="inner_content">
+        <h4>Documents</h4>
+        <p>Nullam ipsum libero, tempus sit amet lacinia ac, dapibus ut arcu. Etiam a diam sagittis</p>
+      </div>
+    <% end %>
+    </div>
+  <div class="col-md-7 home_callout4 home_callout">
+    <%= link_to gallery_path, class: "content" do %>
+      <div class="inner_content">
+        <h4>Gallery</h4>
+        <p>Nullam ipsum libero, tempus sit amet lacinia ac, dapibus ut arcu. Etiam a diam sagittis</p>
+      </div>
+    <% end %>
+  </div>
+</div><!--/row-->
+
+
+
+
+
+<!-- <br/><br/>
+<hr/>
+<br/><br/>
+
 <h1>Welcome to the Salmon Pueblo Archaeological Research Collection</h1>
 
 <div class="row">
   <div class="col-md-6">
     <div class="list-group">
-      <%= link_to explore_path, class: "list-group-item active list-group-item-primary" do %>
+      <#= link_to explore_path, class: "list-group-item active list-group-item-primary" do %>
         <h2 class="list-group-item-heading">
           <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
           Explore
         </h2>
         <p class="list-group-item-text">Maps of the Salmon Pueblo site</p>
-      <% end %>
+      <# end %>
     </div>
   </div>
   <div class="col-md-6">
     <div class="list-group">
-      <%= link_to query_path, class: "list-group-item active list-group-item-primary" do %>
+      <#= link_to query_path, class: "list-group-item active list-group-item-primary" do %>
         <h2 class="list-group-item-heading">
           <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
           Search
         </h2>
         <p class="list-group-item-text">Find information about units, kivas, and images</p>
-      <% end %>
+      <# end %>
     </div>
   </div>
-</div> <!-- /row -->
+</div>  --><!-- /row -->
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-6">
     <div class="list-group">
-      <%= link_to query_path, class: "list-group-item active list-group-item-primary" do %>
+      <#= link_to query_path, class: "list-group-item active list-group-item-primary" do %>
         <h2 class="list-group-item-heading">
           <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
           Query
         </h2>
         <p class="list-group-item-text">Advanced search across all items, like ornaments, ceramic shards, and more</p>
         <p class="list-group-item-text">(Will eventually have the active scaffold replacement)</p>
-      <% end %>
+      <# end %>
     </div>
   </div>
   <div class="col-md-6">
     <div class="list-group">
-      <%= link_to gallery_path, class: "list-group-item active list-group-item-primary" do %>
+      <#= link_to gallery_path, class: "list-group-item active list-group-item-primary" do %>
         <h2 class="list-group-item-heading">
         <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
           Gallery
         </h2>
         <p class="list-group-item-text">Browse and search images of items and the excavation team</p>
-      <% end %>
+      <# end %>
     </div>
   </div>
-</div> <!-- /row -->
+</div>  --><!-- /row -->
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-6">
     <div class="list-group">
-      <%= link_to about_path, class: "list-group-item active list-group-item-primary" do %>
+      <#= link_to about_path, class: "list-group-item active list-group-item-primary" do %>
         <h2 class="list-group-item-heading">
         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
           About
         </h2>
         <p class="list-group-item-text">Learn about the Salmon Pueblo project</p>
-      <% end %>
+      <# end %>
     </div>
   </div>
   <div class="col-md-6">
     <div class="list-group">
-      <%= link_to admin_units_path, class: "list-group-item active list-group-item-primary" do %>
+      <#= link_to admin_units_path, class: "list-group-item active list-group-item-primary" do %>
         <h2 class="list-group-item-heading">
         <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
           Admin
         </h2>
         <p class="list-group-item-text">Current active scaffold tables</p>
-      <% end %>
+      <# end %>
     </div>
   </div>
-</div> <!-- /row -->
+</div> --> <!-- /row -->
