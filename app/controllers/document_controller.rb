@@ -1,5 +1,12 @@
 class DocumentController < ApplicationController
 
+  def index
+    # filter out units with no documents
+    @units = Unit.includes(:documents).where.not(documents: { id: nil }).sorted
+
+    @units_no_docs = Unit.includes(:documents).where(documents: { id: nil }).sorted
+  end
+
   def type
     @type = params["type"]
     type_name = get_name(@type)
@@ -10,7 +17,12 @@ class DocumentController < ApplicationController
 
   def unit
     @unit = params["unit"]
-    @type = params["type"].present? ? params["type"] : DocumentType.sorted.first.name.parameterize("_")
+    if params["type"].present?
+      @type = params["type"]
+    else
+      @type = DocumentType.joins(:units).where(units: {unit_no: @unit}).sorted.first.name.parameterize("_")
+    end
+
     type_name = get_name(@type)
     res = Document.joins(:document_type, :units)
       .where("units.unit_no = ?", @unit)

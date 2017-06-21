@@ -146,6 +146,11 @@ min-height:33px;
   height: 200px;
 }
 
+.doc_type_active {
+  background-color: $gray-base;
+  color: #FFF;
+}
+
 .rt_red, .rt_yellow, .rt_purple, .rt_green, .rt_blue {
   display: inline-block;
   padding:5px;
