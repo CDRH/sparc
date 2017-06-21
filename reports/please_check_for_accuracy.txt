@@ -1,25 +1,5 @@
 Please review the following and verify that units, strata, etc, were added correctly
 
-Unit 049W created from Stratum A-1-1
-Unit 110W created from Stratum B-1-2
-Unit 111W created from Stratum B-1-2
-Unit 112W created from Stratum B-1-2
-stratum 031W:B-1-2 created from Feature 1.0
-stratum 033W:L-1-5.5 created from Feature 6.0
-stratum 036W:B-2-3 created from Feature 1.0
-stratum 036W:n/a created from Feature 8.0
-stratum 062A:I-1-6 created from Feature 12.0
-stratum 062W:I-1-4.2 created from Feature 3.0
-stratum 089W:H-1-12 created from Feature 1.0
-stratum 092W:B-4-5 created from Feature 5.0
-stratum 093W:L-0.5.-8.5 created from Feature 12.0
-stratum 099W:H-1-9 created from Feature 26.0
-stratum 119W:L-3-15 created from Feature 24.0
-stratum 119W:I-11.6-39.6 created from Feature 116.0
-stratum 121E:D-2-4 created from Feature 48.0
-stratum 127W:D-3-11 created from Feature 97.0
-[blank] Doorway Sealed created from Features row 1701
-stratum 129W:C-70-78 created from Feature 77.0
 [blank] Box created from Ceramic Inventories row 145
 [blank] Box created from Ceramic Inventories row 146
 [blank] Box created from Ceramic Inventories row 171
@@ -3150,6 +3130,33 @@ stratum 129W:F-2.1-86-1 created from Soils
 stratum 129W:F-2.2-86.2 created from Soils
 stratum 130W:F-1-03 created from Soils
 stratum 057W:F-1-4 created from Tree Ring SAL-596
+Unit 013P created from Documents
+Unit 032 created from Documents
+Unit 035 created from Documents
+Unit 059 created from Documents
+Unit 060 created from Documents
+Unit 094 created from Documents
+Unit 096 created from Documents
+Unit 122 created from Documents
+Unit 122WA created from Documents
+Unit 125 created from Documents
+Unit 130 created from Documents
+Unit 141A created from Documents
+Unit 157A created from Documents
+Zone SA009 created from Documents
+Unit SA009 created from Documents
+Zone SA015 created from Documents
+Unit SA015 created from Documents
+Zone SA016 created from Documents
+Unit SA016 created from Documents
+Zone TT002 created from Documents
+Unit TT002 created from Documents
+Zone TT010 created from Documents
+Unit TT010 created from Documents
+Zone TT011 created from Documents
+Unit TT011 created from Documents
+Zone TT012 created from Documents
+Unit TT012 created from Documents
 Zone W01 created from Images
 Unit W01 created from Images
 unit TT01-13P created from Image with hyphen in unit NOT added
@@ -3759,7 +3766,6 @@ stratum 6:C-01-04 created from Images
 stratum 011P:C-01-04 created from Images
 stratum 011P:B-01-02 created from Images
 stratum 013W:C-01-03 created from Images
-Unit 013P created from Images
 stratum 013P:C-02-04 created from Images
 stratum 014P:C-01-04 created from Images
 stratum 016P:C-02-08 created from Images
