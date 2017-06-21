@@ -1,3 +1,18 @@
 <h3>Documents</h3>
 
-<p>Documents stuff goes here</p>
+<h4>Browse Documents by Type</h4>
+
+<ul class="document_type_list">
+  <% DocumentType.sorted.each do |type| %>
+    <li><%= link_to type.name, documents_type_path(type.name.parameterize("_")) %></li>
+  <% end %>
+</ul>
+
+<div class="clearfix"></div>
+<h4>Browse Documents by Unit</h4>
+
+<ul class="document_unit_list">
+  <% Unit.sorted.each do |unit| %>
+    <li><%= link_to unit.unit_no, documents_unit_path(unit.unit_no) %></li>
+  <% end %>
+</ul>
