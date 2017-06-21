@@ -19,7 +19,17 @@
           <% if column[/_id$/] %>
             <% assoc_col = column[/^(.+)_id$/, 1] %>
               <% if result.respond_to?(assoc_col) %>
-                <td><%= result.send(assoc_col).present? ? result.send(assoc_col).name : "N/A" %></td>
+                <td>
+                  <% if result.send(assoc_col).present? %>
+                    <% if result.send(assoc_col).respond_to?(:name) %>
+                      <%= result.send(assoc_col).name %>
+                    <% else %>
+                      <%= result.send(assoc_col).id %>
+                    <% end %>
+                  <% else %>
+                    N/A
+                  <% end %>
+                </td>
               <% else %>
                 <td><%= result.send(assoc_col.pluralize).present? ? result.send(assoc_col.pluralize).map{ |r| r.send(assoc_col << "_no") }.join("; ") : "N/A" %></td>
               <% end %>
