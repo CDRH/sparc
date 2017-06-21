@@ -1,0 +1,25 @@
+<h3><%= @unit %> Documents</h3>
+
+<% @group_colors.each do |color, types| %>
+  <span class="rt_<%= color.downcase %>">
+    <% types.each do |type| %>
+      <%= link_to type.name, documents_unit_path(unit: params["unit"], type: type.name.parameterize("_")), { role: "button", class: "btn btn-default" } %>
+    <% end %>
+  </span>
+<% end %>
+
+<p>Found <%= pluralize @result_num, "documents" %></p>
+<%= will_paginate @res %>
+
+<div class="docs_by_type">
+  <% @res.each do |doc| %>
+    <div class="document_thumbnail">
+      <h4><%= doc.scan_no %></h4>
+      <%# TODO this will need to be changed to use the correct image paths when documents are added %>
+      <%# Note: using rocket syntax because of the hyphens in html attribute names %>
+      <%= link_to path_to_image("documents/placeholders/#{doc.document_type.code}.jpeg"), { "class" => "stuff", "data-toggle" => "lightbox", "data-gallery" => "sparc", "data-title" => "Doc" } do %>
+        <%= image_tag "documents/placeholders/#{doc.document_type.code}.jpeg", size: "150" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
