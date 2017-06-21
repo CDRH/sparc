@@ -1871,7 +1871,7 @@ seed_strat_groupings if StratGrouping.count < 1
 seed_strata if Stratum.count < 1
 seed_features if Feature.count < 1
 
-Inventory Tables
+# Inventory Tables
 seed_bone_inventory if BoneInventory.count < 1
 seed_ceramic_inventory if CeramicInventory.count < 1
 seed_lithic_inventories if LithicInventory.count < 1
