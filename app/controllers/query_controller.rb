@@ -33,15 +33,34 @@ class QueryController < ApplicationController
       res = BoneTool
 
       # text searches
-      res = res.where("fs_no LIKE ?", "%#{params['bt_fsno']}%") if params["bt_fsno"].present?
-      res = res.where("depth LIKE ?", "%#{params['bt_dep']}%") if params["bt_dep"].present?
-      res = res.where("comments LIKE ?", "%#{params['bt_cmmt']}%") if params["bt_cmmt"].present?
-      res = res.where("grid LIKE ?", "%#{params['bt_grid']}%") if params["bt_grid"].present?
+      if params["bt_fsno"].present?
+        res = res.where("fs_no LIKE ?", "%#{params['bt_fsno']}%")
+      end
+
+      if params["bt_dep"].present?
+        res = res.where("depth LIKE ?", "%#{params['bt_dep']}%")
+      end
+
+      if params["bt_cmmt"].present?
+        res = res.where("comments LIKE ?", "%#{params['bt_cmmt']}%")
+      end
+
+      if params["bt_grid"].present?
+        res = res.where("grid LIKE ?", "%#{params['bt_grid']}%")
+      end
 
       # match searches
-      res = res.where("tool_type IN (?)", params["bt_type"]) if params["bt_type"].present?
-      res = res.where("tool_type_code = ?", params["bt_tpcd"]) if params["bt_tpcd"].present?
-      res = res.where("species_code = ?", params["bt_spcd"]) if params["bt_spcd"].present?
+      if params["bt_type"].present?
+        res = res.where("tool_type IN (?)", params["bt_type"])
+      end
+
+      if params["bt_tpcd"].present?
+        res = res.where("tool_type_code = ?", params["bt_tpcd"])
+      end
+
+      if params["bt_spcd"].present?
+        res = res.where("species_code = ?", params["bt_spcd"])
+      end
     end
 
     # Common search options
@@ -97,7 +116,8 @@ class QueryController < ApplicationController
 
         if params[param_name].present?
           if column[:type] == "string"
-            @res = @res.where("#{column[:name]} LIKE ?", "%#{params[param_name]}%")
+            @res = @res.where("#{column[:name]} LIKE ?",
+                              "%#{params[param_name]}%")
           else
             @res = @res.where("#{column[:name]} = ?", params[param_name])
           end
@@ -109,10 +129,14 @@ class QueryController < ApplicationController
         param_name = "inv_#{column[:name]}"
 
         if params[param_name].present?
-          if CeramicInventory.reflect_on_all_associations(:belongs_to).map{ |a| a.name.to_s }.include?(column[:name])
-            @res = @res.joins(column[:name].to_sym).where(column[:name].pluralize => { id: params[param_name] })
+          if CeramicInventory.reflect_on_all_associations(:belongs_to)
+               .map{ |a| a.name.to_s }.include?(column[:name])
+            @res = @res.joins(column[:name].to_sym)
+                     .where(column[:name].pluralize
+                            => { id: params[param_name] })
           else
-            @res = @res.where("#{column[:name]} = ?", "%#{params[param_name]}%")
+            @res = @res.where("#{column[:name]} = ?",
+                              "%#{params[param_name]}%")
           end
         end
       end
@@ -127,7 +151,8 @@ class QueryController < ApplicationController
 
         if params[param_name].present?
           if column[:type] == "string"
-            @res = @res.where("#{column[:name]} LIKE ?", "%#{params[param_name]}%")
+            @res = @res.where("#{column[:name]} LIKE ?",
+                              "%#{params[param_name]}%")
           else
             @res = @res.where("#{column[:name]} = ?", params[param_name])
           end
@@ -139,10 +164,14 @@ class QueryController < ApplicationController
         param_name = "clap_#{column[:name]}"
 
         if params[param_name].present?
-          if CeramicClap.reflect_on_all_associations(:belongs_to).map{ |a| a.name.to_s }.include?(column[:name])
-            @res = @res.joins(column[:name].to_sym).where(column[:name].pluralize => { id: params[param_name] })
+          if CeramicClap.reflect_on_all_associations(:belongs_to)
+               .map{ |a| a.name.to_s }.include?(column[:name])
+            @res = @res.joins(column[:name].to_sym)
+                     .where(column[:name].pluralize
+                            => { id: params[param_name] })
           else
-            @res = @res.where("#{column[:name]} = ?", "%#{params[param_name]}%")
+            @res = @res.where("#{column[:name]} = ?",
+                              "%#{params[param_name]}%")
           end
         end
       end
@@ -157,7 +186,8 @@ class QueryController < ApplicationController
 
         if params[param_name].present?
           if column[:type] == "string"
-            @res = @res.where("#{column[:name]} LIKE ?", "%#{params[param_name]}%")
+            @res = @res.where("#{column[:name]} LIKE ?",
+                              "%#{params[param_name]}%")
           else
             @res = @res.where("#{column[:name]} = ?", params[param_name])
           end
@@ -169,10 +199,14 @@ class QueryController < ApplicationController
         param_name = "data_#{column[:name]}"
 
         if params[param_name].present?
-          if Ceramic.reflect_on_all_associations(:belongs_to).map{ |a| a.name.to_s }.include?(column[:name])
-            @res = @res.joins(column[:name].to_sym).where(column[:name].pluralize => { id: params[param_name] })
+          if Ceramic.reflect_on_all_associations(:belongs_to)
+               .map{ |a| a.name.to_s }.include?(column[:name])
+            @res = @res.joins(column[:name].to_sym)
+                .where(column[:name].pluralize
+                       => { id: params[param_name] })
           else
-            @res = @res.where("#{column[:name]} = ?", "%#{params[param_name]}%")
+            @res = @res.where("#{column[:name]} = ?",
+                              "%#{params[param_name]}%")
           end
         end
       end
@@ -187,7 +221,8 @@ class QueryController < ApplicationController
 
         if params[param_name].present?
           if column[:type] == "string"
-            @res = @res.where("#{column[:name]} LIKE ?", "%#{params[param_name]}%")
+            @res = @res.where("#{column[:name]} LIKE ?",
+                              "%#{params[param_name]}%")
           else
             @res = @res.where("#{column[:name]} = ?", params[param_name])
           end
@@ -199,10 +234,14 @@ class QueryController < ApplicationController
         param_name = "data_#{column[:name]}"
 
         if params[param_name].present?
-          if CeramicVessel.reflect_on_all_associations(:belongs_to).map{ |a| a.name.to_s }.include?(column[:name])
-            @res = @res.joins(column[:name].to_sym).where(column[:name].pluralize => { id: params[param_name] })
+          if CeramicVessel.reflect_on_all_associations(:belongs_to)
+               .map{ |a| a.name.to_s }.include?(column[:name])
+            @res = @res.joins(column[:name].to_sym)
+                     .where(column[:name].pluralize
+                            => { id: params[param_name] })
           else
-            @res = @res.where("#{column[:name]} = ?", "%#{params[param_name]}%")
+            @res = @res.where("#{column[:name]} = ?",
+                              "%#{params[param_name]}%")
           end
         end
       end
@@ -289,28 +328,44 @@ class QueryController < ApplicationController
 
   def global_search(res)
     # Units
-    if params["unit"].present? || params["unit_class"].present? && res.reflect_on_all_associations.map { |a| a.name }.include?(:units)
+    if (params["unit"].present? || params["unit_class"].present?) \
+    && res.reflect_on_all_associations.map { |a| a.name }.include?(:units)
       res = res.joins(:units)
-      res = res.where(units: { id: params["unit"] }) if params["unit"].present?
-      res = res.where(units: { unit_class_id: params["unit_class"] }) if params["unit_class"].present?
+
+      if params["unit"].present?
+        res = res.where(units: { id: params["unit"] })
+      end
+
+      if params["unit_class"].present?
+        res = res.where(units: { unit_class_id: params["unit_class"] })
+      end
     end
 
     # Occupations
-    if params["occupation"].present? && res.reflect_on_all_associations.map { |a| a.name }.include?(:occupations)
-      res = res.joins(:occupation).where(occupations: { id: params["occupation"] })
+    if params["occupation"].present? \
+    && res.reflect_on_all_associations.map { |a| a.name }
+         .include?(:occupations)
+      res = res.joins(:occupation)
+              .where(occupations: { id: params["occupation"] })
     end
 
     # Strat Types
-    if params["strat_grouping"].present? && res.reflect_on_all_associations.map { |a| a.name }.include?(:strata)
-      res = res.joins(strata: [strat_type: [:strat_grouping]]).where(strat_groupings: { id: params["strat_grouping"] })
+    if params["strat_grouping"].present? \
+    && res.reflect_on_all_associations.map { |a| a.name }.include?(:strata)
+      res = res.joins(strata: [strat_type: [:strat_grouping]])
+              .where(strat_groupings: { id: params["strat_grouping"] })
     end
 
     # Feature Groups
     if params["feature_group"].present?
-      if res.reflect_on_all_associations.map { |a| a.name }.include?(:features)
-        res = res.joins(features: [:feature_group]).where(feature_groups: { id: params["feature_group"] })
-      elsif res.reflect_on_all_associations.map { |a| a.name }.include?(:strata)
-        res = res.joins(strata: [features: [:feature_group]]).where(feature_groups: { id: params["feature_group"] }).uniq
+      if res.reflect_on_all_associations.map { |a| a.name }
+           .include?(:features)
+        res = res.joins(features: [:feature_group])
+                .where(feature_groups: { id: params["feature_group"] })
+      elsif res.reflect_on_all_associations.map { |a| a.name }
+              .include?(:strata)
+        res = res.joins(strata: [features: [:feature_group]])
+                .where(feature_groups: { id: params["feature_group"] }).uniq
       end
     end
 
@@ -326,7 +381,9 @@ class QueryController < ApplicationController
     # don't match "id", "room", or "unit"
     # don't end in "_at", "_id", "_no", "code", or "type"
     table.columns.each do |c|
-      if !c.name[/^strat/] && !c.name[/^(?:id|room|unit)$/] && !c.name[/(?:_at|_id|_no|code|type)$/]
+      if !c.name[/^strat/] \
+      && !c.name[/^(?:id|room|unit)$/] \
+      && !c.name[/(?:_at|_id|_no|code|type)$/]
         column_list << {name: c.name.to_s, type: c.type}
       end
     end
@@ -347,7 +404,9 @@ class QueryController < ApplicationController
     end
 
     # All belongs_to associations except to unit, strata, feature, inventory
-    table.reflect_on_all_associations(:belongs_to).reject{ |a| a.name[/(?:^unit|^strata|^features?|_inventory)$/] }.map{ |a| column_list << { name: a.name.to_s, type: :assoc} }
+    table.reflect_on_all_associations(:belongs_to)
+      .reject{ |a| a.name[/(?:^unit|^strata|^features?|_inventory)$/] }
+      .map{ |a| column_list << { name: a.name.to_s, type: :assoc} }
 
     return column_list
   end
