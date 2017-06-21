@@ -53,11 +53,11 @@
                 <div class="form-group">
                   <%= label_tag param_name, column[:name].titleize %>
                   <% if column[:type] == :column %>
-                    <%= select_tag param_name, options_for_select(@ci_class.pluck(column[:name]).uniq.sort, params[param_name]), class: "form-control", include_blank: true %>
-                  <% else %>
-                    <%= select_tag param_name, options_from_collection_for_select(column[:name].classify.constantize.distinct.order(:name), "id", "name", params[param_name]), class: "form-control", include_blank: true %>
+                    <%= select_from_column @ci_class, column, param_name %>
+                  <% elsif column[:type] == :assoc %>
+                    <%= select_from_assoc column, param_name %>
                   <% end %>
-                </div>
+                 </div>
               <% end %>
             </div>
           </div>
@@ -85,9 +85,9 @@
                 <div class="form-group">
                   <%= label_tag param_name, column[:name].titleize %>
                   <% if column[:type] == :column %>
-                    <%= select_tag param_name, options_for_select(@cc_class.pluck(column[:name]).uniq.sort, params[param_name]), class: "form-control", include_blank: true %>
-                  <% else %>
-                    <%= select_tag param_name, options_from_collection_for_select(column[:name].classify.constantize.distinct.order(:name), "id", "name", params[param_name]), class: "form-control", include_blank: true %>
+                    <%= select_from_column @cc_class, column, param_name %>
+                  <% elsif column[:type] == :assoc %>
+                    <%= select_from_assoc column, param_name %>
                   <% end %>
                 </div>
               <% end %>
@@ -117,9 +117,9 @@
                 <div class="form-group">
                   <%= label_tag param_name, column[:name].titleize %>
                   <% if column[:type] == :column %>
-                    <%= select_tag param_name, options_for_select(@cd_class.pluck(column[:name]).uniq.sort, params[param_name]), class: "form-control", include_blank: true %>
-                  <% else %>
-                    <%= select_tag param_name, options_from_collection_for_select(column[:name].classify.constantize.distinct.order(:name), "id", "name", params[param_name]), class: "form-control", include_blank: true %>
+                    <%= select_from_column @cd_class, column, param_name %>
+                  <% elsif column[:type] == :assoc %>
+                    <%= select_from_assoc column, param_name %>
                   <% end %>
                 </div>
               <% end %>
@@ -149,9 +149,9 @@
                 <div class="form-group">
                   <%= label_tag param_name, column[:name].titleize %>
                   <% if column[:type] == :column %>
-                    <%= select_tag param_name, options_for_select(@cv_class.pluck(column[:name]).uniq.sort, params[param_name]), class: "form-control", include_blank: true %>
-                  <% else %>
-                    <%= select_tag param_name, options_from_collection_for_select(column[:name].classify.constantize.distinct.order(:name), "id", "name", params[param_name]), class: "form-control", include_blank: true %>
+                    <%= select_from_column @cv_class, column, param_name %>
+                  <% elsif column[:type] == :assoc %>
+                    <%= select_from_assoc column, param_name %>
                   <% end %>
                 </div>
               <% end %>

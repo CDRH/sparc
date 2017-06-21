@@ -31,7 +31,15 @@
                   <% end %>
                 </td>
               <% else %>
-                <td><%= result.send(assoc_col.pluralize).present? ? result.send(assoc_col.pluralize).map{ |r| r.send(assoc_col << "_no") }.join("; ") : "N/A" %></td>
+                <td>
+                  <% if result.send(assoc_col.pluralize).present? %>
+                    <%= result.send(assoc_col.pluralize)
+                          .map { |r| r.send(assoc_col << "_no") }.join("; ")
+                    %>
+                  <% else -%>
+                    N/A
+                  <%- end %>
+                </td>
               <% end %>
           <% elsif !column[/(?:^id|_at)$/] %>
             <td><%= result[column] %></td>
