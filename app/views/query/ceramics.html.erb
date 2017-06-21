@@ -2,57 +2,162 @@
 
 <%= render "artifact_nav" %>
 
-<br>
-
-<%= form_tag ceramics_path, method: :get do %>
+<%= form_tag ceramics_results_path, method: :get do %>
   <div class="row">
     <!-- Ceramics tables and search options -->
     <div class="col-md-8">
 
       <!-- ceramics query navigation -->
-      <ul class="nav nav-tabs" id="artifacts_ceramics_tab">
-        <li><a href="#all" data-toggle="tab">All</a></li>
-        <li class="active"><a href="#inventory" data-toggle="tab">Ceramics Inventory</a></li>
+      <ul class="nav nav-tabs buffer-bottom" id="artifacts_ceramics_tab">
+        <li class="active">
+          <a href="#inventory" data-toggle="tab">
+            Inventory <span class="badge"><%= delimit(@total_ci) %></span>
+          </a>
+        </li>
+        <li>
+          <a href="#claps" data-toggle="tab">
+            CLAPs <span class="badge"><%= delimit(@total_cc) %></span>
+          </a>
+        </li>
+        <li>
+          <a href="#data" data-toggle="tab">
+            2005 Data <span class="badge"><%= delimit(@total_cd) %></span>
+          </a>
+        </li>
+        <li>
+          <a href="#vessels" data-toggle="tab">
+            Vessels <span class="badge"><%= delimit(@total_cv) %></span>
+          </a>
+        </li>
       </ul>
 
       <div class="tab-content">
-
-        <!-- all -->
-        <div class="tab-pane" id="all">
-          <p>This is where a summary of stuff about bone tools would go and some search options</p>
-          <p>There are <%= pluralize @total_ci, "ceramics inventory" %> in this database</p>
-        </div>
-
         <!-- inventory -->
         <div class="tab-pane active" id="inventory">
           <div class="row">
+            <!-- Text fields -->
             <div class="col-md-6">
-              <%= render "inventory_common_fields" %>
+              <% @ci_inputs.each do |column| %>
+                <% param_name = "inv_#{column[:name]}" %>
+                <div class="form-group">
+                  <%= label_tag param_name, column[:name].titleize %>
+                  <%= text_field_tag param_name, params[param_name], class: "form-control" %>
+                </div>
+              <% end %>
             </div>
 
+            <!-- Select fields -->
             <div class="col-md-6">
-              <div class="form-group">
-                <%= label_tag "ci_quad", "Quad" %>
-                <%= select_tag "ci_quad", options_for_select(@ci_quad, params["ci_quad"]),
-                    class: "form-control", include_blank: true %>
-              </div>
-              <div class="form-group">
-                <%= label_tag "ci_sano", "Select Artifact #" %>
-                <%= select_tag "ci_sano", options_for_select(@ci_sano, params["ci_sano"]),
-                    class: "form-control", include_blank: true %>
-              </div>
-              <div class="form-group">
-                <%= label_tag "ci_enby", "Data Entry" %>
-                <%= select_tag "ci_enby", options_for_select(@ci_enby, params["ci_enby"]),
-                    class: "form-control", include_blank: true %>
-              </div>
-              <div class="form-group">
-                <%= label_tag "ci_loca", "Location" %>
-                <%= select_tag "ci_loca", options_for_select(@ci_loca, params["ci_loca"]),
-                    class: "form-control", include_blank: true %>
-              </div>
+              <% @ci_selects.each do |column| %>
+                <% param_name = "inv_#{column[:name]}" %>
+                <div class="form-group">
+                  <%= label_tag param_name, column[:name].titleize %>
+                  <% if column[:type] == :column %>
+                    <%= select_from_column @ci_class, column, param_name %>
+                  <% elsif column[:type] == :assoc %>
+                    <%= select_from_assoc column, param_name %>
+                  <% end %>
+                 </div>
+              <% end %>
             </div>
           </div>
+          <%= submit_tag "Search Ceramic Inventory", class: "btn btn-primary" %>
+        </div>
+
+        <!-- CLAPs -->
+        <div class="tab-pane" id="claps">
+          <div class="row">
+            <!-- Text fields -->
+            <div class="col-md-6">
+              <% @cc_inputs.each do |column| %>
+                <% param_name = "clap_#{column[:name]}" %>
+                <div class="form-group">
+                  <%= label_tag param_name, column[:name].titleize %>
+                  <%= text_field_tag param_name, params[param_name], class: "form-control" %>
+                </div>
+              <% end %>
+            </div>
+
+            <!-- Select fields -->
+            <div class="col-md-6">
+              <% @cc_selects.each do |column| %>
+                <% param_name = "clap_#{column[:name]}" %>
+                <div class="form-group">
+                  <%= label_tag param_name, column[:name].titleize %>
+                  <% if column[:type] == :column %>
+                    <%= select_from_column @cc_class, column, param_name %>
+                  <% elsif column[:type] == :assoc %>
+                    <%= select_from_assoc column, param_name %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <%= submit_tag "Search Ceramic CLAPs", class: "btn btn-primary" %>
+        </div>
+
+        <!-- 2005 Data -->
+        <div class="tab-pane" id="data">
+          <div class="row">
+            <!-- Text fields -->
+            <div class="col-md-6">
+              <% @cd_inputs.each do |column| %>
+                <% param_name = "data_#{column[:name]}" %>
+                <div class="form-group">
+                  <%= label_tag param_name, column[:name].titleize %>
+                  <%= text_field_tag param_name, params[param_name], class: "form-control" %>
+                </div>
+              <% end %>
+            </div>
+
+            <!-- Select fields -->
+            <div class="col-md-6">
+              <% @cd_selects.each do |column| %>
+                <% param_name = "data_#{column[:name]}" %>
+                <div class="form-group">
+                  <%= label_tag param_name, column[:name].titleize %>
+                  <% if column[:type] == :column %>
+                    <%= select_from_column @cd_class, column, param_name %>
+                  <% elsif column[:type] == :assoc %>
+                    <%= select_from_assoc column, param_name %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <%= submit_tag "Search Ceramics 2005 Data", class: "btn btn-primary" %>
+        </div>
+
+        <!-- Vessels -->
+        <div class="tab-pane" id="vessels">
+          <div class="row">
+            <!-- Text fields -->
+            <div class="col-md-6">
+              <% @cv_inputs.each do |column| %>
+                <% param_name = "vessel_#{column[:name]}" %>
+                <div class="form-group">
+                  <%= label_tag param_name, column[:name].titleize %>
+                  <%= text_field_tag param_name, params[param_name], class: "form-control" %>
+                </div>
+              <% end %>
+            </div>
+
+            <!-- Select fields -->
+            <div class="col-md-6">
+              <% @cv_selects.each do |column| %>
+                <% param_name = "vessel_#{column[:name]}" %>
+                <div class="form-group">
+                  <%= label_tag param_name, column[:name].titleize %>
+                  <% if column[:type] == :column %>
+                    <%= select_from_column @cv_class, column, param_name %>
+                  <% elsif column[:type] == :assoc %>
+                    <%= select_from_assoc column, param_name %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <%= submit_tag "Search Ceramic Vessels", class: "btn btn-primary" %>
         </div>
 
       </div> <!-- /tab-content -->

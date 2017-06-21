@@ -2,48 +2,257 @@ class QueryController < ApplicationController
 
   def bones
     @subsection = "artifacts"
+
     #### SEARCH UI ####
-    # tools
-    @total_bt = BoneTool.count
-    @bt_type = BoneTool.pluck(:tool_type).uniq.sort
-    @bt_tpcd = BoneTool.pluck(:tool_type_code).uniq.sort
-    @bt_spcd = BoneTool.pluck(:species_code).uniq.sort
-    # inventory
+    # Inventory
     @total_bi = BoneInventory.count
+
     @bi_enby = BoneInventory.pluck(:entered_by).uniq.sort
     @bi_loca = BoneInventory.pluck(:location).uniq.sort
     @bi_quad = BoneInventory.pluck(:quad).uniq.sort
     @bi_sano = BoneInventory.pluck(:sa_no).uniq.sort
 
-    #### SEARCH RES ####
-    # tools
-    res = BoneTool.includes(
-      :occupation,
-    )
-    # text searches
-    res = res.where("fs_no LIKE ?", "%#{params['bt_fsno']}%") if params["bt_fsno"].present?
-    res = res.where("depth LIKE ?", "%#{params['bt_dep']}%") if params["bt_dep"].present?
-    res = res.where("comments LIKE ?", "%#{params['bt_cmmt']}%") if params["bt_cmmt"].present?
-    res = res.where("grid LIKE ?", "%#{params['bt_grid']}%") if params["bt_grid"].present?
-    # match searches
-    res = res.where("tool_type IN (?)", params["bt_type"]) if params["bt_type"].present?
-    res = res.where("tool_type_code = ?", params["bt_tpcd"]) if params["bt_tpcd"].present?
-    res = res.where("species_code = ?", params["bt_spcd"]) if params["bt_spcd"].present?
-    # join searches
+    # Tools
+    @total_bt = BoneTool.count
+
+    @bt_type = BoneTool.pluck(:tool_type).uniq.sort
+    @bt_tpcd = BoneTool.pluck(:tool_type_code).uniq.sort
+    @bt_spcd = BoneTool.pluck(:species_code).uniq.sort
+  end
+
+  def bones_results
+    if params[:commit] == "Search Bone Inventory"
+      @res_label = "Bone Inventory"
+      @column_names = BoneInventory.columns.map(&:name)
+
+      res = BoneInventory.all
+    else
+      @res_label = "Bone Tools"
+      @column_names = BoneTool.columns.map(&:name)
+
+      res = BoneTool
+
+      # text searches
+      if params["bt_fsno"].present?
+        res = res.where("fs_no LIKE ?", "%#{params['bt_fsno']}%")
+      end
+
+      if params["bt_dep"].present?
+        res = res.where("depth LIKE ?", "%#{params['bt_dep']}%")
+      end
+
+      if params["bt_cmmt"].present?
+        res = res.where("comments LIKE ?", "%#{params['bt_cmmt']}%")
+      end
+
+      if params["bt_grid"].present?
+        res = res.where("grid LIKE ?", "%#{params['bt_grid']}%")
+      end
+
+      # match searches
+      if params["bt_type"].present?
+        res = res.where("tool_type IN (?)", params["bt_type"])
+      end
+
+      if params["bt_tpcd"].present?
+        res = res.where("tool_type_code = ?", params["bt_tpcd"])
+      end
+
+      if params["bt_spcd"].present?
+        res = res.where("species_code = ?", params["bt_spcd"])
+      end
+    end
+
+    # Common search options
     res = global_search res
+
     @res = res.sorted.paginate(:page => params[:page], :per_page => 20)
+
+    render "results_table"
   end
 
   def ceramics
     @subsection = "artifacts"
 
     #### SEARCH UI ####
-    # inventory
+    # Inventory
     @total_ci = CeramicInventory.count
-    @ci_enby = CeramicInventory.pluck(:entered_by).uniq.sort
-    @ci_loca = CeramicInventory.pluck(:location).uniq.sort
-    @ci_quad = CeramicInventory.pluck(:quad).uniq.sort
-    @ci_sano = CeramicInventory.pluck(:sa_no).uniq.sort
+
+    @ci_class = CeramicInventory
+    @ci_inputs = table_input_columns(CeramicInventory)
+    @ci_selects = table_select_columns(CeramicInventory)
+
+    # CLAPs
+    @total_cc = CeramicClap.count
+
+    @cc_class = CeramicClap
+    @cc_inputs = table_input_columns(CeramicClap)
+    @cc_selects = table_select_columns(CeramicClap)
+
+    # 2005 Data
+    @total_cd = Ceramic.count
+
+    @cd_class = Ceramic
+    @cd_inputs = table_input_columns(Ceramic)
+    @cd_selects = table_select_columns(Ceramic)
+
+    # Vessels
+    @total_cv = CeramicVessel.count
+
+    @cv_class = CeramicVessel
+    @cv_inputs = table_input_columns(CeramicVessel)
+    @cv_selects = table_select_columns(CeramicVessel)
+  end
+
+  def ceramics_results
+    if params[:commit] == "Search Ceramic Inventory"
+      @column_names = CeramicInventory.columns.map(&:name)
+      @res = CeramicInventory
+      @res_label = "Ceramic Inventory"
+
+      inputs = table_input_columns(CeramicInventory)
+      inputs.each do |column|
+        param_name = "inv_#{column[:name]}"
+
+        if params[param_name].present?
+          if column[:type] == "string"
+            @res = @res.where("#{column[:name]} LIKE ?",
+                              "%#{params[param_name]}%")
+          else
+            @res = @res.where("#{column[:name]} = ?", params[param_name])
+          end
+        end
+      end
+
+      selects = table_select_columns(CeramicInventory)
+      selects.each do |column|
+        param_name = "inv_#{column[:name]}"
+
+        if params[param_name].present?
+          if CeramicInventory.reflect_on_all_associations(:belongs_to)
+               .map{ |a| a.name.to_s }.include?(column[:name])
+            @res = @res.joins(column[:name].to_sym)
+                     .where(column[:name].pluralize
+                            => { id: params[param_name] })
+          else
+            @res = @res.where("#{column[:name]} = ?",
+                              "%#{params[param_name]}%")
+          end
+        end
+      end
+    elsif params[:commit] == "Search Ceramic CLAPs"
+      @res = CeramicClap
+      @res_label = "Ceramic CLAPs"
+      @column_names = CeramicClap.columns.map(&:name)
+
+      inputs = table_input_columns(CeramicClap)
+      inputs.each do |column|
+        param_name = "clap_#{column[:name]}"
+
+        if params[param_name].present?
+          if column[:type] == "string"
+            @res = @res.where("#{column[:name]} LIKE ?",
+                              "%#{params[param_name]}%")
+          else
+            @res = @res.where("#{column[:name]} = ?", params[param_name])
+          end
+        end
+      end
+
+      selects = table_select_columns(CeramicClap)
+      selects.each do |column|
+        param_name = "clap_#{column[:name]}"
+
+        if params[param_name].present?
+          if CeramicClap.reflect_on_all_associations(:belongs_to)
+               .map{ |a| a.name.to_s }.include?(column[:name])
+            @res = @res.joins(column[:name].to_sym)
+                     .where(column[:name].pluralize
+                            => { id: params[param_name] })
+          else
+            @res = @res.where("#{column[:name]} = ?",
+                              "%#{params[param_name]}%")
+          end
+        end
+      end
+    elsif params[:commit] == "Search Ceramics 2005 Data"
+      @res = Ceramic
+      @res_label = "Ceramics 2005 Data"
+      @column_names = Ceramic.columns.map(&:name)
+
+      inputs = table_input_columns(Ceramic)
+      inputs.each do |column|
+        param_name = "data_#{column[:name]}"
+
+        if params[param_name].present?
+          if column[:type] == "string"
+            @res = @res.where("#{column[:name]} LIKE ?",
+                              "%#{params[param_name]}%")
+          else
+            @res = @res.where("#{column[:name]} = ?", params[param_name])
+          end
+        end
+      end
+
+      selects = table_select_columns(Ceramic)
+      selects.each do |column|
+        param_name = "data_#{column[:name]}"
+
+        if params[param_name].present?
+          if Ceramic.reflect_on_all_associations(:belongs_to)
+               .map{ |a| a.name.to_s }.include?(column[:name])
+            @res = @res.joins(column[:name].to_sym)
+                .where(column[:name].pluralize
+                       => { id: params[param_name] })
+          else
+            @res = @res.where("#{column[:name]} = ?",
+                              "%#{params[param_name]}%")
+          end
+        end
+      end
+    elsif params[:commit] == "Search Ceramic Vessels"
+      @res = CeramicVessel
+      @res_label = "Ceramic Vessels"
+      @column_names = CeramicVessel.columns.map(&:name)
+
+      inputs = table_input_columns(CeramicVessel)
+      inputs.each do |column|
+        param_name = "vessel_#{column[:name]}"
+
+        if params[param_name].present?
+          if column[:type] == "string"
+            @res = @res.where("#{column[:name]} LIKE ?",
+                              "%#{params[param_name]}%")
+          else
+            @res = @res.where("#{column[:name]} = ?", params[param_name])
+          end
+        end
+      end
+
+      selects = table_select_columns(CeramicVessel)
+      selects.each do |column|
+        param_name = "data_#{column[:name]}"
+
+        if params[param_name].present?
+          if CeramicVessel.reflect_on_all_associations(:belongs_to)
+               .map{ |a| a.name.to_s }.include?(column[:name])
+            @res = @res.joins(column[:name].to_sym)
+                     .where(column[:name].pluralize
+                            => { id: params[param_name] })
+          else
+            @res = @res.where("#{column[:name]} = ?",
+                              "%#{params[param_name]}%")
+          end
+        end
+      end
+    end
+
+    # Common search options
+    @res = global_search @res
+
+    @res = @res.sorted.paginate(:page => params[:page], :per_page => 20)
+
+    render "results_table"
   end
 
   def eggshells
@@ -117,11 +326,88 @@ class QueryController < ApplicationController
 
   private
 
-  def global_search res
-    res = res.joins(:units)
-    res = res.where(units: { id: params["unitno"] }) if params["unitno"].present?
-    res = res.where(units: { unit_class_id: params["unitclass"] }) if params["unitclass"].present?
+  def global_search(res)
+    # Units
+    if (params["unit"].present? || params["unit_class"].present?) \
+    && res.reflect_on_all_associations.map { |a| a.name }.include?(:units)
+      res = res.joins(:units)
+
+      if params["unit"].present?
+        res = res.where(units: { id: params["unit"] })
+      end
+
+      if params["unit_class"].present?
+        res = res.where(units: { unit_class_id: params["unit_class"] })
+      end
+    end
+
+    # Occupations
+    if params["occupation"].present? \
+    && res.reflect_on_all_associations.map { |a| a.name }
+         .include?(:occupations)
+      res = res.joins(:occupation)
+              .where(occupations: { id: params["occupation"] })
+    end
+
+    # Strat Types
+    if params["strat_grouping"].present? \
+    && res.reflect_on_all_associations.map { |a| a.name }.include?(:strata)
+      res = res.joins(strata: [strat_type: [:strat_grouping]])
+              .where(strat_groupings: { id: params["strat_grouping"] })
+    end
+
+    # Feature Groups
+    if params["feature_group"].present?
+      if res.reflect_on_all_associations.map { |a| a.name }
+           .include?(:features)
+        res = res.joins(features: [:feature_group])
+                .where(feature_groups: { id: params["feature_group"] })
+      elsif res.reflect_on_all_associations.map { |a| a.name }
+              .include?(:strata)
+        res = res.joins(strata: [features: [:feature_group]])
+                .where(feature_groups: { id: params["feature_group"] }).uniq
+      end
+    end
+
     return res
   end
 
+  def table_input_columns(table)
+    # Create form inputs for:
+    column_list = []
+
+    # Columns whose names
+    # don't begin with "strat"
+    # don't match "id", "room", or "unit"
+    # don't end in "_at", "_id", "_no", "code", or "type"
+    table.columns.each do |c|
+      if !c.name[/^strat/] \
+      && !c.name[/^(?:id|room|unit)$/] \
+      && !c.name[/(?:_at|_id|_no|code|type)$/]
+        column_list << {name: c.name.to_s, type: c.type}
+      end
+    end
+
+    return column_list
+  end
+
+  def table_select_columns(table)
+    # Create select dropdowns for:
+    column_list = []
+
+    # Columns whose names
+    # end in "_no" not preceded by "feature", "code", or "type"
+    table.columns.each do |c|
+      if c.name[/(?:(?<!feature)_no|code|type)$/]
+        column_list << {name: c.name.to_s, type: :column}
+      end
+    end
+
+    # All belongs_to associations except to unit, strata, feature, inventory
+    table.reflect_on_all_associations(:belongs_to)
+      .reject{ |a| a.name[/(?:^unit|^strata|^features?|_inventory)$/] }
+      .map{ |a| column_list << { name: a.name.to_s, type: :assoc} }
+
+    return column_list
+  end
 end
