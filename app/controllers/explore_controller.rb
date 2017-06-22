@@ -1,4 +1,6 @@
 class ExploreController < ApplicationController
+  before_action :get_unit
+  skip_before_action :get_unit, only: [:units, :zone], raise: false
 
   def units
     units = Unit.includes(
@@ -37,18 +39,14 @@ class ExploreController < ApplicationController
     @units = units.sorted.paginate(:page => params[:page], :per_page => 20)
   end
 
-  def unit
-    @unit = Unit.sorted.where(:unit_no => params["number"]).first
-    @images = Image.sorted.joins(:units).where(:units => { :unit_no => params["number"] }).limit(8)
-
-    # documents
-
+  def unit_documents
+    @selected = "documents"
     if params["type"].present?
       @type = params["type"]
     else
       doc_types = DocumentType.joins(:units)
                     .where(units: {unit_no: @unit.unit_no}).sorted.first
-      @type = doc_types.name.parameterize("_") if doc_types
+      @type = doc_types.name.parameterize(separator: "_") if doc_types
     end
 
     type_name = get_doc_type_name(@type)
@@ -62,6 +60,29 @@ class ExploreController < ApplicationController
     # generate the color coded document type buttons
     possible_types = DocumentType.joins(:units).where("units.id = ?", @unit.id).uniq
     @group_colors = possible_types.sorted.group_by(&:color)
+  end
+
+  def unit_features
+    @selected = "features"
+  end
+
+  def unit_images
+    @selected = "images"
+    @images = Image.sorted.joins(:units)
+                .where(:units => { unit_no: params["number"] })
+                .limit(8)
+  end
+
+  def unit_overview
+    @selected = "overview"
+  end
+
+  def unit_strata
+    @selected = "strata"
+  end
+
+  def unit_summary
+    @selected = "summary"
   end
 
   def zone
@@ -80,5 +101,9 @@ class ExploreController < ApplicationController
       query_obj = query_obj.joins(relationship) if joins
     end
     return query_obj
+  end
+
+  def get_unit
+    @unit = Unit.sorted.where(:unit_no => params["number"]).first
   end
 end
