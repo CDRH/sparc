@@ -1723,7 +1723,7 @@ end
 #############
 
 def find_or_create_document_binder unit_no
-  binder = DocumentBinder.where(:resource_id => unit_no).first
+  binder = DocumentBinder.where(resource_id: unit_no).first
   if !binder
     # read in the binders yaml file and fill out a bit more info about it
     binder_data = load_yaml(@files[:document_binders]).first
@@ -1750,13 +1750,14 @@ end
 def seed_documents
   puts "\n\n\nCreating Documents"
   text = File.read(@files[:documents])
-  documents = CSV.parse(text, :headers => true)
+  documents = CSV.parse(text, headers: true)
   documents.each do |document|
     # when working with the CSV apparently symbols aren't gonna work out
     document["document_type"] = create_if_not_exists(DocumentType, :code, document["document_type"])
     document["document_binder"] = find_or_create_document_binder(document["unit"])
     unit = select_or_create_unit document["unit"], "Documents"
     document.delete("unit")
+    # convert from CSV::Row to Hash in order to use with create
     document = document.to_hash
     document["units"] = [unit]
     document = Document.create(document)

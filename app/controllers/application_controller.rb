@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     if type == "feature_record_significant_artifact"
       "Feature Record (Significant Artifact)"
     else
-      type.titleize
+      type.titleize if type
     end
   end
 
