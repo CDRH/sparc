@@ -1,0 +1,37 @@
+- code: FN
+  name: Field Notes
+  color: Yellow
+  rank: 1
+- code: FNS
+  name: Field Notes Summary
+  color: Yellow
+  rank: 2
+- code: M
+  name: Media
+  color: Green
+  rank: 3
+- code: MD
+  name: Media Drawings
+  color: Green
+  rank: 4
+- code: MM
+  name: Media Maps
+  color: Green
+  rank: 5
+- code: FR
+  name: Feature Record
+  color: Purple
+  rank: 6
+- code: FRSA
+  name: Feature Record (Significant Artifact)
+  color: Purple
+  rank: 7
+- code: RR
+  name: Room Record
+  color: Blue
+  rank: 8
+- code: ESI
+  name: Extended Strat Info
+  color: Red
+  rank: 9
+# Does not include Record Inventory (RI) in database

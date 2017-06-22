@@ -3,6 +3,14 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  def get_doc_type_name(type)
+    if type == "feature_record_significant_artifact"
+      "Feature Record (Significant Artifact)"
+    else
+      type.titleize if type
+    end
+  end
+
   # require 'custom_routes'
   require 'new_by_search'
   

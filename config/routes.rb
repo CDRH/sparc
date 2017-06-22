@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get '/', to: 'static#index', as: :home
   # documents
   get '/documents', to: 'document#index', as: :documents
+  get '/documents/type/:type', to: 'document#type', as: :documents_type
+  get '/documents/unit/:unit(/:type)', to: 'document#unit', as: :documents_unit
   # explore
   get '/explore', to: 'explore#index', as: :explore
   get '/explore/early-zoom', to: 'explore#early-zoom', as: :explore_e_zoom
@@ -42,6 +44,7 @@ Rails.application.routes.draw do
     :ceramic_claps,
     :ceramic_inventories,
     :ceramic_vessels,
+    :documents,
     :eggshells,
     :features,
     :images,

@@ -1,0 +1,14 @@
+# resource_id, title, pages, and accession_no will be unique to each binder / resource
+- subtitle: None
+  creator: San Juan Valley Archaeological Program, Salmon Project
+  creator_role: Museum Curator
+  earliest_date: 1970
+  latest_date: 1978
+  dimensions: 8.5" x 11"
+  language: English
+  description: Three-ring binder notebook with original data from the 1970s excavations at Salmon Ruins. These data include a variety of forms (computer forms containing archaeological context information (stratigraphic units and features), some loose-leaf notebook pages with field notes and journals, drawings and maps.
+  condition: Good
+  rights: San Juan County Museum Association
+  rights_holder: Executive Board of the San Juan County Museum Association
+  access_level: Public
+  repository: Salmon Ruins Museum

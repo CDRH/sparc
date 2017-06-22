@@ -22,6 +22,10 @@ seeds = Rails.root.join('db', 'seeds')
   wood_inventory: 'xls/WoodInventory.xls',
 
   # Seeds
+  documents: "#{seeds}/documents.csv",
+  document_binders: "#{seeds}/document_binders.yml",
+  document_metadata: "#{seeds}/document_metadata.yml",
+  document_types: "#{seeds}/document_types.yml",
   lithic_artifact_types: "#{seeds}/lithic_artifact_types.yml",
   lithic_conditions: "#{seeds}/lithic_conditions.yml",
   lithic_material_types: "#{seeds}/lithic_material_types.yml",
@@ -1714,6 +1718,52 @@ def seed_tree_rings
   end
 end
 
+#############
+# Documents #
+#############
+
+def find_or_create_document_binder unit_no
+  binder = DocumentBinder.where(resource_id: unit_no).first
+  if !binder
+    # read in the binders yaml file and fill out a bit more info about it
+    binder_data = load_yaml(@files[:document_binders]).first
+    binder_data["resource_id"] = unit_no
+    binder_data["title"] = "#{unit_no} Binder"
+    binder_data["accession_no"] = unit_no
+    binder = DocumentBinder.create(binder_data)
+  end
+  return binder
+end
+
+def seed_document_metadata
+  puts "\n\n\nCreating Document Metadata"
+  document_metadata = load_yaml @files[:document_metadata]
+  DocumentMetadata.create(document_metadata)
+end
+
+def seed_document_types
+  puts "\n\n\nCreating Document Types"
+  document_types = load_yaml @files[:document_types]
+  DocumentType.create(document_types)
+end
+
+def seed_documents
+  puts "\n\n\nCreating Documents"
+  text = File.read(@files[:documents])
+  documents = CSV.parse(text, headers: true)
+  documents.each do |document|
+    # when working with the CSV apparently symbols aren't gonna work out
+    document["document_type"] = create_if_not_exists(DocumentType, :code, document["document_type"])
+    document["document_binder"] = find_or_create_document_binder(document["unit"])
+    unit = select_or_create_unit document["unit"], "Documents"
+    document.delete("unit")
+    # convert from CSV::Row to Hash in order to use with create
+    document = document.to_hash
+    document["units"] = [unit]
+    document = Document.create(document)
+  end
+end
+
 ##########
 # Images #
 ##########
@@ -1847,6 +1897,11 @@ seed_perishables if Perishable.count < 1
 seed_select_artifacts if SelectArtifact.count < 1
 seed_soils if Soil.count < 1
 seed_tree_rings if TreeRing.count < 1
+
+# Documents
+seed_document_metadata if DocumentMetadata.count < 1
+seed_document_types if DocumentType.count < 1
+seed_documents if Document.count < 1
 
 # Images
 seed_images if Image.count < 1

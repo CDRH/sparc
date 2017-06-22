@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170614152746) do
+ActiveRecord::Schema.define(version: 20170619192052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -410,6 +410,85 @@ ActiveRecord::Schema.define(version: 20170614152746) do
     t.index ["ceramic_vessel_part_id"], name: "index_ceramics_on_ceramic_vessel_part_id", using: :btree
     t.index ["ceramic_ware_id"], name: "index_ceramics_on_ceramic_ware_id", using: :btree
     t.index ["feature_id"], name: "index_ceramics_on_feature_id", using: :btree
+  end
+
+  create_table "document_binders", force: :cascade do |t|
+    t.string   "resource_id"
+    t.string   "title"
+    t.string   "subtitle"
+    t.string   "creator"
+    t.string   "creator_role"
+    t.string   "earliest_date"
+    t.string   "latest_date"
+    t.string   "dimensions"
+    t.string   "language"
+    t.string   "description"
+    t.string   "condition"
+    t.string   "rights"
+    t.string   "rights_holder"
+    t.string   "access_level"
+    t.string   "repository"
+    t.string   "accession_no"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "document_metadata", force: :cascade do |t|
+    t.string   "name"
+    t.string   "country"
+    t.string   "region"
+    t.string   "modern_name"
+    t.string   "location_id"
+    t.string   "location_id_scheme"
+    t.string   "geolocation"
+    t.string   "elevation"
+    t.string   "earliest_date"
+    t.string   "latest_date"
+    t.string   "records_archive"
+    t.string   "persistent_name"
+    t.string   "complex_title"
+    t.string   "terminus_ante_quem"
+    t.string   "terminus_post_quem"
+    t.string   "period"
+    t.string   "archaeological_culture"
+    t.string   "brief_description"
+    t.string   "permitting_heritage"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "document_types", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.string "color"
+    t.string "rank"
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.string   "format"
+    t.string   "page_id"
+    t.string   "scan_no"
+    t.string   "image_upload"
+    t.string   "scan_specifications"
+    t.string   "scan_equipment"
+    t.string   "scan_date"
+    t.string   "scan_creator"
+    t.string   "scan_creator_status"
+    t.string   "rights"
+    t.string   "rank"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "document_binder_id"
+    t.integer  "document_type_id"
+    t.index ["document_binder_id"], name: "index_documents_on_document_binder_id", using: :btree
+    t.index ["document_type_id"], name: "index_documents_on_document_type_id", using: :btree
+  end
+
+  create_table "documents_units", id: false, force: :cascade do |t|
+    t.integer "document_id"
+    t.integer "unit_id"
+    t.index ["document_id"], name: "index_documents_units_on_document_id", using: :btree
+    t.index ["unit_id"], name: "index_documents_units_on_unit_id", using: :btree
   end
 
   create_table "door_between_multiple_rooms", force: :cascade do |t|
@@ -1164,6 +1243,8 @@ ActiveRecord::Schema.define(version: 20170614152746) do
   add_foreign_key "ceramic_inventories", "features"
   add_foreign_key "ceramic_inventories_features", "ceramic_inventories"
   add_foreign_key "ceramic_inventories_features", "features"
+  add_foreign_key "documents_units", "documents"
+  add_foreign_key "documents_units", "units"
   add_foreign_key "eggshells", "eggshell_items"
   add_foreign_key "eggshells_features", "eggshells"
   add_foreign_key "eggshells_features", "features"

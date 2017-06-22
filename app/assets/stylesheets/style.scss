@@ -123,13 +123,13 @@ min-height:33px;
 
 /* Documents */
 
-.document_room_list, .document_type_list  {
+.document_unit_list, .document_type_list  {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.document_room_list li a,
+.document_unit_list li a,
 .document_type_list li a{
   float: left;
   border:  solid 1px #E7D4B3;
@@ -137,11 +137,11 @@ min-height:33px;
   padding: .5em;
 }
 
-.document_room_list li a {
+.document_unit_list li a {
   width: 4.5em;
 }
 
-.document_room_list li a:hover,
+.document_unit_list li a:hover,
 .document_type_list li a:hover {
   background-color: lighten($gray-base, 75%);
 }
@@ -162,16 +162,21 @@ min-height:33px;
   height: 200px;
 }
 
-.rt_esi, .rt_fn, .rt_fr, .rt_m, .rt_rr {
+.doc_type_active {
+  background-color: $gray-base;
+  color: #FFF;
+}
+
+.rt_red, .rt_yellow, .rt_purple, .rt_green, .rt_blue {
   display: inline-block;
   padding:5px;
 }
 
-.rt_esi {background-color: #D75C6F} /* red */
-.rt_fn {background-color: #F6F087}  /* yellow */
-.rt_fr {background-color: #B998C6}  /* purple */
-.rt_m {background-color: #AFCE6E}   /* green */
-.rt_rr {background-color: #7499E1}  /* blue */
+.rt_red {background-color: #D75C6F}     /* esi */
+.rt_yellow {background-color: #F6F087}  /* field notes */
+.rt_purple {background-color: #B998C6}  /* feature records */
+.rt_green {background-color: #AFCE6E}   /* media */
+.rt_blue {background-color: #7499E1}    /* room records */
 
 
 
