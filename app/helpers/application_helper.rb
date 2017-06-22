@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def doc_type_active(type)
-    type_name = type.name.parameterize('_')
+    type_name = type.name.parameterize(separator: '_')
     return type_name == @type ? "doc_type_active" : ""
   end
 
@@ -9,7 +9,7 @@ module ApplicationHelper
     # contains controller and action so
     # do not need a named route
     options = params.to_unsafe_h
-    type_name = type.name.parameterize("_")
+    type_name = type.name.parameterize(separator: "_")
     # replace the old document type selection
     options["type"] = type_name
     return options

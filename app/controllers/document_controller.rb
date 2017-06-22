@@ -22,7 +22,7 @@ class DocumentController < ApplicationController
     else
       @type = DocumentType.joins(:units)
                 .where(units: {unit_no: @unit}).sorted.first
-                .name.parameterize("_")
+                .name.parameterize(separator: "_")
     end
 
     type_name = get_doc_type_name(@type)

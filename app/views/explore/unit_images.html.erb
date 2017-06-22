@@ -1,0 +1,32 @@
+<h1><%= @unit.unit_no %></h1>
+
+<%= render "unit_tabs" %>
+
+<div role="tabpanel" class="tab-pane" id="images">
+  <p>Displaying a subset of images from this unit.
+    <%= link_to "View all images for #{@unit.unit_no}", gallery_path({ :unit => @unit.id }) %>
+  </p>
+  <!-- TODO could move this and image#index version into partial? -->
+  <div class="row">
+    <% @images.each_slice(4) do |img_set| %>
+      <div class="row">
+        <% img_set.each do |img| %>
+          <div class="col-md-3" <%= 'human_remains' if !img.displayable? %>>
+            <%= link_to image_path(img.image_no) do %>
+              <%= image_tag "field/thumb/#{img.image_no}" %>
+            <% end %>
+            <ul>
+              <li>Number: <%= img.image_no %></li>
+              <li>Format: <%= img.format %></li>
+              <li>Comments: <%= img.comments %></li>
+              <li>Subjects: <%= img.subject_list.join("; ") %></li>
+              <li <%= "class=human_remains" if !img.displayable? %>>
+                Human Remains: <%= img.human_remain %>
+              </li>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
