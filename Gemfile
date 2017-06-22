@@ -65,5 +65,9 @@ gem 'activerecord-session_store'
 gem 'roo'
 gem 'roo-xls'
 
+# metadata parser for documents
+# Note: above requires exiftool installed on system: http://www.sno.phy.queensu.ca/~phil/exiftool/
+gem 'mini_exiftool'
+
 # pagination
 gem 'will_paginate'
