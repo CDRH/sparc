@@ -40,6 +40,28 @@ class ExploreController < ApplicationController
   def unit
     @unit = Unit.sorted.where(:unit_no => params["number"]).first
     @images = Image.sorted.joins(:units).where(:units => { :unit_no => params["number"] }).limit(8)
+
+    # documents
+
+    if params["type"].present?
+      @type = params["type"]
+    else
+      doc_types = DocumentType.joins(:units)
+                    .where(units: {unit_no: @unit.unit_no}).sorted.first
+      @type = doc_types.name.parameterize("_") if doc_types
+    end
+
+    type_name = get_doc_type_name(@type)
+    res = Document.joins(:document_type, :units)
+            .where("units.unit_no = ?", @unit.unit_no)
+            .where("document_types.name = ?", type_name)
+            .sorted
+    @result_num_docs = res.size
+    @res = res.paginate(page: params[:page], per_page: 20)
+
+    # generate the color coded document type buttons
+    possible_types = DocumentType.joins(:units).where("units.id = ?", @unit.id).uniq
+    @group_colors = possible_types.sorted.group_by(&:color)
   end
 
   def zone
