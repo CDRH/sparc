@@ -132,8 +132,8 @@ class QueryController < ApplicationController
           if CeramicInventory.reflect_on_all_associations(:belongs_to)
                .map{ |a| a.name.to_s }.include?(column[:name])
             @res = @res.joins(column[:name].to_sym)
-                     .where(column[:name].pluralize
-                            => { id: params[param_name] })
+                     .where(column[:name].pluralize =>
+                            { id: params[param_name] })
           else
             @res = @res.where("#{column[:name]} = ?",
                               "%#{params[param_name]}%")
@@ -167,8 +167,8 @@ class QueryController < ApplicationController
           if CeramicClap.reflect_on_all_associations(:belongs_to)
                .map{ |a| a.name.to_s }.include?(column[:name])
             @res = @res.joins(column[:name].to_sym)
-                     .where(column[:name].pluralize
-                            => { id: params[param_name] })
+                     .where(column[:name].pluralize =>
+                            { id: params[param_name] })
           else
             @res = @res.where("#{column[:name]} = ?",
                               "%#{params[param_name]}%")
@@ -202,8 +202,8 @@ class QueryController < ApplicationController
           if Ceramic.reflect_on_all_associations(:belongs_to)
                .map{ |a| a.name.to_s }.include?(column[:name])
             @res = @res.joins(column[:name].to_sym)
-                .where(column[:name].pluralize
-                       => { id: params[param_name] })
+                .where(column[:name].pluralize =>
+                       { id: params[param_name] })
           else
             @res = @res.where("#{column[:name]} = ?",
                               "%#{params[param_name]}%")
@@ -237,8 +237,8 @@ class QueryController < ApplicationController
           if CeramicVessel.reflect_on_all_associations(:belongs_to)
                .map{ |a| a.name.to_s }.include?(column[:name])
             @res = @res.joins(column[:name].to_sym)
-                     .where(column[:name].pluralize
-                            => { id: params[param_name] })
+                     .where(column[:name].pluralize =>
+                            { id: params[param_name] })
           else
             @res = @res.where("#{column[:name]} = ?",
                               "%#{params[param_name]}%")
