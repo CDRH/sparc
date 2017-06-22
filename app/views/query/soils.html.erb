@@ -7,6 +7,9 @@
 <%= form_tag soils_path, method: :get do %>
   <div class="row">
     <!-- soils tables and search options -->
+
+    <%= render "artifact_global_opts" %>
+
     <div class="col-md-8">
 
       <!-- soils query navigation -->
@@ -63,6 +66,5 @@
       </div> <!-- /tab-content -->
     </div> <!-- /col-md-8 -->
 
-    <%= render "artifact_global_opts" %>
   </div>
 <% end %>
