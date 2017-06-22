@@ -46,14 +46,16 @@ class ExploreController < ApplicationController
     if params["type"].present?
       @type = params["type"]
     else
-      @type = DocumentType.joins(:units).where(units: {unit_no: @unit.unit_no}).sorted.first.name.parameterize("_")
+      doc_types = DocumentType.joins(:units)
+                                .where(units: {unit_no: @unit.unit_no}).sorted.first
+      @type = doc_types.name.parameterize("_") if doc_types
     end
 
     type_name = get_doc_type_name(@type)
     res = Document.joins(:document_type, :units)
-      .where("units.unit_no = ?", @unit.unit_no)
-      .where("document_types.name = ?", type_name)
-      .sorted
+                    .where("units.unit_no = ?", @unit.unit_no)
+                    .where("document_types.name = ?", type_name)
+                    .sorted
     @result_num_docs = res.size
     @res = res.paginate(:page => params[:page], :per_page => 20)
 
