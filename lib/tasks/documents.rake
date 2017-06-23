@@ -4,6 +4,13 @@ require "mini_exiftool"
 DOCUMENT_PATH = "/Volumes/LaCie/DISW\ Boxes/document_jpegs"
 SEEDS_FILE = "#{Rails.root}/db/seeds/documents.csv"
 
+def get_specs(filepath)
+  doc = MiniExiftool.new(filepath)
+  image_size = doc.image_size
+  resolution = doc.x_resolution
+  return "Size: #{image_size}; Resolution: #{resolution} dpi"
+end
+
 namespace :documents do
   desc "create a csv by reading through all the document jpegs"
   task create_csv: :environment do
@@ -57,9 +64,9 @@ namespace :documents do
       page_id = filename_no_ext
       format = "jpeg"
       image_upload = File.basename(filepath)
-      scan_specifications = "Not sure what to put here yet"
+      scan_specifications = get_specs(filepath)
       scan_equipment = "Canon DR-9050C and Capture Perfect Software"
-      scan_date = "TODO pull metadata"
+      scan_date = "2015-2016"
       scan_creator = "Document Imaging of the Southwest, http://docimagingsw.com"
       scan_creator_status = "Public"
       rights = "University of Nebraska-Lincoln and the San Juan County Museum Association"
