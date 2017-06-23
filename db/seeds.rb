@@ -184,6 +184,79 @@ def load_yaml file
   YAML::load_file(file)
 end
 
+def lookup_sa_related type, comment
+  # although things with "bone" in the word can mostly be assumed
+  # to belong in the BoneInventory, etc, I typed out Carrie's mapping
+  # out of concern for thoroughness and not wanting to make assumptions
+  # for example, "bone beads" are ornaments, not bone inventory
+  direct_match = {
+    "BoneInventory" => [
+      "4 bone tools", "animal skull", "bone", "bone awl", "bone scraper",
+      "bone tool", "deer bone", "deer mandible", "macaw", "antler"
+    ],
+    "CeramicInventory" => [
+      "adobe plug", "ceramic chinking", "ceramic ladle", "ceramic sherd",
+      "ceramic tool", "ceramics", "gaming piece", "ladle handle"
+    ],
+    "LithicInventory" => [
+      "anvil", "axe", "bin lid", "chopper", "chopper-pounder", "cobble",
+      "core", "door slab", "drill", "grinding slab", "ground stone", "hammerstone",
+      "hatch cover", "hematite", "hoe", "laminite", "lithic artifact", "lithic tool",
+      "mano", "maul", "metate", "metate & mano", "milling bin slab", "milling slab",
+      "mineral", "modified cobble", "mortar", "pestle", "pigment stone",
+      "pigment-stained stone", "piki stone", "polishing stone", "pot cover",
+      "projectile point", "projectile point cache", "quartz crystal",
+      "retouched flake", "sandstone seat", "slab", "slab burial cover",
+      "slab/cooking stone", "stone disk", "tchamahia", "turquoise artifact",
+      "water serpent effigy"
+    ],
+    "Ornament" => [
+      "baked shale pendant", "bead", "bird fetish", "bone bead", "bone beads", "calcite bead",
+      "effigy", "gypsum pendant", "inlay-mosaic piece", "jet pendant", "olivella shell",
+      "ornament", "pendant", "shell bead", "stone bead", "stone bracelet", "turquoise bead",
+      "turquoise inlay", "turquoise pendant"
+    ],
+    "Perishable" => [
+      "arrow shaft", "basket", "basket impression", "basket?", "basketry",
+      "bow string", "bundle", "cordage", "cotton artifact", "cotton cloth",
+      "feather mold", "fiber artifact", "grass artifact", "knot", "leather artifact",
+      "mat or blind", "matting", "miniature arrows", "organic material", "pouch",
+      "prayer sticks", "rabbit fur or turkey feather robe?", "reed bundle",
+      "robe?", "sandal", "sandal, band, or pad?", "textile", "twine", "yucca artifact",
+      "yucca bundle", "yucca fiber twine bag", "pot rest"
+    ],
+    "CeramicVessel" => [
+      "ceramic vessel"
+    ],
+    "WoodInventory" => [
+      "bark", "bow", "cradle board", "digging stick", "juniper bark strips",
+      "juniper wood", "rabbit stick", "shaped wood pole", "weaving tool",
+      "wood artifact", "wooden beam", "wooden grave covering", "wooden grave lining",
+      "wooden plank", "wooden poles"
+    ]
+  }
+
+  classname = nil
+  if type == "burial cover"
+    # try to determine if it is wood or stone with comment
+    # in one case it does not have a comment, so it is being added to neither! TODO ask
+    if comment.include?("wood")
+      classname = "WoodInventory"
+    elsif comment.include?("stone") || comment.include?("cobble")
+      classname = "LithicInventory"
+    end
+  else
+    direct_match.each do |table, types|
+      if types.include?(type)
+        classname = table
+        break
+      end
+    end
+  end
+  # there won't be a match for "unknown artifact" and that's expected
+  return classname
+end
+
 # TODO "none" will fail for integer column, etc
 # but I'm leaving it because it would have already been failing
 def prepare_cell_values entry_hash, source, index
@@ -1460,7 +1533,7 @@ def seed_ornaments
     ornament = prepare_cell_values(row, "Ornaments", index)
 
     # Output context for creation
-#    puts "\nUnit #{ornament[:unit]}:" if ornament[:unit] != last_unit
+    # puts "\nUnit #{ornament[:unit]}:" if ornament[:unit] != last_unit
     last_unit = ornament[:unit]
 
     # Handle foreign keys
@@ -1469,12 +1542,8 @@ def seed_ornaments
 
     ornament[:occupation] = find_or_create_occupation(ornament[:occupation])
 
-    # TODO Add strat_other and sa_no to schema
-    ornament.delete :strat_other
-    ornament.delete :sa_no
-
     # Output and save
-#    puts ornament[:salmon_museum_no]
+    # puts ornament[:salmon_museum_no]
     Ornament.create(ornament)
   end
 end
@@ -1552,10 +1621,10 @@ def seed_select_artifacts
 
   columns = {
     unit: "Room",
-    artifact_no: "Artifact No",
+    sa_no: "Artifact No",
     strat: "Stratum",
     strat_other: "Other Strata",
-    feature: "Feature No",
+    feature_no: "Feature No",
     floor_association: "Floor Association",
     sa_form: "SA Form",
     associated_feature_artifacts: "Associated SA Artifacts",
@@ -1565,7 +1634,7 @@ def seed_select_artifacts
     select_artifact_type: "Type",
     artifact_count: "Artifact Count",
     location_in_room: "Location in Room",
-    comments: "Comments"
+    comments: "Comments",
   }
 
   last_unit = ""
@@ -1576,32 +1645,51 @@ def seed_select_artifacts
     sa = prepare_cell_values(row, "Select Artifacts", index)
 
     # Output context for creation
-#    puts "\nUnit #{sa[:unit]}:" if sa[:unit] != last_unit
+    # puts "\nUnit #{sa[:unit]}:" if sa[:unit] != last_unit
     last_unit = sa[:unit]
 
     # Handle foreign keys
     unit = select_or_create_unit(sa[:unit], "Select Artifacts")
-
-    # Process each stratum in Strat column
-    sa[:strata] = []
-    strats = sa[:strat].split(/[;,]/).map{ |strat| strat.strip }
-    strats.uniq!
-    strats.each do |strat|
-      sa[:strata] << select_or_create_stratum(unit, strat, "SA #{sa[:artifact_no]}")
-    end
-
+    associate_strata_features(unit, sa[:strat], sa[:feature_no], sa, "Select Artifacts")
     sa[:occupation] = find_or_create_occupation(sa[:occupation])
 
-    # NOTE: associated_feature_artifacts considered for model associations
-    # If done, the select_artifacts_strata table should be removed
-    # and a join set up with features instead
+    # most select artifacts should also copy info to an inventory or analysis table
+    related_table = lookup_sa_related(sa[:select_artifact_type], sa[:comments])
+    if related_table
+      sa[:appears_in_table] = related_table.titleize
+      model = related_table.constantize
 
-    # TODO Add strat_other and feature to schema
-    sa.delete :strat_other
-    sa.delete :feature
-
+      # models are storing SA# as a (multi-valued) string, so have to use text search to find
+      record = model.where("sa_no LIKE ?", "%#{sa[:sa_no]}%").first
+      info_field = {
+        floor_association: sa[:floor_association],
+        grid: sa[:grid],
+        depth: sa[:depth],
+        occupation: sa[:occupation][:name],
+        select_artifact_type: sa[:select_artifact_type],
+        artifact_count: sa[:artifact_count],
+        location_in_room: sa[:location_in_room],
+        comments: sa[:comments]
+      }
+      if record
+        # add to single field
+        record.update_attribute(:select_artifact_info, info_field.to_json)
+      else
+        new_record = {}
+        if model.column_names.include?("unit")
+          new_record[:unit] = sa[:unit]
+        end
+        mult_features = !(model == CeramicVessel || model == Ornament)
+        associate_strata_features(unit, sa[:strat], sa[:feature_no], new_record, related_table.titleize, mult_features)
+        new_record[:sa_no] = sa[:sa_no]
+        new_record[:select_artifact_info] = info_field.to_json
+        model.create(new_record)
+        report related_table, "new record with sa_no #{sa[:sa_no]}", "Select Artifacts"
+        # add a new record, add unit, join to feature(s) but otherwise don't add info
+      end
+    end
     # Output and create
-#    puts sa[:artifact_no]
+    # puts sa[:artifact_no]
     SelectArtifact.create(sa)
   end
 end
