@@ -1,0 +1,22 @@
+<h1><%= @unit.unit_no %></h1>
+
+<%= render "unit_tabs" %>
+
+<div role="tabpanel" class="tab-pane" id="strata">
+  <table class="table table-striped">
+    <tr>
+      <th>Stratum Number</th>
+      <th>Stratum Type</th>
+      <th>Features</th>
+      <th>Occupation</th>
+    </tr>
+    <% @unit.strata.each do |stratum| %>
+      <tr>
+        <td><%= stratum.strat_all %></td>
+        <td><%= stratum.strat_type.name if stratum.strat_type %></td>
+        <td><%= stratum.features.map {|f| f.feature_no }.join("; ") %></td>
+        <td><%= stratum.occupation.name if stratum.occupation %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

@@ -1,0 +1,56 @@
+<h1><%= @unit.unit_no %></h1>
+
+<%= render "unit_tabs" %>
+
+<div role="tabpanel" class="tab-pane" id="features">
+  <table class="table table-striped">
+    <tr>
+      <th>Feature Number</th>
+      <th>Strata</th>
+      <th>Floor Association</th>
+      <th>Occupation</th>
+      <th>Feature Form</th>
+      <th>Associated Features</th>
+      <th>Grid</th>
+      <th>Depth</th>
+      <th>Feature Type</th>
+      <th>Count</th>
+      <th>Residential Feature</th>
+      <th>Real Feature</th>
+      <th>Location in Room</th>
+      <th>Feature Group</th>
+      <th>Doorway Sealed</th>
+      <th>T Shaped Door</th>
+      <th>Door Between Multiple Rooms</th>
+      <th>Length</th>
+      <th>Width</th>
+      <th>Depth / Height</th>
+      <th>Comments</th>
+    </tr>
+    <% @unit.features.each do |feature| %>
+      <tr>
+        <td><%= feature.feature_no %></td>
+        <td><%= feature.strata.map {|s| s.strat_all }.join("; ") %></td>
+        <td><%= feature.floor_association %></td>
+        <td><%= feature.occupation.name if feature.occupation %></td>
+        <td><%= feature.feature_form %></td>
+        <td><%= feature.other_associated_features %></td>
+        <td><%= feature.grid %></td>
+        <td><%= feature.depth_mbd %></td>
+        <td><%= feature.feature_type.name if feature.feature_type %></td>
+        <td><%= feature.count %></td>
+        <td><%= feature.residential_feature.name if feature.residential_feature %></td>
+        <td><%= feature.real_feature %></td>
+        <td><%= feature.location_in_room %></td>
+        <td><%= feature.feature_group.name if feature.feature_group %></td>
+        <td><%= feature.doorway_sealed.name if feature.doorway_sealed %></td>
+        <td><%= feature.t_shaped_door.name if feature.t_shaped_door %></td>
+        <td><%= feature.door_between_multiple_room.name if feature.door_between_multiple_room %></td>
+        <td><%= feature.length %></td>
+        <td><%= feature.width %></td>
+        <td><%= feature.depth_height %></td>
+        <td><%= feature.comments %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
