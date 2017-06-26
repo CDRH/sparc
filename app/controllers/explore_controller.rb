@@ -69,7 +69,7 @@ class ExploreController < ApplicationController
   def unit_images
     @selected = "images"
     @images = Image.sorted.joins(:units)
-                .where(:units => { unit_no: params["number"] })
+                .where(units: { unit_no: params["number"] })
                 .limit(8)
   end
 
@@ -104,6 +104,6 @@ class ExploreController < ApplicationController
   end
 
   def get_unit
-    @unit = Unit.sorted.where(:unit_no => params["number"]).first
+    @unit = Unit.sorted.where(unit_no: params["number"]).first
   end
 end
