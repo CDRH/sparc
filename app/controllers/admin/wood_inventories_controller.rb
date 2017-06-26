@@ -19,7 +19,8 @@ class Admin::WoodInventoriesController < ApplicationController
       :field_date,
       :lab,
       :analysis,
-      :description
+      :description,
+      :select_artifact_info
     ]
     conf.columns[:strata].form_ui = :record_select
     conf.columns[:features].form_ui = :record_select

@@ -7,7 +7,6 @@ class Stratum < ActiveRecord::Base
   has_many :tree_rings
   has_and_belongs_to_many :bone_tools
   has_and_belongs_to_many :features
-  has_and_belongs_to_many :select_artifacts
 
   def to_label
     "#{unit.to_label if unit} : #{strat_all} #{strat_alpha}"
