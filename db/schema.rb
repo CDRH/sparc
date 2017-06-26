@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619192052) do
+ActiveRecord::Schema.define(version: 20170623180012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,8 +46,9 @@ ActiveRecord::Schema.define(version: 20170619192052) do
     t.text     "comments"
     t.string   "entered_by"
     t.string   "location"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "select_artifact_info"
   end
 
   create_table "bone_inventories_features", id: false, force: :cascade do |t|
@@ -225,8 +226,9 @@ ActiveRecord::Schema.define(version: 20170619192052) do
     t.text     "comments"
     t.string   "entered_by"
     t.string   "location"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "select_artifact_info"
   end
 
   create_table "ceramic_inventories_features", id: false, force: :cascade do |t|
@@ -334,6 +336,7 @@ ActiveRecord::Schema.define(version: 20170619192052) do
     t.integer "ceramic_vessel_type_id"
     t.integer "ceramic_vessel_lori_reed_type_id"
     t.integer "ceramic_inventory_id"
+    t.string  "select_artifact_info"
     t.index ["ceramic_inventory_id"], name: "index_ceramic_vessels_on_ceramic_inventory_id", using: :btree
     t.index ["ceramic_vessel_lori_reed_form_id"], name: "index_ceramic_vessels_on_ceramic_vessel_lori_reed_form_id", using: :btree
     t.index ["ceramic_vessel_lori_reed_type_id"], name: "index_ceramic_vessels_on_ceramic_vessel_lori_reed_type_id", using: :btree
@@ -630,6 +633,13 @@ ActiveRecord::Schema.define(version: 20170619192052) do
     t.index ["pollen_inventory_id"], name: "index_features_pollen_inventories_on_pollen_inventory_id", using: :btree
   end
 
+  create_table "features_select_artifacts", id: false, force: :cascade do |t|
+    t.integer "select_artifact_id"
+    t.integer "feature_id"
+    t.index ["feature_id"], name: "index_features_select_artifacts_on_feature_id", using: :btree
+    t.index ["select_artifact_id"], name: "index_features_select_artifacts_on_select_artifact_id", using: :btree
+  end
+
   create_table "features_soils", id: false, force: :cascade do |t|
     t.integer "soil_id"
     t.integer "feature_id"
@@ -834,8 +844,9 @@ ActiveRecord::Schema.define(version: 20170619192052) do
     t.text     "comments"
     t.string   "entered_by"
     t.string   "location"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "select_artifact_info"
   end
 
   create_table "lithic_material_types", force: :cascade do |t|
@@ -951,9 +962,12 @@ ActiveRecord::Schema.define(version: 20170619192052) do
     t.string   "photographer"
     t.integer  "count"
     t.string   "item"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "occupation_id"
+    t.string   "sa_no"
+    t.string   "strat_other"
+    t.string   "select_artifact_info"
     t.index ["occupation_id"], name: "index_ornaments_on_occupation_id", using: :btree
   end
 
@@ -981,6 +995,7 @@ ActiveRecord::Schema.define(version: 20170619192052) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "occupation_id"
+    t.string   "select_artifact_info"
     t.index ["occupation_id"], name: "index_perishables_on_occupation_id", using: :btree
   end
 
@@ -1026,7 +1041,7 @@ ActiveRecord::Schema.define(version: 20170619192052) do
 
   create_table "select_artifacts", force: :cascade do |t|
     t.string   "unit"
-    t.string   "artifact_no"
+    t.string   "sa_no"
     t.string   "strat"
     t.string   "floor_association"
     t.string   "sa_form"
@@ -1040,14 +1055,10 @@ ActiveRecord::Schema.define(version: 20170619192052) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.integer  "occupation_id"
+    t.string   "feature_no"
+    t.string   "appears_in_table"
+    t.string   "strat_other"
     t.index ["occupation_id"], name: "index_select_artifacts_on_occupation_id", using: :btree
-  end
-
-  create_table "select_artifacts_strata", id: false, force: :cascade do |t|
-    t.integer "select_artifact_id"
-    t.integer "stratum_id"
-    t.index ["select_artifact_id"], name: "index_select_artifacts_strata_on_select_artifact_id", using: :btree
-    t.index ["stratum_id"], name: "index_select_artifacts_strata_on_stratum_id", using: :btree
   end
 
   create_table "soils", force: :cascade do |t|
@@ -1226,6 +1237,7 @@ ActiveRecord::Schema.define(version: 20170619192052) do
     t.string "lab"
     t.string "analysis"
     t.string "description"
+    t.string "select_artifact_info"
   end
 
   create_table "zones", force: :cascade do |t|
@@ -1266,6 +1278,8 @@ ActiveRecord::Schema.define(version: 20170619192052) do
   add_foreign_key "features_perishables", "perishables"
   add_foreign_key "features_pollen_inventories", "features"
   add_foreign_key "features_pollen_inventories", "pollen_inventories"
+  add_foreign_key "features_select_artifacts", "features"
+  add_foreign_key "features_select_artifacts", "select_artifacts"
   add_foreign_key "features_soils", "features"
   add_foreign_key "features_soils", "soils"
   add_foreign_key "features_strata", "features"
@@ -1283,8 +1297,6 @@ ActiveRecord::Schema.define(version: 20170619192052) do
   add_foreign_key "images", "image_qualities"
   add_foreign_key "lithic_inventories", "features"
   add_foreign_key "ornaments", "features"
-  add_foreign_key "select_artifacts_strata", "select_artifacts"
-  add_foreign_key "select_artifacts_strata", "strata"
   add_foreign_key "soils", "art_types"
   add_foreign_key "strata", "strat_types"
   add_foreign_key "strata", "units"

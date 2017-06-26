@@ -20,7 +20,8 @@ class Admin::CeramicVesselsController < ApplicationController
       :vessel_percentage,
       :lori_reed_analysis,
       :comments_lori_reed,
-      :comments_other
+      :comments_other,
+      :select_artifact_info
     ]
     ceramic_tables.each do |t|
       conf.columns << t

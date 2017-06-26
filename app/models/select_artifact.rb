@@ -1,6 +1,7 @@
 class SelectArtifact < ApplicationRecord
   belongs_to :occupation
-  has_and_belongs_to_many :strata
+  has_and_belongs_to_many :features
+  has_many :strata, -> {distinct}, :through => :features
   has_many :units, -> {distinct}, :through => :strata
 
   def self.sorted
