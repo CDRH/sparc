@@ -14,7 +14,12 @@ Rails.application.routes.draw do
   get '/explore/late', to: 'explore#late', as: :explore_l
   get '/explore/late-zoom', to: 'explore#late-zoom', as: :explore_l_zoom
   get '/explore/units', to: 'explore#units', as: :units
-  get '/explore/unit/:number', to: 'explore#unit', as: :unit
+  get '/explore/unit/:number', to: 'explore#unit_summary', as: :unit
+  get '/explore/unit/:number/overview', to: 'explore#unit_overview', as: :unit_overview
+  get '/explore/unit/:number/images', to: 'explore#unit_images', as: :unit_images
+  get '/explore/unit/:number/documents', to: 'explore#unit_documents', as: :unit_documents
+  get '/explore/unit/:number/strata', to: 'explore#unit_strata', as: :unit_strata
+  get '/explore/unit/:number/features', to: 'explore#unit_features', as: :unit_features
   get '/explore/zone/:number', to: 'explore#zone', as: :search_zone
   # images
   get '/gallery', to: 'image#index', as: :gallery

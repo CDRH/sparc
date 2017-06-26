@@ -1,0 +1,21 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" <%= tab_selected("summary") %>>
+    <%= link_to "Summary", unit_path(@unit.unit_no) %>
+  </li>
+  <li role="presentation" <%= tab_selected("overview") %>>
+    <%= link_to "Overview", unit_overview_path(@unit.unit_no) %>
+  </li>
+  <li role="presentation" <%= tab_selected("images") %>>
+    <%= link_to "Images", unit_images_path(@unit.unit_no) %>
+  </li>
+  <li role="presentation" <%= tab_selected("documents") %>>
+    <%= link_to "Documents", unit_documents_path(@unit.unit_no) %>
+  </li>
+  <li role="presentation" <%= tab_selected("strata") %>>
+    <%= link_to "Strata", unit_strata_path(@unit.unit_no) %>
+  </li>
+  <li role="presentation" <%= tab_selected("features") %>>
+    <%= link_to "Features", unit_features_path(@unit.unit_no) %>
+  </li>
+</ul>

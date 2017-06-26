@@ -6,7 +6,7 @@
       <li <%= "class=active" if subsection == "index" %>>
         <%= link_to "Explore the Map", explore_path %>
       </li>
-      <li <%= "class=active" if subsection == "units" || subsection == "unit" || subsection == "zone" %>>
+      <li <%= "class=active" if subsection.include?("unit") || subsection == "zone" %>>
         <%= link_to "Browse Units", units_path %>
       </li>
     </ul>
