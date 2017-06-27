@@ -23,8 +23,7 @@ class Admin::LithicToolsController < ApplicationController
       :width,
       :thickness,
       :weight,
-      :comments,
-      :pii
+      :comments
     ]
     lithic_tables.each do |t|
       conf.columns << t
