@@ -19,12 +19,6 @@
           <%= select_tag "creator", options_from_collection_for_select(ImageCreator.sorted, "id", "name", params["creator"]), class: "form-control", multiple: true, include_blank: true %>
         </div>
       </div>
-      <div class="form-group">
-        <div class="form-group">
-          <%= label_tag "occupation", "Occupation" %>
-          <%= select_tag "occupation", options_from_collection_for_select(Occupation.sorted, "id", "name", params["occupation"]), class: "form-control", multiple: true, include_blank: true %>
-        </div>
-      </div>
     </div>
 
     <!-- common options -->
@@ -130,7 +124,6 @@
         <% end %>
         <ul>
           <li>Units: <%= img.unit_list.join("; ") %></li>
-          <li>Occupations: <%= img.occupation_list.join("; ") %></li>
           <li>Number: <%= img.image_no %></li>
           <li>Format: <%= img.format %></li>
           <li>Comments: <%= img.comments %></li>
