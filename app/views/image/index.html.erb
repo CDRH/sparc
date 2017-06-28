@@ -5,89 +5,54 @@
 <%= form_tag gallery_path, :method => "get",
   id: "image-search-form", role: "form" do %>
   <%= hidden_field_tag "sort", params["sort"] %>
+  <!-- primary search fields -->
   <div class="row">
-
-    <!-- identity -->
     <div class="col-md-3">
       <div class="form-group">
         <%= label_tag "image_no" %>
         <%= text_field_tag "image_no", params["image_no"], placeholder: "00946", class: "form-control" %>
       </div>
       <div class="form-group">
-        <div class="form-group">
-          <%= label_tag "creator", "Creator" %>
-          <%= select_tag "creator", options_from_collection_for_select(ImageCreator.sorted, "id", "name", params["creator"]), class: "form-control", multiple: true, include_blank: true %>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="form-group">
-          <%= label_tag "occupation", "Occupation" %>
-          <%= select_tag "occupation", options_from_collection_for_select(Occupation.sorted, "id", "name", params["occupation"]), class: "form-control", multiple: true, include_blank: true %>
-        </div>
+        <%= label_tag "comments" %>
+        <%= text_area_tag "comments", params["comments"], placeholder: "wall section", rows: 2, class: "form-control" %>
       </div>
     </div>
-
-    <!-- common options -->
     <div class="col-md-3">
-      <div class="form-group">
-        <div class="form-group">
-          <%= label_tag "format", "Format" %>
-          <%= select_tag "format", options_from_collection_for_select(ImageFormat.sorted, "id", "name", params["format"]), class: "form-control", multiple: true, include_blank: true %>
-        </div>
-      </div>
       <div class="form-group">
         <div class="form-group">
           <%= label_tag "unit", "Unit" %>
-          <%= select_tag "unit", options_from_collection_for_select(Unit.sorted, "id", "unit_no", params["unit"]), class: "form-control", multiple: true, include_blank: true %>
+          <%= select_tag "unit", options_from_collection_for_select(Unit.sorted, "id", "unit_no", params["unit"]), class: "form-control", multiple: true, include_blank: true, size: 6 %>
         </div>
       </div>
+    </div>
+    <div class="col-md-3">
       <div class="form-group">
         <div class="form-group">
           <%= label_tag "zone", "Zone" %>
-          <%= select_tag "zone", options_from_collection_for_select(Zone.sorted, "id", "name", params["zone"]), class: "form-control", multiple: true, include_blank: true %>
+          <%= select_tag "zone", options_from_collection_for_select(Zone.sorted, "id", "name", params["zone"]), class: "form-control", multiple: true, include_blank: true, size: 6 %>
         </div>
       </div>
     </div>
-
-    <!-- qualitative -->
     <div class="col-md-3">
-      <div class="form-group">
-        <div class="form-group">
-          <%= label_tag "orientation", "Orientation" %>
-          <%= select_tag "orientation", options_from_collection_for_select(ImageOrientation.sorted, "id", "name", params["orientation"]), class: "form-control", multiple: true, include_blank: true %>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="form-group">
-          <%= label_tag "quality", "Quality" %>
-          <%= select_tag "quality", options_from_collection_for_select(ImageQuality.sorted, "id", "name", params["quality"]), class: "form-control", multiple: true, include_blank: true %>
-        </div>
-      </div>
-    </div>
-
-    <!-- contents -->
-    <div class="col-md-3">
-      <div class="form-group">
-        <%= label_tag "comments" %>
-        <%= text_field_tag "comments", params["comments"], placeholder: "wall section", class: "form-control" %>
-      </div>
       <div class="form-group">
         <div class="form-group">
           <%= label_tag "subject", "Subject" %>
-          <%= select_tag "subject", options_from_collection_for_select(ImageSubject.sorted, "id", "name", params["subject"]), class: "form-control", multiple: true, include_blank: true %>
+          <%= select_tag "subject", options_from_collection_for_select(ImageSubject.sorted, "id", "name", params["subject"]), class: "form-control", multiple: true, include_blank: true, size: 6 %>
         </div>
       </div>
     </div>
   </div> <!-- /row -->
 
+  <!-- advanced search options -->
   <div class="row">
     <div class="collapse" id="collapseMore">
       <div class="well">
+
         <div class="row">
           <div class="col-md-3">
             <div class="form-group">
-              <%= label_tag "box", "Box" %>
-              <%= select_tag "box", options_from_collection_for_select(ImageBox.sorted, "id", "name", params["box"]), class: "form-control", multiple: true, include_blank: true %>
+              <%= label_tag "format", "Format" %>
+              <%= select_tag "format", options_from_collection_for_select(ImageFormat.sorted, "id", "name", params["format"]), class: "form-control", multiple: true, include_blank: true %>
             </div>
           </div>
           <div class="col-md-3">
@@ -98,11 +63,39 @@
           </div>
           <div class="col-md-3">
             <div class="form-group">
+              <%= label_tag "orientation", "Orientation" %>
+              <%= select_tag "orientation", options_from_collection_for_select(ImageOrientation.sorted, "id", "name", params["orientation"]), class: "form-control", multiple: true, include_blank: true %>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <%= label_tag "quality", "Quality" %>
+              <%= select_tag "quality", options_from_collection_for_select(ImageQuality.sorted, "id", "name", params["quality"]), class: "form-control", multiple: true, include_blank: true %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
               <%= label_tag "associated_negative", "Associated Negative" %>
               <%= select_tag "associated_negative", options_from_collection_for_select(ImageAssocnoeg.sorted, "id", "name", params["associated_negative"]), class: "form-control", multiple: true, include_blank: true %>
             </div>
           </div>
-        </div> <!-- /row -->
+          <div class="col-md-3">
+            <div class="form-group">
+              <%= label_tag "box", "Box" %>
+              <%= select_tag "box", options_from_collection_for_select(ImageBox.sorted, "id", "name", params["box"]), class: "form-control", multiple: true, include_blank: true %>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <%= label_tag "creator", "Creator" %>
+              <%= select_tag "creator", options_from_collection_for_select(ImageCreator.sorted, "id", "name", params["creator"]), class: "form-control", multiple: true, include_blank: true %>
+            </div>
+          </div>
+        </div>
+
       </div> <!-- /well -->
     </div> <!-- /collapse -->
   </div> <!-- /row -->
@@ -129,13 +122,12 @@
           <%= image_tag "field/thumb/#{img.image_no}" %>
         <% end %>
         <ul>
-          <li>Units: <%= img.unit_list.join("; ") %></li>
-          <li>Occupations: <%= img.occupation_list.join("; ") %></li>
           <li>Number: <%= img.image_no %></li>
-          <li>Format: <%= img.format %></li>
+          <li>Units: <%= img.unit_list.join("; ") %></li>
           <li>Comments: <%= img.comments %></li>
-          <li>Subjects: <%= img.subject_list.join("; ") %></li>
+          <li>Format: <%= img.format %></li>
           <li>Human Remains: <%= img.human_remain %></li>
+          <li>Subjects: <%= img.subject_list.join("; ") %></li>
         </ul>
       </div>
     <% end %>
