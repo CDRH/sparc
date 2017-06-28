@@ -1,114 +1,141 @@
 <h1>Search All Units</h1>
 
-<%= form_tag units_path, :method => "get",
+<%= form_tag units_path, method: "get",
   id: "unit-search-form", role: "form" do %>
   <%= hidden_field_tag "sort", params["sort"] %>
 
   <div class="row">
-    <!-- location -->
+    <!-- search column -->
     <div class="col-md-3">
-      <div class="form-group">
-        <%= label_tag "unit_no", "Unit Number" %>
-        <%= text_field_tag "unit_no", params["unit_no"], placeholder: "BW", class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= label_tag "excavation_status", "Excavation Status" %>
-        <%= select_tag "excavation_status", options_from_collection_for_select(ExcavationStatus.sorted, "id", "name", params["excavation_status"]), class: "form-control", multiple: true, include_blank: true %>
-      </div>
-    </div>
-
-    <!-- description -->
-    <div class="col-md-3">
-      <div class="form-group">
-        <%= label_tag "intact_roof", "IntactRoof" %>
-        <%= select_tag "intact_roof", options_from_collection_for_select(IntactRoof.sorted, "id", "name", params["intact_roof"]), class: "form-control", multiple: true, include_blank: true %>
-      </div>
-      <div class="form-group">
-        <%= label_tag "irregular_shape", "IrregularShape" %>
-        <%= select_tag "irregular_shape", options_from_collection_for_select(IrregularShape.sorted, "id", "name", params["irregular_shape"]), class: "form-control", multiple: true, include_blank: true %>
-      </div>
-    </div>
-
-    <!-- other description -->
-    <div class="col-md-3">
-      <div class="form-group">
-        <%= label_tag "story", "Story" %>
-        <%= select_tag "story", options_from_collection_for_select(Story.sorted, "id", "name", params["story"]), class: "form-control", multiple: true, include_blank: true %>
-      </div>
-      <div class="form-group">
-        <%= label_tag "occupation", "Occupation" %>
-        <%= select_tag "occupation", options_from_collection_for_select(Occupation.sorted, "id", "name", params["occupation"]), class: "form-control", multiple: true, include_blank: true %>
-      </div>
-    </div>
-
-    <!-- function -->
-    <div class="col-md-3">
-      <div class="form-group">
-        <%= label_tag "inferred_function", "Inferred Function" %>
-        <%= select_tag "inferred_function", options_from_collection_for_select(InferredFunction.sorted, "id", "name", params["inferred_function"]), class: "form-control", multiple: true, include_blank: true %>
-      </div>
-      <div class="form-group">
-        <%= label_tag "unit_class", "Unit Class" %>
-        <%= select_tag "unit_class", options_from_collection_for_select(UnitClass.sorted, "id", "name", params["unit_class"]), class: "form-control", multiple: true, include_blank: true %>
-      </div>
-    </div>
-
-  </div> <!-- /row -->
-
-  <!-- COLLAPSED SEARCH OPTIONS -->
-  <div class="row">
-    <div class="collapse" id="collapseMore">
-      <div class="well">
-        <div class="row">
-
-        <!-- location -->
-          <div class="col-md-3">
-            <div class="form-group">
-              <%= label_tag "zone", "Zone" %>
-              <%= select_tag "zone", options_from_collection_for_select(Zone.sorted, "id", "name", params["zone"]), class: "form-control", multiple: true, include_blank: true %>
-            </div>
-            <div class="form-group">
-              <%= label_tag "salmon_sector", "Salmon Sector" %>
-              <%= select_tag "salmon_sector", options_from_collection_for_select(SalmonSector.sorted, "id", "name", params["salmon_sector"]), class: "form-control", multiple: true, include_blank: true %>
-            </div>
+      <div class="row">
+        <!-- locational -->
+        <p>Locational</p>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= label_tag "unit_no", "Unit Number" %>
+            <%= text_field_tag "unit_no", params["unit_no"], placeholder: "BW", class: "form-control" %>
           </div>
-
-          <!-- unit type description -->
-          <div class="col-md-3">
-            <% room_types = RoomType.sorted.map do |type| %>
-              <% [ type.to_label, type.id ] %>
-            <% end %>
-            <div class="form-group">
-              <%= label_tag "room_type" %>
-              <%= select_tag("room_type", options_for_select(room_types, params["room_type"]), include_blank: true, multiple: true, class: "form-control") %>
-            </div>
-            <div class="form-group">
-              <%= label_tag "type_description", "Type Description" %>
-              <%= select_tag "type_description", options_from_collection_for_select(TypeDescription.sorted, "id", "name", params["type_description"]), class: "form-control", multiple: true, include_blank: true %>
-            </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= label_tag "zone", "Zone" %>
+            <%= select_tag "zone", options_from_collection_for_select(Zone.sorted, "id", "name", params["zone"]),
+                class: "form-control", include_blank: true %>
           </div>
+        </div>
+      </div> <!-- /locational -->
+      <!-- submit -->
+      <div class="row">
+        <%= render partial: "partials/clear_search", locals: { path: units_path } %>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      </div> <!-- /submit -->
 
-          <!-- ? -->
-          <div class="col-md-3">
-            <div class="form-group">
-              <%= label_tag "strata" %>
-              <%= text_field_tag "strata", params["strata"], placeholder: "B-1-2", class: "form-control" %>
+      <div class="row">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+            <!-- structural -->
+            <div class="panel-heading" role="tab" id="headingStructural">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseStructural" aria-expanded="true" aria-controls="collapseStructural">Structural</a>
+              </h4>
             </div>
-          </div>
+            <div id="collapseStructural" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingStructural">
+              <div class="panel-body">
+                <div class="form-group">
+                  <%= label_tag "intact_roof", "IntactRoof" %>
+                  <%= select_tag "intact_roof", options_from_collection_for_select(IntactRoof.sorted, "id", "name", params["intact_roof"]), class: "form-control", multiple: true, include_blank: true %>
+                </div>
+                <div class="form-group">
+                  <%= label_tag "story", "Story" %>
+                  <%= select_tag "story", options_from_collection_for_select(Story.sorted, "id", "name", params["story"]), class: "form-control", multiple: true, include_blank: true %>
+                </div>
+                <div class="form-group">
+                  <%= label_tag "irregular_shape", "IrregularShape" %>
+                  <%= select_tag "irregular_shape", options_from_collection_for_select(IrregularShape.sorted, "id", "name", params["irregular_shape"]), class: "form-control", multiple: true, include_blank: true %>
+                </div>
+                <div class="form-group">
+                  <%= label_tag "unit_class", "Unit Class" %>
+                  <%= select_tag "unit_class", options_from_collection_for_select(UnitClass.sorted, "id", "name", params["unit_class"]), class: "form-control", multiple: true, include_blank: true %>
+                </div>
+                <% room_types = RoomType.sorted.map do |type| %>
+                  <% [ type.to_label, type.id ] %>
+                <% end %>
+                <div class="form-group">
+                  <%= label_tag "room_type" %>
+                  <%= select_tag("room_type", options_for_select(room_types, params["room_type"]), include_blank: true, multiple: true, class: "form-control") %>
+                </div>
+                <div class="form-group">
+                  <%= label_tag "type_description", "Type Description" %>
+                  <%= select_tag "type_description", options_from_collection_for_select(TypeDescription.sorted, "id", "name", params["type_description"]), class: "form-control", multiple: true, include_blank: true %>
+                </div>
+              </div>
+            </div> <!-- /structural -->
 
-          <!-- comments -->
-          <div class="col-md-3">
-            <div class="form-group">
-              <%= label_tag "other_description", "Other Description (not much text to search?)" %>
-              <%= text_field_tag "other_description", params["other_description"], placeholder: "intersticial", class: "form-control" %>
+            <!-- other -->
+            <div class="panel-heading" role="tab" id="headingOther">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOther" aria-expanded="true" aria-controls="collapseOther">Other</a>
+              </h4>
             </div>
-            <div class="form-group">
-              <%= label_tag "comments", "Comments" %>
-              <%= text_field_tag "comments", params["comments"], placeholder: "intersticial", class: "form-control" %>
+            <div id="collapseOther" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOther">
+              <div class="panel-body">
+                <div class="form-group">
+                  <%= label_tag "occupation", "Occupation" %>
+                  <%= select_tag "occupation", options_from_collection_for_select(Occupation.sorted, "id", "name", params["occupation"]), class: "form-control", multiple: true, include_blank: true %>
+                </div>
+                <div class="form-group">
+                  <%= label_tag "salmon_sector", "Salmon Sector" %>
+                  <%= select_tag "salmon_sector", options_from_collection_for_select(SalmonSector.sorted, "id", "name", params["salmon_sector"]), class: "form-control", multiple: true, include_blank: true %>
+                </div>
+                <div class="form-group">
+                  <%= label_tag "excavation_status", "Excavation Status" %>
+                  <%= select_tag "excavation_status", options_from_collection_for_select(ExcavationStatus.sorted, "id", "name", params["excavation_status"]), class: "form-control", multiple: true, include_blank: true %>
+                </div>
+                <div class="form-group">
+                  <%= label_tag "inferred_function", "Inferred Function" %>
+                  <%= select_tag "inferred_function", options_from_collection_for_select(InferredFunction.sorted, "id", "name", params["inferred_function"]), class: "form-control", multiple: true, include_blank: true %>
+                </div>
+                <div class="form-group">
+                  <%= label_tag "strata" %>
+                  <%= text_field_tag "strata", params["strata"], placeholder: "B-1-2", class: "form-control" %>
+                </div>
+                <div class="form-group">
+                  <%= label_tag "other_description", "Other Description (not much text to search?)" %>
+                  <%= text_field_tag "other_description", params["other_description"], placeholder: "intersticial", class: "form-control" %>
+                </div>
+                <div class="form-group">
+                  <%= label_tag "comments", "Comments" %>
+                  <%= text_field_tag "comments", params["comments"], placeholder: "intersticial", class: "form-control" %>
+                </div>
+              </div>
+            </div> <!-- /other -->
+            <!-- artifacts -->
+            <div class="panel-heading" role="tab" id="headingArtifacts">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseArtifacts" aria-expanded="true" aria-controls="collapseArtifacts">Artifacts</a>
+              </h4>
             </div>
+            <div id="collapseArtifacts" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingArtifacts">
+              <div class="panel-body">
+                <label>Unit contains following:</label>
+                <div class="form-group">
+                  <ul id="unit_search_list">
+                    <%= render partial: "radio_button", locals: { item: "bone_tools", label: "Bone Tools" } %>
+                    <%= render partial: "radio_button", locals: { item: "bone_inventories", label: "Bone Inventories" } %>
+                    <%= render partial: "radio_button", locals: { item: "ceramic_inventories", label: "Ceramic Inventories" } %>
+                    <%= render partial: "radio_button", locals: { item: "eggshells", label: "Eggshells" } %>
+                    <%= render partial: "radio_button", locals: { item: "images", label: "Images" } %>
+                    <%= render partial: "radio_button", locals: { item: "lithic_inventories", label: "Lithic Inventories" } %>
+                    <%= render partial: "radio_button", locals: { item: "ornaments", label: "Ornaments" } %>
+                    <%= render partial: "radio_button", locals: { item: "perishables", label: "Perishables" } %>
+                    <%= render partial: "radio_button", locals: { item: "select_artifacts", label: "Select Artifacts" } %>
+                    <%= render partial: "radio_button", locals: { item: "soils", label: "Soils" } %>
+                  </ul>
+                </div>
+              </div>
+            </div> <!-- /artifacts -->
           </div>
         </div> <!-- /row -->
-
     </div> <!-- /well -->
   </div>
 
@@ -130,42 +157,34 @@
             <%= render :partial => "radio_button", :locals => { :item => "soils", :label => "Soils" } %>
           </ul>
         </div>
-      </div> <!-- /well -->
-    </div> <!-- /collapse -->
-  </div> <!-- /row -->
+      </div>
 
-  <div class="row">
-    <button class="btn btn-info" type="button"
-      data-toggle="collapse" data-target="#collapseMore"
-      aria-expanded="false" aria-controls="collapseMore">
-      More Query Options
-    </button>
-    <button class="btn btn-info" type="button"
-      data-toggle="collapse" data-target="#collapseItems"
-      aria-expanded="false" aria-controls="collapseItems">
-      Limit by Items in Unit
-    </button>
-    <%= render :partial => "partials/clear_search", :locals => { :path => query_path } %>
-    <%= submit_tag "Search", :class => "btn btn-primary" %>
-  </div> <!-- /row -->
-
-  <p>Found <%= pluralize @result_num, "result" %></p>
-  <%= will_paginate @units %>
-
-  <% @units.each_slice(6) do |unit_set| %>
-    <div class="row">
-      <% unit_set.each do |unit| %>
-        <div class="col-md-2">
-          <h2><%= link_to unit.unit_no, unit_path(unit.unit_no) %></h2>
-          <ul>
-            <li>Occupation: <%= unit.occupation.name if unit.occupation %>
-            <li>Type: <%= unit.type_description.name if unit.type_description %>
-            <li>Inferred Function: <%= unit.inferred_function.name if unit.inferred_function %></li>
-            <li>Number of Images: <%= unit.images.size %></li>
-          </ul>
-        </div>
-      <% end %>
+      <div class="row">
+        <%= render partial: "partials/clear_search", locals: { path: units_path } %>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      </div> <!-- /submit -->
     </div>
   <% end %>
 
-<% end %>
+  <!-- results -->
+  <div class="col-md-9">
+    <p>Found <%= pluralize @result_num, "result" %></p>
+    <%= will_paginate @units %>
+
+    <% @units.each_slice(3) do |unit_set| %>
+      <div class="row">
+        <% unit_set.each do |unit| %>
+          <div class="col-md-4">
+            <h2><%= link_to unit.unit_no, unit_path(unit.unit_no) %></h2>
+            <ul>
+              <li>Occupation: <%= unit.occupation.name if unit.occupation %>
+              <li>Type: <%= unit.type_description.name if unit.type_description %>
+              <li>Inferred Function: <%= unit.inferred_function.name if unit.inferred_function %></li>
+              <li>Number of Images: <%= unit.images.size %></li>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

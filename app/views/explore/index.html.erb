@@ -1,16 +1,19 @@
-<h1>Explore Pueblo</h1>
+<h1>Explore the Salmon Pueblo</h1>
 
-<p>Browse maps of the site</p>
-<p>TODO all of the links on this page will eventually be condensed into a single view</p>
+<div class="row">
+  <!-- map -->
+  <div class="col-md-6">
+    <p>Delve Into the Interactive Map</p>
+    <%= link_to explore_e_zoom_path do %>
+      <%= image_tag "map_thumb", size: "305x159" %>
+    <% end %>
+  </div>
 
-<h2>Early</h2>
-<ul>
-  <li><%= link_to "Zoomable with Links", explore_e_zoom_path %></li>
-  <li><%= link_to "Zoomable Links With Overlay that Don't Yet Work", explore_e_zoom_links_path %></li>
-</ul>
-
-<h2>Late</h2>
-<ul>
-  <li><%= link_to "No Links and No Overlay", explore_l_path %></li>
-  <li><%= link_to "Zoomable No Links and No Overlay", explore_l_zoom_path %></li>
-</ul>
+  <!-- unit search -->
+  <div class="col-md-6">
+    <p>Search and Browse by Units</p>
+    <%= link_to units_path do %>
+      <%= image_tag "documents/placeholders/MM", size: "325x234" %>
+    <% end %>
+  </div>
+</div>
