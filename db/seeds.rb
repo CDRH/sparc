@@ -329,7 +329,7 @@ def select_or_create_unit unit, spreadsheet, log=true
 end
 
 def select_or_create_zone_from_unit unit_str, spreadsheet, log=true
-  num = unit_str.sub(/^0*/, "").sub(/[A-Z\/]*$/, "")
+  num = unit_str.sub(/[A-Z\/]*$/, "")
   if Zone.where(name: num).size < 1
     puts "\nZone #{num}:"
     report "Zone", num, spreadsheet if log
@@ -1842,11 +1842,14 @@ def seed_documents
     # when working with the CSV apparently symbols aren't gonna work out
     document["document_type"] = create_if_not_exists(DocumentType, :code, document["document_type"])
     document["document_binder"] = find_or_create_document_binder(document["unit"])
-    unit = select_or_create_unit document["unit"], "Documents"
-    document.delete("unit")
+    units = []
+    unit_collection = JSON.parse(document["units"])
+    unit_collection.each do |unit|
+      units << select_or_create_unit(unit, "Documents")
+    end
     # convert from CSV::Row to Hash in order to use with create
     document = document.to_hash
-    document["units"] = [unit]
+    document["units"] = units
     document = Document.create(document)
   end
 end
