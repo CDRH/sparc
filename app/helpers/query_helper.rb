@@ -23,7 +23,8 @@ module QueryHelper
 
   def select_from_column(model_class, column, param_name)
     select_tag param_name,
-               options_for_select(model_class.pluck(column[:name]).uniq.sort,
+               options_for_select(model_class.pluck(column[:name]).compact
+                                    .uniq.sort,
                                   params[param_name]),
                class: "form-control", include_blank: true
   end

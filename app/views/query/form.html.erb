@@ -47,9 +47,6 @@
               <%= label_tag column[:name], column[:name].titleize %>
               <% if column[:type] == :column %>
                 <%= select_from_column @table_class, column, column[:name] %>
-                <%#= @table_class %>
-                <%#= column %>
-                <%#= column[:name] %>
               <% elsif column[:type] == :assoc %>
                 <%= select_from_assoc column, column[:name] %>
               <% end %>
