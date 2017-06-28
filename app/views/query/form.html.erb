@@ -9,19 +9,17 @@
     <div class="col-md-8">
       <%= render "artifacts_nav" %>
 
-      <%# if @tables.size > 1 %>
-        <ul class="nav nav-tabs buffer-bottom">
-          <% @tables.each_with_index do |t, index| %>
-            <li class="<%= active?(params[:table], t[:name].to_s)%>">
-            <%= link_to query_form_path(params[:category], params[:type],
-                                        t[:name]) do %>
-              <%= t[:label] %>
-              <span class="badge"><%= delimit(t[:count]) %></span>
-            <% end %>
-            </li>
+      <ul class="nav nav-tabs buffer-bottom">
+        <% @tables.each_with_index do |t, index| %>
+          <li class="<%= active?(params[:table], t[:name])%>">
+          <%= link_to query_form_path(params[:category], params[:type],
+                                      t[:name]) do %>
+            <%= t[:label] %>
+            <span class="badge"><%= delimit(t[:count]) %></span>
           <% end %>
-        </ul>
-      <%# end %>
+          </li>
+        <% end %>
+      </ul>
 
       <div class="pull-right">
         <%= submit_tag "Search #{params[:table].to_s.pluralize.titleize}",
@@ -49,6 +47,9 @@
               <%= label_tag column[:name], column[:name].titleize %>
               <% if column[:type] == :column %>
                 <%= select_from_column @table_class, column, column[:name] %>
+                <%#= @table_class %>
+                <%#= column %>
+                <%#= column[:name] %>
               <% elsif column[:type] == :assoc %>
                 <%= select_from_assoc column, column[:name] %>
               <% end %>
