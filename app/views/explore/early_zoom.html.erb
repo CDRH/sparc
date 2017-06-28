@@ -4,7 +4,17 @@
 
 <h1>Early Map with Zoom</h1>
 
-<%= link_to "Back to Browse Maps", explore_path %>
+<h2>Early</h2>
+<ul>
+  <li><%= link_to "Zoomable with Links", explore_e_zoom_path %></li>
+  <li><%= link_to "Zoomable Links With Overlay that Don't Yet Work", explore_e_zoom_links_path %></li>
+</ul>
+
+<h2>Late</h2>
+<ul>
+  <li><%= link_to "No Links and No Overlay", explore_l_path %></li>
+  <li><%= link_to "Zoomable No Links and No Overlay", explore_l_zoom_path %></li>
+</ul>
 
 <div id="map_container">
   <svg id="map_zoom" class="early" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" version="1.1">
