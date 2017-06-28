@@ -3,7 +3,6 @@ class Image < ActiveRecord::Base
   has_many :strata, -> {distinct}, :through => :features
   has_many :units, -> {distinct}, :through => :strata
   has_many :zones, -> {distinct}, :through => :units
-  has_many :occupations, -> {distinct}, :through => :units
 
   has_and_belongs_to_many :image_subjects
   belongs_to :image_assocnoeg
@@ -52,10 +51,6 @@ class Image < ActiveRecord::Base
 
   def quality
     image_quality.name if image_quality
-  end
-
-  def occupation_list
-    occupations.map {|o| o.name }
   end
 
   def subject_list
