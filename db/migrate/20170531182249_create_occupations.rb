@@ -8,15 +8,12 @@ class CreateOccupations < ActiveRecord::Migration[5.0]
     rename_table :unit_occupations, :occupations
 
     # remove all the indexes for occupations / periods
-    remove_reference :bone_tools, :bone_tool_occupations, index: true, foreign_key: true
+    remove_reference :bone_tools, :bone_tool_occupation, index: true, foreign_key: true
     remove_reference :eggshells, :eggshell_affiliation, index: true, foreign_key: true
     remove_reference :features, :feature_occupation, index: true, foreign_key: true
     remove_reference :ornaments, :ornament_period, index: true, foreign_key: true
     remove_reference :select_artifacts, :select_artifact_occupation, index: true, foreign_key: true
     remove_reference :strata, :strat_occupation, index: true, foreign_key: true
-
-    # also kill a column that doesn't seem to be getting used?
-    remove_column :bone_tools, :bone_tool_occupation_id, :integer
 
     # start dropping the tables
     drop_table :bone_tool_occupations do |t|
