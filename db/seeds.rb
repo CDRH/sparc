@@ -1458,8 +1458,7 @@ def seed_lithic_tools
     width: "Width",
     thickness: "Thickness",
     weight: "Weight",
-    comments: "Notes",
-    pii: "PII?"
+    comments: "Notes"
   }
 
   last_unit = ""
