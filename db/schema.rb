@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170623180012) do
+ActiveRecord::Schema.define(version: 20170627163626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -884,7 +884,6 @@ ActiveRecord::Schema.define(version: 20170623180012) do
     t.integer "thickness"
     t.integer "weight"
     t.string  "comments"
-    t.string  "pii"
     t.integer "lithic_inventory_id"
     t.integer "lithic_artifact_type_id"
     t.integer "lithic_material_type_id"
