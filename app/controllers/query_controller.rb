@@ -1,31 +1,27 @@
 class QueryController < ApplicationController
   def category
     params.require(:category)
-
-    render "category"
   end
 
   def form
     params.require([:category, :type])
 
     @tables = category_type_tables.map { |t| {name: t,
-                                              label: t.to_s
-                                                       .pluralize.titleize,
-                                              count: t.to_s
-                                                       .classify.constantize
+                                              label: t.pluralize.titleize,
+                                              count: t.classify.constantize
                                                        .count} }
 
     params[:table] =
-      params[:table].present? ? params[:table] : @tables.first[:name].to_s
+      params[:table].present? ? params[:table] : @tables.first[:name]
 
     @table_class = params[:table].to_s.classify.constantize
     @table_inputs = table_input_columns(@table_class)
     @table_selects = table_select_columns(@table_class)
-
-    render "query_form"
   end
 
   def results
+    params.require([:category, :type, :table])
+
     @table = params[:table].classify.constantize
     @column_names = @table.columns.map(&:name)
     @res = @table
@@ -70,21 +66,22 @@ class QueryController < ApplicationController
     when "artifacts"
       case params[:type]
       when "bones"
-        return [:bone_inventory, :bone_tool]
+        return ["bone_inventory", "bone_tool"]
       when "ceramics"
-        return [:ceramic_inventory, :ceramic_clap, :ceramic, :ceramic_vessel]
+        return ["ceramic_inventory", "ceramic_clap", "ceramic",
+                "ceramic_vessel"]
       when "eggshells"
-        return [:eggshell]
+        return ["eggshell"]
       when "lithics"
-        return [:lithic_inventory, :lithic_debitage, :lithic_tool]
+        return ["lithic_inventory", "lithic_debitage", "lithic_tool"]
       when "ornaments"
-        return [:ornament]
+        return ["ornament"]
       when "perishables"
-        return [:perishable]
+        return ["perishable"]
       when "soils"
-        return [:soil]
+        return ["soil"]
       when "woods"
-        return [:wood_inventory]
+        return ["wood_inventory"]
       end
     end
   end
