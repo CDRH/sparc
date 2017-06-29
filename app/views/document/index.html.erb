@@ -1,12 +1,22 @@
 <h3>Documents</h3>
 
-<h4>Browse Documents by Type</h4>
-
+<ul class="document_type_list">
+  <li>
+    <%= link_to "Browse Media Map Documents", documents_type_path("media_maps"), role: "button" %>
+  </li>
+</ul>
+<%# leaving the code for all document types in here in case it is needed in the future %>
+<%
+=begin
+%>
 <ul class="document_type_list">
   <% DocumentType.sorted.each do |type| %>
     <li><%= link_to type.name, documents_type_path(type.name.parameterize(separator: "_")) %></li>
   <% end %>
 </ul>
+<%
+=end
+%>
 
 <div class="clearfix"></div>
 <h4>Browse Documents by Unit</h4>

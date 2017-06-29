@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def get_doc_type_name(type)
-    if type == "feature_record_significant_artifact"
-      "Feature Record (Significant Artifact)"
+    if type == "feature_record_select_artifact"
+      "Feature Record (Select Artifact)"
     else
       type.titleize if type
     end
