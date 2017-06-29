@@ -21,9 +21,8 @@
     <![endif]-->
   </head>
 
-  <% section = @section || params["controller"] %>
 
-  <body class='body_<%= params[:controller] %> body_<%= params[:action] %>'>
+  <body class="body_<%= params[:controller] %> body_<%= params[:action] %>">
 
     <header class="body_head">
       <!-- if statement to only show on home page -->
@@ -58,7 +57,6 @@
         <% end %>
         <!-- END if statement-->
 
-        
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
@@ -69,26 +67,29 @@
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <!-- <li <#= "class=active" if section == "static" %>>
-                <#= link_to "SPARC Home", home_path %>
+              <% section = @section || params["controller"] %>
+              <!-- <li class="<%#= active?(home_path) %>">
+                <%#= link_to "SPARC Home", home_path %>
               </li> -->
-              <li <%= "class=active" if section == "explore" %>>
+              <li class="<%= active?("explore", section) %>">
                 <%= link_to "Explore Pueblo", explore_path %>
               </li>
-              <li <%= "class=active" if section == "query" %>>
+              <li class="<%= active?("query", section) %>">
                 <%= link_to "Query Data", query_path %>
               </li>
-              <li <%= "class=active" if section == "document" %>>
+              <li class="<%= active?("document", section) %>">
                 <%= link_to "Documents", documents_path %>
               </li>
-              <li <%= "class=active" if section == "image" %>>
+              <li class="<%= active?("image", section) %>">
                 <%= link_to "Image Gallery", gallery_path %>
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li <%= "class=active" if section == "about" %>><%= link_to "About", about_path %></li>
+              <li class="<%= active?("about", section) %>">
+                <%= link_to "About", about_path %>
+              </li>
               <%# TODO the below will NOT be part of the final site %>
-              <li class="dropdown <%= "active" if section.include?("admin") %>">
+              <li class="dropdown">
                 <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">Admin DB View<b class="caret"></b></a>
                 <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4" data-turbolinks="false">
                   <li><%= link_to('Units', admin_units_path)%></li>

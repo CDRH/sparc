@@ -5,8 +5,7 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
   <% @units.each_with_index do |unit, i| %>
-    <% active = i == 0 %>
-    <li role="presentation" <%= "class=active" if active %> >
+    <li role="presentation" class="<%= active?(0, i) %>">
       <a href=<%= "#unit_#{i}" %> aria-controls=<%= "unit_#{i}" %> role="tab" data-toggle="tab"><%= unit.unit_no %></a>
     </li>
   <% end %>
@@ -15,8 +14,7 @@
 <!-- Tab panes -->
 <div class="tab-content">
   <% @units.each_with_index do |unit, i| %>
-    <% active = i == 0 %>
-    <div role="tabpanel" class="tab-pane <%= "active" if active %>" id=<%= "unit_#{i}" %> >
+    <div role="tabpanel" class="tab-pane <%= active?(0, i) %>" id=<%= "unit_#{i}" %> >
       <h2><%= link_to unit.unit_no, unit_path(unit.unit_no) %></h2>
       <p>Probably an image gallery will go here?</p>
       <p><%= link_to "More info", unit_path(unit.unit_no) %></p>
