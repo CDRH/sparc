@@ -1,6 +1,13 @@
 class QueryController < ApplicationController
   def category
     params.require(:category)
+
+    if params[:category][/^(?:features|strata|images)$/]
+      # These are lone tables, so call the form action and render its view
+      params[:type] = params[:category]
+      form
+      render :form
+    end
   end
 
   def form
@@ -63,6 +70,15 @@ class QueryController < ApplicationController
 
   def category_type_tables
     case params[:category]
+    when "samples"
+      case params[:type]
+      when "pollens"
+        return ["pollen_inventory"]
+      when "soils"
+        return ["soil"]
+      when "tree_rings"
+        return ["tree_ring"]
+      end
     when "artifacts"
       case params[:type]
       when "bones"
@@ -78,11 +94,15 @@ class QueryController < ApplicationController
         return ["ornament"]
       when "perishables"
         return ["perishable"]
-      when "soils"
-        return ["soil"]
       when "woods"
         return ["wood_inventory"]
       end
+    when "features"
+      return ["features"]
+    when "strata"
+      return ["strata"]
+    when "images"
+      return ["images"]
     end
   end
 
@@ -163,9 +183,9 @@ class QueryController < ApplicationController
       end
     end
 
-    # All belongs_to associations except to unit, strata, feature, inventory
+    # All belongs_to associations except to unit, stratum, feature, inventory
     table.reflect_on_all_associations(:belongs_to)
-      .reject{ |a| a.name[/(?:^unit|^strata|^features?|_inventory)$/] }
+      .reject{ |a| a.name[/(?:^unit|^stratum|^features?|_inventory)$/] }
       .map{ |a| column_list << { name: a.name.to_s, type: :assoc} }
 
     return column_list
