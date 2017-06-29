@@ -1,10 +1,10 @@
 <h3>Query</h3>
 
-<ul>
-  <li>Samples</li>
+<ul class="nav nav-pills nav-justified query_subnav">
+  <li><%= link_to "Samples", query_category_path("samples") %></li>
   <li><%= link_to "Artifacts", query_category_path("artifacts") %></li>
-  <li>Features</li>
-  <li>Strata</li>
-  <li>Images</li>
-  <li>Canned Queries</li>
+  <li><%= link_to "Features", query_category_path("features") %></li>
+  <li><%= link_to "Strata", query_category_path("strata") %></li>
+  <li><%= link_to "Images", query_category_path("images") %></li>
+  <li><%= link_to "Canned Queries", query_category_path("canned") %></li>
 </ul>
