@@ -1,3 +1,5 @@
+require_relative "../renderers/csv.rb"
+
 class QueryController < ApplicationController
   def category
     params.require(:category)
@@ -77,6 +79,15 @@ class QueryController < ApplicationController
     @res = common_search @res
 
     @res = @res.sorted.paginate(:page => params[:page], :per_page => 20)
+
+    respond_to do |format|
+      format.html {
+        @res = @res.paginate(:page => params[:page], :per_page => 20)
+      }
+      format.csv {
+        render csv: @res, filename: params[:action], columns: @column_names
+      }
+    end
   end
 
   private

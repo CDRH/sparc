@@ -5,6 +5,14 @@
 <%= will_paginate @res %>
 
 <div class="search_results table-responsive">
+  <div class="pull-right">
+    <%= link_to query_results_path(params_hash, format: "csv") do %>
+      <button type="button" class="btn btn-default">
+        Download as CSV <span class="glyphicon glyphicon-download-alt"></span>
+      </button>
+    <% end %>
+  </div>
+
   <table class="table table-striped">
     <% no_occupation = !@column_names.include?("occupation_id") %>
     <tr>
@@ -78,6 +86,15 @@
       </tr>
     <% end %>
   </table>
+
+  <%= will_paginate @res %>
+  <div class="pull-right">
+    <%= link_to query_results_path(params_hash, format: "csv") do %>
+      <button type="button" class="btn btn-default">
+        Download as CSV <span class="glyphicon glyphicon-download-alt"></span>
+      </button>
+    <% end %>
+  </div>
 </div>
 
 <%= will_paginate @res %>

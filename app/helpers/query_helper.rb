@@ -7,6 +7,12 @@ module QueryHelper
     end
   end
 
+  def params_hash
+    # create a new object so that the params
+    # are not directly altered
+    options = params.to_unsafe_h
+  end
+
   def delimit(number)
     number_with_delimiter(number)
   end
