@@ -1,4 +1,11 @@
 module ApplicationHelper
+  def active?(value, comparison=:current_page)
+    if comparison == :current_page
+      current_page?(value) ? "active" : ""
+    else
+      value == comparison ? "active" : ""
+    end
+  end
 
   def doc_type_active(type)
     type_name = type.name.parameterize(separator: '_')

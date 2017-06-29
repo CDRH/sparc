@@ -24,19 +24,13 @@ Rails.application.routes.draw do
   # images
   get '/gallery', to: 'image#index', as: :gallery
   get '/gallery/:number', to: 'image#show', as: :image
-  # search and browse
+
+  # Query
   get '/query', to: 'query#index', as: :query
-  get '/query/artifacts', to: 'query#artifacts', as: :artifacts
-  get '/query/artifacts/bones', to: 'query#bones', as: :bones
-  get '/query/artifacts/bones/results', to: 'query#bones_results', as: :bones_results
-  get '/query/artifacts/ceramics', to: 'query#ceramics', as: :ceramics
-  get '/query/artifacts/ceramics/results', to: 'query#ceramics_results', as: :ceramics_results
-  get '/query/artifacts/eggshells', to: 'query#eggshells', as: :eggshells
-  get '/query/artifacts/lithics', to: 'query#lithics', as: :lithics
-  get '/query/artifacts/ornaments', to: 'query#ornaments', as: :ornaments
-  get '/query/artifacts/perishables', to: 'query#perishables', as: :perishables
-  get '/query/artifacts/soils', to: 'query#soils', as: :soils
-  get '/query/artifacts/woods', to: 'query#woods', as: :woods
+  get '/query/:category', to: 'query#category', as: :query_category
+  get '/query/:category/:type(/:table)', to: 'query#form', as: :query_form
+  get '/query/:category/:type/:table/results', to: 'query#results', as: :query_results
+
   # placeholders
   get '/about', to: 'static#about', as: :about
 
