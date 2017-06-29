@@ -10,7 +10,7 @@
       <%= render "artifacts_nav" %>
 
       <ul class="nav nav-tabs buffer-bottom">
-        <% @tables.each_with_index do |t, index| %>
+        <% @tables.each do |t| %>
           <li class="<%= active?(params[:table], t[:name])%>">
           <%= link_to query_form_path(params[:category], params[:type],
                                       t[:name]) do %>
