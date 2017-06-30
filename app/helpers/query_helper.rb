@@ -28,4 +28,13 @@ module QueryHelper
                                   params[param_name]),
                class: "form-control", include_blank: true
   end
+
+  def select_from_join(model_class, column, param_name)
+    select_tag param_name,
+               options_for_select(model_class.joins(column[:join_table])
+                                           .pluck(column[:name])
+                                           .uniq.sort,
+                                  params[param_name]),
+               class: "form-control", include_blank: true
+  end
 end

@@ -1,0 +1,12 @@
+<% type = params[:type] %>
+<ul class="nav nav-pills buffer-bottom  nav-justified query_subnav">
+  <li role="presentation" class="<%= active?(type, "pollens") %>">
+    <%= link_to "Pollens", query_form_path("samples", "pollens") %>
+  </li>
+  <li role="presentation" class="<%= active?(type, "soils") %>">
+    <%= link_to "Soils", query_form_path("samples", "soils") %>
+  </li>
+  <li role="presentation" class="<%= active?(type, "tree_rings") %>">
+    <%= link_to "Tree Rings", query_form_path("samples", "tree_rings") %>
+  </li>
+</ul>
