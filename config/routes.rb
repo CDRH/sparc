@@ -9,10 +9,10 @@ Rails.application.routes.draw do
   get '/documents/unit/:unit(/:type)', to: 'document#unit', as: :documents_unit
   # explore
   get '/explore', to: 'explore#index', as: :explore
-  get '/explore/early-zoom', to: 'explore#early-zoom', as: :explore_e_zoom
-  get '/explore/early-zoom-links', to: 'explore#early-zoom-links', as: :explore_e_zoom_links
+  get '/explore/early-zoom', to: 'explore#early_zoom', as: :explore_e_zoom
+  get '/explore/early-zoom-links', to: 'explore#early_zoom_links', as: :explore_e_zoom_links
   get '/explore/late', to: 'explore#late', as: :explore_l
-  get '/explore/late-zoom', to: 'explore#late-zoom', as: :explore_l_zoom
+  get '/explore/late-zoom', to: 'explore#late_zoom', as: :explore_l_zoom
   get '/explore/units', to: 'explore#units', as: :units
   get '/explore/unit/:number', to: 'explore#unit_summary', as: :unit
   get '/explore/unit/:number/overview', to: 'explore#unit_overview', as: :unit_overview
