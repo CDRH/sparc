@@ -10,7 +10,7 @@ module QueryHelper
   def params_hash
     # create a new object so that the params
     # are not directly altered
-    options = params.to_unsafe_h
+    params.to_unsafe_h
   end
 
   def delimit(number)
@@ -34,6 +34,7 @@ module QueryHelper
           value = "N/A"
         end
       else
+        # TODO check for respond_to? here, also?
         if record.send(assoc_col.pluralize).present?
           assoc_values = record.send(assoc_col.pluralize)
             .map { |r| r.send(assoc_col << "_no") }.join("; ")
@@ -44,7 +45,8 @@ module QueryHelper
       end
     # let through columns that aren't "id" or "created_at", etc
     elsif !column[/(?:^id|_at)$/]
-      value = value
+      # if the value is "nil" then sub in empty string so it will display correctly
+      value = "" if value.nil?
     else
       value = nil
     end

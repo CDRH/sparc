@@ -1,62 +1,54 @@
-@@columns_to_remove = [
-  "id",
-  "created_at",
-  "updated_at"
-]
-
 ActionController::Renderers.add :csv do |data, options|
   filename = options[:filename] || 'data'
   obj = []
-  # start with specified column names if they exist
-  if options[:columns]
-    obj << remove_columns(options[:columns])
-  else
-    obj << remove_columns(row.attributes.keys)
-  end
+  # start with specified column names if they exist, otherwise default to record fields
+  columns = options[:columns] || data[0].attributes.keys
+  # filter out those which shouldn't be displayed and titleize
+  # TODO move similar logic out of results html view so both use
+  obj << columns.reject { |column| column[/(?:^id|_at)$/] }
+          .map { |column| column.titleize }
+
   # add the values from each active record object to the array
   data.each do |row|
-    record = remove_columns(row.attributes)
-    record = association_labels(record)
-    obj << record.values
+    obj << row.attributes.map { |column, value| display_values(row, column) }.compact
+    # raise "exception #{row.attributes.map { |column, value| display_values(row, column) }.compact}"
   end
   str = obj.map(&:to_csv).join
   send_data str, type: Mime[:csv], disposition: "attachment; filename=#{filename}.csv"
 end
 
-def association_labels(record)
-  record.each do |column, value|
-    if column[/_id$/]
-      # get name without _id
-      assoc_col = column[/^(.+)_id$/, 1]
-      if record.respond_to?(assoc_col)
-        if record.send(assoc_col).present?
-          if record.send(assoc_col).respond_to?(:name)
-            record[column] = record.send(assoc_col).name
-          else
-            record[column] = record.send(assoc_col).id
-          end
+# TODO this is a copy of the display_values method in the query_helper.rb file and should be condensed
+def display_values(record, column)
+  value = record[column]
+  if column[/_id$/]
+    # get name without _id
+    assoc_col = column[/^(.+)_id$/, 1]
+    if record.respond_to?(assoc_col)
+      if record.send(assoc_col).present?
+        if record.send(assoc_col).respond_to?(:name)
+          value = record.send(assoc_col).name
         else
-          record[column] = "N/A"
+          value = record.send(assoc_col).id
         end
       else
-        if record.send(assoc_col.pluralize).present?
-          assoc_values = result.send(assoc_col.pluralize)
-            .map { |r| r.send(assoc_col << "_no") }.join("; ")
-          record[column] = assoc_values
-        else
-          record[column] = "N/A"
-        end
+        value = "N/A"
+      end
+    else
+      # TODO check for respond_to? here, also?
+      if record.send(assoc_col.pluralize).present?
+        assoc_values = record.send(assoc_col.pluralize)
+          .map { |r| r.send(assoc_col << "_no") }.join("; ")
+        value = assoc_values
+      else
+        value = "N/A"
       end
     end
-  end
-end
-
-# accepts both Array and Hash
-def remove_columns(data, columns=@@columns_to_remove)
-  if data.class == Array
-    return data - columns
+  # let through columns that aren't "id" or "created_at", etc
+  elsif !column[/(?:^id|_at)$/]
+    # if the value is "nil" then sub in empty string so it will display correctly
+    value = "" if value.nil?
   else
-    # assuming that it's a hash
-    return data.reject { |k, v| columns.include?(k) }
+    value = nil
   end
+  return value
 end
