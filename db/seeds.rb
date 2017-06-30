@@ -990,65 +990,6 @@ end
 # ANALYSIS TABLES #
 ###################
 
-##############
-# Faunal Tools #
-##############
-def seed_faunal_tools
-  s = Roo::Excelx.new(@files[:faunaltools])
-
-  puts "\n\n\nCreating Faunal Tools\n"
-
-  faunaltools_columns = {
-    unit: "Room",
-    strat: "Stratum",
-    strat_other: "Other Strata ",
-    feature: "Feature No",
-    sa_no: "Select Artifact No.",
-    fs_no: "FS No",
-    depth: "Depth (meters below datum)",
-    occupation: "Occupation",
-    grid: "Grid",
-    tool_type_code: "Tool Type Code",
-    tool_type: "Tool Type",
-    species_code: "Species Code",
-    comments: "Comments"
-  }
-
-  last_unit = ""
-  s.sheet('data').each_with_index(faunaltools_columns) do |row, index|
-    # Skip header row
-    next if row[:unit] == "Room"
-
-    faunaltool = prepare_cell_values(row, "Faunal Tools", index)
-
-    # Output context for creation
-#    puts "\nUnit #{faunaltool[:unit]}:" if faunaltool[:unit] != last_unit
-    last_unit = faunaltool[:unit]
-
-    # Handle foreign keys
-    unit = select_or_create_unit(faunaltool[:unit], "Faunal Tools")
-
-    faunaltool[:occupation] = find_or_create_occupation(faunaltool[:occupation])
-    faunaltool[:faunal_inventory] = associate_analysis_with_inventory(FaunalInventory, faunaltool[:fs_no], unit)
-
-    faunaltool[:strata] = []
-    strats = faunaltool[:strat].split(/[;,]/).map{ |strat| strat.strip }
-    strats.uniq!
-    strats.each do |strat|
-      faunaltool[:strata] << select_or_create_stratum(unit, strat, "Faunal Tool: #{faunaltool[:fs_no]}")
-    end
-
-    # TODO Add strat_other, feature, and sa_no to schema
-    faunaltool.delete :strat_other
-    faunaltool.delete :feature
-    faunaltool.delete :sa_no
-
-    # Output and save
-#    puts faunaltool[:fs_no]
-    FaunalTool.create(faunaltool)
-  end
-end
-
 ###########
 # Burials #
 ###########
@@ -1367,6 +1308,54 @@ def seed_eggshells
     # Output and save
 #    puts eggshell[:salmon_museum_no]
     Eggshell.create(eggshell)
+  end
+end
+
+################
+# Faunal Tools #
+################
+def seed_faunal_tools
+  s = Roo::Excelx.new(@files[:faunaltools])
+
+  puts "\n\n\nCreating Faunal Tools\n"
+
+  faunaltools_columns = {
+    unit: "Room",
+    strat: "Stratum",
+    strat_other: "Other Strata ",
+    feature: "Feature No",
+    sa_no: "Select Artifact No.",
+    fs_no: "FS No",
+    depth: "Depth (meters below datum)",
+    occupation: "Occupation",
+    grid: "Grid",
+    tool_type_code: "Tool Type Code",
+    tool_type: "Tool Type",
+    species_code: "Species Code",
+    comments: "Comments"
+  }
+
+  last_unit = ""
+  s.sheet('data').each_with_index(faunaltools_columns) do |row, index|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    faunaltool = prepare_cell_values(row, "Faunal Tools", index)
+
+    # Output context for creation
+    # puts "\nUnit #{faunaltool[:unit]}:" if faunaltool[:unit] != last_unit
+    last_unit = faunaltool[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(faunaltool[:unit], "Faunal Tools")
+
+    faunaltool[:occupation] = find_or_create_occupation(faunaltool[:occupation])
+    faunaltool[:faunal_inventory] = associate_analysis_with_inventory(FaunalInventory, faunaltool[:fs_no], unit)
+    associate_strata_features(unit, faunaltool[:strat], faunaltool[:feature], faunaltool, "Faunal Tools", false)
+
+    # Output and save
+    # puts faunaltool[:fs_no]
+    FaunalTool.create(faunaltool)
   end
 end
 
@@ -1963,38 +1952,38 @@ seed_strata if Stratum.count < 1
 seed_features if Feature.count < 1
 
 # Inventory Tables
-# seed_ceramic_inventory if CeramicInventory.count < 1
+seed_ceramic_inventory if CeramicInventory.count < 1
 seed_faunal_inventory if FaunalInventory.count < 1
-# seed_lithic_inventories if LithicInventory.count < 1
-# seed_obsidian_inventory if ObsidianInventory.count < 1
-# seed_pollen_inventories if PollenInventory.count < 1
-# seed_wood_inventories if WoodInventory.count < 1
+seed_lithic_inventories if LithicInventory.count < 1
+seed_obsidian_inventory if ObsidianInventory.count < 1
+seed_pollen_inventories if PollenInventory.count < 1
+seed_wood_inventories if WoodInventory.count < 1
 
-# # Analysis Controlled Vocab Tables
-# seed_lithic_controlled_vocab
+# Analysis Controlled Vocab Tables
+seed_lithic_controlled_vocab
 
-# Analysis Tables
-# seed_burials if Burial.count < 1
-# seed_ceramics if Ceramic.count < 1
-# seed_ceramic_claps if CeramicClap.count < 1
-# seed_ceramic_vessels if CeramicVessel.count < 1
-# seed_eggshells if Eggshell.count < 1
+Analysis Tables
+seed_burials if Burial.count < 1
+seed_ceramics if Ceramic.count < 1
+seed_ceramic_claps if CeramicClap.count < 1
+seed_ceramic_vessels if CeramicVessel.count < 1
+seed_eggshells if Eggshell.count < 1
 seed_faunal_tools if FaunalTool.count < 1
-# seed_lithic_debitages if LithicDebitage.count < 1
-# seed_lithic_tools if LithicTool.count < 1
-# seed_ornaments if Ornament.count < 1
-# seed_perishables if Perishable.count < 1
-# seed_select_artifacts if SelectArtifact.count < 1
-# seed_soils if Soil.count < 1
-# seed_tree_rings if TreeRing.count < 1
+seed_lithic_debitages if LithicDebitage.count < 1
+seed_lithic_tools if LithicTool.count < 1
+seed_ornaments if Ornament.count < 1
+seed_perishables if Perishable.count < 1
+seed_select_artifacts if SelectArtifact.count < 1
+seed_soils if Soil.count < 1
+seed_tree_rings if TreeRing.count < 1
 
-# # Documents
-# seed_document_metadata if DocumentMetadata.count < 1
-# seed_document_types if DocumentType.count < 1
-# seed_documents if Document.count < 1
+# Documents
+seed_document_metadata if DocumentMetadata.count < 1
+seed_document_types if DocumentType.count < 1
+seed_documents if Document.count < 1
 
-# # Images
-# seed_images if Image.count < 1
+# Images
+seed_images if Image.count < 1
 
 # Logging
 File.open("reports/please_check_for_accuracy.txt", "w") do |file|

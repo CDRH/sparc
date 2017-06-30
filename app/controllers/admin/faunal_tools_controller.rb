@@ -4,7 +4,10 @@ class Admin::FaunalToolsController < ApplicationController
     conf.columns = [
       :units,
       :strata,
+      :feature,
       :fs_no,
+      :sa_no,
+      :strat_other,
       :faunal_inventory,
       :depth,
       :occupation,
@@ -16,6 +19,7 @@ class Admin::FaunalToolsController < ApplicationController
     ]
     conf.columns[:units].form_ui = :record_select
     conf.columns[:strata].form_ui = :record_select
+    conf.columns[:feature].form_ui = :record_select
     conf.columns[:faunal_inventory].form_ui = :record_select
     conf.columns[:occupation].form_ui = :select
     conf.actions.swap :search, :field_search

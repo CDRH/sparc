@@ -18,6 +18,7 @@ class FeatureTest < ActiveSupport::TestCase
     @item.ceramic_inventories << CeramicInventory.first
     @item.eggshells << Eggshell.first
     @item.faunal_inventories << FaunalInventory.first
+    @item.faunal_tools << FaunalTool.first
     @item.lithic_inventories << LithicInventory.first
     @item.perishables << Perishable.first
     @item.select_artifacts << SelectArtifact.first
@@ -43,6 +44,7 @@ class FeatureTest < ActiveSupport::TestCase
     assert_not_empty @item.ceramic_inventories
     assert_not_empty @item.eggshells
     assert_not_empty @item.faunal_inventories
+    assert_not_empty @item.faunal_tools
     assert_not_empty @item.lithic_inventories
     assert_not_empty @item.perishables
     assert_not_empty @item.select_artifacts

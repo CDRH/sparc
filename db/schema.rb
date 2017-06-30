@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170630152000) do
+ActiveRecord::Schema.define(version: 20170630162118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -538,15 +538,12 @@ ActiveRecord::Schema.define(version: 20170630152000) do
     t.datetime "updated_at",          null: false
     t.integer  "occupation_id"
     t.integer  "faunal_inventory_id"
+    t.integer  "feature_id"
+    t.string   "strat_other"
+    t.string   "sa_no"
     t.index ["faunal_inventory_id"], name: "index_faunal_tools_on_faunal_inventory_id", using: :btree
+    t.index ["feature_id"], name: "index_faunal_tools_on_feature_id", using: :btree
     t.index ["occupation_id"], name: "index_faunal_tools_on_occupation_id", using: :btree
-  end
-
-  create_table "faunal_tools_strata", id: false, force: :cascade do |t|
-    t.integer "stratum_id"
-    t.integer "faunal_tool_id"
-    t.index ["faunal_tool_id"], name: "index_faunal_tools_strata_on_faunal_tool_id", using: :btree
-    t.index ["stratum_id"], name: "index_faunal_tools_strata_on_stratum_id", using: :btree
   end
 
   create_table "feature_groups", force: :cascade do |t|
@@ -1256,7 +1253,6 @@ ActiveRecord::Schema.define(version: 20170630152000) do
   add_foreign_key "eggshells_features", "features"
   add_foreign_key "faunal_inventories", "features"
   add_foreign_key "faunal_inventories_features", "features"
-  add_foreign_key "faunal_tools_strata", "strata"
   add_foreign_key "features", "door_between_multiple_rooms"
   add_foreign_key "features", "doorway_sealeds"
   add_foreign_key "features", "feature_groups"
