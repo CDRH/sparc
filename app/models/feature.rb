@@ -26,10 +26,14 @@ class Feature < ActiveRecord::Base
   has_and_belongs_to_many :soils
   has_and_belongs_to_many :wood_inventories
 
+  def self.sorted
+    order("feature_no")
+  end
+
   def to_label
     "#{strata.map{|s| s.to_label}.join(', ')} : #{feature_no}"
   end
-  
+
   def authorized_for_update?
     puts "---------#{current_user}"
     current_user != nil ? true : false

@@ -53,6 +53,10 @@ class QueryController < ApplicationController
           @res = @res.joins(column[:name].to_sym)
                    .where(column[:name].pluralize =>
                           { id: params[column[:name]] })
+        elsif column[:type] == :join
+          @res = @res.joins(column[:join_table])
+                   .where(column[:join_table] =>
+                          { column[:name] => params[column[:name]] })
         else
           @res = @res.where("#{column[:name]} = ?",
                             "%#{params[column[:name]]}%")
@@ -156,6 +160,17 @@ class QueryController < ApplicationController
     # Create form inputs for:
     column_list = []
 
+    if table == Feature
+      column_list << { name: "feature_no", type: "string" }
+    elsif table == Stratum
+      column_list << { name: "strat_all", type: "string" }
+      column_list << { name: "strat_alpha", type: "string" }
+      column_list << { name: "strat_one", type: "string" }
+      column_list << { name: "strat_two", type: "string" }
+      column_list << { name: "strat_three", type: "string" }
+    end
+
+
     # Columns whose names
     # don't begin with "strat"
     # don't match "id", "room", or "unit"
@@ -164,7 +179,7 @@ class QueryController < ApplicationController
       if !c.name[/^strat/] \
       && !c.name[/^(?:id|room|unit)$/] \
       && !c.name[/(?:_at|_id|_no|code|type)$/]
-        column_list << {name: c.name.to_s, type: c.type}
+        column_list << { name: c.name.to_s, type: c.type }
       end
     end
 
@@ -179,14 +194,19 @@ class QueryController < ApplicationController
     # end in "_no" not preceded by "feature", "code", or "type"
     table.columns.each do |c|
       if c.name[/(?:(?<!feature)_no|code|type)$/]
-        column_list << {name: c.name.to_s, type: :column}
+        column_list << { name: c.name.to_s, type: :column }
       end
     end
 
-    # All belongs_to associations except to unit, stratum, feature, inventory
+    # All belongs_to associations except to unit, stratum, feature,
+    # inventory, or occupation
     table.reflect_on_all_associations(:belongs_to)
-      .reject{ |a| a.name[/(?:^unit|^stratum|^features?|_inventory)$/] }
-      .map{ |a| column_list << { name: a.name.to_s, type: :assoc} }
+      .reject{ |a| a.name[/(?:^unit|^stratum|^features?|_inventory|occupation)$/] }
+      .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
+
+    if table == Stratum
+      column_list << { name: "feature_no", type: :join, join_table: :features }
+    end
 
     return column_list
   end

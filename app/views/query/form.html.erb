@@ -51,6 +51,8 @@
                 <%= select_from_column @table_class, column, column[:name] %>
               <% elsif column[:type] == :assoc %>
                 <%= select_from_assoc column, column[:name] %>
+              <% elsif column[:type] == :join %>
+                <%= select_from_join @table_class, column, column[:name] %>
               <% end %>
              </div>
           <% end %>
