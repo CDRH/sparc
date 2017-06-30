@@ -13,6 +13,15 @@ class QueryController < ApplicationController
   def form
     params.require([:category, :type])
 
+    # Clear common search options
+    if params["search_clear"].present?
+      session[:common_search_unit] = nil
+      session[:common_search_unit_class] = nil
+      session[:common_search_occupation] = nil
+      session[:common_search_strat_grouping] = nil
+      session[:common_search_feature_group] = nil
+    end
+
     @tables = category_type_tables.map { |t| {name: t,
                                               label: t.pluralize.titleize,
                                               count: t.classify.constantize
@@ -111,6 +120,13 @@ class QueryController < ApplicationController
   end
 
   def global_search(res)
+    # Save params in session
+    session[:common_search_unit] = params["unit"]
+    session[:common_search_unit_class] = params["unit_class"]
+    session[:common_search_occupation] = params["occupation"]
+    session[:common_search_strat_grouping] = params["strat_grouping"]
+    session[:common_search_feature_group] = params["feature_group"]
+
     # Units
     if (params["unit"].present? || params["unit_class"].present?) \
     && res.reflect_on_all_associations.map { |a| a.name }.include?(:units)
