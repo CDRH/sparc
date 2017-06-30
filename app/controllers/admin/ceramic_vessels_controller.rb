@@ -13,6 +13,7 @@ class Admin::CeramicVesselsController < ApplicationController
       :strata,
       :feature,
       :sa_no,
+      :burial_related,
       :fs_no,
       :salmon_vessel_no,
       :pottery_order_no,
