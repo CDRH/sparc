@@ -2,7 +2,29 @@ class ExploreController < ApplicationController
   before_action :get_unit
   skip_before_action :get_unit, only: [:units, :zone], raise: false
 
+  def early_zoom
+    @section = "map"
+  end
+
+  def early_zoom_links
+    @section = "map"
+  end
+
+  def index
+    @section = "map"
+  end
+
+  def late
+    @section = "map"
+  end
+
+  def late_zoom
+    @section = "map"
+  end
+
   def units
+    @section = "units"
+
     units = Unit.includes(
       :inferred_function,
       :type_description,
@@ -40,7 +62,9 @@ class ExploreController < ApplicationController
   end
 
   def unit_documents
+    @section = "units"
     @selected = "documents"
+
     if params["type"].present?
       @type = params["type"]
     else
@@ -63,29 +87,36 @@ class ExploreController < ApplicationController
   end
 
   def unit_features
+    @section = "units"
     @selected = "features"
   end
 
   def unit_images
+    @section = "units"
     @selected = "images"
+
     @images = Image.sorted.joins(:units)
                 .where(units: { unit_no: params["number"] })
                 .limit(8)
   end
 
   def unit_overview
+    @section = "units"
     @selected = "overview"
   end
 
   def unit_strata
+    @section = "units"
     @selected = "strata"
   end
 
   def unit_summary
+    @section = "units"
     @selected = "summary"
   end
 
   def zone
+    @section = "units"
     @units = Unit.sorted.joins(:zone).where("zones.number" => params["number"])
   end
 

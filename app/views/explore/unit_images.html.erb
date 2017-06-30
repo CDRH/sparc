@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "images", media: nil %>
+
 <h1><%= @unit.unit_no %></h1>
 
 <%= render "unit_tabs" %>
@@ -11,7 +13,7 @@
     <% @images.each_slice(4) do |img_set| %>
       <div class="row">
         <% img_set.each do |img| %>
-          <div class="col-md-3<%= ' human_remains' if !img.displayable? %>">
+          <div class="col-md-3<%= " human_remains" if !img.displayable? %>">
             <%= link_to image_path(img.image_no) do %>
               <%= image_tag "field/thumb/#{img.image_no}" %>
             <% end %>
@@ -20,7 +22,7 @@
               <li>Format: <%= img.format %></li>
               <li>Comments: <%= img.comments %></li>
               <li>Subjects: <%= img.subject_list.join("; ") %></li>
-              <li <%= 'class="human_remains"' if !img.displayable? %>>
+              <li class="<%= "human_remains" if !img.displayable? %>">
                 Human Remains: <%= img.human_remain %>
               </li>
             </ul>
