@@ -1,5 +1,5 @@
 <% type = params[:type] %>
-<ul class="nav nav-pills buffer-bottom  nav-justified artifact_submenu">
+<ul class="nav nav-pills buffer-bottom  nav-justified query_subnav">
   <li role="presentation" class="<%= active?(type, "bones") %>">
     <%= link_to "Bones", query_form_path("artifacts", "bones") %>
   </li>
@@ -17,9 +17,6 @@
   </li>
   <li role="presentation" class="<%= active?(type, "perishables") %>">
     <%= link_to "Perishables", query_form_path("artifacts", "perishables") %>
-  </li>
-  <li role="presentation" class="<%= active?(type, "soils") %>">
-    <%= link_to "Soils", query_form_path("artifacts", "soils") %>
   </li>
   <li role="presentation" class="<%= active?(type, "woods") %>">
     <%= link_to "Woods", query_form_path("artifacts", "woods") %>
