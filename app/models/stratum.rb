@@ -7,6 +7,10 @@ class Stratum < ActiveRecord::Base
   has_many :tree_rings
   has_and_belongs_to_many :features
 
+  def self.sorted
+    order("strat_all")
+  end
+
   def to_label
     "#{unit.to_label if unit} : #{strat_all} #{strat_alpha}"
   end

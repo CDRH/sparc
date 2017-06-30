@@ -1,4 +1,4 @@
-<h3>Artifact Search</h3>
+<h3><%= params[:category].titleize %> Search</h3>
 
 <%= form_tag query_results_path(params[:category], params[:type], params[:table]), method: :get do %>
   <div class="row">
@@ -7,7 +7,9 @@
     </div>
 
     <div class="col-md-8">
-      <%= render "artifacts_nav" %>
+      <% if !params[:category][/^(?:features|strata|images)$/] %>
+        <%= render "#{params[:category]}_nav" %>
+      <% end %>
 
       <ul class="nav nav-tabs buffer-bottom">
         <% @tables.each do |t| %>
@@ -49,6 +51,8 @@
                 <%= select_from_column @table_class, column, column[:name] %>
               <% elsif column[:type] == :assoc %>
                 <%= select_from_assoc column, column[:name] %>
+              <% elsif column[:type] == :join %>
+                <%= select_from_join @table_class, column, column[:name] %>
               <% end %>
              </div>
           <% end %>
