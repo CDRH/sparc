@@ -17,8 +17,8 @@
       <li class="<%= active?(category, "images") %>">
         <%= link_to "Images", query_category_path("images") %>
       </li>
-      <li class="<%= active?("canned", :action) %>">
-        <%= link_to "Canned Queries", query_category_path("canned") %>
+      <li class="<%= active?(query_canned_path) %>">
+        <%= link_to "Canned Queries", query_canned_path %>
       </li>
     </ul>
   </div>

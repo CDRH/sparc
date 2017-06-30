@@ -5,7 +5,7 @@ module ApplicationHelper
     elsif comparison == :controller
       current_page_ary_or_direct(:controller, value)
     elsif comparison == :current_page
-      current_page_ary_or_direct(:options, value)
+      current_page_ary_or_direct(nil, value)
     else
       if value.class == Array
         value.each do |v|
@@ -58,22 +58,34 @@ module ApplicationHelper
     if value.class == Array
       value.each do |v|
         begin
-          return "active" if current_page?(opts_key => v)
+          if opts_key.nil?
+            return "active" if current_page?(v)
+          else
+            return "active" if current_page?(opts_key => v)
+          end
         rescue
           # Rescue when current_page? throws "No route matches" exception
-          return "active" if opts_key != :options && params[opts_key] == v
+          return "active" if !opts_key.nil? && params[opts_key] == v
         end
       end
 
       return ""
     elsif value.class == Regexp
-       value.match(params[opts_key]) ? "active" : "" if opts_key != :options
+      if !opts_key.nil?
+        value.match(params[opts_key]) ? "active" : ""
+      end
     else
       begin
-        current_page?(opts_key => value) ? "active" : ""
+        if opts_key.nil?
+          current_page?(value) ? "active" : ""
+        else
+          current_page?(opts_key => value) ? "active" : ""
+        end
       rescue
-        # Rescue when current_page? throws "No route matches" exception
-        params[opts_key] == value ? "active" : "" if opts_key != :options
+        if !opts_key.nil?
+          # Rescue when current_page? throws "No route matches" exception
+          params[opts_key] == value ? "active" : ""
+        end
       end
     end
   end
