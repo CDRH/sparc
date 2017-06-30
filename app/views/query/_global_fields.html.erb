@@ -63,7 +63,7 @@
     <div id="collapse-unitnum" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-num">
       <div>
         <ul class="list-group checked-list-box">
-          <% Unit.all.each do |u| %>
+          <% Unit.all.sorted.each do |u| %>
             <li class="list-group-item">
               <div class="form-inline">
                 <div class="checkbox">
