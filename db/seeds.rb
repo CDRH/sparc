@@ -37,7 +37,7 @@ seeds = Rails.root.join('db', 'seeds')
   burials: 'xls/Burials.xls',
   ceramics: 'xls/CeramicAnalysis.xlsx',
   ceramic_claps: 'xls/Clap.xls',
-  ceramic_vessels: 'xls/CeramicVessels_partial.xlsx',
+  ceramic_vessels: 'xls/CeramicVessels.xlsx',
   eggshells: 'xls/Eggshells.xls',
   faunaltools: 'xls/FaunalTools.xlsx',
   lithic_debitages: 'xls/LithicDebitage.xlsx',
@@ -1213,6 +1213,7 @@ def seed_ceramic_vessels
     strat_other: "Other Strata",
     feature_no: "Feature No",
     sa_no: "SA No",
+    burial_related: "Burial Related",
     fs_no: "FS No",
     salmon_vessel_no: "Salmon Vessel No",
     pottery_order_no: "Pottery Order No",
@@ -1228,11 +1229,13 @@ def seed_ceramic_vessels
   }
 
   last_unit = ""
-  s.sheet('Sheet1').each_with_index(columns) do |row, index|
+  s.sheet('Salmon Whole Pots').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:unit] == "Room"
 
     vessel = prepare_cell_values(row, "Ceramic Vessels", index)
+    # burial related is a boolean
+    vessel[:burial_related] = vessel[:burial_related] == "yes"
 
     # Output context for creation
     # puts "\nUnit #{vessel[:unit]}:" if vessel[:unit] != last_unit

@@ -276,6 +276,7 @@ ActiveRecord::Schema.define(version: 20170630162118) do
     t.integer "ceramic_vessel_lori_reed_type_id"
     t.integer "ceramic_inventory_id"
     t.string  "select_artifact_info"
+    t.boolean "burial_related"
     t.index ["ceramic_inventory_id"], name: "index_ceramic_vessels_on_ceramic_inventory_id", using: :btree
     t.index ["ceramic_vessel_lori_reed_form_id"], name: "index_ceramic_vessels_on_ceramic_vessel_lori_reed_form_id", using: :btree
     t.index ["ceramic_vessel_lori_reed_type_id"], name: "index_ceramic_vessels_on_ceramic_vessel_lori_reed_type_id", using: :btree
