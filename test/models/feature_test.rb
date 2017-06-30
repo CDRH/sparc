@@ -15,11 +15,13 @@ class FeatureTest < ActiveSupport::TestCase
     @item.strata << Stratum.first
 
     @item.ornaments << Ornament.first
-    @item.bone_inventories << BoneInventory.first
     @item.ceramic_inventories << CeramicInventory.first
     @item.eggshells << Eggshell.first
+    @item.faunal_inventories << FaunalInventory.first
+    @item.faunal_tools << FaunalTool.first
     @item.lithic_inventories << LithicInventory.first
     @item.perishables << Perishable.first
+    @item.select_artifacts << SelectArtifact.first
     @item.soils << Soil.first
   end
 
@@ -39,11 +41,13 @@ class FeatureTest < ActiveSupport::TestCase
     assert_not_empty @item.units
 
     assert_not_empty @item.ornaments
-    assert_not_empty @item.bone_inventories
     assert_not_empty @item.ceramic_inventories
     assert_not_empty @item.eggshells
+    assert_not_empty @item.faunal_inventories
+    assert_not_empty @item.faunal_tools
     assert_not_empty @item.lithic_inventories
     assert_not_empty @item.perishables
+    assert_not_empty @item.select_artifacts
     assert_not_empty @item.soils
 
     assert_equal @item.soils.first.id, Soil.first.id

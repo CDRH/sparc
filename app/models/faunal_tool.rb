@@ -1,11 +1,13 @@
-class BoneTool < ActiveRecord::Base
+class FaunalTool < ActiveRecord::Base
   belongs_to :occupation
-  belongs_to :bone_inventory
-  has_and_belongs_to_many :strata
+  belongs_to :faunal_inventory
+  belongs_to :feature
+
+  has_many :strata, -> { distinct }, :through => :feature
   has_many :units, -> { distinct }, :through => :strata
   
   def self.sorted
-    order("bone_tools.fs_no")
+    order("faunal_tools.fs_no")
   end
 
   def to_label
