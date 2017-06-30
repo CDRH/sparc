@@ -1,13 +1,13 @@
 <% type = params[:type] %>
 <ul class="nav nav-pills buffer-bottom  nav-justified artifact_submenu">
-  <li role="presentation" class="<%= active?(type, "bones") %>">
-    <%= link_to "Bones", query_form_path("artifacts", "bones") %>
-  </li>
   <li role="presentation" class="<%= active?(type, "ceramics") %>">
     <%= link_to "Ceramics", query_form_path("artifacts", "ceramics") %>
   </li>
   <li role="presentation" class="<%= active?(type, "eggshells") %>">
     <%= link_to "Eggshells", query_form_path("artifacts", "eggshells") %>
+  </li>
+  <li role="presentation" class="<%= active?(type, "faunal") %>">
+    <%= link_to "Faunal", query_form_path("artifacts", "faunal") %>
   </li>
   <li role="presentation" class="<%= active?(type, "lithics") %>">
     <%= link_to "Lithics", query_form_path("artifacts", "lithics") %>

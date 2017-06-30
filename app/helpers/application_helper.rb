@@ -25,7 +25,7 @@ module ApplicationHelper
   def feature_units_form_column(record, column)
     "#{record.units.map{|u| u.to_label}.join(', ')}"
   end
-  def bone_tool_units_form_column(record, column)
+  def faunal_tool_units_form_column(record, column)
     "#{record.units.map{|u| u.to_label}.join(', ')}"
   end
   def eggshell_units_form_column(record, column)

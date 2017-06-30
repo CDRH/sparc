@@ -1,11 +1,11 @@
-class Admin::BoneToolsController < ApplicationController
+class Admin::FaunalToolsController < ApplicationController
 
-  active_scaffold :bone_tool do |conf|
+  active_scaffold :faunal_tool do |conf|
     conf.columns = [
       :units,
       :strata,
       :fs_no,
-      :bone_inventory,
+      :faunal_inventory,
       :depth,
       :occupation,
       :grid,
@@ -16,7 +16,7 @@ class Admin::BoneToolsController < ApplicationController
     ]
     conf.columns[:units].form_ui = :record_select
     conf.columns[:strata].form_ui = :record_select
-    conf.columns[:bone_inventory].form_ui = :record_select
+    conf.columns[:faunal_inventory].form_ui = :record_select
     conf.columns[:occupation].form_ui = :select
     conf.actions.swap :search, :field_search
   end
