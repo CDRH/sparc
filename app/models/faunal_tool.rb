@@ -1,16 +1,15 @@
-class BoneInventory < ApplicationRecord
-  has_and_belongs_to_many :features
-  has_many :strata, -> {distinct}, :through => :features
-  has_many :units, -> {distinct}, :through => :strata
-
-  has_many :bone_tools
-
+class FaunalTool < ActiveRecord::Base
+  belongs_to :occupation
+  belongs_to :faunal_inventory
+  has_and_belongs_to_many :strata
+  has_many :units, -> { distinct }, :through => :strata
+  
   def self.sorted
-    order("comments")
+    order("faunal_tools.fs_no")
   end
 
   def to_label
-    comments
+    fs_no
   end
 
   def authorized_for_update?
@@ -24,4 +23,5 @@ class BoneInventory < ApplicationRecord
     puts "---------#{current_user}"
     current_user != nil ? true : false
   end
+  
 end

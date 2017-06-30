@@ -3,6 +3,7 @@
 one:
   unit: MyString
   strat: MyString
+  feature_no: 1
   floor_association: MyString
   sa_form: MyString
   associated_feature_artifacts: MyString
@@ -17,6 +18,7 @@ one:
 two:
   unit: MyString
   strat: MyString
+  feature_no: 1
   floor_association: MyString
   sa_form: MyString
   associated_feature_artifacts: MyString
