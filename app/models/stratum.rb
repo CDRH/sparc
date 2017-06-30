@@ -5,7 +5,6 @@ class Stratum < ActiveRecord::Base
   has_one :strat_grouping, :through => :strat_type
 
   has_many :tree_rings
-  has_and_belongs_to_many :bone_tools
   has_and_belongs_to_many :features
 
   def self.sorted

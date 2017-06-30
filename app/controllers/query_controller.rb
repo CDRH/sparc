@@ -85,13 +85,13 @@ class QueryController < ApplicationController
       end
     when "artifacts"
       case params[:type]
-      when "bones"
-        return ["bone_inventory", "bone_tool"]
       when "ceramics"
         return ["ceramic_inventory", "ceramic_clap", "ceramic",
                 "ceramic_vessel"]
       when "eggshells"
         return ["eggshell"]
+      when "faunal"
+        return ["faunal_inventory", "faunal_tool"]
       when "lithics"
         return ["lithic_inventory", "lithic_debitage", "lithic_tool"]
       when "ornaments"

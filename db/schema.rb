@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170627163626) do
+ActiveRecord::Schema.define(version: 20170630162118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,67 +20,6 @@ ActiveRecord::Schema.define(version: 20170627163626) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_art_types_on_name", unique: true, using: :btree
-  end
-
-  create_table "bone_inventories", force: :cascade do |t|
-    t.string   "site"
-    t.string   "box"
-    t.string   "fs_no"
-    t.integer  "count"
-    t.string   "grid_ew"
-    t.string   "grid_ns"
-    t.string   "quad"
-    t.string   "exact_prov"
-    t.string   "depth_begin"
-    t.string   "depth_end"
-    t.string   "strat_alpha"
-    t.integer  "strat_one"
-    t.integer  "strat_two"
-    t.string   "strat_other"
-    t.string   "field_date"
-    t.string   "excavator"
-    t.string   "art_type"
-    t.string   "sa_no"
-    t.string   "record_field_key_no"
-    t.integer  "feature_id"
-    t.text     "comments"
-    t.string   "entered_by"
-    t.string   "location"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.string   "select_artifact_info"
-  end
-
-  create_table "bone_inventories_features", id: false, force: :cascade do |t|
-    t.integer "feature_id"
-    t.integer "bone_inventory_id"
-    t.index ["bone_inventory_id"], name: "index_bone_inventories_features_on_bone_inventory_id", using: :btree
-    t.index ["feature_id"], name: "index_bone_inventories_features_on_feature_id", using: :btree
-  end
-
-  create_table "bone_tools", force: :cascade do |t|
-    t.string   "unit"
-    t.string   "strat"
-    t.string   "fs_no"
-    t.string   "depth"
-    t.string   "grid"
-    t.integer  "tool_type_code"
-    t.string   "tool_type"
-    t.integer  "species_code"
-    t.text     "comments"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.integer  "occupation_id"
-    t.integer  "bone_inventory_id"
-    t.index ["bone_inventory_id"], name: "index_bone_tools_on_bone_inventory_id", using: :btree
-    t.index ["occupation_id"], name: "index_bone_tools_on_occupation_id", using: :btree
-  end
-
-  create_table "bone_tools_strata", id: false, force: :cascade do |t|
-    t.integer "bone_tool_id"
-    t.integer "stratum_id"
-    t.index ["bone_tool_id"], name: "index_bone_tools_strata_on_bone_tool_id", using: :btree
-    t.index ["stratum_id"], name: "index_bone_tools_strata_on_stratum_id", using: :btree
   end
 
   create_table "burial_sexes", force: :cascade do |t|
@@ -337,6 +276,7 @@ ActiveRecord::Schema.define(version: 20170627163626) do
     t.integer "ceramic_vessel_lori_reed_type_id"
     t.integer "ceramic_inventory_id"
     t.string  "select_artifact_info"
+    t.boolean "burial_related"
     t.index ["ceramic_inventory_id"], name: "index_ceramic_vessels_on_ceramic_inventory_id", using: :btree
     t.index ["ceramic_vessel_lori_reed_form_id"], name: "index_ceramic_vessels_on_ceramic_vessel_lori_reed_form_id", using: :btree
     t.index ["ceramic_vessel_lori_reed_type_id"], name: "index_ceramic_vessels_on_ceramic_vessel_lori_reed_type_id", using: :btree
@@ -547,6 +487,64 @@ ActiveRecord::Schema.define(version: 20170627163626) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_excavation_statuses_on_name", unique: true, using: :btree
+  end
+
+  create_table "faunal_inventories", force: :cascade do |t|
+    t.string   "site"
+    t.string   "box"
+    t.string   "fs_no"
+    t.integer  "count"
+    t.string   "grid_ew"
+    t.string   "grid_ns"
+    t.string   "quad"
+    t.string   "exact_prov"
+    t.string   "depth_begin"
+    t.string   "depth_end"
+    t.string   "strat_alpha"
+    t.integer  "strat_one"
+    t.integer  "strat_two"
+    t.string   "strat_other"
+    t.string   "field_date"
+    t.string   "excavator"
+    t.string   "art_type"
+    t.string   "sa_no"
+    t.string   "record_field_key_no"
+    t.integer  "feature_id"
+    t.text     "comments"
+    t.string   "entered_by"
+    t.string   "location"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "select_artifact_info"
+  end
+
+  create_table "faunal_inventories_features", id: false, force: :cascade do |t|
+    t.integer "feature_id"
+    t.integer "faunal_inventory_id"
+    t.index ["faunal_inventory_id"], name: "index_faunal_inventories_features_on_faunal_inventory_id", using: :btree
+    t.index ["feature_id"], name: "index_faunal_inventories_features_on_feature_id", using: :btree
+  end
+
+  create_table "faunal_tools", force: :cascade do |t|
+    t.string   "unit"
+    t.string   "strat"
+    t.string   "fs_no"
+    t.string   "depth"
+    t.string   "grid"
+    t.integer  "tool_type_code"
+    t.string   "tool_type"
+    t.integer  "species_code"
+    t.text     "comments"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "occupation_id"
+    t.integer  "faunal_inventory_id"
+    t.integer  "feature_id"
+    t.string   "strat_other"
+    t.string   "sa_no"
+    t.index ["faunal_inventory_id"], name: "index_faunal_tools_on_faunal_inventory_id", using: :btree
+    t.index ["feature_id"], name: "index_faunal_tools_on_feature_id", using: :btree
+    t.index ["occupation_id"], name: "index_faunal_tools_on_occupation_id", using: :btree
   end
 
   create_table "feature_groups", force: :cascade do |t|
@@ -1244,11 +1242,6 @@ ActiveRecord::Schema.define(version: 20170627163626) do
     t.text   "comments"
   end
 
-  add_foreign_key "bone_inventories", "features"
-  add_foreign_key "bone_inventories_features", "bone_inventories"
-  add_foreign_key "bone_inventories_features", "features"
-  add_foreign_key "bone_tools_strata", "bone_tools"
-  add_foreign_key "bone_tools_strata", "strata"
   add_foreign_key "ceramic_claps_features", "ceramic_claps"
   add_foreign_key "ceramic_claps_features", "features"
   add_foreign_key "ceramic_inventories", "features"
@@ -1259,6 +1252,8 @@ ActiveRecord::Schema.define(version: 20170627163626) do
   add_foreign_key "eggshells", "eggshell_items"
   add_foreign_key "eggshells_features", "eggshells"
   add_foreign_key "eggshells_features", "features"
+  add_foreign_key "faunal_inventories", "features"
+  add_foreign_key "faunal_inventories_features", "features"
   add_foreign_key "features", "door_between_multiple_rooms"
   add_foreign_key "features", "doorway_sealeds"
   add_foreign_key "features", "feature_groups"
