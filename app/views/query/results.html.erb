@@ -1,10 +1,10 @@
 <h3><%= @table.to_s.titleize %> Search Results</h3>
 
+<p>Found <%= pluralize @res.count, "match" %>:</p>
+
+<%= will_paginate @res %>
+
 <div class="search_results table-responsive">
-  <p>Found <%= pluralize @res.count, "match" %>:</p>
-
-  <%= will_paginate @res %>
-
   <table class="table table-striped">
     <tr>
       <% @column_names.each do |column| %>
@@ -48,6 +48,6 @@
       </tr>
     <% end %>
   </table>
-
-  <%= will_paginate @res %>
 </div>
+
+<%= will_paginate @res %>
