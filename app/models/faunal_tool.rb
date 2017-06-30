@@ -1,7 +1,9 @@
 class FaunalTool < ActiveRecord::Base
   belongs_to :occupation
   belongs_to :faunal_inventory
-  has_and_belongs_to_many :strata
+  belongs_to :feature
+
+  has_many :strata, -> { distinct }, :through => :feature
   has_many :units, -> { distinct }, :through => :strata
   
   def self.sorted

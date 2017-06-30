@@ -3,7 +3,6 @@ require 'test_helper'
 class StratumTest < ActiveSupport::TestCase
   def setup
     @item = Stratum.create
-    @item.faunal_tools << FaunalTool.first
     @item.features << Feature.first
 
     @item.occupation = Occupation.first
@@ -14,7 +13,6 @@ class StratumTest < ActiveSupport::TestCase
 
   test "associations" do
     # check generally that these respond with collections, not nil, etc
-    assert_not_empty @item.faunal_tools
     assert_not_empty @item.features
 
     assert_not_nil @item.occupation
