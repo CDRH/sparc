@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class BoneInventoryTest < ActiveSupport::TestCase
+class FaunalInventoryTest < ActiveSupport::TestCase
   def setup
-    @item = BoneInventory.create
+    @item = FaunalInventory.create
     @item.features << Feature.first
   end
 
