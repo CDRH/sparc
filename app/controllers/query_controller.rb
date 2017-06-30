@@ -77,7 +77,6 @@ class QueryController < ApplicationController
 
     # Handle common search fields
     @res = common_search @res
-
     @res = @res.sorted.paginate(:page => params[:page], :per_page => 20)
 
     respond_to do |format|
@@ -85,7 +84,7 @@ class QueryController < ApplicationController
         @res = @res.paginate(:page => params[:page], :per_page => 20)
       }
       format.csv {
-        render csv: @res, filename: params[:action], columns: @column_names
+        render csv: @res, filename: "#{params[:table]}_search_results", columns: @column_names
       }
     end
   end
