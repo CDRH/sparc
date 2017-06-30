@@ -36,8 +36,6 @@ Rails.application.routes.draw do
 
 
   tables = [
-    :bone_inventories,
-    :bone_tools,
     :burials,
     :ceramics,
     :ceramic_claps,
@@ -45,6 +43,8 @@ Rails.application.routes.draw do
     :ceramic_vessels,
     :documents,
     :eggshells,
+    :faunal_inventories,
+    :faunal_tools,
     :features,
     :images,
     :lithic_debitages,

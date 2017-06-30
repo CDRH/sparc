@@ -19,13 +19,13 @@ class Unit < ActiveRecord::Base
   has_many :strata
 
   # strata objects
-  has_many :bone_tools, :through => :strata
+  has_many :faunal_tools, :through => :strata
   has_many :select_artifacts, :through => :strata
 
   # feature objects
-  has_many :bone_inventories, :through => :features
   has_many :ceramic_inventories, :through => :features
   has_many :eggshells, :through => :features
+  has_many :faunal_inventories, :through => :features
   has_many :images, :through => :features
   has_many :lithic_inventories, :through => :features
   has_many :ornaments, :through => :features

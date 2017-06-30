@@ -3,9 +3,7 @@ require 'test_helper'
 class StratumTest < ActiveSupport::TestCase
   def setup
     @item = Stratum.create
-    @item.bone_tools << BoneTool.first
     @item.features << Feature.first
-    @item.select_artifacts << SelectArtifact.first
 
     @item.occupation = Occupation.first
     @item.strat_type = StratType.first
@@ -15,9 +13,7 @@ class StratumTest < ActiveSupport::TestCase
 
   test "associations" do
     # check generally that these respond with collections, not nil, etc
-    assert_not_empty @item.bone_tools
     assert_not_empty @item.features
-    assert_not_empty @item.select_artifacts
 
     assert_not_nil @item.occupation
     assert_not_nil @item.strat_type
