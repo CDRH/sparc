@@ -142,11 +142,25 @@ class QueryController < ApplicationController
     end
 
     # Occupations
-    if params["occupation"].present? \
-    && res.reflect_on_all_associations.map { |a| a.name }
-         .include?(:occupations)
-      res = res.joins(:occupation)
-              .where(occupations: { id: params["occupation"] })
+    if params["occupation"].present?
+      assoc_name_list = res.reflect_on_all_associations.map { |a| a.name }
+
+      # Filter by occupation based on occupation of associated strata,
+      # noted as more accurate than tables' own occupation data
+      if assoc_name_list.include?(:strata)
+        res = res.select("#{@table.to_s.tableize}.*, strata.occupation_id")
+                .joins(:strata)
+                .where(strata: { occupation_id: params["occupation"] })
+        @occupation_source = "Strat Occupation"
+      elsif assoc_name_list.include?(:occupation)
+        res = res.where(occupation_id: params["occupation"])
+        @occupation_source = "#{@table.to_s.titleize} Occupation"
+      elsif assoc_name_list.include?(:occupations)
+        res = res.select("#{@table.to_s.tableize}.*, features.occupation_id")
+                .joins(:features)
+                .where(occupations: { id: params["occupation"] })
+        @occupation_source = "#{@table.to_s.titleize} Occupations"
+      end
     end
 
     # Strat Types
