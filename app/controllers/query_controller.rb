@@ -73,8 +73,8 @@ class QueryController < ApplicationController
       end
     end
 
-    # Handle global fields
-    @res = global_search @res
+    # Handle common search fields
+    @res = common_search @res
 
     @res = @res.sorted.paginate(:page => params[:page], :per_page => 20)
   end
@@ -119,7 +119,7 @@ class QueryController < ApplicationController
     end
   end
 
-  def global_search(res)
+  def common_search(res)
     # Save params in session
     session[:common_search_unit] = params["unit"]
     session[:common_search_unit_class] = params["unit_class"]
