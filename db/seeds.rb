@@ -1965,7 +1965,7 @@ seed_wood_inventories if WoodInventory.count < 1
 # Analysis Controlled Vocab Tables
 seed_lithic_controlled_vocab
 
-Analysis Tables
+# Analysis Tables
 seed_burials if Burial.count < 1
 seed_ceramics if Ceramic.count < 1
 seed_ceramic_claps if CeramicClap.count < 1
