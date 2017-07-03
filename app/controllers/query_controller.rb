@@ -200,7 +200,6 @@ class QueryController < ApplicationController
       column_list << { name: "strat_three", type: "string" }
     end
 
-
     # Columns whose names
     # don't begin with "strat"
     # don't match "id", "room", or "unit"
@@ -231,7 +230,7 @@ class QueryController < ApplicationController
     # All belongs_to associations except to unit, stratum, feature,
     # inventory, or occupation
     table.reflect_on_all_associations(:belongs_to)
-      .reject{ |a| a.name[/(?:^unit|^stratum|^features?|_inventory|occupation)$/] }
+      .reject{ |a| a.name[/(?:^unit|^stratum|^feature|_inventory|occupation)$/] }
       .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
 
     if table == Stratum
