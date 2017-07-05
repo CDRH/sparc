@@ -13,6 +13,15 @@ class QueryController < ApplicationController
   def form
     params.require([:category, :type])
 
+    # Clear common search options
+    if params["search_clear"].present?
+      session[:common_search_unit] = nil
+      session[:common_search_unit_class] = nil
+      session[:common_search_occupation] = nil
+      session[:common_search_strat_grouping] = nil
+      session[:common_search_feature_group] = nil
+    end
+
     @tables = category_type_tables.map { |t| {name: t,
                                               label: t.pluralize.titleize,
                                               count: t.classify.constantize
@@ -64,8 +73,8 @@ class QueryController < ApplicationController
       end
     end
 
-    # Handle global fields
-    @res = global_search @res
+    # Handle common search fields
+    @res = common_search @res
 
     @res = @res.sorted.paginate(:page => params[:page], :per_page => 20)
   end
@@ -110,7 +119,14 @@ class QueryController < ApplicationController
     end
   end
 
-  def global_search(res)
+  def common_search(res)
+    # Save params in session
+    session[:common_search_unit] = params["unit"]
+    session[:common_search_unit_class] = params["unit_class"]
+    session[:common_search_occupation] = params["occupation"]
+    session[:common_search_strat_grouping] = params["strat_grouping"]
+    session[:common_search_feature_group] = params["feature_group"]
+
     # Units
     if (params["unit"].present? || params["unit_class"].present?) \
     && res.reflect_on_all_associations.map { |a| a.name }.include?(:units)
@@ -126,11 +142,25 @@ class QueryController < ApplicationController
     end
 
     # Occupations
-    if params["occupation"].present? \
-    && res.reflect_on_all_associations.map { |a| a.name }
-         .include?(:occupations)
-      res = res.joins(:occupation)
-              .where(occupations: { id: params["occupation"] })
+    if params["occupation"].present?
+      assoc_name_list = res.reflect_on_all_associations.map { |a| a.name }
+
+      # Filter by occupation based on occupation of associated strata,
+      # noted as more accurate than tables' own occupation data
+      if assoc_name_list.include?(:strata)
+        res = res.select("#{@table.to_s.tableize}.*, strata.occupation_id")
+                .joins(:strata)
+                .where(strata: { occupation_id: params["occupation"] })
+        @occupation_source = "Strat Occupation"
+      elsif assoc_name_list.include?(:occupation)
+        res = res.where(occupation_id: params["occupation"])
+        @occupation_source = "#{@table.to_s.titleize} Occupation"
+      elsif assoc_name_list.include?(:occupations)
+        res = res.select("#{@table.to_s.tableize}.*, features.occupation_id")
+                .joins(:features)
+                .where(occupations: { id: params["occupation"] })
+        @occupation_source = "#{@table.to_s.titleize} Occupations"
+      end
     end
 
     # Strat Types
@@ -170,7 +200,6 @@ class QueryController < ApplicationController
       column_list << { name: "strat_three", type: "string" }
     end
 
-
     # Columns whose names
     # don't begin with "strat"
     # don't match "id", "room", or "unit"
@@ -201,7 +230,7 @@ class QueryController < ApplicationController
     # All belongs_to associations except to unit, stratum, feature,
     # inventory, or occupation
     table.reflect_on_all_associations(:belongs_to)
-      .reject{ |a| a.name[/(?:^unit|^stratum|^features?|_inventory|occupation)$/] }
+      .reject{ |a| a.name[/(?:^unit|^stratum|^feature|_inventory|occupation)$/] }
       .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
 
     if table == Stratum
