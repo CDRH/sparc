@@ -1,46 +1,65 @@
 <h3><%= @table.to_s.titleize %> Search Results</h3>
 
+<p>Found <%= pluralize @res.count, "match" %>:</p>
+
+<%= will_paginate @res %>
+
 <div class="search_results table-responsive">
-  <p>Found <%= pluralize @res.count, "match" %>:</p>
-
-  <%= will_paginate @res %>
-
   <table class="table table-striped">
+    <% no_occupation = !@column_names.include?("occupation_id") %>
     <tr>
-      <% @column_names.each do |column| %>
+      <%# Add Occupation column if not present %>
+      <% if @occupation_source.present? && no_occupation %>
+        <th><%= @occupation_source %></th>
+      <% end -%>
+
+      <%- @column_names.each do |column| %>
         <% unless column[/(?:^id|_at)$/] %>
-          <th><%= column.titleize %></th>
+          <th>
+            <% if column == "occupation_id" && @occupation_source.present? %>
+              <%= @occupation_source %>
+            <% else %>
+              <%= column.titleize %>
+            <% end %>
+          </th>
         <% end %>
       <% end %>
     </tr>
     <% @res.each do |result| %>
       <tr>
-        <% @column_names.each do |column| %>
+        <%# Add Occupation column if not present %>
+        <% if @occupation_source.present? && no_occupation %>
+          <td>
+            <%= Occupation.where(id: result[:occupation_id]).first.name %>
+          </td>
+        <% end -%>
+
+        <%- @column_names.each do |column| %>
           <% if column[/_id$/] %>
-            <% assoc_col = column[/^(.+)_id$/, 1] %>
-              <% if result.respond_to?(assoc_col) %>
-                <td>
-                  <% if result.send(assoc_col).present? %>
-                    <% if result.send(assoc_col).respond_to?(:name) %>
-                      <%= result.send(assoc_col).name %>
-                    <% else %>
-                      <%= result.send(assoc_col).id %>
-                    <% end %>
+            <td>
+              <% assoc_col = column[/^(.+)_id$/, 1] %>
+              <% if assoc_col == "occupation" %>
+                <%= Occupation.where(id: result[:occupation_id]).first.name %>
+              <% elsif result.respond_to?(assoc_col) %>
+                <% if result.send(assoc_col).present? %>
+                  <% if result.send(assoc_col).respond_to?(:name) %>
+                    <%= result.send(assoc_col).name %>
                   <% else %>
-                    N/A
+                    <%= result.send(assoc_col).id %>
                   <% end %>
-                </td>
+                <% else %>
+                  N/A
+                <% end %>
               <% else %>
-                <td>
-                  <% if result.send(assoc_col.pluralize).present? %>
-                    <%= result.send(assoc_col.pluralize)
-                          .map { |r| r.send(assoc_col << "_no") }.join("; ")
-                    %>
-                  <% else -%>
-                    N/A
-                  <%- end %>
-                </td>
+                <% if result.send(assoc_col.pluralize).present? %>
+                  <%= result.send(assoc_col.pluralize)
+                        .map { |r| r.send(assoc_col << "_no") }.join("; ")
+                  %>
+                <% else -%>
+                  N/A
+                <%- end %>
               <% end %>
+            </td>
           <% elsif !column[/(?:^id|_at)$/] %>
             <td><%= result[column] %></td>
           <% end %>
@@ -48,6 +67,6 @@
       </tr>
     <% end %>
   </table>
-
-  <%= will_paginate @res %>
 </div>
+
+<%= will_paginate @res %>

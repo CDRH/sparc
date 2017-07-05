@@ -1,7 +1,7 @@
 <h4 class="pull-left">Common Search Options</h4>
 
 <div class="pull-right">
-  <%= link_to "Clear", { controller: params["controller"], action: params["action"] }, class: "btn btn-danger" %>
+  <%= link_to "Clear", { controller: params["controller"], action: params["action"], search_clear: 1 }, class: "btn btn-danger" %>
 </div>
 <div class="clearfix buffer-bottom-sm"></div>
 
@@ -32,7 +32,7 @@
             <li class="list-group-item">
               <div class="form-inline">
                 <div class="checkbox">
-                  <%= check_box_tag "unit_class[#{u.id}]", u.id, checked?(u.id, params["unit_class"]), class: "select_all", name: "unit_class[]" %>
+                  <%= check_box_tag "unit_class[#{u.id}]", u.id, checked?(u.id, session[:common_search_unit_class]), class: "select_all", name: "unit_class[]" %>
                   <%= label_tag "unit_class[#{u.id}]", u.name %>
                 </div>
               </div>
@@ -63,11 +63,11 @@
     <div id="collapse-unitnum" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-num">
       <div>
         <ul class="list-group checked-list-box">
-          <% Unit.all.each do |u| %>
+          <% Unit.all.sorted.each do |u| %>
             <li class="list-group-item">
               <div class="form-inline">
                 <div class="checkbox">
-                  <%= check_box_tag "unit[#{u.id}]", u.id, checked?(u.id, params["unit"]), class: "select_all", name: "unit[]" %>
+                  <%= check_box_tag "unit[#{u.id}]", u.id, checked?(u.id, session[:common_search_unit]), class: "select_all", name: "unit[]" %>
                   <%= label_tag "unit[#{u.id}]", u.unit_no %>
                 </div>
               </div>
@@ -102,7 +102,7 @@
             <li class="list-group-item">
               <div class="form-inline">
                 <div class="checkbox">
-                  <%= check_box_tag "occupation[#{o.id}]", o.id, checked?(o.id, params["occupation"]), class: "select_all", name: "occupation[]" %>
+                  <%= check_box_tag "occupation[#{o.id}]", o.id, checked?(o.id, session[:common_search_occupation]), class: "select_all", name: "occupation[]" %>
                   <%= label_tag "occupation[#{o.id}]", o.name %>
                 </div>
               </div>
@@ -136,7 +136,7 @@
             <li class="list-group-item">
               <div class="form-inline">
                 <div class="checkbox">
-                  <%= check_box_tag "strat_grouping[#{s.id}]", s.id, checked?(s.id, params["strat_grouping"]),
+                  <%= check_box_tag "strat_grouping[#{s.id}]", s.id, checked?(s.id, session[:common_search_strat_grouping]),
                     class: "select_all", name: "strat_grouping[]" %>
                   <%= label_tag "strat_grouping[#{s.id}]", s.name %>
                 </div>
@@ -172,7 +172,7 @@
             <li class="list-group-item">
               <div class="form-inline">
                 <div class="checkbox">
-                  <%= check_box_tag "feature_group[#{fg.id}]", fg.id, checked?(fg.id, params["feature_group"]), class: "select_all", name: "feature_group[]" %>
+                  <%= check_box_tag "feature_group[#{fg.id}]", fg.id, checked?(fg.id, session[:common_search_feature_group]), class: "select_all", name: "feature_group[]" %>
                   <%= label_tag "feature_group[#{fg.id}]", fg.name %>
                 </div>
               </div>
