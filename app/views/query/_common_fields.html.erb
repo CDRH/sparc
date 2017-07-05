@@ -1,7 +1,17 @@
 <h4 class="pull-left">Common Search Options</h4>
 
 <div class="pull-right">
-  <%= link_to "Clear", { controller: params["controller"], action: params["action"], search_clear: 1 }, class: "btn btn-danger" %>
+  <% if params[:table].present? %>
+    <%= link_to "Clear", { controller: params["controller"],
+                           action: params["action"], table: params["table"], search_clear: 1 },
+                class: "btn btn-danger"
+    %>
+  <% else %>
+    <%= link_to "Clear", { controller: params["controller"],
+                           action: params["action"], search_clear: 1 },
+                class: "btn btn-danger"
+    %>
+  <% end %>
 </div>
 <div class="clearfix buffer-bottom-sm"></div>
 
