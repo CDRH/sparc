@@ -50,14 +50,23 @@
                 <% else %>
                   N/A
                 <% end %>
-              <% else %>
+              <% elsif result.respond_to?(assoc_col.pluralize) %>
                 <% if result.send(assoc_col.pluralize).present? %>
-                  <%= result.send(assoc_col.pluralize)
-                        .map { |r| r.send(assoc_col << "_no") }.join("; ")
-                  %>
-                <% else -%>
+                  <% assoc_obj = result.send(assoc_col.pluralize) %>
+                  <% if assoc_obj.first.respond_to?("name") %>
+                    <%= assoc_obj.map { |r| r.name }.join("; ") %>
+                  <% elsif assoc_obj.first.respond_to?(assoc_col << "_no") %>
+                    <%= assoc_obj.map { |r| r.send(assoc_col << "_no") }
+                          .join("; ")
+                    %>
+                  <% elsif assoc_obj.first.respond_to?("id") %>
+                    <%= assoc_obj.map { |r| r.id }.join("; ") %>
+                  <% end %>
+                <% else %>
                   N/A
-                <%- end %>
+                <% end %>
+              <% else %>
+                N/A
               <% end %>
             </td>
           <% elsif !column[/(?:^id|_at)$/] %>
