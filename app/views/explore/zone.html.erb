@@ -1,4 +1,4 @@
-<h1>Zone <%= params["number"] %></h1>
+<h1>Zone <%= @zone_no %></h1>
 
 <p>View of the map(s) will go here with a highlighted zone</p>
 
@@ -21,9 +21,9 @@
       <div class="row">
         <div class="col-md-6">
           <ul>
-            <li><strong>Class:</strong> <%= unit.unit_class.unit_class if unit.unit_class %></li>
-            <li><strong>Excavation Status:</strong> <%= unit.excavation_status.excavation_status if unit.excavation_status %></li>
-            <li><strong>Occupation:</strong> <%= unit.unit_occupation.occupation if unit.unit_occupation %></li>
+            <li><strong>Class:</strong> <%= unit.unit_class.name if unit.unit_class %></li>
+            <li><strong>Excavation Status:</strong> <%= unit.excavation_status.name if unit.excavation_status %></li>
+            <li><strong>Occupation:</strong> <%= unit.occupation.name if unit.occupation %></li>
           </ul>
         </div>
         <div class="col-md-6">
