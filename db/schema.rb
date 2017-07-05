@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170630162118) do
+ActiveRecord::Schema.define(version: 20170705232016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -456,7 +456,6 @@ ActiveRecord::Schema.define(version: 20170630162118) do
   end
 
   create_table "eggshells", force: :cascade do |t|
-    t.integer  "stratum_id"
     t.string   "unit"
     t.string   "strat"
     t.string   "salmon_museum_no"
