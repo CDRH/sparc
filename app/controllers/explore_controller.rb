@@ -116,8 +116,9 @@ class ExploreController < ApplicationController
   end
 
   def zone
+    @zone_no = params["number"].rjust(3, "0")
     @section = "units"
-    @units = Unit.sorted.joins(:zone).where("zones.number" => params["number"])
+    @units = Unit.sorted.joins(:zone).where("zones.name" => @zone_no)
   end
 
 
