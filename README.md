@@ -84,6 +84,22 @@ rake images:find_missing
 rake images:find_extra
 ```
 
+### Regenerate documents.csv
+
+In the event that new documents have been added, filenames altered, etc, you may need to regenerate the file used to seed the database.  First, open up `lib/tasks/document.rake` and verify that the path to the jpegs is correct, for your system.  The path was hardcoded because it is (hopefully) unlikely that the documents.csv file will need to be regenerated.
+
+```
+DOCUMENT_PATH = "/your/path/here"
+```
+
+Verify that [exiftool](http://www.sno.phy.queensu.ca/~phil/exiftool/) is installed on your system, then run:
+
+```
+rake documents:create_csv
+```
+
+__NOTE: This may take up to an hour to run, depending on your machine!__  The script pulls out metadata from the images with exiftool, which is where the bottleneck occurs.
+
 ### Run Tests
 
 ```bash
