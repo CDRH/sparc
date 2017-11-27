@@ -1,0 +1,12 @@
+default: &default
+  settings:
+    # Hide sensitive human remains images via ActiveRecord
+    hide_sensitive_images: false
+test:
+  <<: *default
+development:
+  <<: *default
+production:
+  <<: *default
+  settings:
+    hide_sensitive_images: true
