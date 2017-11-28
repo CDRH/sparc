@@ -13,6 +13,13 @@ class Image < ActiveRecord::Base
   belongs_to :image_orientation
   belongs_to :image_quality
 
+  if SETTINGS["hide_sensitive_image_records"]
+    default_scope {
+      joins(:image_human_remain).where("image_human_remains.name = ?", "N")
+      where.not("images.comments LIKE ?", "%burial%")
+    }
+  end
+
   def self.sorted
     order("image_no")
   end

@@ -22,9 +22,11 @@
               <li>Format: <%= img.format %></li>
               <li>Comments: <%= img.comments %></li>
               <li>Subjects: <%= img.subject_list.join("; ") %></li>
-              <li class="<%= "human_remains" if !img.displayable? %>">
-                Human Remains: <%= img.human_remain %>
-              </li>
+              <% if !SETTINGS["hide_sensitive_image_records"] %>
+                <li class="<%= "human_remains" if !img.displayable? %>">
+                  Human Remains: <%= img.human_remain %>
+                </li>
+              <% end %>
             </ul>
           </div>
         <% end %>

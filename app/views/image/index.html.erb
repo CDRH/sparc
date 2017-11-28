@@ -55,12 +55,14 @@
               <%= select_tag "format", options_from_collection_for_select(ImageFormat.sorted, "id", "name", params["format"]), class: "form-control", multiple: true, include_blank: true %>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <%= label_tag "human_remain", "Human Remains?" %>
-              <%= select_tag "human_remain", options_from_collection_for_select(ImageHumanRemain.sorted, "id", "name", params["human_remain"]), class: "form-control", multiple: true, include_blank: true %>
+          <% if !SETTINGS["hide_sensitive_image_records"] %>
+            <div class="col-md-3">
+              <div class="form-group">
+                <%= label_tag "human_remain", "Human Remains?" %>
+                <%= select_tag "human_remain", options_from_collection_for_select(ImageHumanRemain.sorted, "id", "name", params["human_remain"]), class: "form-control", multiple: true, include_blank: true %>
+              </div>
             </div>
-          </div>
+          <% end %>
           <div class="col-md-3">
             <div class="form-group">
               <%= label_tag "orientation", "Orientation" %>
@@ -126,7 +128,9 @@
           <li>Units: <%= img.unit_list.join("; ") %></li>
           <li>Comments: <%= img.comments %></li>
           <li>Format: <%= img.format %></li>
-          <li>Human Remains: <%= img.human_remain %></li>
+          <% if !SETTINGS["hide_sensitive_image_records"] %>
+            <li>Human Remains: <%= img.human_remain %></li>
+          <% end %>
           <li>Subjects: <%= img.subject_list.join("; ") %></li>
         </ul>
       </div>
