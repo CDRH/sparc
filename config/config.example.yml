@@ -1,6 +1,8 @@
 default: &default
   settings:
-    # Hide sensitive human remains images via ActiveRecord
+    # Filter out Image records with sensitive human remains
+    hide_sensitive_image_records: false
+    # Hide sensitive human remains images with a placeholder image
     hide_sensitive_images: false
 test:
   <<: *default
@@ -9,4 +11,5 @@ development:
 production:
   <<: *default
   settings:
+    hide_sensitive_image_records: false
     hide_sensitive_images: true
