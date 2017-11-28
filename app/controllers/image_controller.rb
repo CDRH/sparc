@@ -8,8 +8,8 @@ class ImageController < ApplicationController
       :image_subjects,
       :units,
     )
-    images = images.where("image_no LIKE ?", "%#{params['image_no']}%") if !params["image_no"].blank?
-    images = images.where("comments LIKE ?", "%#{params['comments']}%") if !params["comments"].blank?
+    images = images.where("images.image_no LIKE ?", "%#{params['image_no']}%") if !params["image_no"].blank?
+    images = images.where("images.comments LIKE ?", "%#{params['comments']}%") if !params["comments"].blank?
     images = add_to_query(images, :image_assocnoegs, params["associated_negative"], :image_assocnoeg, true)
     images = add_to_query(images, :image_boxes, params["box"], :image_box, true)
     images = add_to_query(images, :image_creators, params["creator"], :image_creator, true)
