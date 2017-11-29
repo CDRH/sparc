@@ -41,7 +41,11 @@ class Image < ActiveRecord::Base
   end
 
   def displayable?
-    image_human_remain.displayable if image_human_remain
+    no_remains = true
+    no_remains = image_human_remain.displayable if image_human_remain
+
+    no_remains && !subject_list.include?("Feature-burial") &&
+      !comments.downcase.include?("burial")
   end
 
   def format

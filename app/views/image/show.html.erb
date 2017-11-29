@@ -5,7 +5,16 @@
 <div class="row">
 
   <div class="col-md-6">
-    <%= image_tag "field/large/#{@image.image_no}", class: "image_large" %>
+    <% if SETTINGS["hide_sensitive_images"] && !img.displayable? %>
+      <div class="h3">Image Not Displayable</div>
+    <% else %>
+      <% if File.file?(Rails.root.join(*%w[app assets images field large],
+        "#{@image.image_no}.jpg")) %>
+        <%= image_tag "field/large/#{@image.image_no}", class: "image_large" %>
+      <% else %>
+        <span class="h3">Image Not Available</span>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="col-md-3">
@@ -20,7 +29,7 @@
       <li>Comments: <%= @image.comments %></li>
       <li>Format: <%= @image.format %></li>
       <% if !SETTINGS["hide_sensitive_image_records"] %>
-        <li <%= "class=human_remains" if !@image.displayable? %>>
+        <li>
           Human Remains: <%= @image.human_remain %>
         </li>
       <% end %>
