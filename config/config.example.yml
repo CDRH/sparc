@@ -1,15 +1,12 @@
 default: &default
   settings:
-    # Filter out Image records with sensitive human remains
+    # Filter out Image records with sensitive content
     hide_sensitive_image_records: false
-    # Hide sensitive human remains images with a placeholder image
-    hide_sensitive_images: false
+    # Hide sensitive images with a placeholder
+    hide_sensitive_images: true
 test:
   <<: *default
 development:
   <<: *default
 production:
   <<: *default
-  settings:
-    hide_sensitive_image_records: false
-    hide_sensitive_images: true
