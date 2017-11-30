@@ -42,6 +42,23 @@ module ApplicationHelper
   def faunal_tool_units_form_column(record, column)
     "#{record.units.map{|u| u.to_label}.join(', ')}"
   end
+
+  def field_image_display(image, size)
+    image_class = size == "large" ? "h2" : "h4"
+
+    if SETTINGS["hide_sensitive_images"] && !image.displayable?
+      "<div class=\"#{image_class}\">Image Not Displayable</div>"
+        .html_safe
+    else
+      if File.file?(Rails.root.join(*%w[app assets images field], size,
+        "#{image.image_no}.jpg"))
+        image_tag "field/#{size}/#{image.image_no}", class: "image_#{size}"
+      else
+        "<div class=\"#{image_class}\">Image Not Available</div>".html_safe
+      end
+    end
+  end
+
   def eggshell_units_form_column(record, column)
     "#{record.units.map{|u| u.to_label}.join(', ')}"
   end

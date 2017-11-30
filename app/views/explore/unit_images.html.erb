@@ -14,17 +14,8 @@
       <div class="row">
         <% img_set.each do |img| %>
           <div class="col-md-3">
-            <% if SETTINGS["hide_sensitive_images"] && !img.displayable? %>
-              <div class="h3">Image Not Displayable</div>
-            <% else %>
-              <%= link_to image_path(img.image_no) do %>
-                <% if File.file?(Rails.root.join(
-                  *%w[app assets images field thumb], "#{img.image_no}.jpg")) %>
-                  <%= image_tag "field/thumb/#{img.image_no}" %>
-                <% else %>
-                  <span class="h4">Image Not Available</span>
-                <% end %>
-              <% end %>
+            <%= link_to image_path img.image_no do %>
+              <%= field_image_display(img, "thumb") %>
             <% end %>
             <ul>
               <li>Number: <%= img.image_no %></li>
