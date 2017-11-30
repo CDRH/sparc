@@ -14,7 +14,7 @@
       <% end -%>
 
       <%- @column_names.each do |column| %>
-        <% unless column[/(?:^id|_at)$/] %>
+        <% unless column[/(?:^id|_at)$/] || sensitive_record?(column) %>
           <th>
             <% if column == "occupation_id" && @occupation_source.present? %>
               <%= @occupation_source %>
@@ -35,7 +35,9 @@
         <% end -%>
 
         <%- @column_names.each do |column| %>
-          <% if column[/_id$/] %>
+          <% if sensitive_record?(column) %>
+            <%# Display nothing %>
+          <% elsif column[/_id$/] %>
             <td>
               <% assoc_col = column[/^(.+)_id$/, 1] %>
               <% if assoc_col == "occupation" %>

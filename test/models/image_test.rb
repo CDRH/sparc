@@ -44,6 +44,16 @@ class ImageTest < ActiveSupport::TestCase
 
     # first ImageHumanRemain should be true
     assert @item.displayable?
+
+    # Set image comments to include "burial", not displayable
+    @item.comments = "Burial"
+    assert_not @item.displayable?
+    # Reset comments to a displayable value
+    @item.comments = "MyString"
+
+    # Add an ImageSubject of "Feature-burial", not displayable
+    @item.image_subjects << ImageSubject.create(name: "Feature-burial")
+    assert_not @item.displayable?
   end
 
 end

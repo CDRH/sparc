@@ -13,6 +13,13 @@ class Image < ActiveRecord::Base
   belongs_to :image_orientation
   belongs_to :image_quality
 
+  if SETTINGS["hide_sensitive_image_records"]
+    default_scope {
+      joins(:image_human_remain).where("image_human_remains.name = ?", "N")
+      where.not("images.comments LIKE ?", "%burial%")
+    }
+  end
+
   def self.sorted
     order("image_no")
   end
@@ -34,7 +41,11 @@ class Image < ActiveRecord::Base
   end
 
   def displayable?
-    image_human_remain.displayable if image_human_remain
+    no_remains = true
+    no_remains = image_human_remain.displayable if image_human_remain
+
+    no_remains && !subject_list.include?("Feature-burial") &&
+      !comments.downcase.include?("burial")
   end
 
   def format

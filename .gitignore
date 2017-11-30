@@ -17,6 +17,7 @@
 /tmp
 
 *.svn
+/config/config.yml
 /config/database.yml
 /config/secrets.yml
 /public/assets/*
