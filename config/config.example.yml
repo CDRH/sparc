@@ -1,0 +1,12 @@
+default: &default
+  settings:
+    # Filter out Image records with sensitive content
+    hide_sensitive_image_records: false
+    # Hide sensitive images with a placeholder
+    hide_sensitive_images: true
+test:
+  <<: *default
+development:
+  <<: *default
+production:
+  <<: *default

@@ -233,6 +233,11 @@ class QueryController < ApplicationController
       .reject{ |a| a.name[/(?:^unit|^stratum|^feature|_inventory|occupation)$/] }
       .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
 
+    if SETTINGS["hide_sensitive_image_records"]
+      column_list.reject!{ |column| %w[image_human_remain image_subjects]
+        .include?(column[:name]) }
+    end
+
     if table == Stratum
       column_list << { name: "feature_no", type: :join, join_table: :features }
     end

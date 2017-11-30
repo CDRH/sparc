@@ -34,7 +34,7 @@ class ExploreController < ApplicationController
     # text searches
     units = units.where("unit_no LIKE ?", "%#{params['unit_no']}%") if !params["unit_no"].blank?
     units = units.where("other_description LIKE ?", "%#{params['other_description']}%") if !params["other_description"].blank?
-    units = units.where("comments LIKE ?", "%#{params['comments']}%") if !params["comments"].blank?
+    units = units.where("units.comments LIKE ?", "%#{params['comments']}%") if !params["comments"].blank?
     units = units.joins(:strata).where("strata.strat_all LIKE ?", "%#{params['strata']}%") if !params["strata"].blank?
 
     # basic joins

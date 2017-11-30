@@ -5,7 +5,7 @@
 <div class="row">
 
   <div class="col-md-6">
-    <%= image_tag "field/large/#{@image.image_no}", class: "image_large" %>
+    <%= field_image_display(@image, "large") %>
   </div>
 
   <div class="col-md-3">
@@ -19,9 +19,11 @@
       </li>
       <li>Comments: <%= @image.comments %></li>
       <li>Format: <%= @image.format %></li>
-      <li <%= "class=human_remains" if !@image.displayable? %>>
-        Human Remains: <%= @image.human_remain %>
-      </li>
+      <% if !SETTINGS["hide_sensitive_image_records"] %>
+        <li>
+          Human Remains: <%= @image.human_remain %>
+        </li>
+      <% end %>
       <li>Subjects: <%= @image.subject_list.join("; ") %></li>
       <!-- TODO Features or Strata here? -->
       <li>Features: <%= @image.features.size %></li>
