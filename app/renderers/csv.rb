@@ -14,7 +14,8 @@ ActionController::Renderers.add :csv do |data, options|
     # raise "exception #{row.attributes.map { |column, value| display_values(row, column) }.compact}"
   end
   str = obj.map(&:to_csv).join
-  send_data str, type: Mime[:csv], disposition: "attachment; filename=#{filename}.csv"
+  send_data str, type: Mime[:csv],
+    disposition: "attachment; filename=#{filename}.csv"
 end
 
 # TODO this is a copy of the display_values method in the query_helper.rb file and should be condensed

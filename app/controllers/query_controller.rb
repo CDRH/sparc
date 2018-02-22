@@ -42,16 +42,16 @@ class QueryController < ApplicationController
 
     @table = params[:table].classify.constantize
     @column_names = @table.columns.map(&:name)
-    @res = @table
+    res = @table
 
     inputs = table_input_columns(@table)
     inputs.each do |column|
       if params[column[:name]].present?
         if column[:type] == "string"
-          @res = @res.where("#{column[:name]} LIKE ?",
+          res = res.where("#{column[:name]} LIKE ?",
                             "%#{params[column[:name]]}%")
         else
-          @res = @res.where("#{column[:name]} = ?", params[column[:name]])
+          res = res.where("#{column[:name]} = ?", params[column[:name]])
         end
       end
     end
@@ -61,30 +61,30 @@ class QueryController < ApplicationController
       if params[column[:name]].present?
         if @table.reflect_on_all_associations(:belongs_to)
              .map{ |a| a.name.to_s }.include?(column[:name])
-          @res = @res.joins(column[:name].to_sym)
+          res = res.joins(column[:name].to_sym)
                    .where(column[:name].pluralize =>
                           { id: params[column[:name]] })
         elsif column[:type] == :join
-          @res = @res.joins(column[:join_table])
+          res = res.joins(column[:join_table])
                    .where(column[:join_table] =>
                           { column[:name] => params[column[:name]] })
         else
-          @res = @res.where("#{column[:name]} = ?",
+          res = res.where("#{column[:name]} = ?",
                             "%#{params[column[:name]]}%")
         end
       end
     end
 
     # Handle common search fields
-    @res = common_search @res
-    @res = @res.sorted.paginate(:page => params[:page], :per_page => 20)
-
+    res = common_search res
     respond_to do |format|
       format.html {
-        @res = @res.paginate(:page => params[:page], :per_page => 20)
+        @res = res.sorted.paginate(page: params[:page], per_page: 20)
       }
       format.csv {
-        render csv: @res, filename: "#{params[:table]}_search_results", columns: @column_names
+        render csv: res.sorted,
+          filename: "#{params[:table]}_search_results.csv",
+          columns: @column_names
       }
     end
   end

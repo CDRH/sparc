@@ -7,12 +7,6 @@ module QueryHelper
     end
   end
 
-  def params_hash
-    # create a new object so that the params
-    # are not directly altered
-    params.to_unsafe_h
-  end
-
   def delimit(number)
     number_with_delimiter(number)
   end
@@ -51,6 +45,12 @@ module QueryHelper
       value = nil
     end
     return value
+  end
+
+  def params_copy
+    # create a new object so that the params
+    # are not directly altered
+    params.to_unsafe_h
   end
 
   def select_from_assoc(column, param_name)
