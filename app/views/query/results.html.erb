@@ -41,46 +41,11 @@
             <%= Occupation.where(id: result[:occupation_id]).first.name %>
           </td>
         <% end -%>
-
-        <%- @column_names.each do |column| %>
+        <% @column_names.each do |column| %>
           <% if sensitive_record?(column) %>
             <%# Display nothing %>
-          <% elsif column[/_id$/] %>
-            <td>
-              <% assoc_col = column[/^(.+)_id$/, 1] %>
-              <% if assoc_col == "occupation" %>
-                <%= Occupation.where(id: result[:occupation_id]).first.name %>
-              <% elsif result.respond_to?(assoc_col) %>
-                <% if result.send(assoc_col).present? %>
-                  <% if result.send(assoc_col).respond_to?(:name) %>
-                    <%= result.send(assoc_col).name %>
-                  <% else %>
-                    <%= result.send(assoc_col).id %>
-                  <% end %>
-                <% else %>
-                  N/A
-                <% end %>
-              <% elsif result.respond_to?(assoc_col.pluralize) %>
-                <% if result.send(assoc_col.pluralize).present? %>
-                  <% assoc_obj = result.send(assoc_col.pluralize) %>
-                  <% if assoc_obj.first.respond_to?("name") %>
-                    <%= assoc_obj.map { |r| r.name }.join("; ") %>
-                  <% elsif assoc_obj.first.respond_to?(assoc_col << "_no") %>
-                    <%= assoc_obj.map { |r| r.send(assoc_col << "_no") }
-                          .join("; ")
-                    %>
-                  <% elsif assoc_obj.first.respond_to?("id") %>
-                    <%= assoc_obj.map { |r| r.id }.join("; ") %>
-                  <% end %>
-                <% else %>
-                  N/A
-                <% end %>
-              <% else %>
-                N/A
-              <% end %>
-            </td>
-          <% elsif !column[/(?:^id|_at)$/] %>
-            <td><%= result[column] %></td>
+          <% elsif !column[/^id$/] %>
+            <td><%= display_value(result, column) %></td>
           <% end %>
         <% end %>
       </tr>
