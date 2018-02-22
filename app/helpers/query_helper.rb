@@ -11,40 +11,43 @@ module QueryHelper
     number_with_delimiter(number)
   end
 
-  def display_value(record, column)
-    # default to current value
-    value = record[column]
+  def display_value(result, column)
+    res = column
     if column[/_id$/]
-      # get name without _id
       assoc_col = column[/^(.+)_id$/, 1]
-      if record.respond_to?(assoc_col)
-        if record.send(assoc_col).present?
-          if record.send(assoc_col).respond_to?(:name)
-            value = record.send(assoc_col).name
+      if assoc_col == "occupation"
+        res = Occupation.where(id: result[:occupation_id]).first.name
+      elsif result.respond_to?(assoc_col)
+        if result.send(assoc_col).present?
+          if result.send(assoc_col).respond_to?(:name)
+            res = result.send(assoc_col).name
           else
-            value = record.send(assoc_col).id
+            res = result.send(assoc_col).id
           end
         else
-          value = "N/A"
+          res = "N/A"
+        end
+      elsif result.respond_to?(assoc_col.pluralize)
+        if result.send(assoc_col.pluralize).present?
+          assoc_obj = result.send(assoc_col.pluralize)
+          if assoc_obj.first.respond_to?("name")
+            res = assoc_obj.map { |r| r.name }.join("; ")
+          elsif assoc_obj.first.respond_to?(assoc_col << "_no")
+            res = assoc_obj.map { |r| r.send(assoc_col << "_no") }
+              .join("; ")
+          elsif assoc_obj.first.respond_to?("id")
+            res = assoc_obj.map { |r| r.id }.join("; ")
+          end
+        else
+          res = "N/A"
         end
       else
-        # TODO check for respond_to? here, also?
-        if record.send(assoc_col.pluralize).present?
-          assoc_values = record.send(assoc_col.pluralize)
-            .map { |r| r.send(assoc_col << "_no") }.join("; ")
-          value = assoc_values
-        else
-          value = "N/A"
-        end
+        res = "N/A"
       end
-    # let through columns that aren't "id" or "created_at", etc
     elsif !column[/(?:^id|_at)$/]
-      # if the value is "nil" then sub in empty string so it will display correctly
-      value = "" if value.nil?
-    else
-      value = nil
+      res = result[column]
     end
-    return value
+    res
   end
 
   def params_copy
