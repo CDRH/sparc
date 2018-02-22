@@ -12,7 +12,7 @@ module QueryHelper
   end
 
   def display_value(result, column)
-    res = column
+    res = ""
     if column[/_id$/]
       assoc_col = column[/^(.+)_id$/, 1]
       if assoc_col == "occupation"

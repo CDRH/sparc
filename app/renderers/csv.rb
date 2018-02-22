@@ -20,7 +20,7 @@ end
 
 # TODO this is a copy of the display_values method in the query_helper.rb file and should be condensed
 def display_value(result, column)
-  res = column
+  res = ""
   if column[/_id$/]
     assoc_col = column[/^(.+)_id$/, 1]
     if assoc_col == "occupation"
@@ -54,6 +54,8 @@ def display_value(result, column)
     end
   elsif !column[/(?:^id|_at)$/]
     res = result[column]
+  elsif column[/^id$/]
+    res = nil
   end
   res
 end
