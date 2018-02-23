@@ -22,8 +22,7 @@
 /config/secrets.yml
 /public/assets/*
 
-# ignore ruby versioning files but not demo ones
-.ruby-version
+# ignore ruby gemset file, but not demo rvm files
 .ruby-gemset
 !config/rvm/*
 
