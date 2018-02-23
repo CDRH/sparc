@@ -22,10 +22,6 @@
 /config/secrets.yml
 /public/assets/*
 
-# ignore ruby gemset file, but not demo rvm files
-.ruby-gemset
-!config/rvm/*
-
 # ignore the large amount of images for the gallery
 **/images/field/*
 !**/images/field/.keep
