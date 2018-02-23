@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.0.1'
+gem 'rails', '5.0.6'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -50,7 +50,7 @@ group :development do
 end
 
 # postgres database for active record
-gem 'pg'
+gem "pg", ">= 0.18", "< 1.0"
 # active scaffold sets up the table views
 gem 'active_scaffold', :git => 'https://github.com/activescaffold/active_scaffold.git'#, :ref => 'fdd479d7f3e469a8ca11427bd574707745654f56'
 gem 'recordselect', :git => 'https://github.com/scambra/recordselect.git'
