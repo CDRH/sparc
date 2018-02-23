@@ -94,10 +94,9 @@ class ExploreController < ApplicationController
   def unit_images
     @section = "units"
     @selected = "images"
-
-    @images = Image.sorted.joins(:units)
-                .where(units: { unit_no: params["number"] })
-                .limit(8)
+    @unit = Unit.find_by(unit_no: params["number"])
+    @images = @unit.images
+    @images_display = @images.sorted.limit(8)
   end
 
   def unit_overview
