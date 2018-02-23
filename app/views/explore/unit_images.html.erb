@@ -5,32 +5,36 @@
 <%= render "unit_tabs" %>
 
 <div role="tabpanel" class="tab-pane" id="images">
-  <p>Displaying a subset of images from this unit.
-    <%= link_to "View all images for #{@unit.unit_no}", gallery_path({ :unit => @unit.id }) %>
-  </p>
   <!-- TODO could move this and image#index version into partial? -->
   <div class="row">
-    <% @images.each_slice(4) do |img_set| %>
-      <div class="row">
-        <% img_set.each do |img| %>
-          <div class="col-md-3">
-            <%= link_to image_path img.image_no do %>
-              <%= field_image_display(img, "thumb") %>
-            <% end %>
-            <ul>
-              <li>Number: <%= img.image_no %></li>
-              <li>Format: <%= img.format %></li>
-              <li>Comments: <%= img.comments %></li>
-              <li>Subjects: <%= img.subject_list.join("; ") %></li>
-              <% if !SETTINGS["hide_sensitive_image_records"] %>
-                <li>
-                  Human Remains: <%= img.human_remain %>
-                </li>
+    <% if @images.present? %>
+      <p><%= pluralize @images.count, "image" %> associated with this unit. Below is a subset of available images.</p>
+      <%= link_to "View all images for #{@unit.unit_no}", gallery_path({ :unit => @unit.id }), class: "btn btn-default" %>
+      <% @images_display.each_slice(4) do |img_set| %>
+        <div class="row">
+          <% img_set.each do |img| %>
+            <div class="col-md-3">
+              <%= link_to image_path img.image_no do %>
+                <%= field_image_display(img, "thumb") %>
               <% end %>
-            </ul>
-          </div>
-        <% end %>
-      </div>
+              <ul>
+                <li>Number: <%= img.image_no %></li>
+                <li>Format: <%= img.format %></li>
+                <li>Comments: <%= img.comments %></li>
+                <li>Subjects: <%= img.subject_list.join("; ") %></li>
+                <% if !SETTINGS["hide_sensitive_image_records"] %>
+                  <li>
+                    Human Remains: <%= img.human_remain %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <%= link_to "View all images for #{@unit.unit_no}", gallery_path({ :unit => @unit.id }), class: "btn btn-default" %>
+    <% else %>
+      No images associated with this unit.
     <% end %>
   </div>
 </div>
