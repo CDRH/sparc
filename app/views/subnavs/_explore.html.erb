@@ -1,10 +1,10 @@
 <div class="navbar navbar-default sparc_subnavbar">
   <div class="container">
     <ul class="nav navbar-nav">
-      <li class="<%= active?("map", @section) %>">
-        <%= link_to "Interactive Map", explore_path %>
+      <li class="<%= active?("map", @subsection) %>">
+        <%= link_to "Interactive Map", explore_e_zoom_path %>
       </li>
-      <li class="<%= active?("units", @section) %>">
+      <li class="<%= active?("units", @subsection) %>">
         <%= link_to "Unit Search & Browse", units_path %>
       </li>
     </ul>
