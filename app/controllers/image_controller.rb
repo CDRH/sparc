@@ -8,8 +8,8 @@ class ImageController < ApplicationController
       :image_subjects,
       :units,
     )
-    images = images.where("images.image_no LIKE ?", "%#{params['image_no']}%") if !params["image_no"].blank?
-    images = images.where("images.comments LIKE ?", "%#{params['comments']}%") if !params["comments"].blank?
+    images = images.where("images.image_no LIKE ?", "%#{params['image_no']}%") if params["image_no"].present?
+    images = images.where("images.comments LIKE ?", "%#{params['comments']}%") if params["comments"].present?
     images = add_to_query(images, :image_assocnoegs, params["associated_negative"], :image_assocnoeg, true)
     images = add_to_query(images, :image_boxes, params["box"], :image_box, true)
     images = add_to_query(images, :image_creators, params["creator"], :image_creator, true)
@@ -39,7 +39,7 @@ class ImageController < ApplicationController
   # assumes that the tables need to be joined, but can optionally omit join if this table
   # has previously been loaded via includes
   def add_to_query query_obj, where_rel, param, relationship, joins=true
-    if !param.blank?
+    if param.present?
       query_obj = query_obj.where(where_rel => { :id => param })
       query_obj = query_obj.joins(relationship) if joins
     end

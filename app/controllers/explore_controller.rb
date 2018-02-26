@@ -37,10 +37,10 @@ class ExploreController < ApplicationController
     )
 
     # text searches
-    units = units.where("unit_no LIKE ?", "%#{params['unit_no']}%") if !params["unit_no"].blank?
-    units = units.where("other_description LIKE ?", "%#{params['other_description']}%") if !params["other_description"].blank?
-    units = units.where("units.comments LIKE ?", "%#{params['comments']}%") if !params["comments"].blank?
-    units = units.joins(:strata).where("strata.strat_all LIKE ?", "%#{params['strata']}%") if !params["strata"].blank?
+    units = units.where("unit_no LIKE ?", "%#{params['unit_no']}%") if params["unit_no"].present?
+    units = units.where("other_description LIKE ?", "%#{params['other_description']}%") if params["other_description"].present?
+    units = units.where("units.comments LIKE ?", "%#{params['comments']}%") if params["comments"].present?
+    units = units.joins(:strata).where("strata.strat_all LIKE ?", "%#{params['strata']}%") if params["strata"].present?
 
     # basic joins
     units = add_to_query(units, :excavation_statuses, params["excavation_status"], :excavation_status)
