@@ -3,27 +3,32 @@ class ExploreController < ApplicationController
   skip_before_action :get_unit, only: [:units, :zone], raise: false
 
   def early_zoom
-    @section = "map"
+    @section = "explore"
+    @subsection = "map"
   end
 
   def early_zoom_links
-    @section = "map"
+    @section = "explore"
+    @subsection = "map"
   end
 
   def index
-    @section = "map"
+    @section = "explore"
   end
 
   def late
-    @section = "map"
+    @section = "explore"
+    @subsection = "map"
   end
 
   def late_zoom
-    @section = "map"
+    @section = "explore"
+    @subsection = "map"
   end
 
   def units
-    @section = "units"
+    @section = "explore"
+    @subsection = "units"
 
     units = Unit.includes(
       :inferred_function,
@@ -62,7 +67,8 @@ class ExploreController < ApplicationController
   end
 
   def unit_documents
-    @section = "units"
+    @section = "explore"
+    @subsection = "units"
     @selected = "documents"
 
     if params["type"].present?
@@ -87,12 +93,14 @@ class ExploreController < ApplicationController
   end
 
   def unit_features
-    @section = "units"
+    @section = "explore"
+    @subsection = "units"
     @selected = "features"
   end
 
   def unit_images
-    @section = "units"
+    @section = "explore"
+    @subsection = "units"
     @selected = "images"
     @unit = Unit.find_by(unit_no: params["number"])
     @images = @unit.images
@@ -100,23 +108,27 @@ class ExploreController < ApplicationController
   end
 
   def unit_overview
-    @section = "units"
+    @section = "explore"
+    @subsection = "units"
     @selected = "overview"
   end
 
   def unit_strata
-    @section = "units"
+    @section = "explore"
+    @subsection = "units"
     @selected = "strata"
   end
 
   def unit_summary
-    @section = "units"
+    @section = "explore"
+    @subsection = "units"
     @selected = "summary"
   end
 
   def zone
     @zone_no = params["number"].rjust(3, "0")
-    @section = "units"
+    @section = "explore"
+    @subsection = "units"
     @units = Unit.sorted.joins(:zone).where("zones.name" => @zone_no)
   end
 

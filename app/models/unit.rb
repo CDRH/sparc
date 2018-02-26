@@ -38,6 +38,10 @@ class Unit < ActiveRecord::Base
     order("units.unit_no")
   end
 
+  def media_maps
+    documents.where(document_type: DocumentType.where(code: "MM"))
+  end
+
   def to_label
     unit_no
   end
