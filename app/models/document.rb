@@ -9,6 +9,10 @@ class Document < ActiveRecord::Base
     order("page_id")
   end
 
+  def canonical_unit_no
+    image_upload[/^([^_]*)(?=_)/]
+  end
+
   def to_label
     page_id
   end
