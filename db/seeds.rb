@@ -14,8 +14,9 @@ seeds = Rails.root.join('db', 'seeds')
   features: 'xls/Features.xls',
 
   # Inventory Tables
+  # bone_inventory: 'xls/BoneInventory.xlsx',
   ceramic_inventory: 'xls/CeramicInventory.xlsx',
-  faunal_inventory: 'xls/FaunalInventory_partial.xlsx',
+  faunal_inventory: 'xls/FaunalInventory.xlsx',
   lithic_inventory: 'xls/LithicInventory.xlsx',
   obsidian_inventory: 'xls/ObsidianInventory.xlsx',
   pollen_inventory: 'xls/PollenInventory.xlsx',
@@ -34,8 +35,9 @@ seeds = Rails.root.join('db', 'seeds')
   strat_groupings: "#{seeds}/strat_groupings.yml",
 
   # Analysis Tables
+  # bone_tools: 'xls/BoneTools.xlsx',
   burials: 'xls/Burials.xls',
-  ceramics: 'xls/CeramicAnalysis.xlsx',
+  ceramics: 'xls/CeramicAnalysis2005.xlsx',
   ceramic_claps: 'xls/Clap.xls',
   ceramic_vessels: 'xls/CeramicVessels.xlsx',
   eggshells: 'xls/Eggshells.xls',
@@ -44,7 +46,7 @@ seeds = Rails.root.join('db', 'seeds')
   lithic_tools: 'xls/LithicTools.xlsx',
   ornaments: 'xls/Ornaments.xlsx',
   perishables: 'xls/Perishables.xls',
-  select_artifacts: 'xls/SelectArtifacts.xls',
+  select_artifacts: 'xls/SelectArtifacts.xlsx',
   soils: 'xls/Soils.xlsx',
   tree_rings: 'xls/TreeRings.xlsx',
 
