@@ -14,9 +14,8 @@ seeds = Rails.root.join('db', 'seeds')
   features: 'xls/Features.xls',
 
   # Inventory Tables
-  # bone_inventory: 'xls/BoneInventory.xlsx',
   ceramic_inventory: 'xls/CeramicInventory.xlsx',
-  faunal_inventory: 'xls/FaunalInventory.xlsx',
+  faunal_inventory: 'xls/BoneInventory.xlsx',
   lithic_inventory: 'xls/LithicInventory.xlsx',
   obsidian_inventory: 'xls/ObsidianInventory.xlsx',
   pollen_inventory: 'xls/PollenInventory.xlsx',
@@ -33,15 +32,15 @@ seeds = Rails.root.join('db', 'seeds')
   lithic_platform_types: "#{seeds}/lithic_platform_types.yml",
   lithic_terminations: "#{seeds}/lithic_terminations.yml",
   strat_groupings: "#{seeds}/strat_groupings.yml",
+  strat_types: "#{seeds}/strat_types.yml",
 
   # Analysis Tables
-  # bone_tools: 'xls/BoneTools.xlsx',
   burials: 'xls/Burials.xls',
   ceramics: 'xls/CeramicAnalysis2005.xlsx',
   ceramic_claps: 'xls/Clap.xls',
   ceramic_vessels: 'xls/CeramicVessels.xlsx',
   eggshells: 'xls/Eggshells.xls',
-  faunaltools: 'xls/FaunalTools.xlsx',
+  faunal_tools: 'xls/BoneTools.xlsx',
   lithic_debitages: 'xls/LithicDebitage.xlsx',
   lithic_tools: 'xls/LithicTools.xlsx',
   ornaments: 'xls/Ornaments.xlsx',
@@ -430,44 +429,6 @@ end
 def seed_strata
   s = Roo::Excel.new(@files[:strata])
 
-  puts "\n\n\nCreating Strata Types\n"
-
-  strata_type_columns = {
-    # Order as seen in spreadsheet
-    code: "CODE",
-    name: "STRATTYPE"
-  }
-
-  s.sheet('strat types').each_with_index(strata_type_columns) do |row, index|
-    # Skip header row
-    next if row[:code] == "CODE"
-
-    strata_type = prepare_cell_values(row, "Strata Types", index)
-
-    next if StratType.where(code: strata_type[:code]).size > 0
-
-    # assign the type to a grouping
-    group_name = "Other"
-    case strata_type[:code]
-    when "E", "F", "FC", "N"
-      group_name = "Roof"
-    when "C", "CT", "CU", "M"
-      group_name = "Midden"
-    when "H", "I", "O"
-      group_name = "Floor"
-    when "L"
-      group_name = "Features"
-    when "G"
-      group_name = "Occupational Fill"
-    end
-    strata_type[:strat_grouping] = StratGrouping.where(name: group_name).first
-
-    # Output and save
-    puts "#{strata_type[:code]} => #{strata_type[:name]}"
-    StratType.create(strata_type)
-  end
-
-
   puts "\n\n\nCreating Strata\n"
 
   strata_columns = {
@@ -603,11 +564,11 @@ def seed_faunal_inventory
     count: "COUNT",
     room: "ROOM",
     stratum: "STRATUM",
-    strat_other: "OTHER STRATA",
-    feature: "FEATURE NO",
-    sa_no: "SA NO",
-    grid_ew: "GRID EW",
-    grid_ns: "GRID NS",
+    strat_other: "OTHSTRATS",
+    feature: "FEATURE",
+    sa_no: "SANO",
+    grid_ew: "GRIDEW",
+    grid_ns: "GRIDNS",
     quad: "QUAD",
     exact_prov: "EXACTPROV",
     depth_begin: "DEPTHBEG",
@@ -615,7 +576,6 @@ def seed_faunal_inventory
     field_date: "DATE",
     excavator: "EXCAVATOR",
     art_type: "ARTTYPE",
-    # Empty column
     record_field_key_no: "RECORDKEY",
     comments: "COMMENTS",
     entered_by: "ENTBY",
@@ -988,6 +948,29 @@ def seed_strat_groupings
   StratGrouping.create(strat_groupings)
 end
 
+def seed_strat_types
+  puts "\n\n\nCreating Strata Types"
+  strat_types = load_yaml @files[:strat_types]
+  strat_types.each do |type|
+    # assign the type to a grouping
+    group_name = "Other"
+    case type[:code]
+    when "E", "F", "FC", "N"
+      group_name = "Roof"
+    when "C", "CT", "CU", "M"
+      group_name = "Midden"
+    when "H", "I", "O"
+      group_name = "Floor"
+    when "L"
+      group_name = "Features"
+    when "G"
+      group_name = "Occupational Fill"
+    end
+    type[:strat_grouping] = StratGrouping.where(name: group_name).first
+    StratType.create(type)
+  end
+end
+
 ###################
 # ANALYSIS TABLES #
 ###################
@@ -1320,7 +1303,7 @@ end
 # Faunal Tools #
 ################
 def seed_faunal_tools
-  s = Roo::Excelx.new(@files[:faunaltools])
+  s = Roo::Excelx.new(@files[:faunal_tools])
 
   puts "\n\n\nCreating Faunal Tools\n"
 
@@ -1608,7 +1591,7 @@ end
 # Select Artifacts #
 ####################
 def seed_select_artifacts
-  s = Roo::Excel.new(@files[:select_artifacts])
+  s = Roo::Excelx.new(@files[:select_artifacts])
 
   puts "\n\n\nCreating Select Artifacts\n"
 
@@ -1864,11 +1847,12 @@ def seed_images
   columns = {
     site: "Site",
     unit: "Room",
-    strat: "Strata",
+    strat: "Stratum",
+    strat_other: "Other Strata",
     image_no: "Photo No",
-    image_format: "Image",
-    image_type: "Type",
-    image_assocnoeg: "Assocnoeg",
+    image_format: "Image Type",
+    # image_type: "Type",
+    # image_assocnoeg: "Assocnoeg",
     image_box: "Box",
     grid_ew: "GridE",
     grid_ns: "GridN",
@@ -1877,22 +1861,24 @@ def seed_images
     depth_end: "DepEnd",
     date_original: "Date",
     date: "CDRH: Date",
-    image_creator: "Photographer",
+    # image_creator: "Photographer",
     associated_features: "Feature No",
-    sa_no: "Signi Art No",
+    sa_no: "SA No",
     other_no: "Other No",
     image_human_remain: "CDRH: Human Remains \n(y/n)",
+    image_subject0: "Subject",
     image_subject1: "CDRH: Subject Category 1",
     image_subject2: "CDRH: Subject Category 2",
     image_subject3: "CDRH: Subject Category 3",
     comments: "Comments",
-    storage_location: "Storage Location",
-    entered_by: "Data Entry",
-    image_quality: "CDRH: Image Quality Notes",
+    # storage_location: "Storage Location",
+    # entered_by: "Data Entry",
+    # image_quality: "CDRH: Image Quality Notes",
     notes: "CDRH: Notes"
   }
 
   last_unit = ""
+
   s.sheet('data').each_with_index(columns) do |row, index|
     # Skip header row
     next if row[:unit] == "Room"
@@ -1913,20 +1899,12 @@ def seed_images
     image[:image_quality] = create_if_not_exists(ImageQuality, :name, image[:image_quality])
 
     image[:image_subjects] = []
-    if image[:image_subject1] != "[blank]"
-      image[:image_subjects] << create_if_not_exists(ImageSubject, :name, image[:image_subject1])
+    [:image_subject0, :image_subject1, :image_subject2, :image_subject3].each do |subject|
+      if image[subject] != "[blank]"
+        image[:image_subjects] << create_if_not_exists(ImageSubject, :name, image[subject])
+      end
+      image.delete(subject)
     end
-    if image[:image_subject2] != "[blank]"
-      image[:image_subjects] << create_if_not_exists(ImageSubject, :name, image[:image_subject2])
-    end
-    if image[:image_subject3] != "[blank]"
-      image[:image_subjects] << create_if_not_exists(ImageSubject, :name, image[:image_subject3])
-    end
-
-    # Remove from image hash the three strings used to create associations
-    image.delete :image_subject1
-    image.delete :image_subject2
-    image.delete :image_subject3
 
     if image[:unit].to_s.include?("-")
       # TODO Remove once spreadsheet is revised with correct unit assignments
@@ -1953,6 +1931,7 @@ end
 # Primary Tables
 seed_units if Unit.count < 1
 seed_strat_groupings if StratGrouping.count < 1
+seed_strat_types if StratType.count < 1
 seed_strata if Stratum.count < 1
 seed_features if Feature.count < 1
 
