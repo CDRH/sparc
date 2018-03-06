@@ -1,0 +1,58 @@
+- code: A
+  name: Present Ground
+- code: AB
+  name: Present Ground and Post-Occupational Fill
+- code: B
+  name: Post-Occupational Fill
+- code: C
+  name: Structured Trash
+- code: CT
+  name: Structured Trash and Construction Debris
+- code: CU
+  name: Structured Trash and Disturbed Deposits
+- code: D
+  name: Artificial Fill
+- code: E
+  name: Roof Contact
+- code: F
+  name: Roof Itself
+- code: FC
+  name: Roof Itself and Structured Trash
+- code: G
+  name: Occupational Fill
+- code: H
+  name: Floor Contact
+- code: I
+  name: Floor Itself
+- code: J
+  name: Preoccupational Fill
+- code: K
+  name: Wall Foundation
+- code: L
+  name: Feature Fill
+- code: M
+  name: Secondary, Unstructured Trash
+- code: N
+  name: Natural-Slow Rooffall
+- code: O
+  name: Zonal, Naturally Decayed Floors
+- code: P
+  name: Archaeological Backfill
+- code: Q
+  name: Zonal, Extramural Living Surface
+- code: R
+  name: Extramural Activity Surface
+- code: S
+  name: Contact Surface Betweem 2 Other Surfaces
+- code: T
+  name: Construction Debris
+- code: TD
+  name: Construction Debris and Artificial Fill
+- code: U
+  name: Disturbed Deposits
+- code: V
+  name: Natural Deposit with Some Artifacts
+- code: W
+  name: Material Found Within Walls
+- code: X
+  name: Unknown Deposit

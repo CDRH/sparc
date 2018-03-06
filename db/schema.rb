@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705232016) do
+ActiveRecord::Schema.define(version: 20180306153025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -745,6 +745,7 @@ ActiveRecord::Schema.define(version: 20170705232016) do
     t.integer  "image_human_remain_id"
     t.integer  "image_orientation_id"
     t.integer  "image_quality_id"
+    t.string   "strat_other"
     t.index ["image_assocnoeg_id"], name: "index_images_on_image_assocnoeg_id", using: :btree
     t.index ["image_box_id"], name: "index_images_on_image_box_id", using: :btree
     t.index ["image_creator_id"], name: "index_images_on_image_creator_id", using: :btree
