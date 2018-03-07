@@ -21,6 +21,13 @@
 <div class="clearfix"></div>
 <h4>Browse Documents by Unit</h4>
 
+<p>Click on an excavation unit below to browse all associated documentation from that context.</p>
+
+<p>The grid below includes all of the units excavated by C. Irwin-Williams and her staff and
+Students during the San Juan Valley Archaeological Program excavations at Salmon Pueblo. Once you select a unit of interest, you can browse all of the excavation documents from that unit  (see also the <i>Explore Pueblo</i> map view).  Using the dropdown menu at the top of the gallery viewer, you can move between Field Notes, Field Notes Summary, Media, Media Drawings, Media Maps, Feature Records, Feature Records (Select Artifact), Room Records, and Extended Strat Info.  </p>
+
+<p>The viewer allows you to zoom in and out on a document of interest, read through notes by paging forward, or to quickly jump between pages by selecting from the thumbnail image gallery in the left hand panel.  The viewer also allows you to download high-resolution image files of particular documents or images of interest. <b> </b></p>
+
 <ul class="document_unit_list">
   <% @units.each do |unit| %>
     <li><%= link_to unit.unit_no, documents_unit_path(unit.unit_no) %></li>
