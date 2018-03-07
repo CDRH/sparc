@@ -43,8 +43,9 @@ Rails.application.routes.draw do
   get '/query/:category/:type/:table/results', to: 'query#results',
       as: :query_results
 
-  # placeholders
+  # Static Pages
   get '/about', to: 'static#about', as: :about
+  get '/native-descendants', to: 'static#descendants', as: :descendants
 
 
   tables = [
