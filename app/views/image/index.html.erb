@@ -2,6 +2,8 @@
 
 <h1>Image Gallery</h1>
 
+<p>Click on an excavation unit context and browse all available documentation. <%# TODO [DEPENDS ON HOW THIS WILL LOOK WITH IIIF VIEWER] %> </p>
+
 <%= form_tag gallery_path, :method => "get",
   id: "image-search-form", role: "form" do %>
   <%= hidden_field_tag "sort", params["sort"] %>

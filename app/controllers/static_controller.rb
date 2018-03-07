@@ -4,4 +4,8 @@ class StaticController < ApplicationController
     @section = "about"
   end
 
+  def descendants
+    @section = "descendants"
+  end
+
 end
