@@ -1861,7 +1861,7 @@ def seed_images
     depth_end: "DepEnd",
     date_original: "Date",
     date: "CDRH: Date",
-    # image_creator: "Photographer",
+    image_creator: "Photographer",
     associated_features: "Feature No",
     sa_no: "SA No",
     other_no: "Other No",
@@ -1871,9 +1871,9 @@ def seed_images
     image_subject2: "CDRH: Subject Category 2",
     image_subject3: "CDRH: Subject Category 3",
     comments: "Comments",
-    # storage_location: "Storage Location",
-    # entered_by: "Data Entry",
-    # image_quality: "CDRH: Image Quality Notes",
+    storage_location: "Storage Location",
+    entered_by: "Data Entry",
+    image_quality: "CDRH: Image Quality Notes",
     notes: "CDRH: Notes"
   }
 
