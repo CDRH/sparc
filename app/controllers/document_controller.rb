@@ -66,12 +66,11 @@ class DocumentController < ApplicationController
   
   require 'iiif/presentation'
 
-  MY_IIIF_IMAGE_SERVER = 'https://cdrhdev3.unl.edu/iiif/2/sparc_documents'
-
   def image_annotation_from_id(title, image_id, image_info)
     annotation = IIIF::Presentation::Annotation.new
     annotation.resource = image_resource_from_page_hash(image_id)
     canvas = IIIF::Presentation::Canvas.new
+    # TODO what should this URL be? Use parameterize for title
     canvas_uri = "http://example.org/#{title.gsub(' ','_')}/pages/#{image_id}"
     canvas['@id'] = canvas_uri
     canvas.label = image_info['label']
@@ -94,13 +93,13 @@ class DocumentController < ApplicationController
   end
 
   def image_resource_from_page_hash(page_id)
-    base_uri = "#{MY_IIIF_IMAGE_SERVER}#{page_id.gsub('/','%2F')}"
+    base_uri = "#{SETTINGS["iiif_server"]}#{page_id.gsub('/','%2F')}"
     params = {service_id: base_uri}
     puts "================== #{params}"
     begin
       image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(params)
     rescue
-      base_uri = "#{MY_IIIF_IMAGE_SERVER.gsub('sparc','coming_soon.jpg')}"
+      base_uri = "#{SETTINGS["iiif_server"].gsub('sparc','coming_soon.jpg')}"
       params = {service_id: base_uri}
       puts "------#{params}"
       image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(params)
@@ -109,13 +108,13 @@ class DocumentController < ApplicationController
   end
 
   def build_collection(collection_hash, unit)
-    wrapper = IIIF::Presentation::Collection.new('@id' => "http://hero.village.virginia.edu/3080/documents/unit/#{unit}")
-    collection = IIIF::Presentation::Collection.new('@id' => "http://hero.village.virginia.edu/3080/documents/unit/#{unit}", '@label' => unit)
+    wrapper = IIIF::Presentation::Collection.new('@id' => documents_unit_path({unit: unit}))
+    collection = IIIF::Presentation::Collection.new('@id' => documents_unit_path({unit: unit}), '@label' => unit)
     collection_hash.each do |k, docs|
       
       unit = docs.first.units.first
       title = unit.unit_no
-      manifest = IIIF::Presentation::Manifest.new('@id' => "http://hero.village.virginia.edu/3080/documents/unit/#{title}/#{k}.json")
+      manifest = IIIF::Presentation::Manifest.new('@id' => documents_unit_path({unit: title, type: k, format: "json"}))
       manifest.label = k.humanize 
       manifest.viewing_hint = 'paged'
       manifest.metadata = [
