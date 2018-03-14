@@ -40,7 +40,7 @@ module ActiveRecordAbstraction
           res = "N/A"
         end
       else
-        res = result[column].present? ? result[column] : "N/A"
+        res = result[column].present? ? result[column] : ""
       end
       res
     end
