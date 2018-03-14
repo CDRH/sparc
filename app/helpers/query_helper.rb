@@ -1,4 +1,6 @@
 module QueryHelper
+  include ActiveRecordAbstraction
+
   def checked?(value, paramlist)
     if paramlist.blank?
       return false
@@ -9,45 +11,6 @@ module QueryHelper
 
   def delimit(number)
     number_with_delimiter(number)
-  end
-
-  def display_value(result, column)
-    res = ""
-    if column[/_id$/]
-      assoc_col = column[/^(.+)_id$/, 1]
-      if assoc_col == "occupation"
-        res = Occupation.where(id: result[:occupation_id]).first.name
-      elsif result.respond_to?(assoc_col)
-        if result.send(assoc_col).present?
-          if result.send(assoc_col).respond_to?(:name)
-            res = result.send(assoc_col).name
-          else
-            res = result.send(assoc_col).id
-          end
-        else
-          res = "N/A"
-        end
-      elsif result.respond_to?(assoc_col.pluralize)
-        if result.send(assoc_col.pluralize).present?
-          assoc_obj = result.send(assoc_col.pluralize)
-          if assoc_obj.first.respond_to?("name")
-            res = assoc_obj.map { |r| r.name }.join("; ")
-          elsif assoc_obj.first.respond_to?(assoc_col << "_no")
-            res = assoc_obj.map { |r| r.send(assoc_col << "_no") }
-              .join("; ")
-          elsif assoc_obj.first.respond_to?("id")
-            res = assoc_obj.map { |r| r.id }.join("; ")
-          end
-        else
-          res = "N/A"
-        end
-      else
-        res = "N/A"
-      end
-    elsif !column[/(?:^id|_at)$/]
-      res = result[column]
-    end
-    res
   end
 
   def params_copy

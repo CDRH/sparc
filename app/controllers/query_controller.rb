@@ -1,6 +1,8 @@
 require_relative "../renderers/csv.rb"
 
 class QueryController < ApplicationController
+  include ActiveRecordAbstraction
+
   def category
     params.require(:category)
 
