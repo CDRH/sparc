@@ -19,7 +19,7 @@
       <% end -%>
 
       <%- @column_names.each do |column| %>
-        <% unless column[/(?:^id|_at)$/] || sensitive_record?(column) %>
+        <% unless sensitive_record?(column) %>
           <th>
             <% if column == "occupation_id" && @occupation_source.present? %>
               <%= @occupation_source %>

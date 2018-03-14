@@ -43,7 +43,8 @@ class QueryController < ApplicationController
     params.require([:category, :type, :table])
 
     @table = params[:table].classify.constantize
-    @column_names = @table.columns.map(&:name)
+    @column_names = @table.columns.reject { |c| c.name[/(?:^id|_at)$/] }
+      .map(&:name)
     res = @table
 
     inputs = table_input_columns(@table)
