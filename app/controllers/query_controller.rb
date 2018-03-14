@@ -85,7 +85,8 @@ class QueryController < ApplicationController
       }
       format.csv {
         render csv: res.sorted,
-          filename: "#{params[:table]}_search_results.csv",
+          filename: params["all"] ? params[:table] :
+            "#{params[:table]}_search_results",
           columns: @column_names
       }
     end

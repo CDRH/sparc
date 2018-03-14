@@ -2,18 +2,15 @@
 
 <p>Found <%= pluralize @res.count, "match" %>:</p>
 
-<%= will_paginate @res %>
-
-<div class="search_results table-responsive">
+<div class="row buffer-bottom">
   <div class="pull-right">
-    <%= link_to query_results_path(params_copy.merge({format: "csv"})) do %>
-      <button type="button" class="btn btn-default">
-        Download as CSV <span class="glyphicon glyphicon-download-alt"></span>
-      </button>
-    <% end %>
+    <%= render "csv_results_download" %>
   </div>
+  <%= will_paginate @res %>
+</div>
 
-  <table class="table table-striped">
+<div class="search_results table-responsive buffer-bottom">
+  <table class="table table-condensed table-hover table-striped">
     <% no_occupation = !@column_names.include?("occupation_id") %>
     <tr>
       <%# Add Occupation column if not present %>
@@ -44,22 +41,18 @@
         <% @column_names.each do |column| %>
           <% if sensitive_record?(column) %>
             <%# Display nothing %>
-          <% elsif !column[/^id$/] %>
+          <% else %>
             <td><%= display_value(result, column) %></td>
           <% end %>
         <% end %>
       </tr>
     <% end %>
   </table>
-
-  <%= will_paginate @res %>
-  <div class="pull-right">
-    <%= link_to query_results_path(params_copy.merge({format: "csv"})) do %>
-      <button type="button" class="btn btn-default">
-        Download as CSV <span class="glyphicon glyphicon-download-alt"></span>
-      </button>
-    <% end %>
-  </div>
 </div>
 
-<%= will_paginate @res %>
+<div class="row">
+  <div class="pull-right">
+    <%= render "csv_results_download" %>
+  </div>
+  <%= will_paginate @res %>
+</div>
