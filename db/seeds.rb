@@ -129,6 +129,25 @@ def create_if_not_exists model, field, column
   return record
 end
 
+def find_or_create_unit_class(unitclass, unit_no)
+  name = unitclass.strip.titleize
+  uclass = UnitClass.where(:name => name).first
+  if uclass.nil?
+    mapping = {
+      "Back Wall" => "BW",
+      "Kiva" => "K",
+      "Plaza" => "P",
+      "Room" => "R",
+      "Test Trench" => "TT",
+      # Search Area
+      "Test Unit" => "SA"
+    }
+    code = mapping[name] || ""
+    uclass = UnitClass.create(:name => name, :code => code)
+  end
+  uclass
+end
+
 def find_or_create_occupation(occupation)
   # change any of the below keys into the value
   mapping = {
@@ -409,7 +428,7 @@ def seed_units
     # Handle foreign key columns
     unit[:excavation_status] = create_if_not_exists(ExcavationStatus, :name, unit[:excavation_status])
     unit[:occupation] = find_or_create_occupation(unit[:occupation])
-    unit[:unit_class] = create_if_not_exists(UnitClass, :name, unit[:unit_class])
+    unit[:unit_class] = find_or_create_unit_class(unit[:unit_class], unit[:unit_no])
     unit[:story] = create_if_not_exists(Story, :name, unit[:story])
     unit[:intact_roof] = create_if_not_exists(IntactRoof, :name, unit[:intact_roof])
     unit[:room_type_id] = unit[:salmon_type_code] != "n/a" ? unit[:salmon_type_code].to_i : nil
