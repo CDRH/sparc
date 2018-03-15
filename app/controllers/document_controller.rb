@@ -182,22 +182,8 @@ class DocumentController < ApplicationController
     num = 0
 
     results.each do |result|
-      room_type = ''
-      case unit.unit_class_id
-        when 1
-          room_type = 'BW'
-        when 3
-          room_type = 'P'
-        when 2
-          room_type = 'R'
-        when 9
-          room_type = 'SA'
-        when 8
-          room_type = 'TT'
-        when 4
-          room_type = 'K'
-      end
-      
+      room_type = unit.unit_class.code
+
       sequence.canvases << image_annotation_from_id(title, "/#{unit.unit_no}/#{unit.unit_no}_#{result.document_type.code rescue 'na'}_#{result.scan_no}.jpg", {'label'=>"Page #{num += 1}", 'page'=>"#{result.page_id}", 'creator'=>result.scan_creator, 'rights' => result.rights} )
     end
 
