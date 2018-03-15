@@ -1,0 +1,11 @@
+<%= link_to query_results_path(
+  all: 1,
+  category: params["category"],
+  format: "csv",
+  table: params["table"],
+  type: params["type"]
+  ) do %>
+  <button type="button" class="btn btn-default">
+    Download all as CSV <span class="glyphicon glyphicon-download-alt"></span>
+  </button>
+<% end %>

@@ -2,10 +2,15 @@
 
 <p>Found <%= pluralize @res.count, "match" %>:</p>
 
-<%= will_paginate @res %>
+<div class="row buffer-bottom">
+  <div class="pull-right">
+    <%= render "csv_results_download" %>
+  </div>
+  <%= will_paginate @res %>
+</div>
 
-<div class="search_results table-responsive">
-  <table class="table table-striped">
+<div class="search_results table-responsive buffer-bottom">
+  <table class="table table-condensed table-hover table-striped">
     <% no_occupation = !@column_names.include?("occupation_id") %>
     <tr>
       <%# Add Occupation column if not present %>
@@ -14,7 +19,7 @@
       <% end -%>
 
       <%- @column_names.each do |column| %>
-        <% unless column[/(?:^id|_at)$/] || sensitive_record?(column) %>
+        <% unless sensitive_record?(column) %>
           <th>
             <% if column == "occupation_id" && @occupation_source.present? %>
               <%= @occupation_source %>
@@ -33,46 +38,11 @@
             <%= Occupation.where(id: result[:occupation_id]).first.name %>
           </td>
         <% end -%>
-
-        <%- @column_names.each do |column| %>
+        <% @column_names.each do |column| %>
           <% if sensitive_record?(column) %>
             <%# Display nothing %>
-          <% elsif column[/_id$/] %>
-            <td>
-              <% assoc_col = column[/^(.+)_id$/, 1] %>
-              <% if assoc_col == "occupation" %>
-                <%= Occupation.where(id: result[:occupation_id]).first.name %>
-              <% elsif result.respond_to?(assoc_col) %>
-                <% if result.send(assoc_col).present? %>
-                  <% if result.send(assoc_col).respond_to?(:name) %>
-                    <%= result.send(assoc_col).name %>
-                  <% else %>
-                    <%= result.send(assoc_col).id %>
-                  <% end %>
-                <% else %>
-                  N/A
-                <% end %>
-              <% elsif result.respond_to?(assoc_col.pluralize) %>
-                <% if result.send(assoc_col.pluralize).present? %>
-                  <% assoc_obj = result.send(assoc_col.pluralize) %>
-                  <% if assoc_obj.first.respond_to?("name") %>
-                    <%= assoc_obj.map { |r| r.name }.join("; ") %>
-                  <% elsif assoc_obj.first.respond_to?(assoc_col << "_no") %>
-                    <%= assoc_obj.map { |r| r.send(assoc_col << "_no") }
-                          .join("; ")
-                    %>
-                  <% elsif assoc_obj.first.respond_to?("id") %>
-                    <%= assoc_obj.map { |r| r.id }.join("; ") %>
-                  <% end %>
-                <% else %>
-                  N/A
-                <% end %>
-              <% else %>
-                N/A
-              <% end %>
-            </td>
-          <% elsif !column[/(?:^id|_at)$/] %>
-            <td><%= result[column] %></td>
+          <% else %>
+            <td><%= display_value(result, column) %></td>
           <% end %>
         <% end %>
       </tr>
@@ -80,4 +50,9 @@
   </table>
 </div>
 
-<%= will_paginate @res %>
+<div class="row">
+  <div class="pull-right">
+    <%= render "csv_results_download" %>
+  </div>
+  <%= will_paginate @res %>
+</div>
