@@ -1,18 +1,16 @@
 ActionController::Renderers.add :csv do |data, options|
   filename = options[:filename] || 'data'
-  obj = []
-  # start with specified column names if they exist, otherwise default to record fields
-  columns = options[:columns] || data[0].attributes.keys
-  # filter out those which shouldn't be displayed and titleize
-  # TODO move similar logic out of results html view so both use
-  obj << columns.map { |column| column.titleize }
+  filename << ".csv"
 
-  # add the values from each active record object to the array
-  data.each do |row|
-    obj << row.attributes.map { |column, value| display_value(row, column) }
-      .compact
+  csv_data = CSV.generate(headers: true) do |csv|
+    # Use specified column names if passed, otherwise use record field names
+    headers = options[:columns] || data[0].attributes.keys
+    csv << headers.map { |header| header.titleize }
+
+    data.each do |row|
+      csv << row.attributes.map { |column, value| display_value(row, column) }
+        .compact
+    end
   end
-  str = obj.map(&:to_csv).join
-  send_data str, type: Mime[:csv],
-    disposition: "attachment; filename=#{filename}.csv"
+  send_data csv_data, filename: filename
 end
