@@ -1,4 +1,6 @@
 module QueryHelper
+  include ActiveRecordAbstraction
+
   def checked?(value, paramlist)
     if paramlist.blank?
       return false
@@ -9,6 +11,12 @@ module QueryHelper
 
   def delimit(number)
     number_with_delimiter(number)
+  end
+
+  def params_copy
+    # create a new object so that the params
+    # are not directly altered
+    params.to_unsafe_h
   end
 
   def select_from_assoc(column, param_name)

@@ -23,6 +23,7 @@
         <% end %>
       </ul>
 
+      <%= render "csv_table_download" %>
       <div class="pull-right">
         <%= submit_tag "Search #{params[:table].to_s.pluralize.titleize}",
                        class: "btn btn-primary" %>
@@ -59,6 +60,7 @@
         </div>
       </div>
 
+      <%= render "csv_table_download" %>
       <div class="pull-right">
         <%= submit_tag "Search #{params[:table].to_s.pluralize.titleize}",
                        class: "btn btn-primary" %>
