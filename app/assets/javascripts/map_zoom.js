@@ -1,12 +1,28 @@
 var map_setup = function() {
-  // Expose to window namespase for testing purposes
-  window.zoomTiger = svgPanZoom('#map_zoom', {
+  svgPanZoom('#map_combined', {
     zoomEnabled: true,
     controlIconsEnabled: true,
     fit: true,
     center: true,
-    // viewportSelector: document.getElementById('demo-tiger').querySelector('#g4') // this option will make library to misbehave. Viewport should have no transform attribute
   });
 };
 
 $(document).ready(map_setup);
+
+document.getElementById('toggle_salmon_occ').checked = true;
+document.getElementById('toggle_trenches').checked = true;
+
+function toggle_trenches_display(e) {
+  if (e.checked) { document.getElementById('trenches').style.display = 'block'; }
+  if (!e.checked) { document.getElementById('trenches').style.display = 'none'; }
+}
+
+function toggle_salmon_display() {
+  document.getElementById('salmon_occ').style.display = 'block';
+  document.getElementById('chaco_occ').style.display = 'none';
+}
+
+function toggle_chaco_display() {
+  document.getElementById('salmon_occ').style.display = 'none';
+  document.getElementById('chaco_occ').style.display = 'block';
+}
