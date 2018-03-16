@@ -1,0 +1,20 @@
+<%= javascript_include_tag 'svg-pan-zoom' %>
+
+<div id="map_controls" style="width:900px; height:60px; margin:48px auto;">
+  <form lpformnum="1">
+    <input type="checkbox" name="toggle_trenches" id="toggle_trenches" onchange="toggle_trenches_display(this)">
+    <label for="toggle_trenches">Trenches</label>
+    <input type="radio" name="toggle_occ" id="toggle_salmon_occ" value="salmon_occ" onclick="toggle_salmon_display()">
+    <label for="toggle_salmon_occ">San Juan Occupation</label>
+    <input type="radio" name="toggle_occ" id="toggle_chaco_occ" value="chaco_occ" onclick="toggle_chaco_display()">
+    <label for="toggle_chaco_occ">Chaco Occupation</label>
+  </form>
+</div>
+
+<div id="map_container" style="width:1000px;
+  height:600px; border:1px solid black;
+  margin:48px auto;">
+  <%= render "svg" %>
+</div>
+
+<%= javascript_include_tag 'map_zoom' %>
