@@ -29,7 +29,6 @@
   width:inherit;
 }
 
-/* taken from SVG itself */
 a:hover polygon {
   fill: #FF0000;
   fill-opacity: 0.1;
