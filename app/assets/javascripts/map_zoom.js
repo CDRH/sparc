@@ -1,10 +1,12 @@
 var map_setup = function() {
-  svgPanZoom('#map_combined', {
+  var map = svgPanZoom('#map_combined', {
     zoomEnabled: true,
     controlIconsEnabled: true,
     fit: true,
     center: true,
   });
+  // set default zoom for map
+  map.zoom(1.8);
 };
 
 $(document).ready(map_setup);
