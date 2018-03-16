@@ -8,6 +8,11 @@
   width: 900px;
 }
 
+/* layer controls */
+#map_layer_controls label {
+  font-size: 18px;
+}
+
 /* ------------------------ */
 /* styles pulled out of SVG */
 /* ------------------------ */
