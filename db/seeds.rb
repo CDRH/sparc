@@ -46,7 +46,7 @@ seeds = Rails.root.join('db', 'seeds')
   lithic_tools: 'xls/LithicTools.xlsx',
   ornaments: 'xls/Ornaments.xlsx',
   perishables: 'xls/Perishables.xls',
-  select_artifacts: 'xls/SelectArtifacts.xlsx',
+  select_artifacts: 'xls/SelectArtifacts.xls',
   soils: 'xls/Soils.xlsx',
   tree_rings: 'xls/TreeRings.xlsx',
 
@@ -1574,7 +1574,7 @@ end
 # Select Artifacts #
 ####################
 def seed_select_artifacts
-  s = Roo::Excelx.new(@files[:select_artifacts])
+  s = Roo::Excel.new(@files[:select_artifacts])
 
   puts "\n\n\nCreating Select Artifacts\n"
 
