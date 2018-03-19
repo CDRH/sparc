@@ -31,6 +31,7 @@ seeds = Rails.root.join('db', 'seeds')
   lithic_material_types: "#{seeds}/lithic_material_types.yml",
   lithic_platform_types: "#{seeds}/lithic_platform_types.yml",
   lithic_terminations: "#{seeds}/lithic_terminations.yml",
+  room_types: "#{seeds}/room_types.yml",
   strat_groupings: "#{seeds}/strat_groupings.yml",
   strat_types: "#{seeds}/strat_types.yml",
 
@@ -352,31 +353,11 @@ def seed_units
 
   puts "\n\n\nCreating Room Types\n"
 
-  room_type_columns = {
-    # Order as seen in spreadsheet
-    id: "Type No.",
-    description: "Description",
-    occupation: "Period",
-    location: "Location"
-  }
-
-  s.sheet('room typology').each_with_index(room_type_columns) do |row, index|
-    # Skip header row
-    next if row[:id] == "Type No."
-
-    room_type = prepare_cell_values(row, "Room Types", index)
-
-    room_type[:id] = room_type[:id].to_i
-    next if RoomType.where(id: room_type[:id]).size > 0
-    room_type[:occupation] = find_or_create_occupation(room_type[:occupation])
-
-    puts "\n#{room_type[:id]}"
-    puts "  When  : #{room_type[:occupation]}"
-    puts "  Where : #{room_type[:location]}"
-    puts "  Descrp: #{room_type[:description]}"
-    RoomType.create(room_type)
+  room_types = load_yaml(@files[:room_types])
+  room_types.each do |rt|
+    rt["occupation"] = find_or_create_occupation(rt["occupation"])
+    RoomType.create(rt)
   end
-
 
   puts "\n\n\nCreating Units\n"
 
@@ -412,7 +393,9 @@ def seed_units
     unit[:unit_class] = create_if_not_exists(UnitClass, :name, unit[:unit_class])
     unit[:story] = create_if_not_exists(Story, :name, unit[:story])
     unit[:intact_roof] = create_if_not_exists(IntactRoof, :name, unit[:intact_roof])
-    unit[:room_type_id] = unit[:salmon_type_code] != "n/a" ? unit[:salmon_type_code].to_i : nil
+    if unit[:salmon_type_code] != "n/a"
+      unit[:room_type] = RoomType.find_by(type_no: unit[:salmon_type_code])
+    end
     unit[:type_description] = create_if_not_exists(TypeDescription, :name, unit[:type_description])
     unit[:inferred_function] = create_if_not_exists(InferredFunction, :name, unit[:inferred_function])
     unit[:salmon_sector] = create_if_not_exists(SalmonSector, :name, unit[:salmon_sector])
