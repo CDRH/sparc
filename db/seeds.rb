@@ -36,12 +36,12 @@ seeds = Rails.root.join('db', 'seeds')
   strat_types: "#{seeds}/strat_types.yml",
 
   # Analysis Tables
+  bone_tools: 'xls/BoneTools.xlsx',
   burials: 'xls/Burials.xls',
   ceramics: 'xls/CeramicAnalysis2005.xlsx',
   ceramic_claps: 'xls/Clap.xls',
   ceramic_vessels: 'xls/CeramicVessels.xlsx',
   eggshells: 'xls/Eggshells.xls',
-  faunal_tools: 'xls/BoneTools.xlsx',
   lithic_debitages: 'xls/LithicDebitage.xlsx',
   lithic_tools: 'xls/LithicTools.xlsx',
   ornaments: 'xls/Ornaments.xlsx',
@@ -1283,14 +1283,14 @@ def seed_eggshells
 end
 
 ################
-# Faunal Tools #
+# Bone Tools #
 ################
-def seed_faunal_tools
-  s = Roo::Excelx.new(@files[:faunal_tools])
+def seed_bone_tools
+  s = Roo::Excelx.new(@files[:bone_tools])
 
-  puts "\n\n\nCreating Faunal Tools\n"
+  puts "\n\n\nCreating Bone Tools\n"
 
-  faunaltools_columns = {
+  bonetools_columns = {
     unit: "Room",
     strat: "Stratum",
     strat_other: "Other Strata ",
@@ -1307,26 +1307,26 @@ def seed_faunal_tools
   }
 
   last_unit = ""
-  s.sheet('data').each_with_index(faunaltools_columns) do |row, index|
+  s.sheet('data').each_with_index(bonetools_columns) do |row, index|
     # Skip header row
     next if row[:unit] == "Room"
 
-    faunaltool = prepare_cell_values(row, "Faunal Tools", index)
+    bonetool = prepare_cell_values(row, "Bone Tools", index)
 
     # Output context for creation
-    # puts "\nUnit #{faunaltool[:unit]}:" if faunaltool[:unit] != last_unit
-    last_unit = faunaltool[:unit]
+    # puts "\nUnit #{bonetool[:unit]}:" if bonetool[:unit] != last_unit
+    last_unit = bonetool[:unit]
 
     # Handle foreign keys
-    unit = select_or_create_unit(faunaltool[:unit], "Faunal Tools")
+    unit = select_or_create_unit(bonetool[:unit], "Bone Tools")
 
-    faunaltool[:occupation] = find_or_create_occupation(faunaltool[:occupation])
-    faunaltool[:faunal_inventory] = associate_analysis_with_inventory(FaunalInventory, faunaltool[:fs_no], unit)
-    associate_strata_features(unit, faunaltool[:strat], faunaltool[:feature], faunaltool, "Faunal Tools", false)
+    bonetool[:occupation] = find_or_create_occupation(bonetool[:occupation])
+    bonetool[:faunal_inventory] = associate_analysis_with_inventory(FaunalInventory, bonetool[:fs_no], unit)
+    associate_strata_features(unit, bonetool[:strat], bonetool[:feature], bonetool, "Bone Tools", false)
 
     # Output and save
-    # puts faunaltool[:fs_no]
-    FaunalTool.create(faunaltool)
+    # puts bonetool[:fs_no]
+    BoneTool.create(bonetool)
   end
 end
 
@@ -1930,12 +1930,12 @@ seed_wood_inventories if WoodInventory.count < 1
 seed_lithic_controlled_vocab
 
 # Analysis Tables
+seed_bone_tools if BoneTool.count < 1
 seed_burials if Burial.count < 1
 seed_ceramics if Ceramic.count < 1
 seed_ceramic_claps if CeramicClap.count < 1
 seed_ceramic_vessels if CeramicVessel.count < 1
 seed_eggshells if Eggshell.count < 1
-seed_faunal_tools if FaunalTool.count < 1
 seed_lithic_debitages if LithicDebitage.count < 1
 seed_lithic_tools if LithicTool.count < 1
 seed_ornaments if Ornament.count < 1

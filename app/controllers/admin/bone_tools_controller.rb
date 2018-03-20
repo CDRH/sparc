@@ -1,6 +1,6 @@
-class Admin::FaunalToolsController < ApplicationController
+class Admin::BoneToolsController < ApplicationController
 
-  active_scaffold :faunal_tool do |conf|
+  active_scaffold :bone_tool do |conf|
     conf.columns = [
       :units,
       :strata,

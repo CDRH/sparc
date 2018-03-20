@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class FaunalToolTest < ActiveSupport::TestCase
+class BoneToolTest < ActiveSupport::TestCase
   def setup
-    @item = FaunalTool.create
+    @item = BoneTool.create
     @item.feature = Feature.first
     @item.occupation = Occupation.first
     @item.save
