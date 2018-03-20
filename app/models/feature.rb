@@ -10,9 +10,9 @@ class Feature < ActiveRecord::Base
   has_and_belongs_to_many :strata
   has_many :units, :through => :strata
 
+  has_many :bone_tools
   has_many :burials
   has_many :ceramic_vessels
-  has_many :faunal_tools
   has_many :obsidian_inventories
   has_many :ornaments
   has_and_belongs_to_many :ceramic_claps

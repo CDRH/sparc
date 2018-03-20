@@ -3,7 +3,7 @@ class FaunalInventory < ApplicationRecord
   has_many :strata, -> {distinct}, :through => :features
   has_many :units, -> {distinct}, :through => :strata
 
-  has_many :faunal_tools
+  has_many :bone_tools
 
   def self.sorted
     order("comments")
