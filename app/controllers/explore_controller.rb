@@ -2,26 +2,11 @@ class ExploreController < ApplicationController
   before_action :get_unit
   skip_before_action :get_unit, only: [:units, :zone], raise: false
 
-  def early_zoom
-    @section = "explore"
-    @subsection = "map"
-  end
-
-  def early_zoom_links
-    @section = "explore"
-    @subsection = "map"
-  end
-
   def index
     @section = "explore"
   end
 
-  def late
-    @section = "explore"
-    @subsection = "map"
-  end
-
-  def late_zoom
+  def map
     @section = "explore"
     @subsection = "map"
   end
