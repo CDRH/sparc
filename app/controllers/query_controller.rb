@@ -100,36 +100,36 @@ class QueryController < ApplicationController
     when "samples"
       case params[:type]
       when "pollens"
-        return ["pollen_inventory"]
+        ["pollen_inventory"]
       when "soils"
-        return ["soil"]
+        ["soil"]
       when "tree_rings"
-        return ["tree_ring"]
+        ["tree_ring"]
       end
     when "artifacts"
       case params[:type]
       when "ceramics"
-        return ["ceramic_inventory", "ceramic_clap", "ceramic",
+        ["ceramic_inventory", "ceramic_clap", "ceramic",
                 "ceramic_vessel"]
       when "eggshells"
-        return ["eggshell"]
+        ["eggshell"]
       when "faunal"
-        return ["bone_tool", "faunal_artifacts", "faunal_inventory"]
+        ["bone_tool", "faunal_artifacts", "faunal_inventory"]
       when "lithics"
-        return ["lithic_inventory", "lithic_debitage", "lithic_tool"]
+        ["lithic_inventory", "lithic_debitage", "lithic_tool"]
       when "ornaments"
-        return ["ornament"]
+        ["ornament"]
       when "perishables"
-        return ["perishable"]
+        ["perishable"]
       when "woods"
-        return ["wood_inventory"]
+        ["wood_inventory"]
       end
     when "features"
-      return ["features"]
+      ["features"]
     when "strata"
-      return ["strata"]
+      ["strata"]
     when "images"
-      return ["images"]
+      ["images"]
     end
   end
 
@@ -197,7 +197,7 @@ class QueryController < ApplicationController
       end
     end
 
-    return res
+    res
   end
 
   def table_input_columns(table)
@@ -226,7 +226,7 @@ class QueryController < ApplicationController
       end
     end
 
-    return column_list
+    column_list
   end
 
   def table_select_columns(table)
@@ -256,6 +256,6 @@ class QueryController < ApplicationController
       column_list << { name: "feature_no", type: :join, join_table: :features }
     end
 
-    return column_list
+    column_list
   end
 end
