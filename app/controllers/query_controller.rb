@@ -114,7 +114,7 @@ class QueryController < ApplicationController
       when "eggshells"
         return ["eggshell"]
       when "faunal"
-        return ["bone_tool", "faunal_inventory"]
+        return ["bone_tool", "faunal_artifacts", "faunal_inventory"]
       when "lithics"
         return ["lithic_inventory", "lithic_debitage", "lithic_tool"]
       when "ornaments"

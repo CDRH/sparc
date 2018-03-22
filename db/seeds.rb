@@ -42,6 +42,7 @@ seeds = Rails.root.join('db', 'seeds')
   ceramic_claps: 'xls/Clap.xls',
   ceramic_vessels: 'xls/CeramicVessels.xlsx',
   eggshells: 'xls/Eggshells.xls',
+  faunal_artifacts: 'xls/Faunal.xls',
   lithic_debitages: 'xls/LithicDebitage.xlsx',
   lithic_tools: 'xls/LithicTools.xlsx',
   ornaments: 'xls/Ornaments.xlsx',
@@ -958,6 +959,54 @@ end
 # ANALYSIS TABLES #
 ###################
 
+################
+# Bone Tools #
+################
+def seed_bone_tools
+  s = Roo::Excelx.new(@files[:bone_tools])
+
+  puts "\n\n\nCreating Bone Tools\n"
+
+  bonetools_columns = {
+    unit: "Room",
+    strat: "Stratum",
+    strat_other: "Other Strata ",
+    feature: "Feature No",
+    sa_no: "Select Artifact No.",
+    fs_no: "FS No",
+    depth: "Depth (meters below datum)",
+    occupation: "Occupation",
+    grid: "Grid",
+    tool_type_code: "Tool Type Code",
+    tool_type: "Tool Type",
+    species_code: "Species Code",
+    comments: "Comments"
+  }
+
+  last_unit = ""
+  s.sheet('data').each_with_index(bonetools_columns) do |row, index|
+    # Skip header row
+    next if row[:unit] == "Room"
+
+    bonetool = prepare_cell_values(row, "Bone Tools", index)
+
+    # Output context for creation
+    # puts "\nUnit #{bonetool[:unit]}:" if bonetool[:unit] != last_unit
+    last_unit = bonetool[:unit]
+
+    # Handle foreign keys
+    unit = select_or_create_unit(bonetool[:unit], "Bone Tools")
+
+    bonetool[:occupation] = find_or_create_occupation(bonetool[:occupation])
+    bonetool[:faunal_inventory] = associate_analysis_with_inventory(FaunalInventory, bonetool[:fs_no], unit)
+    associate_strata_features(unit, bonetool[:strat], bonetool[:feature], bonetool, "Bone Tools", false)
+
+    # Output and save
+    # puts bonetool[:fs_no]
+    BoneTool.create(bonetool)
+  end
+end
+
 ###########
 # Burials #
 ###########
@@ -1282,51 +1331,63 @@ def seed_eggshells
   end
 end
 
-################
-# Bone Tools #
-################
-def seed_bone_tools
-  s = Roo::Excelx.new(@files[:bone_tools])
+####################
+# Faunal Artifacts #
+####################
 
-  puts "\n\n\nCreating Bone Tools\n"
+def seed_faunal_artifacts
+  s = Roo::Excel.new(@files[:faunal_artifacts])
 
-  bonetools_columns = {
+  puts "\n\n\nCreating Faunal Artifacts\n"
+
+  faunal_columns = {
+    fs_no: "FS",
+    artifact_no: "ARTIFACT NO",
     unit: "Room",
     strat: "Stratum",
-    strat_other: "Other Strata ",
-    feature: "Feature No",
-    sa_no: "Select Artifact No.",
-    fs_no: "FS No",
-    depth: "Depth (meters below datum)",
-    occupation: "Occupation",
-    grid: "Grid",
-    tool_type_code: "Tool Type Code",
-    tool_type: "Tool Type",
-    species_code: "Species Code",
-    comments: "Comments"
+    feature_no: "Feature",
+    grid_ew: "Grid EW",
+    grid_ns: "Grid NS",
+    depth_begin: "Beg Depth",
+    depth_end: "End Depth",
+    spc: "SPC",
+    elem: "ELEM",
+    side: "SIDE",
+    cond: "COND",
+    frag: "FRAG",
+    pd: "PD",
+    dv: "DV",
+    fuse: "FUSE",
+    burn: "BURN",
+    art: "ART",
+    gnaw: "GNAW",
+    mod: "MOD",
+    bmark: "BMARK",
+    frags: "FRAGS",
   }
 
   last_unit = ""
-  s.sheet('data').each_with_index(bonetools_columns) do |row, index|
+  s.sheet('data').each_with_index(faunal_columns) do |row, index|
     # Skip header row
-    next if row[:unit] == "Room"
+    next if row[:fs_no] == "FS"
 
-    bonetool = prepare_cell_values(row, "Bone Tools", index)
+    faunal = prepare_cell_values(row, "Faunal Artifacts", index)
 
     # Output context for creation
-    # puts "\nUnit #{bonetool[:unit]}:" if bonetool[:unit] != last_unit
-    last_unit = bonetool[:unit]
+    # puts "\nUnit #{faunal[:unit]}:" if faunal[:unit] != last_unit
+    last_unit = faunal[:unit]
 
     # Handle foreign keys
-    unit = select_or_create_unit(bonetool[:unit], "Bone Tools")
+    unit = select_or_create_unit(faunal[:unit], "Faunal Artifacts")
 
-    bonetool[:occupation] = find_or_create_occupation(bonetool[:occupation])
-    bonetool[:faunal_inventory] = associate_analysis_with_inventory(FaunalInventory, bonetool[:fs_no], unit)
-    associate_strata_features(unit, bonetool[:strat], bonetool[:feature], bonetool, "Bone Tools", false)
+    # The faunal artifact fs_no has decimal places that are not in the inventory records
+    fs_no = faunal[:fs_no].to_s.split(".").first
+    faunal[:faunal_inventory] = associate_analysis_with_inventory(FaunalInventory, fs_no, unit)
+    associate_strata_features(unit, faunal[:strat], faunal[:feature_no], faunal, "Faunal Artifacts", false)
 
     # Output and save
-    # puts bonetool[:fs_no]
-    BoneTool.create(bonetool)
+    # puts faunal[:fs_no]
+    FaunalArtifact.create(faunal)
   end
 end
 
@@ -1936,6 +1997,7 @@ seed_ceramics if Ceramic.count < 1
 seed_ceramic_claps if CeramicClap.count < 1
 seed_ceramic_vessels if CeramicVessel.count < 1
 seed_eggshells if Eggshell.count < 1
+seed_faunal_artifacts if FaunalArtifact.count < 1
 seed_lithic_debitages if LithicDebitage.count < 1
 seed_lithic_tools if LithicTool.count < 1
 seed_ornaments if Ornament.count < 1

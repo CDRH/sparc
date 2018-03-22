@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     :ceramic_vessels,
     :documents,
     :eggshells,
+    :faunal_artifacts,
     :faunal_inventories,
     :features,
     :images,

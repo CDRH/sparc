@@ -1,13 +1,12 @@
-class FaunalInventory < ApplicationRecord
-  has_and_belongs_to_many :features
-  has_many :strata, -> {distinct}, :through => :features
-  has_many :units, -> {distinct}, :through => :strata
+class FaunalArtifact < ActiveRecord::Base
+  belongs_to :faunal_inventory
+  belongs_to :feature
 
-  has_many :bone_tools
-  has_many :faunal_artifacts
+  has_many :strata, -> { distinct }, :through => :feature
+  has_many :units, -> { distinct }, :through => :strata
 
   def self.sorted
-    order("comments")
+    order("faunal_artifacts.fs_no")
   end
 
   def to_label
@@ -25,4 +24,5 @@ class FaunalInventory < ApplicationRecord
     puts "---------#{current_user}"
     current_user != nil ? true : false
   end
+
 end
