@@ -1082,6 +1082,8 @@ stratum 123B:J-2-6 created from Wood Inventories
 stratum 123B:I-2-5 created from Wood Inventories
 feature 127W:L-8-20:110.0 created from Wood Inventories
 feature 130W:L-2.1-11.1:3.0 created from Wood Inventories
+feature 036W:L-6-5.4:31.0 created from Bone Tools
+stratum 060A:K-0-0 created from Bone Tools
 feature 031W:L-1-3.5:101.0 created from Burials
 stratum 090W:H-0-0 created from Burials
 feature 090W:H-0-0:101.0 created from Burials
@@ -2929,8 +2931,10 @@ stratum 062W:C-3-7 created from Eggshells
 stratum 062W:multiple strata created from Eggshells
 stratum 091W:C-8.5-20.6 created from Eggshells
 stratum 091W:C-8.5-22.6 created from Eggshells
-feature 036W:L-6-5.4:31.0 created from Faunal Tools
-stratum 060A:K-0-0 created from Faunal Tools
+stratum 129W:C-25-34 created from Faunal Artifacts
+stratum 129W:F-2.2-86.2 created from Faunal Artifacts
+feature 129W:L-13-149:36.0 created from Faunal Artifacts
+feature 130W:L-11-27:161.0 created from Faunal Artifacts
 feature 036W:S-1-4.6:12.0 created from Ornaments
 feature 062A:H-2-5.5:27.0 created from Ornaments
 feature 064W:L-2-10:4.0 created from Ornaments
@@ -3620,7 +3624,6 @@ feature 124Z:L-19-19:44.0 created from Soils
 [blank] Grid Ns created from Soils row 804
 [blank] Quad created from Soils row 804
 stratum 129W:F-2.1-86-1 created from Soils
-stratum 129W:F-2.2-86.2 created from Soils
 stratum 057W:F-1-4 created from Tree Ring SAL-596
 stratum 100W:C-4-7 created from Images
 feature 097W:no data:unknown created from Images
