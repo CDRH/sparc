@@ -331,14 +331,25 @@ def select_or_create_unit unit, spreadsheet, log=true
   return room
 end
 
+# "Zone" is a concept that lumps several units together through occupations
+# Units codified with A-F, W, or Z should be combined into a zone
+# Other unit_no codes (P, TT, SA, BW, etc) are the only unit in their zone
 def select_or_create_zone_from_unit unit_str, spreadsheet, log=true
-  num = unit_str.sub(/[A-Z\/]*$/, "")
-  if Zone.where(name: num).size < 1
-    puts "\nZone #{num}:"
-    report "Zone", num, spreadsheet if log
-    return Zone.create(name: num)
+  room = unit_str[/^[0-9]{1,3}[A-F,W,Z]$/]
+  if room
+    num = unit_str.sub(/[A-Z\/]*$/, "")
+    if Zone.where(name: num).size < 1
+      puts "\nZone #{num}:"
+      report "Zone", num, spreadsheet if log
+      return Zone.create(name: num)
+    else
+      return Zone.where(name: num).first
+    end
   else
-    return Zone.where(name: num).first
+    # make a brand new zone just for this unit with full name
+    puts "\nZone #{unit_str}:"
+    report "Zone", unit_str, spreadsheet if log
+    return Zone.create(name: unit_str)
   end
 end
 
