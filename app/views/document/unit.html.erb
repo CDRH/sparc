@@ -1,173 +1,151 @@
-    <script src="<%= asset_path('uv-2.0.2/jsviews.min.js') %>" type="text/javascript" ></script>
-    <script src="<%= asset_path('uv-2.0.2/easyXDM.min.js') %>" type="text/javascript" ></script>
-    <script src="<%= asset_path('uv-2.0.2/json2.min.js') %>" type="text/javascript" ></script>
-    <script src="<%= asset_path('uv-2.0.2/es6-promise.min.js') %>" type="text/javascript" ></script>
-    <script src="<%= asset_path('uv-2.0.2/yepnope.min.js') %>" type="text/javascript" ></script>
-    <script src="<%= asset_path('uv-2.0.2/lodash.min.js') %>" type="text/javascript" ></script>
-    <script src="<%= asset_path('uv-2.0.2/base64.min.js') %>" type="text/javascript" ></script>
-	
-    <script type="text/javascript" src="<%= asset_path('uv-2.0.2/lib/bundle.min.js')%>"></script>
+<script src="<%= asset_path('uv-2.0.2/jsviews.min.js') %>" type="text/javascript" ></script>
+<script src="<%= asset_path('uv-2.0.2/easyXDM.min.js') %>" type="text/javascript" ></script>
+<script src="<%= asset_path('uv-2.0.2/json2.min.js') %>" type="text/javascript" ></script>
+<script src="<%= asset_path('uv-2.0.2/es6-promise.min.js') %>" type="text/javascript" ></script>
+<script src="<%= asset_path('uv-2.0.2/yepnope.min.js') %>" type="text/javascript" ></script>
+<script src="<%= asset_path('uv-2.0.2/lodash.min.js') %>" type="text/javascript" ></script>
+<script src="<%= asset_path('uv-2.0.2/base64.min.js') %>" type="text/javascript" ></script>
 
-    <script data-main="<%= asset_path('uv-2.0.2/lib/app') %>" type="text/javascript" src="<%= asset_path('uv-2.0.2/require.min.js') %>"></script>
+<script type="text/javascript" src="<%= asset_path('uv-2.0.2/lib/bundle.min.js')%>"></script>
+
+<script data-main="<%= asset_path('uv-2.0.2/lib/app') %>" type="text/javascript" src="<%= asset_path('uv-2.0.2/require.min.js') %>"></script>
 
 <h3><%= @unit %> Documents</h3>
 
- 	   <div class="selection" style="">
-        <select id="manifestSelect" style="width:90vw;font-size:14pt;"></select>
-		</div>
-		
-        <input id="manifest" type="hidden" value="" />
+<div class="selection">
+  <select id="manifestSelect" style="width:90vw;font-size:14pt;"></select>
+</div>
 
-<div class="uv r" data-locale="en-GB:English (GB),cy-GB:Cymraeg" data-config="" data-uri="<%= params[:manifest].present? ? params[:manifest] : (@first_doc_type != nil ? documents_unit_path(params.merge({:format => :json, :type => @first_doc_type}).permit(:unit, :type, :format)) : '') %>" data-manifests="<%#= documents_unit_path(params.merge({:format => :json}).permit(:unit, :type)) %>"  style="width:90vw; height:720px; background-color: #000"></div><script type="text/javascript" id="embedUV" src="<%= asset_path('uv-2.0.2/lib/embed.js') %>"></script><script type="text/javascript">/* wordpress fix */</script>
+<input id="manifest" type="hidden" value="" />
 
-    <script type="text/javascript">
-		$(function() {
+<div class="uv r" data-locale="en-GB:English (GB),cy-GB:Cymraeg" data-config=""
+    data-uri="<%= params[:manifest].present? ? params[:manifest] : (@first_doc_type != nil ? documents_unit_path(params.merge({:format => :json, :type => @first_doc_type}).permit(:unit, :type, :format)) : '') %>"
+    data-manifests="<%#= documents_unit_path(params.merge({:format => :json}).permit(:unit, :type)) %>"
+    style="width:90vw; height:720px; background-color: #000">
+</div>
 
+<script type="text/javascript" id="embedUV" src="<%= asset_path('uv-2.0.2/lib/embed.js') %>"></script>
 
-			var getUrlParameter = function getUrlParameter(sParam) {
-			    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-			        sURLVariables = sPageURL.split('&'),
-			        sParameterName,
-			        i;
+<script type="text/javascript">
+  $(function() {
+    var getUrlParameter = function getUrlParameter(sParam) {
+      var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+          sURLVariables = sPageURL.split('&'),
+          sParameterName,
+          i;
 
-			    for (i = 0; i < sURLVariables.length; i++) {
-			        sParameterName = sURLVariables[i].split('=');
+      for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] === sParam) {
+          return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+      }
+    };
 
-			        if (sParameterName[0] === sParam) {
-			            return sParameterName[1] === undefined ? true : sParameterName[1];
-			        }
-			    }
-			};
+    function loadManifests(cb) {
+      console.log('load menu manifests');
+      var manifests = '<%= documents_unit_path(params.merge({:format => :json}).permit(:unit, :type)) %>';
+      if ((getUrlParameter('manifests') != null) && (getUrlParameter('manifests') != 'undefined')) {
+        manifests = getUrlParameter('manifests');
+      }
+      var manifestsUri = manifests; //formatUrl(manifests);
+      console.log(manifestsUri);
+      // load manifests
+      $.getJSON(manifestsUri, function(manifests){
+        console.log('loaded menu manifests')
+        var $manifestSelect = $('#manifestSelect');
+        for (var i = 0; i < manifests.collections.length; i++) {
+          var collection = manifests.collections[i];
+          if (collection.visible === false) continue;
+            // $manifestSelect.append('<optgroup label="' + collection.label + '">');
+            for (var j = 0; j < collection.manifests.length; j++){
+              var manifest = collection.manifests[j];
+              if (manifest.visible !== false){
+                $manifestSelect.append('<option value="' + manifest['@id'] + '">' + manifest.label + '</option>');
+              }
+            }
+            $manifestSelect.append('</optgroup>');
+          }
+        cb();
+      });
+    }
 
+    function reload() {
+      //var jsonp = getJSONPSetting();
+      //var testids = $('#testids').is(':checked');
+      //var defaultToFullScreen = $('#defaultToFullScreen').is(':checked');
+      var manifest = $('#manifest').val();
+      var locale = $('#locales').val() || 'en-GB';
 
-		    function loadManifests(cb) {
-				console.log('load menu manifests');
-				var manifests = '<%= documents_unit_path(params.merge({:format => :json}).permit(:unit, :type)) %>';
-				if ((getUrlParameter('manifests') != null) && (getUrlParameter('manifests') != 'undefined')) {
-					manifests = getUrlParameter('manifests');
-				}
+      // clear hash params
+      clearHashParams();
 
-					        var manifestsUri = manifests; //formatUrl(manifests);
-				console.log(manifestsUri);
-					        // load manifests
-					        $.getJSON(manifestsUri, function(manifests){
-					console.log('loaded menu manifests')
-					            var $manifestSelect = $('#manifestSelect');
+      var qs = document.location.search.replace('?', '');
+      //qs = Utils.Urls.UpdateURIKeyValuePair(qs, 'jsonp', jsonp);
+      //qs = Utils.Urls.UpdateURIKeyValuePair(qs, 'testids', testids);
+      //qs = Utils.Urls.UpdateURIKeyValuePair(qs, 'defaultToFullScreen', defaultToFullScreen);
+      qs = Utils.Urls.updateURIKeyValuePair(qs, 'manifest', manifest);
+      qs = Utils.Urls.updateURIKeyValuePair(qs, 'locale', locale);
 
-					            for (var i = 0; i < manifests.collections.length; i++) {
-					                var collection = manifests.collections[i];
+      if (window.location.search === '?' + qs){
+          window.location.reload();
+      } else {
+          window.location.search = qs;
+      }
+    }
 
-					                if (collection.visible === false) continue;
+    function clearHashParams(){
+        document.location.hash = '';
+    }
 
-					                // $manifestSelect.append('<optgroup label="' + collection.label + '">');
+    function setSelectedManifest(){
+      var manifest = Utils.Urls.getQuerystringParameter('manifest');
 
-					                for (var j = 0; j < collection.manifests.length; j++){
-					                    var manifest = collection.manifests[j];
+      if (manifest) {
+          $('#manifestSelect').val(manifest);
+      } else {
+        var options = $('#manifestSelect option');
+        if (options.length){
+          manifest = options[0].value;
+        }
+      }
+      $('#manifest').val(manifest);
+      $('.uv').attr('data-uri', manifest);
+    }
 
-					                    if (manifest.visible !== false){
-					                        $manifestSelect.append('<option value="' + manifest['@id'] + '">' + manifest.label + '</option>');
-					                    }
-					                }
+    function init() {
+      $('#manifestSelect').on('change', function(){
+        $('#manifest').val($('#manifestSelect option:selected').val());
+        reload();
+      });
+      $('#manifest').click(function() {
+        $(this).select();
+      });
+      $('#manifest').keypress(function(e) {
+        if(e.which === 13) {
+          reload();
+        }
+      });
+      $('#setManifestBtn').on('click', function(e){
+        e.preventDefault();
+        reload();
+      });
+      if ($('#manifestSelect option').length || $('#manifestSelect optgroup').length){
+        setSelectedManifest();
+      }
+      // setInitialLocale();
+    }
 
-					                $manifestSelect.append('</optgroup>');
-					            }
+    var isLocalhost = document.location.href.indexOf('localhost') != -1;
+    var isGithub = document.location.href.indexOf('github') != -1;
 
-					            cb();
-					        });
-					    }
+    // if the embed script has been included in the page for testing, don't append it.
+    var scriptIncluded = $('#embedUV').length;
 
-
-
-					    function reload() {
-
-					        //var jsonp = getJSONPSetting();
-					        //var testids = $('#testids').is(':checked');
-					        //var defaultToFullScreen = $('#defaultToFullScreen').is(':checked');
-					        var manifest = $('#manifest').val();
-					        var locale = $('#locales').val() || 'en-GB';
-
-					        // clear hash params
-					        clearHashParams();
-
-					        var qs = document.location.search.replace('?', '');
-					        //qs = Utils.Urls.UpdateURIKeyValuePair(qs, 'jsonp', jsonp);
-					        //qs = Utils.Urls.UpdateURIKeyValuePair(qs, 'testids', testids);
-					        //qs = Utils.Urls.UpdateURIKeyValuePair(qs, 'defaultToFullScreen', defaultToFullScreen);
-					        qs = Utils.Urls.updateURIKeyValuePair(qs, 'manifest', manifest);
-					        qs = Utils.Urls.updateURIKeyValuePair(qs, 'locale', locale);
-
-					        if (window.location.search === '?' + qs){
-					            window.location.reload();
-					        } else {
-					            window.location.search = qs;
-					        }
-					    }
-
-					    function clearHashParams(){
-					        document.location.hash = '';
-					    }
-
-
-					    function setSelectedManifest(){
-
-					        var manifest = Utils.Urls.getQuerystringParameter('manifest');
-
-					        if (manifest) {
-					            $('#manifestSelect').val(manifest);
-					        } else {
-					            var options = $('#manifestSelect option');
-
-					            if (options.length){
-					                manifest = options[0].value;
-					            }
-					        }
-
-					        $('#manifest').val(manifest);
-
-					        $('.uv').attr('data-uri', manifest);
-					    }
-
-					    function init() {
-
-					        $('#manifestSelect').on('change', function(){
-					            $('#manifest').val($('#manifestSelect option:selected').val());
-					            reload();
-
-					        });
-
-					        $('#manifest').click(function() {
-					            $(this).select();
-					        });
-
-					        $('#manifest').keypress(function(e) {
-					            if(e.which === 13) {
-					                reload();
-					            }
-					        });
-
-					        $('#setManifestBtn').on('click', function(e){
-					            e.preventDefault();
-					            reload();
-					        });
-
-					        if ($('#manifestSelect option').length || $('#manifestSelect optgroup').length){
-					            setSelectedManifest();
-					        }
-
-					        // setInitialLocale();
-					    }
-
-					    var isLocalhost = document.location.href.indexOf('localhost') != -1;
-					    var isGithub = document.location.href.indexOf('github') != -1;
-
-					    // if the embed script has been included in the page for testing, don't append it.
-					    var scriptIncluded = $('#embedUV').length;
-
-					    loadManifests(function() {
-					        init();
-					    });
-		});
-    </script>
-
+    loadManifests(function() {
+        init();
+    });
+  });
+</script>
 
 <%#= render "partials/document_viewer" %>
