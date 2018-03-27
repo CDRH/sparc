@@ -3,14 +3,15 @@ class FaunalInventory < ApplicationRecord
   has_many :strata, -> {distinct}, :through => :features
   has_many :units, -> {distinct}, :through => :strata
 
-  has_many :faunal_tools
+  has_many :bone_tools
+  has_many :faunal_artifacts
 
   def self.sorted
     order("comments")
   end
 
   def to_label
-    comments
+    fs_no
   end
 
   def authorized_for_update?
