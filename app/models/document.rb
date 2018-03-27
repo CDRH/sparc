@@ -13,6 +13,10 @@ class Document < ActiveRecord::Base
     image_upload[/^([^_]*)(?=_)/]
   end
 
+  def path
+    "/#{canonical_unit_no}/#{canonical_unit_no}_#{document_type.code}_#{scan_no}.jpg"
+  end
+
   def to_label
     page_id
   end

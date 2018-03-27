@@ -134,6 +134,7 @@ def find_or_create_unit_class(unitclass, unit_no)
   uclass = UnitClass.where(:name => name).first
   if uclass.nil?
     mapping = {
+      "Antechamber" => "R",
       "Back Wall" => "BW",
       "Kiva" => "K",
       "Plaza" => "P",
