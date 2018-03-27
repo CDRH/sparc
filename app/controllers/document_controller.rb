@@ -87,7 +87,6 @@ class DocumentController < ApplicationController
       { 'label' => 'Rights', 
         'value' => image_info['rights']
       }
-
     ]
     canvas
   end
@@ -95,13 +94,11 @@ class DocumentController < ApplicationController
   def image_resource_from_page_hash(page_id)
     base_uri = "#{SETTINGS["iiif_server"]}#{page_id.gsub('/','%2F')}"
     params = {service_id: base_uri}
-    puts "================== #{params}"
     begin
       image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(params)
     rescue
       base_uri = "#{SETTINGS["iiif_server"].gsub('sparc','coming_soon.jpg')}"
       params = {service_id: base_uri}
-      puts "------#{params}"
       image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(params)
     end      
     image_resource
@@ -121,7 +118,6 @@ class DocumentController < ApplicationController
         { 'label' => 'Unit', 'value' => "#{title.split('-').first}" }
       ]
 
-  
       collection.manifests <<  manifest
     end
   
@@ -130,49 +126,16 @@ class DocumentController < ApplicationController
   end
 
   def build_manifest(results, code)
-    unit = results.first.units.where(unit_no: results.first.page_id.split('_').first).first
+    first_doc = results.first
+    unit = Unit.find_by(unit_no: first_doc.canonical_unit_no)
     title = unit.unit_no
     manifest = IIIF::Presentation::Manifest.new('@id' => "http://example.org/#{title.gsub(' ','_')}")
-    room_type = ''
-    case unit.unit_class_id
-      when 1
-        room_type = 'Back Wall'
-      when 3
-        room_type = 'Plaza'
-      when 2
-        room_type = 'Room'
-      when 9
-        room_type = 'Search Area'
-      when 8
-        room_type = 'Test Trench'
-      when 4
-        room_type = 'Kiva'
-    end
-    #
-    record_type = ''
-    case results.first.page_id.split('_')[1]
-    when 'ESI'
-      record_type = 'Extended Strat Info'
-    when 'FN'
-      record_type = 'Field Notes'
-    when 'FNS'
-      record_type = 'Field Notes Summary'
-    when 'FR'
-      record_type = 'Feature Record'
-    when 'M'
-      record_type = 'Media'
-    when 'MD'
-      record_type = 'Media Drawing'
-    when 'MM'
-      record_type = 'Media Maps'
-    when 'RR'
-      record_type = 'Room Record'
-    when 'RI'
-      record_type = 'Record Inventory'
-    when 'FRSA'
-      record_type = 'Feature Record Select Artifact'
-    end
-    manifest.label = "#{room_type} #{title.split('-').first} #{record_type}"
+    room_type = unit.unit_class.name.titleize
+
+    # document type
+    code = first_doc.page_id.split('_')[1]
+    doc_type = DocumentType.find_by(code: code)
+    manifest.label = "#{room_type} #{title.split('-').first} #{doc_type}"
     manifest.viewing_hint = 'paged'
     manifest.metadata = [
       { 'label' => 'Unit', 'value' => "#{title}" },
@@ -183,15 +146,23 @@ class DocumentController < ApplicationController
 
     results.each do |result|
       room_type = unit.unit_class.code
+      doc_type = result.document_type ? result.document_type.code : "na"
+      num += 1
 
-      sequence.canvases << image_annotation_from_id(title, "/#{unit.unit_no}/#{unit.unit_no}_#{result.document_type.code rescue 'na'}_#{result.scan_no}.jpg", {'label'=>"Page #{num += 1}", 'page'=>"#{result.page_id}", 'creator'=>result.scan_creator, 'rights' => result.rights} )
+      img_info = {
+        "label" => "Page #{num}",
+        "page" => "#{result.page_id}",
+        "creator" => result.scan_creator,
+        "rights" => result.rights
+      }
+      sequence.canvases << image_annotation_from_id(title, result.path, img_info)
     end
 
     manifest.sequences << sequence
 
     thumb = manifest.sequences.first.canvases.first.images.first.resource['@id']
     manifest.insert_after(existing_key: 'label', new_key: 'thumbnail', value: thumb)
-  
+
     manifest.to_json(pretty: true)
   end
 
