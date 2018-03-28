@@ -35,7 +35,23 @@ namespace :images do
     File.open("#{LOG_LOC}/images_extra.txt", "w") do |file|
       file.write(extra.uniq.join("\n"))
     end
+  end
 
+  desc "return list of remains and burials"
+  task list_remains: :environment do
+    # refresh the list of displayable image_human_remain records in
+    # case the criteria for matching them has changed
+    ImageHumanRemain.all.each { |i| i.save }
+
+    burials = Image.includes(:image_human_remain, :image_subjects)
+      .select { |i| !i.displayable? }
+    burials = burials.map do |b|
+      path = b.image_format.name == "polaroid" ? "polaroid" : "field"
+      "#{path}/#{b.image_no}.jpg"
+    end
+    File.open("#{LOG_LOC}/images_remains.txt", "w") do |file|
+      file.write(burials.join("\n"))
+    end
   end
 
 end
