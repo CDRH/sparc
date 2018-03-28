@@ -92,7 +92,7 @@ class DocumentController < ApplicationController
   end
 
   def image_resource_from_page_hash(page_id)
-    base_uri = "#{SETTINGS["iiif_server"]}#{page_id.gsub('/','%2F')}"
+    base_uri = "#{SETTINGS["iiif_server"]}%2Fdocuments%2F#{page_id.gsub('/','%2F')}"
     params = {service_id: base_uri}
     begin
       image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(params)
@@ -100,7 +100,7 @@ class DocumentController < ApplicationController
       base_uri = "#{SETTINGS["iiif_server"].gsub('sparc','coming_soon.jpg')}"
       params = {service_id: base_uri}
       image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(params)
-    end      
+    end
     image_resource
   end
 

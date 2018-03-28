@@ -5,7 +5,7 @@ default: &default
     # Hide sensitive images with a placeholder
     hide_sensitive_images: true
     # IIIF image server location
-    iiif_server: https://server.unl.edu/iiif/2/sparc_documents
+    iiif_server: https://server.unl.edu/iiif/2/sparc
 test:
   <<: *default
 development:
