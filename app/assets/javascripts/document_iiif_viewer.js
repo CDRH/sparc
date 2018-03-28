@@ -72,7 +72,7 @@ function setSelectedManifest(){
     }
   }
   $('#manifest').val(manifest);
-  $('.uv').attr('data-uri', manifest);
+  $('#uv_viewer').attr('data-uri', manifest);
 }
 
 function init() {
