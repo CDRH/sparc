@@ -14,7 +14,7 @@ class Document < ActiveRecord::Base
   end
 
   def path
-    "/#{canonical_unit_no}/#{canonical_unit_no}_#{document_type.code}_#{scan_no}.jpg"
+    "#{canonical_unit_no}/#{canonical_unit_no}_#{document_type.code}_#{scan_no}.jpeg"
   end
 
   def to_label
