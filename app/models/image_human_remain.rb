@@ -17,7 +17,7 @@ class ImageHumanRemain < ActiveRecord::Base
   private
 
   def set_displayable
-    self.displayable = self.name == "N" ? true : false
+    self.displayable = self.name[/^no?$/i] ? true : false
     # rails deprecation warning complaining about not returning
     # true on success, fixed below
     return true

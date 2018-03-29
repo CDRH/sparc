@@ -25,3 +25,6 @@
 # ignore the large amount of images for the gallery
 **/images/field/*
 !**/images/field/.keep
+
+# omit the burial / remains image listing
+reports/images_remains.txt
