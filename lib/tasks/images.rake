@@ -43,12 +43,10 @@ namespace :images do
     # case the criteria for matching them has changed
     ImageHumanRemain.all.each { |i| i.save }
 
-    burials = Image.includes(:image_human_remain, :image_subjects)
+    burials = Image
+      .includes(:image_human_remain, :image_subjects)
       .select { |i| !i.displayable? }
-    burials = burials.map do |b|
-      path = b.image_format.name == "polaroid" ? "polaroid" : "field"
-      "#{path}/#{b.image_no}.jpg"
-    end
+      .map { |b| b.filepath }
     File.open("#{LOG_LOC}/images_remains.txt", "w") do |file|
       file.write(burials.join("\n"))
     end
