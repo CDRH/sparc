@@ -60,6 +60,14 @@ class Image < ActiveRecord::Base
     image_orientation.name if image_orientation
   end
 
+  def filepath
+    loc = format == "polaroid" ? "polaroids" : "field"
+    # strip PA[0] from front of image names
+    # since database image_no does not match filesystem
+    filename = image_no.gsub(/^PA0?/, "")
+    "#{loc}/#{filename}.jpg"
+  end
+
   def quality
     image_quality.name if image_quality
   end
