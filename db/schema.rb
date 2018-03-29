@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313182607) do
+ActiveRecord::Schema.define(version: 20180322173647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,28 @@ ActiveRecord::Schema.define(version: 20180313182607) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_art_types_on_name", unique: true, using: :btree
+  end
+
+  create_table "bone_tools", force: :cascade do |t|
+    t.string   "unit"
+    t.string   "strat"
+    t.string   "fs_no"
+    t.string   "depth"
+    t.string   "grid"
+    t.integer  "tool_type_code"
+    t.string   "tool_type"
+    t.integer  "species_code"
+    t.text     "comments"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "occupation_id"
+    t.integer  "faunal_inventory_id"
+    t.integer  "feature_id"
+    t.string   "strat_other"
+    t.string   "sa_no"
+    t.index ["faunal_inventory_id"], name: "index_bone_tools_on_faunal_inventory_id", using: :btree
+    t.index ["feature_id"], name: "index_bone_tools_on_feature_id", using: :btree
+    t.index ["occupation_id"], name: "index_bone_tools_on_occupation_id", using: :btree
   end
 
   create_table "burial_sexes", force: :cascade do |t|
@@ -488,6 +510,38 @@ ActiveRecord::Schema.define(version: 20180313182607) do
     t.index ["name"], name: "index_excavation_statuses_on_name", unique: true, using: :btree
   end
 
+  create_table "faunal_artifacts", force: :cascade do |t|
+    t.string   "fs_no"
+    t.string   "artifact_no"
+    t.string   "unit"
+    t.string   "strat"
+    t.string   "feature_no"
+    t.string   "grid_ew"
+    t.string   "grid_ns"
+    t.string   "depth_begin"
+    t.string   "depth_end"
+    t.string   "spc"
+    t.string   "elem"
+    t.string   "side"
+    t.string   "cond"
+    t.string   "frag"
+    t.string   "pd"
+    t.string   "dv"
+    t.string   "fuse"
+    t.string   "burn"
+    t.string   "art"
+    t.string   "gnaw"
+    t.string   "mod"
+    t.string   "bmark"
+    t.string   "frags"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "faunal_inventory_id"
+    t.integer  "feature_id"
+    t.index ["faunal_inventory_id"], name: "index_faunal_artifacts_on_faunal_inventory_id", using: :btree
+    t.index ["feature_id"], name: "index_faunal_artifacts_on_feature_id", using: :btree
+  end
+
   create_table "faunal_inventories", force: :cascade do |t|
     t.string   "site"
     t.string   "box"
@@ -522,28 +576,6 @@ ActiveRecord::Schema.define(version: 20180313182607) do
     t.integer "faunal_inventory_id"
     t.index ["faunal_inventory_id"], name: "index_faunal_inventories_features_on_faunal_inventory_id", using: :btree
     t.index ["feature_id"], name: "index_faunal_inventories_features_on_feature_id", using: :btree
-  end
-
-  create_table "faunal_tools", force: :cascade do |t|
-    t.string   "unit"
-    t.string   "strat"
-    t.string   "fs_no"
-    t.string   "depth"
-    t.string   "grid"
-    t.integer  "tool_type_code"
-    t.string   "tool_type"
-    t.integer  "species_code"
-    t.text     "comments"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.integer  "occupation_id"
-    t.integer  "faunal_inventory_id"
-    t.integer  "feature_id"
-    t.string   "strat_other"
-    t.string   "sa_no"
-    t.index ["faunal_inventory_id"], name: "index_faunal_tools_on_faunal_inventory_id", using: :btree
-    t.index ["feature_id"], name: "index_faunal_tools_on_feature_id", using: :btree
-    t.index ["occupation_id"], name: "index_faunal_tools_on_occupation_id", using: :btree
   end
 
   create_table "feature_groups", force: :cascade do |t|
@@ -1026,6 +1058,7 @@ ActiveRecord::Schema.define(version: 20180313182607) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "occupation_id"
+    t.string   "type_no"
     t.index ["occupation_id"], name: "index_room_types_on_occupation_id", using: :btree
   end
 
