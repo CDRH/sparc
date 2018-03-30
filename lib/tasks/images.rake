@@ -37,14 +37,11 @@ namespace :images do
 
   desc "return list of remains and burials"
   task list_remains: :environment do
-    # refresh the list of displayable image_human_remain records in
-    # case the criteria for matching them has changed
-    ImageHumanRemain.all.each { |i| i.save }
-
     burials = Image
       .includes(:image_human_remain, :image_subjects)
       .select { |i| !i.displayable? }
       .map { |b| b.filepath }
+    puts "Writing list of non-displayable images to reports"
     File.open("#{LOG_LOC}/images_remains.txt", "w") do |file|
       file.write(burials.join("\n"))
     end

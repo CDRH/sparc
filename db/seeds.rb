@@ -131,6 +131,22 @@ def create_if_not_exists model, field, column
   return record
 end
 
+def find_or_create_human_remains(desc)
+  desc = desc.strip
+  hr = ImageHumanRemain.where(:name => desc).first
+  if hr.nil?
+    mapping = {
+      "no" => "N",
+      "yes" => "Y"
+    }
+    name = mapping[desc.downcase] || desc
+    # default to nothing displayable unless it specifically says "N"
+    displayable = name == "N" ? true : false
+    hr = ImageHumanRemain.create(:name => name, :displayable => displayable)
+  end
+  hr
+end
+
 def find_or_create_unit_class(unitclass, unit_no)
   name = unitclass.strip.titleize
   uclass = UnitClass.where(:name => name).first
@@ -1969,7 +1985,7 @@ def seed_images
     image[:image_box] = create_if_not_exists(ImageBox, :name, image[:image_box])
     image[:image_creator] = create_if_not_exists(ImageCreator, :name, image[:image_creator])
     image[:image_format] = create_if_not_exists(ImageFormat, :name, image[:image_format])
-    image[:image_human_remain] = create_if_not_exists(ImageHumanRemain, :name, image[:image_human_remain])
+    image[:image_human_remain] = find_or_create_human_remains(image[:image_human_remain])
     image[:image_orientation] = create_if_not_exists(ImageOrientation, :name, image[:image_orientation])
     image[:image_quality] = create_if_not_exists(ImageQuality, :name, image[:image_quality])
 
