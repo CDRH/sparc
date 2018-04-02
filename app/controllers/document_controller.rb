@@ -17,50 +17,17 @@ class DocumentController < ApplicationController
   def unit
     @unit_no = params["unit"]
     @unit = Unit.find_by(unit_no: @unit_no)
-    @doc_type = nil
-    @collections = {}
     @first_doc_type = nil
+    # if document type is known, then skip building collections
     if params["type"].present?
-      @doc_type = params["type"]
+      @res = build_manifest(@unit, params["type"])
     else
-      # find the first document type for the requested unit
-      @doc_type = @unit.document_types.sorted.first
-                    .name.parameterize(separator: "_")
-      # get all relevant documents and organize into the collections by document type
-      # to build collection manifest for iiif
-      DocumentType.all.each_with_index do |dt, idx|
-        @first_doc_type = dt.name if idx == 0
-        key = dt.name.parameterize(separator: "_")
-        docs = Document.joins(:document_type, :units)
-                .where("units.unit_no = ?", @unit_no)
-                .where(document_type: dt)
-                .sorted
-        if docs.count > 0
-          @collections[key] = docs
-        end
-      end
+      @res = build_collection(@unit)
     end
-
-    # get documents to display using document type name
-    type_name = get_doc_type_name(@doc_type)
-    res = Document.joins(:document_type, :units)
-            .where("units.unit_no = ?", @unit_no)
-            .where("document_types.name = ?", type_name)
-            .sorted
-
-    @result_num_docs = res.size
-    @res = res.paginate(page: params[:page], per_page: 20)
-
-    code = params['code'].present? ? params['code'] : nil
 
     respond_to do |format|
       format.html
-      format.json {
-        response = @collections.size > 0 ?
-          build_collection(@collections, @unit_no) :
-          build_manifest(res, code)
-        render :json => response
-      }
+      format.json { render json: @res }
     end
   end
 
@@ -68,20 +35,40 @@ class DocumentController < ApplicationController
 
   require 'iiif/presentation'
 
-  def build_collection(collection_hash, unit)
-    wrapper = IIIF::Presentation::Collection.new('@id' => documents_unit_path({unit: unit}))
-    collection = IIIF::Presentation::Collection.new('@id' => documents_unit_path({unit: unit}), '@label' => unit)
-    collection_hash.each do |k, docs|
+  def build_collection(unit)
+    unit_no = unit.unit_no
+    collections = {}
+    DocumentType.all.each_with_index do |dt, idx|
+      key = dt.name.parameterize(separator: "_")
+      docs = Document.joins(:document_type, :units)
+              .where("units.unit_no = ?", unit_no)
+              .where(document_type: dt)
+              .sorted
+      if docs.count > 0
+        collections[key] = docs
+      end
+    end
 
-      unit = docs.first.units.first
-      title = unit.unit_no
-      manifest = IIIF::Presentation::Manifest.new('@id' => documents_unit_path({unit: title, type: k, format: "json"}))
-      manifest.label = k.humanize 
-      manifest.viewing_hint = 'paged'
-      manifest.metadata = [
-        { 'label' => 'Unit', 'value' => "#{title.split('-').first}" }
-      ]
-
+    collection_url = documents_unit_path({ unit: unit_no })
+    wrapper = IIIF::Presentation::Collection.new("@id" => collection_url)
+    collection = IIIF::Presentation::Collection.new(
+                   "@id" => collection_url,
+                   "@label" => unit_no
+                 )
+    collections.each do |doc_type, docs|
+      manifest = IIIF::Presentation::Manifest.new(
+                   "@id" => documents_unit_path({
+                      unit: unit_no,
+                      type: doc_type,
+                      format: "json"
+                    }),
+                    "label" => get_doc_type_name(doc_type),
+                    "metadata" => [
+                      "label" => "Unit",
+                      "value" => unit_no
+                    ],
+                    "viewing_hint" => "paged"
+                  )
       collection.manifests <<  manifest
     end
 
@@ -89,28 +76,43 @@ class DocumentController < ApplicationController
     wrapper.to_json(pretty: true)
   end
 
-  def build_manifest(results, code)
-    first_doc = results.first
-    unit = Unit.find_by(unit_no: first_doc.canonical_unit_no)
-    title = unit.unit_no
-    manifest = IIIF::Presentation::Manifest.new('@id' => "http://example.org/#{title.gsub(' ','_')}")
+  def build_manifest(unit, type)
+    unit_no = unit.unit_no
+    title_link = unit_no.parameterize(separator: "_")
     room_type = unit.unit_class.name.titleize
 
-    # document type
-    code = first_doc.page_id.split('_')[1]
-    doc_type = DocumentType.find_by(code: code)
-    manifest.label = "#{room_type} #{title.split('-').first} #{doc_type.name}"
-    manifest.viewing_hint = 'paged'
-    manifest.metadata = [
-      { 'label' => 'Unit', 'value' => "#{title}" },
-    ]
+    # get documents to display using document type name
+    type_name = get_doc_type_name(type)
+    doc_type = DocumentType.find_by(name: type_name)
+    res = Document.joins(:document_type, :units)
+            .where("units.unit_no = ?", unit_no)
+            .where("document_types.name = ?", type_name)
+            .sorted
 
+    # @result_num_docs = res.size
+    results = res.paginate(page: params[:page], per_page: 20)
+
+    # build the manifest for a requested document type
+    # first_doc = res.first
+    manifest = IIIF::Presentation::Manifest.new(
+                 "@id" => documents_unit_path({ unit: title_link }),
+                 "metadata" => [{
+                   "label" => "Unit",
+                   "value" => "#{unit_no}"
+                 }],
+                 "viewing_hint" => "paged"
+               )
+
+    manifest.label = "#{room_type} #{unit_no} #{doc_type.name}"
+
+    # create a sequence of canvases to add to the manifest
     sequence = IIIF::Presentation::Sequence.new
     num = 0
 
+    # create canvases
     results.each do |result|
       room_type = unit.unit_class.code
-      doc_type = result.document_type ? result.document_type.code : "na"
+      doc_type = result.document_type ? result.document_type.code : "n/a"
       num += 1
 
       img_info = {
@@ -119,14 +121,13 @@ class DocumentController < ApplicationController
         "creator" => result.scan_creator,
         "rights" => result.rights
       }
-      sequence.canvases << image_annotation_from_id(title, result.path, img_info)
+      sequence.canvases << image_annotation_from_id(unit_no, result.path, img_info)
     end
 
     manifest.sequences << sequence
 
-    thumb = manifest.sequences.first.canvases.first.images.first.resource['@id']
+    thumb = sequence.canvases.first.images.first.resource['@id']
     manifest.insert_after(existing_key: 'label', new_key: 'thumbnail', value: thumb)
-
     manifest.to_json(pretty: true)
   end
 
