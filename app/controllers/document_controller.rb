@@ -112,7 +112,6 @@ class DocumentController < ApplicationController
     # create canvases
     results.each do |result|
       room_type = unit.unit_class.code
-      doc_type = result.document_type ? result.document_type.code : "n/a"
       num += 1
 
       img_info = {
@@ -121,7 +120,7 @@ class DocumentController < ApplicationController
         "creator" => result.scan_creator,
         "rights" => result.rights
       }
-      sequence.canvases << image_annotation_from_id(unit_no, result.path, img_info)
+      sequence.canvases << image_annotation_from_id(unit_no, doc_type, result.path, img_info)
     end
 
     manifest.sequences << sequence
@@ -131,13 +130,13 @@ class DocumentController < ApplicationController
     manifest.to_json(pretty: true)
   end
 
-  def image_annotation_from_id(title, image_id, image_info)
+  def image_annotation_from_id(unit_no, doc_type, image_id, image_info)
     annotation = IIIF::Presentation::Annotation.new
     annotation.resource = image_resource_from_page_hash(image_id)
     canvas = IIIF::Presentation::Canvas.new
-    # TODO what should this URL be? Use parameterize for title
-    canvas_uri = "http://example.org/#{title.gsub(' ','_')}/pages/#{image_id}"
-    canvas['@id'] = canvas_uri
+    doc_type_url = doc_type.name.parameterize(separator: "_")
+    uri = "#{request.base_url}/documents/unit/#{unit_no}/#{doc_type_url}.json"
+    canvas['@id'] = uri
     canvas.label = image_info['label']
     canvas.width = annotation.resource['width']
     canvas.height = annotation.resource['height']
@@ -162,6 +161,7 @@ class DocumentController < ApplicationController
     begin
       image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(params)
     rescue
+      # TODO choose a placeholder image for missing
       base_uri = "#{SETTINGS["iiif_server"].gsub('sparc','coming_soon.jpg')}"
       params = {service_id: base_uri}
       image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(params)
