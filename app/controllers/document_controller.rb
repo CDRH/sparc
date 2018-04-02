@@ -89,11 +89,9 @@ class DocumentController < ApplicationController
             .where("document_types.name = ?", type_name)
             .sorted
 
-    # @result_num_docs = res.size
     results = res.paginate(page: params[:page], per_page: 20)
 
     # build the manifest for a requested document type
-    # first_doc = res.first
     manifest = IIIF::Presentation::Manifest.new(
                  "@id" => documents_unit_path({ unit: title_link }),
                  "metadata" => [{
