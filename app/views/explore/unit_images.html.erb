@@ -15,7 +15,7 @@
           <% img_set.each do |img| %>
             <div class="col-md-3">
               <%= link_to image_path img.image_no do %>
-                <%= field_image_display(img, true) %>
+                <%= field_image_display(img, thumb: true) %>
               <% end %>
               <ul>
                 <li>Number: <%= img.image_no %></li>
