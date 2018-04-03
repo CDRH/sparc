@@ -4,7 +4,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
       sParameterName,
       i;
 
-  for (i = 0; i < sURLVariables.length; i++) {
+  for (var i = 0, urlCount = sURLVariables.length; i < urlCount; i++) {
     sParameterName = sURLVariables[i].split('=');
     if (sParameterName[0] === sParam) {
       return sParameterName[1] === undefined ? true : sParameterName[1];
@@ -23,10 +23,10 @@ function loadManifests(manifests, cb) {
   $.getJSON(manifestsUri, function(manifests){
     console.log('loaded menu manifests')
     var $manifestSelect = $('#manifestSelect');
-    for (var i = 0; i < manifests.collections.length; i++) {
+    for (var i = 0, collCount = manifests.collections.length; i < collCount; i++) {
       var collection = manifests.collections[i];
       if (collection.visible === false) continue;
-        for (var j = 0; j < collection.manifests.length; j++){
+        for (var j = 0, manCount = collection.manifests.length; j < manCount; j++){
           var manifest = collection.manifests[j];
           if (manifest.visible !== false){
             $manifestSelect.append('<option value="' + manifest['@id'] + '">' + manifest.label + '</option>');

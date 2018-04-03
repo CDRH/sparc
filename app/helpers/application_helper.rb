@@ -43,7 +43,7 @@ module ApplicationHelper
     "#{record.units.map{|u| u.to_label}.join(', ')}"
   end
 
-  def field_image_display(image, thumb=false)
+  def field_image_display(image, thumb: false)
     if SETTINGS["hide_sensitive_images"] && !image.displayable?
       text_class = thumb ? "h4" : "h2"
       "<div class=\"#{text_class}\">Image Not Displayable</div>"
@@ -104,7 +104,7 @@ module ApplicationHelper
   end
 
   def iiif_path(image, size="full")
-    server = "#{SETTINGS["iiif_server"]}"
+    server = SETTINGS["iiif_server"]
     img_path = image.filepath.gsub("/", "%2F")
     iiif = "full/#{size}/0/default.jpg"
 

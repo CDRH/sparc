@@ -1,3 +1,5 @@
+require 'iiif/presentation'
+
 class DocumentController < ApplicationController
 
   def index
@@ -32,8 +34,6 @@ class DocumentController < ApplicationController
   end
 
   private
-
-  require 'iiif/presentation'
 
   def build_collection(unit)
     unit_no = unit.unit_no
@@ -73,7 +73,7 @@ class DocumentController < ApplicationController
     end
 
     wrapper.collections << collection
-    wrapper.to_json(pretty: true)
+    wrapper.to_json
   end
 
   def build_manifest(unit, type)
@@ -125,7 +125,7 @@ class DocumentController < ApplicationController
 
     thumb = sequence.canvases.first.images.first.resource['@id']
     manifest.insert_after(existing_key: 'label', new_key: 'thumbnail', value: thumb)
-    manifest.to_json(pretty: true)
+    manifest.to_json
   end
 
   def image_annotation_from_id(unit_no, doc_type, image_id, image_info)
@@ -155,14 +155,14 @@ class DocumentController < ApplicationController
 
   def image_resource_from_page_hash(page_id)
     base_uri = "#{SETTINGS["iiif_server"]}%2Fdocuments%2F#{page_id.gsub('/','%2F')}"
-    params = {service_id: base_uri}
+    opts = { service_id: base_uri }
     begin
-      image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(params)
+      image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(opts)
     rescue
       # TODO choose a placeholder image for missing
       base_uri = "#{SETTINGS["iiif_server"].gsub('sparc','coming_soon.jpg')}"
-      params = {service_id: base_uri}
-      image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(params)
+      opts = { service_id: base_uri }
+      image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(opts)
     end
     image_resource
   end
