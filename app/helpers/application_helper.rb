@@ -43,7 +43,7 @@ module ApplicationHelper
     "#{record.units.map{|u| u.to_label}.join(', ')}"
   end
 
-  def field_image_display(image, thumb: false)
+  def image_display(image, thumb: false)
     if SETTINGS["hide_sensitive_images"] && !image.displayable?
       text_class = thumb ? "h4" : "h2"
       "<div class=\"#{text_class}\">Image Not Displayable</div>"
@@ -51,7 +51,7 @@ module ApplicationHelper
     else
       iiif_size = thumb ? SETTINGS["thumbnail_size"] : "full"
       path = iiif_path(image, iiif_size)
-      image_tag path, class: "#{thumb ? "image_thumb" : "image_full"}"
+      image_tag path, alt: image.image_no, class: "#{thumb ? "image_thumb" : "image_full"}"
     end
   end
 
