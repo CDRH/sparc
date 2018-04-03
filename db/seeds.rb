@@ -133,13 +133,13 @@ end
 
 def find_or_create_human_remains(desc)
   desc = desc.strip
-  hr = ImageHumanRemain.where(:name => desc).first
+  mapping = {
+    "no" => "N",
+    "yes" => "Y"
+  }
+  name = mapping[desc.downcase] || desc
+  hr = ImageHumanRemain.where(:name => name).first
   if hr.nil?
-    mapping = {
-      "no" => "N",
-      "yes" => "Y"
-    }
-    name = mapping[desc.downcase] || desc
     # default to nothing displayable unless it specifically says "N"
     displayable = name == "N" ? true : false
     hr = ImageHumanRemain.create(:name => name, :displayable => displayable)
