@@ -1,3 +1,26 @@
-<h3><%= @unit %> Documents</h3>
+<%= javascript_include_tag "uv-2.0.2/lib/bundle.min" %>
 
-<%= render "partials/document_viewer" %>
+<%= javascript_include_tag "uv-2.0.2/require.min", "data-main": asset_path("uv-2.0.2/lib/app") %>
+
+<h3><%= @unit_no %> Documents</h3>
+
+<div class="selection">
+  <select id="manifestSelect"></select>
+</div>
+
+<input id="manifest" type="hidden" value="" />
+
+<div id="uv_viewer" class="uv"></div>
+
+<%# because of self-referential lines in embed JS do not use rails script include helper %>
+<script type="text/javascript" id="embedUV" src="<%= asset_path('uv-2.0.2/lib/embed.js') %>"></script>
+
+<%= javascript_include_tag "document_iiif_viewer" %>
+
+<script type="text/javascript">
+  $(function() {
+    loadManifests("<%= get_manifests %>", function() {
+      init();
+    });
+  });
+</script>

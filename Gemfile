@@ -71,3 +71,6 @@ gem 'mini_exiftool'
 
 # pagination
 gem 'will_paginate'
+
+# iiif presentation
+gem 'osullivan'

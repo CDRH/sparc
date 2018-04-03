@@ -131,6 +131,42 @@ def create_if_not_exists model, field, column
   return record
 end
 
+def find_or_create_human_remains(desc)
+  desc = desc.strip
+  mapping = {
+    "no" => "N",
+    "yes" => "Y"
+  }
+  name = mapping[desc.downcase] || desc
+  hr = ImageHumanRemain.where(:name => name).first
+  if hr.nil?
+    # default to nothing displayable unless it specifically says "N"
+    displayable = name == "N" ? true : false
+    hr = ImageHumanRemain.create(:name => name, :displayable => displayable)
+  end
+  hr
+end
+
+def find_or_create_unit_class(unitclass, unit_no)
+  name = unitclass.strip.titleize
+  uclass = UnitClass.where(:name => name).first
+  if uclass.nil?
+    mapping = {
+      "Antechamber" => "R",
+      "Back Wall" => "BW",
+      "Kiva" => "K",
+      "Plaza" => "P",
+      "Room" => "R",
+      "Test Trench" => "TT",
+      # Search Area
+      "Test Unit" => "SA"
+    }
+    code = mapping[name] || ""
+    uclass = UnitClass.create(:name => name, :code => code)
+  end
+  uclass
+end
+
 def find_or_create_occupation(occupation)
   # change any of the below keys into the value
   mapping = {
@@ -402,7 +438,7 @@ def seed_units
     # Handle foreign key columns
     unit[:excavation_status] = create_if_not_exists(ExcavationStatus, :name, unit[:excavation_status])
     unit[:occupation] = find_or_create_occupation(unit[:occupation])
-    unit[:unit_class] = create_if_not_exists(UnitClass, :name, unit[:unit_class])
+    unit[:unit_class] = find_or_create_unit_class(unit[:unit_class], unit[:unit_no])
     unit[:story] = create_if_not_exists(Story, :name, unit[:story])
     unit[:intact_roof] = create_if_not_exists(IntactRoof, :name, unit[:intact_roof])
     if unit[:salmon_type_code] != "n/a"
@@ -1949,7 +1985,7 @@ def seed_images
     image[:image_box] = create_if_not_exists(ImageBox, :name, image[:image_box])
     image[:image_creator] = create_if_not_exists(ImageCreator, :name, image[:image_creator])
     image[:image_format] = create_if_not_exists(ImageFormat, :name, image[:image_format])
-    image[:image_human_remain] = create_if_not_exists(ImageHumanRemain, :name, image[:image_human_remain])
+    image[:image_human_remain] = find_or_create_human_remains(image[:image_human_remain])
     image[:image_orientation] = create_if_not_exists(ImageOrientation, :name, image[:image_orientation])
     image[:image_quality] = create_if_not_exists(ImageQuality, :name, image[:image_quality])
 

@@ -33,3 +33,11 @@ Rails.application.config.assets.precompile += %w(
   map_zoom.js
   maps.css
 )
+
+Rails.application.config.assets.precompile += %w( 
+  uv-2.0.2/lib/bundle.min.js
+  uv-2.0.2/lib/app.js
+  uv-2.0.2/lib/embed.js
+  uv-2.0.2/require.min.js
+  document_iiif_viewer.js
+)

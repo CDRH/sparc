@@ -4,6 +4,9 @@ default: &default
     hide_sensitive_image_records: false
     # Hide sensitive images with a placeholder
     hide_sensitive_images: true
+    # IIIF image server location
+    iiif_server: https://server.unl.edu/iiif/2/sparc
+    thumbnail_size: "!200,200"
 test:
   <<: *default
 development:
