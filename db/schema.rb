@@ -1199,9 +1199,10 @@ ActiveRecord::Schema.define(version: 20180322173647) do
   end
 
   create_table "unit_classes", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",                    null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "code",       default: ""
     t.index ["name"], name: "index_unit_classes_on_name", unique: true, using: :btree
   end
 

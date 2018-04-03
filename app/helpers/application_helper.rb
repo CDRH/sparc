@@ -43,19 +43,15 @@ module ApplicationHelper
     "#{record.units.map{|u| u.to_label}.join(', ')}"
   end
 
-  def field_image_display(image, size)
-    image_class = size == "large" ? "h2" : "h4"
-
+  def image_display(image, thumb: false)
     if SETTINGS["hide_sensitive_images"] && !image.displayable?
-      "<div class=\"#{image_class}\">Image Not Displayable</div>"
+      text_class = thumb ? "h4" : "h2"
+      "<div class=\"#{text_class}\">Image Not Displayable</div>"
         .html_safe
     else
-      if File.file?(Rails.root.join(*%w[app assets images field], size,
-        "#{image.image_no}.jpg"))
-        image_tag "field/#{size}/#{image.image_no}", class: "image_#{size}"
-      else
-        "<div class=\"#{image_class}\">Image Not Available</div>".html_safe
-      end
+      iiif_size = thumb ? SETTINGS["thumbnail_size"] : "full"
+      path = iiif_path(image, iiif_size)
+      image_tag path, alt: image.image_no, class: "#{thumb ? "image_thumb" : "image_full"}"
     end
   end
 
@@ -105,5 +101,13 @@ module ApplicationHelper
         end
       end
     end
+  end
+
+  def iiif_path(image, size="full")
+    server = SETTINGS["iiif_server"]
+    img_path = image.filepath.gsub("/", "%2F")
+    iiif = "full/#{size}/0/default.jpg"
+
+    path = "#{server}%2F#{img_path}/#{iiif}"
   end
 end

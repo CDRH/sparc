@@ -2,15 +2,21 @@
   name: Antechamber
 2:
   name: backwall
+  code: BW
 3:
   name: Kiva
+  code: K
 4:
   name: n/a
 5:
   name: plaza
+  code: P
 6:
   name: Room
+  code: R
 7:
   name: test trench
+  code: TT
 8:
   name: test unit
+  code: SA
