@@ -6,7 +6,6 @@ one:
   strat: MyString
   associated_features: MyString
   image_no: MyString
-  image_type: MyString
   grid_ew: MyString
   grid_ns: MyString
   depth_begin: MyString

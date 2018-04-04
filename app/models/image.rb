@@ -5,7 +5,6 @@ class Image < ActiveRecord::Base
   has_many :zones, -> {distinct}, :through => :units
 
   has_and_belongs_to_many :image_subjects
-  belongs_to :image_assocnoeg
   belongs_to :image_box
   belongs_to :image_creator
   belongs_to :image_format
@@ -26,10 +25,6 @@ class Image < ActiveRecord::Base
 
   def to_label
     image_no
-  end
-
-  def assocnoeg
-    image_assocnoeg.name if image_assocnoeg
   end
 
   def box

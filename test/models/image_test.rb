@@ -3,7 +3,6 @@ require 'test_helper'
 class ImageTest < ActiveSupport::TestCase
   def setup
     @item = Image.first
-    @item.image_assocnoeg = ImageAssocnoeg.first
     @item.image_box = ImageBox.first
     @item.image_creator = ImageCreator.first
     @item.image_format = ImageFormat.first
@@ -24,7 +23,6 @@ class ImageTest < ActiveSupport::TestCase
     assert_not_empty @item.zones
     assert_not_empty @item.image_subjects
 
-    assert_not_nil @item.image_assocnoeg
     assert_not_nil @item.image_box
     assert_not_nil @item.image_creator
     assert_not_nil @item.image_format
@@ -34,7 +32,6 @@ class ImageTest < ActiveSupport::TestCase
   end
 
   test "methods" do
-    assert_equal @item.assocnoeg, @item.image_assocnoeg.name
     assert_equal @item.box, @item.image_box.name
     assert_equal @item.creator, @item.image_creator.name
     assert_equal @item.format, @item.image_format.name
