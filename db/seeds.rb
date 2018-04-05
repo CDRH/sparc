@@ -1942,8 +1942,6 @@ def seed_images
     strat_other: "Other Strata",
     image_no: "Photo No",
     image_format: "Image Type",
-    # image_type: "Type",
-    # image_assocnoeg: "Assocnoeg",
     image_box: "Box",
     grid_ew: "GridE",
     grid_ns: "GridN",
@@ -1981,7 +1979,6 @@ def seed_images
     last_unit = image[:unit]
 
     # Handle foreign keys
-    image[:image_assocnoeg] = create_if_not_exists(ImageAssocnoeg, :name, image[:image_assocnoeg])
     image[:image_box] = create_if_not_exists(ImageBox, :name, image[:image_box])
     image[:image_creator] = create_if_not_exists(ImageCreator, :name, image[:image_creator])
     image[:image_format] = create_if_not_exists(ImageFormat, :name, image[:image_format])
