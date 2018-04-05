@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322173647) do
+ActiveRecord::Schema.define(version: 20180404201341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -690,12 +690,6 @@ ActiveRecord::Schema.define(version: 20180322173647) do
     t.index ["wood_inventory_id"], name: "index_features_wood_inventories_on_wood_inventory_id", using: :btree
   end
 
-  create_table "image_assocnoegs", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "image_boxes", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -756,7 +750,6 @@ ActiveRecord::Schema.define(version: 20180322173647) do
     t.string   "strat"
     t.string   "associated_features"
     t.string   "image_no"
-    t.string   "image_type"
     t.string   "grid_ew"
     t.string   "grid_ns"
     t.string   "depth_begin"
@@ -770,7 +763,6 @@ ActiveRecord::Schema.define(version: 20180322173647) do
     t.string   "notes"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
-    t.integer  "image_assocnoeg_id"
     t.integer  "image_box_id"
     t.integer  "image_creator_id"
     t.integer  "image_format_id"
@@ -778,7 +770,6 @@ ActiveRecord::Schema.define(version: 20180322173647) do
     t.integer  "image_orientation_id"
     t.integer  "image_quality_id"
     t.string   "strat_other"
-    t.index ["image_assocnoeg_id"], name: "index_images_on_image_assocnoeg_id", using: :btree
     t.index ["image_box_id"], name: "index_images_on_image_box_id", using: :btree
     t.index ["image_creator_id"], name: "index_images_on_image_creator_id", using: :btree
     t.index ["image_format_id"], name: "index_images_on_image_format_id", using: :btree
@@ -1316,7 +1307,6 @@ ActiveRecord::Schema.define(version: 20180322173647) do
   add_foreign_key "features_wood_inventories", "wood_inventories"
   add_foreign_key "image_subjects_images", "image_subjects", column: "image_subjects_id"
   add_foreign_key "image_subjects_images", "images", column: "images_id"
-  add_foreign_key "images", "image_assocnoegs"
   add_foreign_key "images", "image_boxes"
   add_foreign_key "images", "image_creators"
   add_foreign_key "images", "image_formats"
