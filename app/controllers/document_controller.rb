@@ -160,7 +160,7 @@ class DocumentController < ApplicationController
       image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(opts)
     rescue
       # TODO choose a placeholder image for missing
-      base_uri = "#{SETTINGS["iiif_server"].gsub('sparc','coming_soon.jpg')}"
+      base_uri = "#{SETTINGS["iiif_server"]}%2Fnot_found.jpg"
       opts = { service_id: base_uri }
       image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(opts)
     end
