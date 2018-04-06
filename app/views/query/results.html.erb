@@ -24,6 +24,11 @@
             <% if column == "occupation_id" && @occupation_source.present? %>
               <%= @occupation_source %>
             <% else %>
+              <% if column[/_(?:habtm|hm)$/]
+                column = column[/^(.+)_(?:habtm|hm)$/, 1]
+              elsif column[/_join$/]
+                column = column[/^\w+\|(\w+)_join$/, 1]
+              end %>
               <%= column.titleize %>
             <% end %>
           </th>

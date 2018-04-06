@@ -39,6 +39,16 @@ module ActiveRecordAbstraction
         else
           res = "N/A"
         end
+      elsif column[/_(?:habtm|hm|join)$/]
+        if column[/_(?:habtm|hm)$/]
+          column = column[/^(.+)_(?:habtm|hm)$/, 1]
+
+            res = result.send(column).map { |r| r.name }.uniq.sort.join("; ")
+        elsif column[/_join$/]
+          column = column[/^(.+)_join$/, 1]
+          column, table = column.split("|")
+          res = result.send(table).map { |r| r.feature_no }.uniq.sort.join("; ")
+        end
       else
         res = result[column].present? ? result[column] : ""
       end
