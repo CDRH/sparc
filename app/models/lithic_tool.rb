@@ -11,6 +11,13 @@ class LithicTool < ActiveRecord::Base
   belongs_to :lithic_platform_type
   belongs_to :lithic_termination
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "fs_no"
+    }
+  end
+
   def self.sorted
     order("fs_no")
   end

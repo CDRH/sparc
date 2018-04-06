@@ -4,6 +4,13 @@ class TreeRing < ApplicationRecord
   belongs_to :stratum
   has_one :unit, -> {distinct}, :through => :stratum
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "trl_no"
+    }
+  end
+
   def self.sorted
     order("trl_no")
   end

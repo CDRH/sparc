@@ -7,6 +7,13 @@ class Stratum < ActiveRecord::Base
   has_many :tree_rings
   has_and_belongs_to_many :features
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "strat_all"
+    }
+  end
+
   def self.sorted
     order("strat_all")
   end

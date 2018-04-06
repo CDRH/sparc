@@ -20,13 +20,24 @@ module QueryHelper
   end
 
   def select_from_assoc(column, param_name)
-    select_tag param_name,
-               options_from_collection_for_select(column[:name]
-                                                    .classify.constantize
-                                                    .distinct.order(:name),
-                                                  "id", "name",
-                                                  params[param_name]),
-               class: "form-control", include_blank: true
+    # Check if model defines column to use instead of default "name"
+    if column[:name].classify.constantize.respond_to?("abstraction")
+      model = column[:name].classify.constantize
+      abstraction = model.send("abstraction")
+      select_tag param_name,
+                 options_from_collection_for_select(
+                   model.distinct.order(abstraction[:assoc_input_column]),
+                   "id", abstraction[:assoc_input_column], params[param_name]
+                 ),
+                 class: "form-control", include_blank: true
+    else
+      select_tag param_name,
+                 options_from_collection_for_select(
+                   column[:name].classify.constantize.distinct.order(:name),
+                   "id", "name", params[param_name]
+                 ),
+                 class: "form-control", include_blank: true
+    end
   end
 
   def select_from_column(model_class, column, param_name)

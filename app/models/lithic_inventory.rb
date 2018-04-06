@@ -6,6 +6,13 @@ class LithicInventory < ApplicationRecord
   has_many :lithic_debitages
   has_many :lithic_tools
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "fs_no"
+    }
+  end
+
   def self.sorted
     order("fs_no")
   end

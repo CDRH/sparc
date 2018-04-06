@@ -5,6 +5,13 @@ class FaunalArtifact < ActiveRecord::Base
   has_many :strata, -> { distinct }, :through => :feature
   has_many :units, -> { distinct }, :through => :strata
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "fs_no"
+    }
+  end
+
   def self.sorted
     order("faunal_artifacts.fs_no")
   end

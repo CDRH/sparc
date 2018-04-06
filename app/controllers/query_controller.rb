@@ -6,7 +6,7 @@ class QueryController < ApplicationController
   def category
     params.require(:category)
 
-    if params[:category][/^(?:features|strata|images)$/]
+    if params[:category][/^(?:units|features|strata|images)$/]
       # These are lone tables, so call the form action and render its view
       params[:type] = params[:category]
       form
@@ -26,10 +26,13 @@ class QueryController < ApplicationController
       session[:common_search_feature_group] = nil
     end
 
-    @tables = category_type_tables.map { |t| {name: t,
-                                              label: t.pluralize.titleize,
-                                              count: t.classify.constantize
-                                                       .count} }
+    @tables = category_type_tables.map { |t|
+      {
+        name: t,
+        label: t.pluralize.titleize,
+        count: t.classify.constantize.count
+      }
+    }
 
     params[:table] =
       params[:table].present? ? params[:table] : @tables.first[:name]
@@ -61,20 +64,47 @@ class QueryController < ApplicationController
 
     selects = table_select_columns(@table)
     selects.each do |column|
-      if params[column[:name]].present?
-        if @table.reflect_on_all_associations(:belongs_to)
-             .map{ |a| a.name.to_s }.include?(column[:name])
+      if @table.reflect_on_all_associations(:belongs_to)
+        .map{ |a| a.name.to_s }.include?(column[:name])
+
+        if params[column[:name]].present?
           res = res.joins(column[:name].to_sym)
-                   .where(column[:name].pluralize =>
-                          { id: params[column[:name]] })
-        elsif column[:type] == :join
-          res = res.joins(column[:join_table])
-                   .where(column[:join_table] =>
-                          { column[:name] => params[column[:name]] })
+            .where(column[:name].pluralize => { id: params[column[:name]] })
         else
-          res = res.where("#{column[:name]} = ?",
-                            "%#{params[column[:name]]}%")
+          res = res.includes(column[:name].to_sym)
         end
+      elsif @table.reflect_on_all_associations(:has_and_belongs_to_many)
+        .map{ |a| a.name.to_s }.include?(column[:name])
+
+        if params[column[:name]].present?
+          res = res.joins(column[:name].to_sym)
+            .where(column[:name].pluralize => { id: params[column[:name]] })
+        else
+          res = res.includes(column[:name].to_sym)
+        end
+        @column_names << "#{column[:name]}_habtm"
+      elsif @table.reflect_on_all_associations(:has_many)
+        .map{ |a| a.name.to_s }.include?(column[:name])
+
+        if params[column[:name]].present?
+          res = res.joins(column[:name].to_sym)
+            .where(column[:name].pluralize => { id: params[column[:name]] })
+        else
+          res = res.includes(column[:name].to_sym)
+        end
+        @column_names << "#{column[:name]}_hm"
+      elsif column[:type] == :join
+        if params[column[:name]].present?
+          res = res.joins(column[:join_table])
+            .where(column[:join_table] =>
+            { column[:name] => params[column[:name]] })
+        else
+          res = res.includes(column[:join_table])
+        end
+        @column_names << "#{column[:name]}|#{column[:join_table]}_join"
+      elsif params[column[:name]].present?
+        res = res.where("#{column[:name]} = ?", "#{params[column[:name]]}")
+        @column_names << column[:name]
       end
     end
 
@@ -100,36 +130,41 @@ class QueryController < ApplicationController
     when "samples"
       case params[:type]
       when "pollens"
-        return ["pollen_inventory"]
+        ["pollen_inventory"]
       when "soils"
-        return ["soil"]
+        ["soil"]
       when "tree_rings"
-        return ["tree_ring"]
+        ["tree_ring"]
       end
     when "artifacts"
       case params[:type]
       when "ceramics"
-        return ["ceramic_inventory", "ceramic_clap", "ceramic",
+        ["ceramic_inventory", "ceramic_clap", "ceramic",
                 "ceramic_vessel"]
       when "eggshells"
-        return ["eggshell"]
+        ["eggshell"]
       when "faunal"
-        return ["bone_tool", "faunal_artifacts", "faunal_inventory"]
+        ["bone_tool", "faunal_artifacts", "faunal_inventory"]
       when "lithics"
-        return ["lithic_inventory", "lithic_debitage", "lithic_tool"]
+        ["lithic_inventory", "lithic_debitage", "lithic_tool",
+          "obsidian_inventories"]
       when "ornaments"
-        return ["ornament"]
+        ["ornament"]
       when "perishables"
-        return ["perishable"]
+        ["perishable"]
+      when "select_artifacts"
+        ["select_artifacts"]
       when "woods"
-        return ["wood_inventory"]
+        ["wood_inventory"]
       end
+    when "units"
+      ["units"]
     when "features"
-      return ["features"]
+      ["features"]
     when "strata"
-      return ["strata"]
+      ["strata"]
     when "images"
-      return ["images"]
+      ["images"]
     end
   end
 
@@ -197,14 +232,16 @@ class QueryController < ApplicationController
       end
     end
 
-    return res
+    res
   end
 
   def table_input_columns(table)
     # Create form inputs for:
     column_list = []
 
-    if table == Feature
+    if table == Unit
+      column_list << { name: "unit_no", type: "string" }
+    elsif table == Feature
       column_list << { name: "feature_no", type: "string" }
     elsif table == Stratum
       column_list << { name: "strat_all", type: "string" }
@@ -226,7 +263,7 @@ class QueryController < ApplicationController
       end
     end
 
-    return column_list
+    column_list
   end
 
   def table_select_columns(table)
@@ -236,15 +273,23 @@ class QueryController < ApplicationController
     # Columns whose names
     # end in "_no" not preceded by "feature", "code", or "type"
     table.columns.each do |c|
-      if c.name[/(?:(?<!feature)_no|code|type)$/]
+      if c.name[/(?:(?<!feature|#{table.to_s.downcase})_no|code|type)$/]
         column_list << { name: c.name.to_s, type: :column }
       end
     end
 
-    # All belongs_to associations except to unit, stratum, feature,
-    # inventory, or occupation
+    # All associations except to Common Search Options:
+    #   unit, stratum, feature, or occupation
     table.reflect_on_all_associations(:belongs_to)
-      .reject{ |a| a.name[/(?:^unit|^stratum|^feature|_inventory|occupation)$/] }
+      .reject{ |a| a.name[/(?:^unit|^stratum|^feature|occupation)$/] }
+      .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
+
+    table.reflect_on_all_associations(:has_many)
+      .reject{ |a| a.name[/(?:^units|^strata|^features|occupations)$/] }
+      .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
+
+    table.reflect_on_all_associations(:has_and_belongs_to_many)
+      .reject{ |a| a.name[/(?:^units|^strata|^features|occupations)$/] }
       .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
 
     if SETTINGS["hide_sensitive_image_records"]
@@ -256,6 +301,6 @@ class QueryController < ApplicationController
       column_list << { name: "feature_no", type: :join, join_table: :features }
     end
 
-    return column_list
+    column_list
   end
 end

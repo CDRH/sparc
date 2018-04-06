@@ -21,6 +21,13 @@ class Ceramic < ActiveRecord::Base
   belongs_to :ceramic_specific_type
   belongs_to :ceramic_style
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "fs_no"
+    }
+  end
+
   def self.sorted
     order("fs_no")
   end

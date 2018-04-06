@@ -6,6 +6,13 @@ class FaunalInventory < ApplicationRecord
   has_many :bone_tools
   has_many :faunal_artifacts
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "record_field_key_no"
+    }
+  end
+
   def self.sorted
     order("comments")
   end

@@ -4,7 +4,14 @@ class Eggshell < ActiveRecord::Base
   has_and_belongs_to_many :features
   has_many :strata, -> {distinct}, :through => :features
   has_many :units, -> {distinct}, :through => :strata
-  
+
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "salmon_museum_no"
+    }
+  end
+
   def self.sorted
     order("salmon_museum_no")
   end
