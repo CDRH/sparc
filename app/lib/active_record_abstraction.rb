@@ -10,7 +10,8 @@ module ActiveRecordAbstraction
       res = ""
       if column[/_id$/]
         assoc_col = column[/^(.+)_id$/, 1]
-        if assoc_col == "occupation"
+        if assoc_col == "occupation" &&
+          Occupation.where(id: result[:occupation_id]).present?
           res = Occupation.where(id: result[:occupation_id]).first.name
         elsif result.respond_to?(assoc_col)
           if result.send(assoc_col).present?
