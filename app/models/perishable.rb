@@ -4,6 +4,13 @@ class Perishable < ApplicationRecord
   has_many :strata, -> {distinct}, :through => :features
   has_many :units, -> {distinct}, :through => :strata
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "salmon_museum_number"
+    }
+  end
+
   def self.sorted
     order("fs_no")
   end

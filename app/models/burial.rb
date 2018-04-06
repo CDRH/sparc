@@ -5,6 +5,13 @@ class Burial < ActiveRecord::Base
   has_many :strata, -> {distinct}, :through => :feature
   has_many :units, -> {distinct}, :through => :strata
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "record_field_key_no"
+    }
+  end
+
   def self.sorted
     order("new_burial_no")
   end

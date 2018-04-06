@@ -5,6 +5,13 @@ class Document < ActiveRecord::Base
   belongs_to :document_type
   has_and_belongs_to_many :units
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "page_id"
+    }
+  end
+
   def self.sorted
     order("page_id")
   end
