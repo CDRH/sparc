@@ -26,10 +26,13 @@ class QueryController < ApplicationController
       session[:common_search_feature_group] = nil
     end
 
-    @tables = category_type_tables.map { |t| {name: t,
-                                              label: t.pluralize.titleize,
-                                              count: t.classify.constantize
-                                                       .count} }
+    @tables = category_type_tables.map { |t|
+      {
+        name: t,
+        label: t.pluralize.titleize,
+        count: t.classify.constantize.count
+      }
+    }
 
     params[:table] =
       params[:table].present? ? params[:table] : @tables.first[:name]
