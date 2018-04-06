@@ -61,20 +61,47 @@ class QueryController < ApplicationController
 
     selects = table_select_columns(@table)
     selects.each do |column|
-      if params[column[:name]].present?
-        if @table.reflect_on_all_associations(:belongs_to)
-             .map{ |a| a.name.to_s }.include?(column[:name])
+      if @table.reflect_on_all_associations(:belongs_to)
+        .map{ |a| a.name.to_s }.include?(column[:name])
+
+        if params[column[:name]].present?
           res = res.joins(column[:name].to_sym)
-                   .where(column[:name].pluralize =>
-                          { id: params[column[:name]] })
-        elsif column[:type] == :join
-          res = res.joins(column[:join_table])
-                   .where(column[:join_table] =>
-                          { column[:name] => params[column[:name]] })
+            .where(column[:name].pluralize => { id: params[column[:name]] })
         else
-          res = res.where("#{column[:name]} = ?",
-                            "%#{params[column[:name]]}%")
+          res = res.includes(column[:name].to_sym)
         end
+      elsif @table.reflect_on_all_associations(:has_and_belongs_to_many)
+        .map{ |a| a.name.to_s }.include?(column[:name])
+
+        if params[column[:name]].present?
+          res = res.joins(column[:name].to_sym)
+            .where(column[:name].pluralize => { id: params[column[:name]] })
+        else
+          res = res.includes(column[:name].to_sym)
+        end
+        @column_names << "#{column[:name]}_habtm"
+      elsif @table.reflect_on_all_associations(:has_many)
+        .map{ |a| a.name.to_s }.include?(column[:name])
+
+        if params[column[:name]].present?
+          res = res.joins(column[:name].to_sym)
+            .where(column[:name].pluralize => { id: params[column[:name]] })
+        else
+          res = res.includes(column[:name].to_sym)
+        end
+        @column_names << "#{column[:name]}_hm"
+      elsif column[:type] == :join
+        if params[column[:name]].present?
+          res = res.joins(column[:join_table])
+            .where(column[:join_table] =>
+            { column[:name] => params[column[:name]] })
+        else
+          res = res.includes(column[:join_table])
+        end
+        @column_names << "#{column[:name]}|#{column[:join_table]}_join"
+      elsif params[column[:name]].present?
+        res = res.where("#{column[:name]} = ?", "#{params[column[:name]]}")
+        @column_names << column[:name]
       end
     end
 
@@ -236,15 +263,23 @@ class QueryController < ApplicationController
     # Columns whose names
     # end in "_no" not preceded by "feature", "code", or "type"
     table.columns.each do |c|
-      if c.name[/(?:(?<!feature)_no|code|type)$/]
+      if c.name[/(?:(?<!feature|#{table.to_s.downcase})_no|code|type)$/]
         column_list << { name: c.name.to_s, type: :column }
       end
     end
 
-    # All belongs_to associations except to unit, stratum, feature,
-    # inventory, or occupation
+    # All associations except to Common Search Options:
+    #   unit, stratum, feature, or occupation
     table.reflect_on_all_associations(:belongs_to)
-      .reject{ |a| a.name[/(?:^unit|^stratum|^feature|_inventory|occupation)$/] }
+      .reject{ |a| a.name[/(?:^unit|^stratum|^feature|occupation)$/] }
+      .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
+
+    table.reflect_on_all_associations(:has_many)
+      .reject{ |a| a.name[/(?:^units|^strata|^features|occupations)$/] }
+      .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
+
+    table.reflect_on_all_associations(:has_and_belongs_to_many)
+      .reject{ |a| a.name[/(?:^units|^strata|^features|occupations)$/] }
       .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
 
     if SETTINGS["hide_sensitive_image_records"]
