@@ -6,6 +6,13 @@ class ObsidianInventory < ApplicationRecord
   belongs_to :occupation
   belongs_to :obsidian_identified_source
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "fs_no"
+    }
+  end
+
   def self.sorted
     order("fs_no")
   end

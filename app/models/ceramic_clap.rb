@@ -9,6 +9,13 @@ class CeramicClap < ActiveRecord::Base
   belongs_to :ceramic_clap_vessel_form
   belongs_to :ceramic_clap_temper
 
+  def self.abstraction
+    {
+      assoc_input_type: "select",
+      assoc_input_column: "ceramic_clap_type_id"
+    }
+  end
+
   def self.sorted
     order("record_field_key_no")
   end
