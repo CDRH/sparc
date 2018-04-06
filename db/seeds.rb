@@ -1738,21 +1738,10 @@ def seed_select_artifacts
         location_in_room: sa[:location_in_room],
         comments: sa[:comments]
       }
+      # if no matching record found with exact sa_no, do not add to database
       if record
         # add to single field
         record.update_attribute(:select_artifact_info, info_field.to_json)
-      else
-        new_record = {}
-        if model.column_names.include?("unit")
-          new_record[:unit] = sa[:unit]
-        end
-        mult_features = !(model == CeramicVessel || model == Ornament)
-        associate_strata_features(unit, sa[:strat], sa[:feature_no], new_record, related_table.titleize, mult_features)
-        new_record[:sa_no] = sa[:sa_no]
-        new_record[:select_artifact_info] = info_field.to_json
-        model.create(new_record)
-        report related_table, "new record with sa_no #{sa[:sa_no]}", "Select Artifacts"
-        # add a new record, add unit, join to feature(s) but otherwise don't add info
       end
     end
     # Output and create
