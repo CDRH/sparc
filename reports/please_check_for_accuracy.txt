@@ -392,7 +392,7 @@ stratum 097W:N-1-5 created from Ceramic Inventories
 stratum 097W:N-1-6 created from Ceramic Inventories
 stratum 121C:D-1-3 created from Ceramic Inventories
 stratum 121B:D-1-3 created from Ceramic Inventories
-Zone T01 created from Ceramic Inventories
+Zone T01EW created from Ceramic Inventories
 Unit T01EW created from Ceramic Inventories
 stratum T01EW:B-2-11 created from Ceramic Inventories
 stratum T01EW:P-1-2 created from Ceramic Inventories
@@ -564,6 +564,7 @@ stratum 097W:I-1-6 created from Ceramic Inventories
 [blank] Status created from Ceramic Inventories row 24285
 [blank] Location created from Ceramic Inventories row 24285
 stratum 008BW:C-1-5 created from Faunal Inventory
+Zone 010BW created from Faunal Inventories
 Unit 010BW created from Faunal Inventories
 stratum 016P:L-8-38 created from Faunal Inventory
 feature 016P:L-8-38:11.0 created from Faunal Inventory
@@ -2962,636 +2963,42 @@ feature 043W:F-1.5-6:3.0 created from Perishables
 feature 036W:C-2.5-4.5:29.0 created from Perishables
 stratum 097B:N-1-3 created from Perishables
 feature 097B:N-1-3:2.0 created from Perishables
-Perishable new record with sa_no SA007A003 created from Select Artifacts
-WoodInventory new record with sa_no SA008BW003 created from Select Artifacts
-Perishable new record with sa_no SA017P002 created from Select Artifacts
-LithicInventory new record with sa_no SA018P002 created from Select Artifacts
-LithicInventory new record with sa_no SA018P003 created from Select Artifacts
-CeramicInventory new record with sa_no SA018P004 created from Select Artifacts
-Perishable new record with sa_no SA018P005 created from Select Artifacts
-LithicInventory new record with sa_no SA018P009 created from Select Artifacts
-LithicInventory new record with sa_no SA018P010 created from Select Artifacts
-LithicInventory new record with sa_no SA018P014 created from Select Artifacts
-LithicInventory new record with sa_no SA018P016 created from Select Artifacts
 feature 019P:L-1-12:5.0 created from Select Artifacts
-LithicInventory new record with sa_no SA019P008 created from Select Artifacts
 feature 021P:R-3-19.7:27.0 created from Select Artifacts
-LithicInventory new record with sa_no SA021P026 created from Select Artifacts
 feature 030B:G-1-4:7.0 created from Select Artifacts
-Perishable new record with sa_no SA030B006 created from Select Artifacts
-LithicInventory new record with sa_no SA031A003 created from Select Artifacts
-LithicInventory new record with sa_no SA031B001 created from Select Artifacts
-Perishable new record with sa_no SA031W012 created from Select Artifacts
-Perishable new record with sa_no SA033B001 created from Select Artifacts
-Perishable new record with sa_no SA033B004 created from Select Artifacts
-Perishable new record with sa_no SA033B005 created from Select Artifacts
-CeramicVessel new record with sa_no SA033C001 created from Select Artifacts
 feature 033W:F-2-9:12.0 created from Select Artifacts
-LithicInventory new record with sa_no SA033W006 created from Select Artifacts
-Perishable new record with sa_no SA033W010 created from Select Artifacts
-LithicInventory new record with sa_no SA033W014 created from Select Artifacts
-Perishable new record with sa_no SA033W017 created from Select Artifacts
-Perishable new record with sa_no SA033W018 created from Select Artifacts
-LithicInventory new record with sa_no SA033W020 created from Select Artifacts
-LithicInventory new record with sa_no SA033W024 created from Select Artifacts
-LithicInventory new record with sa_no SA033W044 created from Select Artifacts
-Perishable new record with sa_no SA033W046 created from Select Artifacts
-LithicInventory new record with sa_no SA033W048 created from Select Artifacts
-FaunalInventory new record with sa_no SA033W050 created from Select Artifacts
-Perishable new record with sa_no SA036W005 created from Select Artifacts
-LithicInventory new record with sa_no SA036W011 created from Select Artifacts
-CeramicInventory new record with sa_no SA036W013 created from Select Artifacts
-FaunalInventory new record with sa_no SA036W014 created from Select Artifacts
-LithicInventory new record with sa_no SA036W015 created from Select Artifacts
-Ornament new record with sa_no SA036W016 created from Select Artifacts
-Ornament new record with sa_no SA036W027 created from Select Artifacts
-LithicInventory new record with sa_no SA036W043 created from Select Artifacts
-LithicInventory new record with sa_no SA036W047 created from Select Artifacts
-LithicInventory new record with sa_no SA036W052 created from Select Artifacts
-LithicInventory new record with sa_no SA036W054 created from Select Artifacts
-LithicInventory new record with sa_no SA036W055 created from Select Artifacts
-LithicInventory new record with sa_no SA036W057 created from Select Artifacts
-LithicInventory new record with sa_no SA036W060 created from Select Artifacts
-LithicInventory new record with sa_no SA036W063 created from Select Artifacts
-LithicInventory new record with sa_no SA037W069 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W072 created from Select Artifacts
-LithicInventory new record with sa_no SA037W074 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W078 created from Select Artifacts
-LithicInventory new record with sa_no SA037W080 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W091 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W092 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W093 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W094 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W095 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W096 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W097 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W098 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W099 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W100 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W101 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W102 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W103 created from Select Artifacts
-CeramicVessel new record with sa_no SA037W104 created from Select Artifacts
-Perishable new record with sa_no SA037W105 created from Select Artifacts
-FaunalInventory new record with sa_no SA043W014 created from Select Artifacts
-Perishable new record with sa_no SA043W015 created from Select Artifacts
-Perishable new record with sa_no SA043W016 created from Select Artifacts
-WoodInventory new record with sa_no SA043W020 created from Select Artifacts
-WoodInventory new record with sa_no SA043W021 created from Select Artifacts
-LithicInventory new record with sa_no SA043W023 created from Select Artifacts
-WoodInventory new record with sa_no SA043W024 created from Select Artifacts
 feature 043W:L-2-7.5:19.0 created from Select Artifacts
-Ornament new record with sa_no SA043W033 created from Select Artifacts
-LithicInventory new record with sa_no SA043W034 created from Select Artifacts
-Perishable new record with sa_no SA043W035 created from Select Artifacts
 [blank] Floor Association created from Select Artifacts row 162
 [blank] Sa Form created from Select Artifacts row 162
 [blank] Associated Feature Artifacts created from Select Artifacts row 162
-WoodInventory new record with sa_no SA043W036 created from Select Artifacts
-FaunalInventory new record with sa_no SA043W037 created from Select Artifacts
-WoodInventory new record with sa_no SA043W038 created from Select Artifacts
-Perishable new record with sa_no SA043W051 created from Select Artifacts
-WoodInventory new record with sa_no SA043W067 created from Select Artifacts
-LithicInventory new record with sa_no SA051W001 created from Select Artifacts
-LithicInventory new record with sa_no SA051W003 created from Select Artifacts
-LithicInventory new record with sa_no SA051W004 created from Select Artifacts
-WoodInventory new record with sa_no SA051W005 created from Select Artifacts
-LithicInventory new record with sa_no SA051W007 created from Select Artifacts
-LithicInventory new record with sa_no SA051W008.1 created from Select Artifacts
-LithicInventory new record with sa_no SA051W008.2 created from Select Artifacts
-Ornament new record with sa_no SA057W022 created from Select Artifacts
-LithicInventory new record with sa_no SA057W023 created from Select Artifacts
 feature 058W:N-1-5:12.0 created from Select Artifacts
-LithicInventory new record with sa_no SA058W013 created from Select Artifacts
-LithicInventory new record with sa_no SA058W017 created from Select Artifacts
-CeramicVessel new record with sa_no SA059W009 created from Select Artifacts
-CeramicVessel new record with sa_no SA059W011 created from Select Artifacts
-WoodInventory new record with sa_no SA060A013 created from Select Artifacts
-Perishable new record with sa_no SA062A001 created from Select Artifacts
-WoodInventory new record with sa_no SA062A002 created from Select Artifacts
-CeramicInventory new record with sa_no SA062A008 created from Select Artifacts
-LithicInventory new record with sa_no SA062A024 created from Select Artifacts
-CeramicVessel new record with sa_no SA062A026 created from Select Artifacts
-LithicInventory new record with sa_no SA062A028 created from Select Artifacts
-CeramicVessel new record with sa_no SA062A032 created from Select Artifacts
-LithicInventory new record with sa_no SA062A033 created from Select Artifacts
-CeramicVessel new record with sa_no SA062A034 created from Select Artifacts
-FaunalInventory new record with sa_no SA062A035 created from Select Artifacts
-LithicInventory new record with sa_no SA062A036 created from Select Artifacts
-CeramicVessel new record with sa_no SA062A037 created from Select Artifacts
-LithicInventory new record with sa_no SA062A039 created from Select Artifacts
-LithicInventory new record with sa_no SA062A040 created from Select Artifacts
-Perishable new record with sa_no SA062A042 created from Select Artifacts
-CeramicVessel new record with sa_no SA062A044 created from Select Artifacts
-CeramicVessel new record with sa_no SA062A045 created from Select Artifacts
-CeramicVessel new record with sa_no SA062A046 created from Select Artifacts
-FaunalInventory new record with sa_no SA062A047 created from Select Artifacts
-WoodInventory new record with sa_no SA062A048 created from Select Artifacts
-CeramicVessel new record with sa_no SA062A049 created from Select Artifacts
-CeramicVessel new record with sa_no SA062A050 created from Select Artifacts
-CeramicVessel new record with sa_no SA062A051 created from Select Artifacts
-LithicInventory new record with sa_no SA062A052 created from Select Artifacts
-LithicInventory new record with sa_no SA062A055 created from Select Artifacts
-LithicInventory new record with sa_no SA062A056 created from Select Artifacts
-LithicInventory new record with sa_no SA062A057 created from Select Artifacts
-LithicInventory new record with sa_no SA062A058 created from Select Artifacts
-LithicInventory new record with sa_no SA062A059 created from Select Artifacts
-LithicInventory new record with sa_no SA062A061 created from Select Artifacts
-LithicInventory new record with sa_no SA062A066 created from Select Artifacts
-LithicInventory new record with sa_no SA062A067 created from Select Artifacts
-LithicInventory new record with sa_no SA062A068 created from Select Artifacts
-LithicInventory new record with sa_no SA062A069 created from Select Artifacts
-LithicInventory new record with sa_no SA062A070 created from Select Artifacts
-LithicInventory new record with sa_no SA062A071 created from Select Artifacts
-LithicInventory new record with sa_no SA062A072 created from Select Artifacts
-LithicInventory new record with sa_no SA062A073 created from Select Artifacts
-LithicInventory new record with sa_no SA062A075 created from Select Artifacts
-LithicInventory new record with sa_no SA062A076 created from Select Artifacts
-LithicInventory new record with sa_no SA062A088 created from Select Artifacts
 feature 062A:I-2-6:90.0 created from Select Artifacts
-LithicInventory new record with sa_no SA062W074 created from Select Artifacts
-LithicInventory new record with sa_no SA062W077 created from Select Artifacts
-LithicInventory new record with sa_no SA062W078 created from Select Artifacts
-LithicInventory new record with sa_no SA062W080 created from Select Artifacts
-LithicInventory new record with sa_no SA062W081 created from Select Artifacts
-LithicInventory new record with sa_no SA062W124 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W032 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W034 created from Select Artifacts
-Ornament new record with sa_no SA064W036 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W037 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W038 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W039 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W040 created from Select Artifacts
-LithicInventory new record with sa_no SA064W043 created from Select Artifacts
-FaunalInventory new record with sa_no SA064W052 created from Select Artifacts
-FaunalInventory new record with sa_no SA064W053 created from Select Artifacts
-LithicInventory new record with sa_no SA064W055 created from Select Artifacts
-FaunalInventory new record with sa_no SA064W058 created from Select Artifacts
-FaunalInventory new record with sa_no SA064W060 created from Select Artifacts
-WoodInventory new record with sa_no SA064W065 created from Select Artifacts
-LithicInventory new record with sa_no SA064W081 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W088 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W092 created from Select Artifacts
-LithicInventory new record with sa_no SA064W093 created from Select Artifacts
 feature 064W:H-1-8:7.0 created from Select Artifacts
-LithicInventory new record with sa_no SA064W094 created from Select Artifacts
 feature 064W:H-1-8:47.0 created from Select Artifacts
-LithicInventory new record with sa_no SA064W095 created from Select Artifacts
-Perishable new record with sa_no SA064W098 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W099 created from Select Artifacts
-LithicInventory new record with sa_no SA064W100 created from Select Artifacts
-WoodInventory new record with sa_no SA064W101 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W102 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W103 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W104 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W105 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W106 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W107 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W108 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W109 created from Select Artifacts
-FaunalInventory new record with sa_no SA064W110 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W111 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W112 created from Select Artifacts
-Ornament new record with sa_no SA064W119 created from Select Artifacts
-LithicInventory new record with sa_no SA064W122 created from Select Artifacts
-LithicInventory new record with sa_no SA064W126 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W128 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W129 created from Select Artifacts
-LithicInventory new record with sa_no SA064W130 created from Select Artifacts
-LithicInventory new record with sa_no SA064W131 created from Select Artifacts
-LithicInventory new record with sa_no SA064W132 created from Select Artifacts
-CeramicVessel new record with sa_no SA064W133 created from Select Artifacts
-LithicInventory new record with sa_no SA064W134 created from Select Artifacts
-LithicInventory new record with sa_no SA064W135 created from Select Artifacts
-WoodInventory new record with sa_no SA064W136 created from Select Artifacts
-WoodInventory new record with sa_no SA067W025 created from Select Artifacts
-WoodInventory new record with sa_no SA067W026 created from Select Artifacts
-FaunalInventory new record with sa_no SA081W002 created from Select Artifacts
-FaunalInventory new record with sa_no SA081W100 created from Select Artifacts
-FaunalInventory new record with sa_no SA081W250 created from Select Artifacts
-WoodInventory new record with sa_no SA081W251 created from Select Artifacts
-CeramicVessel new record with sa_no SA081W252 created from Select Artifacts
-WoodInventory new record with sa_no SA081W253 created from Select Artifacts
-CeramicInventory new record with sa_no SA081W332 created from Select Artifacts
-FaunalInventory new record with sa_no SA081W338 created from Select Artifacts
-WoodInventory new record with sa_no SA081W354 created from Select Artifacts
-LithicInventory new record with sa_no SA082A038 created from Select Artifacts
-LithicInventory new record with sa_no SA082A041 created from Select Artifacts
-LithicInventory new record with sa_no SA082A049 created from Select Artifacts
-LithicInventory new record with sa_no SA082A050 created from Select Artifacts
-LithicInventory new record with sa_no SA082A054 created from Select Artifacts
-CeramicInventory new record with sa_no SA082A055 created from Select Artifacts
-LithicInventory new record with sa_no SA082A056 created from Select Artifacts
-LithicInventory new record with sa_no SA082A057 created from Select Artifacts
-LithicInventory new record with sa_no SA082A058 created from Select Artifacts
-LithicInventory new record with sa_no SA082A062 created from Select Artifacts
-LithicInventory new record with sa_no SA082A063 created from Select Artifacts
-LithicInventory new record with sa_no SA082A064 created from Select Artifacts
-LithicInventory new record with sa_no SA082A065 created from Select Artifacts
-LithicInventory new record with sa_no SA082A066 created from Select Artifacts
-LithicInventory new record with sa_no SA082A067 created from Select Artifacts
-Ornament new record with sa_no SA082W019.1 created from Select Artifacts
-Ornament new record with sa_no SA082W019.2 created from Select Artifacts
-Ornament new record with sa_no SA082W019.3 created from Select Artifacts
-Ornament new record with sa_no SA082W020 created from Select Artifacts
-Ornament new record with sa_no SA082W021 created from Select Artifacts
-WoodInventory new record with sa_no SA082W028.1 created from Select Artifacts
-Perishable new record with sa_no SA082W032 created from Select Artifacts
-WoodInventory new record with sa_no SA082W033 created from Select Artifacts
-LithicInventory new record with sa_no SA082W060 created from Select Artifacts
-LithicInventory new record with sa_no SA082W061 created from Select Artifacts
-LithicInventory new record with sa_no SA082W087 created from Select Artifacts
-LithicInventory new record with sa_no SA082W091 created from Select Artifacts
-LithicInventory new record with sa_no SA082W092 created from Select Artifacts
-LithicInventory new record with sa_no SA082W095 created from Select Artifacts
-LithicInventory new record with sa_no SA082W096 created from Select Artifacts
-LithicInventory new record with sa_no SA082W097 created from Select Artifacts
-LithicInventory new record with sa_no SA082W098 created from Select Artifacts
-LithicInventory new record with sa_no SA082W099 created from Select Artifacts
-LithicInventory new record with sa_no SA082W100 created from Select Artifacts
-LithicInventory new record with sa_no SA082W101 created from Select Artifacts
-LithicInventory new record with sa_no SA082W102 created from Select Artifacts
-LithicInventory new record with sa_no SA082W105 created from Select Artifacts
-LithicInventory new record with sa_no SA082W110 created from Select Artifacts
-LithicInventory new record with sa_no SA082W111 created from Select Artifacts
-LithicInventory new record with sa_no SA082W112 created from Select Artifacts
-LithicInventory new record with sa_no SA082W113 created from Select Artifacts
-LithicInventory new record with sa_no SA082W115 created from Select Artifacts
-LithicInventory new record with sa_no SA082W118 created from Select Artifacts
-LithicInventory new record with sa_no SA082W120 created from Select Artifacts
-LithicInventory new record with sa_no SA082W126 created from Select Artifacts
-LithicInventory new record with sa_no SA082W128 created from Select Artifacts
-LithicInventory new record with sa_no SA082W129 created from Select Artifacts
-LithicInventory new record with sa_no SA082W131 created from Select Artifacts
-LithicInventory new record with sa_no SA082W134 created from Select Artifacts
-LithicInventory new record with sa_no SA082W200 created from Select Artifacts
-Ornament new record with sa_no SA084W001 created from Select Artifacts
-LithicInventory new record with sa_no SA084W4007 created from Select Artifacts
-Perishable new record with sa_no SA084W4008 created from Select Artifacts
-LithicInventory new record with sa_no SA084W4009 created from Select Artifacts
-LithicInventory new record with sa_no SA084W4010 created from Select Artifacts
-LithicInventory new record with sa_no SA084W4013 created from Select Artifacts
-FaunalInventory new record with sa_no SA084W4014 created from Select Artifacts
-LithicInventory new record with sa_no SA086W031 created from Select Artifacts
-FaunalInventory new record with sa_no SA086W036 created from Select Artifacts
-CeramicInventory new record with sa_no SA086W046 created from Select Artifacts
-LithicInventory new record with sa_no SA086W064 created from Select Artifacts
-FaunalInventory new record with sa_no SA086W076 created from Select Artifacts
-LithicInventory new record with sa_no SA086W112 created from Select Artifacts
-Perishable new record with sa_no SA086W118 created from Select Artifacts
-LithicInventory new record with sa_no SA088W003 created from Select Artifacts
-LithicInventory new record with sa_no SA090W020 created from Select Artifacts
-LithicInventory new record with sa_no SA090W021 created from Select Artifacts
-FaunalInventory new record with sa_no SA090W022 created from Select Artifacts
-FaunalInventory new record with sa_no SA090W023 created from Select Artifacts
-FaunalInventory new record with sa_no SA090W024 created from Select Artifacts
-FaunalInventory new record with sa_no SA090W026 created from Select Artifacts
-FaunalInventory new record with sa_no SA090W027 created from Select Artifacts
-LithicInventory new record with sa_no SA090W028 created from Select Artifacts
-LithicInventory new record with sa_no SA090W029 created from Select Artifacts
-LithicInventory new record with sa_no SA090W030 created from Select Artifacts
-LithicInventory new record with sa_no SA090W031 created from Select Artifacts
-LithicInventory new record with sa_no SA090W032 created from Select Artifacts
-LithicInventory new record with sa_no SA090W033 created from Select Artifacts
-LithicInventory new record with sa_no SA090W034 created from Select Artifacts
-LithicInventory new record with sa_no SA090W035 created from Select Artifacts
-LithicInventory new record with sa_no SA090W036 created from Select Artifacts
-LithicInventory new record with sa_no SA090W037 created from Select Artifacts
-LithicInventory new record with sa_no SA090W047 created from Select Artifacts
-LithicInventory new record with sa_no SA090W121 created from Select Artifacts
-LithicInventory new record with sa_no SA091A006 created from Select Artifacts
-LithicInventory new record with sa_no SA091A008 created from Select Artifacts
-LithicInventory new record with sa_no SA091C015 created from Select Artifacts
-CeramicInventory new record with sa_no SA091C019 created from Select Artifacts
-LithicInventory new record with sa_no SA091C020 created from Select Artifacts
-LithicInventory new record with sa_no SA091C021 created from Select Artifacts
-LithicInventory new record with sa_no SA091W010 created from Select Artifacts
-FaunalInventory new record with sa_no SA091W100 created from Select Artifacts
-LithicInventory new record with sa_no SA092A031 created from Select Artifacts
-LithicInventory new record with sa_no SA092A032 created from Select Artifacts
-LithicInventory new record with sa_no SA093W020 created from Select Artifacts
-LithicInventory new record with sa_no SA093W032 created from Select Artifacts
-LithicInventory new record with sa_no SA093W033 created from Select Artifacts
-LithicInventory new record with sa_no SA093W034 created from Select Artifacts
-LithicInventory new record with sa_no SA093W035 created from Select Artifacts
-LithicInventory new record with sa_no SA093W036 created from Select Artifacts
-LithicInventory new record with sa_no SA093W037 created from Select Artifacts
-LithicInventory new record with sa_no SA093W038 created from Select Artifacts
-LithicInventory new record with sa_no SA093W039 created from Select Artifacts
-LithicInventory new record with sa_no SA093W043 created from Select Artifacts
-LithicInventory new record with sa_no SA094C004 created from Select Artifacts
-LithicInventory new record with sa_no SA094C006 created from Select Artifacts
-Perishable new record with sa_no SA094C007 created from Select Artifacts
-FaunalInventory new record with sa_no SA094W003 created from Select Artifacts
-LithicInventory new record with sa_no SA094W009 created from Select Artifacts
-Ornament new record with sa_no SA094W010 created from Select Artifacts
-Ornament new record with sa_no SA094W011 created from Select Artifacts
-FaunalInventory new record with sa_no SA094W012 created from Select Artifacts
-LithicInventory new record with sa_no SA094W013 created from Select Artifacts
-LithicInventory new record with sa_no SA094W014 created from Select Artifacts
-LithicInventory new record with sa_no SA094W015 created from Select Artifacts
-LithicInventory new record with sa_no SA094W016 created from Select Artifacts
-Ornament new record with sa_no SA094W017 created from Select Artifacts
-FaunalInventory new record with sa_no SA094W018 created from Select Artifacts
-Ornament new record with sa_no SA094W019 created from Select Artifacts
-LithicInventory new record with sa_no SA094W020 created from Select Artifacts
-FaunalInventory new record with sa_no SA094W021 created from Select Artifacts
-FaunalInventory new record with sa_no SA094W022 created from Select Artifacts
-Ornament new record with sa_no SA094W023 created from Select Artifacts
-LithicInventory new record with sa_no SA094W024 created from Select Artifacts
-LithicInventory new record with sa_no SA094W025 created from Select Artifacts
-LithicInventory new record with sa_no SA094W026 created from Select Artifacts
-LithicInventory new record with sa_no SA094W027 created from Select Artifacts
-LithicInventory new record with sa_no SA094W028 created from Select Artifacts
-LithicInventory new record with sa_no SA094W030 created from Select Artifacts
-LithicInventory new record with sa_no SA094W031 created from Select Artifacts
-LithicInventory new record with sa_no SA094W032 created from Select Artifacts
-LithicInventory new record with sa_no SA094W033 created from Select Artifacts
-LithicInventory new record with sa_no SA094W034 created from Select Artifacts
-LithicInventory new record with sa_no SA094W035 created from Select Artifacts
-LithicInventory new record with sa_no SA094W036 created from Select Artifacts
-LithicInventory new record with sa_no SA096W001 created from Select Artifacts
-LithicInventory new record with sa_no SA096W009 created from Select Artifacts
-LithicInventory new record with sa_no SA096W010 created from Select Artifacts
-FaunalInventory new record with sa_no SA096W011 created from Select Artifacts
-LithicInventory new record with sa_no SA097A1003 created from Select Artifacts
-LithicInventory new record with sa_no SA097W1008 created from Select Artifacts
-LithicInventory new record with sa_no SA097W2001.1 created from Select Artifacts
-FaunalInventory new record with sa_no SA097W2001.2 created from Select Artifacts
-WoodInventory new record with sa_no SA097W2016 created from Select Artifacts
-CeramicInventory new record with sa_no SA097W2017 created from Select Artifacts
-CeramicInventory new record with sa_no SA097W2018 created from Select Artifacts
 feature 097W:L-3-8:2001.0 created from Select Artifacts
-LithicInventory new record with sa_no SA097W2019 created from Select Artifacts
 feature 097W:H-1-5:2001.0 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4001 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4005 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4006 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4007 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4009 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4010 created from Select Artifacts
 feature 097W:D-2-16:2015.0 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4012 created from Select Artifacts
 feature 097W:D-2-16:2016.0 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4013 created from Select Artifacts
 feature 097W:D-2-16:2017.0 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4014 created from Select Artifacts
 feature 097W:D-2-16:2018.0 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4015 created from Select Artifacts
 feature 097W:D-2-16:2019.0 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4016 created from Select Artifacts
 feature 097W:D-2-16:2020.0 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4017 created from Select Artifacts
 feature 097W:D-2-16:2021.0 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4018 created from Select Artifacts
 feature 097W:D-2-16:2022.0 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4019 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4035 created from Select Artifacts
-LithicInventory new record with sa_no SA097W4036 created from Select Artifacts
-LithicInventory new record with sa_no SA100W001 created from Select Artifacts
-Perishable new record with sa_no SA100W002 created from Select Artifacts
-CeramicVessel new record with sa_no SA100W003 created from Select Artifacts
-WoodInventory new record with sa_no SA100W311 created from Select Artifacts
-LithicInventory new record with sa_no SA100W4002 created from Select Artifacts
-CeramicVessel new record with sa_no SA100W5024 created from Select Artifacts
-LithicInventory new record with sa_no SA101W001 created from Select Artifacts
-LithicInventory new record with sa_no SA102A4016 created from Select Artifacts
-LithicInventory new record with sa_no SA102A5005 created from Select Artifacts
-LithicInventory new record with sa_no SA102A5007 created from Select Artifacts
-LithicInventory new record with sa_no SA102B002 created from Select Artifacts
-LithicInventory new record with sa_no SA102B006 created from Select Artifacts
-Perishable new record with sa_no SA102B008 created from Select Artifacts
-LithicInventory new record with sa_no SA102D5001 created from Select Artifacts
-LithicInventory new record with sa_no SA102D5002 created from Select Artifacts
-LithicInventory new record with sa_no SA102D5003 created from Select Artifacts
-LithicInventory new record with sa_no SA102D5004 created from Select Artifacts
-LithicInventory new record with sa_no SA118W049 created from Select Artifacts
-LithicInventory new record with sa_no SA118W050 created from Select Artifacts
-LithicInventory new record with sa_no SA118W051 created from Select Artifacts
-LithicInventory new record with sa_no SA118W053 created from Select Artifacts
-LithicInventory new record with sa_no SA118W054 created from Select Artifacts
-LithicInventory new record with sa_no SA118W055 created from Select Artifacts
-LithicInventory new record with sa_no SA118W057 created from Select Artifacts
-LithicInventory new record with sa_no SA118W058 created from Select Artifacts
-LithicInventory new record with sa_no SA118W064 created from Select Artifacts
-LithicInventory new record with sa_no SA118W065 created from Select Artifacts
-LithicInventory new record with sa_no SA118W067 created from Select Artifacts
-LithicInventory new record with sa_no SA118W068 created from Select Artifacts
-LithicInventory new record with sa_no SA118W069 created from Select Artifacts
-LithicInventory new record with sa_no SA118W070 created from Select Artifacts
-LithicInventory new record with sa_no SA118W071 created from Select Artifacts
-LithicInventory new record with sa_no SA118W073 created from Select Artifacts
-CeramicInventory new record with sa_no SA118W074 created from Select Artifacts
-LithicInventory new record with sa_no SA118W075 created from Select Artifacts
-LithicInventory new record with sa_no SA119W001 created from Select Artifacts
 feature 119W:L-2.3-11.3:17.0 created from Select Artifacts
-LithicInventory new record with sa_no SA119W014 created from Select Artifacts
-LithicInventory new record with sa_no SA119W015 created from Select Artifacts
-LithicInventory new record with sa_no SA119W020 created from Select Artifacts
-LithicInventory new record with sa_no SA119W021 created from Select Artifacts
-LithicInventory new record with sa_no SA119W023 created from Select Artifacts
-LithicInventory new record with sa_no SA119W041.1 created from Select Artifacts
-WoodInventory new record with sa_no SA119W042.1 created from Select Artifacts
-LithicInventory new record with sa_no SA119W044.1 created from Select Artifacts
 feature 119W:H-6.6-14.6:26.0 created from Select Artifacts
-LithicInventory new record with sa_no SA119W047 created from Select Artifacts
-LithicInventory new record with sa_no SA119W048 created from Select Artifacts
-WoodInventory new record with sa_no SA119W049 created from Select Artifacts
-LithicInventory new record with sa_no SA119W052 created from Select Artifacts
-LithicInventory new record with sa_no SA119W053 created from Select Artifacts
-LithicInventory new record with sa_no SA119W055 created from Select Artifacts
-WoodInventory new record with sa_no SA119W057 created from Select Artifacts
-Perishable new record with sa_no SA119W061 created from Select Artifacts
 feature 119W:no data:80.0 created from Select Artifacts
-LithicInventory new record with sa_no SA119W062 created from Select Artifacts
-LithicInventory new record with sa_no SA119W063 created from Select Artifacts
-LithicInventory new record with sa_no SA119W064 created from Select Artifacts
-LithicInventory new record with sa_no SA119W065 created from Select Artifacts
-LithicInventory new record with sa_no SA119W066 created from Select Artifacts
-LithicInventory new record with sa_no SA119W067 created from Select Artifacts
-LithicInventory new record with sa_no SA119W068 created from Select Artifacts
-LithicInventory new record with sa_no SA119W070 created from Select Artifacts
-LithicInventory new record with sa_no SA119W072 created from Select Artifacts
-LithicInventory new record with sa_no SA119W085 created from Select Artifacts
-LithicInventory new record with sa_no SA119W086 created from Select Artifacts
-LithicInventory new record with sa_no SA119W087 created from Select Artifacts
-LithicInventory new record with sa_no SA119W088 created from Select Artifacts
-LithicInventory new record with sa_no SA119W091 created from Select Artifacts
-LithicInventory new record with sa_no SA119W092 created from Select Artifacts
-LithicInventory new record with sa_no SA119W094 created from Select Artifacts
-LithicInventory new record with sa_no SA119W095 created from Select Artifacts
 feature 119W:H-8.5-22.5:74.0 created from Select Artifacts
-LithicInventory new record with sa_no SA119W098 created from Select Artifacts
-LithicInventory new record with sa_no SA119W102 created from Select Artifacts
 stratum 119W:W-1-91 created from Select Artifacts
 feature 119W:W-1-91:45.0 created from Select Artifacts
-WoodInventory new record with sa_no SA119W103 created from Select Artifacts
-LithicInventory new record with sa_no SA119W106 created from Select Artifacts
 feature 119W:I-11-39:104.0 created from Select Artifacts
-LithicInventory new record with sa_no SA119W111 created from Select Artifacts
-LithicInventory new record with sa_no SA119W117 created from Select Artifacts
-LithicInventory new record with sa_no SA119W118 created from Select Artifacts
-LithicInventory new record with sa_no SA119W119 created from Select Artifacts
-Perishable new record with sa_no SA119W121 created from Select Artifacts
 feature 119W:M-1-30:35.0 created from Select Artifacts
-LithicInventory new record with sa_no SA119W122 created from Select Artifacts
-LithicInventory new record with sa_no SA119W123 created from Select Artifacts
-LithicInventory new record with sa_no SA119W124 created from Select Artifacts
-LithicInventory new record with sa_no SA119W125 created from Select Artifacts
-LithicInventory new record with sa_no SA119W126 created from Select Artifacts
-LithicInventory new record with sa_no SA119W127 created from Select Artifacts
-LithicInventory new record with sa_no SA119W128 created from Select Artifacts
-LithicInventory new record with sa_no SA119W129 created from Select Artifacts
-LithicInventory new record with sa_no SA119W130 created from Select Artifacts
-LithicInventory new record with sa_no SA119W131 created from Select Artifacts
-LithicInventory new record with sa_no SA119W132 created from Select Artifacts
-LithicInventory new record with sa_no SA119W133 created from Select Artifacts
-LithicInventory new record with sa_no SA121A043 created from Select Artifacts
 stratum 121W:H-1-6 created from Select Artifacts
 feature 121W:H-1-6:1.0 created from Select Artifacts
-LithicInventory new record with sa_no SA121W002 created from Select Artifacts
-Ornament new record with sa_no SA121W040 created from Select Artifacts
-Perishable new record with sa_no SA121W042 created from Select Artifacts
-LithicInventory new record with sa_no SA121Z002 created from Select Artifacts
-Perishable new record with sa_no SA121Z004 created from Select Artifacts
-LithicInventory new record with sa_no SA121Z005 created from Select Artifacts
-LithicInventory new record with sa_no SA121Z008 created from Select Artifacts
-LithicInventory new record with sa_no SA122W005 created from Select Artifacts
-CeramicInventory new record with sa_no SA124B042 created from Select Artifacts
-LithicInventory new record with sa_no SA127A004 created from Select Artifacts
-LithicInventory new record with sa_no SA127A005 created from Select Artifacts
-LithicInventory new record with sa_no SA127A006 created from Select Artifacts
 feature 127A:L-1-7:8.0 created from Select Artifacts
-LithicInventory new record with sa_no SA127A011 created from Select Artifacts
-WoodInventory new record with sa_no SA127B004 created from Select Artifacts
-LithicInventory new record with sa_no SA127W054 created from Select Artifacts
-WoodInventory new record with sa_no SA127W058 created from Select Artifacts
-WoodInventory new record with sa_no SA127W059 created from Select Artifacts
-LithicInventory new record with sa_no SA127W061 created from Select Artifacts
-LithicInventory new record with sa_no SA127W063 created from Select Artifacts
-LithicInventory new record with sa_no SA127W064 created from Select Artifacts
-LithicInventory new record with sa_no SA127W065 created from Select Artifacts
-LithicInventory new record with sa_no SA127W067 created from Select Artifacts
-LithicInventory new record with sa_no SA127W068 created from Select Artifacts
-LithicInventory new record with sa_no SA127W070 created from Select Artifacts
-LithicInventory new record with sa_no SA127W071 created from Select Artifacts
-LithicInventory new record with sa_no SA127W072 created from Select Artifacts
-LithicInventory new record with sa_no SA127W073 created from Select Artifacts
-LithicInventory new record with sa_no SA127W074 created from Select Artifacts
-LithicInventory new record with sa_no SA127W075 created from Select Artifacts
-LithicInventory new record with sa_no SA127W076 created from Select Artifacts
-LithicInventory new record with sa_no SA127W078 created from Select Artifacts
-LithicInventory new record with sa_no SA127W079 created from Select Artifacts
-LithicInventory new record with sa_no SA127W080 created from Select Artifacts
-LithicInventory new record with sa_no SA127W081 created from Select Artifacts
-LithicInventory new record with sa_no SA127W082 created from Select Artifacts
-LithicInventory new record with sa_no SA127W083 created from Select Artifacts
-LithicInventory new record with sa_no SA127W084 created from Select Artifacts
-LithicInventory new record with sa_no SA127W085 created from Select Artifacts
-LithicInventory new record with sa_no SA127W086 created from Select Artifacts
-LithicInventory new record with sa_no SA127W088 created from Select Artifacts
-LithicInventory new record with sa_no SA127W092 created from Select Artifacts
-LithicInventory new record with sa_no SA127W094 created from Select Artifacts
-LithicInventory new record with sa_no SA127W098 created from Select Artifacts
-LithicInventory new record with sa_no SA127W110 created from Select Artifacts
-Perishable new record with sa_no SA127W112 created from Select Artifacts
-WoodInventory new record with sa_no SA127W113 created from Select Artifacts
-CeramicVessel new record with sa_no SA127W129 created from Select Artifacts
-LithicInventory new record with sa_no SA127W131 created from Select Artifacts
-CeramicVessel new record with sa_no SA127W139 created from Select Artifacts
-CeramicVessel new record with sa_no SA127W143 created from Select Artifacts
-LithicInventory new record with sa_no SA127W146 created from Select Artifacts
-LithicInventory new record with sa_no SA127W149 created from Select Artifacts
-LithicInventory new record with sa_no SA127W151 created from Select Artifacts
-LithicInventory new record with sa_no SA127W152 created from Select Artifacts
-Perishable new record with sa_no SA127W153 created from Select Artifacts
-Perishable new record with sa_no SA127W156 created from Select Artifacts
-Ornament new record with sa_no SA127W158 created from Select Artifacts
-LithicInventory new record with sa_no SA128W001 created from Select Artifacts
-LithicInventory new record with sa_no SA128W002 created from Select Artifacts
-Perishable new record with sa_no SA129W001 created from Select Artifacts
-LithicInventory new record with sa_no SA129W032 created from Select Artifacts
-LithicInventory new record with sa_no SA129W033 created from Select Artifacts
-LithicInventory new record with sa_no SA129W034 created from Select Artifacts
 feature 129W:W-1-91:45.0 created from Select Artifacts
-WoodInventory new record with sa_no SA129W103 created from Select Artifacts
-WoodInventory new record with sa_no SA129W104 created from Select Artifacts
-LithicInventory new record with sa_no SA129W105 created from Select Artifacts
-LithicInventory new record with sa_no SA129W109 created from Select Artifacts
-LithicInventory new record with sa_no SA129W111 created from Select Artifacts
-LithicInventory new record with sa_no SA129W113 created from Select Artifacts
-LithicInventory new record with sa_no SA129W114 created from Select Artifacts
-LithicInventory new record with sa_no SA129W115 created from Select Artifacts
-LithicInventory new record with sa_no SA129W132 created from Select Artifacts
-Perishable new record with sa_no SA129W133 created from Select Artifacts
-Ornament new record with sa_no SA129W138 created from Select Artifacts
-LithicInventory new record with sa_no SA129W149 created from Select Artifacts
-LithicInventory new record with sa_no SA129W154 created from Select Artifacts
-LithicInventory new record with sa_no SA129W156 created from Select Artifacts
-LithicInventory new record with sa_no SA129W157 created from Select Artifacts
-LithicInventory new record with sa_no SA129W158 created from Select Artifacts
-LithicInventory new record with sa_no SA129W159 created from Select Artifacts
-LithicInventory new record with sa_no SA129W160 created from Select Artifacts
-LithicInventory new record with sa_no SA129W162 created from Select Artifacts
-LithicInventory new record with sa_no SA129W164 created from Select Artifacts
-LithicInventory new record with sa_no SA129W165 created from Select Artifacts
-LithicInventory new record with sa_no SA129W166 created from Select Artifacts
-LithicInventory new record with sa_no SA129W167 created from Select Artifacts
-LithicInventory new record with sa_no SA129W168 created from Select Artifacts
-LithicInventory new record with sa_no SA129W169 created from Select Artifacts
-LithicInventory new record with sa_no SA129W170 created from Select Artifacts
-LithicInventory new record with sa_no SA129W179 created from Select Artifacts
-LithicInventory new record with sa_no SA129W183 created from Select Artifacts
-LithicInventory new record with sa_no SA130W029 created from Select Artifacts
-LithicInventory new record with sa_no SA130W030 created from Select Artifacts
-LithicInventory new record with sa_no SA130W031 created from Select Artifacts
-LithicInventory new record with sa_no SA130W032 created from Select Artifacts
-LithicInventory new record with sa_no SA130W033 created from Select Artifacts
-LithicInventory new record with sa_no SA130W034 created from Select Artifacts
-LithicInventory new record with sa_no SA130W035 created from Select Artifacts
-LithicInventory new record with sa_no SA130W044 created from Select Artifacts
-LithicInventory new record with sa_no SA130W048 created from Select Artifacts
-Ornament new record with sa_no SA130W051 created from Select Artifacts
-Ornament new record with sa_no SA130W052 created from Select Artifacts
-Ornament new record with sa_no SA130W053 created from Select Artifacts
-LithicInventory new record with sa_no SA130W054 created from Select Artifacts
-LithicInventory new record with sa_no SA130W055 created from Select Artifacts
-LithicInventory new record with sa_no SA130W056 created from Select Artifacts
-LithicInventory new record with sa_no SA130W057 created from Select Artifacts
-LithicInventory new record with sa_no SA130W058 created from Select Artifacts
-Ornament new record with sa_no SA130W059 created from Select Artifacts
-Ornament new record with sa_no SA130W063 created from Select Artifacts
 feature 130W:L-2.3-11.3:3.0 created from Select Artifacts
-Ornament new record with sa_no SA130W066 created from Select Artifacts
-Ornament new record with sa_no SA130W067 created from Select Artifacts
-LithicInventory new record with sa_no SA130W068 created from Select Artifacts
-LithicInventory new record with sa_no SA130W069 created from Select Artifacts
-LithicInventory new record with sa_no SA130W070 created from Select Artifacts
-LithicInventory new record with sa_no SA130W071 created from Select Artifacts
-LithicInventory new record with sa_no SA130W072 created from Select Artifacts
-LithicInventory new record with sa_no SA130W074 created from Select Artifacts
-LithicInventory new record with sa_no SA130W075 created from Select Artifacts
-LithicInventory new record with sa_no SA130W076 created from Select Artifacts
-Ornament new record with sa_no SA130W077 created from Select Artifacts
-Ornament new record with sa_no SA130W078 created from Select Artifacts
-Ornament new record with sa_no SA130W080 created from Select Artifacts
-Ornament new record with sa_no SA130W081 created from Select Artifacts
-Ornament new record with sa_no SA130W082 created from Select Artifacts
-Ornament new record with sa_no SA130W083 created from Select Artifacts
-Ornament new record with sa_no SA130W084 created from Select Artifacts
-LithicInventory new record with sa_no SA136W001 created from Select Artifacts
-LithicInventory new record with sa_no SA136W002 created from Select Artifacts
-LithicInventory new record with sa_no SA136W003 created from Select Artifacts
-LithicInventory new record with sa_no SA136W004 created from Select Artifacts
 feature 136W:D-1-9:2.0 created from Select Artifacts
-LithicInventory new record with sa_no SA136W005 created from Select Artifacts
-LithicInventory new record with sa_no SA136W006 created from Select Artifacts
-LithicInventory new record with sa_no SA136W007 created from Select Artifacts
-LithicInventory new record with sa_no SA136W008 created from Select Artifacts
-LithicInventory new record with sa_no SA136W009 created from Select Artifacts
-LithicInventory new record with sa_no SA136W010 created from Select Artifacts
-LithicInventory new record with sa_no SA136W011 created from Select Artifacts
-LithicInventory new record with sa_no SA136W029 created from Select Artifacts
 stratum 020P:B-1-2.5 created from Soils
 stratum 020P:B-4.4-4.7 created from Soils
 feature 020P:L-10-13:16.0 created from Soils
@@ -3700,7 +3107,7 @@ stratum 031W:I-1-6 created from Images
 stratum 031W:B-1-2 created from Images
 feature 031W:B-1-2:3.0 created from Images
 feature 033C:C-1-7:5.0 created from Images
-Zone  created from Images
+Zone N/A created from Images
 Unit N/A created from Images
 feature N/A:no data:0.0 created from Images
 feature 036W:L-3-5.7:3.0 created from Images
