@@ -6,6 +6,13 @@ class CeramicInventory < ApplicationRecord
   has_many :ceramics
   has_many :ceramic_vessels
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "record_field_key_no"
+    }
+  end
+
   def self.sorted
     order("fs_no")
   end

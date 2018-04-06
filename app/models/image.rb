@@ -19,6 +19,13 @@ class Image < ActiveRecord::Base
     }
   end
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "image_no"
+    }
+  end
+
   def self.sorted
     order("image_no")
   end

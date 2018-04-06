@@ -4,8 +4,15 @@ class SelectArtifact < ApplicationRecord
   has_many :strata, -> {distinct}, :through => :features
   has_many :units, -> {distinct}, :through => :strata
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "sa_no"
+    }
+  end
+
   def self.sorted
-    order("artifact_no")
+    order("sa_no")
   end
 
   def to_label

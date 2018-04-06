@@ -10,6 +10,13 @@ class CeramicVessel < ActiveRecord::Base
   belongs_to :ceramic_vessel_type
   belongs_to :ceramic_vessel_lori_reed_type
 
+  def self.abstraction
+    {
+      assoc_input_type: "input",
+      assoc_input_column: "fs_no"
+    }
+  end
+
   def self.sorted
     order("fs_no")
   end
