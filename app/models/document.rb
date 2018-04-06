@@ -20,8 +20,8 @@ class Document < ActiveRecord::Base
     image_upload[/^([^_]*)(?=_)/]
   end
 
-  def path
-    "#{canonical_unit_no}/#{canonical_unit_no}_#{document_type.code}_#{scan_no}.jpeg"
+  def filepath
+    "documents/#{canonical_unit_no}/#{canonical_unit_no}_#{document_type.code}_#{scan_no}.jpeg"
   end
 
   def to_label
