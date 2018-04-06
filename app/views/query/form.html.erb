@@ -7,7 +7,7 @@
     </div>
 
     <div class="col-md-8">
-      <% if !params[:category][/^(?:features|strata|images)$/] %>
+      <% if !params[:category][/^(?:units|features|strata|images)$/] %>
         <%= render "#{params[:category]}_nav" %>
       <% end %>
 

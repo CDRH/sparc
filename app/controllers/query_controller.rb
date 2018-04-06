@@ -6,7 +6,7 @@ class QueryController < ApplicationController
   def category
     params.require(:category)
 
-    if params[:category][/^(?:features|strata|images)$/]
+    if params[:category][/^(?:units|features|strata|images)$/]
       # These are lone tables, so call the form action and render its view
       params[:type] = params[:category]
       form
@@ -143,14 +143,19 @@ class QueryController < ApplicationController
       when "faunal"
         ["bone_tool", "faunal_artifacts", "faunal_inventory"]
       when "lithics"
-        ["lithic_inventory", "lithic_debitage", "lithic_tool"]
+        ["lithic_inventory", "lithic_debitage", "lithic_tool",
+          "obsidian_inventories"]
       when "ornaments"
         ["ornament"]
       when "perishables"
         ["perishable"]
+      when "select_artifacts"
+        ["select_artifacts"]
       when "woods"
         ["wood_inventory"]
       end
+    when "units"
+      ["units"]
     when "features"
       ["features"]
     when "strata"
@@ -231,7 +236,9 @@ class QueryController < ApplicationController
     # Create form inputs for:
     column_list = []
 
-    if table == Feature
+    if table == Unit
+      column_list << { name: "unit_no", type: "string" }
+    elsif table == Feature
       column_list << { name: "feature_no", type: "string" }
     elsif table == Stratum
       column_list << { name: "strat_all", type: "string" }
