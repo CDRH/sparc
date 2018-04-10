@@ -18,10 +18,6 @@
   <li role="presentation" class="<%= active?(type, "perishables") %>">
     <%= link_to "Perishables", query_form_path("artifacts", "perishables") %>
   </li>
-  <li role="presentation" class="<%= active?(type, "select_artifacts") %>">
-    <%= link_to "Select",
-                query_form_path("artifacts", "select_artifacts") %>
-  </li>
   <li role="presentation" class="<%= active?(type, "woods") %>">
     <%= link_to "Woods", query_form_path("artifacts", "woods") %>
   </li>
