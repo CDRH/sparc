@@ -153,8 +153,6 @@ class QueryController < ApplicationController
         ["ornament"]
       when "perishables"
         ["perishable"]
-      when "select_artifacts"
-        ["select_artifacts"]
       when "woods"
         ["wood_inventory"]
       end
