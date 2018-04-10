@@ -26,13 +26,13 @@ class QueryController < ApplicationController
       session[:common_search_feature_group] = nil
     end
 
-    @tables = category_type_tables.map { |t|
+    @tables = category_type_tables.map do |t|
       {
         name: t,
         label: t.pluralize.titleize,
         count: t.classify.constantize.count
       }
-    }
+    end
 
     params[:table] =
       params[:table].present? ? params[:table] : @tables.first[:name]
@@ -282,15 +282,15 @@ class QueryController < ApplicationController
     #   unit, stratum, feature, or occupation
     table.reflect_on_all_associations(:belongs_to)
       .reject{ |a| a.name[/(?:^unit|^stratum|^feature|occupation)$/] }
-      .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
+      .each { |a| column_list << { name: a.name.to_s, type: :assoc } }
 
     table.reflect_on_all_associations(:has_many)
       .reject{ |a| a.name[/(?:^units|^strata|^features|occupations)$/] }
-      .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
+      .each { |a| column_list << { name: a.name.to_s, type: :assoc } }
 
     table.reflect_on_all_associations(:has_and_belongs_to_many)
       .reject{ |a| a.name[/(?:^units|^strata|^features|occupations)$/] }
-      .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
+      .each { |a| column_list << { name: a.name.to_s, type: :assoc } }
 
     if SETTINGS["hide_sensitive_image_records"]
       column_list.reject!{ |column| %w[image_human_remain image_subjects]
