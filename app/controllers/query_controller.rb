@@ -62,20 +62,23 @@ class QueryController < ApplicationController
       end
     end
 
+    bt_columns =
+      @table.reflect_on_all_associations(:belongs_to).map { |a| a.name.to_s }
+    habtm_columns =
+      @table.reflect_on_all_associations(:has_and_belongs_to_many)
+        .map { |a| a.name.to_s }
+    hm_columns =
+      @table.reflect_on_all_associations(:has_many).map { |a| a.name.to_s }
     selects = table_select_columns(@table)
     selects.each do |column|
-      if @table.reflect_on_all_associations(:belongs_to)
-        .map{ |a| a.name.to_s }.include?(column[:name])
-
+      if bt_columns.include?(column[:name])
         if params[column[:name]].present?
           res = res.joins(column[:name].to_sym)
             .where(column[:name].pluralize => { id: params[column[:name]] })
         else
           res = res.includes(column[:name].to_sym)
         end
-      elsif @table.reflect_on_all_associations(:has_and_belongs_to_many)
-        .map{ |a| a.name.to_s }.include?(column[:name])
-
+      elsif habtm_columns.include?(column[:name])
         if params[column[:name]].present?
           res = res.joins(column[:name].to_sym)
             .where(column[:name].pluralize => { id: params[column[:name]] })
@@ -83,9 +86,7 @@ class QueryController < ApplicationController
           res = res.includes(column[:name].to_sym)
         end
         @column_names << "#{column[:name]}_habtm"
-      elsif @table.reflect_on_all_associations(:has_many)
-        .map{ |a| a.name.to_s }.include?(column[:name])
-
+      elsif hm_columns.include?(column[:name])
         if params[column[:name]].present?
           res = res.joins(column[:name].to_sym)
             .where(column[:name].pluralize => { id: params[column[:name]] })
