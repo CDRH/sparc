@@ -18,11 +18,6 @@ class Unit < ActiveRecord::Base
   has_many :images, :through => :features
   has_many :strata
 
-  # strata objects
-  # TODO Complete or remove these associations
-  #has_many :bone_tools, :through => :strata
-  #has_many :select_artifacts, :through => :strata
-
   # feature objects
   has_many :ceramic_inventories, :through => :features
   has_many :eggshells, :through => :features
@@ -58,5 +53,4 @@ class Unit < ActiveRecord::Base
     puts "---------#{current_user}"
     current_user != nil ? true : false
   end
-  
 end
