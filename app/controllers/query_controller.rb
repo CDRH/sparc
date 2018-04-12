@@ -176,16 +176,27 @@ class QueryController < ApplicationController
     session[:common_search_feature_group] = params["feature_group"]
 
     # Units
-    if (params["unit"].present? || params["unit_class"].present?) \
-    && res.reflect_on_all_associations.map { |a| a.name }.include?(:units)
-      res = res.joins(:units)
+    if (params["unit"].present? || params["unit_class"].present?)
+      assocs = res.reflect_on_all_associations.map { |a| a.name }
+      if assocs.include?(:units)
+        res = res.joins(:units)
 
-      if params["unit"].present?
-        res = res.where(units: { id: params["unit"] })
-      end
+        if params["unit"].present?
+          res = res.where(units: { id: params["unit"] })
+        end
 
-      if params["unit_class"].present?
-        res = res.where(units: { unit_class_id: params["unit_class"] })
+        if params["unit_class"].present?
+          res = res.where(units: { unit_class_id: params["unit_class"] })
+        end
+      elsif assocs.include?(:unit)
+        if params["unit"].present?
+          res = res.where(unit_id: params["unit"])
+        end
+
+        if params["unit_class"].present?
+          res = res.where(unit_id:
+            UnitClass.where(id: params["unit_class"]).pluck(:id))
+        end
       end
     end
 
