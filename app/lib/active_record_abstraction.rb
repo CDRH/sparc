@@ -70,7 +70,7 @@ module ActiveRecordAbstraction
         elsif column[/_join$/]
           column = column[/^(.+)_join$/, 1]
           column, table = column.split("|")
-          res = result.send(table).map { |r| r.feature_no }.uniq.sort.join("; ")
+          res = result.send(table).map { |r| r.send(column) }.uniq.sort.join("; ")
         end
       else
         res = result[column].present? ? result[column] : ""

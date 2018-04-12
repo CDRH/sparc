@@ -26,13 +26,13 @@ class QueryController < ApplicationController
       session[:common_search_feature_group] = nil
     end
 
-    @tables = category_type_tables.map { |t|
+    @tables = category_type_tables.map do |t|
       {
         name: t,
         label: t.pluralize.titleize,
         count: t.classify.constantize.count
       }
-    }
+    end
 
     params[:table] =
       params[:table].present? ? params[:table] : @tables.first[:name]
@@ -62,20 +62,23 @@ class QueryController < ApplicationController
       end
     end
 
+    bt_columns =
+      @table.reflect_on_all_associations(:belongs_to).map { |a| a.name.to_s }
+    habtm_columns =
+      @table.reflect_on_all_associations(:has_and_belongs_to_many)
+        .map { |a| a.name.to_s }
+    hm_columns =
+      @table.reflect_on_all_associations(:has_many).map { |a| a.name.to_s }
     selects = table_select_columns(@table)
     selects.each do |column|
-      if @table.reflect_on_all_associations(:belongs_to)
-        .map{ |a| a.name.to_s }.include?(column[:name])
-
+      if bt_columns.include?(column[:name])
         if params[column[:name]].present?
           res = res.joins(column[:name].to_sym)
             .where(column[:name].pluralize => { id: params[column[:name]] })
         else
           res = res.includes(column[:name].to_sym)
         end
-      elsif @table.reflect_on_all_associations(:has_and_belongs_to_many)
-        .map{ |a| a.name.to_s }.include?(column[:name])
-
+      elsif habtm_columns.include?(column[:name])
         if params[column[:name]].present?
           res = res.joins(column[:name].to_sym)
             .where(column[:name].pluralize => { id: params[column[:name]] })
@@ -83,9 +86,7 @@ class QueryController < ApplicationController
           res = res.includes(column[:name].to_sym)
         end
         @column_names << "#{column[:name]}_habtm"
-      elsif @table.reflect_on_all_associations(:has_many)
-        .map{ |a| a.name.to_s }.include?(column[:name])
-
+      elsif hm_columns.include?(column[:name])
         if params[column[:name]].present?
           res = res.joins(column[:name].to_sym)
             .where(column[:name].pluralize => { id: params[column[:name]] })
@@ -152,8 +153,6 @@ class QueryController < ApplicationController
         ["ornament"]
       when "perishables"
         ["perishable"]
-      when "select_artifacts"
-        ["select_artifacts"]
       when "woods"
         ["wood_inventory"]
       end
@@ -177,16 +176,27 @@ class QueryController < ApplicationController
     session[:common_search_feature_group] = params["feature_group"]
 
     # Units
-    if (params["unit"].present? || params["unit_class"].present?) \
-    && res.reflect_on_all_associations.map { |a| a.name }.include?(:units)
-      res = res.joins(:units)
+    if (params["unit"].present? || params["unit_class"].present?)
+      assocs = res.reflect_on_all_associations.map { |a| a.name }
+      if assocs.include?(:units)
+        res = res.joins(:units)
 
-      if params["unit"].present?
-        res = res.where(units: { id: params["unit"] })
-      end
+        if params["unit"].present?
+          res = res.where(units: { id: params["unit"] })
+        end
 
-      if params["unit_class"].present?
-        res = res.where(units: { unit_class_id: params["unit_class"] })
+        if params["unit_class"].present?
+          res = res.where(units: { unit_class_id: params["unit_class"] })
+        end
+      elsif assocs.include?(:unit)
+        if params["unit"].present?
+          res = res.where(unit_id: params["unit"])
+        end
+
+        if params["unit_class"].present?
+          res = res.where(unit_id:
+            UnitClass.where(id: params["unit_class"]).pluck(:id))
+        end
       end
     end
 
@@ -282,15 +292,15 @@ class QueryController < ApplicationController
     #   unit, stratum, feature, or occupation
     table.reflect_on_all_associations(:belongs_to)
       .reject{ |a| a.name[/(?:^unit|^stratum|^feature|occupation)$/] }
-      .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
+      .each { |a| column_list << { name: a.name.to_s, type: :assoc } }
 
     table.reflect_on_all_associations(:has_many)
       .reject{ |a| a.name[/(?:^units|^strata|^features|occupations)$/] }
-      .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
+      .each { |a| column_list << { name: a.name.to_s, type: :assoc } }
 
     table.reflect_on_all_associations(:has_and_belongs_to_many)
       .reject{ |a| a.name[/(?:^units|^strata|^features|occupations)$/] }
-      .map{ |a| column_list << { name: a.name.to_s, type: :assoc } }
+      .each { |a| column_list << { name: a.name.to_s, type: :assoc } }
 
     if SETTINGS["hide_sensitive_image_records"]
       column_list.reject!{ |column| %w[image_human_remain image_subjects]
