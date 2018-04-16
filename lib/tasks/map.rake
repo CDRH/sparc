@@ -12,8 +12,17 @@ namespace :maps do
     map.gsub!(/(<g clip-path.*>\n *<text transform.*>(.*)<\/text>\n *<\/g>)/,
       "<a href=\"zone/\\2\">\\1</a>"
     )
+    # fix unit names for trenches, plazas, backwalls
+    map.gsub!(/(\d*)-(P|BW|TT)/, "\\1\\2")
+    map.gsub!(/(\d)-(\d*)-?(P)/, "\\1\\2\\3")
+
     File.open(path, "w") { |file| file.write(map) }
     puts "Finished, please refresh your browser"
+    puts <<-TEXT
+      Please copy the lines <g id=\"chaco_occ\" display=\"none\">
+      through the closing tag and add ?occupation=chaco to the links
+      (find href=\"(.*)\", replace href=\"\1?occupation=chaco\")
+      TEXT
   end
 
 end
