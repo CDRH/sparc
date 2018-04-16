@@ -118,7 +118,7 @@ class DocumentController < ApplicationController
         "creator" => result.scan_creator,
         "rights" => result.rights
       }
-      sequence.canvases << image_annotation_from_id(unit_no, doc_type, result.path, img_info)
+      sequence.canvases << image_annotation_from_id(unit_no, doc_type, result.filepath, img_info)
     end
 
     manifest.sequences << sequence
@@ -154,12 +154,11 @@ class DocumentController < ApplicationController
   end
 
   def image_resource_from_page_hash(page_id)
-    base_uri = "#{SETTINGS["iiif_server"]}%2Fdocuments%2F#{page_id.gsub('/','%2F')}"
+    base_uri = "#{SETTINGS["iiif_server"]}%2F#{page_id.gsub('/','%2F')}"
     opts = { service_id: base_uri }
     begin
       image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(opts)
     rescue
-      # TODO choose a placeholder image for missing
       base_uri = "#{SETTINGS["iiif_server"]}%2Fnot_found.jpg"
       opts = { service_id: base_uri }
       image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(opts)
