@@ -15,6 +15,7 @@ namespace :maps do
     # fix unit names for trenches, plazas, backwalls
     map.gsub!(/(\d*)-(P|BW|TT)/, "\\1\\2")
     map.gsub!(/(\d)-(\d*)-?(P)/, "\\1\\2\\3")
+    map.gsub!(/href="zone\/(\d*)[ABC](?!W)/, "href=\"zone/\\1")
 
     File.open(path, "w") { |file| file.write(map) }
     puts "Finished, please refresh your browser"
