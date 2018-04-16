@@ -20,10 +20,10 @@ namespace :maps do
     File.open(path, "w") { |file| file.write(map) }
     puts "Finished, please refresh your browser"
     puts <<-TEXT
-      Please copy the lines <g id=\"chaco_occ\" display=\"none\">
-      through the closing tag and add ?occupation=chaco to the links
-      (find href=\"(.*)\", replace href=\"\1?occupation=chaco\")
-      TEXT
+      For each <a xlink:href="zone/###"> link nested inside
+      <g id="chaco_occ" display="none">, append "?occupation=chaco"
+      to the "xlink:href" attribute value.
+    TEXT
   end
 
 end

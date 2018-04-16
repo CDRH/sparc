@@ -118,7 +118,7 @@ class ExploreController < ApplicationController
     @units = Unit.sorted.joins(:zone).where("zones.name" => @zone_no)
     @all_count = @units.count
     if params["occupation"] == "chaco"
-      @units = @units.joins(:occupation).joins(:occupation)
+      @units = @units.joins(:occupation)
         .where("occupations.name": ["Chacoan", "Mixed Chacoan and San Juan"])
       @is_filtered = @all_count != @units.count
     end
