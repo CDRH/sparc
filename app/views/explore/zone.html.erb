@@ -7,6 +7,14 @@
   </div>
 </div>
 
+<% if params["occupation"] == "chaco" && @is_filtered %>
+  <p>
+    Displaying a filtered list of units present during the Chacoan occupation.
+    <%= link_to search_zone_path(@zone_no) do %>
+      View <%= pluralize @all_count, "unit" %> regardless of occupation
+    <% end %>
+  </p>
+<% end %>
 <% @units.each_slice(3) do |unit_set| %>
   <div class="row">
     <% unit_set.each do |unit| %>
@@ -28,8 +36,7 @@
                 <li><strong>Type:</strong> <%= unit.type_description.name if unit.type_description %>
                 <li><strong>Other Description:</strong> <%= unit.other_description %></li>
                 <% if unit.media_maps.first %>
-                  <%# TODO put in image_tag for real document path when hooked up with IIIF %>
-                  <%= image_tag "documents/placeholders/MM.jpeg", size: "150" %>
+                  <%= image_tag iiif_path(unit.media_maps.first, "!200,200") %>
                 <% end %>
               </ul>
             </div>
