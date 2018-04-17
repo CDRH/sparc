@@ -36,7 +36,7 @@
                 <li><strong>Type:</strong> <%= unit.type_description.name if unit.type_description %>
                 <li><strong>Other Description:</strong> <%= unit.other_description %></li>
                 <% if unit.media_maps.first %>
-                  <%= image_tag iiif_path(unit.media_maps.first, "!200,200") %>
+                  <%= image_tag iiif_path(unit.media_maps.first, SETTINGS["thumbnail_size"]) %>
                 <% end %>
               </ul>
             </div>
