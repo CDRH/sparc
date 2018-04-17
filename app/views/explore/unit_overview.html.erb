@@ -5,39 +5,42 @@
 <div role="tabpanel" class="tab-pane" id="overview">
   <div class="row">
     <div class="col-md-6">
+      <h3>Physical Description</h3>
       <ul>
-        <li><strong>Occupation:</strong> <%= @unit.occupation.name if @unit.occupation %></li>
         <li><strong>Class:</strong> <%= @unit.unit_class.name if @unit.unit_class %></li>
-        <li><strong>Excavation Status:</strong> <%= @unit.excavation_status.name if @unit.excavation_status %></li>
+        <li><strong>Length:</strong> <%= @unit.length %></li>
+        <li><strong>Width:</strong> <%= @unit.width %></li>
+        <li><strong>Floor Area:</strong> <%= @unit.floor_area %></li>
         <li><strong>Sector:</strong> <%= @unit.salmon_sector.name if @unit.salmon_sector %></li>
-        <li><%= pluralize @unit.strata.size, "stratum" %></li>
-        <li><%= pluralize @unit.features.size, "feature" %></li>
         <li><strong>Stories:</strong> <%= @unit.story.name if @unit.story %></li>
         <li><strong>Intact Roof:</strong> <%= @unit.intact_roof.name if @unit.intact_roof %></li>
         <li><strong>Type:</strong> <%= @unit.salmon_type_code %></li>
         <li><strong>Type Description:</strong> <%= @unit.type_description.name if @unit.type_description %></li>
-        <li><strong>Inferred Function:</strong> <%= @unit.inferred_function.name if @unit.inferred_function %></li>
-        <li>Other Description: <%= @unit.other_description if @unit.other_description %></li>
-        <li>Irregular Shape: <%= @unit.irregular_shape.name if @unit.irregular_shape %></li>
+        <li><strong>Irregular Shape:</strong> <%= @unit.irregular_shape.name if @unit.irregular_shape %></li>
       </ul>
     </div>
-    <!-- ROOM TYPE -->
     <div class="col-md-6">
+      <h3>Other Information</h3>
       <ul>
+        <li><strong>Occupation:</strong> <%= @unit.occupation.name if @unit.occupation %></li>
+        <li><strong>Excavation Status:</strong> <%= @unit.excavation_status.name if @unit.excavation_status %></li>
+        <li><strong>Associated Strata:</strong> <%= pluralize @unit.strata.size, "stratum" %></li>
         <% type = @unit.room_type %>
         <% if type %>
           <li><strong>Room Type:</strong> <%= type.description if type.description %>
           <li><strong>Room Type Period:</strong> <%= type.occupation.name if type.occupation %></li>
           <li><strong>Room Type Location:</strong> <%= type.location %></li>
         <% end %>
-        <li><strong>Length:</strong> <%= @unit.length %></li>
-        <li><strong>Width:</strong> <%= @unit.width %></li>
-        <li><strong>Floor Area:</strong> <%= @unit.floor_area %></li>
+        <li><strong>Inferred Function:</strong> <%= @unit.inferred_function.name if @unit.inferred_function %></li>
+        <li><strong>Other Description:</strong> <%= @unit.other_description if @unit.other_description %></li>
         <li><strong>Comments:</strong> <%= @unit.comments %></li>
+        <% if related_units(@unit).present? %>
+          <li>
+            <strong>Related Unit(s):</strong>
+            <%= sanitize(related_units(@unit).join("; ")) %>
+          </li>
+        <% end %>
       </ul>
-      <p><a href="#">View bone tools in this unit [link todo]</a></p>
-      <p><a href="#">View ceramics in this unit [link todo]</a></p>
-      <p><a href="#">TODO add when these searches are active</a></p>
     </div>
   </div>
 </div>
