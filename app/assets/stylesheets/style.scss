@@ -1,4 +1,9 @@
 
+// Colors
+$beige: #F3EDE6; // Used in footer
+$gray:  #aaa;    // used in image gallery, decoration
+
+// May not be needed depending on size of footer
 
 .buffer-bottom {
   margin-bottom: 1em;
@@ -16,7 +21,7 @@
   margin-bottom: 0.25em;
 }
 
-/* Styles for sparc subnavigation. Will probably want to refine this if we end up keeping it */
+// Styles for sparc subnavigation. Will probably want to refine this if we end up keeping it 
 
 .check_all {
   margin-top: -2px;
@@ -40,8 +45,31 @@
 }
 
 
-/* Start Karin's CSS */
+/* Start Main Site */
 
+// ---------------
+// Extend Selectors
+// ---------------
+
+%simple_button {
+  border: 1px solid $gray;
+  display: inline-block;
+  font-size: .95em;
+  margin-bottom: .3em;
+  margin-right: .02em;
+  min-width: 1.2em;
+  padding: .1em .15em;
+  text-align: center;
+  text-decoration: none;
+}
+
+%simple_button_background {
+  background-color: $beige;
+}
+
+//---------------
+// HTML
+//---------------
 
 html {
   background-color: lighten($gray-base, 75%);
@@ -49,57 +77,44 @@ html {
 
 @font-face {
   font-family: 'joehand_2regular';
-  src: url('jh2trial-webfont.woff2') format('woff2'),
-       url('jh2trial-webfont.woff') format('woff');
-  font-weight: normal;
   font-style: normal;
-
+  font-weight: normal;
+  src: url('jh2trial-webfont.woff2') format('woff2'), 
+    url('jh2trial-webfont.woff') format('woff');
 }
 
 
-/* Subnavigation */
+// SHARED
 
-.sparc_subnavbar.navbar {
-margin-top: -20px;
-min-height:33px;
+.pagination {
+  margin: .5em 0;
+  padding: 0;
+  a, em, span {
+    @extend %simple_button;
+  }
+  a:hover {
+    @extend %simple_button_background;
+  }
+  .current {
+    background-color: $beige;
+  }
 }
 
-.sparc_subnavbar .nav li a {
- height:  31px;
- padding-top:5px;
-}
+//---------------
+// Explore Pages
+//---------------
 
+//---------------
+// Query Pages
+//---------------
 
-
-/* Footer */
-
-.project_footer {
-  background-color: lighten($gray-base, 75%);
-  padding: 30px 0 60px 0;
-  margin-top: 50px
-}
-
-.navbar-default .navbar-nav li.active a {
-  background-color: darken($brand-primary, 10%); /* For older browsers */
-  background-color: rgba(0,0,0,.2);
-}
-
-.navbar-default .navbar-nav li.active a:hover {
-  background-color: darken($brand-primary, 15%); /* For older browsers */
-  background-color: rgba(0,0,0,.3);
-  color: #fff;
-}
-
-
-/* Query Pages */
-
-/* Common Search Options */
+// Common Search Options
 .check_all {
   margin-top: -2px;
 }
 
 .combined_selections .list-group {
-  margin-bottom:  0;
+  margin-bottom: 0;
 }
 
 .checked-list-box {
@@ -112,25 +127,28 @@ min-height:33px;
   padding: 5px;
 }
 
-/* Other */
+// Other
 
 .tab-pane {
   padding:10px 0;
 }
 
 
-/* Documents */
+//---------------
+// Documents
+//---------------
 
-.document_unit_list, .document_type_list  {
+.document_unit_list, 
+.document_type_list  {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .document_unit_list li a,
-.document_type_list li a{
+.document_type_list li a {
+  border: solid 1px #E7D4B3;
   float: left;
-  border:  solid 1px #E7D4B3;
   margin: 0 5px 5px 0;
   padding: .5em;
 }
@@ -144,26 +162,28 @@ min-height:33px;
   background-color: lighten($gray-base, 75%);
 }
 
-.document_thumbnail {
-  width: 160px;
-  height: 160px;
-  float: left;
-  margin: 0 2px 10px 0;
-}
+// Replaced by Universal viewer, delete later
+
+// .document_thumbnail {
+//   width: 160px;
+//   height: 160px;
+//   float: left;
+//   margin: 0 2px 10px 0;
+// }
 
 /* Thumbnails on type page */
-.docs_by_type .document_thumbnail h4 {
-  font-size: 1.3em;
-}
+// .docs_by_type .document_thumbnail h4 {
+//   font-size: 1.3em;
+// }
 
-.docs_by_type .document_thumbnail {
-  height: 200px;
-}
+// .docs_by_type .document_thumbnail {
+//   height: 200px;
+// }
 
-.doc_type_active {
-  background-color: $gray-base;
-  color: #FFF;
-}
+// .doc_type_active {
+//   background-color: $gray-base;
+//   color: #FFF;
+// }
 
 // Delete these if we don't end up using them
 //.rt_red, .rt_yellow, .rt_purple, .rt_green, .rt_blue {
@@ -176,6 +196,9 @@ min-height:33px;
 //.rt_purple {background-color: #B998C6}  /* feature records */
 //.rt_green {background-color: #AFCE6E}   /* media */
 //.rt_blue {background-color: #7499E1}    /* room records */
+
+
+// Universal Viewer
 
 .document_selection {
  background-color: #000;
@@ -196,18 +219,118 @@ min-height:33px;
   width: 100%;
 }
 
-/* Header */
+//---------------
+// Image Gallery Pages
+//---------------
 
-/* header_logo */
+// Gallery page
 
+// Anchor is wrapped around image and text
+a.image_link {
+  color: #000;
+  text-decoration: none;
+}
+
+a.image_link:hover {
+  text-decoration: none;
+}
+
+.images_row img {
+  border: solid 2px $gray;
+  display: block;
+  margin: 0 auto 10px auto;
+  max-width: 100%;
+}
+
+// Info about each image
+ul.image_info {
+  list-style: none;
+  padding: 0;
+}
+
+.image_info li {
+  line-height: 1.1em;
+  font-size: .9em;
+}
+
+.image_entry {
+  border-top: solid 4px $beige;
+  margin: .5em 0 .5em 0;
+  padding: 1em .5em .5em .5em;
+}
+
+.image_entry:hover {
+  background-color: $beige;
+}
+
+.image_img {
+  display: block;
+  min-height: 180px;
+}
+
+.image_pagination .pagination {
+  float: right;
+}
+
+
+//---------------
+// Native Descendants
+//---------------
+
+
+//---------------
+// About
+//---------------
+
+
+//---------------
+// Site
+//---------------
+
+// Subnavigation 
+
+.sparc_subnavbar.navbar {
+  margin-top: -20px;
+  min-height:33px;
+}
+
+.sparc_subnavbar .nav li a {
+ height: 31px;
+ padding-top: 5px;
+}
+
+// Footer
+
+.project_footer {
+  background-color: lighten($gray-base, 75%);
+  margin-top: 50px;
+  padding: 30px 0 60px 0;
+}
+
+.navbar-default .navbar-nav li.active a {
+  background-color: darken($brand-primary, 10%); /* For older browsers */
+  background-color: rgba(0,0,0,.2);
+}
+
+.navbar-default .navbar-nav li.active a:hover {
+  background-color: darken($brand-primary, 15%); /* For older browsers */
+  background-color: rgba(0,0,0,.3);
+  color: #fff;
+}
+
+//---------------
+// Header
+//---------------
+
+// header_logo
 
 .header_words {
-  font-size: 2.4em;
   display: inline-block;
   float: left;
-  padding: .3em .5em .1em 0;
+  font-size: 2.4em;
+  height: 60px;
   margin: 0;
-  height:60px
+  padding: .3em .5em .1em 0;
 }
 
 .header_words:hover {
@@ -246,7 +369,7 @@ min-height:33px;
   width: 240px; 
 }
 
-/* Logo on main page */
+// Logo on main page
 
 .header_words_nav a {
   color: $gray-base;
@@ -269,9 +392,7 @@ min-height:33px;
   margin-top: -1.5em;
 }
 
-
-
-/* Navbar */
+// Navbar
 
 .navbar-default {
   background-color: $brand-primary;
@@ -291,16 +412,17 @@ min-height:33px;
 }
 
 .site_logo_container {
-  overflow: hidden;
-  width: 850px;
-  margin: auto;
   height: 240px; 
   margin-top: 15px;
+  margin: auto;
+  overflow: hidden;
+  width: 850px;
 }
 
 
-
-/* Home Page */
+//---------------
+// Home Page
+//---------------
 
 .home_first_band {
   background: url('band_aerial.jpg') center center;
@@ -309,13 +431,13 @@ min-height:33px;
 
 .home_first_band p {
   background-color: rgba(0,0,0,.6);
-  padding: 20px;
   color: #fff;
-  font-size: 1.4em;
-  vertical-align: bottom;
   float: right;
-  width: 300px;
+  font-size: 1.4em;
   height: 400px;
+  padding: 20px;
+  vertical-align: bottom;
+  width: 300px;
 }
 
 .home_alternate_band {
@@ -324,8 +446,8 @@ min-height:33px;
 
 .home_second_band .container {
   background: url('topographic_bottom.jpg') center top no-repeat #4c83ab;
-  text-align: center;
   padding: 20px;
+  text-align: center;
 }
    
 .home_second_band p {
@@ -335,13 +457,13 @@ min-height:33px;
 }
    
 .home_callout .content {
+  border-radius: 8px;
+  border: 4px solid $gray-light;
+  display: block;
   font-size: 1.2em;
   height: 14em;
   margin: 10px 0;
   padding: 10px;
-  border: 4px solid $gray-light;
-  border-radius: 8px;
-  display: block;
 }
 
 .home_callout a:hover {
@@ -349,19 +471,19 @@ min-height:33px;
 }
 
 .home_callout .content:hover {
+  border-radius: 8px;
+  display: block;
   font-size: 1.2em;
   height: 14em;
   margin: 10px 0;
   padding: 10px;
-  border-radius: 8px;
-  display: block;
 }
 
 .home_callout .inner_content {
   background-color: rgba(255,255,255,.7);
-  width: 50%;
-  padding: 10px;
   border-radius: 8px;
+  padding: 10px;
+  width: 50%;
 }
    
 .home_callout1 .content,
@@ -397,41 +519,3 @@ min-height:33px;
   background: url('landscape.png') #4c83ab;
   background-size: cover;
 }
-
-
-
-
-
-
-
-
-
-
-
-/* Color reference: Remove Later */
-
-.color-gray-darker {background-color: $gray-darker}
-
-.color-gray-dark {background-color: $gray-dark}
-
-.color-gray {background-color: $gray}
-
-.color-gray-light {background-color: $gray-light}
-
-.color-gray-lighter {background-color: $gray-lighter}
-
-.color-brand-primary {background-color: $brand-primary}
-
-.color-brand-success {background-color: $brand-success}
-
-.color-brand-info {background-color: $brand-info}
-
-.color-brand-warming {background-color: $brand-warning}
-
-.color-brand-danger {background-color: $brand-danger}
-
-.color-body-bg {background-color: $body-bg}
-
-.color-gray-base {background-color: $gray-base}
-
-
