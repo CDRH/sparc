@@ -6,7 +6,6 @@ Rails.application.routes.draw do
 
   # Documents
   get '/documents', to: 'document#index', as: :documents
-  get '/documents/type/:type', to: 'document#type', as: :documents_type
   get '/documents/unit/:unit(/:type)', to: 'document#unit',
       as: :documents_unit
 
