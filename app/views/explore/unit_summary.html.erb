@@ -8,7 +8,9 @@
       Text describing unit here
     </div>
     <div class="col-md-6">
-      <%= image_tag iiif_path(@unit.media_maps.first, "!300,300") %>
+      <% if @unit.media_maps.present? %>
+        <%= image_tag iiif_path(@unit.media_maps.first, "!300,300") %>
+      <% end %>
     </div>
   </div>
 </div>
