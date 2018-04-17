@@ -102,6 +102,8 @@ class ExploreController < ApplicationController
     @section = "explore"
     @subsection = "units"
     @selected = "strata"
+
+    @strata = @unit.strata.includes(:features, :occupation, :strat_type)
   end
 
   def unit_summary

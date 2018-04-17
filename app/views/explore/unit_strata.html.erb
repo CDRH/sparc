@@ -10,7 +10,7 @@
       <th>Features</th>
       <th>Occupation</th>
     </tr>
-    <% @unit.strata.each do |stratum| %>
+    <% @strata.each do |stratum| %>
       <tr>
         <td><%= stratum.strat_all %></td>
         <td><%= stratum.strat_type.name if stratum.strat_type %></td>
