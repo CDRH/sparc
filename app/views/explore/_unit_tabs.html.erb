@@ -15,7 +15,7 @@
   <li role="presentation" class="<%= active?("strata", @selected) %>">
     <%= link_to "Strata", unit_strata_path(@unit.unit_no) %>
   </li>
-  <li role="presentation" class="<%= active?("features", @selected) %>">
-    <%= link_to "Features", unit_features_path(@unit.unit_no) %>
+  <li role="presentation" class="<%= active?("associated", @selected) %>">
+    <%= link_to "Associated Objects", unit_associated_path(@unit.unit_no) %>
   </li>
 </ul>

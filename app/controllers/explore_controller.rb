@@ -51,6 +51,31 @@ class ExploreController < ApplicationController
     @units = units.sorted.paginate(:page => params[:page], :per_page => 20)
   end
 
+  def unit_associated
+    @section = "explore"
+    @subsection = "units"
+    @selected = "associated"
+
+    @associated = {
+      "samples" => {
+        "pollens" => ["pollen_inventory"],
+        "soils" => ["soil"],
+        "tree_rings" => ["tree_ring"]
+      },
+      "artifacts" => {
+        "ceramics" => ["ceramic_inventory", "ceramic_clap", "ceramic",
+                "ceramic_vessel"],
+        "eggshells" => ["eggshell"],
+        "faunal" => ["bone_tool", "faunal_artifacts", "faunal_inventory"],
+        "lithics" => ["lithic_inventory", "lithic_debitage", "lithic_tool",
+          "obsidian_inventories"],
+        "ornaments" => ["ornament"],
+        "perishables" => ["perishable"],
+        "woods" => ["wood_inventory"]
+      }
+    }
+  end
+
   def unit_documents
     @section = "explore"
     @subsection = "units"
@@ -75,12 +100,6 @@ class ExploreController < ApplicationController
     # generate the color coded document type buttons
     possible_types = DocumentType.joins(:units).where("units.id = ?", @unit.id).uniq
     @group_colors = possible_types.sorted.group_by(&:color)
-  end
-
-  def unit_features
-    @section = "explore"
-    @subsection = "units"
-    @selected = "features"
   end
 
   def unit_images

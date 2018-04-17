@@ -23,8 +23,8 @@ Rails.application.routes.draw do
       as: :unit_documents
   get '/explore/unit/:number/strata', to: 'explore#unit_strata',
       as: :unit_strata
-  get '/explore/unit/:number/features', to: 'explore#unit_features',
-      as: :unit_features
+  get '/explore/unit/:number/associated', to: 'explore#unit_associated',
+      as: :unit_associated
   get '/explore/zone/:number', to: 'explore#zone', as: :search_zone
 
   # Images
