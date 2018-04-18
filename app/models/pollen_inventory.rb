@@ -6,7 +6,15 @@ class PollenInventory < ActiveRecord::Base
   def self.abstraction
     {
       assoc_input_type: "input",
-      assoc_input_column: "sa_no"
+      assoc_input_column: "sa_no",
+      description: <<-DESC
+The Pollen Inventory table derives from Salmon Ruins Museum inventory work in
+the 1980s and was updated during Archaeology Southwest's Salmon Project
+(2001-2018). This table contains data on the remaining pollen samples collected
+(but not processed or analyzed) during the original Salmon work (1970s). During
+the SPARC project (2015-2018), data within this table were edited and
+cross-checked against other sources.
+      DESC
     }
   end
 

@@ -28,6 +28,20 @@ class Feature < ActiveRecord::Base
   has_and_belongs_to_many :soils
   has_and_belongs_to_many :wood_inventories
 
+  def self.abstraction
+    {
+      description: <<-DESC
+This analysis table contains data on features from Salmon Pueblo (including
+rooms and extramural areas). It was built by Paul Reed and staff (beginning in
+2004) by extracting and summarizing feature information from the field forms
+and, in some cases, creating new feature numbers and descriptions during
+Archaeology Southwest's Salmon Project (2001-2018). During the SPARC project
+(2015-2018), data within this table were edited and cross-checked against other
+sources.
+      DESC
+    }
+  end
+
   def self.sorted
     order("feature_no")
   end
