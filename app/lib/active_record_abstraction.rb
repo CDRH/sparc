@@ -105,6 +105,23 @@ module ActiveRecordAbstraction
       end
       res
     end
+
+    def table_label
+      category = ABSTRACT["nav"][params[:category]]
+      if category["singular"]
+        category["label"].present? ?
+          category["label"] : params[:category].titleize
+      else
+        subcat = category[params[:subcat]]
+        if subcat["singular"]
+          subcat["label"].present? ? subcat["label"] : params[:subcat].titleize
+        elsif subcat[params[:table]] && subcat[params[:table]]["label"].present?
+          subcat[params[:table]]["label"]
+        else
+          params[:table].titleize
+        end
+      end
+    end
   end
 
   module ClassMethods
