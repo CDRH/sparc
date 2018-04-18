@@ -23,6 +23,10 @@
         <% end %>
       </ul>
 
+      <p class="buffer-bottom">
+        <%= table_description %>
+      </p>
+
       <%= render "csv_table_download" %>
       <div class="pull-right">
         <%= submit_tag "Search #{table_label}", class: "btn btn-primary" %>
