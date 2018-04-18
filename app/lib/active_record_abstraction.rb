@@ -106,6 +106,11 @@ module ActiveRecordAbstraction
       res
     end
 
+    def table_description
+      sanitize params[:table].classify.constantize
+        .send("abstraction")[:description]
+    end
+
     def table_label
       category = ABSTRACT["nav"][params[:category]]
       if category["singular"]
