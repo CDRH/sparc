@@ -6,7 +6,7 @@ class QueryController < ApplicationController
   def category
     params.require(:category)
 
-    if params[:category][/^(?:units|features|strata|images)$/]
+    if ABSTRACT["nav"][params[:category]]["singular"]
       # These are lone tables, so call the form action and render its view
       params[:type] = params[:category]
       form

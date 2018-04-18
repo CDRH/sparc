@@ -2,27 +2,7 @@
 <div class="navbar navbar-default sparc_subnavbar">
   <div class="container">
     <ul class="nav navbar-nav">
-      <li class="<%= active?(category, "samples") %>">
-        <%= link_to "Samples", query_category_path("samples") %>
-      </li>
-      <li class="<%= active?(category, "artifacts") %>">
-        <%= link_to "Artifacts", query_category_path("artifacts") %>
-      </li>
-      <li class="<%= active?(category, "units") %>">
-        <%= link_to "Units", query_category_path("units") %>
-      </li>
-      <li class="<%= active?(category, "features") %>">
-        <%= link_to "Features", query_category_path("features") %>
-      </li>
-      <li class="<%= active?(category, "strata") %>">
-        <%= link_to "Strata", query_category_path("strata") %>
-      </li>
-      <li class="<%= active?(category, "images") %>">
-        <%= link_to "Images", query_category_path("images") %>
-      </li>
-      <li class="<%= active?(query_canned_path) %>">
-        <%= link_to "Canned Queries", query_canned_path %>
-      </li>
+      <%= abstraction_nav %>
     </ul>
   </div>
 </div>

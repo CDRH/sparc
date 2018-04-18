@@ -4,6 +4,19 @@ module ActiveRecordAbstraction
   extend ActiveSupport::Concern
 
   included do
+    def abstraction_nav
+      markup = ""
+      ABSTRACT["nav"].each do |category, info|
+        label = info["label"].present? ? info["label"] : category.titleize
+        path = info["path"].present? ? send(info["path"]) :
+          query_category_path(category)
+        link_markup = content_tag "li", link_to(label, path),
+          class: active?(params[:category], category), role: "presentation"
+        markup << link_markup
+      end
+      markup.html_safe
+    end
+
     def display_value(result, column)
       return if column[/(?:^id|_at)$/]
 
