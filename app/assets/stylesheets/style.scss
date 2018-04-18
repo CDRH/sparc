@@ -1,6 +1,7 @@
 
 // Colors
 $beige: #F3EDE6; // Used in footer
+$darkbeige: #E7D4B3; // used as borders when beige is too light
 $gray:  #aaa;    // used in image gallery, decoration
 
 // May not be needed depending on size of footer
@@ -52,7 +53,7 @@ $gray:  #aaa;    // used in image gallery, decoration
 // ---------------
 
 %simple_button {
-  border: 1px solid $gray;
+  border: 1px solid $darkbeige;
   display: inline-block;
   font-size: .95em;
   margin-bottom: .3em;
@@ -96,13 +97,15 @@ html {
     @extend %simple_button_background;
   }
   .current {
-    background-color: $beige;
+    background-color: lighten($gray-base, 75%);
   }
 }
 
 //---------------
 // Explore Pages
 //---------------
+
+
 
 //---------------
 // Query Pages
@@ -147,7 +150,7 @@ html {
 
 .document_unit_list li a,
 .document_type_list li a {
-  border: solid 1px #E7D4B3;
+  border: solid 1px $darkbeige;
   float: left;
   margin: 0 5px 5px 0;
   padding: .5em;
@@ -243,12 +246,13 @@ a.image_link:hover {
 }
 
 // Info about each image
-ul.image_info {
+// Also used in Explore
+ul.gallery_info {
   list-style: none;
   padding: 0;
 }
 
-.image_info li {
+.gallery_info li {
   line-height: 1.1em;
   font-size: .9em;
 }
@@ -270,6 +274,10 @@ ul.image_info {
 
 .image_pagination .pagination {
   float: right;
+}
+
+.image_display img {
+  border: solid 2px $gray;
 }
 
 
