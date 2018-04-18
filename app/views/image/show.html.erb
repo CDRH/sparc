@@ -1,14 +1,15 @@
 <%= stylesheet_link_tag "images", media: "all" %>
 
+<div class="back_link"><%= link_to "Back to Gallery", gallery_path %></div>
+
 <h1>Image <%= @image.image_no %></h1>
 
+<div class="image_display">
+  <%= image_display(@image) %>
+</div>
+
 <div class="row">
-
   <div class="col-md-6">
-    <%= image_display(@image) %>
-  </div>
-
-  <div class="col-md-3">
     <h2>Image Information</h2>
     <ul>
       <li>Number: <%= @image.image_no %></li>
@@ -30,7 +31,7 @@
     </ul>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-6">
     <h2>More Information</h2>
     <ul>
       <li>Box: <%= @image.box %></li>
