@@ -9,7 +9,7 @@
   <%= hidden_field_tag "sort", params["sort"] %>
   <!-- primary search fields -->
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-sm-3">
       <div class="form-group">
         <%= label_tag "image_no" %>
         <%= text_field_tag "image_no", params["image_no"], placeholder: "00946", class: "form-control" %>
@@ -19,7 +19,7 @@
         <%= text_area_tag "comments", params["comments"], placeholder: "wall section", rows: 2, class: "form-control" %>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-sm-2">
       <div class="form-group">
         <div class="form-group">
           <%= label_tag "unit", "Unit" %>
@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-sm-2">
       <div class="form-group">
         <div class="form-group">
           <%= label_tag "zone", "Zone" %>
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-sm-5">
       <div class="form-group">
         <div class="form-group">
           <%= label_tag "subject", "Subject" %>
@@ -51,27 +51,27 @@
       <div class="well">
 
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-sm-3">
             <div class="form-group">
               <%= label_tag "format", "Format" %>
               <%= select_tag "format", options_from_collection_for_select(ImageFormat.sorted, "id", "name", params["format"]), class: "form-control", multiple: true, include_blank: true %>
             </div>
           </div>
           <% if !SETTINGS["hide_sensitive_image_records"] %>
-            <div class="col-md-3">
+            <div class="col-sm-3">
               <div class="form-group">
                 <%= label_tag "human_remain", "Human Remains?" %>
                 <%= select_tag "human_remain", options_from_collection_for_select(ImageHumanRemain.sorted, "id", "name", params["human_remain"]), class: "form-control", multiple: true, include_blank: true %>
               </div>
             </div>
           <% end %>
-          <div class="col-md-3">
+          <div class="col-sm-3">
             <div class="form-group">
               <%= label_tag "orientation", "Orientation" %>
               <%= select_tag "orientation", options_from_collection_for_select(ImageOrientation.sorted, "id", "name", params["orientation"]), class: "form-control", multiple: true, include_blank: true %>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-sm-3">
             <div class="form-group">
               <%= label_tag "quality", "Quality" %>
               <%= select_tag "quality", options_from_collection_for_select(ImageQuality.sorted, "id", "name", params["quality"]), class: "form-control", multiple: true, include_blank: true %>
@@ -80,13 +80,13 @@
         </div>
 
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-sm-3">
             <div class="form-group">
               <%= label_tag "box", "Box" %>
               <%= select_tag "box", options_from_collection_for_select(ImageBox.sorted, "id", "name", params["box"]), class: "form-control", multiple: true, include_blank: true %>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-sm-3">
             <div class="form-group">
               <%= label_tag "creator", "Creator" %>
               <%= select_tag "creator", options_from_collection_for_select(ImageCreator.sorted, "id", "name", params["creator"]), class: "form-control", multiple: true, include_blank: true %>
@@ -99,40 +99,51 @@
   </div> <!-- /row -->
 
   <div class="row">
-    <button class="btn btn-info" type="button"
-      data-toggle="collapse" data-target="#collapseMore"
-      aria-expanded="false" aria-controls="collapseMore">
-      More Query Options
-    </button>
-    <%= render partial: "partials/clear_search", locals: { path: gallery_path } %>
-    <%= submit_tag("Search", :class => "btn btn-primary") %>
+    <div class="col-md-4">
+      <button class="btn btn-info" type="button"
+        data-toggle="collapse" data-target="#collapseMore"
+        aria-expanded="false" aria-controls="collapseMore">
+        More Options
+      </button>
+      <%= render partial: "partials/clear_search", locals: { path: gallery_path } %>
+      <%= submit_tag("Search", :class => "btn btn-primary") %>
+    </div>
+    <div class="col-md-7 image_pagination pull-right">
+      <%= will_paginate @images %>
+    </div>
   </div>
 <% end %>
 
 <p>Found <%= pluralize(@result_num, "image") %></p>
-<%= will_paginate @images %>
+
 
 <% @images.each_slice(4) do |img_set| %>
-  <div class="row">
+  <div class="row images_row">
     <% img_set.each do |img| %>
-      <div class="col-md-3">
-        <%= link_to image_path img.image_no do %>
-          <%= image_display(img, thumb: true) %>
-        <% end %>
-        <ul>
-          <li>Number: <%= img.image_no %></li>
-          <li>Units: <%= img.unit_list.join("; ") %></li>
-          <li>Comments: <%= img.comments %></li>
-          <li>Format: <%= img.format %></li>
-          <% if !SETTINGS["hide_sensitive_image_records"] %>
-            <li>Human Remains: <%= img.human_remain %></li>
+      <div class="col-sm-3">
+        <%= link_to image_path(img.image_no), class: "image_link" do %>
+          <div class="image_entry">
+            <span class="image_img">
+              <%= image_display(img, thumb: true) %>
+            </span>
+            <ul class="gallery_info">
+              <li><strong>Number:</strong> <%= img.image_no %></li>
+              <li><strong>Units:</strong> <%= img.unit_list.join("; ") %></li>
+              <li><strong>Comments:</strong> <%= img.comments %></li>
+              <li><strong>Format:</strong> <%= img.format %></li>
+              <% if !SETTINGS["hide_sensitive_image_records"] %>
+                <li><strong>Human Remains:</strong> <%= img.human_remain %></li>
+              <% end %>
+              <li><strong>Subjects:</strong> <%= img.subject_list.join("; ") %></li>
+            </ul>
           <% end %>
-          <li>Subjects: <%= img.subject_list.join("; ") %></li>
-        </ul>
+        </div>
       </div>
     <% end %>
   </div>
 <% end %>
 
-<%= will_paginate @images %>
+<div class="image_pagination">
+  <%= will_paginate @images %>
+</div>
 
