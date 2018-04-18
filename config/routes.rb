@@ -35,8 +35,8 @@ Rails.application.routes.draw do
   get '/query', to: 'query#index', as: :query
   get '/query/canned', to: 'query#canned', as: :query_canned
   get '/query/:category', to: 'query#category', as: :query_category
-  get '/query/:category/:type(/:table)', to: 'query#form', as: :query_form
-  get '/query/:category/:type/:table/results', to: 'query#results',
+  get '/query/:category/:subcat(/:table)', to: 'query#form', as: :query_form
+  get '/query/:category/:subcat/:table/results', to: 'query#results',
       as: :query_results
 
   # Static Pages

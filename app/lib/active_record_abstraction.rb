@@ -17,6 +17,21 @@ module ActiveRecordAbstraction
       markup.html_safe
     end
 
+    def abstraction_subnav
+      markup =
+        '<ul class="nav nav-pills buffer-bottom nav-justified query_subnav">'
+      ABSTRACT["nav"][params[:category]].each do |subcat, info|
+        label = info["label"].present? ? info["label"] : subcat.titleize
+        path = info["path"].present? ? send(info["path"]) :
+          query_form_path(params[:category], subcat)
+        link_markup = content_tag "li", link_to(label, path),
+          class: active?(params[:subcat], subcat), role: "presentation"
+        markup << link_markup
+      end
+      markup << '</ul>'
+      markup.html_safe
+    end
+
     def display_value(result, column)
       return if column[/(?:^id|_at)$/]
 
