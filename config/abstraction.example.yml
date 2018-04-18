@@ -1,0 +1,55 @@
+default: &default
+  nav:
+    samples:
+      pollen_inventory:
+        singular: true
+        label: Pollen
+      soil:
+        singular: true
+      tree_ring:
+        singular: true
+    artifacts:
+      ceramics:
+        ceramic_inventory:
+        ceramic_clap:
+          label: Ceramic CLAP
+        ceramic:
+          label: 2005 Sample Analysis
+        ceramic_vessel:
+          label: Ceramic Vessels
+      eggshell:
+        singular: true
+      fauna:
+        bone_tool:
+          label: Bone Tools
+        faunal_artifacts:
+        faunal_inventory:
+      lithics:
+        lithic_inventory:
+        lithic_debitage:
+        lithic_tool:
+          label: Lithic Tools
+        obsidian_inventory:
+      ornaments:
+        singular: true
+      perishables:
+        singular: true
+      wood_inventory:
+        label: Woods
+        singular: true
+    units:
+      singular: true
+    features:
+      singular: true
+    strata:
+      singular: true
+    images:
+      singular: true
+    canned_queries:
+      path: query_canned_path
+test:
+  <<: *default
+development:
+  <<: *default
+production:
+  <<: *default
