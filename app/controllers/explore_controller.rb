@@ -1,18 +1,16 @@
 class ExploreController < ApplicationController
+  before_action :set_section
   before_action :get_unit
   skip_before_action :get_unit, only: [:units, :zone], raise: false
 
   def index
-    @section = "explore"
   end
 
   def map
-    @section = "explore"
     @subsection = "map"
   end
 
   def units
-    @section = "explore"
     @subsection = "units"
 
     units = Unit.includes(
@@ -52,7 +50,6 @@ class ExploreController < ApplicationController
   end
 
   def unit_associated
-    @section = "explore"
     @subsection = "units"
     @selected = "associated"
 
@@ -77,7 +74,6 @@ class ExploreController < ApplicationController
   end
 
   def unit_documents
-    @section = "explore"
     @subsection = "units"
     @selected = "documents"
 
@@ -95,7 +91,6 @@ class ExploreController < ApplicationController
   end
 
   def unit_images
-    @section = "explore"
     @subsection = "units"
     @selected = "images"
     @unit = Unit.find_by(unit_no: params["number"])
@@ -104,13 +99,11 @@ class ExploreController < ApplicationController
   end
 
   def unit_overview
-    @section = "explore"
     @subsection = "units"
     @selected = "overview"
   end
 
   def unit_strata
-    @section = "explore"
     @subsection = "units"
     @selected = "strata"
 
@@ -118,14 +111,12 @@ class ExploreController < ApplicationController
   end
 
   def unit_summary
-    @section = "explore"
     @subsection = "units"
     @selected = "summary"
   end
 
   def zone
     @zone_no = params["number"].rjust(3, "0")
-    @section = "explore"
     @subsection = "units"
     # if linked to from the chaco occupation map, filter the units
     @units = Unit.sorted.joins(:zone).where("zones.name" => @zone_no)
@@ -154,5 +145,9 @@ class ExploreController < ApplicationController
 
   def get_unit
     @unit = Unit.sorted.where(unit_no: params["number"]).first
+  end
+
+  def set_section
+    @section = "explore"
   end
 end
