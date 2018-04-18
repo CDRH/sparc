@@ -14,7 +14,7 @@ module ActiveRecordAbstraction
           class: active?(params[:category], category), role: "presentation"
         markup << link_markup
       end
-      markup.html_safe
+      sanitize markup
     end
 
     def abstraction_subnav
@@ -29,7 +29,7 @@ module ActiveRecordAbstraction
         markup << link_markup
       end
       markup << '</ul>'
-      markup.html_safe
+      sanitize markup
     end
 
     def display_value(result, column)
