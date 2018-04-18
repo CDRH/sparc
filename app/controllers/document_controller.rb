@@ -1,6 +1,7 @@
 require 'iiif/presentation'
 
 class DocumentController < ApplicationController
+  before_action :set_section
 
   def index
     # filter out units with no documents
@@ -164,6 +165,10 @@ class DocumentController < ApplicationController
       image_resource = IIIF::Presentation::ImageResource.create_image_api_image_resource(opts)
     end
     image_resource
+  end
+
+  def set_section
+    @section = "documents"
   end
 
 end
