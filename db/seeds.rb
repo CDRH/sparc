@@ -1944,7 +1944,7 @@ def seed_images
     sa_no: "SA No",
     other_no: "Other No",
     image_human_remain: "CDRH: Human Remains \n(y/n)",
-    image_subject0: "Subject",
+    orig_subjects: "Subject",
     image_subject1: "CDRH: Subject Category 1",
     image_subject2: "CDRH: Subject Category 2",
     image_subject3: "CDRH: Subject Category 3",
@@ -1976,7 +1976,7 @@ def seed_images
     image[:image_quality] = create_if_not_exists(ImageQuality, :name, image[:image_quality])
 
     image[:image_subjects] = []
-    [:image_subject0, :image_subject1, :image_subject2, :image_subject3].each do |subject|
+    [:image_subject1, :image_subject2, :image_subject3].each do |subject|
       if image[subject] != "[blank]"
         image[:image_subjects] << create_if_not_exists(ImageSubject, :name, image[subject])
       end
