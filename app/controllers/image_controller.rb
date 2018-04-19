@@ -1,4 +1,5 @@
 class ImageController < ApplicationController
+  before_action :set_section
 
   def index
     # always include these fields because they are used to describe each image
@@ -43,6 +44,10 @@ class ImageController < ApplicationController
       query_obj = query_obj.joins(relationship) if joins
     end
     return query_obj
+  end
+
+  def set_section
+    @section = "images"
   end
 
 end

@@ -65,6 +65,13 @@ module ApplicationHelper
     "#{record.features.map{|u| u.to_label}.join(', ')}"
   end
 
+  def title_display
+    title = "SPARC"
+    title << " | #{@section.titleize}" if @section
+    title << " | #{@subsection.titleize}" if @subsection
+    title
+  end
+
   private
 
   def current_page_ary_or_direct(opts_key, value)
