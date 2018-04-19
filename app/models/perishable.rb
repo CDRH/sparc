@@ -7,7 +7,14 @@ class Perishable < ApplicationRecord
   def self.abstraction
     {
       assoc_input_type: "input",
-      assoc_input_column: "salmon_museum_number"
+      assoc_input_column: "salmon_museum_number",
+      description: <<-DESC
+The Perishables analysis table combines the 1980s Salmon Ruins Museum inventory
+file with Laurie Webster's analysis (part of Archaeology Southwest's Salmon
+Project (2001-2018) of Salmon fiber artifacts into a single table. During the
+SPARC project (2015-2018), data within this table were edited and cross-checked
+against other sources.
+      DESC
     }
   end
 

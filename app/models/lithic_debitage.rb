@@ -13,7 +13,13 @@ class LithicDebitage < ActiveRecord::Base
   def self.abstraction
     {
       assoc_input_type: "input",
-      assoc_input_column: "fs_no"
+      assoc_input_column: "fs_no",
+      description: <<-DESC
+The Lithic Debitage analysis table was created by David Witt in 2013 as part of
+his dissertation work focused on the Middle San Juan region. During the SPARC
+project (2015-2018), data within this table were edited and cross-checked
+against other sources.
+      DESC
     }
   end
 

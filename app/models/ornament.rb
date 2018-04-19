@@ -7,7 +7,15 @@ class Ornament < ApplicationRecord
   def self.abstraction
     {
       assoc_input_type: "input",
-      assoc_input_column: "salmon_museum_no"
+      assoc_input_column: "salmon_museum_no",
+      description: <<-DESC
+The Ornaments table is an analysis table that derives from the original Salmon
+San Juan Valley Archaeological Program in the 1970s. It was subsequently updated
+during the Salmon Ruins Museum inventory work in the 1980s. It includes data on
+artifacts identified as ornaments. As part of the SPARC Project (2015-2018), the
+table has been edited and data within has been cross-checked against other
+sources.
+      DESC
     }
   end
 

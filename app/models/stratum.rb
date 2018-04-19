@@ -10,7 +10,15 @@ class Stratum < ActiveRecord::Base
   def self.abstraction
     {
       assoc_input_type: "input",
-      assoc_input_column: "strat_all"
+      assoc_input_column: "strat_all",
+      description: <<-DESC
+The Strata analysis table (previously known as the Codex) tracks all strata
+identified at Salmon during excavations or subsequently added during analysis
+and reporting. It derives from the original Salmon project data. The table was
+extensively modified and revised during Archaeology Southwest's Salmon Project
+(2001-2018). During the SPARC project (2015-2018), data within this table were
+edited and cross-checked against other sources.
+      DESC
     }
   end
 
