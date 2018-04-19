@@ -17,7 +17,6 @@
 /tmp
 
 *.svn
-/config/abstraction.yml
 /config/config.yml
 /config/database.yml
 /config/secrets.yml
