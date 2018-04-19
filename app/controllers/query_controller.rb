@@ -2,9 +2,11 @@ require_relative "../renderers/csv.rb"
 
 class QueryController < ApplicationController
   include ActiveRecordAbstraction
+  before_action :set_section
 
   def category
     params.require(:category)
+    @subsection = params[:category]
 
     if ABSTRACT["nav"][params[:category]]["singular"]
       # These are lone tables, so call the form action and render its view
@@ -52,10 +54,12 @@ class QueryController < ApplicationController
     @table_class = params[:table].to_s.classify.constantize
     @table_inputs = table_input_columns(@table_class)
     @table_selects = table_select_columns(@table_class)
+    @subsection = table_label
   end
 
   def results
     params.require([:category, :subcat, :table])
+    @subsection = table_label
 
     @table = params[:table].classify.constantize
     @column_names = @table.columns.reject { |c| c.name[/(?:^id|_at)$/] }
@@ -214,6 +218,10 @@ class QueryController < ApplicationController
     end
 
     res
+  end
+
+  def set_section
+    @section = "query"
   end
 
   def table_input_columns(table)
