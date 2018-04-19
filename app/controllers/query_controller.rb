@@ -6,16 +6,16 @@ class QueryController < ApplicationController
   def category
     params.require(:category)
 
-    if params[:category][/^(?:units|features|strata|images)$/]
+    if ABSTRACT["nav"][params[:category]]["singular"]
       # These are lone tables, so call the form action and render its view
-      params[:type] = params[:category]
+      params[:subcat] = params[:category]
       form
       render :form
     end
   end
 
   def form
-    params.require([:category, :type])
+    params.require([:category, :subcat])
 
     # Clear common search options
     if params["search_clear"].present?
@@ -26,11 +26,23 @@ class QueryController < ApplicationController
       session[:common_search_feature_group] = nil
     end
 
-    @tables = category_type_tables.map do |t|
+    category = ABSTRACT["nav"][params[:category]]
+    if category["singular"]
+      @tables = { params[:category] => category }
+    else
+      subcat = category[params[:subcat]]
+      if subcat["singular"]
+        @tables = { params[:subcat] => subcat }
+      else
+        @tables = subcat
+      end
+    end
+
+    @tables = @tables.map do |table, info|
       {
-        name: t,
-        label: t.pluralize.titleize,
-        count: t.classify.constantize.count
+        name: table,
+        label: info && info["label"].present? ? info["label"] : table.titleize,
+        count: table.classify.constantize.count
       }
     end
 
@@ -43,7 +55,7 @@ class QueryController < ApplicationController
   end
 
   def results
-    params.require([:category, :type, :table])
+    params.require([:category, :subcat, :table])
 
     @table = params[:table].classify.constantize
     @column_names = @table.columns.reject { |c| c.name[/(?:^id|_at)$/] }
@@ -125,47 +137,6 @@ class QueryController < ApplicationController
   end
 
   private
-
-  def category_type_tables
-    case params[:category]
-    when "samples"
-      case params[:type]
-      when "pollens"
-        ["pollen_inventory"]
-      when "soils"
-        ["soil"]
-      when "tree_rings"
-        ["tree_ring"]
-      end
-    when "artifacts"
-      case params[:type]
-      when "ceramics"
-        ["ceramic_inventory", "ceramic_clap", "ceramic",
-                "ceramic_vessel"]
-      when "eggshells"
-        ["eggshell"]
-      when "faunal"
-        ["bone_tool", "faunal_artifacts", "faunal_inventory"]
-      when "lithics"
-        ["lithic_inventory", "lithic_debitage", "lithic_tool",
-          "obsidian_inventories"]
-      when "ornaments"
-        ["ornament"]
-      when "perishables"
-        ["perishable"]
-      when "woods"
-        ["wood_inventory"]
-      end
-    when "units"
-      ["units"]
-    when "features"
-      ["features"]
-    when "strata"
-      ["strata"]
-    when "images"
-      ["images"]
-    end
-  end
 
   def common_search(res)
     # Save params in session

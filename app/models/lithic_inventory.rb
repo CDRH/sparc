@@ -9,7 +9,13 @@ class LithicInventory < ApplicationRecord
   def self.abstraction
     {
       assoc_input_type: "input",
-      assoc_input_column: "fs_no"
+      assoc_input_column: "fs_no",
+      description: <<-DESC
+The Lithic Inventory table was created during Archaeology Southwest's Salmon
+Project (2001-2018) as lithic and ground stone artifacts were repackaged into
+archival quality materials. During the SPARC project (2015-2018), data within
+this table were edited and cross-checked against other sources.
+      DESC
     }
   end
 

@@ -24,7 +24,15 @@ class Ceramic < ActiveRecord::Base
   def self.abstraction
     {
       assoc_input_type: "input",
-      assoc_input_column: "fs_no"
+      assoc_input_column: "fs_no",
+      description: <<-DESC
+This table, completed in 2005, represents the latest ceramic analysis of a
+sample from Salmon Pueblo's ceramic assemblage. Lori Reed and her Animas Ceramic
+Consulting staff completed this analysis as part of Archaeology Southwest's
+Salmon Project (2001-2018). The Chacoan occupation was targeted with the sample
+of about 40,000 sherds. During the SPARC project (2015-2018), data within this
+table were edited and cross-checked against other sources.
+      DESC
     }
   end
 
