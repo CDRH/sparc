@@ -1,50 +1,54 @@
-<h1>Zone <%= @zone.name %></h1>
+<% if @zone %>
+  <h1>Zone <%= @zone.name %></h1>
 
-<div class="row">
-  <div class="col-md-6">
-    <%= sanitize @zone.description %>
-  </div>
-  <div class="col-md-6">
-    <%= image_tag "map_thumb", size: "305x159" %>
-  </div>
-</div>
-
-<% if params["occupation"] == "chaco" && @is_filtered %>
-  <p>
-    Displaying a filtered list of units present during the Chacoan occupation.
-    <%= link_to search_zone_path(@zone.name) do %>
-      View <%= pluralize @all_count, "unit" %> regardless of occupation
-    <% end %>
-  </p>
-<% end %>
-<% @units.each_slice(3) do |unit_set| %>
   <div class="row">
-    <% unit_set.each do |unit| %>
-      <div class="col-md-4">
-        <%= link_to unit_path(unit.unit_no) do %>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">
-                <%= unit.unit_no %>
-                <% if unit.occupation.present? %>
-                  (<%= unit.occupation.name %>)
-                <% end %>
-              </h3>
-            </div>
-            <div class="panel-body">
-              <ul>
-                <li><strong>Class:</strong> <%= unit.unit_class.name if unit.unit_class %></li>
-                <li><strong>Excavation Status:</strong> <%= unit.excavation_status.name if unit.excavation_status %></li>
-                <li><strong>Type:</strong> <%= unit.type_description.name if unit.type_description %>
-                <li><strong>Other Description:</strong> <%= unit.other_description %></li>
-                <% if unit.media_maps.first %>
-                  <%= image_tag iiif_path(unit.media_maps.first, SETTINGS["thumbnail_size"]) %>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+    <div class="col-md-6">
+      <%= sanitize @zone.description %>
+    </div>
+    <div class="col-md-6">
+      <%= image_tag "map_thumb", size: "305x159" %>
+    </div>
   </div>
+
+  <% if params["occupation"] == "chaco" && @is_filtered %>
+    <p>
+      Displaying a filtered list of units present during the Chacoan occupation.
+      <%= link_to search_zone_path(@zone.name) do %>
+        View <%= pluralize @all_count, "unit" %> regardless of occupation
+      <% end %>
+    </p>
+  <% end %>
+  <% @units.each_slice(3) do |unit_set| %>
+    <div class="row">
+      <% unit_set.each do |unit| %>
+        <div class="col-md-4">
+          <%= link_to unit_path(unit.unit_no) do %>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  <%= unit.unit_no %>
+                  <% if unit.occupation.present? %>
+                    (<%= unit.occupation.name %>)
+                  <% end %>
+                </h3>
+              </div>
+              <div class="panel-body">
+                <ul>
+                  <li><strong>Class:</strong> <%= unit.unit_class.name if unit.unit_class %></li>
+                  <li><strong>Excavation Status:</strong> <%= unit.excavation_status.name if unit.excavation_status %></li>
+                  <li><strong>Type:</strong> <%= unit.type_description.name if unit.type_description %>
+                  <li><strong>Other Description:</strong> <%= unit.other_description %></li>
+                  <% if unit.media_maps.first %>
+                    <%= image_tag iiif_path(unit.media_maps.first, SETTINGS["thumbnail_size"]) %>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <h1>No zone found for <%= @zone_no %></h1>
 <% end %>
