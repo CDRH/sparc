@@ -8,8 +8,8 @@
       <h3>Samples and Features</h3>
       <p>
         <%= link_to "Features", query_results_path({
-          type: "features",
           category: "features",
+          subcat: "features",
           table: "features",
           unit: @unit.id
           })
@@ -19,8 +19,8 @@
         <% tables.each do |table| %>
           <p>
             <%= link_to table.titleize, query_results_path({
-                type: "samples",
                 category: category,
+                subcat: "samples",
                 table: table,
                 unit: @unit.id
               })
@@ -35,8 +35,8 @@
         <% tables.each do |table| %>
           <p>
             <%= link_to table.titleize, query_results_path({
-                type: "artifacts",
                 category: category,
+                subcat: "artifacts",
                 table: table,
                 unit: @unit.id
               })
