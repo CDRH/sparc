@@ -1,7 +1,9 @@
-<h1>Zone <%= @zone_no %></h1>
+<h1>Zone <%= @zone.name %></h1>
 
 <div class="row">
-  <div class="col-md-6">Description of the zone will go here</div>
+  <div class="col-md-6">
+    <%= sanitize @zone.description %>
+  </div>
   <div class="col-md-6">
     <%= image_tag "map_thumb", size: "305x159" %>
   </div>
@@ -10,7 +12,7 @@
 <% if params["occupation"] == "chaco" && @is_filtered %>
   <p>
     Displaying a filtered list of units present during the Chacoan occupation.
-    <%= link_to search_zone_path(@zone_no) do %>
+    <%= link_to search_zone_path(@zone.name) do %>
       View <%= pluralize @all_count, "unit" %> regardless of occupation
     <% end %>
   </p>
