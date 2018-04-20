@@ -116,17 +116,17 @@ class ExploreController < ApplicationController
   end
 
   def zone
-    @zone_no = params["number"].rjust(3, "0")
     @subsection = "units"
+    zone_no = params["number"].rjust(3, "0")
+    @zone = Zone.find_by(name: zone_no)
+    @units = @zone.units.sorted
     # if linked to from the chaco occupation map, filter the units
-    @units = Unit.sorted.joins(:zone).where("zones.name" => @zone_no)
     @all_count = @units.count
     if params["occupation"] == "chaco"
       @units = @units.joins(:occupation)
         .where("occupations.name": ["Chacoan", "Mixed Chacoan and San Juan"])
       @is_filtered = @all_count != @units.count
     end
-    @units
   end
 
 
