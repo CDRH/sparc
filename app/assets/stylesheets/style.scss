@@ -1,8 +1,5 @@
-
 // Colors
-$beige: #F3EDE6; // Used in footer
-$darkbeige: #E7D4B3; // used as borders when beige is too light
-$gray:  #aaa;    // used in image gallery, decoration
+@import "colors";
 
 // May not be needed depending on size of footer
 
@@ -45,7 +42,6 @@ $gray:  #aaa;    // used in image gallery, decoration
   padding-bottom:15px
 }
 
-
 /* Start Main Site */
 
 // ---------------
@@ -85,7 +81,7 @@ html {
 }
 
 
-// SHARED
+// Pagination
 
 .pagination {
   margin: .5em 0;
@@ -101,11 +97,58 @@ html {
   }
 }
 
+.pagination_container .pagination {
+  float: right;
+}
+
+// Gallery Code (Used in Explore and Image Gallery)
+
+// Anchor is wrapped around image and text
+a.gallery_link {
+  color: #000;
+  text-decoration: none;
+}
+
+a.gallery_link:hover {
+  text-decoration: none;
+}
+
+// Info about each item
+ul.gallery_info {
+  list-style: none;
+  padding: 0;
+}
+
+.gallery_info li {
+  line-height: 1.1em;
+  font-size: .9em;
+}
+
+.gallery_entry {
+  border-top: solid 4px $beige;
+  margin: .5em 0 0 0;
+  padding: 1em .5em .2em .5em;
+}
+
+.gallery_entry:hover {
+  background-color: $beige;
+}
+
 //---------------
 // Explore Pages
 //---------------
 
 
+
+//Unit search and browse
+.gallery_row h3 {
+  margin: 0 0 .2em 0;
+  color: $blue;
+}
+
+.gallery_entry:hover  h3 {
+  text-decoration: underline;
+}
 
 //---------------
 // Query Pages
@@ -121,7 +164,7 @@ html {
 }
 
 .checked-list-box {
-  max-height:300px;
+  max-height: 300px;
   overflow-y: auto;
 }
 
@@ -133,7 +176,7 @@ html {
 // Other
 
 .tab-pane {
-  padding:10px 0;
+  padding: 10px 0;
 }
 
 
@@ -226,60 +269,18 @@ html {
 // Image Gallery Pages
 //---------------
 
-// Gallery page
-
-// Anchor is wrapped around image and text
-a.image_link {
-  color: #000;
-  text-decoration: none;
-}
-
-a.image_link:hover {
-  text-decoration: none;
-}
-
-.images_row img {
+// Specific to image gallery
+.image_img img {
   border: solid 2px $gray;
   display: block;
   margin: 0 auto 10px auto;
   max-width: 100%;
-}
-
-// Info about each image
-// Also used in Explore
-ul.gallery_info {
-  list-style: none;
-  padding: 0;
-}
-
-.gallery_info li {
-  line-height: 1.1em;
-  font-size: .9em;
-}
-
-.image_entry {
-  border-top: solid 4px $beige;
-  margin: .5em 0 .5em 0;
-  padding: 1em .5em .5em .5em;
-}
-
-.image_entry:hover {
-  background-color: $beige;
-}
-
-.image_img {
-  display: block;
   min-height: 180px;
 }
 
-.image_pagination .pagination {
-  float: right;
+.image_img img:hover {
+  border-color: $blue;
 }
-
-.image_display img {
-  border: solid 2px $gray;
-}
-
 
 //---------------
 // Native Descendants
