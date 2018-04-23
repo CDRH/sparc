@@ -325,7 +325,7 @@ ul.gallery_info {
 .navbar-default .navbar-nav li.active a {
   background-color: darken($brand-primary, 10%); /* For older browsers */
   background-color: rgba(0,0,0,.2);
-  a:focus, a:hover {
+  &:focus, &:hover {
     background-color: darken($brand-primary, 15%); /* For older browsers */
     background-color: rgba(0,0,0,.3);
     color: #fff;
