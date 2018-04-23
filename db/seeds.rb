@@ -2055,4 +2055,4 @@ File.open("reports/please_check_for_accuracy.txt", "w") do |file|
   end
 end
 
-puts "Please run `rake units:description` to add descriptions to zones and units"
+puts "Please run `rails units:description` to add descriptions to zones and units"

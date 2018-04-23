@@ -9,7 +9,7 @@ namespace :units do
       desc
     end
 
-    path = "#{Rails.root}/lib/tasks/unit_descriptions.xml"
+    path = Rails.root.join("lib", "tasks", "unit_descriptions.xml")
     desc_xml = File.open(path) { |f| Nokogiri::XML(f) }
 
     # zone descriptions
