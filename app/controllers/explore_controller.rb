@@ -116,17 +116,26 @@ class ExploreController < ApplicationController
   end
 
   def zone
-    @zone_no = params["number"].rjust(3, "0")
     @subsection = "units"
-    # if linked to from the chaco occupation map, filter the units
-    @units = Unit.sorted.joins(:zone).where("zones.name" => @zone_no)
-    @all_count = @units.count
-    if params["occupation"] == "chaco"
-      @units = @units.joins(:occupation)
-        .where("occupations.name": ["Chacoan", "Mixed Chacoan and San Juan"])
-      @is_filtered = @all_count != @units.count
+    # pad zones with appropriate number of zeroes, despite P / BW codes
+    @zone_no = params["number"].rjust(3, "0")
+    if @zone_no[/[A-Z]/]
+      num = @zone_no[/\d*/]
+      if num.length < 3
+        @zone_no = @zone_no.gsub(num, num.rjust(3, "0"))
+      end
     end
-    @units
+    @zone = Zone.find_by(name: @zone_no)
+    if @zone
+      @units = @zone.units.sorted
+      # if linked to from the chaco occupation map, filter the units
+      @all_count = @units.count
+      if params["occupation"] == "chaco"
+        @units = @units.joins(:occupation)
+          .where("occupations.name": ["Chacoan", "Mixed Chacoan and San Juan"])
+        @is_filtered = @all_count != @units.count
+      end
+    end
   end
 
 

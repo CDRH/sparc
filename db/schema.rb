@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180417210639) do
+ActiveRecord::Schema.define(version: 20180420161826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1219,6 +1219,7 @@ ActiveRecord::Schema.define(version: 20180417210639) do
     t.datetime "updated_at",           null: false
     t.integer  "zone_id"
     t.integer  "occupation_id"
+    t.text     "description"
     t.index ["occupation_id"], name: "index_units_on_occupation_id", using: :btree
     t.index ["unit_no"], name: "index_units_on_unit_no", unique: true, using: :btree
     t.index ["zone_id"], name: "index_units_on_zone_id", using: :btree
@@ -1266,6 +1267,7 @@ ActiveRecord::Schema.define(version: 20180417210639) do
   create_table "zones", force: :cascade do |t|
     t.string "name"
     t.text   "comments"
+    t.text   "description"
   end
 
   add_foreign_key "ceramic_claps_features", "ceramic_claps"
