@@ -1,19 +1,56 @@
 <%= javascript_include_tag 'svg-pan-zoom' %>
 <%= stylesheet_link_tag 'maps' %>
 
-<div id="map_layer_controls">
-  <form lpformnum="1">
-    <input type="checkbox" name="toggle_trenches" id="toggle_trenches" onchange="toggle_trenches_display(this)">
-    <label for="toggle_trenches">Trenches</label>
-    <input type="radio" name="toggle_occ" id="toggle_salmon_occ" value="salmon_occ" onclick="toggle_salmon_display()">
-    <label for="toggle_salmon_occ">San Juan Occupation</label>
-    <input type="radio" name="toggle_occ" id="toggle_chaco_occ" value="chaco_occ" onclick="toggle_chaco_display()">
-    <label for="toggle_chaco_occ">Chaco Occupation</label>
-  </form>
+<script>
+	$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+</script>
+
+<div class="map_controls">
+	<form lpformnum="1">
+		<div class="row">
+			<div class="col-sm-3">
+				<h3>Map Controls:</h3>
+			</div>
+			<div class="col-sm-4 map_trench_controls">
+				<strong>Trenches:</strong>
+				<div class="btn-group" data-toggle="buttons">
+				  <label class="btn btn-primary active" onclick="toggle_trenches_on()">
+				    <input type="radio" name="options" id="toggle_salmon_occ" autocomplete="off" checked > Show
+				  </label>
+				  <label class="btn btn-primary" onclick="toggle_trenches_off()">
+				    <input type="radio" name="options" id="toggle_chaco_occ" autocomplete="off" > Hide
+				  </label>
+				</div>
+			</div>
+	
+			<div class="col-sm-5">
+				<strong>Occupation:</strong>
+				<div class="btn-group" data-toggle="buttons">
+				  <label class="btn btn-primary active" onclick="toggle_salmon_display()">
+				    <input type="radio" name="options" id="toggle_salmon_occ" autocomplete="off" checked > San Juan
+				  </label>
+				  <label class="btn btn-primary" onclick="toggle_chaco_display()">
+				    <input type="radio" name="options" id="toggle_chaco_occ" autocomplete="off" > Chaco
+				  </label>
+				</div>
+
+				<span class="glyphicon glyphicon-question-sign map_occupation_help" aria-hidden="true" data-toggle="popover" data-content="Clicking on a room will take you to an overview. Rooms which have been identified with Chaco will show only those units, while the San Juan view will show all units."></span>
+
+			</div>
+			
+		</div>
+	</form>
+</div><!-- /map_controls -->
+
+</div><!-- /container -->
+
+<div class="container-fluid">
+	<div id="map_container">
+		<%= render "svg" %>
+	</div>
 </div>
 
-<div id="map_container">
-  <%= render "svg" %>
-</div>
 
 <%= javascript_include_tag 'map_zoom' %>
