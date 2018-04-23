@@ -7,18 +7,10 @@ var map_setup = function() {
   });
   // set default zoom for map
   map.zoom(1.7);
-  // select the starting UI
-  // document.getElementById('toggle_salmon_occ').checked = true;
-  // document.getElementById('toggle_trenches').checked = true;
 };
 
 $(document).ready(map_setup);
 
-
-// function toggle_trenches_display(e) {
-//   if (e.checked) { document.getElementById('trenches').style.display = 'block'; }
-//   if (!e.checked) { document.getElementById('trenches').style.display = 'none'; }
-// }
 
 function toggle_trenches_on() {
   document.getElementById('trenches').style.display = 'block';
