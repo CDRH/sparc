@@ -26,7 +26,7 @@ $legstroke: #000;
 
 // Map Controls (top of page)
 .map_controls {
-margin: .5em 0 .8em 0;
+  margin: .5em 0 .8em 0;
 }
 
 .map_controls h3 {
@@ -36,15 +36,15 @@ margin: .5em 0 .8em 0;
 }
 
 .map_trench_controls {
-margin-bottom: .3em;
+  margin-bottom: .3em;
 }
 
 .map_occupation_help {
-font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 #map_container a {
-border: none;
+  border: none;
 }
 
 /* ------------------------ */
@@ -54,22 +54,22 @@ border: none;
 /* svg element */
 #map_combined {
   display: block;
-  height:inherit;
-  max-height:inherit;
-  max-width:inherit;
-  min-height:inherit;
-  min-width:inherit;
+  height: inherit;
+  max-height: inherit;
+  max-width: inherit;
+  min-height: inherit;
+  min-width: inherit;
   overflow: hidden;
-  width:inherit;
+  width: inherit;
 }
 
 // Shared Styles
 
+.bldgline, 
 .doorline, 
 .legline, 
-.bldgline, 
-.poly_b, 
 .poly_a,
+.poly_b, 
 .poly_c, 
 .poly_d, 
 .poly_e, 
@@ -103,8 +103,8 @@ border: none;
 }
 
 // the rest of the san juan and chaco buildings
-.poly_b, 
-.poly_a { 
+.poly_a, 
+.poly_b { 
   stroke: $blgstroke;
 }
 
@@ -121,9 +121,13 @@ border: none;
   stroke: $trenchstroke;
 }
 
-a:hover polygon, 
-a:hover polyline, 
+a:focus path,
 a:hover path, 
+a:focus polygon,
+a:hover polygon, 
+a:focus polyline,
+a:hover polyline,
+a:focus rect, 
 a:hover rect {
   fill-opacity: .5;
   fill: $fill;
@@ -131,6 +135,7 @@ a:hover rect {
   stroke: $fill;
 }
 
+#trenches a:focus,
 #trenches a:hover {
   text-decoration: none;
 }
@@ -141,6 +146,7 @@ a:hover rect {
   fill: black; 
 } 
 
+.svg-pan-zoom-control:focus,
 .svg-pan-zoom-control:hover { 
   fill-opacity: 0.8; 
 } 
