@@ -89,7 +89,7 @@ html {
   a, em, span {
     @extend %simple_button;
   }
-  a:hover {
+  a:focus, a:hover {
     @extend %simple_button_background;
   }
   .current {
@@ -109,6 +109,7 @@ a.gallery_link {
   text-decoration: none;
 }
 
+a.gallery_link:focus,
 a.gallery_link:hover {
   text-decoration: none;
 }
@@ -130,6 +131,7 @@ ul.gallery_info {
   padding: 1em .5em .2em .5em;
 }
 
+.gallery_entry:focus,
 .gallery_entry:hover {
   background-color: $beige;
 }
@@ -146,7 +148,8 @@ ul.gallery_info {
   color: $blue;
 }
 
-.gallery_entry:hover  h3 {
+.gallery_entry:focus h3,
+.gallery_entry:hover h3 {
   text-decoration: underline;
 }
 
@@ -184,15 +187,15 @@ ul.gallery_info {
 // Documents
 //---------------
 
-.document_unit_list, 
-.document_type_list  {
+.document_type_list,
+.document_unit_list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.document_unit_list li a,
-.document_type_list li a {
+.document_type_list li a,
+.document_unit_list li a {
   border: solid 1px $darkbeige;
   float: left;
   margin: 0 5px 5px 0;
@@ -203,8 +206,10 @@ ul.gallery_info {
   width: 4.5em;
 }
 
-.document_unit_list li a:hover,
-.document_type_list li a:hover {
+.document_type_list li a:focus,
+.document_type_list li a:hover,
+.document_unit_list li a:focus,
+.document_unit_list li a:hover {
   background-color: lighten($gray-base, 75%);
 }
 
@@ -278,6 +283,7 @@ ul.gallery_info {
   min-height: 180px;
 }
 
+.image_img img:focus,
 .image_img img:hover {
   border-color: $blue;
 }
@@ -300,12 +306,12 @@ ul.gallery_info {
 
 .sparc_subnavbar.navbar {
   margin-top: -20px;
-  min-height:33px;
+  min-height: 33px;
 }
 
 .sparc_subnavbar .nav li a {
- height: 31px;
- padding-top: 5px;
+  height: 31px;
+  padding-top: 5px;
 }
 
 // Footer
@@ -319,12 +325,11 @@ ul.gallery_info {
 .navbar-default .navbar-nav li.active a {
   background-color: darken($brand-primary, 10%); /* For older browsers */
   background-color: rgba(0,0,0,.2);
-}
-
-.navbar-default .navbar-nav li.active a:hover {
-  background-color: darken($brand-primary, 15%); /* For older browsers */
-  background-color: rgba(0,0,0,.3);
-  color: #fff;
+  a:focus, a:hover {
+    background-color: darken($brand-primary, 15%); /* For older browsers */
+    background-color: rgba(0,0,0,.3);
+    color: #fff;
+  }
 }
 
 //---------------
@@ -342,6 +347,7 @@ ul.gallery_info {
   padding: .3em .5em .1em 0;
 }
 
+.header_words:focus,
 .header_words:hover {
   background-color: rgba(255,255,255,.2);
 }
@@ -350,6 +356,7 @@ ul.gallery_info {
   color: #fff;
 }
 
+.header_words a:focus,
 .header_words a:hover {
   color: #fff;
   text-decoration: none;
@@ -384,6 +391,7 @@ ul.gallery_info {
   color: $gray-base;
 }
 
+.header_words_nav a:focus,
 .header_words_nav a:hover {
   color: $gray-darker;
 }
@@ -422,8 +430,7 @@ ul.gallery_info {
 
 .site_logo_container {
   height: 240px; 
-  margin-top: 15px;
-  margin: auto;
+  margin: 15px auto 0 auto;
   overflow: hidden;
   width: 850px;
 }
@@ -436,15 +443,18 @@ ul.gallery_info {
 .home_first_band {
   background: url('band_aerial.jpg') center center;
   height: 400px;
+  margin-top: -22px;
 }
 
 .home_first_band p {
   background-color: rgba(0,0,0,.6);
   color: #fff;
   float: right;
-  font-size: 1.4em;
+  font-family: 'Jura', sans-serif;
+  font-size: 1.8em;
   height: 400px;
   padding: 20px;
+  text-align: center;
   vertical-align: bottom;
   width: 300px;
 }
@@ -475,10 +485,12 @@ ul.gallery_info {
   padding: 10px;
 }
 
+.home_callout a:focus,
 .home_callout a:hover {
   text-decoration: none;
 }
 
+.home_callout .content:focus,
 .home_callout .content:hover {
   border-radius: 8px;
   display: block;
@@ -500,10 +512,12 @@ ul.gallery_info {
   background: #F7ECDB;
 }
 
+.home_callout .content:focus,
 .home_callout .content:hover {
   border-color: $brand-primary;
 }
 
+.home_callout .content:focus .inner_content
 .home_callout .content:hover .inner_content {
   border-color: $brand-primary;
   background-color: rgba(255,255,255,.9);

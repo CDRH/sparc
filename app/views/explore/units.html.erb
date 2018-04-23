@@ -133,52 +133,47 @@
     </div> <!-- /collapse -->
   </div> <!-- /row -->
 
-
-
-
   <div class="row">
-    <div class="col-md-6"> <button class="btn btn-info" type="button"
+    <div class="col-md-6"> 
+      <button class="btn btn-info" type="button"
       data-toggle="collapse" data-target="#collapseMore"
       aria-expanded="false" aria-controls="collapseMore">
-      More Options
-    </button>
-    <button class="btn btn-info" type="button"
+        More Options
+      </button>
+      <button class="btn btn-info" type="button"
       data-toggle="collapse" data-target="#collapseItems"
       aria-expanded="false" aria-controls="collapseItems">
-      Limit by Items in Unit
-    </button>
-    <%= render :partial => "partials/clear_search", :locals => { :path => query_path } %>
-    <%= submit_tag "Search", :class => "btn btn-primary" %>
+        Limit by Items in Unit
+      </button>
+      <%= render :partial => "partials/clear_search", :locals => { :path => query_path } %>
+      <%= submit_tag "Search", :class => "btn btn-primary" %>
     </div>
     <div class="col-md-6 pagination_container">
       <%= will_paginate @units %>
     </div>
-   
   </div> <!-- /row -->
 
   <p>Found <%= pluralize @result_num, "result" %></p>
   
-
   <% @units.each_slice(4) do |unit_set| %>
     <div class="row gallery_row">
       <% unit_set.each do |unit| %>
         <div class="col-sm-3">
           <%= link_to unit_path(unit.unit_no), class: "gallery_link" do %>
-          <div class="gallery_entry">
-          <h3><%= unit.unit_no %></h3>
-          <ul class=" gallery_info">
-            <li><strong>Occupation:</strong> <%= unit.occupation.name if unit.occupation %></li>
-            <li><strong>Type:</strong> <%= unit.type_description.name if unit.type_description %></li>
-            <li><strong>Inferred Function:</strong> <%= unit.inferred_function.name if unit.inferred_function %></li>
-            <li><strong>Number of Images:</strong> <%= unit.images.size %></li>
-          </ul>
-        </div>
+            <div class="gallery_entry">
+              <h3><%= unit.unit_no %></h3>
+              <ul class=" gallery_info">
+                <li><strong>Occupation:</strong> <%= unit.occupation.name if unit.occupation %></li>
+                <li><strong>Type:</strong> <%= unit.type_description.name if unit.type_description %></li>
+                <li><strong>Inferred Function:</strong> <%= unit.inferred_function.name if unit.inferred_function %></li>
+                <li><strong>Number of Images:</strong> <%= unit.images.size %></li>
+              </ul>
+            </div>
           <% end %>
         </div>
       <% end %>
-    </div>
+    </div><!-- /row -->
   <% end %>
-
 <% end %>
 
 <div class="pagination_container">
