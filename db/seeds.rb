@@ -2054,3 +2054,5 @@ File.open("reports/please_check_for_accuracy.txt", "w") do |file|
     file.write("\n#{added[:category]} #{added[:value]} created from #{added[:source]}")
   end
 end
+
+puts "Please run `rails units:description` to add descriptions to zones and units"
