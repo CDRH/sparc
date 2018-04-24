@@ -9,14 +9,6 @@ class DocumentController < ApplicationController
     @units_no_docs = Unit.includes(:documents).where(documents: { id: nil }).sorted
   end
 
-  def type
-    @type = params["type"]
-    type_name = get_doc_type_name(@type)
-    res = Document.joins(:document_type).where("document_types.name = ?", type_name)
-    @result_num = res.size
-    @res = res.paginate(page: params[:page], per_page: 20)
-  end
-
   def unit
     @unit_no = params["unit"]
     @unit = Unit.find_by(unit_no: @unit_no)
@@ -90,8 +82,6 @@ class DocumentController < ApplicationController
             .where("document_types.name = ?", type_name)
             .sorted
 
-    results = res.paginate(page: params[:page], per_page: 20)
-
     # build the manifest for a requested document type
     manifest = IIIF::Presentation::Manifest.new(
                  "@id" => documents_unit_path({ unit: title_link }),
@@ -109,7 +99,7 @@ class DocumentController < ApplicationController
     num = 0
 
     # create canvases
-    results.each do |result|
+    res.each do |result|
       room_type = unit.unit_class.code
       num += 1
 
