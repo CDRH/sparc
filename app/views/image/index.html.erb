@@ -27,14 +27,6 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-2">
-      <div class="form-group">
-        <div class="form-group">
-          <%= label_tag "zone", "Zone" %>
-          <%= select_tag "zone", options_from_collection_for_select(Zone.sorted, "id", "name", params["zone"]), class: "form-control", multiple: true, include_blank: true, size: 6 %>
-        </div>
-      </div>
-    </div>
     <div class="col-sm-5">
       <div class="form-group">
         <div class="form-group">
