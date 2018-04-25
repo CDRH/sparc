@@ -2,7 +2,6 @@ class Unit < ActiveRecord::Base
   belongs_to :excavation_status
   belongs_to :inferred_function
   belongs_to :intact_roof
-  belongs_to :room_type
   belongs_to :irregular_shape
   belongs_to :salmon_sector
   belongs_to :story

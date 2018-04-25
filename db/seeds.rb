@@ -31,7 +31,6 @@ seeds = Rails.root.join('db', 'seeds')
   lithic_material_types: "#{seeds}/lithic_material_types.yml",
   lithic_platform_types: "#{seeds}/lithic_platform_types.yml",
   lithic_terminations: "#{seeds}/lithic_terminations.yml",
-  room_types: "#{seeds}/room_types.yml",
   strat_groupings: "#{seeds}/strat_groupings.yml",
   strat_types: "#{seeds}/strat_types.yml",
 
@@ -399,14 +398,6 @@ end
 def seed_units
   s = Roo::Excelx.new(@files[:units])
 
-  puts "\n\n\nCreating Room Types\n"
-
-  room_types = load_yaml(@files[:room_types])
-  room_types.each do |rt|
-    rt["occupation"] = find_or_create_occupation(rt["occupation"])
-    RoomType.create(rt)
-  end
-
   puts "\n\n\nCreating Units\n"
 
   unit_columns = {
@@ -441,9 +432,6 @@ def seed_units
     unit[:unit_class] = find_or_create_unit_class(unit[:unit_class], unit[:unit_no])
     unit[:story] = create_if_not_exists(Story, :name, unit[:story])
     unit[:intact_roof] = create_if_not_exists(IntactRoof, :name, unit[:intact_roof])
-    if unit[:salmon_type_code] != "n/a"
-      unit[:room_type] = RoomType.find_by(type_no: unit[:salmon_type_code])
-    end
     unit[:type_description] = create_if_not_exists(TypeDescription, :name, unit[:type_description])
     unit[:inferred_function] = create_if_not_exists(InferredFunction, :name, unit[:inferred_function])
     unit[:salmon_sector] = create_if_not_exists(SalmonSector, :name, unit[:salmon_sector])
