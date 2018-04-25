@@ -33,7 +33,6 @@ class ExploreController < ApplicationController
     units = add_to_query(units, :inferred_functions, params["inferred_function"], :inferred_function, false)
     units = add_to_query(units, :intact_roofs, params["intact_roof"], :intact_roof)
     units = add_to_query(units, :irregular_shapes, params["irregular_shape"], :irregular_shape)
-    units = add_to_query(units, :room_types, params["room_type"], :room_type)
     units = add_to_query(units, :salmon_sectors, params["salmon_sector"], :salmon_sector)
     units = add_to_query(units, :stories, params["story"], :story)
     units = add_to_query(units, :type_descriptions, params["type_description"], :type_description, false)
