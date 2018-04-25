@@ -19,13 +19,11 @@ class ImageController < ApplicationController
     images = add_to_query(images, :image_qualities, params["quality"], :image_quality, true)
     images = add_to_query(images, :image_subjects, params["subject"], :image_subjects, false)
     images = add_to_query(images, :units, params["unit"], :units, false)
-    images = add_to_query(images, :zones, params["zone"], :zones, true)
 
     @result_num = images.size
 
     @images = images.paginate(:page => params[:page], :per_page => 20)
     @units = Unit.sorted.distinct.joins(:images).order("unit_no")
-    @zones = Zone.sorted.distinct.joins(:images).order("name")
   end
 
   def show
