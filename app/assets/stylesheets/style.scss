@@ -26,20 +26,20 @@
 }
 
 .combined_selections .list-group {
-  margin-bottom:  0;;
+  margin-bottom: 0;
 }
 
 .sparc_subnavbar.navbar {
   height: 30px;
   margin-top: -20px;
-  min-height:30px;
+  min-height: 30px;
   padding: 0;
 }
 
 .sparc_subnavbar .nav li a {
-  height:  29px;
-  padding-bottom:15px
-  padding-top:5px;
+  height: 29px;
+  padding-bottom: 15px;
+  padding-top: 5px;
 }
 
 /* Start Main Site */
@@ -479,7 +479,7 @@ a.content {
   overflow: hidden;
   padding: 0;
   &:focus, &:hover {
-    background-size:960px 720px;
+    background-size: 960px 720px;
     background-position: center;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
