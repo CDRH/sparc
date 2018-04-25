@@ -12,6 +12,9 @@ class ExploreController < ApplicationController
 
   def units
     @subsection = "units"
+    @unit_occs = Occupation.includes(:units)
+                   .where.not(units: { occupation_id: nil })
+                   .sorted
 
     units = Unit.includes(
       :inferred_function,
