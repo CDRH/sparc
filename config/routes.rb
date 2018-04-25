@@ -63,7 +63,6 @@ Rails.application.routes.draw do
     :ornaments,
     :perishables,
     :pollen_inventories,
-    :room_types,
     :select_artifacts,
     :soils,
     :strata,
