@@ -30,16 +30,16 @@
 }
 
 .sparc_subnavbar.navbar {
-  margin-top: -20px;
   height: 30px;
+  margin-top: -20px;
   min-height:30px;
   padding: 0;
 }
 
 .sparc_subnavbar .nav li a {
   height:  29px;
-  padding-top:5px;
   padding-bottom:15px
+  padding-top:5px;
 }
 
 /* Start Main Site */
@@ -121,8 +121,8 @@ ul.gallery_info {
 }
 
 .gallery_info li {
-  line-height: 1.1em;
   font-size: .9em;
+  line-height: 1.1em;
 }
 
 .gallery_entry {
@@ -252,8 +252,8 @@ ul.gallery_info {
 // Universal Viewer
 
 .document_selection {
- background-color: #000;
- padding: .2em
+  background-color: #000;
+  padding: .2em
 }
 
 #manifestSelect {
@@ -371,8 +371,8 @@ ul.gallery_info {
 .head_arc {
   display: block;
   font-family: 'Jura', sans-serif;
-  line-height: 1em;
   font-size: .26em; 
+  line-height: 1em;
   margin-top: -1.3em;
 }
 
@@ -444,101 +444,95 @@ ul.gallery_info {
   background: url('band_aerial.jpg') center center;
   height: 400px;
   margin-top: -22px;
-}
-
-.home_first_band p {
-  background-color: rgba(0,0,0,.6);
-  color: #fff;
-  float: right;
-  font-family: 'Jura', sans-serif;
-  font-size: 1.8em;
-  height: 400px;
-  padding: 20px;
-  text-align: center;
-  vertical-align: bottom;
-  width: 300px;
-}
-
-.home_alternate_band {
-  margin: 20px auto;
-}
-
-.home_second_band .container {
-  background: url('topographic_bottom.jpg') center top no-repeat #4c83ab;
-  padding: 20px;
-  text-align: center;
+  p {
+    background-color: rgba(0,0,0,.6);
+    color: #fff;
+    float: right;
+    font-family: 'Jura', sans-serif;
+    font-size: 1.8em;
+    height: 400px;
+    padding: 20px;
+    text-align: center;
+    vertical-align: bottom;
+    width: 300px;
+  }
 }
    
-.home_second_band p {
-  color: #fff;
-  font-size: 1.3em;
-  line-height: 1;
-}
-   
-.home_callout .content {
-  border-radius: 8px;
-  border: 4px solid $gray-light;
+.home_callout {
   display: block;
   font-size: 1.2em;
-  height: 14em;
-  margin: 10px 0;
-  padding: 10px;
+  height: 16em;
 }
 
-.home_callout a:focus,
-.home_callout a:hover {
-  text-decoration: none;
+@media (max-width: $container-tablet) {
+  .home_callout {
+    height: 13em;
+  }
 }
 
-.home_callout .content:focus,
-.home_callout .content:hover {
-  border-radius: 8px;
+a.content {
+  background-position: center;
+  background-size: 800px 600px;
   display: block;
-  font-size: 1.2em;
-  height: 14em;
-  margin: 10px 0;
-  padding: 10px;
+  margin-left: -15px;
+  margin-right: -15px;
+  overflow: hidden;
+  padding: 0;
+  &:focus, &:hover {
+    background-size:960px 720px;
+    background-position: center;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+  }
+  .row {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  &:hover h4 {
+    font-weight: 800;
+  }
 }
 
-.home_callout .inner_content {
-  background-color: rgba(255,255,255,.7);
-  border-radius: 8px;
-  padding: 10px;
-  width: 50%;
-}
-   
-.home_callout1 .content,
-.home_callout4 .content {
-  background: #F7ECDB;
+a.content:focus .inner_content,
+a.content:hover .inner_content {
+  border-bottom: 10px solid $blue;
+  padding-top: 1.5em;
 }
 
-.home_callout .content:focus,
-.home_callout .content:hover {
-  border-color: $brand-primary;
+// Explore
+.home_callout1 {
+  background-image: url('home_explore.jpg');
+}
+// Query
+.home_callout2 {
+  background-image: url('home_query.jpg');
+}
+// Documents
+.home_callout3 {
+  background-image: url('home_docs.jpg');
+}
+// Gallery
+.home_callout4 {
+  background-image: url('home_gallery.jpg');
 }
 
-.home_callout .content:focus .inner_content
-.home_callout .content:hover .inner_content {
-  border-color: $brand-primary;
-  background-color: rgba(255,255,255,.9);
+a .inner_content  {
+  color: #000;
 }
 
-.home_callout1 .content {
-  background: url('writing.png') #4c83ab !important;
-  background-size: cover;
+.inner_content {
+  background-color: rgba(255,255,255,.85);
+  padding: .5em;
+  transition: padding 0.5s;
+  -moz-transition: padding 0.5s;
+  -o-transition: padding 0.5s;
+  -webkit-transition: padding 0.5s;
+  h4 {
+    font-family: 'Jura', sans-serif;
+    font-weight: 100;
+  }
 }
 
-.home_callout2 .content {
-  background: url('shards1.png') #4c83ab;
-  background-size: cover;
-}
 
-.home_callout3 .content {
-  background: url('bricks1.png') #4c83ab;
-  background-size: cover;
-}
-
-.home_callout4 .content {
-  background: url('landscape.png') #4c83ab;
-  background-size: cover;
-}
