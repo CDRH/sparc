@@ -505,7 +505,7 @@ a.content {
     margin-right: 15px;
     margin-left: 15px;
   }
-  &:hover h4 {
+  &:focus h4, &:hover h4 {
     font-weight: 800;
   }
 }
@@ -521,6 +521,7 @@ a.content:hover .inner_content {
   height: 100%;
 }
 
+.home_callout:focus .explore_inner,
 .home_callout:hover .explore_inner {
   background-color: transparent;
 }
