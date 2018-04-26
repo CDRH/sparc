@@ -23,10 +23,10 @@ class ExploreController < ApplicationController
     )
 
     # text searches
-    units = units.where("unit_no LIKE ?", "%#{params['unit_no']}%") if params["unit_no"].present?
-    units = units.where("other_description LIKE ?", "%#{params['other_description']}%") if params["other_description"].present?
-    units = units.where("units.comments LIKE ?", "%#{params['comments']}%") if params["comments"].present?
-    units = units.joins(:strata).where("strata.strat_all LIKE ?", "%#{params['strata']}%") if params["strata"].present?
+    units = units.where("unit_no LIKE ?", "%#{params['unit_no']}%") if present?(params["unit_no"])
+    units = units.where("other_description LIKE ?", "%#{params['other_description']}%") if present?(params["other_description"])
+    units = units.where("units.comments LIKE ?", "%#{params['comments']}%") if present?(params["comments"])
+    units = units.joins(:strata).where("strata.strat_all LIKE ?", "%#{params['strata']}%") if present?(params["strata"])
 
     # basic joins
     units = add_to_query(units, :excavation_statuses, params["excavation_status"], :excavation_status)
@@ -41,7 +41,7 @@ class ExploreController < ApplicationController
     units = add_to_query(units, :zones, params["zone"], :zone)
 
     # left joins where not null
-    if params["items"].present?
+    if present?(params["items"])
       params["items"].each do |item|
         units = units.includes(item).where.not(item => { :id => nil })
       end
@@ -147,7 +147,7 @@ class ExploreController < ApplicationController
   # essentially creating: images.where(:where_rel => { :id => param }).joins(:relationship)
   # most of the time relationship is the same as where_rel but depends on model design
   def add_to_query query_obj, where_rel, param, relationship=where_rel, joins=true
-    if param.present?
+    if present?(param)
       query_obj = query_obj.where(where_rel => { :id => param })
       query_obj = query_obj.joins(relationship) if joins
     end
