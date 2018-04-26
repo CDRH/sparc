@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180425150620) do
+ActiveRecord::Schema.define(version: 20180425211750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -771,6 +771,7 @@ ActiveRecord::Schema.define(version: 20180425150620) do
     t.integer  "image_quality_id"
     t.string   "strat_other"
     t.string   "orig_subjects"
+    t.boolean  "file_exists"
     t.index ["image_box_id"], name: "index_images_on_image_box_id", using: :btree
     t.index ["image_creator_id"], name: "index_images_on_image_creator_id", using: :btree
     t.index ["image_format_id"], name: "index_images_on_image_format_id", using: :btree
