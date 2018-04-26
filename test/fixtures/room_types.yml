@@ -1,9 +1,0 @@
-one:
-  description: MyString
-  occupation_id: 1
-  location: MyString
-
-two:
-  description: MyString
-  occupation_id: 1
-  location: MyString

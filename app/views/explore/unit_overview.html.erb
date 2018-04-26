@@ -25,12 +25,6 @@
         <li><strong>Occupation:</strong> <%= @unit.occupation.name if @unit.occupation %></li>
         <li><strong>Excavation Status:</strong> <%= @unit.excavation_status.name if @unit.excavation_status %></li>
         <li><strong>Associated Strata:</strong> <%= pluralize @unit.strata.size, "stratum" %></li>
-        <% type = @unit.room_type %>
-        <% if type %>
-          <li><strong>Room Type:</strong> <%= type.description if type.description %>
-          <li><strong>Room Type Period:</strong> <%= type.occupation.name if type.occupation %></li>
-          <li><strong>Room Type Location:</strong> <%= type.location %></li>
-        <% end %>
         <li><strong>Inferred Function:</strong> <%= @unit.inferred_function.name if @unit.inferred_function %></li>
         <li><strong>Other Description:</strong> <%= @unit.other_description if @unit.other_description %></li>
         <li><strong>Comments:</strong> <%= @unit.comments %></li>

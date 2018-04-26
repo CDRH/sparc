@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180420161826) do
+ActiveRecord::Schema.define(version: 20180425211750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -771,6 +771,7 @@ ActiveRecord::Schema.define(version: 20180420161826) do
     t.integer  "image_quality_id"
     t.string   "strat_other"
     t.string   "orig_subjects"
+    t.boolean  "file_exists"
     t.index ["image_box_id"], name: "index_images_on_image_box_id", using: :btree
     t.index ["image_creator_id"], name: "index_images_on_image_creator_id", using: :btree
     t.index ["image_format_id"], name: "index_images_on_image_format_id", using: :btree
@@ -1044,16 +1045,6 @@ ActiveRecord::Schema.define(version: 20180420161826) do
     t.index ["name"], name: "index_residential_features_on_name", unique: true, using: :btree
   end
 
-  create_table "room_types", force: :cascade do |t|
-    t.string   "description"
-    t.string   "location"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "occupation_id"
-    t.string   "type_no"
-    t.index ["occupation_id"], name: "index_room_types_on_occupation_id", using: :btree
-  end
-
   create_table "salmon_sectors", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -1210,7 +1201,6 @@ ActiveRecord::Schema.define(version: 20180420161826) do
     t.integer  "salmon_sector_id"
     t.text     "other_description"
     t.integer  "irregular_shape_id"
-    t.integer  "room_type_id"
     t.string   "length"
     t.string   "width"
     t.string   "floor_area"
@@ -1325,7 +1315,6 @@ ActiveRecord::Schema.define(version: 20180420161826) do
   add_foreign_key "units", "inferred_functions"
   add_foreign_key "units", "intact_roofs"
   add_foreign_key "units", "irregular_shapes"
-  add_foreign_key "units", "room_types"
   add_foreign_key "units", "salmon_sectors"
   add_foreign_key "units", "stories"
   add_foreign_key "units", "type_descriptions"

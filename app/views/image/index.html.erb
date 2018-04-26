@@ -12,11 +12,11 @@
     <div class="col-sm-3">
       <div class="form-group">
         <%= label_tag "image_no" %>
-        <%= text_field_tag "image_no", params["image_no"], placeholder: "00946", class: "form-control" %>
+        <%= text_field_tag "image_no", params["image_no"], class: "form-control" %>
       </div>
       <div class="form-group">
         <%= label_tag "comments" %>
-        <%= text_area_tag "comments", params["comments"], placeholder: "wall section", rows: 2, class: "form-control" %>
+        <%= text_area_tag "comments", params["comments"], rows: 2, class: "form-control" %>
       </div>
     </div>
     <div class="col-sm-2">
@@ -24,14 +24,6 @@
         <div class="form-group">
           <%= label_tag "unit", "Unit" %>
           <%= select_tag "unit", options_from_collection_for_select(Unit.sorted, "id", "unit_no", params["unit"]), class: "form-control", multiple: true, include_blank: true, size: 6 %>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-2">
-      <div class="form-group">
-        <div class="form-group">
-          <%= label_tag "zone", "Zone" %>
-          <%= select_tag "zone", options_from_collection_for_select(Zone.sorted, "id", "name", params["zone"]), class: "form-control", multiple: true, include_blank: true, size: 6 %>
         </div>
       </div>
     </div>
