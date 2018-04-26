@@ -2,8 +2,8 @@ LOG_LOC = "#{Rails.root}/reports"
 
 namespace :images do
 
-  desc "find missing and extra images"
-  task find_missing: :environment do
+  desc "report missing and extra images"
+  task report_missing: :environment do
     report = "#{LOG_LOC}/all_mediaserver_images.txt"
     if File.file?(report)
       puts "Processing filesystem report"
