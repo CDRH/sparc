@@ -2044,3 +2044,4 @@ File.open("reports/please_check_for_accuracy.txt", "w") do |file|
 end
 
 puts "Please run `rails units:description` to add descriptions to zones and units"
+puts "Please run `rails images:file_exists` to mark when images do or do not exists on the file system"

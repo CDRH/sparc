@@ -9,6 +9,7 @@ class ImageController < ApplicationController
       :image_subjects,
       :units,
     )
+    images = images.where(file_exists: true)
     images = images.where("images.image_no LIKE ?", "%#{params['image_no']}%") if params["image_no"].present?
     images = images.where("images.comments LIKE ?", "%#{params['comments']}%") if params["comments"].present?
     images = add_to_query(images, :image_boxes, params["box"], :image_box, true)

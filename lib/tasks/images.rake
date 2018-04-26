@@ -2,6 +2,25 @@ LOG_LOC = "#{Rails.root}/reports"
 
 namespace :images do
 
+  desc "flag images file_exists column"
+  task file_exists: :environment do
+    res = { exists: 0, dne: 0 }
+    report = "#{LOG_LOC}/all_mediaserver_images.txt"
+    if File.file?(report)
+      fs = IO.readlines(report).map(&:chomp)
+      Image.all.each do |image|
+        exists = fs.include?(image.filepath)
+        image.update_attributes(file_exists: exists)
+        exists ? res[:exists] += 1 : res[:dne] += 1
+      end
+      puts "Updated images #{res}"
+    else
+      puts "Unable to find #{report}, please regenerate"
+      puts "    Run following from iiif/sparc directory:"
+      puts "    find field polaroids -type f > all_mediaserver_images.txt"
+    end
+  end
+
   desc "report missing and extra images"
   task report_missing: :environment do
     report = "#{LOG_LOC}/all_mediaserver_images.txt"
