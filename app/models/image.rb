@@ -14,8 +14,7 @@ class Image < ActiveRecord::Base
 
   if SETTINGS["hide_sensitive_image_records"]
     default_scope {
-      joins(:image_human_remain).where("image_human_remains.name = ?", "N")
-      where.not("images.comments LIKE ?", "%burial%")
+      joins(:image_human_remain).where(image_human_remains: { displayable: true })
     }
   end
 
@@ -53,9 +52,7 @@ were edited and cross-checked against other sources.
   def displayable?
     no_remains = true
     no_remains = image_human_remain.displayable if image_human_remain
-
-    no_remains && !subject_list.include?("Feature-burial") &&
-      !comments.downcase.include?("burial")
+    no_remains && file_exists
   end
 
   def format

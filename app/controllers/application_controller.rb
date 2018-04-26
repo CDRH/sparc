@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def present?(parameter)
+    parameter = parameter.reject(&:empty?) if parameter.class == Array
+    parameter.present?
+  end
+
   # require 'custom_routes'
   require 'new_by_search'
   

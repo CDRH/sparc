@@ -9,8 +9,9 @@ class ImageController < ApplicationController
       :image_subjects,
       :units,
     )
-    images = images.where("images.image_no LIKE ?", "%#{params['image_no']}%") if params["image_no"].present?
-    images = images.where("images.comments LIKE ?", "%#{params['comments']}%") if params["comments"].present?
+    images = images.where(file_exists: true)
+    images = images.where("images.image_no LIKE ?", "%#{params['image_no']}%") if present?(params["image_no"])
+    images = images.where("images.comments LIKE ?", "%#{params['comments']}%") if present?(params["comments"])
     images = add_to_query(images, :image_boxes, params["box"], :image_box, true)
     images = add_to_query(images, :image_creators, params["creator"], :image_creator, true)
     images = add_to_query(images, :image_formats, params["format"], :image_format, false)
@@ -19,13 +20,11 @@ class ImageController < ApplicationController
     images = add_to_query(images, :image_qualities, params["quality"], :image_quality, true)
     images = add_to_query(images, :image_subjects, params["subject"], :image_subjects, false)
     images = add_to_query(images, :units, params["unit"], :units, false)
-    images = add_to_query(images, :zones, params["zone"], :zones, true)
 
     @result_num = images.size
 
     @images = images.paginate(:page => params[:page], :per_page => 20)
     @units = Unit.sorted.distinct.joins(:images).order("unit_no")
-    @zones = Zone.sorted.distinct.joins(:images).order("name")
   end
 
   def show
@@ -39,7 +38,7 @@ class ImageController < ApplicationController
   # assumes that the tables need to be joined, but can optionally omit join if this table
   # has previously been loaded via includes
   def add_to_query(query_obj, where_rel, param, relationship, joins=true)
-    if param.present?
+    if present?(param)
       query_obj = query_obj.where(where_rel => { :id => param })
       query_obj = query_obj.joins(relationship) if joins
     end
