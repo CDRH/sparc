@@ -8,7 +8,7 @@
     <!-- location -->
     <div class="col-md-3">
       <div class="form-group">
-        <%= label_tag "unit_no", "Unit Number" %>
+        <%= label_tag "unit_no", "Unit Number (e.g. \"001\", \"BW\")" %>
         <%= text_field_tag "unit_no", params["unit_no"], class: "form-control" %>
       </div>
       <div class="form-group">
@@ -83,7 +83,7 @@
           <!-- ? -->
           <div class="col-md-3">
             <div class="form-group">
-              <%= label_tag "strata" %>
+              <%= label_tag "strata", "Strata (e.g. \"B-1-2\")" %>
               <%= text_field_tag "strata", params["strata"], class: "form-control" %>
             </div>
           </div>
@@ -91,11 +91,11 @@
           <!-- comments -->
           <div class="col-md-3">
             <div class="form-group">
-              <%= label_tag "other_description", "Other Description (not much text to search?)" %>
+              <%= label_tag "other_description", "Other Description (e.g. \"interstitial\")" %>
               <%= text_field_tag "other_description", params["other_description"], class: "form-control" %>
             </div>
             <div class="form-group">
-              <%= label_tag "comments", "Comments" %>
+              <%= label_tag "comments", "Comments (e.g. \"interstitial\")" %>
               <%= text_field_tag "comments", params["comments"], class: "form-control" %>
             </div>
           </div>
