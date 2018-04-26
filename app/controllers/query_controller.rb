@@ -282,7 +282,7 @@ class QueryController < ApplicationController
       .each { |a| column_list << { name: a.name.to_s, type: :assoc } }
 
     if SETTINGS["hide_sensitive_image_records"]
-      column_list.reject!{ |column| %w[image_human_remain image_subjects]
+      column_list.reject!{ |column| %w[image_human_remain]
         .include?(column[:name]) }
     end
 
