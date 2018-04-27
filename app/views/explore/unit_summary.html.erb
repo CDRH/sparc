@@ -4,10 +4,10 @@
 
 <div role="tabpanel" class="tab-pane active" id="summary">
   <div class="row">
-    <div class="col-md-6 buffer-bottom">
-      <%= sanitize @unit.description %>
+    <div class="col-md-8 buffer-bottom">
+      <p class="lead"><%= sanitize @unit.description %></p>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4 explore_summary_mm">
       <% if @unit.media_maps.present? %>
         <%= image_tag iiif_path(@unit.media_maps.first, "!300,300") %>
       <% end %>
