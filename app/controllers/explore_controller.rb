@@ -96,7 +96,7 @@ class ExploreController < ApplicationController
     @subsection = "units"
     @selected = "images"
     @unit = Unit.find_by(unit_no: params["number"])
-    @images = @unit.images
+    @images = @unit.images.where(file_exists: true)
     @images_display = @images.sorted.limit(8)
   end
 
