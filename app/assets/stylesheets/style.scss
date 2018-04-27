@@ -29,18 +29,22 @@
   margin-bottom: 0;
 }
 
-.sparc_subnavbar.navbar {
-  height: 30px;
-  margin-top: -20px;
-  min-height: 30px;
-  padding: 0;
+.sparc_subnavbar {
+  &.navbar {
+    height: 30px;
+    margin-top: -20px;
+    min-height: 30px;
+    padding: 0;
+    height: auto;
+  }
+  .nav li a {
+    height: 29px;
+    padding-bottom: 15px;
+    padding-top: 5px;
+  }
 }
 
-.sparc_subnavbar .nav li a {
-  height: 29px;
-  padding-bottom: 15px;
-  padding-top: 5px;
-}
+
 
 /* Start Main Site */
 
@@ -227,7 +231,7 @@ a.content:hover .inner_content {
 }
    
 .home_callout {
-  border: 4px solid #453B2A;
+  border: 4px solid $darkbrown;
   display: block;
   font-size: 1.2em;
   height: 16em;
@@ -318,6 +322,10 @@ a .inner_content  {
   text-decoration: underline;
 }
 
+.explore_choices {
+  margin-top: 1.5em;
+}
+
 // Extends code from home page
 // Interactive Map
 .explore_callout1 {
@@ -335,19 +343,38 @@ a .inner_content  {
 @media (min-width: $container-tablet) {
   // Interactive Map
   .explore_callout1 {
+    border-bottom-width: 4px;
     border-right-width: 2px;
-    border-top-width: 4px;
   }
   // Browse Units
   .explore_callout2 {
+    border-left-width: 2px;
     border-top-width: 4px;
-    border-right-width: 2px;
   }
 }
 
-.explore_choices {
-  margin-top: 2em;
+.explore_summary_mm {
+  text-align: center;
+  img {
+    border: 2px solid $darkbrown;
+    max-width: 100%;
+  }
 }
+
+// Images and documents tabs
+.explore_see_more {
+  margin: 1em 0 2em 0;
+}
+
+.explore_sample_image {
+  height: 100%;
+  text-align: center;
+  img {
+    margin: 5px;
+    max-width: 100%;
+  }
+}
+
 
 //---------------
 // Query Pages
