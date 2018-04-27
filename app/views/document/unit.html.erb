@@ -14,7 +14,7 @@
 
 <input id="manifest" type="hidden" value="" />
 
-<div id="uv_viewer" class="uv"></div>
+<div id="uv_viewer" class="uv" data-uri="<%= get_data_uri %>"></div>
 
 <%# because of self-referential lines in embed JS do not use rails script include helper %>
 <script type="text/javascript" id="embedUV" src="<%= asset_path('uv-2.0.2/lib/embed.js') %>"></script>
