@@ -2,19 +2,30 @@
 
 <%= render "unit_tabs" %>
 
-<div role="tabpanel" class="tab-pane" id="documents">
-  <p>
-    <%= pluralize @document_count, "document" %> available to view.
-    <%= link_to "Visit the document viewer for this unit to see all documents", documents_unit_path(unit: @unit.unit_no) %>
-  </p>
-  <% @res.each_slice(3) do |docs| %>
-    <div class="row">
-      <% docs.each do |doc| %>
-        <div class="col-md-4">
-          <p><%= doc.document_type.name %></p>
-          <%= image_tag iiif_path(doc, SETTINGS["thumbnail_size"]) %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+<div role="tabpanel" class="tab-pane" id="images">
+  <!-- TODO could move this and image#index version into partial? -->
+  <div class="row">
+    <%= link_to documents_unit_path(unit: @unit.unit_no), class: "btn btn-primary btn-lg explore_see_more" do %>
+      Visit the document viewer for this unit to see all documents 
+      <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+    <% end %>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Example Documents</h3>
+      </div>
+      <div class="panel-body">
+        <% @res.each_slice(4) do |docs| %>
+          <div class="row">
+            <% docs.each do |doc| %>
+              <div class="col-xs-3 explore_sample_image">
+                <p><%= doc.document_type.name %></p>
+                <%= image_tag iiif_path(doc, SETTINGS["thumbnail_size"]) %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div><!-- /panel -->
+  </div><!-- /row -->
+</div><!-- /tabpanel -->

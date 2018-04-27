@@ -4,20 +4,38 @@
 
 <p>When you select an individual excavation unit, the map will take you to a new page where you can browse the various categories of information available for that context.  This includes a excavation summaries (overview), field notes, feature descriptions and stratigraphic information from that unit. </p>
 
-<div class="row">
-  <!-- map -->
-  <div class="col-md-6">
-    <%= link_to map_path do %>
-      <p>Delve Into the Interactive Map</p>
-      <%= image_tag "map_preview", size: "380x220" %>
-    <% end %>
-  </div>
+</div> <!-- /container -->
 
-  <!-- unit search -->
-  <div class="col-md-6">
-    <%= link_to units_path do %>
-      <p>Search and Browse by Units</p>
-      <%= image_tag "MM", size: "325x234" %>
+<div class="container-fluid">
+
+<div class="row explore_choices">
+  <div class="col-sm-6">
+    <%= link_to map_path, class: "content explore_callout1 home_callout" do %>
+      <div class="explore_inner">
+        <div class="row">
+          <div class="col-md-9 col-md-offset-3">
+            <div class="inner_content">
+              <h4>Interactive Map</h4>
+              <p>browse the excavation information by clicking on a particular room, unit or excavation context</p>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </div>
-</div>
+  </div><!-- /col -->
+  <div class="col-sm-6">
+    <%= link_to units_path, class: "content explore_callout2 home_callout" do %>
+      <div class="explore_inner">
+        <div class="row">
+          <div class="col-md-9 ">
+            <div class="inner_content">
+              <h4>Browse Units</h4>
+              <p>Search and browse by Units</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div><!-- /col -->
+</div><!-- /row -->
+
