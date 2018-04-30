@@ -8,7 +8,7 @@ namespace :images do
     report = "#{LOG_LOC}/all_mediaserver_images.txt"
     if File.file?(report)
       fs = IO.readlines(report).map(&:chomp)
-      Image.all.each do |image|
+      Image.unscoped.all.each do |image|
         exists = fs.include?(image.filepath)
         image.update_attributes(file_exists: exists)
         exists ? res[:exists] += 1 : res[:dne] += 1
@@ -29,7 +29,7 @@ namespace :images do
       fs = IO.readlines(report).map(&:chomp)
       puts "    #{fs.uniq.length} images found in media server"
       puts "Retrieving database records"
-      db = Image.all.map { |i| i.filepath }
+      db = Image.unscoped.all.map { |i| i.filepath }
       puts "    #{db.length} image records found in database"
       puts "    (#{db.uniq.length} image records in database have unique image_no)"
       only_in_db = db - fs
@@ -56,7 +56,7 @@ namespace :images do
 
   desc "return list of remains and burials"
   task list_remains: :environment do
-    burials = Image
+    burials = Image.unscoped
       .includes(:image_human_remain, :image_subjects)
       .select { |i| !i.displayable? }
       .map { |b| b.filepath }
