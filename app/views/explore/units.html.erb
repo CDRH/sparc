@@ -11,17 +11,17 @@
         <%= label_tag "unit_no", "Unit Number (e.g. \"001\", \"BW\")" %>
         <%= text_field_tag "unit_no", params["unit_no"], class: "form-control" %>
       </div>
-      <div class="form-group">
-        <%= label_tag "excavation_status", "Excavation Status" %>
-        <%= select_tag "excavation_status", options_from_collection_for_select(ExcavationStatus.sorted, "id", "name", params["excavation_status"]), class: "form-control", multiple: true, include_blank: true %>
+      <div class="form-group float-bottom">
+        <%= label_tag "unit_class", "Unit Class" %>
+        <%= select_tag "unit_class", options_from_collection_for_select(UnitClass.sorted, "id", "name", params["unit_class"]), class: "form-control", multiple: true, include_blank: true %>
       </div>
     </div>
 
     <!-- description -->
     <div class="col-md-3">
       <div class="form-group">
-        <%= label_tag "intact_roof", "IntactRoof" %>
-        <%= select_tag "intact_roof", options_from_collection_for_select(IntactRoof.sorted, "id", "name", params["intact_roof"]), class: "form-control", multiple: true, include_blank: true %>
+        <%= label_tag "occupation", "Occupation" %>
+        <%= select_tag "occupation", options_from_collection_for_select(@unit_occs, "id", "name", params["occupation"]), class: "form-control", multiple: true, include_blank: true %>
       </div>
       <div class="form-group">
         <%= label_tag "irregular_shape", "IrregularShape" %>
@@ -36,8 +36,8 @@
         <%= select_tag "story", options_from_collection_for_select(Story.sorted, "id", "name", params["story"]), class: "form-control", multiple: true, include_blank: true %>
       </div>
       <div class="form-group">
-        <%= label_tag "occupation", "Occupation" %>
-        <%= select_tag "occupation", options_from_collection_for_select(@unit_occs, "id", "name", params["occupation"]), class: "form-control", multiple: true, include_blank: true %>
+        <%= label_tag "intact_roof", "IntactRoof" %>
+        <%= select_tag "intact_roof", options_from_collection_for_select(IntactRoof.sorted, "id", "name", params["intact_roof"]), class: "form-control", multiple: true, include_blank: true %>
       </div>
     </div>
 
@@ -48,8 +48,8 @@
         <%= select_tag "inferred_function", options_from_collection_for_select(InferredFunction.sorted, "id", "name", params["inferred_function"]), class: "form-control", multiple: true, include_blank: true %>
       </div>
       <div class="form-group">
-        <%= label_tag "unit_class", "Unit Class" %>
-        <%= select_tag "unit_class", options_from_collection_for_select(UnitClass.sorted, "id", "name", params["unit_class"]), class: "form-control", multiple: true, include_blank: true %>
+        <%= label_tag "excavation_status", "Excavation Status" %>
+        <%= select_tag "excavation_status", options_from_collection_for_select(ExcavationStatus.sorted, "id", "name", params["excavation_status"]), class: "form-control", multiple: true, include_blank: true %>
       </div>
     </div>
 
