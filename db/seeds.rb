@@ -2033,7 +2033,7 @@ seed_document_types if DocumentType.count < 1
 seed_documents if Document.count < 1
 
 # Images
-seed_images if Image.count < 1
+seed_images if Image.unscoped.count < 1
 
 # Logging
 File.open("reports/please_check_for_accuracy.txt", "w") do |file|
