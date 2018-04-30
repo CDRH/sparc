@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   # Static Pages
   get '/about', to: 'static#about', as: :about
+  get '/about/:name', to: 'static#about_sub', as: :about_sub
   get '/native-descendants', to: 'static#descendants', as: :descendants
 
 
