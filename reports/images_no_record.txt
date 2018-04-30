@@ -32,7 +32,6 @@ field/00602-1.jpg
 field/00049.jpg
 field/00624-2.jpg
 field/07046.jpg
-field/02582.jpg
 field/00614-2.jpg
 field/00618-1.jpg
 field/00042.jpg
