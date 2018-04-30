@@ -29,7 +29,7 @@ namespace :images do
       fs = IO.readlines(report).map(&:chomp)
       puts "    #{fs.uniq.length} images found in media server"
       puts "Retrieving database records"
-      db = Image.all.map { |i| i.filepath }
+      db = Image.unscoped.all.map { |i| i.filepath }
       puts "    #{db.length} image records found in database"
       puts "    (#{db.uniq.length} image records in database have unique image_no)"
       only_in_db = db - fs
