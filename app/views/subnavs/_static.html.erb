@@ -1,1 +1,25 @@
 <%# home has no sub navigation %>
+
+<% if @section == "about" %>
+  <div class="navbar navbar-default sparc_subnavbar">
+    <div class="container">
+      <ul class="nav navbar-nav">
+        <% about_pages = [
+            "background",
+            "credits",
+            "goals",
+            "how-to-cite",
+            "people",
+            "policies",
+            "technical"
+          ]
+        %>
+        <% about_pages.each do |sub| %>
+          <li class="<%= active?(sub, @subsection) %>">
+            <%= link_to sub.titleize, about_sub_path(name: sub) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
