@@ -32,6 +32,7 @@ class DocumentController < ApplicationController
     unit_no = unit.unit_no
     collections = {}
     DocumentType.all.each_with_index do |dt, idx|
+      @first_doc_type = dt.name if idx == 0
       key = dt.name.parameterize(separator: "_")
       docs = Document.joins(:document_type, :units)
               .where("units.unit_no = ?", unit_no)
