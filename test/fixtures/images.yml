@@ -17,3 +17,4 @@ one:
   storage_location: MyString
   entered_by: MyString
   notes: MyString
+  file_exists: true
