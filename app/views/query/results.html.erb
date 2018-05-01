@@ -11,7 +11,8 @@
 
 <div class="search_results table-responsive buffer-bottom">
   <table class="table table-condensed table-hover table-striped">
-    <% no_occupation = !@table_fields.map.include?("occupation_id") %>
+    <% no_occupation =
+      !@table_fields.map{ |f| f[:name] }.include?("occupation") %>
     <tr>
       <%# Add Occupation column if not present %>
       <% if @occupation_source.present? && no_occupation %>

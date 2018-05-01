@@ -119,7 +119,7 @@ class QueryController < ApplicationController
     end
 
     # Occupations
-    if params["occupation"].present? && params["occupation"][/^[0-9]+$/]
+    if occupation_param_ids_only?
       assoc_name_list = res.reflect_on_all_associations.map { |a| a.name }
 
       # Filter by occupation based on occupation of associated strata,
@@ -161,6 +161,20 @@ class QueryController < ApplicationController
     end
 
     res
+  end
+
+  def occupation_param_ids_only?
+    if params["occupation"].present?
+      if params["occupation"].respond_to?(:map)
+        params["occupation"].each do |o|
+          return false if !o[/^\d+$/]
+        end
+        return true
+      else
+        return params["occupation"][/^[0-9]+$/]
+      end
+    end
+    false
   end
 
   def set_section
