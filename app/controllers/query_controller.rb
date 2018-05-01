@@ -52,7 +52,7 @@ class QueryController < ApplicationController
       params[:table].present? ? params[:table] : @tables.first[:name]
 
     @table_class = params[:table].to_s.classify.constantize
-    @table_fields = collect_fields @table_class
+    @table_fields = collect_fields(@table_class)
     @subsection = table_label
   end
 
@@ -61,12 +61,12 @@ class QueryController < ApplicationController
     @subsection = table_label
 
     @table = params[:table].classify.constantize
-    @table_fields = collect_fields @table
+    @table_fields = collect_fields(@table)
 
     # Flatten primary and other field hash sets into one array of field hashes
     @table_fields = %i[primary other].map { |set| @table_fields[set] }.flatten
 
-    res = search_fields @table, @table_fields
+    res = search_fields(@table, @table_fields)
 
     # Handle common search fields
     res = common_search res
