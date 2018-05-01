@@ -35,7 +35,7 @@ default: &default
       perishables:
         singular: true
       wood_inventory:
-        label: Woods
+        label: Wood
         singular: true
     units:
       singular: true
