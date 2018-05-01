@@ -21,7 +21,7 @@
       <%- @table_fields.each do |field| %>
         <% unless sensitive_record?(field[:name].to_s) %>
           <th>
-            <%= field_label field %>
+            <%= field_label(field) %>
           </th>
         <% end %>
       <% end %>
