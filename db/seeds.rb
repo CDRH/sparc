@@ -918,7 +918,6 @@ def seed_wood_inventories
     # TODO will need to revisit after splitting strata into primary / other
     # in join table
     associate_strata_features(unit, wood[:strat], wood[:feature_no], wood, "Wood Inventories")
-    wood.delete(:feature_no)
     # Output and save
     # puts wood[:salmon_museum_no]
     WoodInventory.create(wood)
@@ -1817,6 +1816,7 @@ def seed_tree_rings
     trl_no: "TRL No.",
     year_dated: "Year Dated",
     windes_sample: "Windes Sample",
+    field_no: "Field No.",
     record_field_key_no: "Record Key",
     species_tree_ring: "Species",
     inner_date: "Inner Date",
