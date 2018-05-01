@@ -119,7 +119,7 @@ class QueryController < ApplicationController
     end
 
     # Occupations
-    if params["occupation"].present?
+    if params["occupation"].present? && params["occupation"][/^[0-9]+$/]
       assoc_name_list = res.reflect_on_all_associations.map { |a| a.name }
 
       # Filter by occupation based on occupation of associated strata,
