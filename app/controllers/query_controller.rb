@@ -61,68 +61,12 @@ class QueryController < ApplicationController
     @subsection = table_label
 
     @table = params[:table].classify.constantize
-    @column_names = @table.columns.reject { |c| c.name[/(?:^id|_at)$/] }
-      .map(&:name)
-    res = @table
+    @table_fields = collect_fields @table
 
-    inputs = table_input_columns(@table)
-    inputs.each do |column|
-      if params[column[:name]].present?
-        if column[:type] == "string"
-          res = res.where("#{column[:name]} LIKE ?",
-                            "%#{params[column[:name]]}%")
-        else
-          res = res.where("#{column[:name]} = ?", params[column[:name]])
-        end
-      end
-    end
+    # Flatten primary and other field hash sets into one array of field hashes
+    @table_fields = %i[primary other].map { |set| @table_fields[set] }.flatten
 
-    bt_columns =
-      @table.reflect_on_all_associations(:belongs_to).map { |a| a.name.to_s }
-    habtm_columns =
-      @table.reflect_on_all_associations(:has_and_belongs_to_many)
-        .map { |a| a.name.to_s }
-    hm_columns =
-      @table.reflect_on_all_associations(:has_many).map { |a| a.name.to_s }
-    selects = table_select_columns(@table)
-    selects.each do |column|
-      if bt_columns.include?(column[:name])
-        if params[column[:name]].present?
-          res = res.joins(column[:name].to_sym)
-            .where(column[:name].pluralize => { id: params[column[:name]] })
-        else
-          res = res.includes(column[:name].to_sym)
-        end
-      elsif habtm_columns.include?(column[:name])
-        if params[column[:name]].present?
-          res = res.joins(column[:name].to_sym)
-            .where(column[:name].pluralize => { id: params[column[:name]] })
-        else
-          res = res.includes(column[:name].to_sym)
-        end
-        @column_names << "#{column[:name]}_habtm"
-      elsif hm_columns.include?(column[:name])
-        if params[column[:name]].present?
-          res = res.joins(column[:name].to_sym)
-            .where(column[:name].pluralize => { id: params[column[:name]] })
-        else
-          res = res.includes(column[:name].to_sym)
-        end
-        @column_names << "#{column[:name]}_hm"
-      elsif column[:type] == :join
-        if params[column[:name]].present?
-          res = res.joins(column[:join_table])
-            .where(column[:join_table] =>
-            { column[:name] => params[column[:name]] })
-        else
-          res = res.includes(column[:join_table])
-        end
-        @column_names << "#{column[:name]}|#{column[:join_table]}_join"
-      elsif params[column[:name]].present?
-        res = res.where("#{column[:name]} = ?", "#{params[column[:name]]}")
-        @column_names << column[:name]
-      end
-    end
+    res = search_fields @table, @table_fields
 
     # Handle common search fields
     res = common_search res
@@ -221,74 +165,5 @@ class QueryController < ApplicationController
 
   def set_section
     @section = "query"
-  end
-
-  def table_input_columns(table)
-    # Create form inputs for:
-    column_list = []
-
-    if table == Unit
-      column_list << { name: "unit_no", type: "string" }
-    elsif table == Feature
-      column_list << { name: "feature_no", type: "string" }
-    elsif table == Stratum
-      column_list << { name: "strat_all", type: "string" }
-      column_list << { name: "strat_alpha", type: "string" }
-      column_list << { name: "strat_one", type: "string" }
-      column_list << { name: "strat_two", type: "string" }
-      column_list << { name: "strat_three", type: "string" }
-    end
-
-    # Columns whose names
-    # don't begin with "strat"
-    # don't match "id", "room", or "unit"
-    # don't end in "_at", "_id", "_no", "code", or "type"
-    table.columns.each do |c|
-      if !c.name[/^strat/] \
-      && !c.name[/^(?:id|room|unit)$/] \
-      && !c.name[/(?:_at|_id|_no|code|type)$/]
-        column_list << { name: c.name.to_s, type: c.type }
-      end
-    end
-
-    column_list
-  end
-
-  def table_select_columns(table)
-    # Create select dropdowns for:
-    column_list = []
-
-    # Columns whose names
-    # end in "_no" not preceded by "feature", "code", or "type"
-    table.columns.each do |c|
-      if c.name[/(?:(?<!feature|#{table.to_s.downcase})_no|code|type)$/]
-        column_list << { name: c.name.to_s, type: :column }
-      end
-    end
-
-    # All associations except to Common Search Options:
-    #   unit, stratum, feature, or occupation
-    table.reflect_on_all_associations(:belongs_to)
-      .reject{ |a| a.name[/(?:^unit|^stratum|^feature|occupation)$/] }
-      .each { |a| column_list << { name: a.name.to_s, type: :assoc } }
-
-    table.reflect_on_all_associations(:has_many)
-      .reject{ |a| a.name[/(?:^units|^strata|^features|occupations)$/] }
-      .each { |a| column_list << { name: a.name.to_s, type: :assoc } }
-
-    table.reflect_on_all_associations(:has_and_belongs_to_many)
-      .reject{ |a| a.name[/(?:^units|^strata|^features|occupations)$/] }
-      .each { |a| column_list << { name: a.name.to_s, type: :assoc } }
-
-    if SETTINGS["hide_sensitive_image_records"]
-      column_list.reject!{ |column| %w[image_human_remain]
-        .include?(column[:name]) }
-    end
-
-    if table == Stratum
-      column_list << { name: "feature_no", type: :join, join_table: :features }
-    end
-
-    column_list
   end
 end
