@@ -16,7 +16,7 @@ cross-checked against other sources.
       DESC
       disabled: %w[],
       labels: {
-        trl_no: "TRL No."
+        trl_no: "TRL Number"
       },
       primary: %w[trl_no species_tree_ring outer_date cutting_date comments],
       selects: %w[cutting_date]

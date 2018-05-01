@@ -16,8 +16,8 @@ against other sources.
       DESC
       disabled: %w[],
       labels: {
-        fs_no: "FS No.",
-        sa_no: "SA No."
+        fs_no: "FS Number",
+        sa_no: "SA Number"
       },
       primary: %w[
         salmon_museum_number fs_no sa_no artifact_type comments comments_other

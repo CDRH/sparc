@@ -16,7 +16,8 @@ sources.
       DESC
       disabled: %w[feature_no],
       labels: {
-        salmon_museum_no: "Salmon Museum Number"
+        salmon_museum_no: "Salmon Museum Number",
+        record_field_key_no: "Record Field Key Number"
       },
       primary: %w[salmon_museum_no record_field_key_no description],
       selects: %w[]
