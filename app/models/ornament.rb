@@ -17,8 +17,8 @@ sources.
       DESC
       disabled: %w[],
       labels: {
-        salmon_museum_no: "Museum Specimen No.",
-        sa_no: "SA No."
+        salmon_museum_no: "Museum Specimen Number",
+        sa_no: "SA Number"
       },
       primary: %w[salmon_museum_no sa_no item],
       selects: %w[]

@@ -17,6 +17,7 @@ against other sources.
       DESC
       disabled: %w[],
       labels: {
+        salmon_museum_no: "Salmon Museum Number"
       },
       primary: %w[salmon_museum_no eggshell_item],
       selects: %w[eggshell_item]

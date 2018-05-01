@@ -17,7 +17,7 @@ against other sources.
       DESC
       disabled: %w[],
       labels: {
-        fs_no: "FS No."
+        fs_no: "FS Number"
       },
       primary: %w[fs_no],
       selects: %w[]

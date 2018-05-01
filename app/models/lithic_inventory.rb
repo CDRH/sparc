@@ -17,8 +17,8 @@ this table were edited and cross-checked against other sources.
       DESC
       disabled: %w[],
       labels: {
-        fs_no: "FS No.",
-        sa_no: "SA No."
+        fs_no: "FS Number",
+        sa_no: "SA Number"
       },
       primary: %w[fs_no sa_no comments],
       selects: %w[]

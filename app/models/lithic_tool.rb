@@ -22,8 +22,8 @@ against other sources.
       DESC
       disabled: %w[],
       labels: {
-        fs_no: "FS No.",
-        artifact_no: "Artifact No."
+        fs_no: "FS Number",
+        artifact_no: "Artifact Number"
       },
       primary: %w[
         fs_no artifact_no lithic_material_type lithic_condition fire_altered

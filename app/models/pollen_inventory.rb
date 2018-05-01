@@ -17,7 +17,7 @@ cross-checked against other sources.
       disabled: %w[],
       labels: {
         sa_no: "SA Number",
-        salmon_museum_no: "Salmon Museum No."
+        salmon_museum_no: "Salmon Museum Number"
       },
       primary: %w[sa_no salmon_museum_no],
       selects: %w[]

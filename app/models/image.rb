@@ -31,9 +31,9 @@ were edited and cross-checked against other sources.
       DESC
       disabled: %w[],
       labels: {
-        image_no: "Image No.",
-#        image_orientation: "Orientation",
-#        image_subjects: "Subjects"
+        image_no: "Image Number",
+        image_orientation: "Orientation",
+        image_subjects: "Subjects"
       },
       primary: %w[
         image_no image_format image_orientation image_subjects comments
