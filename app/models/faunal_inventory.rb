@@ -8,14 +8,20 @@ class FaunalInventory < ApplicationRecord
 
   def self.abstraction
     {
-      assoc_input_type: "input",
-      assoc_input_column: "record_field_key_no",
-      description: <<-DESC
-The Bone Inventory table was created during Archaeology Southwest's Salmon
+      assoc_col: "record_field_key_no",
+      description: <<-DESC,
+The Faunal Inventory table was created during Archaeology Southwest's Salmon
 Project (2001-2018) as bone items were repackaged into archival quality
 materials. During the SPARC project (2015-2018), data within this table were
 edited and cross-checked against other sources.
       DESC
+      disabled: %w[],
+      labels: {
+        fs_no: "FS Number",
+        sa_no: "SA Number"
+      },
+      primary: %w[fs_no sa_no comments],
+      selects: %w[]
     }
   end
 

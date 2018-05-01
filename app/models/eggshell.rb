@@ -7,15 +7,19 @@ class Eggshell < ActiveRecord::Base
 
   def self.abstraction
     {
-      assoc_input_type: "input",
-      assoc_input_column: "salmon_museum_no",
-      description: <<-DESC
+      assoc_col: "salmon_museum_no",
+      description: <<-DESC,
 The Eggshell inventory table derives from Salmon Ruins Museum inventory work in
 the 1980s and was updated during Archaeology Southwest's Salmon Project
 (2001-2018). It summarizes data on eggshell from Salmon Pueblo. During the SPARC
 project (2015-2018), data within this table were edited and cross-checked
 against other sources.
       DESC
+      disabled: %w[],
+      labels: {
+      },
+      primary: %w[salmon_museum_no eggshell_item],
+      selects: %w[eggshell_item]
     }
   end
 

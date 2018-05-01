@@ -8,15 +8,20 @@ class ObsidianInventory < ApplicationRecord
 
   def self.abstraction
     {
-      assoc_input_type: "input",
-      assoc_input_column: "fs_no",
-      description: <<-DESC
+      assoc_column: "fs_no",
+      description: <<-DESC,
 The Obsidian Table is an analysis file that combines all Salmon obsidian data
 from both the original project and more recent sampling and restudy of the
 obsidian data (part of Archaeology Southwest's Salmon Project (2001-2018).
 During the SPARC project (2015-2018), data within this table were edited and
 cross-checked against other sources.
       DESC
+      disabled: %w[],
+      labels: {
+        fs_no: "FS No."
+      },
+      primary: %w[fs_no obsidian_identified_source],
+      selects: %w[]
     }
   end
 

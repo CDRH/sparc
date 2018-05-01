@@ -12,9 +12,8 @@ class CeramicVessel < ActiveRecord::Base
 
   def self.abstraction
     {
-      assoc_input_type: "input",
-      assoc_input_column: "fs_no",
-      description: <<-DESC
+      assoc_col: "fs_no",
+      description: <<-DESC,
 The Ceramic Vessels table derived from the original San Juan Valley
 Archaeological Program with a whole vessel inventory (roughly 330 vessels)
 created by Hayward Franklin. Lori Reed subsequenty modified this file as she
@@ -23,6 +22,21 @@ whole ceramic vessels from Salmon Pueblo conducted by L. Reed thus far. During
 the SPARC project (2015-2018), data within this table were edited and
 cross-checked against other sources.
       DESC
+      disabled: %w[],
+      labels: {
+        sa_no: "SA Number",
+        fs_no: "FS Number",
+        ceramic_whole_vessel_form: "Original Whole Vessel Form",
+        ceramic_vessel_lori_reed_form: "Lori Reed Ceramic Vessel Form",
+        ceramic_vessel_type: "Original Vessel Type",
+        ceramic_vessel_lori_reed_type: "Lori Reed Ceramic Vessel Type"
+      },
+      primary: %w[
+        sa_no burial_related fs_no
+        ceramic_whole_vessel_form ceramic_vessel_lori_reed_form
+        ceramic_vessel_type ceramic_vessel_lori_reed_type
+      ],
+      selects: %w[burial_related]
     }
   end
 

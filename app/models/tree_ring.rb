@@ -6,15 +6,20 @@ class TreeRing < ApplicationRecord
 
   def self.abstraction
     {
-      assoc_input_type: "input",
-      assoc_input_column: "trl_no",
-      description: <<-DESC
+      assoc_col: "trl_no",
+      description: <<-DESC,
 The Tree-ring table combines all Salmon tree-ring data from both the original
 project and Tom Windes’ work (part of Archaeology Southwest's Salmon Project -
 2001-2018) to comprehensively sample Salmon Pueblo’s in situ wood assemblage.
 During the SPARC project (2015-2018), data within this table were edited and
 cross-checked against other sources.
       DESC
+      disabled: %w[],
+      labels: {
+        trl_no: "TRL No."
+      },
+      primary: %w[trl_no species_tree_ring outer_date cutting_date comments],
+      selects: %w[cutting_date]
     }
   end
 
