@@ -33,34 +33,14 @@
       </div>
       <div class="clearfix"></div>
 
+      <h4>Primary Search Options</h4>
       <div class="row">
-        <!-- Text fields -->
-        <div class="col-md-6">
-          <% @table_inputs.each do |column| %>
-            <div class="form-group">
-              <%= label_tag column[:name], column[:name].titleize %>
-              <%= text_field_tag column[:name], params[column[:name]],
-                                 class: "form-control" %>
-            </div>
-          <% end %>
-        </div>
+        <%= display_forms @table_fields[:primary] %>
+      </div>
 
-        <!-- Select fields -->
-        <div class="col-md-6">
-          <% @table_selects.each do |column| %>
-            <% param_name = "inv_#{column[:name]}" %>
-            <div class="form-group">
-              <%= label_tag column[:name], column[:name].titleize %>
-              <% if column[:type] == :column %>
-                <%= select_from_column @table_class, column, column[:name] %>
-              <% elsif column[:type] == :assoc %>
-                <%= select_from_assoc column, column[:name] %>
-              <% elsif column[:type] == :join %>
-                <%= select_from_join @table_class, column, column[:name] %>
-              <% end %>
-             </div>
-          <% end %>
-        </div>
+      <h4>Other Search Options</h4>
+      <div class="row">
+        <%= display_forms @table_fields[:other] %>
       </div>
 
       <%= render "csv_table_download" %>

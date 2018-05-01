@@ -52,8 +52,7 @@ class QueryController < ApplicationController
       params[:table].present? ? params[:table] : @tables.first[:name]
 
     @table_class = params[:table].to_s.classify.constantize
-    @table_inputs = table_input_columns(@table_class)
-    @table_selects = table_select_columns(@table_class)
+    @table_fields = collect_fields @table_class
     @subsection = table_label
   end
 
