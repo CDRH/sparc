@@ -87,20 +87,7 @@ module ActiveRecordAbstraction
           if field[:assoc] == :column
             form_markup = select_tag field[:name],
               options_for_select(
-                Array(@table_class.pluck(field[:name])).compact.uniq
-                  .sort do |a,b|
-                    # Sort doesn't handle boolean values by default
-                    if a.class == FalseClass || a.class == TrueClass
-                      if (a.class == FalseClass && b.class == FalseClass) ||
-                        (a.class == TrueClass && b.class == TrueClass)
-                        0
-                      else
-                        a.class == FalseClass && b.class == TrueClass ? 1 : -1
-                      end
-                    else
-                      a <=> b
-                    end
-                  end,
+                pluck_column_for_select(@table_class, field[:name]),
                 params[field[:name]]
               ), class: "form-control", include_blank: true
           else
@@ -192,11 +179,10 @@ module ActiveRecordAbstraction
                 .column_for_attribute(association_column(field[:name]))
                 .type == :string
 
-                res = res.joins(field[:name].to_sym).where(
-                  "#{field[:name].pluralize}" <<
-                  ".#{association_column(field[:name])} LIKE ?",
-                  "%#{params[field[:name]]}%"
-                )
+                query_string = "#{field[:name].pluralize}" <<
+                  ".#{association_column(field[:name])} LIKE ?"
+                res = res.joins(field[:name].to_sym)
+                  .where(query_string, "%#{params[field[:name]]}%")
               else
                 res = res.joins(field[:name].to_sym).where(
                   field[:name].pluralize => {
@@ -332,6 +318,23 @@ module ActiveRecordAbstraction
         end
       end
       false
+    end
+
+    def pluck_column_for_select(table, column)
+      Array(table.pluck(column)).compact.uniq
+        .sort do |a, b|
+          # Sort doesn't handle boolean values by default
+          if a.class == FalseClass || a.class == TrueClass
+            if (a.class == FalseClass && b.class == FalseClass) ||
+              (a.class == TrueClass && b.class == TrueClass)
+              0
+            else
+              a.class == FalseClass && b.class == TrueClass ? 1 : -1
+            end
+          else
+            a <=> b
+          end
+        end
     end
 
     def remove_skip_fields(fields)
