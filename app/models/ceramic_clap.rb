@@ -11,9 +11,8 @@ class CeramicClap < ActiveRecord::Base
 
   def self.abstraction
     {
-      assoc_input_type: "select",
-      assoc_input_column: "ceramic_clap_type_id",
-      description: <<-DESC
+      assoc_col: "record_field_key_no",
+      description: <<-DESC,
 The Ceramic CLAP table originates from the original San Juan Valley
 Archaeological Program, and represents a portion of Hayward Franklin's Salmon
 ceramic lab output. CLAP is an acronym that stands for Ceramic Limited Attribute
@@ -21,6 +20,17 @@ Program. The proveniences in this file are almost exclusively Chacoan in origin.
 During the SPARC project (2015-2018), data within this table were edited and
 cross-checked against other sources.
       DESC
+      disabled: %w[],
+      labels: {
+      },
+      primary: %w[
+        ceramic_clap_type ceramic_clap_group_type ceramic_clap_tradition
+        ceramic_clap_vessel_form ceramic_clap_temper
+      ],
+      selects: %w[
+        ceramic_clap_type ceramic_clap_group_type ceramic_clap_tradition
+        ceramic_clap_vessel_form ceramic_clap_temper
+      ]
     }
   end
 

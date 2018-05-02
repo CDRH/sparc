@@ -11,26 +11,18 @@
 
 <div class="search_results table-responsive buffer-bottom">
   <table class="table table-condensed table-hover table-striped">
-    <% no_occupation = !@column_names.include?("occupation_id") %>
+    <% no_occupation =
+      !@table_fields.map{ |f| f[:name] }.include?("occupation") %>
     <tr>
       <%# Add Occupation column if not present %>
       <% if @occupation_source.present? && no_occupation %>
         <th><%= @occupation_source %></th>
       <% end -%>
 
-      <%- @column_names.each do |column| %>
-        <% unless sensitive_record?(column) %>
+      <%- @table_fields.each do |field| %>
+        <% unless sensitive_record?(field[:name].to_s) %>
           <th>
-            <% if column == "occupation_id" && @occupation_source.present? %>
-              <%= @occupation_source %>
-            <% else %>
-              <% if column[/_(?:habtm|hm)$/]
-                column = column[/^(.+)_(?:habtm|hm)$/, 1]
-              elsif column[/_join$/]
-                column = column[/^\w+\|(\w+)_join$/, 1]
-              end %>
-              <%= column.titleize %>
-            <% end %>
+            <%= field_label(field) %>
           </th>
         <% end %>
       <% end %>
@@ -43,11 +35,11 @@
             <%= Occupation.where(id: result[:occupation_id]).first.name %>
           </td>
         <% end -%>
-        <% @column_names.each do |column| %>
-          <% if sensitive_record?(column) %>
+        <% @table_fields.each do |field| %>
+          <% if sensitive_record?(field[:name].to_s) %>
             <%# Display nothing %>
           <% else %>
-            <td><%= display_value(result, column) %></td>
+            <td><%= display_value(result, field[:name], field[:assoc]) %></td>
           <% end %>
         <% end %>
       </tr>

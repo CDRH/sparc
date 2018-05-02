@@ -13,14 +13,23 @@ class LithicTool < ActiveRecord::Base
 
   def self.abstraction
     {
-      assoc_input_type: "input",
-      assoc_input_column: "fs_no",
-      description: <<-DESC
+      assoc_col: "fs_no",
+      description: <<-DESC,
 The Lithic Tool analysis table was created by David Witt in 2013 as part of his
 dissertation work focused on the Middle San Juan region. During the SPARC
 project (2015-2018), data within this table were edited and cross-checked
 against other sources.
       DESC
+      disabled: %w[],
+      labels: {
+        fs_no: "FS Number",
+        artifact_no: "Artifact Number"
+      },
+      primary: %w[
+        fs_no artifact_no lithic_material_type lithic_condition fire_altered
+        utilized lithic_platform_type lithic_termination notes
+      ],
+      selects: %w[]
     }
   end
 
