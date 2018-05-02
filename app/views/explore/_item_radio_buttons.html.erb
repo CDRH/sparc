@@ -1,0 +1,7 @@
+<% item_radio_list.each do |item| %>
+  <li>
+    <%= label_tag "items_#{item}", item.titleize %>
+    <% selected = params["items"].present? && params["items"].include?(item) %>
+    <%= check_box_tag "items[]", item, selected %>
+  </li>
+<% end %>

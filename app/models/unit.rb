@@ -16,16 +16,27 @@ class Unit < ActiveRecord::Base
   has_many :features, :through => :strata
   has_many :images, :through => :features
   has_many :strata
+  has_many :tree_rings, :through => :strata
 
   # feature objects
+  has_many :bone_tools, :through => :features
+  has_many :ceramics, :through => :features
+  has_many :ceramic_claps, :through => :features
   has_many :ceramic_inventories, :through => :features
+  has_many :ceramic_vessels, :through => :features
   has_many :eggshells, :through => :features
+  has_many :faunal_artifacts, :through => :features
   has_many :faunal_inventories, :through => :features
   has_many :images, :through => :features
+  has_many :lithic_debitages, :through => :features
   has_many :lithic_inventories, :through => :features
+  has_many :lithic_tools, :through => :features
+  has_many :obsidian_inventories, :through => :features
   has_many :ornaments, :through => :features
   has_many :perishables, :through => :features
+  has_many :pollen_inventories, :through => :features
   has_many :soils, :through => :features
+  has_many :wood_inventories, :through => :features
 
   validates_uniqueness_of :unit_no
 

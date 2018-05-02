@@ -107,19 +107,10 @@
   <div class="row">
     <div class="collapse" id="collapseItems">
       <div class="well">
-        <h4>Return only units with the following items: <small>(query may take some time, please be patient)</small></h4>
+        <h4>Return only units with the following items: <small>(query may take some time when selecting multiple items, please be patient)</small></h4>
         <div class="form-group">
           <ul id="unit_search_list">
-            <%= render :partial => "radio_button", :locals => { :item => "ceramic_inventories", :label => "Ceramic Inventories" } %>
-            <%= render :partial => "radio_button", :locals => { :item => "eggshells", :label => "Eggshells" } %>
-            <%= render :partial => "radio_button", :locals => { :item => "bone_tools", :label => "Bone Tools" } %>
-            <%= render :partial => "radio_button", :locals => { :item => "faunal_inventories", :label => "Faunal Inventories" } %>
-            <%= render :partial => "radio_button", :locals => { :item => "images", :label => "Images" } %>
-            <%= render :partial => "radio_button", :locals => { :item => "lithic_inventories", :label => "Lithic Inventories" } %>
-            <%= render :partial => "radio_button", :locals => { :item => "ornaments", :label => "Ornaments" } %>
-            <%= render :partial => "radio_button", :locals => { :item => "perishables", :label => "Perishables" } %>
-            <%= render :partial => "radio_button", :locals => { :item => "select_artifacts", :label => "Select Artifacts" } %>
-            <%= render :partial => "radio_button", :locals => { :item => "soils", :label => "Soils" } %>
+            <%= render "item_radio_buttons" %>
           </ul>
         </div>
       </div> <!-- /well -->
