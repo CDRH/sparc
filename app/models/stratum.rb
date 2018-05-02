@@ -20,9 +20,8 @@ edited and cross-checked against other sources.
       DESC
       disabled: %w[],
       labels: {
-        strat_all: "Stratum"
       },
-      primary: %w[strat_all strat_type comments],
+      primary: %w[strat_all strat_alpha strat_type comments],
       selects: %w[]
     }
   end
