@@ -20,9 +20,8 @@ class Image < ActiveRecord::Base
 
   def self.abstraction
     {
-      assoc_input_type: "input",
-      assoc_input_column: "image_no",
-      description: <<-DESC
+      assoc_col: "image_no",
+      description: <<-DESC,
 The Images table was created by Nancy Espinosa, Emma Gibson, and other staff
 members (of Salmon Ruins Museum) as part of Archaeology Southwest's Salmon
 Project (2001-2018). This table contains data on images (photographic prints,
@@ -30,6 +29,16 @@ slides, polaroids from fieldwork, map transparencies, etc.) from the 1970s
 Salmon Project. During the SPARC project (2015-2018), data within this table
 were edited and cross-checked against other sources.
       DESC
+      disabled: %w[],
+      labels: {
+        image_no: "Image Number",
+        image_orientation: "Orientation",
+        image_subjects: "Subjects"
+      },
+      primary: %w[
+        image_no image_format image_orientation image_subjects comments
+      ],
+      selects: %w[image_format image_orientation image_subjects]
     }
   end
 

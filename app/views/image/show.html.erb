@@ -1,14 +1,18 @@
 <%= stylesheet_link_tag "images", media: "all" %>
 
+<<<<<<< HEAD
 <div class="back_link"><%= link_to "Back to Gallery", gallery_path %></div>
 
 <h2>Image <%= @image.image_no %></h2>
+=======
+<h2>Image <%= @image.image_no %> <small>[<a href="#gallery_metadata">See data about image</a>]</small></h2>
+>>>>>>> master
 
 <div class="image_display">
   <%= image_display(@image) %>
 </div>
 
-<div class="row">
+<div class="row gallery_metadata" id="gallery_metadata">
   <div class="col-md-6">
     <h2>Image Information</h2>
     <ul>

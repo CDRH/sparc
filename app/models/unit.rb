@@ -31,7 +31,8 @@ class Unit < ActiveRecord::Base
 
   def self.abstraction
     {
-      description: <<-DESC
+      assoc_col: "unit_no",
+      description: <<-DESC,
 During Archaeology Southwest's Salmon Project (2001-2018), Paul Reed created
 this Unit analysis table to manage room and excavation unit data across the
 site. This file summarizes the data on each room and excavation unit at Salmon.
@@ -39,6 +40,12 @@ It includes dimensions, inferred use or purpose, period of occupation, and other
 data. During the SPARC project (2015-2018), data within this table were edited
 and cross-checked against other sources.
       DESC
+      disabled: %w[],
+      labels: {
+        unit_no: "Unit Number"
+      },
+      primary: %w[unit_no unit_class comments],
+      selects: %w[]
     }
   end
 

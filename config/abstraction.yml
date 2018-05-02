@@ -35,7 +35,7 @@ default: &default
       perishables:
         singular: true
       wood_inventory:
-        label: Woods
+        label: Wood
         singular: true
     units:
       singular: true
@@ -47,6 +47,19 @@ default: &default
       singular: true
     canned_queries:
       path: query_canned_path
+  select_limit: 50
+  skip_fields:
+    app_wide:
+      - !ruby/regexp '/(?:^id|_at)$/'
+    belongs_to:
+    - feature
+    - occupation
+    column:
+    habtm:
+    - features
+    has_many:
+    - strata
+    - units
 test:
   <<: *default
 development:

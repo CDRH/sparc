@@ -80,8 +80,8 @@ html {
   font-family: 'joehand_2regular';
   font-style: normal;
   font-weight: normal;
-  src: url('jh2trial-webfont.woff2') format('woff2'), 
-    url('jh2trial-webfont.woff') format('woff');
+  src: url(<%= asset_path 'jh2trial-webfont.woff2' %>) format('woff2'), 
+    url(<%= asset_path 'jh2trial-webfont.woff' %>) format('woff');
 }
 
 // change fonts for main subheads
@@ -167,11 +167,11 @@ ul.gallery_info {
   padding-bottom: 1.5em;
 }
 
-.logo_as {
-  padding-bottom: 4em;
+.logo_neh {
+  padding-bottom: 3em;
 }
 
-.logo_neh {
+.logo_as {
   padding-bottom: 1.5em;
 }
 
@@ -181,12 +181,16 @@ ul.gallery_info {
 
 .logo_iath {}
 
+.footer_logos {
+  margin-top: 2em;
+}
+
 //---------------
 // Home Page
 //---------------
 
 .home_first_band {
-  background: url('band_aerial.jpg') center center;
+  background: url(<%= asset_path 'band_aerial.jpg' %>) center center;
   height: 400px;
   margin-top: -22px;
   margin-bottom: 2em;
@@ -265,25 +269,25 @@ a.content:hover .inner_content {
 // Set background pictures and widths
 // Explore
 .home_callout1 {
-  background-image: url('home_explore.jpg');
+  background-image: url(<%= asset_path 'home_explore.jpg' %>);
   border-bottom-width: 2px;
 }
 
 // Query
 .home_callout2 {
-  background-image: url('home_query.jpg');
+  background-image: url(<%= asset_path 'home_query.jpg' %>);
   border-bottom-width: 2px;
   border-top-width: 2px;
 }
 // Documents
 .home_callout3 {
-  background-image: url('home_docs.jpg');
+  background-image: url(<%= asset_path 'home_docs.jpg' %>);
   border-bottom-width: 2px;
   border-top-width: 2px;
 }
 // Gallery
 .home_callout4 {
-  background-image: url('home_gallery.jpg');
+  background-image: url(<%= asset_path 'home_gallery.jpg' %>);
   border-top-width: 2px;
 }
 
@@ -326,6 +330,12 @@ a .inner_content  {
   }
 }
 
+.documents_nodocs {
+  color: lighten(#000, 60);
+  font-size: .9em;
+  margin-top: 4em;
+}
+
 //---------------
 // Explore Pages
 //---------------
@@ -348,13 +358,13 @@ a .inner_content  {
 // Extends code from home page
 // Interactive Map
 .explore_callout1 {
-  background-image: url('home_explore.jpg');
+  background-image: url(<%= asset_path 'home_explore.jpg' %>);
   border-bottom-width: 2px;
 }
 
 // Browse Units
 .explore_callout2 {
-  background-image: url('explore_unit_2.jpg');
+  background-image: url(<%= asset_path 'explore_unit_2.jpg' %>);
   border-top-width: 2px;
 }
 
@@ -673,11 +683,11 @@ a .inner_content  {
 }
 
 .header_top {
-  background: url('topographic_top.gif') center bottom no-repeat lighten($gray-base, 75%);
+  background: url(<%= asset_path 'topographic_top.gif' %>) center bottom no-repeat lighten($gray-base, 75%);
 }
 
 .sparc_navbar {
-  background: url('topographic_bottom.jpg') center top no-repeat $brand-primary;
+  background: url(<%= asset_path 'topographic_bottom.jpg' %>) center top no-repeat $brand-primary;
   margin-top: -4px;
 }
 
