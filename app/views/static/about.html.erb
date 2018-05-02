@@ -1,34 +1,27 @@
 <h2>About the Salmon Pueblo Archaeological Research Collection </h2>
 
-<div class="row about_choices">
-  <div class="col-sm-6">
-    <%= link_to "Background", about_sub_path(name: "background") %>
-  </div><!-- /col -->
-  <div class="col-sm-6">
-    <%= link_to "Credits", about_sub_path(name: "credits") %>
-  </div><!-- /col -->
-</div><!-- /row -->
-
-<div class="row about_choices">
-  <div class="col-sm-6">
-    <%= link_to "Goals", about_sub_path(name: "goals") %>
-  </div><!-- /col -->
-  <div class="col-sm-6">
-    <%= link_to "How to Cite", about_sub_path(name: "how-to-cite") %>
-  </div><!-- /col -->
-</div><!-- /row -->
-
-<div class="row about_choices">
-  <div class="col-sm-6">
-    <%= link_to "People", about_sub_path(name: "people") %>
-  </div><!-- /col -->
-  <div class="col-sm-6">
-    <%= link_to "Policies", about_sub_path(name: "policies") %>
-  </div><!-- /col -->
-</div><!-- /row -->
-
-<div class="row about_choices">
-  <div class="col-sm-6">
-    <%= link_to "Technical", about_sub_path(name: "technical") %>
-  </div><!-- /col -->
-</div><!-- /row -->
+<div class="row about_main_1">
+  <div class="col-sm-3">
+    <%= link_to "Background", about_sub_path(name: "background"), :class => 'btn btn-default btn-lg btn-block' %>
+  </div>
+  <div class="col-sm-3">
+    <%= link_to "Credits", about_sub_path(name: "credits"), :class => 'btn btn-default btn-lg btn-block' %>
+  </div>
+  <div class="col-sm-3">
+    <%= link_to "Goals", about_sub_path(name: "goals"), :class => 'btn btn-default btn-lg btn-block' %>
+  </div>
+  <div class="col-sm-3">
+    <%= link_to "How To Cite", about_sub_path(name: "how-to-cite"), :class => 'btn btn-default btn-lg btn-block' %>
+  </div>
+</div>
+<div class="row about_main_2">
+  <div class="col-sm-4">
+    <%= link_to "People", about_sub_path(name: "people"), :class => 'btn btn-default btn-lg btn-block' %>
+  </div>
+  <div class="col-sm-4">
+    <%= link_to "Policies", about_sub_path(name: "policies"), :class => 'btn btn-default btn-lg btn-block' %>
+  </div>
+  <div class="col-sm-4">
+    <%= link_to "Technical", about_sub_path(name: "technical"), :class => 'btn btn-default btn-lg btn-block' %>
+  </div>
+</div>
