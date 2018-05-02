@@ -84,6 +84,15 @@ html {
     url('jh2trial-webfont.woff') format('woff');
 }
 
+// change fonts for main subheads
+.main_content > h2 {
+  font-family: 'Jura', sans-serif;
+  font-size: 2.3em;
+}
+
+.simple_list {
+  list-style: none;
+}
 
 // Pagination
 
@@ -103,6 +112,16 @@ html {
 
 .pagination_container .pagination {
   float: right;
+}
+
+// Columns 
+
+@media (min-width: $container-tablet) {
+  .column_3 {
+    column-count: 3;
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
+  }
 }
 
 // Gallery Code (Used in Explore and Image Gallery)
@@ -515,11 +534,22 @@ a .inner_content  {
 // Native Descendants
 //---------------
 
+.descendants_tribes {
+  background: lighten($beige, 3);
+  font-size: 1.1em;
+  margin: 2em 0;
+  padding: 20px;
+}
 
 //---------------
 // About
 //---------------
 
+@media (min-width: $container-tablet) {
+  .about_main_2 {
+    margin-top: 1.5em;
+  }
+}
 
 //---------------
 // Site
