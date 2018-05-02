@@ -165,7 +165,7 @@ class QueryController < ApplicationController
 
   def occupation_param_ids_only?
     if params["occupation"].present?
-      if params["occupation"].respond_to?(:map)
+      if params["occupation"].respond_to?(:each)
         params["occupation"].each do |o|
           return false if !o[/^\d+$/]
         end
