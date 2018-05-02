@@ -34,6 +34,11 @@ Rails.application.config.assets.precompile += %w(
   maps.css
 )
 
+# query
+Rails.application.config.assets.precompile += %w(
+  query
+)
+
 Rails.application.config.assets.precompile += %w( 
   uv-2.0.2/lib/bundle.min.js
   uv-2.0.2/lib/app.js
