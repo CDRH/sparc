@@ -44,7 +44,10 @@ sources.
       labels: {
         feature_no: "Feature Number"
       },
-      primary: %w[feature_no feature_type feature_group comments],
+      primary: %w[
+        feature_no occupation feature_group feature_type residential_feature
+        t_shaped_door door_between_multiple_room doorway_sealed comments
+      ],
       selects: %w[]
     }
   end
