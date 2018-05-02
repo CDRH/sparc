@@ -6,9 +6,8 @@ class Soil < ApplicationRecord
 
  def self.abstraction
     {
-      assoc_input_type: "input",
-      assoc_input_column: "sample_no",
-      description: <<-DESC
+      assoc_col: "sample_no",
+      description: <<-DESC,
 The Soil Inventory table was created during Salmon Ruins Museum inventory work
 in the 1980s and was updated during Archaeology Southwest's Salmon Project
 (2001-2018). This table contains data on the remaining soil samples collected
@@ -16,6 +15,14 @@ in the 1980s and was updated during Archaeology Southwest's Salmon Project
 the SPARC project (2015-2018), data within this table were edited and
 cross-checked against other sources.
       DESC
+      disabled: %w[],
+      labels: {
+        sample_no: "SA Number",
+        fs_no: "FS Number",
+        art_type: "Art Type"
+      },
+      primary: %w[sample_no fs_no art_type comments],
+      selects: %w[art_type]
     }
   end
 

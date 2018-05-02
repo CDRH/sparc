@@ -32,87 +32,176 @@ module ActiveRecordAbstraction
       sanitize markup
     end
 
-    def display_value(result, column)
-      return if column[/(?:^id|_at)$/]
+    def collect_fields(table)
+      # Return cached abstraction if already processed
+      return ABSTRACT[table.to_s] if ABSTRACT.key?(table.to_s)
 
-      res = ""
-      if column[/_id$/]
-        assoc_col = column[/^(.+)_id$/, 1]
-        if assoc_col == "occupation" &&
-          Occupation.where(id: result[:occupation_id]).present?
-          res = Occupation.where(id: result[:occupation_id]).first.name
-        elsif result.respond_to?(assoc_col)
-          if result.send(assoc_col).present?
-            assoc_class = assoc_col.classify.constantize
-            if assoc_class.respond_to?("abstraction") &&
-              assoc_class.send("abstraction")[:assoc_input_column].present?
-              abstraction = assoc_class.send("abstraction")
-              res =
-                result.send(assoc_col).send(abstraction[:assoc_input_column])
-            elsif result.send(assoc_col).respond_to?(:name)
-              res = result.send(assoc_col).name
-            elsif result.send(assoc_col).respond_to?("#{assoc_col}_no")
-              res = result.send(assoc_col).send("#{assoc_col}_no")
-            elsif result.respond_to?("id")
-              res = result.send(assoc_col).id.to_s << " (DB ID)"
-            else
-              res = "Assoc Info Missed"
-            end
-          else
-            res = "N/A"
-          end
-        elsif result.respond_to?(assoc_col.pluralize)
-          if result.send(assoc_col.pluralize).present?
-            assoc_obj = result.send(assoc_col.pluralize)
-            if assoc_obj.first.respond_to?("abstraction") &&
-              assoc_obj.first.send("abstraction")[:assoc_input_column].present?
-              abstraction = assoc_obj.send("abstraction")
-              res =
-                assoc_obj.map { |r| r.send(abstraction[:assoc_input_column]) }
-                .uniq.join("; ")
-            elsif assoc_obj.first.respond_to?("name")
-              res = assoc_obj.map { |r| r.name }.uniq.join("; ")
-            elsif assoc_obj.first.respond_to?("#{assoc_col}_no")
-              res = assoc_obj.map { |r| r.send("#{assoc_col}_no") }
-                .uniq.join("; ")
-            elsif assoc_obj.first.respond_to?("id")
-              res = assoc_obj.map { |r| r.id }.uniq.join("; ") << " (DB ID)"
-            else
-              res = "Pluralized Assoc Info Missed"
-            end
-          else
-            res = "N/A"
-          end
-        else
-          res = "N/A"
+      table_fields = []
+
+      table.columns.each do |c|
+        table_fields << { assoc: :column, name: c.name.to_s }
+      end
+
+      # Collect association fields
+      table.reflect_on_all_associations(:belongs_to).each do |a|
+        # Remove ID column and use association instead
+        table_fields = table_fields.reject { |f| f[:name] == "#{a.name}_id" }
+
+        table_fields << { assoc: :belongs_to, name: a.name.to_s }
+      end
+
+      table.reflect_on_all_associations(:has_and_belongs_to_many).each do |a|
+        table_fields << { assoc: :habtm, name: a.name.to_s }
+      end
+
+      %i[has_many has_one].each do |as|
+        table.reflect_on_all_associations(as).each do |a|
+          table_fields << { assoc: as, name: a.name.to_s }
         end
-      elsif column[/_(?:habtm|hm|join)$/]
-        if column[/_(?:habtm|hm)$/]
-          column = column[/^(.+)_(?:habtm|hm)$/, 1]
-          column_class = column.classify.constantize
-          if column_class.respond_to?("abstraction") &&
-            column_class.send("abstraction")[:assoc_input_column].present?
-            abstraction = column_class.send("abstraction")
-            res = result.send(column)
-              .map { |r| r.send(abstraction[:assoc_input_column]) }
-              .uniq.sort.join("; ")
+      end
+
+      table_fields = remove_skip_fields(table_fields)
+      table_fields = apply_form_abstraction(table, table_fields)
+
+      # Cache abstraction so only processed once
+      ABSTRACT[table.to_s] = table_fields
+
+      table_fields
+    end
+
+    def display_forms(fields)
+      markup = ''
+      fields.each do |field|
+        markup << <<-HTML
+<div class="col-md-6">
+  <div class="form-group">
+        HTML
+
+        label_markup = label_tag field[:name], field_label(field)
+        markup << label_markup
+
+        if field[:form] == :input
+          form_markup = text_field_tag field[:name], params[field[:name]],
+            class: "form-control"
+        elsif field[:form] == :select
+          if field[:assoc] == :column
+            form_markup = select_tag field[:name],
+              options_for_select(
+                pluck_column_for_select(@table_class, field[:name]),
+                params[field[:name]]
+              ), class: "form-control", include_blank: true
           else
-            res = result.send(column).map { |r| r.name }.uniq.sort.join("; ")
+            # Associations
+            assoc_model = field[:name].classify.constantize
+            form_markup = select_tag field[:name],
+              options_from_collection_for_select(
+                assoc_model.distinct.order(association_column(assoc_model)),
+                "id", association_column(assoc_model), params[field[:name]]
+              ), class: "form-control", include_blank: true
           end
-        elsif column[/_join$/]
-          column = column[/^(.+)_join$/, 1]
-          column, table = column.split("|")
-          res = result.send(table).map { |r| r.send(column) }.uniq.sort.join("; ")
         end
+        markup << form_markup
+
+        markup << <<-HTML
+  </div>
+</div>
+        HTML
+      end
+      sanitize markup, tags: %w[div input label select option],
+        attributes: %w[class for id label name selected type value]
+    end
+
+    def display_value(result, column, assoc)
+      value = ""
+
+      if assoc == :column
+        value = result[column].present? ? result[column] : ""
       else
-        res = result[column].present? ? result[column] : ""
+        if result.send(column).present?
+          assoc_col = association_column(column)
+          if result.send(column).respond_to?(assoc_col)
+            if result.send(column).respond_to?(:map)
+              value = result.send(column)
+                .map { |r| r.send(assoc_col) }.uniq.join("; ")
+            else
+              value = result.send(column).send(assoc_col)
+            end
+          else
+            value = result.send(column)
+              .map { |r| r.send(assoc_col) }.uniq.join("; ")
+          end
+          value = "#{value} (DB ID)" if assoc_col == "id"
+        else
+          value = "N/A"
+        end
+      end
+      value
+    end
+
+    def field_label(field)
+      label = field.key?(:label) ? field[:label].clone : field[:name].titleize
+      if field[:assoc] != :column
+        assoc_col = association_column(field[:name])
+        assoc_label =
+          ABSTRACT.dig(field[:name].classify, :labels, field[:name])
+        assoc_label = assoc_label ? assoc_label : assoc_col.titleize
+
+        label << " (#{assoc_label})"
+      end
+      label
+    end
+
+    def search_fields(table, fields)
+      res = table
+      fields.each do |field|
+        if field[:assoc] == :column
+          if params[field[:name]].present?
+            if field[:form] == :input
+              if table.column_for_attribute(field[:name]).type == :string
+                res = res.where("#{field[:name]} LIKE ?",
+                                "%#{params[field[:name]]}%")
+              else
+                res = res.where("#{field[:name]} = ?",
+                                "#{params[field[:name]]}")
+              end
+            elsif field[:form] == :select
+              res = res.where("#{field[:name]} = ?",
+                              "#{params[field[:name]]}")
+            end
+          end
+        elsif %i[belongs_to habtm has_many has_one].include?(field[:assoc])
+          if params[field[:name]].present?
+            if field[:form] == :select
+              res = res.joins(field[:name].to_sym)
+                .where(field[:name].pluralize => { id: params[field[:name]] })
+            elsif field[:form] == :input
+              if field[:name].classify.constantize
+                .column_for_attribute(association_column(field[:name]))
+                .type == :string
+
+                query_string = "#{field[:name].pluralize}" <<
+                  ".#{association_column(field[:name])} LIKE ?"
+                res = res.joins(field[:name].to_sym)
+                  .where(query_string, "%#{params[field[:name]]}%")
+              else
+                res = res.joins(field[:name].to_sym).where(
+                  field[:name].pluralize => {
+                    association_column(field[:name]) => params[field[:name]]
+                  }
+                )
+              end
+            end
+          else
+            res = res.includes(field[:name].to_sym)
+          end
+        end
       end
       res
     end
 
     def table_description
       sanitize params[:table].classify.constantize
-        .send("abstraction")[:description]
+        .abstraction[:description]
     end
 
     def table_label
@@ -129,6 +218,137 @@ module ActiveRecordAbstraction
         else
           params[:table].titleize
         end
+      end
+    end
+
+    private
+
+    def apply_form_abstraction(table, fields)
+      if table.abstraction.key?(:disabled)
+        fields = fields.reject do |f|
+          table.abstraction[:disabled].include?(f[:name])
+        end
+      end
+
+      if table.abstraction.key?(:labels)
+        fields = fields.each do |f|
+          if table.abstraction[:labels].key?(f[:name].to_sym)
+            f[:label] = table.abstraction[:labels][f[:name].to_sym]
+          end
+        end
+      end
+
+      if table.abstraction.key?(:selects)
+        fields = fields.each do |f|
+          if table.abstraction[:selects].include?(f[:name]) ||
+            field_is_selectable_column?(table, f) ||
+            field_is_selectable_assoc?(table, f)
+            f[:form] = :select
+          else
+            f[:form] = :input
+          end
+        end
+      end
+
+      organized_fields = { primary: [], other: [] }
+
+      # Separate primary fields as defined in model abstraction
+      table.abstraction[:primary].each do |p_field|
+        fields.each do |f|
+          if f[:name] == p_field
+            organized_fields[:primary] << f
+            fields.delete(f)
+          end
+        end
+      end
+
+      # Alphabetize other fields
+      fields.sort! { |a, b| a[:name] <=> b[:name] }
+      organized_fields[:other].concat(fields)
+
+      organized_fields
+    end
+
+    def association_column(model)
+      model = model.classify.constantize if model.class == String
+
+      if model.respond_to?("abstraction") &&
+        model.abstraction[:assoc_col].present?
+
+        model.abstraction[:assoc_col]
+      elsif model.column_for_attribute(:name).table_name.present?
+        "name"
+      else
+        "id"
+      end
+    end
+
+    def field_is_selectable_assoc?(table, field)
+      if field[:assoc] != :column
+        assoc = field[:name].classify.constantize
+        if assoc.respond_to?("abstraction") &&
+          assoc.abstraction[:assoc_col].present?
+
+          assoc_col = assoc.abstraction[:assoc_col]
+          if assoc.select(assoc_col).distinct.count < ABSTRACT["select_limit"]
+            true
+          end
+        end
+      end
+      false
+    end
+
+    def field_is_selectable_column?(table, field)
+      field[:assoc] == :column &&
+        table.select(field[:name]).distinct.count < ABSTRACT["select_limit"]
+    end
+
+    def in_skip_list?(name, skip_list)
+      if skip_list.present?
+        skip_list.each do |skip|
+          if skip.class == String
+            if name == skip
+              return true
+            end
+          elsif skip.class == Regexp
+            if name.match?(skip)
+              return true
+            end
+          end
+        end
+      end
+      false
+    end
+
+    def pluck_column_for_select(table, column)
+      Array(table.pluck(column)).compact.uniq
+        .sort do |a, b|
+          # Sort doesn't handle boolean values by default
+          if a.class == FalseClass || a.class == TrueClass
+            if (a.class == FalseClass && b.class == FalseClass) ||
+              (a.class == TrueClass && b.class == TrueClass)
+              0
+            else
+              a.class == FalseClass && b.class == TrueClass ? 1 : -1
+            end
+          else
+            a <=> b
+          end
+        end
+    end
+
+    def remove_skip_fields(fields)
+      skips = ABSTRACT["skip_fields"]
+      fields.reject do |field|
+        group = field[:assoc]
+        name = field[:name]
+
+        in_skip_list?(name, skips["app_wide"]) ||
+        (group == :belongs_to && in_skip_list?(name, skips["belongs_to"])) ||
+        (group == :column && in_skip_list?(name, skips["column"])) ||
+        (group == :habtm && in_skip_list?(name, skips["habtm"])) ||
+        (group == :has_many && in_skip_list?(name, skips["has_many"])) ||
+        (group == :has_one && in_skip_list?(name, skips["has_one"]))
       end
     end
   end

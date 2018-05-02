@@ -8,14 +8,19 @@ class BoneTool < ActiveRecord::Base
 
   def self.abstraction
     {
-      assoc_input_type: "input",
-      assoc_input_column: "fs_no",
-      description: <<-DESC
+      assoc_col: "fs_no",
+      description: <<-DESC,
 This Bone Tool analysis table derives from a recent Eastern New Mexico
 University masters thesis (Lloyd 2007) on bone tools. During the SPARC project
 (2015-2018), data within this table were edited and cross-checked against other
 sources.
       DESC
+      disabled: %w[],
+      labels: {
+        fs_no: "FS Number"
+      },
+      primary: %w[fs_no tool_type species_code comments],
+      selects: %w[]
     }
   end
 
