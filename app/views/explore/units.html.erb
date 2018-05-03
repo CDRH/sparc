@@ -127,6 +127,9 @@
       <button class="btn btn-info" type="button"
       data-toggle="collapse" data-target="#collapseItems"
       aria-expanded="false" aria-controls="collapseItems">
+        <% if params["items"].present? && !params["items"].empty? %>
+          <span class="glyphicon glyphicon-warning-sign"></span>
+        <% end %>
         Limit by Items in Unit
       </button>
       <%= render :partial => "partials/clear_search", :locals => { :path => units_path } %>
@@ -138,7 +141,12 @@
   </div> <!-- /row -->
 
   <p>Found <%= pluralize @result_num, "result" %></p>
-  
+
+  <% if params["items"].present? && !params["items"].empty? %>
+    <span class="glyphicon glyphicon-warning-sign"></span>
+    Note that units shown are limited by items within them. See above
+  <% end %>
+
   <% @units.each_slice(4) do |unit_set| %>
     <div class="row gallery_row">
       <% unit_set.each do |unit| %>
