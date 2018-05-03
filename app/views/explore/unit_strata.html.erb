@@ -4,21 +4,21 @@
 
 <div role="tabpanel" class="tab-pane" id="strata">
   <div class="table-responsive">
-  <table class="table table-striped table-condensed ">
-    <tr>
-      <th>Stratum Number</th>
-      <th>Stratum Type</th>
-      <th>Features</th>
-      <th>Occupation</th>
-    </tr>
-    <% @strata.each do |stratum| %>
+    <table class="table table-striped table-condensed ">
       <tr>
-        <td><%= stratum.strat_all %></td>
-        <td><%= stratum.strat_type.name if stratum.strat_type %></td>
-        <td><%= stratum.features.map {|f| f.feature_no }.join("; ") %></td>
-        <td><%= stratum.occupation.name if stratum.occupation %></td>
+        <th>Stratum Number</th>
+        <th>Stratum Type</th>
+        <th>Features</th>
+        <th>Occupation</th>
       </tr>
-    <% end %>
-  </table>
-</div>
+      <% @strata.each do |stratum| %>
+        <tr>
+          <td><%= stratum.strat_all %></td>
+          <td><%= stratum.strat_type.name if stratum.strat_type %></td>
+          <td><%= stratum.features.map {|f| f.feature_no }.join("; ") %></td>
+          <td><%= stratum.occupation.name if stratum.occupation %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
