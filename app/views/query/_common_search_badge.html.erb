@@ -1,5 +1,9 @@
-<% if session_value.present? %>
-  <span class="badge" title="Options selected">
-    <%= session_value.size %>
-  </span>
-<% end %>
+<span
+  <% if session_value.present? %>
+    class="badge" aria-hidden="false"
+  <% else %>
+    class="badge hidden" aria-hidden="true"
+  <% end %>
+  title="Options selected">
+  <%= session_value.present? ? session_value.size : 0 %>
+</span>
