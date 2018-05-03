@@ -2,6 +2,6 @@
   <li>
     <%= label_tag "items_#{item}", item.titleize %>
     <% selected = params["items"].present? && params["items"].include?(item) %>
-    <%= check_box_tag "items[]", item, selected %>
+    <%= check_box_tag "items[]", item, selected, id: "items_#{item}" %>
   </li>
 <% end %>
