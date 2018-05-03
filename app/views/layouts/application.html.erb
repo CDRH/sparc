@@ -31,7 +31,7 @@
           <div class="header_stuff container">
             <div class="site_logo_container">
               <div class="site_image">
-                <img src="assets/effigy3.png">
+                <%= image_tag 'effigy3.png' %>
               </div>
               <h1 class="header_words header_words_nav">
                   <span class="head_sp">Salmon Pueblo</span>
@@ -144,6 +144,7 @@
 
     <footer class="project_footer">
       <div class="container text-center">
+        <p><%= link_to "How To Cite", about_sub_path(name: "how-to-cite"), :class => '' %></p>
         <p>The <em>Salmon Pueblo Archaeological Research Collection</em> created by the Center for Digital Research in the Humanities with funding from the National Endowment for the Humanities and in partnership with Archaeology Southwest, the Institute for Advanced Technology in the Humanities, and the San Juan County Archaeological Research Center and Library - Salmon Ruins. Distributed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons License</a>.</p>
         <div class="row footer_logos">
           <div class="col-md-4">
