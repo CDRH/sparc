@@ -23,7 +23,6 @@
         <% end %>
       </ul>
 
-
       <p class="buffer-bottom" id="query_table_description">
         <%= table_description %>
       </p>
@@ -31,16 +30,12 @@
       <div class="query_description_display">
         <button class="btn btn-info btn-sm" type="button" data-toggle="collapse" data-target="#query_table_description" aria-expanded="false" aria-controls="Show table description" id="query_desc_disp_btn">Show table description</button>
       </div>
-   
-      
-      
 
       <div class="clearfix"></div>
       
       <div class="row">
         <div class="col-md-8">
           <%= render "csv_table_download" %>
-          <!-- <h4>Primary Search Options</h4> -->
         </div>
         <div class="col-md-4">
           <%= submit_tag "Search #{table_label}", class: "btn btn-primary pull-right" %>
@@ -50,15 +45,14 @@
       <div class="row">
         <%= display_forms @table_fields[:primary] %>
       </div>
-
-      <div class="query_other_otions_wrap">
-        <div class="query_other_otions_btn_wrap"><button class="btn btn-info btn-sm" type="button" data-toggle="collapse" data-target="#query_other_otions" aria-expanded="false" aria-controls="Show search options" id="query_search_options_btn">Show more search options</button></div>
-
-        <div class="row well" id="query_other_otions">
-          <%= display_forms @table_fields[:other] %>
-        </div>
+      
+      <div class="query_other_otions_btn_wrap">
+        <button class="btn btn-info btn-sm" type="button" data-toggle="collapse" data-target="#query_other_otions" aria-expanded="false" aria-controls="Show search options" id="query_search_options_btn">Show more search options</button>
       </div>
 
+      <div class="row well" id="query_other_otions">
+        <%= display_forms @table_fields[:other] %>
+      </div>
       
       <div class="pull-right">
         <%= submit_tag "Search #{table_label}", class: "btn btn-primary" %>
