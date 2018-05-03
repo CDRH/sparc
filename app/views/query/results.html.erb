@@ -9,43 +9,48 @@
   <%= will_paginate @res %>
 </div>
 
-<div class="search_results table-responsive buffer-bottom">
-  <table class="table table-condensed table-hover table-striped">
-    <% no_occupation =
-      !@table_fields.map{ |f| f[:name] }.include?("occupation") %>
-    <tr>
-      <%# Add Occupation column if not present %>
-      <% if @occupation_source.present? && no_occupation %>
-        <th><%= @occupation_source %></th>
-      <% end -%>
-
-      <%- @table_fields.each do |field| %>
-        <% unless sensitive_record?(field[:name].to_s) %>
-          <th>
-            <%= field_label(field) %>
-          </th>
-        <% end %>
-      <% end %>
-    </tr>
-    <% @res.each do |result| %>
+</div><!-- /container -->
+<div class="container-fluid">
+  <div class="search_results table-responsive buffer-bottom">
+    <table class="table table-condensed table-hover table-striped">
+      <% no_occupation =
+        !@table_fields.map{ |f| f[:name] }.include?("occupation") %>
       <tr>
         <%# Add Occupation column if not present %>
         <% if @occupation_source.present? && no_occupation %>
-          <td>
-            <%= Occupation.where(id: result[:occupation_id]).first.name %>
-          </td>
+          <th><%= @occupation_source %></th>
         <% end -%>
-        <% @table_fields.each do |field| %>
-          <% if sensitive_record?(field[:name].to_s) %>
-            <%# Display nothing %>
-          <% else %>
-            <td><%= display_value(result, field[:name], field[:assoc]) %></td>
+
+        <%- @table_fields.each do |field| %>
+          <% unless sensitive_record?(field[:name].to_s) %>
+            <th>
+              <%= field_label(field) %>
+            </th>
           <% end %>
         <% end %>
       </tr>
-    <% end %>
-  </table>
-</div>
+      <% @res.each do |result| %>
+        <tr>
+          <%# Add Occupation column if not present %>
+          <% if @occupation_source.present? && no_occupation %>
+            <td>
+              <%= Occupation.where(id: result[:occupation_id]).first.name %>
+            </td>
+          <% end -%>
+          <% @table_fields.each do |field| %>
+            <% if sensitive_record?(field[:name].to_s) %>
+              <%# Display nothing %>
+            <% else %>
+              <td><%= display_value(result, field[:name], field[:assoc]) %></td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+</div><!-- /container-fluid -->
+<div class="container">
 
 <div class="row">
   <div class="pull-right">
