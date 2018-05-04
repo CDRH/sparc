@@ -4,12 +4,12 @@ ActionController::Renderers.add :csv do |data, options|
 
   csv_data = CSV.generate(headers: true) do |csv|
     # Use specified column names if passed, otherwise use record field names
-    headers = options[:columns] || data[0].attributes.keys
-    csv << headers.map { |header| header.titleize }
+    csv << options[:table_fields].map { |field| field_label(field) }
 
-    data.each do |row|
-      csv << row.attributes.map { |column, value| display_value(row, column) }
-        .compact
+    data.each do |result|
+      csv << options[:table_fields].map do |field|
+        display_value(result, field[:name], field[:assoc])
+      end
     end
   end
   send_data csv_data, filename: filename
