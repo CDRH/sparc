@@ -32,7 +32,9 @@
           <%# Add Occupation column if not present %>
           <% if @occupation_source.present? && no_occupation %>
             <td>
-              <%= Occupation.where(id: result[:occupation_id]).first.name %>
+              <%= Occupation.where(id: result[:occupation_id])
+                    .pluck(:name).uniq.join("; ")
+              %>
             </td>
           <% end -%>
           <% @table_fields.each do |field| %>

@@ -16,7 +16,9 @@ ActionController::Renderers.add :csv do |data, options|
     data.each do |result|
       row = []
       if options[:occupation_source].present? && no_occupation
-        row.push(Occupation.where(id: result[:occupation_id]).first.name)
+        occs = Occupation.where(id: result[:occupation_id])
+                 .pluck(:name).uniq.join("; ")
+        row.push(occs)
       end
       values = options[:table_fields].map do |field|
         display_value(result, field[:name], field[:assoc])
