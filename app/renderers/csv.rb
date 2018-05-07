@@ -3,8 +3,6 @@ ActionController::Renderers.add :csv do |data, options|
   filename << ".csv"
 
   csv_data = CSV.generate(headers: true) do |csv|
-    # Use specified column names if passed, otherwise use record field names
-
     # add occupation column if not present
     no_occupation = !@table_fields.map{ |f| f[:name] }.include?("occupation")
 

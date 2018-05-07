@@ -340,7 +340,7 @@ module ActiveRecordAbstraction
 
     def remove_sensitive_records(fields)
       if SETTINGS["hide_sensitive_image_records"]
-        fields.reject { |f| f[:name].to_s == "image_human_remain_id" }
+        fields = fields.reject { |f| f[:name] == "image_human_remain" }
       end
       fields
     end
