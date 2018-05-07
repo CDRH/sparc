@@ -3,3 +3,12 @@
 <div class="row buffer-bottom">
   <%= abstraction_subnav %>
 </div>
+
+<%# if more than two categories requre descriptions, move to
+    dynamic partials or include in abstraction %>
+
+<% if params[:category] == "samples" %>
+  To query the samples obtained from Salmon Pueblo, select one of the three options below. Please note that you can filter for records of interest by using the “Common Search Options” in the left-hand panel in conjunction with the search fields available for each sample table.
+<% elsif params[:category] == "artifacts" %>
+  To query the artifact tables, select one of the seven categories below. Please note, some categories contain multiple data tables including an inventory and separate types of analysis tables. For all artifact tables you can filter for records of interest by using the “Common Search Options” in the left-hand panel in conjunction with the search fields available for each artifact table.
+<% end %>
