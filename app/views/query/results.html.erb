@@ -22,11 +22,9 @@
         <% end -%>
 
         <%- @table_fields.each do |field| %>
-          <% unless sensitive_record?(field[:name].to_s) %>
-            <th>
-              <%= field_label(field) %>
-            </th>
-          <% end %>
+          <th>
+            <%= field_label(field) %>
+          </th>
         <% end %>
       </tr>
       <% @res.each do |result| %>
@@ -34,15 +32,13 @@
           <%# Add Occupation column if not present %>
           <% if @occupation_source.present? && no_occupation %>
             <td>
-              <%= Occupation.where(id: result[:occupation_id]).first.name %>
+              <%= Occupation.where(id: result[:occupation_id])
+                    .pluck(:name).uniq.join("; ")
+              %>
             </td>
           <% end -%>
           <% @table_fields.each do |field| %>
-            <% if sensitive_record?(field[:name].to_s) %>
-              <%# Display nothing %>
-            <% else %>
-              <td><%= display_value(result, field[:name], field[:assoc]) %></td>
-            <% end %>
+            <td><%= display_value(result, field[:name], field[:assoc]) %></td>
           <% end %>
         </tr>
       <% end %>

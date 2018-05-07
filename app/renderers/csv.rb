@@ -3,13 +3,27 @@ ActionController::Renderers.add :csv do |data, options|
   filename << ".csv"
 
   csv_data = CSV.generate(headers: true) do |csv|
-    # Use specified column names if passed, otherwise use record field names
-    headers = options[:columns] || data[0].attributes.keys
-    csv << headers.map { |header| header.titleize }
+    # add occupation column if not present
+    no_occupation = !@table_fields.map{ |f| f[:name] }.include?("occupation")
 
-    data.each do |row|
-      csv << row.attributes.map { |column, value| display_value(row, column) }
-        .compact
+    header = []
+    if options[:occupation_source].present? && no_occupation
+      header.push(options[:occupation_source])
+    end
+    labels = options[:table_fields].map { |field| field_label(field) }
+    csv << header.push(*labels)
+
+    data.each do |result|
+      row = []
+      if options[:occupation_source].present? && no_occupation
+        occs = Occupation.where(id: result[:occupation_id])
+                 .pluck(:name).uniq.join("; ")
+        row.push(occs)
+      end
+      values = options[:table_fields].map do |field|
+        display_value(result, field[:name], field[:assoc])
+      end
+      csv << row.push(*values)
     end
   end
   send_data csv_data, filename: filename

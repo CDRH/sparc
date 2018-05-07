@@ -61,6 +61,7 @@ module ActiveRecordAbstraction
       end
 
       table_fields = remove_skip_fields(table_fields)
+      table_fields = remove_sensitive_records(table_fields)
       table_fields = apply_form_abstraction(table, table_fields)
 
       # Cache abstraction so only processed once
@@ -335,6 +336,13 @@ module ActiveRecordAbstraction
             a <=> b
           end
         end
+    end
+
+    def remove_sensitive_records(fields)
+      if SETTINGS["hide_sensitive_image_records"]
+        fields = fields.reject { |f| f[:name] == "image_human_remain" }
+      end
+      fields
     end
 
     def remove_skip_fields(fields)
