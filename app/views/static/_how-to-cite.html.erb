@@ -1,3 +1,77 @@
-<h3>How To Cite</h3>
+<h3>How To Cite SPARC Content</h3>
 
-<p></p>
+<p>SPARC provides users with a variety of content including artifact and context query results, archival documents, photographic images, and maps. When using SPARC resources, please cite them following the guidelines below:</p>
+
+<h4>Citing Website Content:</h4>
+
+<p>Unsigned text from SPARC website pages should be credited to SPARC. Examples of unsigned content include all content in the About SPARC website sections and the Native Descendants page.</p>
+
+<h5>Example:</h5>
+
+<p>SPARC<br/>
+2018 History of Salmon Pueblo Archaeological Research and Preservation Efforts. The Salmon Pueblo Archaeological Research Collection, December 15, 2018 (<%= link_to "https://salmonpueblo.org/about/background", about_sub_path(name: "background") %>).
+</p>
+
+<h4>Citing Query Results:</h4>
+
+<p>Please provide the following information in a bibliography when citing data returned from a SPARC Query.</p>
+
+<ol>
+  <li>The Query from which data was used, e.g. Artifact Ornaments.</li>
+  <li>The date the data was downloaded, e.g. May 15, 2018.</li>
+  <li>The Archive name and website address.</li>
+</ol>
+
+<h5>Examples:</h5>
+
+<p>SPARC<br/>
+  2018a Artifact Ornament Query, May 15, 2018. The Salmon Pueblo
+  Archaeological Research Collection (<%= link_to "https://salmonpueblo.org/query/artifacts/ornaments", query_form_path(category: "artifacts", subcat: "ornaments", table: "ornaments" )%>).</p>
+
+<p>SPARC<br/>
+  2018b Features Query, May 15, 2018. The Salmon Pueblo Archaeological
+  Research Collection (<%= link_to "https://salmonpueblo.org/query/features", query_category_path(category: "features") %>).</p>
+
+<h4>Citing Maps, Documents and Photographs:</h4>
+
+<p>Please provide the following information in a bibliography or in a caption when citing maps, documents and photographs available on the SPARC website.</p>
+
+<ol>
+  <li>The image number or Page ID, as provided in the SPARC image metadata.</li>
+  <li>If possible, the name of the person who took the photograph.</li>
+  <li>If possible, the date of the photograph.</li>
+  <li>If the image is of an artifact or feature, include the artifact or
+  feature identification number provided in the image metadata.</li>
+  <li>If the image is of a particular room or excavation unit, include the
+  Unit ID provided in the image metadata.</li>
+  <li>The date the image was downloaded, e.g. June 1, 2018.</li>
+  <li>The Archive name and URL to the image. For archival documents, this is available as an embed link in the lower left-hand corner of the viewer.</li>
+</ol>
+
+<h5>Image Examples:</h5>
+
+<ul>
+  <li>Unit 001W, Image 01006. Photographed by Peter George, August 8, 1973. Downloaded from The Salmon Pueblo Archaeological Research Collection (<%= link_to "https://salmonpueblo.org/gallery/01006", image_path(number: "01006") %>) on June 15, 2018.</li>
+  <li>Room 004A Field Note Summary, Page ID 004A_FNS_0001. Downloaded from The Salmon Pueblo Archaeological Research Collection (<a href="<%= request.base_url %>/documents/unit/004A?manifest=%2Fdocuments%2Funit%2F004A%2Ffield_notes_summary.json&amp;locale=en-GB#?c=0&amp;m=0&amp;s=0&amp;cv=0&amp;xywh=-1706%2C-244%2C6551%2C4880">https://salmonpueblo.org/documents/unit/004A?manifest=%2Fdocuments%2Funit%2F004A%2Ffield_notes_summary.json&amp;locale=en-GB#?c=0&amp;m=0&amp;s=0&amp;cv=0&amp;xywh=-1706%2C-244%2C6551%2C4880</a>) on June 15, 2015.</li>
+</ul>
+
+<h4>Citing Data Structures:</h4>
+
+<p>Please provide the following information in a bibliography when citing SPARC data structures.</p>
+
+<ol>
+  <li>The Data Table(s) and/or entire Database Structure that is being cited.</li>
+  <li>The Archive name and website address.</li>
+  <li>The date the website was accessed.</li>
+</ol>
+
+<h5>Examples:</h5>
+
+<p>SPARC<br/>
+  2015 Ceramic Inventory Table Data Structure. The Salmon Pueblo
+Archaeological Research Collection, August 10, 2018(https://salmonpueblo.org/about/technical).</p>
+
+<p>SPARC<br/>
+  2018 SPARC Database Structure. The Salmon Pueblo Archaeological Research Collection, August 10, 2018 (https://salmonpueblo.org/about/technical).
+</p>
+

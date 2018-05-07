@@ -2,7 +2,9 @@
 
 <h2>Image Gallery</h2>
 
-<p>Click on an excavation unit context and browse all available documentation. <%# TODO [DEPENDS ON HOW THIS WILL LOOK WITH IIIF VIEWER] %> </p>
+<p>Search and browse all available SPARC images.</p> 
+
+<p>Please note: Images showing human remains and known funerary items have been excluded from all image searches because of their cultural sensitivity.  Metadata about these images can be found using the <%= link_to "Image Query", query_category_path(category: "images") %>.</p>
 
 <%= form_tag gallery_path, :method => "get",
   id: "image-search-form", role: "form" do %>
