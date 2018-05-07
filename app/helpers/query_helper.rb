@@ -57,8 +57,4 @@ module QueryHelper
                class: "form-control", include_blank: true
   end
 
-  def sensitive_record?(column)
-    SETTINGS["hide_sensitive_image_records"] &&
-      column == "image_human_remain_id"
-  end
 end
