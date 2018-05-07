@@ -39,7 +39,7 @@
               <div class="form-inline">
                 <div class="checkbox">
                   <%= check_box_tag "unit_class[#{u.id}]", u.id, checked?(u.id, session[:common_search_unit_class]), class: "select_all", name: "unit_class[]" %>
-                  <%= label_tag "unit_class[#{u.id}]", u.name %>
+                  <%= label_tag "unit_class[#{u.id}]", u.name.titleize %>
                 </div>
               </div>
             </li>
@@ -99,7 +99,7 @@
               <div class="form-inline">
                 <div class="checkbox">
                   <%= check_box_tag "occupation[#{o.id}]", o.id, checked?(o.id, session[:common_search_occupation]), class: "select_all", name: "occupation[]" %>
-                  <%= label_tag "occupation[#{o.id}]", o.name %>
+                  <%= label_tag "occupation[#{o.id}]", o.name.titleize %>
                 </div>
               </div>
             </li>
@@ -129,7 +129,7 @@
                 <div class="checkbox">
                   <%= check_box_tag "strat_grouping[#{s.id}]", s.id, checked?(s.id, session[:common_search_strat_grouping]),
                     class: "select_all", name: "strat_grouping[]" %>
-                  <%= label_tag "strat_grouping[#{s.id}]", s.name %>
+                  <%= label_tag "strat_grouping[#{s.id}]", s.name.titleize %>
                 </div>
               </div>
             </li>
@@ -159,7 +159,7 @@
               <div class="form-inline">
                 <div class="checkbox">
                   <%= check_box_tag "feature_group[#{fg.id}]", fg.id, checked?(fg.id, session[:common_search_feature_group]), class: "select_all", name: "feature_group[]" %>
-                  <%= label_tag "feature_group[#{fg.id}]", fg.name %>
+                  <%= label_tag "feature_group[#{fg.id}]", fg.name.titleize %>
                 </div>
               </div>
             </li>
