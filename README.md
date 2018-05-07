@@ -67,6 +67,25 @@ rake db:migrate
 rake db:seed
 ```
 
+### "Seed" More Data
+
+There are several other steps that need to be taken to prepare the database.
+
+Add descriptions to units and zones:
+```
+rails units:description
+```
+
+Mark images which do exist on the file system. You will need to generate that list ahead of time by going to the IIIF directory and running:
+```
+find field polaroids -type f > all_mediaserver_images.txt
+```
+Copy the text file results to `reports/all_mediaserver_images.txt` and then run:
+
+```
+rails images:file_exists
+```
+
 ### Start Rails
 
 ```bash
