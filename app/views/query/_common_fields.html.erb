@@ -1,17 +1,17 @@
-<h4 class="pull-left">Common Search Options</h4>
+<%= javascript_include_tag "query" %>
 
+<h4>Common Search Options</h4>
+
+<span class="common_search_help glyphicon glyphicon-question-sign"
+  aria-hidden="true" data-toggle="popover"
+  data-content="Common Search Options are saved when a search is performed.
+  To clear all saved search options, press the 'Clear All Search Options'
+  button. Note: This will also clear any search criteria entered in the table
+  search options to the right.">
+</span>
 <div class="pull-right">
-  <% if params[:table].present? %>
-    <%= link_to "Clear", { controller: params["controller"],
-                           action: params["action"], table: params["table"], search_clear: 1 },
-                class: "btn btn-danger"
-    %>
-  <% else %>
-    <%= link_to "Clear", { controller: params["controller"],
-                           action: params["action"], search_clear: 1 },
-                class: "btn btn-danger"
-    %>
-  <% end %>
+  <%= link_to "Clear All Search Options", { controller: params["controller"],
+    action: params["action"], search_clear: 1 }, class: "btn btn-danger" %>
 </div>
 <div class="clearfix buffer-bottom-sm"></div>
 
@@ -26,6 +26,8 @@
            href="#collapse-unitclass" aria-expanded="true" aria-controls="collapse-unitclass">
           Unit Type
         </a>
+        <%= render "common_search_badge",
+          session_value: session[:common_search_unit_class] %>
         <div class="form-inline pull-right check_all">
           <div class="checkbox">
             <label>
@@ -61,6 +63,8 @@
            href="#collapse-unitnum" aria-expanded="false" aria-controls="collapse-unitnum">
           Unit Number
         </a>
+        <%= render "common_search_badge",
+          session_value: session[:common_search_unit] %>
         <div class="form-inline pull-right check_all">
           <div class="checkbox">
             <label>
@@ -94,8 +98,10 @@
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
            href="#collapse-occupation" aria-expanded="false" aria-controls="collapse-occupation">
-          Occupation 
+          Occupation
         </a>
+        <%= render "common_search_badge",
+          session_value: session[:common_search_occupation] %>
         <div class="form-inline pull-right check_all">
           <div class="checkbox">
             <label>
@@ -130,6 +136,8 @@
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-stratum" aria-expanded="false" aria-controls="collapse-stratum">
           Strata
         </a>
+        <%= render "common_search_badge",
+          session_value: session[:common_search_strat_grouping] %>
         <div class="form-inline pull-right check_all" >
           <div class="checkbox">
             <label>
@@ -166,6 +174,8 @@
            href="#collapse-feature" aria-expanded="false" aria-controls="collapse-feature">
           Feature
         </a>
+        <%= render "common_search_badge",
+          session_value: session[:common_search_feature_group] %>
         <div class="form-inline pull-right check_all" >
           <div class="checkbox">
             <label>
