@@ -124,6 +124,87 @@ html {
   }
 }
 
+// Illustration Image display
+
+.illustration {
+  max-width: 100%;
+  img {
+    max-width: 100%;
+  }
+  .caption {
+    background-color: $beige;
+    font-size: .9em;
+    margin-top: .5em;
+    padding: .2em .4em;
+    text-align: center;
+  }
+  &.illustration_center {
+    margin: 20px auto;
+    text-align: center;
+  }
+  &.illustration_left {
+    margin: 0 20px 20px 0;
+    float: left;
+  }
+  &.illustration_right {
+    margin: 0 0 20px 20px;
+    float: right;
+  }
+}
+
+@media (max-width: $container-tablet) {
+  .illustration {
+    float: none !important;
+    &.illustration_center, 
+    &.illustration_left,
+    &.illustration_right {
+      margin: 20px 0;
+    }
+
+  }
+}
+
+// Keeping all these together so I can find them
+
+.query_illustration {
+  width: 300px;
+}
+
+.background_illustration_1 {
+
+  width: 600px;
+}
+
+.background_illustration_2 {
+  width: 400px;
+}
+
+.background_illustration_3 {
+  width: 400px;
+}
+
+.credits_illustration {
+  width: 500px;
+}
+
+.goals_illustration_1,
+.goals_illustration_2,
+.goals_illustration_3,
+.goals_illustration_4 {
+  width: 350px;
+}
+
+// Save for later styling
+//.people_illustration_1 {}
+
+//.people_illustration_2 {}
+
+//.people_illustration_3 {}
+
+//.people_illustration_4 {}
+
+// END Illustrations
+
 // Gallery Code (Used in Explore and Image Gallery)
 
 // Anchor is wrapped around image and text
