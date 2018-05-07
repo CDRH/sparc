@@ -9,7 +9,7 @@
 <h5>Example:</h5>
 
 <p>SPARC<br/>
-2018 History of Salmon Pueblo Archaeological Research and Preservation Efforts. The Salmon Pueblo Archaeological Research Collection, December 15, 2018 (<a href="https://salmonpueblo.org/about/background">https://salmonpueblo.org/about/background</a>).
+2018 History of Salmon Pueblo Archaeological Research and Preservation Efforts. The Salmon Pueblo Archaeological Research Collection, December 15, 2018 (<%= link_to "https://salmonpueblo.org/about/background", about_sub_path(name: "background") %>).
 </p>
 
 <h4>Citing Query Results:</h4>
@@ -26,11 +26,11 @@
 
 <p>SPARC<br/>
   2018a Artifact Ornament Query, May 15, 2018. The Salmon Pueblo
-  Archaeological Research Collection (<a href="https://salmonpueblo.org/query/artifacts/ornaments">https://salmonpueblo.org/query/artifacts/ornaments</a>).</p>
+  Archaeological Research Collection (<%= link_to "https://salmonpueblo.org/query/artifacts/ornaments", query_form_path(category: "artifacts", subcat: "ornaments", table: "ornaments" )%>).</p>
 
 <p>SPARC<br/>
   2018b Features Query, May 15, 2018. The Salmon Pueblo Archaeological
-  Research Collection (<a href="https://salmonpuebloorg/query/features">https://salmonpuebloorg/query/features</a>).</p>
+  Research Collection (<%= link_to "https://salmonpueblo.org/query/features", query_category_path(category: "features") %>).</p>
 
 <h4>Citing Maps, Documents and Photographs:</h4>
 
@@ -51,8 +51,8 @@
 <h5>Image Examples:</h5>
 
 <ul>
-  <li>Unit 001W, Image 01006. Photographed by Peter George, August 8, 1973. Downloaded from The Salmon Pueblo Archaeological Research Collection (<a href="https://salmonpueblo.org/gallery/01006">https://salmonpueblo.org/gallery/01006</a>) on June 15, 2018.</li>
-  <li>Room 004A Field Note Summary, Page ID 004A_FNS_0001. Downloaded from The Salmon Pueblo Archaeological Research Collection (<a href="https://salmonpueblo.org/documents/unit/004A?manifest=%2Fdocuments%2Funit%2F004A%2Ffield_notes_summary.json&amp;locale=en-GB#?c=0&amp;m=0&amp;s=0&amp;cv=0&amp;xywh=-1706%2C-244%2C6551%2C4880">https://salmonpueblo.org/documents/unit/004A?manifest=%2Fdocuments%2Funit%2F004A%2Ffield_notes_summary.json&amp;locale=en-GB#?c=0&amp;m=0&amp;s=0&amp;cv=0&amp;xywh=-1706%2C-244%2C6551%2C4880</a>) on June 15, 2015.</li>
+  <li>Unit 001W, Image 01006. Photographed by Peter George, August 8, 1973. Downloaded from The Salmon Pueblo Archaeological Research Collection (<%= link_to "https://salmonpueblo.org/gallery/01006", image_path(number: "01006") %>) on June 15, 2018.</li>
+  <li>Room 004A Field Note Summary, Page ID 004A_FNS_0001. Downloaded from The Salmon Pueblo Archaeological Research Collection (<a href="<%= request.base_url %>/documents/unit/004A?manifest=%2Fdocuments%2Funit%2F004A%2Ffield_notes_summary.json&amp;locale=en-GB#?c=0&amp;m=0&amp;s=0&amp;cv=0&amp;xywh=-1706%2C-244%2C6551%2C4880">https://salmonpueblo.org/documents/unit/004A?manifest=%2Fdocuments%2Funit%2F004A%2Ffield_notes_summary.json&amp;locale=en-GB#?c=0&amp;m=0&amp;s=0&amp;cv=0&amp;xywh=-1706%2C-244%2C6551%2C4880</a>) on June 15, 2015.</li>
 </ul>
 
 <h4>Citing Data Structures:</h4>
