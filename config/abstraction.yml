@@ -61,6 +61,7 @@ default: &default
     - features
     has_many:
     - strata
+    has_one:
 test:
   <<: *default
 development:

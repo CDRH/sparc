@@ -38,7 +38,12 @@
             </td>
           <% end -%>
           <% @table_fields.each do |field| %>
-            <td><%= display_value(result, field[:name], field[:assoc]) %></td>
+            <% value = display_value(result, field[:name], field[:assoc]) %>
+            <% if params[:table] == "images" && field[:name] == "image_no" && result.displayable? %>
+              <td><%= link_to value, image_path(number: value) %></td>
+            <% else %>
+              <td><%= value %></td>
+            <% end %>
           <% end %>
         </tr>
       <% end %>
