@@ -153,7 +153,7 @@ module ActiveRecordAbstraction
     end
 
     def search_fields(table, fields)
-      res = table
+      res = table.unscoped
       fields.each do |field|
         if field[:assoc] == :column
           if params[field[:name]].present?

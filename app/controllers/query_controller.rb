@@ -44,7 +44,7 @@ class QueryController < ApplicationController
       {
         name: table,
         label: info && info["label"].present? ? info["label"] : table.titleize,
-        count: table.classify.constantize.count
+        count: table.classify.constantize.unscoped.count
       }
     end
 
