@@ -9,6 +9,26 @@ module QueryHelper
     end
   end
 
+  def common_search_expand(param, first: false)
+    if first
+      if session[:common_search_unit].blank? &&
+        session[:common_search_unit_class].blank? &&
+        session[:common_search_occupation].blank? &&
+        session[:common_search_strat_grouping].blank? &&
+        session[:common_search_feature_group].blank?
+
+        return 'in'
+      end
+    end
+
+    if @search_expanded || param.blank? || param.empty?
+      ''
+    else
+      @search_expanded = true
+      'in'
+    end
+  end
+
   def delimit(number)
     number_with_delimiter(number)
   end
