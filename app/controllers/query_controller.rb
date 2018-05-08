@@ -95,71 +95,71 @@ class QueryController < ApplicationController
     session[:common_search_feature_group] = params["feature_group"]
 
     # Units
-    if (params["unit"].present? || params["unit_class"].present?)
-      assocs = res.reflect_on_all_associations.map { |a| a.name }
-      if assocs.include?(:units)
-        res = res.joins(:units)
+#    if (params["unit"].present? || params["unit_class"].present?)
+#      assocs = res.reflect_on_all_associations.map { |a| a.name }
+#      if assocs.include?(:units)
+#        res = res.joins(:units)
 
-        if params["unit"].present?
-          res = res.where(units: { id: params["unit"] })
-        end
+#        if params["unit"].present?
+#          res = res.where(units: { id: params["unit"] })
+#        end
 
-        if params["unit_class"].present?
-          res = res.where(units: { unit_class_id: params["unit_class"] })
-        end
-      elsif assocs.include?(:unit)
-        if params["unit"].present?
-          res = res.where(unit_id: params["unit"])
-        end
+#        if params["unit_class"].present?
+#          res = res.where(units: { unit_class_id: params["unit_class"] })
+#        end
+#      elsif assocs.include?(:unit)
+#        if params["unit"].present?
+#          res = res.where(unit_id: params["unit"])
+#        end
 
-        if params["unit_class"].present?
-          res = res.where(unit_id:
-            UnitClass.where(id: params["unit_class"]).pluck(:id))
-        end
-      end
-    end
+#        if params["unit_class"].present?
+#          res = res.where(unit_id:
+#            UnitClass.where(id: params["unit_class"]).pluck(:id))
+#        end
+#      end
+#    end
 
     # Occupations
-    if occupation_param_ids_only?
-      assoc_name_list = res.reflect_on_all_associations.map { |a| a.name }
+#    if occupation_param_ids_only?
+#      assoc_name_list = res.reflect_on_all_associations.map { |a| a.name }
 
-      # Filter by occupation based on occupation of associated strata,
-      # noted as more accurate than tables' own occupation data
-      if assoc_name_list.include?(:strata)
-        res = res.select("#{@table.to_s.tableize}.*, strata.occupation_id")
-                .joins(:strata)
-                .where(strata: { occupation_id: params["occupation"] })
-        @occupation_source = "Strat Occupation"
-      elsif assoc_name_list.include?(:occupation)
-        res = res.where(occupation_id: params["occupation"])
-        @occupation_source = "#{@table.to_s.titleize} Occupation"
-      elsif assoc_name_list.include?(:occupations)
-        res = res.select("#{@table.to_s.tableize}.*, features.occupation_id")
-                .joins(:features)
-                .where(occupations: { id: params["occupation"] })
-        @occupation_source = "#{@table.to_s.titleize} Occupations"
-      end
-    end
+#      # Filter by occupation based on occupation of associated strata,
+#      # noted as more accurate than tables' own occupation data
+#      if assoc_name_list.include?(:strata)
+#        res = res.select("#{@table.to_s.tableize}.*, strata.occupation_id")
+#                .joins(:strata)
+#                .where(strata: { occupation_id: params["occupation"] })
+#        @occupation_source = "Strat Occupation"
+#      elsif assoc_name_list.include?(:occupation)
+#        res = res.where(occupation_id: params["occupation"])
+#        @occupation_source = "#{@table.to_s.titleize} Occupation"
+#      elsif assoc_name_list.include?(:occupations)
+#        res = res.select("#{@table.to_s.tableize}.*, features.occupation_id")
+#                .joins(:features)
+#                .where(occupations: { id: params["occupation"] })
+#        @occupation_source = "#{@table.to_s.titleize} Occupations"
+#      end
+#    end
 
     # Strat Types
-    if params["strat_grouping"].present? \
-    && res.reflect_on_all_associations.map { |a| a.name }.include?(:strata)
-      res = res.joins(strata: [strat_type: [:strat_grouping]])
-              .where(strat_groupings: { id: params["strat_grouping"] })
-    end
+#    if params["strat_grouping"].present? \
+#    && res.reflect_on_all_associations.map { |a| a.name }.include?(:strata)
+#      res = res.joins(strata: [strat_type: [:strat_grouping]])
+#              .where(strat_groupings: { id: params["strat_grouping"] })
+#    end
 
     # Feature Groups
-    if params["feature_group"].present?
-      if res.reflect_on_all_associations.map { |a| a.name }
-           .include?(:features)
-        res = res.joins(features: [:feature_group])
-                .where(feature_groups: { id: params["feature_group"] })
-      elsif res.reflect_on_all_associations.map { |a| a.name }
-              .include?(:strata)
-        res = res.joins(strata: [features: [:feature_group]])
-                .where(feature_groups: { id: params["feature_group"] }).uniq
-      end
-    end
+#    if params["feature_group"].present?
+#      if res.reflect_on_all_associations.map { |a| a.name }
+#           .include?(:features)
+#        res = res.joins(features: [:feature_group])
+#                .where(feature_groups: { id: params["feature_group"] })
+#      elsif res.reflect_on_all_associations.map { |a| a.name }
+#              .include?(:strata)
+#        res = res.joins(strata: [features: [:feature_group]])
+#                .where(feature_groups: { id: params["feature_group"] }).uniq
+#      end
+#    end
 
     res
   end
