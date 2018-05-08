@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   get '/documents/unit/:unit(/:type)', to: 'document#unit',
       as: :documents_unit
 
+  # Errors
+  get '/404', to: 'errors#not_found'
+  get '/422', to: 'errors#unacceptable'
+  get '/500', to: 'errors#internal_error'
+
   # Explore
   get '/explore', to: 'explore#index', as: :explore
   get '/explore/map', to: 'explore#map', as: :map
