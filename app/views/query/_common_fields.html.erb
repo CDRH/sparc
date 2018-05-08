@@ -17,6 +17,7 @@
 <div class="clearfix buffer-bottom-sm"></div>
 
 <!-- common search options accordian -->
+<% @search_expanded = false %>
 <div class="panel-group combined_selections" id="accordion" role="tablist" aria-multiselectable="true">
 
   <!-- unit type filters -->
@@ -27,11 +28,13 @@
            href="#collapse-unitclass" aria-expanded="true" aria-controls="collapse-unitclass">
           Unit Type
         </a>
-        <%= render "common_search_badge",
-          session_value: session[:common_search_unit_class] %>
+        <% search_param = session[:common_search_unit_class] %>
+        <%= render "common_search_badge", session_value: search_param %>
       </h4>
     </div>
-    <div id="collapse-unitclass" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-unit">
+    <div id="collapse-unitclass" class="panel-collapse collapse
+      <%= common_search_expand(search_param, first: true) %>" role="tabpanel"
+      aria-labelledby="heading-unit">
       <div>
         <ul class="list-group checked-list-box">
           <% UnitClass.all.each do |u| %>
@@ -57,11 +60,13 @@
            href="#collapse-unitnum" aria-expanded="false" aria-controls="collapse-unitnum">
           Unit Number
         </a>
-        <%= render "common_search_badge",
-          session_value: session[:common_search_unit] %>
+        <% search_param = session[:common_search_unit] %>
+        <%= render "common_search_badge", session_value: search_param %>
       </h4>
     </div>
-    <div id="collapse-unitnum" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-num">
+    <div id="collapse-unitnum" class="panel-collapse collapse
+      <%= common_search_expand(search_param) %>" role="tabpanel"
+      aria-labelledby="heading-num">
       <div>
         <ul class="list-group checked-list-box">
           <% Unit.all.sorted.each do |u| %>
@@ -87,11 +92,13 @@
            href="#collapse-occupation" aria-expanded="false" aria-controls="collapse-occupation">
           Occupation
         </a>
-        <%= render "common_search_badge",
-          session_value: session[:common_search_occupation] %>
+        <% search_param = session[:common_search_occupation] %>
+        <%= render "common_search_badge", session_value: search_param %>
       </h4>
     </div>
-    <div id="collapse-occupation" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-occupation">
+    <div id="collapse-occupation" class="panel-collapse collapse
+      <%= common_search_expand(search_param) %>" role="tabpanel"
+      aria-labelledby="heading-occupation">
       <div>
         <ul class="list-group checked-list-box">
           <% Occupation.order("name").each do |o| %>
@@ -116,11 +123,13 @@
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-stratum" aria-expanded="false" aria-controls="collapse-stratum">
           Strata
         </a>
-        <%= render "common_search_badge",
-          session_value: session[:common_search_strat_grouping] %>
+        <% search_param = session[:common_search_strat_grouping] %>
+        <%= render "common_search_badge", session_value: search_param %>
       </h4>
     </div>
-    <div id="collapse-stratum" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-stratum">
+    <div id="collapse-stratum" class="panel-collapse collapse
+      <%= common_search_expand(search_param) %>" role="tabpanel"
+      aria-labelledby="heading-stratum">
       <div>
         <ul class="list-group checked-list-box">
           <% StratGrouping.order("name").each do |s| %>
@@ -147,11 +156,13 @@
            href="#collapse-feature" aria-expanded="false" aria-controls="collapse-feature">
           Feature
         </a>
-        <%= render "common_search_badge",
-          session_value: session[:common_search_feature_group] %>
+        <% search_param = session[:common_search_feature_group] %>
+        <%= render "common_search_badge", session_value: search_param %>
       </h4>
     </div>
-    <div id="collapse-feature" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-feature">
+    <div id="collapse-feature" class="panel-collapse collapse
+      <%= common_search_expand(search_param) %>" role="tabpanel"
+      aria-labelledby="heading-feature">
       <div>
         <ul class="list-group checked-list-box">
           <% FeatureGroup.all.each do |fg| %>
