@@ -45,8 +45,8 @@ default: &default
       singular: true
     images:
       singular: true
-    canned_queries:
-      path: query_canned_path
+    other_tables:
+      path: query_other_path
   select_limit: 50
   skip_fields:
     app_wide:

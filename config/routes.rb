@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   # Query
   get '/query', to: 'query#index', as: :query
-  get '/query/canned', to: 'query#canned', as: :query_canned
+  get '/query/other', to: 'query#other', as: :query_other
   get '/query/:category', to: 'query#category', as: :query_category
   get '/query/:category/:subcat(/:table)', to: 'query#form', as: :query_form
   get '/query/:category/:subcat/:table/results', to: 'query#results',
