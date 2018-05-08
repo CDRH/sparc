@@ -60,6 +60,7 @@ default: &default
     has_many:
     - strata
     - units
+    has_one:
 test:
   <<: *default
 development:

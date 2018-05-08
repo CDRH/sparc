@@ -37,11 +37,11 @@
       aria-labelledby="heading-unit">
       <div>
         <ul class="list-group checked-list-box">
-          <% UnitClass.all.each do |u| %>
+          <% UnitClass.all.order("name").each do |u| %>
             <li class="list-group-item">
               <div class="form-inline">
                 <div class="checkbox">
-                  <%= check_box_tag "unit_class[#{u.id}]", u.id, checked?(u.id, session[:common_search_unit_class]), class: "select_all", name: "unit_class[]" %>
+                  <%= check_box_tag "unit_class[#{u.id}]", u.id, checked?(u.id, session[:common_search_unit_class]), class: "select_all", name: "unit_class_common[]" %>
                   <%= label_tag "unit_class[#{u.id}]", u.name.titleize %>
                 </div>
               </div>
@@ -73,7 +73,7 @@
             <li class="list-group-item">
               <div class="form-inline">
                 <div class="checkbox">
-                  <%= check_box_tag "unit[#{u.id}]", u.id, checked?(u.id, session[:common_search_unit]), class: "select_all", name: "unit[]" %>
+                  <%= check_box_tag "unit[#{u.id}]", u.id, checked?(u.id, session[:common_search_unit]), class: "select_all", name: "unit_common[]" %>
                   <%= label_tag "unit[#{u.id}]", u.unit_no %>
                 </div>
               </div>
