@@ -6,44 +6,129 @@
   <div class="row">
     <div class="col-md-6">
       <h3>Samples and Features</h3>
+
       <p>
         <%= link_to "Features", query_results_path({
-          category: "features",
-          subcat: "features",
-          table: "features",
-          unit: @unit.id
-          })
-        %>
+              category: "features", subcat: "features",
+              table: "features", unit: @unit.id
+          }) %>
       </p>
-      <% @associated["samples"].each do |category, tables| %>
-        <% tables.each do |table| %>
-          <p>
-            <%= link_to table.titleize, query_results_path({
-                category: category,
-                subcat: "samples",
-                table: table,
-                unit: @unit.id
-              })
-            %>
-          </p>
-        <% end %>
+      <p>
+        <%= link_to "Pollen Inventory (broken)", query_results_path({
+            category: "samples", subcat: "pollen_inventory",
+            table: "pollen_inventory", unit: @unit.unit_no
+          }) %>
+      </p>
+      <p>
+        <%= link_to "Soil (broken)", query_results_path({
+            category: "samples", subcat: "soil",
+            table: "soil", unit: @unit.unit_no
+          }) %>
+      </p>
+      <p>
+        <%= link_to "Tree Ring", query_results_path({
+            category: "samples", subcat: "tree_ring",
+            table: "tree_ring", unit_no: @unit.unit_no
+          }) %>
+      </p>
+
+      <h3>Ceramics</h3>
+
+      <% ["ceramic_inventory", "ceramic_clap", "ceramic", "ceramic_vessel"].each do |cer| %>
+        Inventory works, others broken
+        <p>
+          <%= link_to cer.titleize, query_results_path({
+            category: "artifacts", subcat: "ceramics",
+            table: cer, unit: @unit.id
+          }) %>
+        </p>
       <% end %>
-    </div>
+
+    </div> <!-- left column -->
+
     <div class="col-md-6">
-      <% @associated["artifacts"].each do |category, tables| %>
-        <h4><%= category.titleize %></h4>
-        <% tables.each do |table| %>
-          <p>
-            <%= link_to table.titleize, query_results_path({
-                category: category,
-                subcat: "artifacts",
-                table: table,
-                unit: @unit.id
-              })
-            %>
-          </p>
-        <% end %>
-      <% end %>
+
+      <h3>Fauna</h3>
+
+      <p>
+        <%= link_to "Bone Tool (broken)", query_results_path({
+          category: "artifacts", subcat: "fauna",
+          table: "bone_tool", unit: @unit.id
+        }) %>
+      </p>
+      <p>
+        <%= link_to "Faunal Artifacts (broken)", query_results_path({
+          category: "artifacts", subcat: "fauna",
+          table: "bone_tool", unit: @unit.id
+        }) %>
+      </p>
+      <p>
+        <%= link_to "Faunal Inventory", query_results_path({
+          category: "artifacts", subcat: "fauna",
+          table: "faunal_inventory", unit: @unit.id
+        }) %>
+      </p>
+
+      <h3>Lithics</h3>
+
+      <p>
+        <%= link_to "Lithic Inventory", query_results_path({
+          category: "artifacts", subcat: "lithics",
+          table: "lithic_inventory", unit: @unit.id
+        }) %>
+      </p>
+
+      <p>
+        <%= link_to "Lithic Debitage (check)", query_results_path({
+          category: "artifacts", subcat: "lithics",
+          table: "lithic_debitage", unit: @unit.id
+        }) %>
+      </p>
+
+      <p>
+        <%= link_to "Lithic Tool (check)", query_results_path({
+          category: "artifacts", subcat: "lithics",
+          table: "lithic_tool", unit: @unit.id
+        }) %>
+      </p>
+
+      <p>
+        <%= link_to "Obsidian Inventory (check)", query_results_path({
+          category: "artifacts", subcat: "lithics",
+          table: "obsidian_inventory", unit: @unit.id
+        }) %>
+      </p>
+
+      <h3>Other</h3>
+
+      <p>
+        <%= link_to "Eggshell (broken)", query_results_path({
+          category: "artifacts", subcat: "eggshell",
+          table: "eggshell", unit: @unit.id
+        }) %>
+      </p>
+
+      <p>
+        <%= link_to "Ornaments (check)", query_results_path({
+          category: "artifacts", subcat: "ornaments",
+          table: "ornaments", unit: @unit.id
+        }) %>
+      </p>
+
+      <p>
+        <%= link_to "Perishables (check)", query_results_path({
+          category: "artifacts", subcat: "perishables",
+          table: "perishables", unit: @unit.id
+        }) %>
+      </p>
+
+      <p>
+        <%= link_to "Wood Inventory (check)", query_results_path({
+          category: "artifacts", subcat: "wood_inventory",
+          table: "wood_inventory", unit: @unit.id
+        }) %>
+      </p>
+
     </div>
   </div>
 </div>
