@@ -8,39 +8,69 @@
       <h3>Samples and Features</h3>
 
       <p>
-        <%= link_to "Features", query_results_path({
-              category: "features", subcat: "features",
-              table: "features", unit: @unit.id
-          }) %>
+        <% if @unit.features.count == 0 %>
+          Features (0)
+        <% else %>
+          <%= link_to "Features (#{@unit.features.count})", query_results_path({
+                category: "features", subcat: "features",
+                table: "features", unit_no: @unit.unit_no
+            }) %>
+        <% end %>
       </p>
       <p>
-        <%= link_to "Pollen Inventory (broken)", query_results_path({
-            category: "samples", subcat: "pollen_inventory",
-            table: "pollen_inventory", unit: @unit.unit_no
-          }) %>
+        <% if @unit.pollen_inventories.count == 0 %>
+          Pollen Inventory (0)
+        <% else %>
+          <%= link_to "Pollen Inventory (#{@unit.pollen_inventories.count})", query_results_path({
+              category: "samples", subcat: "pollen_inventory",
+              table: "pollen_inventory", unit: @unit.unit_no
+            }) %>
+        <% end %>
       </p>
       <p>
-        <%= link_to "Soil (broken)", query_results_path({
-            category: "samples", subcat: "soil",
-            table: "soil", unit: @unit.unit_no
-          }) %>
+        <% if @unit.soils.count == 0 %>
+          Soil (0)
+        <% else %>
+          <%= link_to "Soil (#{@unit.soils.count})", query_results_path({
+              category: "samples", subcat: "soil",
+              table: "soil", unit: @unit.unit_no
+            }) %>
+        <% end %>
       </p>
       <p>
-        <%= link_to "Tree Ring", query_results_path({
-            category: "samples", subcat: "tree_ring",
-            table: "tree_ring", unit_no: @unit.unit_no
-          }) %>
+        <% if @unit.tree_rings.count == 0 %>
+          Tree Ring (0)
+        <% else %>
+          <%= link_to "Tree Ring (#{@unit.tree_rings.count})", query_results_path({
+              category: "samples", subcat: "tree_ring",
+              table: "tree_ring", unit_no: @unit.unit_no
+            }) %>
+        <% end %>
       </p>
 
       <h3>Ceramics</h3>
 
-      <% ["ceramic_inventory", "ceramic_clap", "ceramic", "ceramic_vessel"].each do |cer| %>
-        Inventory works, others broken
+      <p>
+        <% if @unit.ceramic_inventories.count == 0 %>
+          Ceramic Inventory (0)
+        <% else %>
+          <%= link_to "Ceramic Inventory (broken) (#{@unit.ceramic_inventories.count})", query_results_path({
+              category: "artifacts", subcat: "ceramics",
+              table: "ceramic_inventory", unit: @unit.unit_no
+            }) %>
+        <% end %>
+      </p>
+
+      <% ["ceramic_clap", "ceramic", "ceramic_vessel"].each do |cer| %>
         <p>
-          <%= link_to cer.titleize, query_results_path({
-            category: "artifacts", subcat: "ceramics",
-            table: cer, unit: @unit.id
-          }) %>
+          <% if @unit.send(cer.pluralize).count == 0 %>
+            <%= cer.titleize %> (0)
+          <% else %>
+            <%= link_to "#{cer.titleize} (#{@unit.send(cer.pluralize).length})", query_results_path({
+              category: "artifacts", subcat: "ceramics",
+              table: cer, unit: @unit.unit_no
+            }) %>
+          <% end %>
         </p>
       <% end %>
 
@@ -51,82 +81,126 @@
       <h3>Fauna</h3>
 
       <p>
-        <%= link_to "Bone Tool (broken)", query_results_path({
-          category: "artifacts", subcat: "fauna",
-          table: "bone_tool", unit: @unit.id
-        }) %>
+        <% if @unit.bone_tools.count == 0 %>
+          Bone Tool (0)
+        <% else %>
+          <%= link_to "Bone Tool (#{@unit.bone_tools.count})", query_results_path({
+            category: "artifacts", subcat: "fauna",
+            table: "bone_tool", unit: @unit.unit_no
+          }) %>
+        <% end %>
       </p>
       <p>
-        <%= link_to "Faunal Artifacts (broken)", query_results_path({
-          category: "artifacts", subcat: "fauna",
-          table: "bone_tool", unit: @unit.id
-        }) %>
+        <% if @unit.faunal_artifacts.count == 0 %>
+          Faunal Artifacts (0)
+        <% else %>
+          <%= link_to "Faunal Artifacts (#{@unit.faunal_artifacts.count})", query_results_path({
+            category: "artifacts", subcat: "fauna",
+            table: "faunal_artifact", unit: @unit.unit_no
+          }) %>
+        <% end %>
       </p>
       <p>
-        <%= link_to "Faunal Inventory", query_results_path({
-          category: "artifacts", subcat: "fauna",
-          table: "faunal_inventory", unit: @unit.id
-        }) %>
+        <% if @unit.faunal_inventories.count == 0 %>
+          Faunal Inventory (0)
+        <% else %>
+          <%= link_to "Faunal Inventory (broken) (#{@unit.faunal_inventories.count})", query_results_path({
+            category: "artifacts", subcat: "fauna",
+            table: "faunal_inventory", unit: @unit.unit_no
+          }) %>
+        <% end %>
       </p>
 
       <h3>Lithics</h3>
 
       <p>
-        <%= link_to "Lithic Inventory", query_results_path({
-          category: "artifacts", subcat: "lithics",
-          table: "lithic_inventory", unit: @unit.id
-        }) %>
+        <% if @unit.lithic_inventories.count == 0 %>
+          Lithic Inventory (0)
+        <% else %>
+          <%= link_to "Lithic Inventory (broken) (#{@unit.lithic_inventories.count})", query_results_path({
+            category: "artifacts", subcat: "lithics",
+            table: "lithic_inventory", unit: @unit.unit_no
+          }) %>
+        <% end %>
       </p>
 
       <p>
-        <%= link_to "Lithic Debitage (check)", query_results_path({
-          category: "artifacts", subcat: "lithics",
-          table: "lithic_debitage", unit: @unit.id
-        }) %>
+        <% if @unit.lithic_debitages.count == 0 %>
+          Lithic Debitage (0)
+        <% else %>
+          <%= link_to "Lithic Debitage (#{@unit.lithic_debitages.count})", query_results_path({
+            category: "artifacts", subcat: "lithics",
+            table: "lithic_debitage", unit: @unit.unit_no
+          }) %>
+        <% end %>
       </p>
 
       <p>
-        <%= link_to "Lithic Tool (check)", query_results_path({
-          category: "artifacts", subcat: "lithics",
-          table: "lithic_tool", unit: @unit.id
-        }) %>
+        <% if @unit.lithic_tools.count == 0 %>
+          Lithic Tools (0)
+        <% else %>
+          <%= link_to "Lithic Tool (#{@unit.lithic_tools.count})", query_results_path({
+            category: "artifacts", subcat: "lithics",
+            table: "lithic_tool", unit: @unit.unit_no
+          }) %>
+        <% end %>
       </p>
 
       <p>
-        <%= link_to "Obsidian Inventory (check)", query_results_path({
-          category: "artifacts", subcat: "lithics",
-          table: "obsidian_inventory", unit: @unit.id
-        }) %>
+        <% if @unit.obsidian_inventories.count == 0 %>
+          Obsidian Inventory (0)
+        <% else %>
+          <%= link_to "Obsidian Inventory (#{@unit.obsidian_inventories.count})", query_results_path({
+            category: "artifacts", subcat: "lithics",
+            table: "obsidian_inventory", unit: @unit.unit_no
+          }) %>
+        <% end %>
       </p>
 
       <h3>Other</h3>
 
       <p>
-        <%= link_to "Eggshell (broken)", query_results_path({
-          category: "artifacts", subcat: "eggshell",
-          table: "eggshell", unit: @unit.id
-        }) %>
+        <% if @unit.eggshells.count == 0 %>
+          Eggshell (0)
+        <% else %>
+          <%= link_to "Eggshell (#{@unit.eggshells.count})", query_results_path({
+            category: "artifacts", subcat: "eggshell",
+            table: "eggshell", unit: @unit.unit_no
+          }) %>
+        <% end %>
       </p>
 
       <p>
-        <%= link_to "Ornaments (check)", query_results_path({
-          category: "artifacts", subcat: "ornaments",
-          table: "ornaments", unit: @unit.id
-        }) %>
+        <% if @unit.ornaments.count == 0 %>
+          Ornaments (0)
+        <% else %>
+          <%= link_to "Ornaments (#{@unit.ornaments.count})", query_results_path({
+            category: "artifacts", subcat: "ornaments",
+            table: "ornaments", unit: @unit.unit_no
+          }) %>
+        <% end %>
       </p>
 
       <p>
-        <%= link_to "Perishables (check)", query_results_path({
-          category: "artifacts", subcat: "perishables",
-          table: "perishables", unit: @unit.id
-        }) %>
+        <% if @unit.perishables.count == 0 %>
+          Perishables (0)
+        <% else %>
+          <%= link_to "Perishables (#{@unit.perishables.count})", query_results_path({
+            category: "artifacts", subcat: "perishables",
+            table: "perishables", unit: @unit.unit_no
+          }) %>
+        <% end %>
       </p>
 
       <p>
-        <%= link_to "Wood Inventory (check)", query_results_path({
-          category: "artifacts", subcat: "wood_inventory",
-          table: "wood_inventory", unit: @unit.id
-        }) %>
+        <% if @unit.wood_inventories.count == 0 %>
+          Wood Inventory (0)
+        <% else %>
+          <%= link_to "Wood Inventory (#{@unit.wood_inventories.count})", query_results_path({
+            category: "artifacts", subcat: "wood_inventory",
+            table: "wood_inventory", unit: @unit.unit_no
+          }) %>
+        <% end %>
       </p>
 
     </div>
