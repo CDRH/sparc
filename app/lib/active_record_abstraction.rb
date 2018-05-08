@@ -73,6 +73,9 @@ module ActiveRecordAbstraction
     def display_forms(fields)
       markup = ''
       fields.each do |field|
+        # because units is a common search option, do not add to display form
+        # TODO move to abstaction config file when hidden form fields created
+        next if field[:name] == "units"
         markup << <<-HTML
 <div class="col-md-6">
   <div class="form-group">

@@ -55,11 +55,12 @@ default: &default
     - feature
     - occupation
     column:
+    - unit
+    - unit_no
     habtm:
     - features
     has_many:
     - strata
-    - units
 test:
   <<: *default
 development:
