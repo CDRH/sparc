@@ -6,7 +6,7 @@ class SelectArtifact < ApplicationRecord
 
   def self.abstraction
     {
-      assoc_col: "input",
+      assoc_col: "sa_no",
       description: "",
       disabled: %w[],
       labels: {
