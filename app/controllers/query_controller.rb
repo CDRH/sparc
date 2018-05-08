@@ -56,6 +56,22 @@ class QueryController < ApplicationController
     @subsection = table_label
   end
 
+  def other
+    respond_to do |format|
+      format.csv {
+        @table_fields = collect_fields(SelectArtifact)
+        @table_fields = %i[primary other].map { |set| @table_fields[set] }.flatten
+        res = search_fields(SelectArtifact, @table_fields)
+
+        render csv: res.sorted,
+          filename: "select_artifacts",
+          occupation_source: nil,
+          table_fields: @table_fields
+      }
+      format.html { }
+    end
+  end
+
   def results
     params.require([:category, :subcat, :table])
     @subsection = table_label

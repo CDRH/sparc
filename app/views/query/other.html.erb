@@ -8,7 +8,12 @@
 
 <p>It is also the case that some items recorded in the “Select Artifacts” table were never listed in any other inventory or analysis table.  For instance, an ornament might have been recorded in the SA table, but did not exist in the "Ornament" table.  Users may, therefore, be interested in downloading the entire Select Artifacts table. </p>
 
-<p>[LINK TO DOWNLOAD CSV OF SELECT ARTIFACTS TABLE]</p>
+<p><%= link_to query_other_path({ format: "csv" }) do %>
+      <button type="button" class="btn btn-default">
+        Download select artifacts as CSV <span class="glyphicon glyphicon-download-alt"></span>
+      </button>
+  <% end %>
+</p>
 
 <p>The Salmon Ruins Museum has two other data tables that are not included within SPARC due to the sensitive nature of their contents:  A human burial table and a human osteology table. Qualified individuals may request access to this information. Please note, such requests will be granted at the discretion of the Director of the Salmon Ruins Museum. All inquiries should be directed to:</p>
 
