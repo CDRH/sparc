@@ -21,6 +21,8 @@ module SparcDb
     # config.i18n.default_locale = :de
 
     # config.relative_url_root = "/sparc_db"
-    
+
+    # 404 / 500 pages
+    config.exceptions_app = self.routes
   end
 end
