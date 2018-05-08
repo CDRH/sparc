@@ -21,7 +21,7 @@ sources.
         sa_no: "SA Number"
       },
       primary: %w[salmon_museum_no sa_no item],
-      selects: %w[]
+      selects: %w[item]
     }
   end
 

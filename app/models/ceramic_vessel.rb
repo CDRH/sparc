@@ -32,9 +32,10 @@ cross-checked against other sources.
         ceramic_vessel_lori_reed_type: "Lori Reed Ceramic Vessel Type"
       },
       primary: %w[
-        sa_no burial_related fs_no
+        sa_no fs_no
         ceramic_whole_vessel_form ceramic_vessel_lori_reed_form
         ceramic_vessel_type ceramic_vessel_lori_reed_type
+        burial_related
       ],
       selects: %w[burial_related]
     }

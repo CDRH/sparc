@@ -36,6 +36,19 @@ cp config/secrets.demo.yml config/secrets.yml
 
 Now you can run `rails secret` as many times as you like to generate new secrets for your `config/secrets.yml` file.
 
+### Libraries / Apache
+
+Create a symlink for the universal viewer files.
+
+```
+ln -s /path/to/app/public/uv-2.0.2 /path/to/app/public/assets/uv-2.0.2
+```
+
+Set up your apache configuration to allow symlinks:
+
+```
+Options FollowSymLinks
+```
 
 ### Database
 
@@ -118,6 +131,20 @@ rake documents:create_csv
 ```
 
 __NOTE: This may take up to an hour to run, depending on your machine!__  The script pulls out metadata from the images with exiftool, which is where the bottleneck occurs.
+
+### Generate assets and favicons
+
+To generate assets (production only):
+
+```
+rails assets:precompile RAILS_ENV=production
+```
+
+To generate new favicons, based off config/favicon.json
+
+```
+rails generate favicon
+```
 
 ### Run Tests
 

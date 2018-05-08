@@ -51,7 +51,7 @@ sources.
         feature_no occupation feature_group feature_type residential_feature
         t_shaped_door door_between_multiple_room doorway_sealed comments
       ],
-      selects: %w[]
+      selects: %w[feature_type]
     }
   end
 
