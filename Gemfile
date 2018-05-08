@@ -47,6 +47,9 @@ group :development do
   # will kill postgres processes related to the database connection
   # which allows for the database to be dropped even when using phusion passenger
   gem 'pgreset'
+
+  # create favicon
+  gem 'rails_real_favicon'
 end
 
 # postgres database for active record
