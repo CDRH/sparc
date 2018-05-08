@@ -4,10 +4,11 @@
 
 <span class="common_search_help glyphicon glyphicon-question-sign"
   aria-hidden="true" data-toggle="popover"
-  data-content="Common Search Options are saved when a search is performed.
-  To clear all saved search options, press the 'Clear All Search Options'
-  button. Note: This will also clear any search criteria entered in the table
-  search options to the right.">
+  data-content="If no selections are made in a group, results will not be
+    narrowed by that criteria. Common Search Options are saved when a search is
+    performed. To clear all saved search options, press the 'Clear All Search
+    Options' button. Note: This will also clear any search criteria entered in
+    the table search options to the right.">
 </span>
 <div class="pull-right">
   <%= link_to "Clear All Search Options", { controller: params["controller"],
@@ -16,6 +17,7 @@
 <div class="clearfix buffer-bottom-sm"></div>
 
 <!-- common search options accordian -->
+<% @search_expanded = false %>
 <div class="panel-group combined_selections" id="accordion" role="tablist" aria-multiselectable="true">
 
   <!-- unit type filters -->
@@ -26,18 +28,13 @@
            href="#collapse-unitclass" aria-expanded="true" aria-controls="collapse-unitclass">
           Unit Type
         </a>
-        <%= render "common_search_badge",
-          session_value: session[:common_search_unit_class] %>
-        <div class="form-inline pull-right check_all">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" class="select_all"/> Select All
-            </label>
-          </div>
-        </div>
+        <% search_param = session[:common_search_unit_class] %>
+        <%= render "common_search_badge", session_value: search_param %>
       </h4>
     </div>
-    <div id="collapse-unitclass" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-unit">
+    <div id="collapse-unitclass" class="panel-collapse collapse
+      <%= common_search_expand(search_param, first: true) %>" role="tabpanel"
+      aria-labelledby="heading-unit">
       <div>
         <ul class="list-group checked-list-box">
           <% UnitClass.all.each do |u| %>
@@ -45,7 +42,7 @@
               <div class="form-inline">
                 <div class="checkbox">
                   <%= check_box_tag "unit_class[#{u.id}]", u.id, checked?(u.id, session[:common_search_unit_class]), class: "select_all", name: "unit_class[]" %>
-                  <%= label_tag "unit_class[#{u.id}]", u.name %>
+                  <%= label_tag "unit_class[#{u.id}]", u.name.titleize %>
                 </div>
               </div>
             </li>
@@ -63,18 +60,13 @@
            href="#collapse-unitnum" aria-expanded="false" aria-controls="collapse-unitnum">
           Unit Number
         </a>
-        <%= render "common_search_badge",
-          session_value: session[:common_search_unit] %>
-        <div class="form-inline pull-right check_all">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" class="select_all"/> Select All
-            </label>
-          </div>
-        </div>
+        <% search_param = session[:common_search_unit] %>
+        <%= render "common_search_badge", session_value: search_param %>
       </h4>
     </div>
-    <div id="collapse-unitnum" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-num">
+    <div id="collapse-unitnum" class="panel-collapse collapse
+      <%= common_search_expand(search_param) %>" role="tabpanel"
+      aria-labelledby="heading-num">
       <div>
         <ul class="list-group checked-list-box">
           <% Unit.all.sorted.each do |u| %>
@@ -100,18 +92,13 @@
            href="#collapse-occupation" aria-expanded="false" aria-controls="collapse-occupation">
           Occupation
         </a>
-        <%= render "common_search_badge",
-          session_value: session[:common_search_occupation] %>
-        <div class="form-inline pull-right check_all">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" class="select_all"/> Select All
-            </label>
-          </div>
-        </div>
+        <% search_param = session[:common_search_occupation] %>
+        <%= render "common_search_badge", session_value: search_param %>
       </h4>
     </div>
-    <div id="collapse-occupation" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-occupation">
+    <div id="collapse-occupation" class="panel-collapse collapse
+      <%= common_search_expand(search_param) %>" role="tabpanel"
+      aria-labelledby="heading-occupation">
       <div>
         <ul class="list-group checked-list-box">
           <% Occupation.order("name").each do |o| %>
@@ -119,7 +106,7 @@
               <div class="form-inline">
                 <div class="checkbox">
                   <%= check_box_tag "occupation[#{o.id}]", o.id, checked?(o.id, session[:common_search_occupation]), class: "select_all", name: "occupation[]" %>
-                  <%= label_tag "occupation[#{o.id}]", o.name %>
+                  <%= label_tag "occupation[#{o.id}]", o.name.titleize %>
                 </div>
               </div>
             </li>
@@ -136,18 +123,13 @@
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-stratum" aria-expanded="false" aria-controls="collapse-stratum">
           Strata
         </a>
-        <%= render "common_search_badge",
-          session_value: session[:common_search_strat_grouping] %>
-        <div class="form-inline pull-right check_all" >
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" class="select_all"/> Select All
-            </label>
-          </div>
-        </div>
+        <% search_param = session[:common_search_strat_grouping] %>
+        <%= render "common_search_badge", session_value: search_param %>
       </h4>
     </div>
-    <div id="collapse-stratum" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-stratum">
+    <div id="collapse-stratum" class="panel-collapse collapse
+      <%= common_search_expand(search_param) %>" role="tabpanel"
+      aria-labelledby="heading-stratum">
       <div>
         <ul class="list-group checked-list-box">
           <% StratGrouping.order("name").each do |s| %>
@@ -156,7 +138,7 @@
                 <div class="checkbox">
                   <%= check_box_tag "strat_grouping[#{s.id}]", s.id, checked?(s.id, session[:common_search_strat_grouping]),
                     class: "select_all", name: "strat_grouping[]" %>
-                  <%= label_tag "strat_grouping[#{s.id}]", s.name %>
+                  <%= label_tag "strat_grouping[#{s.id}]", s.name.titleize %>
                 </div>
               </div>
             </li>
@@ -174,18 +156,13 @@
            href="#collapse-feature" aria-expanded="false" aria-controls="collapse-feature">
           Feature
         </a>
-        <%= render "common_search_badge",
-          session_value: session[:common_search_feature_group] %>
-        <div class="form-inline pull-right check_all" >
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" class="select_all"/> Select All
-            </label>
-          </div>
-        </div>
+        <% search_param = session[:common_search_feature_group] %>
+        <%= render "common_search_badge", session_value: search_param %>
       </h4>
     </div>
-    <div id="collapse-feature" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-feature">
+    <div id="collapse-feature" class="panel-collapse collapse
+      <%= common_search_expand(search_param) %>" role="tabpanel"
+      aria-labelledby="heading-feature">
       <div>
         <ul class="list-group checked-list-box">
           <% FeatureGroup.all.each do |fg| %>
@@ -193,7 +170,7 @@
               <div class="form-inline">
                 <div class="checkbox">
                   <%= check_box_tag "feature_group[#{fg.id}]", fg.id, checked?(fg.id, session[:common_search_feature_group]), class: "select_all", name: "feature_group[]" %>
-                  <%= label_tag "feature_group[#{fg.id}]", fg.name %>
+                  <%= label_tag "feature_group[#{fg.id}]", fg.name.titleize %>
                 </div>
               </div>
             </li>
