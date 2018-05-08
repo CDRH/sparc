@@ -86,38 +86,76 @@ class QueryController < ApplicationController
 
   private
 
+  def add_unit_field(association)
+    if @table_fields.select { |f| f[:name].include?("unit") }.empty?
+      if association == :units
+        @table.reflect_on_all_associations.each do |a|
+          if a.name == :units
+            @table_fields.unshift({ assoc: :unknown, name: a.name.to_s })
+          end
+        end
+      elsif association == :unit
+        @table.reflect_on_all_associations.each do |a|
+          if a.name == :unit
+            @table_fields.unshift({ assoc: :unknown, name: a.name.to_s })
+          end
+        end
+      end
+    end
+  end
+
   def common_search(res)
     # Save params in session
-    session[:common_search_unit] = params["unit"]
-    session[:common_search_unit_class] = params["unit_class"]
+    session[:common_search_unit] = params["unit_common"]
+    session[:common_search_unit_class] = params["unit_class_common"]
     session[:common_search_occupation] = params["occupation"]
     session[:common_search_strat_grouping] = params["strat_grouping"]
     session[:common_search_feature_group] = params["feature_group"]
 
     # Units
-#    if (params["unit"].present? || params["unit_class"].present?)
-#      assocs = res.reflect_on_all_associations.map { |a| a.name }
-#      if assocs.include?(:units)
-#        res = res.joins(:units)
-
-#        if params["unit"].present?
-#          res = res.where(units: { id: params["unit"] })
+    if (params["unit_common"].present? || params["unit_class_common"].present?)
+      assocs = res.reflect_on_all_associations.map { |a| a.name }
+      if @table == Unit
+#        if params["unit_common"].present?
+#          res = res.where(id: params["unit_common"])
 #        end
 
-#        if params["unit_class"].present?
-#          res = res.where(units: { unit_class_id: params["unit_class"] })
-#        end
-#      elsif assocs.include?(:unit)
-#        if params["unit"].present?
-#          res = res.where(unit_id: params["unit"])
+        if params["unit_class_common"].present?
+          res = res.where(unit_class_id: params["unit_class_common"])
+        end
+      elsif assocs.include?(:units)
+        add_unit_field(:units)
+        res = res.joins(:units)
+
+#        if params["unit_common"].present?
+#          res = res.where(units: { id: params["unit_common"] })
 #        end
 
-#        if params["unit_class"].present?
-#          res = res.where(unit_id:
-#            UnitClass.where(id: params["unit_class"]).pluck(:id))
+        if params["unit_class_common"].present?
+          res = res.where(units: { unit_class_id: params["unit_class_common"] })
+        end
+      elsif assocs.include?(:unit)
+        add_unit_field(:unit)
+
+#        if params["unit_common"].present?
+#          res = res.where(unit_id: params["unit_common"])
 #        end
-#      end
-#    end
+
+        if params["unit_class_common"].present?
+          if !@table.columns.map { |c| c.name.to_s }.include?("unit_id")
+            # Handles TreeRing search with Unit Class
+            res = res.where(unit_no:
+              Unit.select(:unit_no).where(unit_class_id:
+                UnitClass.where(id: params["unit_class_common"])
+              )
+            )
+          else
+            res = res.where(unit_id:
+              UnitClass.where(id: params["unit_class_common"]).pluck(:id))
+          end
+        end
+      end
+    end
 
     # Occupations
 #    if occupation_param_ids_only?
