@@ -287,13 +287,11 @@ module ActiveRecordAbstraction
     def field_is_selectable_assoc?(table, field)
       if field[:assoc] != :column
         assoc = field[:name].classify.constantize
-        if assoc.respond_to?("abstraction") &&
-          assoc.abstraction[:assoc_col].present?
 
-          assoc_col = assoc.abstraction[:assoc_col]
-          if assoc.select(assoc_col).distinct.count < ABSTRACT["select_limit"]
-            true
-          end
+        if assoc.select(association_column(assoc)).distinct
+          .count < ABSTRACT["select_limit"]
+
+          return true
         end
       end
       false

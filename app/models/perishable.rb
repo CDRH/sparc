@@ -22,7 +22,7 @@ against other sources.
       primary: %w[
         salmon_museum_number fs_no sa_no artifact_type comments comments_other
       ],
-      selects: %w[]
+      selects: %w[artifact_type]
     }
   end
 
