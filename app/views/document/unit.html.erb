@@ -1,6 +1,9 @@
-<%= javascript_include_tag "uv-2.0.2/lib/bundle.min" %>
+<%# file does not use traditional javascript include tags because universal viewer
+    has internal calls to resources, so manually including at non-fingerprinted path %>
+<script type="text/javascript" src="<%= "#{request.base_url}/assets/uv-2.0.2/lib/bundle.min.js" %>"></script>
 
-<%= javascript_include_tag "uv-2.0.2/require.min", "data-main": asset_path("uv-2.0.2/lib/app") %>
+<script type="text/javascript" src="<%= "#{request.base_url}/assets/uv-2.0.2/require.min.js" %>"
+  data-main="<%= "#{request.base_url}/uv-2.0.2/lib/app.js" %>"></script>
 
 <h2><%= @unit_no %> Documents</h2>
 
@@ -16,8 +19,7 @@
 
 <div id="uv_viewer" class="uv" data-uri="<%= get_data_uri %>"></div>
 
-<%# because of self-referential lines in embed JS do not use rails script include helper %>
-<script type="text/javascript" id="embedUV" src="<%= asset_path('uv-2.0.2/lib/embed.js') %>"></script>
+<script type="text/javascript" id="embedUV" src="<%= "#{request.base_url}/assets/uv-2.0.2/lib/embed.js" %>"></script>
 
 <%= javascript_include_tag "document_iiif_viewer" %>
 
