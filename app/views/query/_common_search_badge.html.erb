@@ -1,8 +1,8 @@
 <span
   <% if session_value.present? %>
-    class="badge" aria-hidden="false"
+    class="pull-right badge" aria-hidden="false"
   <% else %>
-    class="badge hidden" aria-hidden="true"
+    class="pull-right badge hidden" aria-hidden="true"
   <% end %>
   title="Options selected">
   <%= session_value.present? ? session_value.size : 0 %>
