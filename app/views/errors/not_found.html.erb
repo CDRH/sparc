@@ -1,3 +1,8 @@
 <h2>Not Found</h2>
 
-<p>We were unable to find the requested resource!</p>
+<div class="illustration credits_illustration illustration_right">
+  <%= image_tag "pp_credits_001.jpg", class: "", alt: "image of kiva" %>
+  <div class="caption">Salmon Pueblo.  Image 586419262.  Photo by: Education Images/UIG via Getty Images. </div>
+</div>
+
+<p class="lead">We were unable to load the requested resource! Please head back to the <%= link_to "home page", home_path %> and try again, or <%= link_to "contact us", about_sub_path(name: "contact") %>.</p>
