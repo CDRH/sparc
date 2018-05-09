@@ -162,14 +162,14 @@ module ActiveRecordAbstraction
           if params[field[:name]].present?
             if field[:form] == :input
               if table.column_for_attribute(field[:name]).type == :string
-                res = res.where("#{field[:name]} LIKE ?",
+                res = res.where("#{@table}.#{field[:name]} LIKE ?",
                                 "%#{params[field[:name]]}%")
               else
-                res = res.where("#{field[:name]} = ?",
+                res = res.where("#{@table}.#{field[:name]} = ?",
                                 "#{params[field[:name]]}")
               end
             elsif field[:form] == :select
-              res = res.where("#{field[:name]} = ?",
+              res = res.where("#{@table}.#{field[:name]} = ?",
                               "#{params[field[:name]]}")
             end
           end
@@ -177,19 +177,19 @@ module ActiveRecordAbstraction
           if params[field[:name]].present?
             if field[:form] == :select
               res = res.joins(field[:name].to_sym)
-                .where(field[:name].pluralize => { id: params[field[:name]] })
+                .where("#{@table}.#{field[:name].pluralize}" => { id: params[field[:name]] })
             elsif field[:form] == :input
               if field[:name].classify.constantize
                 .column_for_attribute(association_column(field[:name]))
                 .type == :string
 
-                query_string = "#{field[:name].pluralize}" <<
+                query_string = "#{@table}.#{field[:name].pluralize}" <<
                   ".#{association_column(field[:name])} LIKE ?"
                 res = res.joins(field[:name].to_sym)
                   .where(query_string, "%#{params[field[:name]]}%")
               else
                 res = res.joins(field[:name].to_sym).where(
-                  field[:name].pluralize => {
+                  "#{@table}.#{field[:name].pluralize}" => {
                     association_column(field[:name]) => params[field[:name]]
                   }
                 )
