@@ -14,7 +14,7 @@ project and Tom Windes’ work (part of Archaeology Southwest's Salmon Project -
 During the SPARC project (2015-2018), data within this table were edited and
 cross-checked against other sources.
       DESC
-      disabled: %w[],
+      disabled: %w[unit_no],
       labels: {
         trl_no: "TRL Number"
       },
@@ -24,7 +24,7 @@ cross-checked against other sources.
   end
 
   def self.sorted
-    order("trl_no")
+    order("tree_rings.trl_no")
   end
 
   def to_label

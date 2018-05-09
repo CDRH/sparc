@@ -27,7 +27,7 @@ cross-checked against other sources.
   end
 
   def self.sorted
-    order("comments")
+    order("soils.comments")
   end
 
   def to_label

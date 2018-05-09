@@ -12,7 +12,7 @@ class DocumentBinder < ActiveRecord::Base
   end
 
   def self.sorted
-    order("resource_id")
+    order("document_binders.resource_id")
   end
 
   def pages

@@ -4,7 +4,7 @@ class DoorBetweenMultipleRoom < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("door_between_multiple_rooms.name")
   end
 
   def to_label

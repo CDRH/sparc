@@ -43,7 +43,7 @@ Archaeology Southwest's Salmon Project (2001-2018). During the SPARC project
 (2015-2018), data within this table were edited and cross-checked against other
 sources.
       DESC
-      disabled: %w[],
+      disabled: %w[units],
       labels: {
         feature_no: "Feature Number"
       },
@@ -56,7 +56,7 @@ sources.
   end
 
   def self.sorted
-    order("feature_no")
+    order("features.feature_no")
   end
 
   def to_label

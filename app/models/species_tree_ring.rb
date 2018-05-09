@@ -4,7 +4,7 @@ class SpeciesTreeRing < ApplicationRecord
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("species_tree_rings.name")
   end
 
   def to_label

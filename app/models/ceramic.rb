@@ -55,7 +55,7 @@ table were edited and cross-checked against other sources.
   end
 
   def self.sorted
-    order("fs_no")
+    order("ceramics.fs_no")
   end
 
   def to_label

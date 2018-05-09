@@ -4,7 +4,7 @@ class CeramicVesselPart < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("ceramic_vessel_parts.name")
   end
 
   def to_label

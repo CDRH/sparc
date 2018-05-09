@@ -4,7 +4,7 @@ class BurialSex < ApplicationRecord
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("burial_sexes.name")
   end
 
   def to_label
