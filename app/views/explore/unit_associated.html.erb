@@ -13,7 +13,7 @@
         <% else %>
           <%= link_to "Features (#{@unit.features.count})", query_results_path({
                 category: "features", subcat: "features",
-                table: "features", unit_no: @unit.unit_no
+                table: "features", units: @unit.unit_no
             }) %>
         <% end %>
       </p>
@@ -43,7 +43,7 @@
         <% else %>
           <%= link_to "Tree Ring (#{@unit.tree_rings.count})", query_results_path({
               category: "samples", subcat: "tree_ring",
-              table: "tree_ring", unit_no: @unit.unit_no
+              table: "tree_ring", unit: @unit.unit_no
             }) %>
         <% end %>
       </p>
