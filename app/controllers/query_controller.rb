@@ -136,9 +136,9 @@ class QueryController < ApplicationController
     if (params["unit_common"].present? || params["unit_class_common"].present?)
       assocs = res.reflect_on_all_associations.map { |a| a.name }
       if @table == Unit
-#        if params["unit_common"].present?
-#          res = res.where(id: params["unit_common"])
-#        end
+        if params["unit_common"].present?
+          res = res.where(id: params["unit_common"])
+        end
 
         if params["unit_class_common"].present?
           res = res.where(unit_class_id: params["unit_class_common"])
@@ -147,9 +147,9 @@ class QueryController < ApplicationController
         add_unit_field(:units)
         res = res.joins(:units)
 
-#        if params["unit_common"].present?
-#          res = res.where(units: { id: params["unit_common"] })
-#        end
+        if params["unit_common"].present?
+          res = res.where(units: { id: params["unit_common"] })
+        end
 
         if params["unit_class_common"].present?
           res = res.where(units: { unit_class_id: params["unit_class_common"] })
@@ -157,9 +157,15 @@ class QueryController < ApplicationController
       elsif assocs.include?(:unit)
         add_unit_field(:unit)
 
-#        if params["unit_common"].present?
-#          res = res.where(unit_id: params["unit_common"])
-#        end
+        if params["unit_common"].present?
+          if !@table.columns.map { |c| c.name.to_s }.include?("unit_id")
+            # Handles TreeRing search with Unit Number
+            res = res.where(unit_no: Unit.select(:unit_no)
+              .where(id: params["unit_common"]))
+          else
+            res = res.where(unit_id: params["unit_common"])
+          end
+        end
 
         if params["unit_class_common"].present?
           if !@table.columns.map { |c| c.name.to_s }.include?("unit_id")
