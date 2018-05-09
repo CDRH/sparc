@@ -124,7 +124,7 @@ class QueryController < ApplicationController
     # Save params in session
     session[:common_search_unit] = params["unit_common"]
     session[:common_search_unit_class] = params["unit_class_common"]
-    session[:common_search_occupation] = params["occupation"]
+    session[:common_search_occupation] = params["occupation_common"]
     session[:common_search_strat_grouping] = params["strat_grouping"]
     session[:common_search_feature_group] = params["feature_group"]
 
@@ -174,26 +174,26 @@ class QueryController < ApplicationController
     end
 
     # Occupations
-#    if occupation_param_ids_only?
-#      assoc_name_list = res.reflect_on_all_associations.map { |a| a.name }
+    if params["occupation_common"].present?
+      assoc_name_list = res.reflect_on_all_associations.map { |a| a.name }
 
-#      # Filter by occupation based on occupation of associated strata,
-#      # noted as more accurate than tables' own occupation data
-#      if assoc_name_list.include?(:strata)
-#        res = res.select("#{@table.to_s.tableize}.*, strata.occupation_id")
-#                .joins(:strata)
-#                .where(strata: { occupation_id: params["occupation"] })
-#        @occupation_source = "Strat Occupation"
-#      elsif assoc_name_list.include?(:occupation)
-#        res = res.where(occupation_id: params["occupation"])
-#        @occupation_source = "#{@table.to_s.titleize} Occupation"
-#      elsif assoc_name_list.include?(:occupations)
-#        res = res.select("#{@table.to_s.tableize}.*, features.occupation_id")
-#                .joins(:features)
-#                .where(occupations: { id: params["occupation"] })
-#        @occupation_source = "#{@table.to_s.titleize} Occupations"
-#      end
-#    end
+      # Filter by occupation based on occupation of associated strata,
+      # noted as more accurate than tables' own occupation data
+      if assoc_name_list.include?(:strata)
+        res = res.select("#{@table.to_s.tableize}.*, strata.occupation_id")
+                .joins(:strata)
+                .where(strata: { occupation_id: params["occupation_common"] })
+        @occupation_source = "Strat Occupation"
+      elsif assoc_name_list.include?(:occupation)
+        res = res.where(occupation_id: params["occupation_common"])
+        @occupation_source = "#{@table.to_s.titleize} Occupation"
+      elsif assoc_name_list.include?(:occupations)
+        res = res.select("#{@table.to_s.tableize}.*, features.occupation_id")
+                .joins(:features)
+                .where(occupations: { id: params["occupation_common"] })
+        @occupation_source = "#{@table.to_s.titleize} Occupations"
+      end
+    end
 
     # Strat Types
 #    if params["strat_grouping"].present? \
@@ -216,20 +216,6 @@ class QueryController < ApplicationController
 #    end
 
     res
-  end
-
-  def occupation_param_ids_only?
-    if params["occupation"].present?
-      if params["occupation"].respond_to?(:each)
-        params["occupation"].each do |o|
-          return false if !o[/^\d+$/]
-        end
-        return true
-      else
-        return params["occupation"][/^[0-9]+$/]
-      end
-    end
-    false
   end
 
   def set_section
