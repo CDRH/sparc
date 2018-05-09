@@ -118,38 +118,6 @@
     </div>
   </div>
 
-  <!-- strata filters -->
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading-stratum">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-stratum" aria-expanded="false" aria-controls="collapse-stratum">
-          Strata
-        </a>
-        <% search_param = session[:common_search_strat_grouping] %>
-        <%= render "common_search_badge", session_value: search_param %>
-      </h4>
-    </div>
-    <div id="collapse-stratum" class="panel-collapse collapse
-      <%= common_search_expand(search_param) %>" role="tabpanel"
-      aria-labelledby="heading-stratum">
-      <div>
-        <ul class="list-group checked-list-box">
-          <% StratGrouping.sorted.each do |s| %>
-            <li class="list-group-item">
-              <div class="form-inline">
-                <div class="checkbox">
-                  <%= check_box_tag "strat_grouping[#{s.id}]", s.id, checked?(s.id, session[:common_search_strat_grouping]),
-                    class: "select_all", name: "strat_grouping[]" %>
-                  <%= label_tag "strat_grouping[#{s.id}]", s.name.titleize %>
-                </div>
-              </div>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-
   <!-- features filters -->
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="heading-feature">
