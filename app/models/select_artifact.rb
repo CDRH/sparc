@@ -20,7 +20,7 @@ class SelectArtifact < ApplicationRecord
   end
 
   def self.sorted
-    order("sa_no")
+    order("select_artifacts.sa_no")
   end
 
   def to_label

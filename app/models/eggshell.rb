@@ -25,7 +25,7 @@ against other sources.
   end
 
   def self.sorted
-    order("salmon_museum_no")
+    order("eggshells.salmon_museum_no")
   end
 
   def to_label

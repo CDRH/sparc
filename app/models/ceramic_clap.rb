@@ -35,7 +35,7 @@ cross-checked against other sources.
   end
 
   def self.sorted
-    order("record_field_key_no")
+    order("ceramic_claps.record_field_key_no")
   end
 
   def to_label

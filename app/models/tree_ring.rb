@@ -24,7 +24,7 @@ cross-checked against other sources.
   end
 
   def self.sorted
-    order("trl_no")
+    order("tree_rings.trl_no")
   end
 
   def to_label

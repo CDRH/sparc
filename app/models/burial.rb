@@ -13,7 +13,7 @@ class Burial < ActiveRecord::Base
   end
 
   def self.sorted
-    order("new_burial_no")
+    order("burials.new_burial_no")
   end
 
   def to_label

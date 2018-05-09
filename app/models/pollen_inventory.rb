@@ -25,7 +25,7 @@ cross-checked against other sources.
   end
 
   def self.sorted
-    order("salmon_museum_no")
+    order("pollen_inventories.salmon_museum_no")
   end
 
   def to_label
