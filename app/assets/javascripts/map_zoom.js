@@ -4,6 +4,7 @@ var map_setup = function() {
     controlIconsEnabled: true,
     fit: true,
     center: true,
+    preventMouseEventsDefault: false,
   });
   // set default zoom for map
   map.zoom(1.7);
