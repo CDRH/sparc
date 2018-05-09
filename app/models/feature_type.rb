@@ -4,7 +4,7 @@ class FeatureType < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("feature_types.name")
   end
 
   def to_label

@@ -4,7 +4,7 @@ class DoorwaySealed < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("doorway_sealeds.name")
   end
 
   def to_label

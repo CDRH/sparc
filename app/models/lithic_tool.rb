@@ -34,7 +34,7 @@ against other sources.
   end
 
   def self.sorted
-    order("fs_no")
+    order("lithic_tools.fs_no")
   end
 
   def to_label

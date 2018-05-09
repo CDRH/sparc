@@ -4,7 +4,7 @@ class CeramicClapGroupType < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("ceramic_clap_group_types.name")
   end
 
   def to_label

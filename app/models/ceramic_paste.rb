@@ -4,7 +4,7 @@ class CeramicPaste < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("ceramic_pastes.name")
   end
 
   def to_label

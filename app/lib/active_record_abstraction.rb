@@ -73,6 +73,9 @@ module ActiveRecordAbstraction
     def display_forms(fields)
       markup = ''
       fields.each do |field|
+        # because units is a common search option, do not add to display form
+        # TODO move to abstaction config file when hidden form fields created
+        next if field[:name] == "units"
         markup << <<-HTML
 <div class="col-md-6">
   <div class="form-group">
@@ -154,19 +157,20 @@ module ActiveRecordAbstraction
 
     def search_fields(table, fields)
       res = table.unscoped
+      table_name = table.model_name.plural
       fields.each do |field|
         if field[:assoc] == :column
           if params[field[:name]].present?
             if field[:form] == :input
               if table.column_for_attribute(field[:name]).type == :string
-                res = res.where("#{field[:name]} LIKE ?",
+                res = res.where("#{table_name}.#{field[:name]} LIKE ?",
                                 "%#{params[field[:name]]}%")
               else
-                res = res.where("#{field[:name]} = ?",
+                res = res.where("#{table_name}.#{field[:name]} = ?",
                                 "#{params[field[:name]]}")
               end
             elsif field[:form] == :select
-              res = res.where("#{field[:name]} = ?",
+              res = res.where("#{table_name}.#{field[:name]} = ?",
                               "#{params[field[:name]]}")
             end
           end
@@ -174,19 +178,18 @@ module ActiveRecordAbstraction
           if params[field[:name]].present?
             if field[:form] == :select
               res = res.joins(field[:name].to_sym)
-                .where(field[:name].pluralize => { id: params[field[:name]] })
+                .where("#{table_name}.#{field[:name].pluralize}" => { id: params[field[:name]] })
             elsif field[:form] == :input
               if field[:name].classify.constantize
                 .column_for_attribute(association_column(field[:name]))
                 .type == :string
-
                 query_string = "#{field[:name].pluralize}" <<
                   ".#{association_column(field[:name])} LIKE ?"
                 res = res.joins(field[:name].to_sym)
                   .where(query_string, "%#{params[field[:name]]}%")
               else
                 res = res.joins(field[:name].to_sym).where(
-                  field[:name].pluralize => {
+                  "#{table_name}.#{field[:name].pluralize}" => {
                     association_column(field[:name]) => params[field[:name]]
                   }
                 )

@@ -27,7 +27,7 @@ against other sources.
   end
 
   def self.sorted
-    order("fs_no")
+    order("perishables.fs_no")
   end
 
   def to_label

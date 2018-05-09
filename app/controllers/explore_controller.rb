@@ -54,25 +54,6 @@ class ExploreController < ApplicationController
   def unit_associated
     @subsection = "units"
     @selected = "associated"
-
-    @associated = {
-      "samples" => {
-        "pollens" => ["pollen_inventory"],
-        "soils" => ["soil"],
-        "tree_rings" => ["tree_ring"]
-      },
-      "artifacts" => {
-        "ceramics" => ["ceramic_inventory", "ceramic_clap", "ceramic",
-                "ceramic_vessel"],
-        "eggshells" => ["eggshell"],
-        "faunal" => ["bone_tool", "faunal_artifacts", "faunal_inventory"],
-        "lithics" => ["lithic_inventory", "lithic_debitage", "lithic_tool",
-          "obsidian_inventories"],
-        "ornaments" => ["ornament"],
-        "perishables" => ["perishable"],
-        "woods" => ["wood_inventory"]
-      }
-    }
   end
 
   def unit_documents

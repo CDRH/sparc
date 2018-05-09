@@ -4,7 +4,7 @@ class EggshellItem < ApplicationRecord
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("eggshell_items.name")
   end
 
   def to_label
