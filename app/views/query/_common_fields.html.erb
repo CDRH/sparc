@@ -171,7 +171,9 @@
             <li class="list-group-item">
               <div class="form-inline">
                 <div class="checkbox">
-                  <%= check_box_tag "feature_group[#{fg.id}]", fg.id, checked?(fg.id, session[:common_search_feature_group]), class: "select_all", name: "feature_group[]" %>
+                  <%= check_box_tag "feature_group[#{fg.id}]", fg.id,
+                    checked?(fg.id, session[:common_search_feature_group]),
+                    class: "select_all", name: "feature_group_common[]" %>
                   <%= label_tag "feature_group[#{fg.id}]", fg.name.titleize %>
                 </div>
               </div>
