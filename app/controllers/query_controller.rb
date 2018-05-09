@@ -183,7 +183,9 @@ class QueryController < ApplicationController
 
       # Filter by occupation based on occupation of associated strata,
       # noted as more accurate than tables' own occupation data
-      if assoc_name_list.include?(:strata)
+      if assoc_name_list.include?(:strata) &&
+        !%w[Unit Feature].include?(res.model_name.name)
+
         res = res.select("#{@table.to_s.tableize}.*, strata.occupation_id")
                 .joins(:strata)
                 .where(strata: { occupation_id: params["occupation_common"] })
