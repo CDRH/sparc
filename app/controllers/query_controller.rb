@@ -213,7 +213,9 @@ class QueryController < ApplicationController
 
     # Feature Groups
     if params["feature_group_common"].present?
-      if res.reflect_on_all_associations.map { |a| a.name }.include?(:features)
+      if res.reflect_on_all_associations.map { |a| a.name }
+        .include?(:features) && res.model_name.name != "Unit"
+
         res = res.joins(features: [:feature_group])
           .where(feature_groups: { id: params["feature_group_common"] })
       elsif res.reflect_on_all_associations.map { |a| a.name }.include?(:strata)
