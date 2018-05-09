@@ -105,7 +105,9 @@
             <li class="list-group-item">
               <div class="form-inline">
                 <div class="checkbox">
-                  <%= check_box_tag "occupation[#{o.id}]", o.id, checked?(o.id, session[:common_search_occupation]), class: "select_all", name: "occupation[]" %>
+                  <%= check_box_tag "occupation[#{o.id}]", o.id,
+                    checked?(o.id, session[:common_search_occupation]), class:
+                    "select_all", name: "occupation_common[]" %>
                   <%= label_tag "occupation[#{o.id}]", o.name.titleize %>
                 </div>
               </div>
