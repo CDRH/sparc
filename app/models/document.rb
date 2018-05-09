@@ -13,7 +13,7 @@ class Document < ActiveRecord::Base
   end
 
   def self.sorted
-    order("page_id")
+    order("documents.page_id")
   end
 
   def canonical_unit_no

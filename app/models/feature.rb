@@ -56,7 +56,7 @@ sources.
   end
 
   def self.sorted
-    order("feature_no")
+    order("features.feature_no")
   end
 
   def to_label

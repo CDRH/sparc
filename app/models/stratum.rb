@@ -27,7 +27,7 @@ edited and cross-checked against other sources.
   end
 
   def self.sorted
-    order("strat_all")
+    order("strata.strat_all")
   end
 
   def to_label

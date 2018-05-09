@@ -43,7 +43,7 @@ were edited and cross-checked against other sources.
   end
 
   def self.sorted
-    order("image_no")
+    order("images.image_no")
   end
 
   def to_label

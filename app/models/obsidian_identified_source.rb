@@ -4,7 +4,7 @@ class ObsidianIdentifiedSource < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("obsidian_identified_sources.name")
   end
 
   def to_label
