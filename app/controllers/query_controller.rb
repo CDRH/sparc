@@ -130,7 +130,7 @@ class QueryController < ApplicationController
     session[:common_search_unit_class] = params["unit_class_common"]
     session[:common_search_occupation] = params["occupation_common"]
     session[:common_search_strat_grouping] = params["strat_grouping"]
-    session[:common_search_feature_group] = params["feature_group"]
+    session[:common_search_feature_group] = params["feature_group_common"]
 
     # Units
     if (params["unit_common"].present? || params["unit_class_common"].present?)
@@ -212,17 +212,20 @@ class QueryController < ApplicationController
 #    end
 
     # Feature Groups
-#    if params["feature_group"].present?
-#      if res.reflect_on_all_associations.map { |a| a.name }
-#           .include?(:features)
-#        res = res.joins(features: [:feature_group])
-#                .where(feature_groups: { id: params["feature_group"] })
-#      elsif res.reflect_on_all_associations.map { |a| a.name }
-#              .include?(:strata)
-#        res = res.joins(strata: [features: [:feature_group]])
-#                .where(feature_groups: { id: params["feature_group"] }).uniq
-#      end
-#    end
+    if params["feature_group_common"].present?
+      if res.reflect_on_all_associations.map { |a| a.name }.include?(:features)
+        res = res.joins(features: [:feature_group])
+          .where(feature_groups: { id: params["feature_group_common"] })
+      elsif res.reflect_on_all_associations.map { |a| a.name }.include?(:strata)
+        res = res.joins(strata: [features: [:feature_group]])
+          .where(feature_groups: { id: params["feature_group_common"] }).uniq
+      elsif res.reflect_on_all_associations.map { |a| a.name }
+        .include?(:stratum)
+
+        res = res.joins(stratum: [features: [:feature_group]])
+          .where(feature_groups: { id: params["feature_group_common"] }).uniq
+      end
+    end
 
     res
   end
