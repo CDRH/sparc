@@ -7,6 +7,13 @@
     </div>
 
     <div class="col-md-8">
+      <% if params[:table] == "features" %>
+        <p class="text-danger">
+          Many Feature search options below are temporarily inoperable.
+          Apologies for the inconvenience.
+        </p>
+      <% end %>
+
       <% if !params[:category][/^(?:units|features|strata|images)$/] %>
         <%= abstraction_subnav %>
       <% end %>
