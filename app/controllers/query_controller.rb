@@ -102,20 +102,24 @@ class QueryController < ApplicationController
 
   private
 
+#  def add_occupation_field(association)
+#    if @table_fields.select { |f| f[:name].include?("occupation") }.empty?
+#      if association == :strata
+#        @table_fields.unshift({ assoc: :unknown, name: "occupation" })
+#      elsif association == :occupations
+#        @table_fields.unshift({ assoc: :unknown, name: "occupations" })
+#      elsif association == :occupation
+#        @table_fields.unshift({ assoc: :unknown, name: "occupation" })
+#      end
+#    end
+#  end
+
   def add_unit_field(association)
     if @table_fields.select { |f| f[:name].include?("unit") }.empty?
       if association == :units
-        @table.reflect_on_all_associations.each do |a|
-          if a.name == :units
-            @table_fields.unshift({ assoc: :unknown, name: a.name.to_s })
-          end
-        end
+        @table_fields.unshift({ assoc: :unknown, name: "units" })
       elsif association == :unit
-        @table.reflect_on_all_associations.each do |a|
-          if a.name == :unit
-            @table_fields.unshift({ assoc: :unknown, name: a.name.to_s })
-          end
-        end
+        @table_fields.unshift({ assoc: :unknown, name: "unit" })
       end
     end
   end
@@ -184,14 +188,17 @@ class QueryController < ApplicationController
                 .joins(:strata)
                 .where(strata: { occupation_id: params["occupation_common"] })
         @occupation_source = "Strat Occupation"
+#        add_occupation_field(:strata)
       elsif assoc_name_list.include?(:occupation)
         res = res.where(occupation_id: params["occupation_common"])
         @occupation_source = "#{@table.to_s.titleize} Occupation"
+#        add_occupation_field(:occupation)
       elsif assoc_name_list.include?(:occupations)
         res = res.select("#{@table.to_s.tableize}.*, features.occupation_id")
                 .joins(:features)
                 .where(occupations: { id: params["occupation_common"] })
         @occupation_source = "#{@table.to_s.titleize} Occupations"
+#        add_occupation_field(:occupations)
       end
     end
 
