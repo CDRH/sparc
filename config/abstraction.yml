@@ -56,7 +56,6 @@ default: &default
     - occupation
     column:
     - unit
-    - unit_no
     habtm:
     - features
     has_many:
