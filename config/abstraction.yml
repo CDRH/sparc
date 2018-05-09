@@ -56,6 +56,7 @@ default: &default
     - occupation
     column:
     - unit
+    - select_artifact_info
     habtm:
     - features
     has_many:
