@@ -4,7 +4,7 @@ class ImageQuality < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("image_qualities.name")
   end
 
   def to_label

@@ -6,7 +6,7 @@ class Zone < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("zones.name")
   end
 
   def media_maps

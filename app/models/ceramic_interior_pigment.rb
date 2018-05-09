@@ -4,7 +4,7 @@ class CeramicInteriorPigment < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("ceramic_interior_pigments.name")
   end
 
   def to_label

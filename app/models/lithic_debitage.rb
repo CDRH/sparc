@@ -33,7 +33,7 @@ against other sources.
   end
 
   def self.sorted
-    order("fs_no")
+    order("lithic_debitages.fs_no")
   end
 
   def to_label

@@ -4,7 +4,7 @@ class CeramicExteriorSurface < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("ceramic_exterior_surfaces.name")
   end
 
   def to_label

@@ -42,7 +42,7 @@ cross-checked against other sources.
   end
 
   def self.sorted
-    order("fs_no")
+    order("ceramic_vessels.fs_no")
   end
 
   def to_label

@@ -4,7 +4,7 @@ class IrregularShape < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("irregular_shapes.name")
   end
 
   def to_label

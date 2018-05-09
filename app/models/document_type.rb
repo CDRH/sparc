@@ -4,7 +4,7 @@ class DocumentType < ActiveRecord::Base
   has_many :units, -> {distinct}, :through => :documents
 
   def self.sorted
-    order("rank")
+    order("document_types.rank")
   end
 
   def to_label

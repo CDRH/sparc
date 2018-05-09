@@ -4,7 +4,7 @@ class ResidentialFeature < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("residential_features.name")
   end
 
   def to_label

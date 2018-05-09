@@ -6,7 +6,11 @@
       <%= sanitize @zone.description %>
     </div>
     <div class="col-md-6">
-      <%= image_tag "home_explore.jpg", class: "explore_zone_image" %>
+      <% if params["occupation"] == "chaco" %>
+        <%= image_tag "home_explore_chaco.jpg", class: "explore_zone_image" %>
+      <% else %>
+        <%= image_tag "home_explore.jpg", class: "explore_zone_image" %>
+      <% end %>
     </div>
   </div>
 

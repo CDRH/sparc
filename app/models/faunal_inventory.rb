@@ -26,7 +26,7 @@ edited and cross-checked against other sources.
   end
 
   def self.sorted
-    order("comments")
+    order("faunal_inventories.comments")
   end
 
   def to_label

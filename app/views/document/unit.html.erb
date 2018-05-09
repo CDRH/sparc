@@ -5,7 +5,7 @@
 <script type="text/javascript" src="<%= "#{request.base_url}/assets/uv-2.0.2/require.min.js" %>"
   data-main="<%= "#{request.base_url}/uv-2.0.2/lib/app.js" %>"></script>
 
-<h2><%= @unit_no %> Documents</h2>
+<h2><%= @unit_no %> Documents <small>[<%= link_to "See data about unit", unit_path(number: @unit_no) %>]</small></h2>
 
 </div> <!-- end container -->
 

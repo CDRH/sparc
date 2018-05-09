@@ -5,7 +5,7 @@ class LithicCondition < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.sorted
-    order("name")
+    order("lithic_conditions.name")
   end
 
   def to_label
