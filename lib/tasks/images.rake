@@ -1,4 +1,5 @@
 LOG_LOC = "#{Rails.root}/reports"
+IMAGE_LOC = "/var/local/www/media/sparc/images"
 
 namespace :images do
 
@@ -58,11 +59,39 @@ namespace :images do
   task list_remains: :environment do
     burials = Image.unscoped
       .includes(:image_human_remain, :image_subjects)
-      .select { |i| !i.displayable? }
+      .reject { |i| i.image_human_remain.displayable }
       .map { |b| b.filepath }
     puts "Writing list of non-displayable images to reports"
     File.open("#{LOG_LOC}/images_remains.txt", "w") do |file|
       file.write(burials.join("\n"))
+    end
+  end
+
+  desc "move images identified as having human remains to separate directories"
+  task move_remains: :environment do
+    # make subdirectories
+    FileUtils::mkdir_p("#{IMAGE_LOC}/field/sensitive")
+    FileUtils::mkdir_p("#{IMAGE_LOC}/polaroids/sensitive")
+
+    # image is flagged as having human remains and the file exists
+    burials = Image.unscoped
+      .includes(:image_human_remain, :image_subjects)
+      .select { |i| !i.image_human_remain.displayable && i.file_exists }
+      .map { |b| b.filepath }
+
+    burials.each do |burial|
+      orig_path = "#{IMAGE_LOC}/#{burial}"
+      new_path = orig_path.gsub(/(polaroids|field)/, "\\1/sensitive")
+      if File.exist?(orig_path)
+        if !File.exist?(new_path)
+          FileUtils.mv(orig_path, new_path)
+          puts "moved #{burial}"
+        else
+          puts "file #{new_path} already exists! Cancelled moving #{orig_path}"
+        end
+      else
+        puts "no file found for #{orig_path}"
+      end
     end
   end
 
