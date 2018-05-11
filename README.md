@@ -181,7 +181,12 @@ Navigate to the production rails application.
 
 ```
 rails c production
+> # field image
 > i = Image.find_by(image_no: "12038")
+> i.update_attributes(image_human_remain_id: 2)
+>
+> # polaroid image
+> i = Image.find_by(image_no: "PA012038")
 > i.update_attributes(image_human_remain_id: 2)
 > exit
 ```
