@@ -211,11 +211,25 @@ class QueryController < ApplicationController
     end
 
     # Strat Types
-#    if params["strat_grouping"].present? \
-#    && res.reflect_on_all_associations.map { |a| a.name }.include?(:strata)
-#      res = res.joins(strata: [strat_type: [:strat_grouping]])
-#              .where(strat_groupings: { id: params["strat_grouping"] })
-#    end
+    if params["strat_grouping"].present?
+      if res.reflect_on_all_associations.map { |a| a.name }.include?(:strata) &&
+        !%w[CeramicClap Unit].include?(res.model_name.name)
+        # Disable tables returning more results than they have records
+        # until separate issue causing that is fixed
+
+        res = res.joins(strata: [strat_type: [:strat_grouping]])
+          .where(strat_groupings: { id: params["strat_grouping"] })
+      elsif res.reflect_on_all_associations.map { |a| a.name }
+        .include?(:stratum)
+
+        res = res.joins(stratum: [strat_type: [:strat_grouping]])
+          .where(strat_groupings: { id: params["strat_grouping"] })
+      elsif res.reflect_on_all_associations.map { |a| a.name }
+        .include?(:strat_grouping)
+
+        res = res.joins(:strat_type).where(strat_type: StratGrouping.where(id: params["strat_grouping"]))
+      end
+    end
 
     # Feature Groups
     if params["feature_group_common"].present?
