@@ -162,7 +162,9 @@ module ActiveRecordAbstraction
         if field[:assoc] == :column
           if params[field[:name]].present?
             if field[:form] == :input
-              if table.column_for_attribute(field[:name]).type == :string
+              if %i[string text]
+                .include?(table.column_for_attribute(field[:name]).type)
+
                 res = res.where("#{table_name}.#{field[:name]} LIKE ?",
                                 "%#{params[field[:name]]}%")
               else
@@ -180,9 +182,9 @@ module ActiveRecordAbstraction
               res = res.joins(field[:name].to_sym)
                 .where(field[:name].pluralize => { id: params[field[:name]] })
             elsif field[:form] == :input
-              if field[:name].classify.constantize
-                .column_for_attribute(association_column(field[:name]))
-                .type == :string
+              if %i[string text].include?(field[:name].classify.constantize
+                .column_for_attribute(association_column(field[:name])))
+
                 query_string = "#{field[:name].pluralize}" <<
                   ".#{association_column(field[:name])} LIKE ?"
                 res = res.joins(field[:name].to_sym)
