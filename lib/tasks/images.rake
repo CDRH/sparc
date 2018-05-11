@@ -59,7 +59,7 @@ namespace :images do
   task list_remains: :environment do
     burials = Image.unscoped
       .includes(:image_human_remain, :image_subjects)
-      .select { |i| !i.image_human_remain.displayable }
+      .reject { |i| i.image_human_remain.displayable }
       .map { |b| b.filepath }
     puts "Writing list of non-displayable images to reports"
     File.open("#{LOG_LOC}/images_remains.txt", "w") do |file|
@@ -81,7 +81,7 @@ namespace :images do
 
     burials.each do |burial|
       orig_path = "#{IMAGE_LOC}/#{burial}"
-      new_path = orig_path.gsub(/(.*(?:polaroids|field))/, "\\1/sensitive")
+      new_path = orig_path.gsub(/(polaroids|field)/, "\\1/sensitive")
       if File.exist?(orig_path)
         if !File.exist?(new_path)
           FileUtils.mv(orig_path, new_path)
