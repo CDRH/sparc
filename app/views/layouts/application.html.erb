@@ -27,10 +27,10 @@
   </head>
 
 
-  <body class="body_<%= params[:controller] %> body_<%= params[:action] %>">
+  <body class="body_<%= params[:controller] %> body_<%= params[:action] %> <% if current_page? home_path %>home_page<% end %>">
 
     <header class="body_head">
-      <!-- if statement to only show on home page -->
+      <%# if statement to only show on home page %>
       <% if current_page?(home_path) %>
         <div class="header_top">
           <div class="header_stuff container">
@@ -46,12 +46,12 @@
           </div><!-- /header_stuff -->
         </div><!-- /header_top -->
       <% end %>
-      <!-- END if statement -->
+      <%#  END if statement %>
 
       <div class="navbar navbar-default sparc_navbar">
         <div class="container">
 
-        <!-- if statement to show everywhere BUT home page -->
+        <%#  if statement to show everywhere BUT home page %>
         <% if !current_page?(home_path) %>
           <h1 class="header_words">
             <%= link_to home_path, class: "home_links" do %>
@@ -60,7 +60,7 @@
             <% end %>
           </h1>
         <% end %>
-        <!-- END if statement-->
+        <%#  END if statement %>
 
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

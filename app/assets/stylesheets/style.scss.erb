@@ -124,6 +124,10 @@ html {
   }
 }
 
+.navbar-toggle {
+  background-color: #fff;
+}
+
 // Illustration Image display
 
 .illustration {
@@ -203,6 +207,7 @@ html {
 //.people_illustration_4 {}
 
 // END Illustrations
+
 
 // Gallery Code (Used in Explore and Image Gallery)
 
@@ -708,7 +713,136 @@ a .inner_content  {
 // Header
 //---------------
 
-// header_logo
+
+
+// // header_logo
+
+// .head_sp {
+//   display: block;
+//   font-family: 'joehand_2regular';
+//   font-weight: 100;
+// }
+
+// .head_arc {
+//   display: block;
+//   font-family: 'Jura', sans-serif;
+//   font-size: .26em; 
+//   // line-height: 0;
+//   margin-top: -1.3em;
+// }
+
+// .site_image {
+//   display: inline;
+//   // float: left;
+//   display: block;
+//   img {
+//     max-width: 100%;
+//     width: 240px; 
+//   }
+// }
+
+
+
+
+
+// .header_words {
+//   display: block;
+//   font-size: 1.1em;
+//   line-height: 1.2;
+//   margin: 0 0 .5em 0;
+//   padding: .3em .5em .1em 0;
+//   &:focus, &:hover {
+//     background-color: rgba(255,255,255,.2);
+//   }
+//   a {
+//     color: $gray-base;
+//   }
+//   a:focus, a:hover {
+//     color: #fff;
+//     text-decoration: none;
+//     color: $gray-darker;
+//   }
+//   .head_sp {
+//     font-size: 3em;
+//   }
+//   .head_arc {
+//     font-size: .8em;
+//     margin-top: -1.5em;
+//   }
+// }
+
+
+
+
+
+// .header_words {
+//  /*! display:inline-block; *//*! float:left; */font-size:2.4em;
+//  height:60px;
+//  margin:0;
+//  padding:.3em .5em .1em 0
+// }
+// .header_words:focus,.header_words:hover {
+//  background-color:rgba(255,255,255,0.2)
+// }
+
+
+// // Logo on main page
+
+
+
+// @media (min-width: $container-tablet) {
+//   .home_page {
+//     .site_logo_container {
+//       height: 240px; 
+//       margin: 15px auto 0 auto;
+//       overflow: hidden;
+//       width: 850px;
+//     }
+//     .header_words_nav {
+//       margin-top: 90px;
+//     }
+//     .header_words {
+//       display: inline-block;
+//       float: left;
+//       font-size: 2.4em;
+//       height: 60px;
+//       margin: 0;
+//     }
+//     .head_arc {
+//       line-height: .9;
+//     }
+//     .site_image {
+//       float: left;
+//     }
+//   }
+// }
+
+// // Navbar
+
+// .navbar-default {
+//   background-color: $brand-primary;
+//   a {
+//     font-size: 1.1em;
+//   }
+// }
+
+// .header_top {
+//   background: url(<%= asset_path 'topographic_top.gif' %>) center bottom no-repeat lighten($gray-base, 75%);
+// }
+
+// .sparc_navbar {
+//   background: url(<%= asset_path 'topographic_bottom.jpg' %>) center top no-repeat $brand-primary;
+//   margin-top: -4px;
+// }
+
+
+
+
+//---------------
+// Header
+//---------------
+
+// logo (words) 
 
 .header_words {
   display: inline-block;
@@ -717,21 +851,18 @@ a .inner_content  {
   height: 60px;
   margin: 0;
   padding: .3em .5em .1em 0;
-}
-
-.header_words:focus,
-.header_words:hover {
-  background-color: rgba(255,255,255,.2);
-}
-
-.header_words a {
-  color: #fff;
-}
-
-.header_words a:focus,
-.header_words a:hover {
-  color: #fff;
-  text-decoration: none;
+  &:focus,
+  &:hover {
+    background-color: rgba(255,255,255,.2);
+  }
+  a {
+    color: #fff;
+    &:focus,
+    &:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
 }
 
 .head_sp {
@@ -748,37 +879,43 @@ a .inner_content  {
   margin-top: -1.3em;
 }
 
+// Logo and image on home page
+
+.home_page {
+  .site_logo_container {
+    text-align: center;
+  }
+  .header_words {
+    float: none;
+    font-size: 3.4em;
+    margin-bottom: .5em;
+  }
+}
+
 .site_image {
-  display: inline;
-  float: left;
+  img {
+    max-width: 100%;
+    width: 240px; 
+  }
 }
 
-.site_image img {
-  width: 240px; 
-}
+@media (min-width: $container-tablet) {
+  .site_image {
+    display: inline;
+    float: left;
+  }
 
-// Logo on main page
+  .site_logo_container {
+    height: 240px; 
+    margin: 15px auto 0 auto;
+    overflow: hidden;
+    width: 850px;
+  }
 
-.header_words_nav a {
-  color: $gray-base;
-}
-
-.header_words_nav a:focus,
-.header_words_nav a:hover {
-  color: $gray-darker;
-}
-
-.header_words_nav {
-  margin-top: 90px;
-}
-
-.header_words_nav .head_sp {
-  font-size: 3em;
-}
-
-.header_words_nav .head_arc {
-  font-size: .8em;
-  margin-top: -1.5em;
+  .home_page .header_words {
+   font-size: 7em;
+   margin-top: 70px;
+  }
 }
 
 // Navbar
@@ -799,15 +936,3 @@ a .inner_content  {
   background: url(<%= asset_path 'topographic_bottom.jpg' %>) center top no-repeat $brand-primary;
   margin-top: -4px;
 }
-
-.site_logo_container {
-  height: 240px; 
-  margin: 15px auto 0 auto;
-  overflow: hidden;
-  width: 850px;
-}
-
-
-
-
-
