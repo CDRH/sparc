@@ -168,3 +168,24 @@ exit  # or Ctrl+D
 ```
 
 I do not recommend doing the above in a production environment.  In the near future we should figure out how we would like cascading deletes, etc, to work for these PKs.
+
+### Redact Images
+
+When asked to redact images, take the following steps.
+
+Verify which image you need to redact. The files themselves are arranged in two directories, polaroid and field, but while the filenames have nothing prepended to the number, the database lists polaroids as `PA0#####`. If you are redacting a polaroid, make sure that you use `PA0` in the following commands.
+
+Navigate to the production rails application.
+
+** USE EXTREME CAUTION WHEN RUNNING CONSOLE DB OPERATIONS ON THE PRODUCTION SERVER **
+
+```
+rails c production
+> i = Image.find_by(image_no: "12038")
+> i.update_attributes(image_human_remain_id: 2)
+> exit
+```
+
+Refresh the website to make sure that the image is no longer available in the gallery views.
+
+Now manually move the redacted image.  Navigate to the mediaserver directory housing the images and move the image in question into the `sensitive` directory.  This means it will not be available to view through the media server / IIIF URLs.
