@@ -162,8 +162,9 @@ module ActiveRecordAbstraction
         if field[:assoc] == :column
           if params[field[:name]].present?
             if field[:form] == :input
-              if table.column_for_attribute(field[:name]).type == :string
-                res = res.where("#{table_name}.#{field[:name]} LIKE ?",
+              if table.column_for_attribute(field[:name]).type == :string ||
+                 table.column_for_attribute(field[:name]).type == :text
+                   res = res.where("#{table_name}.#{field[:name]} LIKE ?",
                                 "%#{params[field[:name]]}%")
               else
                 res = res.where("#{table_name}.#{field[:name]} = ?",
