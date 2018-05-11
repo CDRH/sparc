@@ -178,7 +178,7 @@ module ActiveRecordAbstraction
           if params[field[:name]].present?
             if field[:form] == :select
               res = res.joins(field[:name].to_sym)
-                .where("#{table_name}.#{field[:name].pluralize}" => { id: params[field[:name]] })
+                .where(field[:name].pluralize => { id: params[field[:name]] })
             elsif field[:form] == :input
               if field[:name].classify.constantize
                 .column_for_attribute(association_column(field[:name]))
