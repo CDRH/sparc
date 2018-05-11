@@ -319,10 +319,8 @@ a.content {
 
 // Navbar
 
-.sparc_navbar {
+.navbar-default {
   background-color: $brand-primary;
-  background: url(<%= asset_path 'topographic_bottom.jpg' %>) center top no-repeat $brand-primary;
-  margin-top: -4px;
   a {
     font-size: 1.1em;
   }
@@ -337,7 +335,12 @@ a.content {
   }
 }
 
-// logo (words) 
+.sparc_navbar {
+  background: url(<%= asset_path 'topographic_bottom.jpg' %>) center top no-repeat $brand-primary;
+  margin-top: -4px;
+}
+
+// logo (words)
 
 .header_words {
   display: inline-block;
