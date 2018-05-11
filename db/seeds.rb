@@ -972,7 +972,7 @@ def seed_strat_types
   strat_types.each do |type|
     # assign the type to a grouping
     group_name = "Other"
-    case type[:code]
+    case type["code"]
     when "E", "F", "FC", "N"
       group_name = "Roof"
     when "C", "CT", "CU", "M"
