@@ -1,7 +1,7 @@
 class ExploreController < ApplicationController
   before_action :set_section
   before_action :get_unit
-  skip_before_action :get_unit, only: [:units, :zone], raise: false
+  skip_before_action :get_unit, only: [:index, :map, :units, :zone], raise: false
 
   def index
   end
@@ -76,7 +76,6 @@ class ExploreController < ApplicationController
   def unit_images
     @subsection = "units"
     @selected = "images"
-    @unit = Unit.find_by(unit_no: params["number"])
     @images = @unit.images.where(file_exists: true)
     @images_display = @images.sorted.limit(8)
   end
@@ -136,7 +135,8 @@ class ExploreController < ApplicationController
   end
 
   def get_unit
-    @unit = Unit.sorted.where(unit_no: params["number"]).first
+    num = params["number"].gsub("%2F", "/")
+    @unit = Unit.sorted.where(unit_no: num).first
   end
 
   def set_section
