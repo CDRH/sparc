@@ -40,4 +40,15 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+
+
+  # LOCAL
+  # Custom dev env logger to empty log more frequently
+  config.logger = ActiveSupport::TaggedLogging.new(
+    ActiveSupport::Logger.new(File.join(Rails.root.to_s, "log", "development.log"),
+      # Keep one old log file, rotate after size reaches 32 MB
+      1, 32.megabytes
+    )
+  )
 end
