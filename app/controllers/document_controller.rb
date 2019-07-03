@@ -130,6 +130,10 @@ class DocumentController < ApplicationController
     canvas.label = image_info['label']
     canvas.width = annotation.resource['width']
     canvas.height = annotation.resource['height']
+
+    # Needed for Mirador viewing
+    annotation['on'] = annotation.resource['@id']
+
     canvas.images << annotation
     canvas.metadata = [
       { 'label' => 'Page ID',
