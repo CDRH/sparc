@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0.6'
 # Use sqlite3 as the database for Active Record
@@ -57,11 +56,7 @@ end
 # postgres database for active record
 gem "pg", ">= 0.18", "< 1.0"
 
-gem 'devise'
 gem 'bootstrap-sass'
-
-gem 'kaminari'
-gem 'activerecord-session_store'
 
 # spreadsheet parsing tools
 gem 'roo'
@@ -74,5 +69,8 @@ gem 'mini_exiftool'
 # pagination
 gem 'will_paginate'
 
+# TODO temporary holding for sprockets to avoid asset pipeline mess
+# while working on other aspects of the update
+gem 'sprockets', '3.7.2'
 # iiif presentation
 gem 'osullivan'

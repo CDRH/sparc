@@ -10,7 +10,7 @@ namespace :tables do
     models.each do |model|
       begin
         next if model.include?("HABTM")
-        next if ["ActiveRecord::SessionStore::Session", "User", "ApplicationRecord", "FeatureStratum"].include?(model)
+        next if ["ApplicationRecord", "FeatureStratum"].include?(model)
         count = model.constantize.count
         puts "#{model}: #{count}"
         records += count
