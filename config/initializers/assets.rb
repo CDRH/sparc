@@ -25,7 +25,7 @@ Rails.application.config.assets.precompile += %w(
 
 # maps
 Rails.application.config.assets.precompile += %w(
-  svgpanzoom.js
+  svg-pan-zoom.js
   map_zoom.js
   maps.css
 )
