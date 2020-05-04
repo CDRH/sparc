@@ -48,47 +48,4 @@ Rails.application.routes.draw do
   get '/about/:name', to: 'static#about_sub', as: :about_sub
   get '/native-descendants', to: 'static#descendants', as: :descendants
 
-
-  tables = [
-    :bone_tools,
-    :burials,
-    :ceramics,
-    :ceramic_claps,
-    :ceramic_inventories,
-    :ceramic_vessels,
-    :documents,
-    :eggshells,
-    :faunal_artifacts,
-    :faunal_inventories,
-    :features,
-    :images,
-    :lithic_debitages,
-    :lithic_inventories,
-    :lithic_tools,
-    :obsidian_inventories,
-    :ornaments,
-    :perishables,
-    :pollen_inventories,
-    :select_artifacts,
-    :soils,
-    :strata,
-    :tree_rings,
-    :units,
-    :wood_inventories,
-    :zones
-  ]
-
-  tables.each do |table|
-    namespace :admin do
-      get '/', to: 'units#index'
-      resources table do
-        # as_routes is deprecated but for some reason its replacement isn't working for me
-        as_routes
-        record_select_routes
-        add_as_extension table
-      end
-    end
-  end
-
-  # activescaffold_extensions(:rooms)
 end

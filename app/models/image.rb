@@ -100,18 +100,4 @@ were edited and cross-checked against other sources.
     zones.map {|z| z.name }
   end
 
-
-  # active scaffold / devise
-
-  def authorized_for_update?
-    puts "---------#{current_user}"
-    current_user != nil ? true : false
-  end
-  def authorized_for_delete?
-    current_user != nil ? true : false
-  end
-  def authorized_for_create?
-    puts "---------#{current_user}"
-    current_user != nil ? true : false
-  end
 end

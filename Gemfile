@@ -56,9 +56,6 @@ end
 
 # postgres database for active record
 gem "pg", ">= 0.18", "< 1.0"
-# active scaffold sets up the table views
-gem 'active_scaffold', :git => 'https://github.com/activescaffold/active_scaffold.git', :tag => 'v3.5.0'
-gem 'recordselect', :git => 'https://github.com/scambra/recordselect.git'
 
 gem 'devise'
 gem 'bootstrap-sass'
