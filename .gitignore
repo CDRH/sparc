@@ -28,5 +28,6 @@
 
 # omit the burial / remains image listing
 reports/images_remains.txt
+xls/Burials.xlsx
 
 .DS_Store

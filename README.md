@@ -28,6 +28,12 @@ gem install bundler
 bundle install
 ```
 
+Set up your config file and fill out the location of your iiif_server:
+
+```
+cp config/config.example.yml config/config.yml
+```
+
 Now let's take a minute to set up your secrets file.
 
 ```bash
@@ -65,6 +71,8 @@ cp config/database.demo.yml config/database.yml
 ```
 
 Open `config/database.yml` and add the role (sparc) and password that you set above
+
+Before you get too much farther, you will need to locate and add `Burials.xlsx`, which is not stored in this repository. Otherwise, comment out Burials at the bottom of `seeds.rb`.
 
 Now set your dev and test databases up!  This step may take a few minutes while it loads all the spreadsheet data.
 

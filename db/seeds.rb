@@ -36,7 +36,7 @@ seeds = Rails.root.join('db', 'seeds')
 
   # Analysis Tables
   bone_tools: 'xls/BoneTools.xlsx',
-  burials: 'xls/Burials.xls',
+  burials: 'xls/Burials.xlsx',
   ceramics: 'xls/CeramicAnalysis2005.xlsx',
   ceramic_claps: 'xls/Clap.xls',
   ceramic_vessels: 'xls/CeramicVessels.xlsx',
@@ -1045,7 +1045,7 @@ end
 # Burials #
 ###########
 def seed_burials
-  s = Roo::Excel.new(@files[:burials])
+  s = Roo::Excelx.new(@files[:burials])
   puts "\n\n\nCreating Burials\n"
 
   columns = {
