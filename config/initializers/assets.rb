@@ -13,13 +13,6 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
-Rails.application.config.assets.precompile += %w( search.js )
-
-# image gallery
-Rails.application.config.assets.precompile += %w(
-  images.css
-)
-
 # maps
 Rails.application.config.assets.precompile += %w(
   svg-pan-zoom.js
