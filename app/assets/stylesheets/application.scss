@@ -12,17 +12,16 @@
  *
  *= require jquery-ui
  */
-
 @import "bootstrap-sprockets";
 @import "bootstrap/_variables";
 @import "bootstrap";
+/*@import "style";*/
 
-@import "style";
+/*
+*= require style
+*/
 
-// body {
-//   padding: 15px;
-// }
-
+/* TODO why are these here? */
 label,
 input,
 button,

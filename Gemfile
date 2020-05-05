@@ -1,14 +1,15 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.1.0'
+gem 'rails', '~> 5.2.4.2'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sassc-rails', '~> 2.1'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '~> 4.2.0'
 # Use CoffeeScript for .coffee assets and views
+# TODO update to 5.0?
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
@@ -22,16 +23,10 @@ gem 'jquery-ui-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', '~> 1.0.0', group: :doc
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# bootsnap reduces load times, added in ruby 5.2
+gem 'bootsnap'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -40,7 +35,7 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 3.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -51,7 +46,7 @@ group :development do
 end
 
 # postgres database for active record
-gem "pg", ">= 0.18", "< 1.0"
+gem "pg", "~> 1.0.0"
 
 gem 'bootstrap-sass'
 
@@ -66,8 +61,6 @@ gem 'mini_exiftool'
 # pagination
 gem 'will_paginate'
 
-# TODO temporary holding for sprockets to avoid asset pipeline mess
-# while working on other aspects of the update
-gem 'sprockets', '3.7.2'
 # iiif presentation
-gem 'osullivan'
+# using stanford fork of original osullivan library, since it is supported
+gem "iiif-presentation", "~> 0.2.0", github: "sul-dlss/osullivan", ref: "1f3c9fd96d34fc67405bd412f6470bef8ca3a455"

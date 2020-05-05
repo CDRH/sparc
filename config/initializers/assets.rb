@@ -13,10 +13,9 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
-# application.js, application.css, and all nonJS/CSS in app/assets folder are already added.
-# Rails.application.config.assets.precompile += %w( search.js )
+Rails.application.config.assets.precompile += %w( search.js )
 
-# images
+# image gallery
 Rails.application.config.assets.precompile += %w(
   ekko-lightbox.min.css
   ekko-lightbox.min.js
@@ -35,6 +34,7 @@ Rails.application.config.assets.precompile += %w(
   query
 )
 
+# documents
 Rails.application.config.assets.precompile += %w( 
   uv2.0.2/lib/bundle.min.js
   uv2.0.2/lib/app.js
