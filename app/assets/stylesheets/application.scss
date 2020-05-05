@@ -16,22 +16,3 @@
 @import "bootstrap-sprockets";
 @import "bootstrap/_variables";
 @import "bootstrap";
-
-/* TODO why are these here? */
-label,
-input,
-button,
-select,
-textarea {
-  font-size: 12px;
-  font-weight: normal;
-  line-height: 16px;
-}
-
-#unit_search_list {
-  list-style-type: none;
-
-  column-count: 4;
-  -moz-column-count: 4; /* Firefox */
-  -webkit-column-count: 4; /* Chrome, Safari, Opera */
-}
