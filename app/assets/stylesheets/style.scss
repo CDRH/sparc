@@ -68,8 +68,8 @@ html {
   font-family: 'joehand_2regular';
   font-style: normal;
   font-weight: normal;
-  src: url(<%= asset_path 'jh2trial-webfont.woff2' %>) format('woff2'), 
-    url(<%= asset_path 'jh2trial-webfont.woff' %>) format('woff');
+  src: font-url('jh2trial-webfont.woff2') format('woff2'),
+    font-url('jh2trial-webfont.woff') format('woff');
 }
 
 .tab-pane {
@@ -339,7 +339,7 @@ a.content {
 }
 
 .sparc_navbar {
-  background: url(<%= asset_path 'topographic_bottom.jpg' %>) center top no-repeat $brand-primary;
+  background: image-url('topographic_bottom.jpg') center top no-repeat $brand-primary;
   margin-top: -4px;
 }
 
@@ -412,13 +412,13 @@ a.content {
 // Extends code from home page
 // Interactive Map
 .explore_callout1 {
-  background-image: url(<%= asset_path 'home_explore.jpg' %>);
+  background-image: image-url('home_explore.jpg');
   border-bottom-width: 2px;
 }
 
 // Browse Units
 .explore_callout2 {
-  background-image: url(<%= asset_path 'explore_unit_2.jpg' %>);
+  background-image: image-url('explore_unit_2.jpg');
   border-top-width: 2px;
 }
 
@@ -609,11 +609,11 @@ a.content {
 //---------------
 
 .header_top {
-  background: url(<%= asset_path 'topographic_top.gif' %>) center bottom no-repeat lighten($gray-base, 75%);
+  background: image-url('topographic_top.gif') center bottom no-repeat lighten($gray-base, 75%);
 }
 
 .home_first_band {
-  background: url(<%= asset_path 'band_aerial.jpg' %>) center center;
+  background: image-url('band_aerial.jpg') center center;
   height: 400px;
   margin-bottom: 2em;
   margin-top: -22px;
@@ -637,25 +637,25 @@ a.content {
 // Set background pictures and border widths
 // Explore Link
 .home_callout1 {
-  background-image: url(<%= asset_path 'home_explore.jpg' %>);
+  background-image: image-url('home_explore.jpg');
   border-bottom-width: 2px;
 }
 
 // Query Link
 .home_callout2 {
-  background-image: url(<%= asset_path 'home_query.jpg' %>);
+  background-image: image-url('home_query.jpg');
   border-bottom-width: 2px;
   border-top-width: 2px;
 }
 // Documents Link
 .home_callout3 {
-  background-image: url(<%= asset_path 'home_docs.jpg' %>);
+  background-image: image-url('home_docs.jpg');
   border-bottom-width: 2px;
   border-top-width: 2px;
 }
 // Gallery Link
 .home_callout4 {
-  background-image: url(<%= asset_path 'home_gallery.jpg' %>);
+  background-image: image-url('home_gallery.jpg');
   border-top-width: 2px;
 }
 
