@@ -16,20 +16,13 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # maps
 Rails.application.config.assets.precompile += %w(
   svg-pan-zoom.js
-  map_zoom.js
-  maps.css
-)
-
-# query
-Rails.application.config.assets.precompile += %w(
-  query
 )
 
 # documents
+# these are located in the public directory
 Rails.application.config.assets.precompile += %w( 
   uv2.0.2/lib/bundle.min.js
   uv2.0.2/lib/app.js
   uv2.0.2/lib/embed.js
   uv2.0.2/require.min.js
-  document_iiif_viewer.js
 )
