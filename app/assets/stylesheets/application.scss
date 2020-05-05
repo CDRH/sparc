@@ -11,15 +11,11 @@
  * file per style scope.
  *
  *= require jquery-ui
- */
+*/
+
 @import "bootstrap-sprockets";
 @import "bootstrap/_variables";
 @import "bootstrap";
-/*@import "style";*/
-
-/*
-*= require style
-*/
 
 /* TODO why are these here? */
 label,
