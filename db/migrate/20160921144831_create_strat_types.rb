@@ -1,4 +1,4 @@
-class CreateStratTypes < ActiveRecord::Migration
+class CreateStratTypes < ActiveRecord::Migration[5.0]
   def change
     create_table :strat_types do |t|
       t.string :code

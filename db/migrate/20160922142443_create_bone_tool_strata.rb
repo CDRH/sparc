@@ -1,4 +1,4 @@
-class CreateBoneToolStrata < ActiveRecord::Migration
+class CreateBoneToolStrata < ActiveRecord::Migration[5.0]
   def change
     create_join_table :bone_tools, :strata do |t|
       t.references :bone_tool, index: true, foreign_key: true

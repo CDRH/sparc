@@ -1,4 +1,4 @@
-class CreateBoneTools < ActiveRecord::Migration
+class CreateBoneTools < ActiveRecord::Migration[5.0]
   def change
     create_table :bone_tools do |t|
       t.string :room
