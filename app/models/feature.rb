@@ -1,11 +1,11 @@
 class Feature < ActiveRecord::Base
-  belongs_to :feature_group
-  belongs_to :occupation
-  belongs_to :feature_type
-  belongs_to :doorway_sealed
-  belongs_to :door_between_multiple_room
-  belongs_to :residential_feature
-  belongs_to :t_shaped_door
+  belongs_to :feature_group, optional: true
+  belongs_to :occupation, optional: true
+  belongs_to :feature_type, optional: true
+  belongs_to :doorway_sealed, optional: true
+  belongs_to :door_between_multiple_room, optional: true
+  belongs_to :residential_feature, optional: true
+  belongs_to :t_shaped_door, optional: true
 
   has_and_belongs_to_many :strata
   has_many :units, :through => :strata
