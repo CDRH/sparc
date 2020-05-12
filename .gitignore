@@ -24,7 +24,6 @@
 /public/assets/*
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/config/credentials.yml.enc
 
 # ignore the large amount of images for the gallery
 **/images/field/*
