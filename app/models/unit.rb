@@ -13,9 +13,9 @@ class Unit < ActiveRecord::Base
   has_and_belongs_to_many :documents
   has_many :document_binders, -> {distinct}, :through => :documents
   has_many :document_types, -> {distinct}, :through => :documents
+  has_many :strata
   has_many :features, :through => :strata
   has_many :images, :through => :features
-  has_many :strata
   has_many :tree_rings, :through => :strata
 
   # feature objects

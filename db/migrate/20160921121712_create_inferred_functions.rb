@@ -1,4 +1,4 @@
-class CreateInferredFunctions < ActiveRecord::Migration
+class CreateInferredFunctions < ActiveRecord::Migration[5.0]
   def change
     create_table :inferred_functions do |t|
       t.string :inferred_function

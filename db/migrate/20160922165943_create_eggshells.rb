@@ -1,4 +1,4 @@
-class CreateEggshells < ActiveRecord::Migration
+class CreateEggshells < ActiveRecord::Migration[5.0]
   def change
     create_table :eggshells do |t|
       t.integer :stratum_id

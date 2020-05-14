@@ -1,4 +1,4 @@
-class CreateIntactRoofs < ActiveRecord::Migration
+class CreateIntactRoofs < ActiveRecord::Migration[5.0]
   def change
     create_table :intact_roofs do |t|
       t.string :intact_roof

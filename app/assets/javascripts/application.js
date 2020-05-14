@@ -13,27 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require lightbox_activation.js
 
 // require_tree .
-
-
-// =======================
-// Common jQuery Functions
-// =======================
-
-// Toggle function
-$.fn.clicktoggle = function(a, b) {
-  return this.each(function() {
-    var clicked = false;
-    $(this).bind("click", function() {
-      if (clicked) {
-        clicked = false;
-        return b.apply(this, arguments);
-      } else {
-        clicked = true;
-        return a.apply(this, arguments);
-      }
-    });
-  });
-};

@@ -3,8 +3,6 @@
   <head>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-    <%= stylesheet_link_tag 'ekko-lightbox.min' %>
-    <%= javascript_include_tag 'ekko-lightbox.min' %>
     <%= csrf_meta_tags %>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,16 +12,9 @@
     <link href="https://fonts.googleapis.com/css?family=Jura:400,600,700" rel="stylesheet">
 
     <%= render "partials/google_analytics" %>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <%= render "partials/internet_explorer_support" %>
     <%= render 'application/favicon' %>
-    
+
   </head>
 
 
@@ -96,51 +87,10 @@
               <li class="<%= active?("about", section) %>">
                 <%= link_to "About", about_path %>
               </li>
-              <% if controller.class.parents.include?(Admin) %>
-                <%# TODO the below will NOT be part of the final site %>
-                <li class="dropdown">
-                  <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">Admin DB View<b class="caret"></b></a>
-                  <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-                    <li><%= link_to('Units', admin_units_path)%></li>
-                    <li><%= link_to('Strata', admin_strata_path)%></li>
-                    <li><%= link_to('Features', admin_features_path)%></li>
-                    <%# begin alphabetical %>
-                    <li><%= link_to('Bone Tools', admin_bone_tools_path)%></li>
-                    <li><%= link_to('Burials', admin_burials_path)%></li>
-                    <li><%= link_to('Ceramics 2005', admin_ceramics_path)%></li>
-                    <li><%= link_to('Ceramic CLAP', admin_ceramic_claps_path)%></li>
-                    <li><%= link_to('Ceramic Inventories', admin_ceramic_inventories_path)%></li>
-                    <li><%= link_to('Ceramic Vessels', admin_ceramic_vessels_path)%></li>
-                    <li><%= link_to('Documents', admin_documents_path)%></li>
-                    <li><%= link_to('Eggshells', admin_eggshells_path)%></li>
-                    <li><%= link_to('Faunal Artifacts', admin_faunal_artifacts_path)%></li>
-                    <li><%= link_to('Faunal Inventories', admin_faunal_inventories_path)%></li>
-                    <li><%= link_to('Lithic Debitages', admin_lithic_debitages_path)%></li>
-                    <li><%= link_to('Lithic Inventories', admin_lithic_inventories_path)%></li>
-                    <li><%= link_to('Lithic Tools', admin_lithic_tools_path)%></li>
-                    <li><%= link_to('Images', admin_images_path)%></li>
-                    <li><%= link_to('Obsidian Inventories', admin_obsidian_inventories_path) %></li>
-                    <li><%= link_to('Ornaments', admin_ornaments_path)%></li>
-                    <li><%= link_to('Perishables', admin_perishables_path)%></li>
-                    <li><%= link_to('Pollen Inventories', admin_pollen_inventories_path)%></li>
-                    <li><%= link_to('Select Artifacts', admin_select_artifacts_path)%></li>
-                    <li><%= link_to('Soils', admin_soils_path)%></li>
-                    <li><%= link_to('Tree Rings', admin_tree_rings_path)%></li>
-                    <li><%= link_to('Wood Inventories', admin_wood_inventories_path)%></li>
-                    <li><%= link_to('Zones', admin_zones_path) %></li>
-                  </ul>
-                </li>
-              <% end %>
             </ul>
           </div> <!-- /navbar-collapse -->
         </div>
       </div>
-
-      <%# TODO can remove this check after active scaffold is removed %>
-      <% if lookup_context.exists?("subnavs/_#{params["controller"]}") %>
-        <%= render "subnavs/#{params["controller"]}" %>
-      <% end %>
-
     </header>
 
     <div class="container main_content">

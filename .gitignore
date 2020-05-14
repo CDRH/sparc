@@ -19,8 +19,11 @@
 *.svn
 /config/config.yml
 /config/database.yml
+/config/initializers/secret_token.rb
 /config/secrets.yml
 /public/assets/*
+# Ignore master key for decrypting credentials and more.
+/config/master.key
 
 # ignore the large amount of images for the gallery
 **/images/field/*
@@ -28,5 +31,7 @@
 
 # omit the burial / remains image listing
 reports/images_remains.txt
+xls/Burials.xlsx
 
+# ignore macosx file
 .DS_Store

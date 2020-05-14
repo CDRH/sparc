@@ -28,6 +28,12 @@ gem install bundler
 bundle install
 ```
 
+Set up your config file and fill out the location of your iiif_server:
+
+```
+cp config/config.example.yml config/config.yml
+```
+
 Now let's take a minute to set up your secrets file.
 
 ```bash
@@ -66,6 +72,8 @@ cp config/database.demo.yml config/database.yml
 
 Open `config/database.yml` and add the role (sparc) and password that you set above
 
+Before you get too much farther, you will need to locate and add `Burials.xlsx`, which is not stored in this repository. Otherwise, comment out Burials at the bottom of `seeds.rb`.
+
 Now set your dev and test databases up!  This step may take a few minutes while it loads all the spreadsheet data.
 
 ```bash
@@ -97,6 +105,12 @@ Copy the text file results to `reports/all_mediaserver_images.txt` and then run:
 
 ```
 rails images:file_exists
+```
+
+If you don't care if some images are broken and just want to see some images (for example, if working in development), run the following in your rails console (`rails c`):
+
+```
+Image.update_all(file_exists: true)
 ```
 
 ### Start Rails
@@ -132,18 +146,12 @@ rake documents:create_csv
 
 __NOTE: This may take up to an hour to run, depending on your machine!__  The script pulls out metadata from the images with exiftool, which is where the bottleneck occurs.
 
-### Generate assets and favicons
+### Generate assets
 
 To generate assets (production only):
 
 ```
 rails assets:precompile RAILS_ENV=production
-```
-
-To generate new favicons, based off config/favicon.json
-
-```
-rails generate favicon
 ```
 
 ### Run Tests
