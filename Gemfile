@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.4.2'
+gem 'rails', '~> 6.0.0'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
+# Use Puma as the app server
+gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
 gem 'sassc-rails', '~> 2.1'
 # Use Uglifier as compressor for JavaScript assets
@@ -39,6 +41,7 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'listen'
 
   # will kill postgres processes related to the database connection
   # which allows for the database to be dropped even when using phusion passenger
@@ -46,7 +49,7 @@ group :development do
 end
 
 # postgres database for active record
-gem "pg", "~> 1.0.0"
+gem "pg"
 
 gem 'bootstrap-sass'
 
@@ -64,3 +67,6 @@ gem 'will_paginate'
 # iiif presentation
 # using stanford fork of original osullivan library, since it is supported
 gem "iiif-presentation", "~> 0.2.0", github: "sul-dlss/osullivan", ref: "1f3c9fd96d34fc67405bd412f6470bef8ca3a455"
+
+# Temp constraint on Psych for config file alias compatibility
+gem 'psych', '< 4.0.0'
