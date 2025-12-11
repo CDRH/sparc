@@ -42,18 +42,51 @@ cp config/secrets.demo.yml config/secrets.yml
 
 Now you can run `rails secret` as many times as you like to generate new secrets for your `config/secrets.yml` file.
 
-### Libraries / Apache
+### Apache Config
 
-Create a symlink for the universal viewer files.
+The following Apache configuration is required in the production site's
+`<VirtualHost>` block:
+
+```apacheconf
+  # Necessary for unit names with slashes
+  AllowEncodedSlashes NoDecode
+
+  # CORS Header
+  SetEnvIf Request_URI "^/documents/.+/\w+\.json$" IIIF=1
+  Header set Access-Control-Allow-Origin * env=IIIF
+  UnsetEnv IIIF
+```
+
+#### Static JavaScript
+
+Universal Viewer references other files relative to each other, so it must be
+served as static assets outside of the Rails asset pipeline.
+
+This is best managed with Apache like this:
+
+```apacheconf
+# Universal Viewer Static Assets
+Alias /assets/uv-2.0.2 /var/local/www/rails/salmonpueblo.org/public/uv-2.0.2
+<Location /assets/uv-2.0.2/>
+  PassengerEnabled off
+
+  Require all granted
+</Location>
+
+Alias /uv-2.0.2 /var/local/www/rails/salmonpueblo.org/public/uv-2.0.2
+<Location /uv-2.0.2/>
+  PassengerEnabled off
+
+  Require all granted
+</Location>
+```
+
+It's unclear how to remove the prefix of `/assets/` to some of the UV URLs, but
+updating UV to a newer version might simplify the URLs it uses here.
+```
+
 
 ```
-ln -s /path/to/app/public/uv-2.0.2 /path/to/app/public/assets/uv-2.0.2
-```
-
-Set up your apache configuration to allow symlinks:
-
-```
-Options FollowSymLinks
 ```
 
 ### Database
