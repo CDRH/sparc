@@ -282,8 +282,10 @@ module ActiveRecordAbstraction
         model.abstraction[:assoc_col].present?
 
         model.abstraction[:assoc_col]
-      elsif model.column_for_attribute(:name).table_name.present?
-        "name"
+      elsif model.column_for_attribute(:name).respond_to?("table_name") &&
+        model.column_for_attribute(:name).table_name.present?
+
+        model.column_for_attribute(:name).table_name
       else
         "id"
       end
