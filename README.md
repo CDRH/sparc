@@ -40,7 +40,7 @@ cp config/config.example.yml config/config.yml
 Now let's take a minute to set up your secrets file.
 
 ```bash
-cp config/secrets.demo.yml config/secrets.yml
+cp config/secrets.example.yml config/secrets.yml
 ```
 
 Now you can run `rails secret` as many times as you like to generate new secrets for your `config/secrets.yml` file.
@@ -163,7 +163,7 @@ psql -h localhost -U sparc -W
 Now you'll need to set up Rails database configuration.
 
 ```bash
-cp config/database.demo.yml config/database.yml
+cp config/database.example.yml config/database.yml
 ```
 
 Open `config/database.yml` and add the user (sparc) and password that you set above.
