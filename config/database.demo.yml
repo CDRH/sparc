@@ -4,6 +4,8 @@ default: &default
   host: localhost
   username:
   password:
+  algorithm: scram-sha-256
+  gssencmode: disable
 
 development:
   <<: *default

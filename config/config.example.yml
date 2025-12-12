@@ -1,7 +1,7 @@
 default: &default
   settings:
     # Filter out Image records with sensitive content
-    hide_sensitive_image_records: false
+    hide_sensitive_image_records: true
     # Hide sensitive images with a placeholder
     hide_sensitive_images: true
     # IIIF image server location
