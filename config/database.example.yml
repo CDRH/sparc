@@ -3,11 +3,13 @@ default: &default
   encoding: utf8
   host: localhost
   username:
-  password: 
+  password:
+  algorithm: scram-sha-256
+  gssencmode: disable
 
 development:
   <<: *default
-  database: sparc_dev
+  database: sparc
 
 test:
   <<: *default

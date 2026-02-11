@@ -219,7 +219,7 @@ def get_feature_number feat_str, source
 end
 
 def load_yaml file
-  YAML::load_file(file)
+  YAML::load_file(file, aliases: true)
 end
 
 def lookup_sa_related type, comment
