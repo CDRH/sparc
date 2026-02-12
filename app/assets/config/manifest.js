@@ -1,5 +1,7 @@
 //= link_tree ../images
-//= link_directory ../javascripts .js
-//= link_directory ../stylesheets
-//= link_tree ../fonts
+//= link_tree ../javascripts
+//= link application.css
+//= link application.js
+
 //= link favicon/browserconfig.xml
+//= link maps.css
