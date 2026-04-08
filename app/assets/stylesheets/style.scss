@@ -784,3 +784,24 @@ textarea {
   white-space: nowrap;
   width: 1px;
 }
+
+a {
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+a.btn,
+a.btn:hover {
+  text-decoration: none;
+}
+
+.btn {
+  white-space: initial;
+}
+
+a.home_links {
+  text-decoration: none;
+}
