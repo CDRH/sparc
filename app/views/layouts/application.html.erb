@@ -72,24 +72,24 @@
                 <%#= link_to "SPARC Home", home_path %>
               </li> -->
               <li class="<%= active?("explore", section) %>">
-                <%= link_to "Explore Pueblo", explore_path %>
+                <%= link_to "Explore Pueblo", explore_path, 'aria-current': (current_page?(explore_path) ? 'page' : nil) %>
               </li>
               <li class="<%= active?("query", section) %>">
-                <%= link_to "Query Data", query_path %>
+                <%= link_to "Query Data", query_path, 'aria-current': (current_page?(query_path) ? 'page' : nil) %>
               </li>
               <li class="<%= active?("documents", section) %>">
-                <%= link_to "Documents", documents_path %>
+                <%= link_to "Documents", documents_path, 'aria-current': (current_page?(documents_path) ? 'page' : nil) %>
               </li>
               <li class="<%= active?("images", section) %>">
-                <%= link_to "Image Gallery", gallery_path %>
+                <%= link_to "Image Gallery", gallery_path, 'aria-current': (current_page?(gallery_path) ? 'page' : nil) %>
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="<%= active?("descendants", section) %>">
-                <%= link_to "Native Descendants", descendants_path %>
+                <%= link_to "Native Descendants", descendants_path, 'aria-current': (current_page?(descendants_path) ? 'page' : nil) %>
               </li>
               <li class="<%= active?("about", section) %>">
-                <%= link_to "About", about_path %>
+                <%= link_to "About", about_path, 'aria-current': (current_page?(about_path) ? 'page' : nil) %>
               </li>
             </ul>
           </div>
