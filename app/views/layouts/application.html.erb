@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
@@ -19,15 +19,18 @@
 
 
   <body class="body_<%= params[:controller] %> body_<%= params[:action] %> <% if current_page? home_path %>home_page<% end %>">
-
-    <header class="body_head">
+  <a href="#content_wrapper" class="sr-only sr-only-focusable">
+    Skip to main content
+  </a> 
+    <div id="body_wrapper">
+    <header id="header" class="body_head">
       <%# if statement to only show on home page %>
       <% if current_page?(home_path) %>
         <div class="header_top">
           <div class="header_stuff container">
             <div class="site_logo_container">
               <div class="site_image">
-                <%= image_tag 'effigy3.png' %>
+                <%= image_tag 'effigy3.png', alt: "Photo of an artifact" %>
               </div>
               <h1 class="header_words header_words_nav">
                   <span class="head_sp">Salmon Pueblo</span>
@@ -54,87 +57,92 @@
         <%#  END if statement %>
 
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Expand or collapse main menu">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
           </div>
-          <div class="collapse navbar-collapse">
+          <nav class="collapse navbar-collapse" aria-label="Main Menu">
+            <div class="row">
             <ul class="nav navbar-nav">
               <% section = @section || params["controller"] %>
               <!-- <li class="<%#= active?(home_path) %>">
                 <%#= link_to "SPARC Home", home_path %>
               </li> -->
               <li class="<%= active?("explore", section) %>">
-                <%= link_to "Explore Pueblo", explore_path %>
+                <%= link_to "Explore Pueblo", explore_path, 'aria-current': (current_page?(explore_path) ? 'page' : nil) %>
               </li>
               <li class="<%= active?("query", section) %>">
-                <%= link_to "Query Data", query_path %>
+                <%= link_to "Query Data", query_path, 'aria-current': (current_page?(query_path) ? 'page' : nil) %>
               </li>
               <li class="<%= active?("documents", section) %>">
-                <%= link_to "Documents", documents_path %>
+                <%= link_to "Documents", documents_path, 'aria-current': (current_page?(documents_path) ? 'page' : nil) %>
               </li>
               <li class="<%= active?("images", section) %>">
-                <%= link_to "Image Gallery", gallery_path %>
+                <%= link_to "Image Gallery", gallery_path, 'aria-current': (current_page?(gallery_path) ? 'page' : nil) %>
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="<%= active?("descendants", section) %>">
-                <%= link_to "Native Descendants", descendants_path %>
+                <%= link_to "Native Descendants", descendants_path, 'aria-current': (current_page?(descendants_path) ? 'page' : nil) %>
               </li>
               <li class="<%= active?("about", section) %>">
-                <%= link_to "About", about_path %>
+                <%= link_to "About", about_path, 'aria-current': (current_page?(about_path) ? 'page' : nil) %>
               </li>
             </ul>
-          </div> <!-- /navbar-collapse -->
+          </div>
+          </nav> <!-- /navbar-collapse -->
         </div>
       </div>
     </header>
 
-    <div class="container main_content">
+    <main class="container main_content" id="content_wrapper" tabindex="-1">
       <%= yield %>
+    </main>
     </div>
-
-    <footer class="project_footer">
+    
+    <footer id="footer" class="project_footer">
       <div class="container">
         <p><%= link_to "How To Cite", about_sub_path(name: "how-to-cite"), :class => '' %></p>
         <p>The <em>Salmon Pueblo Archaeological Research Collection</em> created by the Center for Digital Research in the Humanities with funding from the National Endowment for the Humanities and in partnership with Archaeology Southwest, the Institute for Advanced Technology in the Humanities, and the San Juan County Archaeological Research Center and Library - Salmon Ruins. Distributed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons License</a>.</p>
         <div class="row footer_logos text-center">
           <div class="col-md-4">
             <div class="logo_sr">
-              <a href="https://www.salmonruins.com/archaeology-firm.html" alt="san Juan Museum Association">
-                <%= image_tag 'logo_sr.gif' %>
+              <a href="https://www.salmonruins.com/archaeology-firm.html" rel="external">
+                <%= image_tag 'logo_sr.gif', alt: "San Juan Museum Association logo"  %>
               </a>
             </div>
           </div>
           <div class="col-md-4">
             <div class="logo_neh">
-              <a href="https://www.neh.gov/" alt="The National Endowment for the Humanities">
-                <%= image_tag 'logo_neh.gif' %>
+              <a href="https://www.neh.gov/" rel="external">
+                <%= image_tag 'logo_neh.gif', alt: "National Endowment for the Humanities logo"  %>
               </a>
             </div>
             <div class="logo_as">
-              <a href="https://www.archaeologysouthwest.org/" alt="Archaeology Southwest">
-                <%= image_tag 'logo_archaeology_southwest.gif' %>
+              <a href="https://www.archaeologysouthwest.org/" rel="external">
+                <%= image_tag 'logo_archaeology_southwest.gif', alt: "Archaeology Southwest logo"  %>
               </a>
             </div>
           </div>
           <div class="col-md-4">
             <div class="logo_unl">
-              <a href="https://cdrh.unl.edu/" alt="The Center for Digital Research in the Humanities at the University of Nebraska–Lincoln">
-                <%= image_tag 'logo_unl.gif' %>
+              <a href="https://cdrh.unl.edu/" rel="external">
+                <%= image_tag 'logo_unl.gif', alt: "University of Nebraska-Lincoln logo"  %>
               </a>
             </div>
             <div class="logo_iath">
-              <a href="http://www.iath.virginia.edu/" alt="The Institute for Advanced Technology in the Humanities at the University of Virginia">
-                <%= image_tag 'logo_iath.gif' %>
+              <a href="https://www.iath.virginia.edu/" rel="external">
+                <%= image_tag 'logo_iath.gif', alt: "Institute for Advanced Technology in the Humanities at the University of Virginia logo"  %>
               </a>
             </div>
           </div>
         </div>
+      <div class="back-to-top">
+        <a href="#body_wrapper">Back to top</a>
       </div>
     </footer>
+  </div>
   </body>
 </html>
