@@ -133,8 +133,8 @@ ActiveRecord::Schema.define(version: 2025_12_08_120613) do
   end
 
   create_table "ceramic_claps_features", id: false, force: :cascade do |t|
-    t.integer "ceramic_clap_id"
-    t.integer "feature_id"
+    t.integer "ceramic_clap_id", null: false
+    t.integer "feature_id", null: false
     t.index ["ceramic_clap_id"], name: "index_ceramic_claps_features_on_ceramic_clap_id"
     t.index ["feature_id"], name: "index_ceramic_claps_features_on_feature_id"
   end
@@ -193,8 +193,8 @@ ActiveRecord::Schema.define(version: 2025_12_08_120613) do
   end
 
   create_table "ceramic_inventories_features", id: false, force: :cascade do |t|
-    t.integer "feature_id"
-    t.integer "ceramic_inventory_id"
+    t.integer "feature_id", null: false
+    t.integer "ceramic_inventory_id", null: false
     t.index ["ceramic_inventory_id"], name: "index_ceramic_inventories_features_on_ceramic_inventory_id"
     t.index ["feature_id"], name: "index_ceramic_inventories_features_on_feature_id"
   end
@@ -450,8 +450,8 @@ ActiveRecord::Schema.define(version: 2025_12_08_120613) do
   end
 
   create_table "documents_units", id: false, force: :cascade do |t|
-    t.integer "document_id"
-    t.integer "unit_id"
+    t.integer "document_id", null: false
+    t.integer "unit_id", null: false
     t.index ["document_id"], name: "index_documents_units_on_document_id"
     t.index ["unit_id"], name: "index_documents_units_on_unit_id"
   end
@@ -497,8 +497,8 @@ ActiveRecord::Schema.define(version: 2025_12_08_120613) do
   end
 
   create_table "eggshells_features", id: false, force: :cascade do |t|
-    t.integer "eggshell_id"
-    t.integer "feature_id"
+    t.integer "eggshell_id", null: false
+    t.integer "feature_id", null: false
     t.index ["eggshell_id"], name: "index_eggshells_features_on_eggshell_id"
     t.index ["feature_id"], name: "index_eggshells_features_on_feature_id"
   end
@@ -572,7 +572,7 @@ ActiveRecord::Schema.define(version: 2025_12_08_120613) do
   end
 
   create_table "faunal_inventories_features", id: false, force: :cascade do |t|
-    t.integer "feature_id"
+    t.integer "feature_id", null: false
     t.integer "faunal_inventory_id"
     t.index ["faunal_inventory_id"], name: "index_faunal_inventories_features_on_faunal_inventory_id"
     t.index ["feature_id"], name: "index_faunal_inventories_features_on_feature_id"
@@ -621,71 +621,71 @@ ActiveRecord::Schema.define(version: 2025_12_08_120613) do
   end
 
   create_table "features_images", id: false, force: :cascade do |t|
-    t.integer "image_id"
-    t.integer "feature_id"
+    t.integer "image_id", null: false
+    t.integer "feature_id", null: false
     t.index ["feature_id"], name: "index_features_images_on_feature_id"
     t.index ["image_id"], name: "index_features_images_on_image_id"
   end
 
   create_table "features_lithic_debitages", id: false, force: :cascade do |t|
-    t.integer "lithic_debitage_id"
-    t.integer "feature_id"
+    t.integer "lithic_debitage_id", null: false
+    t.integer "feature_id", null: false
     t.index ["feature_id"], name: "index_features_lithic_debitages_on_feature_id"
     t.index ["lithic_debitage_id"], name: "index_features_lithic_debitages_on_lithic_debitage_id"
   end
 
   create_table "features_lithic_inventories", id: false, force: :cascade do |t|
-    t.integer "lithic_inventory_id"
-    t.integer "feature_id"
+    t.integer "lithic_inventory_id", null: false
+    t.integer "feature_id", null: false
     t.index ["feature_id"], name: "index_features_lithic_inventories_on_feature_id"
     t.index ["lithic_inventory_id"], name: "index_features_lithic_inventories_on_lithic_inventory_id"
   end
 
   create_table "features_lithic_tools", id: false, force: :cascade do |t|
-    t.integer "lithic_tool_id"
-    t.integer "feature_id"
+    t.integer "lithic_tool_id", null: false
+    t.integer "feature_id", null: false
     t.index ["feature_id"], name: "index_features_lithic_tools_on_feature_id"
     t.index ["lithic_tool_id"], name: "index_features_lithic_tools_on_lithic_tool_id"
   end
 
   create_table "features_perishables", id: false, force: :cascade do |t|
-    t.integer "perishable_id"
-    t.integer "feature_id"
+    t.integer "perishable_id", null: false
+    t.integer "feature_id", null: false
     t.index ["feature_id"], name: "index_features_perishables_on_feature_id"
     t.index ["perishable_id"], name: "index_features_perishables_on_perishable_id"
   end
 
   create_table "features_pollen_inventories", id: false, force: :cascade do |t|
-    t.integer "pollen_inventory_id"
-    t.integer "feature_id"
+    t.integer "pollen_inventory_id", null: false
+    t.integer "feature_id", null: false
     t.index ["feature_id"], name: "index_features_pollen_inventories_on_feature_id"
     t.index ["pollen_inventory_id"], name: "index_features_pollen_inventories_on_pollen_inventory_id"
   end
 
   create_table "features_select_artifacts", id: false, force: :cascade do |t|
-    t.integer "select_artifact_id"
-    t.integer "feature_id"
+    t.integer "select_artifact_id", null: false
+    t.integer "feature_id", null: false
     t.index ["feature_id"], name: "index_features_select_artifacts_on_feature_id"
     t.index ["select_artifact_id"], name: "index_features_select_artifacts_on_select_artifact_id"
   end
 
   create_table "features_soils", id: false, force: :cascade do |t|
-    t.integer "soil_id"
-    t.integer "feature_id"
+    t.integer "soil_id", null: false
+    t.integer "feature_id", null: false
     t.index ["feature_id"], name: "index_features_soils_on_feature_id"
     t.index ["soil_id"], name: "index_features_soils_on_soil_id"
   end
 
   create_table "features_strata", id: false, force: :cascade do |t|
-    t.integer "feature_id"
-    t.integer "stratum_id"
+    t.integer "feature_id", null: false
+    t.integer "stratum_id", null: false
     t.index ["feature_id"], name: "index_features_strata_on_feature_id"
     t.index ["stratum_id"], name: "index_features_strata_on_stratum_id"
   end
 
   create_table "features_wood_inventories", id: false, force: :cascade do |t|
-    t.integer "wood_inventory_id"
-    t.integer "feature_id"
+    t.integer "wood_inventory_id", null: false
+    t.integer "feature_id", null: false
     t.index ["feature_id"], name: "index_features_wood_inventories_on_feature_id"
     t.index ["wood_inventory_id"], name: "index_features_wood_inventories_on_wood_inventory_id"
   end
@@ -736,12 +736,10 @@ ActiveRecord::Schema.define(version: 2025_12_08_120613) do
   create_table "image_subjects_images", id: false, force: :cascade do |t|
     t.integer "image_id", null: false
     t.integer "image_subject_id", null: false
-    t.integer "images_id"
-    t.integer "image_subjects_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["image_subjects_id"], name: "index_image_subjects_images_on_image_subjects_id"
-    t.index ["images_id"], name: "index_image_subjects_images_on_images_id"
+    t.index ["image_id"], name: "index_image_subjects_images_on_image_id"
+    t.index ["image_subject_id"], name: "index_image_subjects_images_on_image_subject_id"
   end
 
   create_table "images", id: :serial, force: :cascade do |t|
@@ -931,12 +929,12 @@ ActiveRecord::Schema.define(version: 2025_12_08_120613) do
     t.string "site"
     t.string "box"
     t.string "fs_no"
-    t.integer "count"
     t.string "unit"
     t.string "strat"
     t.string "strat_other"
     t.string "feature_no"
     t.string "lithic_id"
+    t.integer "count"
     t.string "material_type"
     t.string "shackley_sourcing"
     t.string "grid_ew"
@@ -1281,8 +1279,8 @@ ActiveRecord::Schema.define(version: 2025_12_08_120613) do
   add_foreign_key "features_strata", "strata"
   add_foreign_key "features_wood_inventories", "features"
   add_foreign_key "features_wood_inventories", "wood_inventories"
-  add_foreign_key "image_subjects_images", "image_subjects", column: "image_subjects_id"
-  add_foreign_key "image_subjects_images", "images", column: "images_id"
+  add_foreign_key "image_subjects_images", "image_subjects"
+  add_foreign_key "image_subjects_images", "images"
   add_foreign_key "images", "image_boxes"
   add_foreign_key "images", "image_creators"
   add_foreign_key "images", "image_formats"

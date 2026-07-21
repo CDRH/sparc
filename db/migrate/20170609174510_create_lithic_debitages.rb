@@ -19,8 +19,12 @@ class CreateLithicDebitages < ActiveRecord::Migration[5.0]
     end
 
     create_join_table :lithic_debitages, :features do |t|
-      t.references :feature, index: true, foreign_key: true
-      t.references :lithic_debitage, index: true, foreign_key: true
+      # t.references :feature, index: true, foreign_key: true
+      # t.references :lithic_debitage, index: true, foreign_key: true
+      t.index :lithic_debitage_id
+      t.index :feature_id
+      t.foreign_key :lithic_debitages
+      t.foreign_key :features
     end
 
     add_reference :lithic_debitages, :lithic_inventory

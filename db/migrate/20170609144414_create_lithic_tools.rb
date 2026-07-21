@@ -24,8 +24,12 @@ class CreateLithicTools < ActiveRecord::Migration[5.0]
     # then it would be very difficult to link them to a unit, so I am sticking with
     # how we have previously linked up analysis tables
     create_join_table :lithic_tools, :features do |t|
-      t.references :feature, index: true, foreign_key: true
-      t.references :lithic_tool, index: true, foreign_key: true
+      # t.references :feature, index: true, foreign_key: true
+      # t.references :lithic_tool, index: true, foreign_key: true
+      t.index :lithic_tool_id
+      t.index :feature_id
+      t.foreign_key :lithic_tools
+      t.foreign_key :features
     end
 
     create_table :lithic_artifact_types do |t|
