@@ -5,9 +5,11 @@ Salmon Pueblo Archaeological Research Collection
 This is an application to work with the SPARC data derived from the spreadsheets.
 
 <del>
+  
 The interface is primarily driven by the ActiveScaffold gem to provide a simple and intuitive editing interface with minimal effort to setup and customize.
 
 https://github.com/activescaffold/active_scaffold
+
 </del>
 
 The app no longer uses ActiveScaffold since the data editing was completed.
