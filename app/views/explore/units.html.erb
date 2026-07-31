@@ -55,6 +55,27 @@
 
   </div> <!-- /row -->
 
+  <div class="row">
+    <div class="col-md-6"> 
+      <button class="btn btn-info" type="button"
+      data-toggle="collapse" data-target="#collapseMore"
+      aria-expanded="false" aria-controls="collapseMore">
+        More Options
+      </button>
+      <button class="btn btn-info" type="button"
+      data-toggle="collapse" data-target="#collapseItems"
+      aria-expanded="false" aria-controls="collapseItems">
+        <% if params["items"].present? && !params["items"].empty? %>
+          <span class="glyphicon glyphicon-warning-sign"></span>
+        <% end %>
+        Limit by Items in Unit
+      </button>
+      <%= render :partial => "partials/clear_search", :locals => { :path => units_path } %>
+      <%= submit_tag "Search", :class => "btn btn-primary" %>
+    </div>
+
+  </div> <!-- /row -->
+
   <!-- COLLAPSED SEARCH OPTIONS -->
     <div class="collapse" id="collapseMore">
       <div class="well">
@@ -104,7 +125,7 @@
     </div> <!-- /well -->
   </div>
 
-  <div class="row">
+    <div class="row">
     <div class="collapse" id="collapseItems">
       <div class="well">
         <h4>Return only units with the following items: <small>(query may take some time when selecting multiple items, please be patient)</small></h4>
@@ -117,30 +138,10 @@
     </div> <!-- /collapse -->
   </div> <!-- /row -->
 
-  <div class="row">
-    <div class="col-md-6"> 
-      <button class="btn btn-info" type="button"
-      data-toggle="collapse" data-target="#collapseMore"
-      aria-expanded="false" aria-controls="collapseMore">
-        More Options
-      </button>
-      <button class="btn btn-info" type="button"
-      data-toggle="collapse" data-target="#collapseItems"
-      aria-expanded="false" aria-controls="collapseItems">
-        <% if params["items"].present? && !params["items"].empty? %>
-          <span class="glyphicon glyphicon-warning-sign"></span>
-        <% end %>
-        Limit by Items in Unit
-      </button>
-      <%= render :partial => "partials/clear_search", :locals => { :path => units_path } %>
-      <%= submit_tag "Search", :class => "btn btn-primary" %>
-    </div>
-    <div class="col-md-6 pagination_container">
-      <%= will_paginate @units %>
-    </div>
-  </div> <!-- /row -->
-
-  <p>Found <%= pluralize @result_num, "result" %></p>
+  <div class="col-md-6 pagination_container">
+    <%= will_paginate @units %>
+    <p>Found <%= pluralize @result_num, "result" %></p>
+  </div>
 
   <% if params["items"].present? && !params["items"].empty? %>
     <span class="glyphicon glyphicon-warning-sign"></span>
