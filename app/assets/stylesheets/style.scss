@@ -419,6 +419,23 @@ a.content {
   border-top-width: 2px;
 }
 
+.options-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.order-1 {
+  order: 1;
+}
+
+.order-2 {
+  order: 2;
+}
+
+.order-3 {
+  order: 3;
+}
+
 // Change border widths when non mobile so they're not doubled
 @media (min-width: $container-tablet) {
   // Interactive Map
