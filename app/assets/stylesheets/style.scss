@@ -436,6 +436,10 @@ a.content {
   order: 3;
 }
 
+.body_explore.body_units .options-wrapper .btn {
+  margin-bottom: 4px;
+}
+
 // Change border widths when non mobile so they're not doubled
 @media (min-width: $container-tablet) {
   // Interactive Map
