@@ -15,7 +15,7 @@
         <%= label_tag "unit_class", "Unit Class" %>
         <%= select_tag "unit_class", options_from_collection_for_select(UnitClass.sorted, "id", "name", params["unit_class"]), class: "form-control", multiple: true, include_blank: true %>
       </div>
-    </div>
+    </div><!-- /col-md-3 -->
 
     <!-- description -->
     <div class="col-md-3">
@@ -27,7 +27,7 @@
         <%= label_tag "irregular_shape", "IrregularShape" %>
         <%= select_tag "irregular_shape", options_from_collection_for_select(IrregularShape.sorted, "id", "name", params["irregular_shape"]), class: "form-control", multiple: true, include_blank: true %>
       </div>
-    </div>
+    </div><!-- /col-md-3 -->
 
     <!-- other description -->
     <div class="col-md-3">
@@ -39,7 +39,7 @@
         <%= label_tag "intact_roof", "IntactRoof" %>
         <%= select_tag "intact_roof", options_from_collection_for_select(IntactRoof.sorted, "id", "name", params["intact_roof"]), class: "form-control", multiple: true, include_blank: true %>
       </div>
-    </div>
+    </div><!-- /col-md-3 -->
 
     <!-- function -->
     <div class="col-md-3">
@@ -51,12 +51,15 @@
         <%= label_tag "excavation_status", "Excavation Status" %>
         <%= select_tag "excavation_status", options_from_collection_for_select(ExcavationStatus.sorted, "id", "name", params["excavation_status"]), class: "form-control", multiple: true, include_blank: true %>
       </div>
-    </div>
+    </div><!-- /col-md-3 -->
+  </div><!-- /row -->
+<div>
+  
+<div class="row">
+  <div class="options-wrapper">
 
-  </div> <!-- /row -->
-
-  <div class="row">
-    <div class="col-md-6"> 
+    <!-- BUTTONS -->
+    <div class="col-md-6 order-1">
       <button class="btn btn-info" type="button"
       data-toggle="collapse" data-target="#collapseMore"
       aria-expanded="false" aria-controls="collapseMore">
@@ -72,80 +75,84 @@
       </button>
       <%= render :partial => "partials/clear_search", :locals => { :path => units_path } %>
       <%= submit_tag "Search", :class => "btn btn-primary" %>
+    </div><!-- /col-md-6 -->
+
+
+    <!-- COLLAPSED SEARCH OPTIONS -->
+    <div class="col-md-12 order-3 collapse-body">
+      <div class="collapse" id="collapseMore">
+        <div class="well">
+          <div class="row">
+
+            <!-- location -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <%= label_tag "zone", "Zone" %>
+                <%= select_tag "zone", options_from_collection_for_select(Zone.sorted, "id", "name", params["zone"]), class: "form-control", multiple: true, include_blank: true %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "salmon_sector", "Salmon Sector" %>
+                <%= select_tag "salmon_sector", options_from_collection_for_select(SalmonSector.sorted, "id", "name", params["salmon_sector"]), class: "form-control", multiple: true, include_blank: true %>
+              </div>
+            </div><!-- /col-md-3 -->
+
+            <!-- unit type description -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <%= label_tag "type_description", "Type Description" %>
+                <%= select_tag "type_description", options_from_collection_for_select(TypeDescription.sorted, "id", "name", params["type_description"]), class: "form-control", multiple: true, include_blank: true %>
+              </div>
+            </div><!-- /col-md-3 -->
+
+            <!-- ? -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <%= label_tag "strata", "Strata (e.g. \"B-1-2\")" %>
+                <%= text_field_tag "strata", params["strata"], class: "form-control" %>
+              </div>
+            </div><!-- /col-md-3 -->
+
+            <!-- comments -->
+            <div class="col-md-3">
+              <div class="form-group">
+                <%= label_tag "other_description", "Other Description (e.g. \"interstitial\")" %>
+                <%= text_field_tag "other_description", params["other_description"], class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= label_tag "comments", "Comments (e.g. \"interstitial\")" %>
+                <%= text_field_tag "comments", params["comments"], class: "form-control" %>
+              </div>
+            </div><!-- /col-md-3 -->
+          </div><!-- /row -->
+        </div><!-- /well -->
+      </div><!-- /collapse -->
+
+      <div class="col-md-6">
+        <div class="collapse" id="collapseItems">
+          <div class="well">
+            <h4>Return only units with the following items: <small>(query may take some time when selecting multiple items, please be patient)</small></h4>
+            <div class="form-group">
+              <ul id="unit_search_list">
+                <%= render "item_radio_buttons" %>
+              </ul>
+            </div>
+          </div><!-- /well -->
+        </div><!-- /collapse -->
+      </div><!-- /col-md-6 -->
+    </div><!-- /collapse-body -->
+
+    <div class="col-md-6 pagination_container order-2">
+      <%= will_paginate @units %>
     </div>
-
-  </div> <!-- /row -->
-
-  <!-- COLLAPSED SEARCH OPTIONS -->
-    <div class="collapse" id="collapseMore">
-      <div class="well">
-        <div class="row">
-
-        <!-- location -->
-          <div class="col-md-3">
-            <div class="form-group">
-              <%= label_tag "zone", "Zone" %>
-              <%= select_tag "zone", options_from_collection_for_select(Zone.sorted, "id", "name", params["zone"]), class: "form-control", multiple: true, include_blank: true %>
-            </div>
-            <div class="form-group">
-              <%= label_tag "salmon_sector", "Salmon Sector" %>
-              <%= select_tag "salmon_sector", options_from_collection_for_select(SalmonSector.sorted, "id", "name", params["salmon_sector"]), class: "form-control", multiple: true, include_blank: true %>
-            </div>
-          </div>
-
-          <!-- unit type description -->
-          <div class="col-md-3">
-            <div class="form-group">
-              <%= label_tag "type_description", "Type Description" %>
-              <%= select_tag "type_description", options_from_collection_for_select(TypeDescription.sorted, "id", "name", params["type_description"]), class: "form-control", multiple: true, include_blank: true %>
-            </div>
-          </div>
-
-          <!-- ? -->
-          <div class="col-md-3">
-            <div class="form-group">
-              <%= label_tag "strata", "Strata (e.g. \"B-1-2\")" %>
-              <%= text_field_tag "strata", params["strata"], class: "form-control" %>
-            </div>
-          </div>
-
-          <!-- comments -->
-          <div class="col-md-3">
-            <div class="form-group">
-              <%= label_tag "other_description", "Other Description (e.g. \"interstitial\")" %>
-              <%= text_field_tag "other_description", params["other_description"], class: "form-control" %>
-            </div>
-            <div class="form-group">
-              <%= label_tag "comments", "Comments (e.g. \"interstitial\")" %>
-              <%= text_field_tag "comments", params["comments"], class: "form-control" %>
-            </div>
-          </div>
-        </div> <!-- /row -->
-
-    </div> <!-- /well -->
-  </div>
-
-    <div class="row">
-    <div class="collapse" id="collapseItems">
-      <div class="well">
-        <h4>Return only units with the following items: <small>(query may take some time when selecting multiple items, please be patient)</small></h4>
-        <div class="form-group">
-          <ul id="unit_search_list">
-            <%= render "item_radio_buttons" %>
-          </ul>
-        </div>
-      </div> <!-- /well -->
-    </div> <!-- /collapse -->
-  </div> <!-- /row -->
-
-  <div class="col-md-6 pagination_container">
-    <%= will_paginate @units %>
+  </div><!-- /options-wrapper -->
+  <div class="col-md-12">
     <p>Found <%= pluralize @result_num, "result" %></p>
   </div>
+</div><!-- /row -->
 
   <% if params["items"].present? && !params["items"].empty? %>
     <span class="glyphicon glyphicon-warning-sign"></span>
-    Note that units shown are limited by items within them. See above
+    Note that units shown are limited by items within them. See above.
   <% end %>
 
   <% @units.each_slice(4) do |unit_set| %>
