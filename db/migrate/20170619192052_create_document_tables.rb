@@ -71,8 +71,12 @@ class CreateDocumentTables < ActiveRecord::Migration[5.0]
     end
 
     create_join_table :documents, :units do |t|
-      t.references :document, index: true, foreign_key: true
-      t.references :unit, index: true, foreign_key: true
+      t.index :document_id
+      t.index :unit_id
+      t.foreign_key :documents
+      t.foreign_key :units
+      # t.references :document, index: true, foreign_key: true
+      # t.references :unit, index: true, foreign_key: true
     end
 
     add_reference :documents, :document_binder

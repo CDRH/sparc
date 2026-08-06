@@ -18,8 +18,12 @@ class CreatePollenInventory < ActiveRecord::Migration[5.0]
     end
 
     create_join_table :pollen_inventories, :features do |t|
-      t.references :pollen_inventory, index: true, foreign_key: true
-      t.references :feature, index: true, foreign_key: true
+      # t.references :pollen_inventory, index: true, foreign_key: true
+      # t.references :feature, index: true, foreign_key: true
+      t.index :pollen_inventory_id
+      t.index :feature_id
+      t.foreign_key :pollen_inventories
+      t.foreign_key :features
     end
   end
 end
