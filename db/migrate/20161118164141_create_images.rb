@@ -38,14 +38,22 @@ class CreateImages < ActiveRecord::Migration[5.0]
     end
 
     create_join_table :images, :image_subjects do |t|
-      t.references :images, index: true, foreign_key: true
-      t.references :image_subjects, index: true, foreign_key: true
+      # t.references :images, index: true, foreign_key: true
+      # t.references :image_subjects, index: true, foreign_key: true
+      t.index :image_id
+      t.index :image_subject_id
+      t.foreign_key :images
+      t.foreign_key :image_subjects
       t.timestamps
     end
 
     create_join_table :images, :features do |t|
-      t.references :feature, index: true, foreign_key: true
-      t.references :image, index: true, foreign_key: true
+      # t.references :feature, index: true, foreign_key: true
+      # t.references :image, index: true, foreign_key: true
+      t.index :feature_id
+      t.index :image_id
+      t.foreign_key :features
+      t.foreign_key :images
     end
   end
 end

@@ -4,7 +4,6 @@ class CreateObsidianInventories < ActiveRecord::Migration[5.0]
       t.string :site
       t.string :box
       t.string :fs_no
-      t.string :count
       t.string :unit
       t.string :strat
       t.string :strat_other

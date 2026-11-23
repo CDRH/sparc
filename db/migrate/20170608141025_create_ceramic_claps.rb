@@ -16,8 +16,12 @@ class CreateCeramicClaps < ActiveRecord::Migration[5.0]
     end
 
     create_join_table :ceramic_claps, :features do |t|
-      t.references :feature, index: true, foreign_key: true
-      t.references :ceramic_clap, index: true, foreign_key: true
+      t.index :ceramic_clap_id
+      t.index :feature_id
+      t.foreign_key :ceramic_claps
+      t.foreign_key :features
+      # t.references :feature, index: true, foreign_key: true
+      # t.references :ceramic_clap, index: true, foreign_key: true
     end
 
     create_table :ceramic_clap_types do |t|
